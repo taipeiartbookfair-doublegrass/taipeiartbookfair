@@ -1,24 +1,24 @@
 body {
   margin: 0;
   padding: 0;
-  font-family: 'Poppins', sans-serif;
+  font-family: "Poppins", sans-serif;
   /* background: whitesmoke; */
   overflow: hidden;
   position: relative;
-  
 }
 
 ::selection {
-  color:palegreen;
-  background-color:olive;
+  color: palegreen;
+  background-color: olive;
 }
 
-.bgimg{
-  filter: saturate(800) hue-rotate(180deg) contrast(150%) brightness(90%) sepia(20%);
-  position:fixed; 
+.bgimg {
+  filter: saturate(800) hue-rotate(180deg) contrast(150%) brightness(90%)
+    sepia(20%);
+  position: fixed;
   z-index: -50;
   width: 100vw;
-  height:100vh;
+  height: 100vh;
   -webkit-user-drag: none;
 }
 
@@ -26,20 +26,61 @@ nav a.vertical {
   writing-mode: vertical-rl;
   text-orientation: mixed;
   position: absolute;
-  font-weight:600;
+  font-weight: 600;
   text-decoration: none;
   transform-origin: center;
   transition: transform 0.2s ease;
 }
 
-.about {font-size: 9rem;width:170px;left: 0.9vw; bottom: -92vh; color:#e55e25;  text-align: center;text-shadow: 3px 2px 0 #000, -1px -1px 0 #000;cursor: pointer;}
-.shop {font-size: 12rem;width:130px; right: 23vw; bottom: -93vh; text-align: center;color:#d8d8d8; text-shadow: 3px 2px 0 #000, -1px -1px 0 #000;}
-.fb {font-size: 6.8rem;width:70px; right: 16vw; bottom: -93vh; text-align: center;color:#6b4ca5; text-shadow: 3px 2px 0 #000, -1px -1px 0 #000;}
-.ig {font-size: 6.8rem;width:70px; right: 8vw; bottom: -93vh; text-align: center;color:#6b4ca5; text-shadow: 3px 2px 0 #000, -1px -1px 0 #000;}
-.email {font-size: 6.8rem;width:70px; right: 0vw; bottom: -92vh; text-align:right;color:#6b4ca5; text-shadow: 3px 2px 0 #000, -1px -1px 0 #000;}
+.about {
+  font-size: 9rem;
+  width: 170px;
+  left: 0.9vw;
+  bottom: -92vh;
+  color: #e55e25;
+  text-align: center;
+  text-shadow: 3px 2px 0 #000, -1px -1px 0 #000;
+  cursor: pointer;
+}
+.shop {
+  font-size: 12rem;
+  width: 130px;
+  right: 23vw;
+  bottom: -93vh;
+  text-align: center;
+  color: #d8d8d8;
+  text-shadow: 3px 2px 0 #000, -1px -1px 0 #000;
+}
+.fb {
+  font-size: 6.8rem;
+  width: 70px;
+  right: 16vw;
+  bottom: -93vh;
+  text-align: center;
+  color: #6b4ca5;
+  text-shadow: 3px 2px 0 #000, -1px -1px 0 #000;
+}
+.ig {
+  font-size: 6.8rem;
+  width: 70px;
+  right: 8vw;
+  bottom: -93vh;
+  text-align: center;
+  color: #6b4ca5;
+  text-shadow: 3px 2px 0 #000, -1px -1px 0 #000;
+}
+.email {
+  font-size: 6.8rem;
+  width: 70px;
+  right: 0vw;
+  bottom: -92vh;
+  text-align: right;
+  color: #6b4ca5;
+  text-shadow: 3px 2px 0 #000, -1px -1px 0 #000;
+}
 
 nav a:hover {
-  transform:  rotate(-0.01turn);
+  transform: rotate(-0.01turn);
 }
 
 .open-call {
@@ -50,25 +91,34 @@ nav a:hover {
   bottom: -107.5vh;
   font-weight: 600;
   color: #e0e0e0;
-  text-decoration:underline;
+  text-decoration: underline;
   position: absolute;
   overflow: hidden;
-  cursor:pointer;
+  cursor: pointer;
 }
-.open-call span{
-  margin:0%;
-  padding:0px;
-  line-height:0.3rem;
+.open-call span {
+  margin: 0%;
+  padding: 0px;
+  line-height: 0.3rem;
 }
 
-.open-call:hover { 
+.open-call:hover {
   transform: none;
   border: 2px solid red;
 }
 @keyframes waveFlicker {
-  0%   { opacity: 1; transform: translateY(0); }
-  50%  { opacity: 0.1; transform: translateY(-5px); }
-  100% { opacity: 1; transform: translateY(0); }
+  0% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  50% {
+    opacity: 0.1;
+    transform: translateY(-5px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 .open-call span {
@@ -77,20 +127,46 @@ nav a:hover {
 }
 
 /* Stagger each span using nth-child */
-.open-call span:nth-child(1) { animation-delay: 0s; }
-.open-call span:nth-child(2) { animation-delay: 0.1s; }
-.open-call span:nth-child(3) { animation-delay: 0.2s; }
-.open-call span:nth-child(4) { animation-delay: 0.3s; }
-.open-call span:nth-child(5) { animation-delay: 0.3s; }
-.open-call span:nth-child(6) { animation-delay: 0.3s; }
-.open-call span:nth-child(7) { animation-delay: 0.3s; }
-.open-call span:nth-child(8) { animation-delay: 0.3s; }
-.open-call span:nth-child(9) { animation-delay: 0.3s; }
-.open-call span:nth-child(10) { animation-delay: 0.3s; }
-.open-call span:nth-child(11) { animation-delay: 0.3s; }
-.open-call span:nth-child(12) { animation-delay: 0.3s; }
-.open-call span:nth-child(13) { animation-delay: 0.3s; }
- 
+.open-call span:nth-child(1) {
+  animation-delay: 0s;
+}
+.open-call span:nth-child(2) {
+  animation-delay: 0.1s;
+}
+.open-call span:nth-child(3) {
+  animation-delay: 0.2s;
+}
+.open-call span:nth-child(4) {
+  animation-delay: 0.3s;
+}
+.open-call span:nth-child(5) {
+  animation-delay: 0.3s;
+}
+.open-call span:nth-child(6) {
+  animation-delay: 0.3s;
+}
+.open-call span:nth-child(7) {
+  animation-delay: 0.3s;
+}
+.open-call span:nth-child(8) {
+  animation-delay: 0.3s;
+}
+.open-call span:nth-child(9) {
+  animation-delay: 0.3s;
+}
+.open-call span:nth-child(10) {
+  animation-delay: 0.3s;
+}
+.open-call span:nth-child(11) {
+  animation-delay: 0.3s;
+}
+.open-call span:nth-child(12) {
+  animation-delay: 0.3s;
+}
+.open-call span:nth-child(13) {
+  animation-delay: 0.3s;
+}
+
 /* ad廣告刷起來 */
 .flickers {
   position: fixed;
@@ -105,24 +181,32 @@ nav a:hover {
 
 .flickers span {
   position: absolute;
-  font-size: .8rem;
+  font-size: 0.8rem;
   color: whitesmoke;
   animation: flicker 2s infinite;
   white-space: nowrap;
-  cursor:help;
+  cursor: help;
 }
 .flickers a {
   pointer-events: auto; /* do you wanna come, please come! */
 }
 @keyframes flicker {
-  0%, 19%, 21%, 23%, 25%, 54%, 56%, 100% {
+  0%,
+  19%,
+  21%,
+  23%,
+  25%,
+  54%,
+  56%,
+  100% {
     opacity: 1;
   }
-  20%, 24%, 55% {
+  20%,
+  24%,
+  55% {
     opacity: 0;
   }
 }
-
 
 .grid-layer {
   position: fixed;
@@ -136,24 +220,36 @@ nav a:hover {
 
 /* Base Grid */
 .grid-layer.base {
-  background-image:
-    repeating-linear-gradient(to right, rgba(255, 255, 255, 0.05) 0 1px, transparent 1px 60px),
-    repeating-linear-gradient(to bottom, rgba(255, 255, 255, 0.05) 0 1px, transparent 1px 60px);
+  background-image: repeating-linear-gradient(
+      to right,
+      rgba(255, 255, 255, 0.05) 0 1px,
+      transparent 1px 60px
+    ),
+    repeating-linear-gradient(
+      to bottom,
+      rgba(255, 255, 255, 0.05) 0 1px,
+      transparent 1px 60px
+    );
   background-size: 60px 60px;
   mix-blend-mode: multiply;
 }
 
 /* Overlay Grid – Misaligned + Different Color */
 .grid-layer.overlay {
-  background-image:
-    repeating-linear-gradient(to right, rgba(255, 0, 150, 0.1) 0 2px, transparent 2px 80px),
-    repeating-linear-gradient(to bottom, rgba(0, 255, 255, 0.1) 0 2px, transparent 2px 80px);
+  background-image: repeating-linear-gradient(
+      to right,
+      rgba(255, 0, 150, 0.1) 0 2px,
+      transparent 2px 80px
+    ),
+    repeating-linear-gradient(
+      to bottom,
+      rgba(0, 255, 255, 0.1) 0 2px,
+      transparent 2px 80px
+    );
   background-size: 80px 80px;
   mix-blend-mode: difference;
   transform: rotate(0.3deg) translate(-1px, 3px); /* imperfection! */
 }
-
-
 
 .poster-rotator {
   position: absolute;
@@ -164,11 +260,36 @@ nav a:hover {
   animation-play-state: paused;
 }
 
-.rotata div:nth-child(1) { top: 10vh; left: 25%; width: 280px; height: 170px; }
-.rotata div:nth-child(2) { top: 34vh; left: 25%; width: 220px; height: 150px; }
-.rotata div:nth-child(3) { top: 60vh; left: 8%; width: 150px; height: 220px; }
-.rotata div:nth-child(4) { top: 3vh; right: 4%; width: 100px; height: 340px; }
-.rotata div:nth-child(5) { top: 73vh; right: 8%; width: 200px; height: 130px; }
+.rotata div:nth-child(1) {
+  top: 10vh;
+  left: 25%;
+  width: 280px;
+  height: 170px;
+}
+.rotata div:nth-child(2) {
+  top: 34vh;
+  left: 25%;
+  width: 220px;
+  height: 150px;
+}
+.rotata div:nth-child(3) {
+  top: 60vh;
+  left: 8%;
+  width: 150px;
+  height: 220px;
+}
+.rotata div:nth-child(4) {
+  top: 3vh;
+  right: 4%;
+  width: 100px;
+  height: 340px;
+}
+.rotata div:nth-child(5) {
+  top: 73vh;
+  right: 8%;
+  width: 200px;
+  height: 130px;
+}
 
 .image-strip {
   display: flex;
@@ -193,18 +314,18 @@ nav a:hover {
 }
 
 .rotata div:nth-child(3) .image-strip img {
-  width: auto;  /* Maintain aspect ratio based on height */
-  height: 130% !important;  /* Ensure the image fills the height of the container */
-  object-fit: cover;  /* Cover the height without empty spaces */
+  width: auto; /* Maintain aspect ratio based on height */
+  height: 130% !important; /* Ensure the image fills the height of the container */
+  object-fit: cover; /* Cover the height without empty spaces */
   flex-shrink: 0;
   display: block;
   max-width: none;
 }
 
 .rotata div:nth-child(4) .image-strip img {
-  width: auto;  /* Maintain aspect ratio based on height */
-  height: 200% !important;  /* Ensure the image fills the height of the container */
-  object-fit: cover;  /* Cover the height without empty spaces */
+  width: auto; /* Maintain aspect ratio based on height */
+  height: 200% !important; /* Ensure the image fills the height of the container */
+  object-fit: cover; /* Cover the height without empty spaces */
   flex-shrink: 0;
   display: block;
   max-width: none;
@@ -213,9 +334,9 @@ nav a:hover {
 .rotata div:nth-child(1) .image-strip img,
 .rotata div:nth-child(2) .image-strip img,
 .rotata div:nth-child(5) .image-strip img {
-  height: 100% !important;  /* Maintain the current behavior for wider-than-tall containers */
-  width: auto;  /* Maintain the aspect ratio based on width */
-  object-fit: cover;  /* Ensure the image covers the container */
+  height: 100% !important; /* Maintain the current behavior for wider-than-tall containers */
+  width: auto; /* Maintain the aspect ratio based on width */
+  object-fit: cover; /* Ensure the image covers the container */
   flex-shrink: 0;
   display: block;
   max-width: none;
@@ -226,29 +347,29 @@ nav a:hover {
   position: fixed;
   left: 35%;
   bottom: 7vh;
-  padding:2px;
+  padding: 2px;
   color: black;
-  width:220px;
+  width: 220px;
   background: white;
   border: 1px solid black;
   /* box-shadow: -3px 2px 0px black; */
   font-size: 0.7rem;
   /* text-shadow: 3px 2px 0 #000, -1px -1px 0 #000; */
 }
-p{
+p {
   margin-block-start: 0rem;
-  margin-block-end:0rem;
+  margin-block-end: 0rem;
 }
 
 .about-text {
   position: fixed;
   left: 10px;
   top: 50px;
-  padding:2px;
+  padding: 2px;
   font-size: 0.9rem;
   color: black;
-  width:300px;
-  height:auto;
+  width: 300px;
+  height: auto;
   background: white;
   border: 1px solid black;
 }
@@ -296,7 +417,7 @@ p{
   position: absolute;
   top: 10px;
   left: 10px;
-  z-index:50;
+  z-index: 50;
 }
 
 .toggle-ui button {
@@ -306,12 +427,12 @@ p{
   cursor: pointer;
 }
 
-.tag{
-  position:absolute;
+.tag {
+  position: absolute;
   background: white;
   border: 1px solid black;
   font-size: 1.3rem;
-  padding:2px;
+  padding: 2px;
 }
 
 .opencallframe {
@@ -321,7 +442,19 @@ p{
   left: 50%;
   top: 50%;
   transform: translate(-50%, -50%);
-  background: linear-gradient(90deg, rgba(0, 0, 0, 1) 0%, rgba(255, 255, 255, 1) 7%, rgba(222, 222, 222, 1) 18%, rgba(255, 255, 255, 1) 21%, rgba(255, 255, 255, 1) 46%, rgba(227, 227, 227, 1) 53%, rgba(237, 235, 235, 1) 79%, rgba(255, 255, 255, 1) 82%, rgba(174, 174, 174, 1) 97%, rgba(0, 0, 0, 1) 100%);
+  background: linear-gradient(
+    90deg,
+    rgba(0, 0, 0, 1) 0%,
+    rgba(255, 255, 255, 1) 7%,
+    rgba(222, 222, 222, 1) 18%,
+    rgba(255, 255, 255, 1) 21%,
+    rgba(255, 255, 255, 1) 46%,
+    rgba(227, 227, 227, 1) 53%,
+    rgba(237, 235, 235, 1) 79%,
+    rgba(255, 255, 255, 1) 82%,
+    rgba(174, 174, 174, 1) 97%,
+    rgba(0, 0, 0, 1) 100%
+  );
   overflow: auto;
   padding: 3vh 4vw;
   box-sizing: border-box;
@@ -384,8 +517,8 @@ p{
   color: orangered; 
 } */
 
-.openopencall{
-  display:none;
+.openopencall {
+  display: none;
   position: fixed;
   width: 90vw;
   height: 90vh;
@@ -396,16 +529,15 @@ p{
   box-sizing: border-box;
 }
 
-
 /* 手機版 */
 @media screen and (max-width: 768px) {
   body {
     margin: 0;
     padding: 0;
-    font-family: 'Poppins', sans-serif;
+    font-family: "Poppins", sans-serif;
     overflow: hidden;
     position: relative;
-    font-size: 1rem; 
+    font-size: 1rem;
   }
 
   nav {
@@ -415,7 +547,7 @@ p{
     right: 0;
     display: flex;
     flex-direction: column; /* 上下排列 */
-  text-align:left;
+    text-align: left;
     gap: 15px;
     z-index: 10;
   }
@@ -432,15 +564,19 @@ p{
     justify-content: center;
 
     text-decoration: none;
-  
+
     font-weight: bold;
   }
 
-  .about, .shop, .fb, .ig, .email {
+  .about,
+  .shop,
+  .fb,
+  .ig,
+  .email {
     all: unset; /* 先清空原本設定 */
     font-weight: 600;
     text-decoration: none;
-    text-align:left;
+    text-align: left;
   }
   .about {
     color: #e55e25;
@@ -448,7 +584,9 @@ p{
   .shop {
     color: #d8d8d8;
   }
-  .fb, .ig, .email {
+  .fb,
+  .ig,
+  .email {
     color: #6b4ca5;
   }
 
@@ -469,7 +607,8 @@ p{
 
   /* 使背景圖層更適應手機螢幕 */
   .bgimg {
-    filter: saturate(800) hue-rotate(180deg) contrast(150%) brightness(90%) sepia(20%);
+    filter: saturate(800) hue-rotate(180deg) contrast(150%) brightness(90%)
+      sepia(20%);
     position: fixed;
     z-index: -50;
     width: 100vw;
@@ -477,18 +616,19 @@ p{
     -webkit-user-drag: none;
   }
 
-  .toggle-ui{
-    display:none;
+  .toggle-ui {
+    display: none;
   }
-  .grid-layer.base, .grid-layer.overlay {
+  .grid-layer.base,
+  .grid-layer.overlay {
     display: none; /* 移除網格圖層，避免手機版太擁擠 */
   }
 
   .flickers {
     display: none; /* 移除廣告效果 */
   }
-  .rotata{
-    display:none;
+  .rotata {
+    display: none;
   }
 
   /* banner 優化 */
@@ -535,7 +675,6 @@ p{
 @media screen and (min-width: 769px) {
   /* 保持原有排版或進一步調整 */
 }
-
 
 /* 大人的大螢幕 */
 @media screen and (min-width: 769px) {
