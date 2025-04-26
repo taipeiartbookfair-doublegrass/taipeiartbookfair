@@ -1,21 +1,31 @@
-const form = document.querySelector("form");
-form.addEventListener("submit", function (event) {
-  event.preventDefault(); // 防止頁面重新整理
+document
+  .getElementById("uploadButton")
+  .addEventListener("click", async function () {
+    const fileInput = document.getElementById("fileInput");
 
-  const formData = new FormData(form); // 這會收集表單中的所有資料
-
-  fetch(
-    "https://script.google.com/macros/s/AKfycbwhOkLqvvuiA-QmEXbh-Oi26r2I9t8YuhWGfWF4_6LvCaSXIwanCpqEe2r371_ivMNHtg/exec",
-    {
-      method: "POST",
-      body: formData,
+    // 如果使用者沒有選檔案，就不做事
+    if (!fileInput.files.length) {
+      alert("請先選擇檔案！");
+      return;
     }
-  )
-    .then((response) => response.json())
-    .then((data) => {
-      console.log("成功：", data);
-    })
-    .catch((error) => {
-      console.error("錯誤：", error);
-    });
-});
+
+    const formData = new FormData();
+    formData.append("file", fileInput.files[0]);
+    formData.append("formId", "自訂的一個ID"); // 這可以亂給，例如 'abc123'
+    formData.append("category", "artwork"); // 可以設定分類（或不用）
+
+    try {
+      const uploadRes = await fetch("你的upload伺服器網址", {
+        method: "POST",
+        body: formData,
+      });
+
+      const resultText = await uploadRes.text(); // 從 server 拿回來的東西（應該是網址）
+
+      console.log("上傳成功，檔案網址是：", resultText);
+
+      // TODO: 這裡 resultText 拿到了，你可以接著做「送表單」的動作
+    } catch (error) {
+      console.error("上傳失敗：", error);
+    }
+  });

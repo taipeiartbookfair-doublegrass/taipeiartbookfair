@@ -619,22 +619,19 @@
           imagination.
         </div>
         <div class="column layout-form-column-grid-1">
-          <span class="from-description-header"
-            >Required Question.maximum size: <strong>10 A4, 8MB</strong>.</span
-          >
-          <div
-            action="https://upload-to-drive.onrender.com/upload"
-            method="POST"
-            enctype="multipart/form-data"
-          >
-            <input type="file" name="file" />
-            <input
-              type="hidden"
-              name="formId"
-              value="some-unique-id-or-timestamp"
-            />
-            <input type="hidden" name="category" value="artwork" />
-          </div>
+          <span class="from-description-header">
+            Required Question. Maximum size: <strong>10 A4, 8MB</strong>.
+          </span>
+
+          <input type="file" id="fileInput" name="file" />
+          <input
+            type="hidden"
+            id="formId"
+            value="some-unique-id-or-timestamp"
+          />
+          <input type="hidden" id="category" value="artwork" />
+          <input type="hidden" name="entry.715764736" id="uploadedFileUrl" />
+          <button type="button" id="uploadButton">upload</button>
         </div>
 
         <!--Social Media-->
