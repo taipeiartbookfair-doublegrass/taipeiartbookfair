@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  
+  <title>草率季Taipei Art Book Fair</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="font.css">
+
+  <!-- jquery這裡 -->
+  <link rel="stylesheet" href="http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css">
+  <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+  <script>  document.addEventListener('DOMContentLoaded', () => {
+    const isSafari = /^((?!chrome|android).)*safari/i.test(navigator.userAgent);
+    const img = document.getElementById('sasa');
+
+    if (isSafari && img) {
+      img.src = 'safaririp.jpg';
+      img.style.filter = 'none';
+    }
+  });</script>
+</head>
+<body>
+  <img draggable="false" (dragstart)="false;" class="bgimg" id="sasa" src="001.jpg">
+  <div class="grid-layer overlay" style="z-index:-2"></div>
+
+
+  <!-- Toggle UI -->
+  <div class="toggle-ui">
+    <button id="toggle-ads">關閉廣告 ✕</button>
+  </div>
+
+  <!-- 廣告刷起來 -->
+  <div class="flickers" id="flickers"></div>
+
+
+  
+  <!-- moshimoshi -->
+  <nav>
+    <a class="vertical about" onclick="myAbout()">ABOUT</a>
+    <div onclick="openThis(openopencall);" class="open-call">
+      <span>OPEN CALL</span><br>
+      <span>OPEN CALL</span><br>
+      <span>OPEN CALL</span><br>
+      <span>OPEN CALL</span><br>
+      <span>OPEN CALL</span><br>
+      <span>OPEN CALL</span><br>
+      <span>OPEN CALL</span><br>
+      <span>OPEN CALL</span><br>
+      <span>OPEN CALL</span><br>
+      <span>OPEN CALL</span><br>
+      <span>OPEN CALL</span><br>
+      <span>OPEN CALL</span><br>
+      <span>OPEN CALL</span>
+    </div>
+    <a href="https://taipeiartbookfair.easy.co/" target="_blank" class="vertical shop">SHOP</a>
+    <a href="https://www.facebook.com/taipeiartbookfair/" target="_blank" class="vertical fb">FACEBOOK</a>
+    <a href="https://www.instagram.com/taipeiartbookfair/" target="_blank" class="vertical ig">INSTAGRAM</a>
+    <a href="mailto:shakyfloor@double-grass.com" class="vertical email">EMAIL</a>
+  </nav>
+
+  <!-- 照片轉起來！Hot! -->
+  <div class="rotata" id="rotata">
+    <!-- automation!! -->
+  </div>
+  
+  <!-- Date & Location -->
+  <div class="info">
+    <p>2025 草率季 Taipei Art Book Fair<br><br>
+   {時間Time}2025.11.21–23<br>
+   {地址Address}華山1914文化創意產業園區 東二 ABCD棟 Huashan Creative Park<br>
+   {目前重要資訊}<br><span style="color:blue; cursor:pointer;" onclick="openThis(openopencall);">←← Open Call is out! 徵件，快投啊！</span></p>
+  </div>
+  <div class="tag" style="top:25vh;right:23vw;transform:rotate(-0.02turn);">
+    <p>&nbsp;TAIPEI ART BOOK FAIR&nbsp;</p>
+  </div>
+  <div class="tag"style="top:65vh;right:15vw;transform:rotate(0.02turn);">
+    <p>&nbsp;草率季&nbsp;</p>
+  </div>
+
+  <!-- banana -->
+  <div class="banner">
+    <div class="banner-track">
+      <div class="banner-content">
+        <span class="dot"></span> 台北！一零一！台北一零一！TAIPEI 101 No More High Words！
+        <span class="dot"></span> 台北！一零一！台北一零一！TAIPEI 101 No More High Words！
+        <span class="dot"></span> 台北！一零一！台北一零一！TAIPEI 101 No More High Words！
+        <span class="dot"></span> 台北！一零一！台北一零一！TAIPEI 101 No More High Words！
+      </div>
+      <div class="banner-content">
+        <span class="dot"></span> 台北！一零一！台北一零一！TAIPEI 101 No More High Words！
+        <span class="dot"></span> 台北！一零一！台北一零一！TAIPEI 101 No More High Words！
+        <span class="dot"></span> 台北！一零一！台北一零一！TAIPEI 101 No More High Words！
+        <span class="dot"></span> 台北！一零一！台北一零一！TAIPEI 101 No More High Words！
+      </div>
+    </div>
+  </div>
+
+  <!-- 關羽
+  <div class="about-text">
+    <p>一年一度的獨立藝文盛會「草率季」（Taipei Art Book Fair）在今年邁入第八屆。這個自2016年起年年舉行（除2021年因疫情停辦）的文創活動，迄今仍不斷打破大眾對市集的想像。<br><br>現場集結各路創作者、出版社、獨立書店與藝術家等攤位，展出各項獨立刊物、畫冊、藝術雜誌、美術書刊、特色服飾、配件、手做小物⋯⋯等極具特色的出版品與實體創作品，堪稱是年度最大攤的獨立出版創作者派對。
+      <br>每年為期三天的活動裡皆湧入大量人潮，集結所有熱愛設計、攝影、插畫、漫畫、印刷等不同類型的各路文青＋潮青們齊聚一堂。<br><br>This three-day event showcases a diverse range of art books from various publishers, artists, and creators from around the globe. It's a platform for exploring and discovering unique perspectives within the world of art and creativity.</p>
+  </div> -->
+  <div id="openopencall" class="openopencall">
+  <div class="opencallframe">
+    <div style="letter-spacing: 6rem;font-size:1rem; text-align: center; font-weight: 600;">OPEN CALL</div><br>
+    <div class="textcolumn">
+      
+        <div class="column en">
+            <h2>Welcome to Taipei Art Book Fair 2019!</h2>
+            <p>We appreciate your support as we’re heading towards the fourth annual Taipei Art Book Fair. Welcome aboard! But just before you go ahead and submit your application please bear with us for a moment. Please carefully read the following conditions and by applying to participate, you are accepting these conditions and agree to be bound by them.</p>
+            
+            <h3>Fair Date</h3>
+            <p>Preview: 2019/10/18 (Fri) 14:00 - 21:00</p>
+            <p>Fair Hours: 2019/10/19, 20 (Sat-Sun) 12:00 - 20:00</p>
+            <p>Venue: Taipei SongShan Cultural and Creative Park, No.133, Guangfu South Road, Xinyi District, Taipei City 11072, Taiwan <small><a href="http://goo.gl/maps/2Pd5egRePJjuNgNn7" target="_blank">goo.gl/maps</a></small></p>
+            <br>
+            <h3>About the participation</h3>
+            <p>This application form is for participants who wish to have their own table or booth in which to exhibit and sell their publications or artworks. As we receive great numbers of applications, we may decline the application based on the submitted information due to the limitation of the space.</p>
+            <br>
+            <h3>Deadline</h3>
+            <p>Application deadline is July 19th (Friday 24:00). We will notify you regarding your participation by August 2nd (Friday 24:00). Payment must be made by August 16th (Friday 24:00).</p>
+            <br>
+            <h3>At the Fair</h3>
+            <p>The organizing committee will decide the position of booths according to the overall layout of the space. No booth position preference will be accepted before nor after the floor plan has been made. Please make sure that your booth is attended at all times during the fair. No booth position changes will be allowed. Wi-Fi access and power sockets are not guaranteed. We recommend bringing your own mobile hotspot and extension cord.</p>
+            <br>
+            <h3>Booth Types</h3>
+            <p><strong>Curation Booth 580 USD (Including tax)</strong></p>
+            <p>For participants who wish to work on a bigger scale of space during the book fair. Application will need to include a complete plan of space use. Walls and up to two full-size tables are included. The size of the booth space is around 4.5 square meters.</p>
+            <br>
+            <p><strong>One Regular Table 110 USD (Including tax)</strong></p>
+            <p>For participants who wish to use a full-size table. Use of walls is not guaranteed.</p>
+
+            <p><strong>Outdoor Type 35 USD (Including tax)</strong></p>
+            <p>For participants who wish to use a full-size table outdoors with a roof.</p>
+
+            <blockquote><small>* Table size approximately 150x60 cm.</small></blockquote>
+            <br>
+            <h3>Facts from 2018 Taipei Art Book Fair</h3>
+            <ul>
+                <li>180 exhibitors (75 international booths from 14 countries + 105 local booths)</li>
+                <li>6,000 paid visitors</li>
+            </ul>
+            <br>
+            <h3>Contact</h3>
+            <p>hooroo@double-grass.com</p>
+            <p>tiffanyhoung@double-grass.com</p>
+            <br>
+            <h3><a href="overseaapplication.html" class="application-button" rel="history">Overseas Booth Application</a></h3>
+          </div>
+
+        <div class="column zh">
+            <h2>歡迎來到2019台北藝術書展</h2>
+            <p>感謝您在第四屆台北藝術書展上的支持。歡迎上車！但是，在您繼續提交申請之前，請耐心等待一下。請仔細閱讀以下條件，併申請參加即表示您接受這些條件並同意受其約束。</p>
+            <br>
+            <h3>活動時間</h3>
+            <p>開幕日: 2019/10/18 (五) 2PM - 9PM</p>
+            <p>書展期: 2019/10/19, 20 (六-日) 12PM - 8PM</p>
+            <p>地點: 松山文創園區, 臺北市信義區光復南路133號 <small><a href="http://goo.gl/maps/2Pd5egRePJjuNgNn7">goo.gl/maps</a></small></p>
+           
+            <br>
+            <h3>申明</h3>
+            <p>該申請表適用於希望擁有自己的桌子或展位以展示和出售其出版物或藝術品的參與者。當我們收到大量申請時，由於篇幅所限，我們可能會根據提交的信息拒絕該申請。</p>
+            <br>
+            <h3>最後期限</h3>
+            <p>申請截止日期為7月19日（星期五24:00），我們將在8月2日（星期五24:00）通知您您的參與。必須在8月16日（星期五24:00）之前付款。</p>
+            <br>
+            <h3>在展會上</h3>
+            <p>組委會將根據展位的整體佈局確定展位的位置。為了公平起見，在地板平面製作之前或之後，均不接受對展位位置偏好的要求。</p>
+            <br>
+            <h3>展位類型</h3>
+            <p><strong>策展攤位580 USD（含稅）</strong></p>
+            <p>對於希望在書展期間擴大工作空間（最好舉辦小型展覽）的參與者。</p>
+
+            <p><strong>一張正桌110美元（含稅）</strong></p>
+            <p>對於希望使用全尺寸表的參與者。</p>
+
+            <p><strong>戶外型35美元（含稅）</strong></p>
+            <p>對於希望使用全尺寸表的參與者。室外帶屋頂。</p>
+
+            <blockquote><small>* 桌子尺寸約150*60厘米。</small></blockquote>
+            <br>
+            <h3>關於去年台北藝術書展</h3>
+            <ul>
+                <li>180個參展商（14個國家/地區中的75個國際展位，105個本地展位）</li>
+                <li>6,000名付費遊客</li>
+            </ul>
+            <br>
+            <h3>聯繫</h3>
+            <p>hooroo@double-grass.com</p>
+            <p>tiffanyhoung@double-grass.com</p>
+
+            <h3><a href="localapplication.html" class="application-button" rel="history">本地申請</a></h3>
+          </div>
+    </div>
+  </div>
+  <button class="close-btn" onclick="closeThis(openopencall);">✕</button>
+  </div>
+
+  
+  
+  <script src="script.js"></script>
+</body>
+</html>
+ 
