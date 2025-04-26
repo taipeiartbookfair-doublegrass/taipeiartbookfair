@@ -628,6 +628,12 @@
             enctype="multipart/form-data"
           >
             <input type="file" name="file" />
+            <input
+              type="hidden"
+              name="formId"
+              value="some-unique-id-or-timestamp"
+            />
+            <input type="hidden" name="category" value="artwork" />
           </div>
         </div>
 
@@ -956,6 +962,7 @@
     <script src="identity.js"></script>
     <script src="jump.js"></script>
     <script src="yes.js"></script>
+    <script src="uploadoversea.js"></script>
     <!-- <script src="hide.js"></script> -->
   </body>
 </html>
