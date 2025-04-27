@@ -33,7 +33,7 @@ document
 
     try {
       const uploadRes = await fetch(
-        "https://script.google.com/macros/s/AKfycbxr_kswfFo24yC-9GlxkvO7nq3Z1MPpqMc2xdjKtL33N8UcLBzEKhPLbjowb23klY45/exec",
+        "https://script.google.com/macros/s/AKfycbwMLtBsAmDm-ZZYOyTXB3Cndihne_Hz76XNGJtZBFqfVgeqRs-SCJVI-p6CdvKdD4TC/exec",
         {
           method: "POST",
           body: formData,
