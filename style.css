@@ -680,6 +680,7 @@ p {
     color: black;
     width: 85%;
     top: 3rem;
+    margin-bottom: 14vh;
   }
 
   /* 讓底部的 'open-call' 按鈕可以顯示在手機版 */
