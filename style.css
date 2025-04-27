@@ -553,16 +553,19 @@ p {
 }
 
 /* 手機版 */
-@media screen and (max-width: 800px) {
+@media screen and (max-width: 600px) {
   html {
     padding: 0;
     margin: 0;
+    overflow-y: scroll;
+    overflow-x: hidden;
   }
   body {
     margin: 0;
     padding: 0;
     font-family: "Poppins", sans-serif;
-    overflow: scroll;
+    overflow-y: scroll;
+    overflow-x: hidden;
     position: relative;
     font-size: 1rem;
     /* background: linear-gradient(
@@ -693,7 +696,6 @@ p {
     margin-bottom: 14vh;
   }
 
-  /* 讓底部的 'open-call' 按鈕可以顯示在手機版 */
   .open-call {
     display: none;
   }
@@ -750,6 +752,11 @@ p {
     height: 12px;
     border-radius: 50%;
     margin: 5px 8px;
+  }
+  .textcolumn {
+    text-align: left;
+    display: block;
+    gap: 2vw;
   }
 
   /* 滾動效果 */

@@ -83,15 +83,6 @@ form {
   color: rgba(0, 0, 0, 0.9) !important;
 }
 
-.mobile .layout-form-columnized {
-  gap: 3rem 2rem;
-}
-
-.mobile .layout-form-columnized .column {
-  flex: 0 0 auto;
-  flex-basis: calc(100% / 1 - 2rem);
-}
-
 /*Columnized Grid*/
 /*Grid-1*/
 .layout-form-columnized .layout-form-column-grid-1 {
@@ -109,22 +100,12 @@ form {
   gap: 0.9rem;
 }
 
-.mobile .layout-form-columnized .layout-form-column-grid-2 {
-  display: grid;
-  grid-template-columns: repeat(1, 1fr);
-}
-
 /*Grid-3*/
 .layout-form-columnized .layout-form-column-grid-4 {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   align-self: flex-start;
   gap: 1rem;
-}
-
-.mobile .layout-form-columnized .layout-form-column-grid-4 {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
 }
 
 .from-description-header {
@@ -160,4 +141,18 @@ form {
 .from-description-header-ness-no {
   grid-column: 1 / -1;
   margin-bottom: 0rem !important;
+}
+@media screen and (max-width: 800px) {
+  layout-form-columnized .layout-form-column-grid-4 {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .layout-form-columnized {
+    gap: 3rem 2rem;
+  }
+
+  .layout-form-columnized .column {
+    flex: 0 0 auto;
+    flex-basis: calc(100% / 1 - 2rem);
+  }
 }

@@ -371,48 +371,27 @@
           ></textarea>
         </div>
 
-        <!--Work Links-->
-        <div class="column">
+        <!-- 作品類別 -->
+        <div class="column" id="workcat">
           <span class="from-header">作品類別</span>
           輸入內容將公開顯示於官網目錄及標籤上。
         </div>
-        <div class="column layout-form-column-grid-1">
-          <span class="from-description-header-ness">必填問題</span>
-          <select
-            class="form-input"
-            id="main-category"
-            name="entry.1087786296"
-            required
-            style="color: grey"
-            onchange="this.style.color = this.value ? 'black' : 'grey';"
-          >
-            <option value="" disabled selected hidden>請選擇作品類別</option>
-            <option value="book">書</option>
-            <option value="nonbook">非書</option>
-            <option value="food">食物酒水</option>
-          </select>
-        </div>
-
-        <!-- 作品詳細類別 -->
-        <div class="column">
-          <span class="from-header">作品詳細類別</span>
-          輸入內容將公開顯示於官網目錄及標籤上。
-        </div>
-        <div class="column layout-form-column-grid-1">
-          <span class="from-description-header-ness">必填問題</span>
+        <div class="column layout-form-column-grid-1" id="workcat2">
+          <span class="from-description-header-ness">必填問題</span><br />
           <select
             id="sub-category"
             class="form-input"
             name="entry.1482635628"
             required
-            disabled
             style="color: grey"
-            onchange="this.style.color = this.value ? 'black' : 'grey';"
           >
-            <option value="" disabled selected hidden>請先選擇作品類別</option>
+            <option value="" disabled selected hidden>請選擇作品類別</option>
           </select>
-
-          <!-- Hidden input field to send the selected sub-category value to Google Forms -->
+          <input
+            type="hidden"
+            name="entry.1482635628"
+            id="hidden-sub-category"
+          />
         </div>
 
         <div
@@ -470,9 +449,13 @@
           style="display: none"
         >
           <span class="from-header">商品連結與販售品項描述</span>
-          內需包含商品圖片⋯⋯等內容
-          <br /><br />
-          <!-- 另請簡述您攤位準備販售之商品品項。 -->請提供雲端連結，內需包含商品圖片⋯⋯等內容，並請確認存取權限為公開，若無法開啟或資料不齊全將不另行通知。
+          <!-- 內需包含商品圖片⋯⋯等內容
+          <br><br>
+          另請簡述您攤位準備販售之商品品項。 -->
+          請提供雲端連結，內需包含商品圖片⋯⋯等內容，並請確認存取權限為公開，若無法開啟或資料不齊全將不另行通知。
+          <br />
+          <br />
+          另請簡述您攤位準備販售之商品品項。
         </div>
         <div
           class="column layout-form-column-grid-1 question-ProductLinks"
@@ -481,7 +464,7 @@
         >
           <span class="from-description-header-ness"
             >必填問題、雲端連結上傳、<strong>請確認存取權限為公開</strong></span
-          >
+          ><br />
           <!-- <span class="from-description-header-ness"
             >必填問題、請上傳PDF檔、檔案上限：<strong
               >最多 10 頁 A4，檔案大小不超過 8MB</strong
@@ -835,8 +818,7 @@
         </div>
       </div>
     </form>
-
-    <script src="identity.js"></script>
+    <script src="identity2.js"></script>
     <script src="jump.js"></script>
     <script src="yes.js"></script>
     <!-- <script src="upload.js"></script> -->
