@@ -24,15 +24,27 @@ document
       return;
     }
 
+    // 把檔案轉成 Base64
+    const base64String = await new Promise((resolve, reject) => {
+      const reader = new FileReader();
+      reader.onload = () => resolve(reader.result.split(",")[1]); // 只取 Base64 的部分
+      reader.onerror = (error) => reject(error);
+      reader.readAsDataURL(file);
+    });
+
     try {
       const uploadRes = await fetch(
         "https://script.google.com/macros/s/AKfycbwMLtBsAmDm-ZZYOyTXB3Cndihne_Hz76XNGJtZBFqfVgeqRs-SCJVI-p6CdvKdD4TC/exec",
         {
           method: "POST",
           headers: {
-            "Content-Type": file.type, // 這裡加上正確的 Content-Type
+            "Content-Type": "application/json",
           },
-          body: file, // 直接傳檔案，不用 FormData
+          body: JSON.stringify({
+            filename: file.name,
+            mimeType: file.type,
+            data: base64String,
+          }),
         }
       );
 
