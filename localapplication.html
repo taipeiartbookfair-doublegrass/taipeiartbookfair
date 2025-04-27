@@ -371,46 +371,27 @@
           ></textarea>
         </div>
 
-        <!--Work Links-->
-        <div class="column">
+        <!-- 作品類別 -->
+        <div class="column" id="workcat">
           <span class="from-header">作品類別</span>
           輸入內容將公開顯示於官網目錄及標籤上。
         </div>
-        <div class="column layout-form-column-grid-1">
-          <span class="from-description-header-ness">必填問題</span>
-          <select
-            class="form-input"
-            id="main-category"
-            name="entry.1087786296"
-            required
-            style="color: grey"
-            onchange="this.style.color = this.value ? 'black' : 'grey';"
-          >
-            <option value="" disabled selected hidden>請選擇作品類別</option>
-            <option value="書">書</option>
-            <option value="非書">非書</option>
-            <option value="食物酒水">食物酒水</option>
-          </select>
-        </div>
-
-        <!-- 作品詳細類別 -->
-        <div class="column">
-          <span class="from-header">作品詳細類別</span>
-          輸入內容將公開顯示於官網目錄及標籤上。
-        </div>
-        <div class="column layout-form-column-grid-1">
-          <span class="from-description-header-ness">必填問題</span>
+        <div class="column layout-form-column-grid-1" id="workcat2">
+          <span class="from-description-header-ness">必填問題</span><br />
           <select
             id="sub-category"
             class="form-input"
             name="entry.1482635628"
             required
-            disabled
             style="color: grey"
-            onchange="this.style.color = this.value ? 'black' : 'grey';"
           >
-            <option value="" disabled selected hidden>請先選擇作品類別</option>
+            <option value="" disabled selected hidden>請選擇作品類別</option>
           </select>
+          <input
+            type="hidden"
+            name="entry.1482635628"
+            id="hidden-sub-category"
+          />
         </div>
 
         <div
@@ -837,8 +818,7 @@
         </div>
       </div>
     </form>
-    <!-- <TRYINGOUT> -->
-    <script src="identity.js"></script>
+    <script src="identity2.js"></script>
     <script src="jump.js"></script>
     <script src="yes.js"></script>
     <!-- <script src="upload.js"></script> -->
