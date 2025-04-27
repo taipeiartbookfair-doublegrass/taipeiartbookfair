@@ -387,9 +387,9 @@
             onchange="this.style.color = this.value ? 'black' : 'grey';"
           >
             <option value="" disabled selected hidden>請選擇作品類別</option>
-            <option value="book">書</option>
-            <option value="nonbook">非書</option>
-            <option value="food">食物酒水</option>
+            <option value="書">書</option>
+            <option value="非書">非書</option>
+            <option value="食物酒水">食物酒水</option>
           </select>
         </div>
 
@@ -411,8 +411,6 @@
           >
             <option value="" disabled selected hidden>請先選擇作品類別</option>
           </select>
-
-          <!-- Hidden input field to send the selected sub-category value to Google Forms -->
         </div>
 
         <div
@@ -437,9 +435,9 @@
           id="uploadArtwork-l"
           style="display: none"
         >
-          <span class="from-description-header"
+          <span class="from-description-header-ness"
             >必填問題、雲端連結上傳、<strong>請確認存取權限為公開</strong></span
-          >
+          ><br />
           <!-- <span class="from-description-header-ness"
             >必填問題、請上傳PDF檔、檔案上限：<strong
               >最多 10 頁 A4，檔案大小不超過 8MB</strong
@@ -470,18 +468,22 @@
           style="display: none"
         >
           <span class="from-header">商品連結與販售品項描述</span>
-          內需包含商品圖片⋯⋯等內容
-          <br /><br />
-          <!-- 另請簡述您攤位準備販售之商品品項。 -->請提供雲端連結，內需包含商品圖片⋯⋯等內容，並請確認存取權限為公開，若無法開啟或資料不齊全將不另行通知。
+          <!-- 內需包含商品圖片⋯⋯等內容
+          <br><br>
+          另請簡述您攤位準備販售之商品品項。 -->
+          請提供雲端連結，內需包含商品圖片⋯⋯等內容，並請確認存取權限為公開，若無法開啟或資料不齊全將不另行通知。
+          <br />
+          <br />
+          另請簡述您攤位準備販售之商品品項。
         </div>
         <div
           class="column layout-form-column-grid-1 question-ProductLinks"
           id="productLink-l"
           style="display: none"
         >
-          <span class="from-description-header"
+          <span class="from-description-header-ness"
             >必填問題、雲端連結上傳、<strong>請確認存取權限為公開</strong></span
-          >
+          ><br />
           <!-- <span class="from-description-header-ness"
             >必填問題、請上傳PDF檔、檔案上限：<strong
               >最多 10 頁 A4，檔案大小不超過 8MB</strong
@@ -502,7 +504,7 @@
             name="entry.1111437113"
             placeholder="商品連結。https://"
             maxlength="3000"
-          />
+          /><br />
           <textarea
             class="form-input-textarea"
             name="entry.1425905511"
@@ -529,7 +531,7 @@
         >
           <span class="from-description-header-ness"
             >必填問題、雲端連結上傳、<strong>請確認存取權限為公開</strong></span
-          >
+          ><br />
 
           <!-- <span class="from-description-header-ness"
             >必填問題、請上傳PDF檔、檔案上限：<strong
