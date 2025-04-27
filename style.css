@@ -746,6 +746,11 @@ p {
     display: flex;
     white-space: nowrap;
   }
+  .textcolumn {
+    text-align: left;
+    display: block;
+    gap: 2vw;
+  }
 
   .dot {
     width: 12px;
