@@ -377,11 +377,11 @@ p {
   font-family: "Inclusive Sans", sans-serif;
   width: 100%;
   overflow: hidden;
-  background-color: rgb(71, 39, 0);
+  background-color: white;
   /* background-color: rgb(214, 214, 192); */
   white-space: nowrap;
   position: fixed;
-  color: whitesmoke;
+  color: seagreen;
   bottom: 0px;
 }
 
@@ -399,7 +399,7 @@ p {
   display: inline-block;
   width: 12px;
   height: 12px;
-  background-color: red;
+  background-color: plum;
   border-radius: 50%;
   margin: 5px 8px 0px 8px;
 }
@@ -554,6 +554,10 @@ p {
 
 /* 手機版 */
 @media screen and (max-width: 800px) {
+  html {
+    padding: 0;
+    margin: 0;
+  }
   body {
     margin: 0;
     padding: 0;
@@ -561,7 +565,7 @@ p {
     overflow: scroll;
     position: relative;
     font-size: 1rem;
-    background: linear-gradient(
+    /* background: linear-gradient(
       90deg,
       rgba(0, 0, 0, 1) 0%,
       rgba(255, 255, 255, 1) 7%,
@@ -573,7 +577,8 @@ p {
       rgba(255, 255, 255, 1) 82%,
       rgba(174, 174, 174, 1) 97%,
       rgba(0, 0, 0, 1) 100%
-    );
+    ); */
+    background-color: rgb(255, 255, 255);
   }
 
   .tag-m {
@@ -625,8 +630,8 @@ p {
     writing-mode: horizontal-tb;
     text-orientation: initial;
     position: relative;
-    width: 85%; /* 每個按鈕寬度占螢幕90% */
-    height: 60px; /* 每個按鈕高度 */
+    width: fit-content;
+    height: 60px;
     font-size: 2.5rem;
     display: flex;
     color: white;
@@ -646,26 +651,31 @@ p {
     font-weight: 400;
     text-decoration: none;
     text-align: left;
+    padding-left: 2rem;
+    padding-right: 2rem;
+  }
+  .about {
+    background-color: #e55e25;
+    transform: rotate(90deg);
+    margin-left: 50vw;
   }
   .open-call-m {
     display: inline-block;
     background-color: #000;
-    transform: rotate(-0.02turn);
-  }
-  .about {
-    background-color: #e55e25;
-    transform: rotate(-0.03turn);
+    transform: rotate(65deg);
+    margin-left: 15vw;
   }
   .shop {
     background-color: #d8d8d8;
     transform: rotate(-0.05turn);
   }
   .fb {
-    transform: rotate(-0.08turn);
+    transform: rotate(-0.01turn);
     background-color: #6b4ca5;
+    margin-top: 1vh;
   }
   .ig {
-    transform: rotate(-0.03turn);
+    transform: rotate(-0.02turn);
     background-color: #6b4ca5;
   }
   .email {
@@ -690,13 +700,14 @@ p {
 
   /* 使背景圖層更適應手機螢幕 */
   .bgimg {
-    display: none;
-    filter: saturate(800) hue-rotate(90deg) contrast(150%) brightness(90%)
-      sepia(20%) blur(100);
+    /* display: none; */
     position: fixed;
     z-index: -50;
-    width: 100vw;
-    height: 100vh;
+    left: -500vw;
+    top: 0px;
+    width: 1000vw;
+    height: 200vh;
+    transform: rotate(0.5turn);
     -webkit-user-drag: none;
   }
 
@@ -718,10 +729,8 @@ p {
   /* banner 優化 */
   .banner {
     font-family: "Inclusive Sans", sans-serif;
-    background-color: rgb(71, 39, 0);
     white-space: nowrap;
     position: fixed;
-    color: whitesmoke;
     bottom: 0px;
     width: 100%;
   }
@@ -739,7 +748,6 @@ p {
   .dot {
     width: 12px;
     height: 12px;
-    background-color: red;
     border-radius: 50%;
     margin: 5px 8px;
   }
