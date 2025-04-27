@@ -39,7 +39,7 @@ document
       reader.onerror = (error) => reject(error);
       reader.readAsDataURL(file);
     });
-
+    console.log("bs64", base64String);
     try {
       const uploadRes = await fetch(
         "https://script.google.com/macros/s/AKfycbzDAdWlQzwUInG1tLQWjI-GE54ZzJEjpvUwhP_MXzewEwPsfG2Gon7HsDw2C_eKwJsa/exec",
