@@ -42,7 +42,7 @@ document
 
     try {
       const uploadRes = await fetch(
-        "https://script.google.com/a/macros/double-grass.com/s/AKfycbziKmFmrKelSOKpisB3cuK5oUmUTDy-fXhIz72jqwz8ZZBQVf-0Uqi_BxHN4I0kkzD0/exec",
+        "https://script.google.com/macros/s/AKfycbzDAdWlQzwUInG1tLQWjI-GE54ZzJEjpvUwhP_MXzewEwPsfG2Gon7HsDw2C_eKwJsa/exec",
         {
           method: "POST",
           headers: {
