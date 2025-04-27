@@ -343,7 +343,6 @@ nav a:hover {
 }
 
 .info {
-  /* font-family: "Source Code Pro", monospace; */
   position: fixed;
   left: 35%;
   bottom: 7vh;
@@ -427,15 +426,35 @@ p {
   cursor: pointer;
 }
 
+.tag-m {
+  display: none;
+}
+.tag2-m {
+  display: none;
+}
 .tag {
   position: absolute;
   background: white;
   border: 1px solid black;
   font-size: 1.3rem;
   padding: 2px;
+  top: 25vh;
+  right: 23vw;
+  transform: rotate(-0.02turn);
+}
+.tag2 {
+  position: absolute;
+  background: white;
+  border: 1px solid black;
+  font-size: 1.3rem;
+  padding: 2px;
+  top: 65vh;
+  right: 15vw;
+  transform: rotate(0.02turn);
 }
 
 .opencallframe {
+  z-index: 9 !important;
   position: fixed;
   width: 90vw;
   height: 90vh;
@@ -511,6 +530,7 @@ p {
   font-size: 1.5rem;
   color: black;
   cursor: pointer;
+  z-index: 10;
 }
 
 /* .close-btn:hover {
@@ -538,28 +558,67 @@ p {
     margin: 0;
     padding: 0;
     font-family: "Poppins", sans-serif;
-    overflow: hidden;
+    overflow: scroll;
     position: relative;
     font-size: 1rem;
+    background: linear-gradient(
+      90deg,
+      rgba(0, 0, 0, 1) 0%,
+      rgba(255, 255, 255, 1) 7%,
+      rgba(222, 222, 222, 1) 18%,
+      rgba(255, 255, 255, 1) 21%,
+      rgba(255, 255, 255, 1) 46%,
+      rgba(227, 227, 227, 1) 53%,
+      rgba(237, 235, 235, 1) 79%,
+      rgba(255, 255, 255, 1) 82%,
+      rgba(174, 174, 174, 1) 97%,
+      rgba(0, 0, 0, 1) 100%
+    );
+  }
+
+  .tag-m {
+    background-color: white;
+    border: 1px solid black;
+    font-size: 1.3rem;
+    padding: 2px;
+    display: block;
+    position: relative;
+    width: fit-content;
+    justify-content: center;
+    top: 0.5rem;
+    left: 0.5rem;
+    margin: 10px;
+    transform: rotate(0turn);
+  }
+  .tag2-m {
+    background-color: white;
+    border: 1px solid black;
+    font-size: 1.3rem;
+    padding: 2px;
+    display: block;
+    position: relative;
+    width: fit-content;
+    justify-content: center;
+    top: 0.5rem;
+    left: 0.5rem;
+    margin: 10px;
+    transform: rotate(0turn);
   }
   .tag {
-    position: relative;
-    background: white;
-    font-size: 2rem;
-    top: 10px;
-    left: 10px;
+    display: none;
+  }
+  .tag2 {
+    display: none;
   }
 
   nav {
     position: relative;
     top: 10px;
-    left: 10px;
+    left: 1.5rem;
     right: 0;
     display: flex;
     flex-direction: column; /* 上下排列 */
-    text-align: left;
-    gap: 15px;
-    z-index: 10;
+    gap: 25px;
   }
 
   nav a.vertical {
@@ -568,15 +627,13 @@ p {
     position: relative;
     width: 85%; /* 每個按鈕寬度占螢幕90% */
     height: 60px; /* 每個按鈕高度 */
-    font-size: 3rem;
+    font-size: 2.5rem;
     display: flex;
-    align-items: left;
+    color: white;
     text-decoration: none;
-    font-weight: bold;
-    text-shadow: 3px 2px 0 #000, -1px -1px 0 #ffffff;
-  }
-  .open-call-m {
-    display: inline-block;
+    align-items: center;
+    justify-content: center;
+    /* text-shadow: 3px 2px 0 #000, -1px -1px 0 #ffffff; */
   }
 
   .open-call-m,
@@ -586,20 +643,43 @@ p {
   .ig,
   .email {
     all: unset; /* 先清空原本設定 */
-    font-weight: 600;
+    font-weight: 400;
     text-decoration: none;
     text-align: left;
   }
+  .open-call-m {
+    display: inline-block;
+    background-color: #000;
+    transform: rotate(-0.02turn);
+  }
   .about {
-    color: #e55e25;
+    background-color: #e55e25;
+    transform: rotate(-0.03turn);
   }
   .shop {
-    color: #d8d8d8;
+    background-color: #d8d8d8;
+    transform: rotate(-0.05turn);
   }
-  .fb,
-  .ig,
+  .fb {
+    transform: rotate(-0.08turn);
+    background-color: #6b4ca5;
+  }
+  .ig {
+    transform: rotate(-0.03turn);
+    background-color: #6b4ca5;
+  }
   .email {
-    color: #6b4ca5;
+    transform: rotate(0.01turn);
+    background-color: #6b4ca5;
+  }
+  .info {
+    position: relative;
+    left: 1.5rem;
+    bottom: auto;
+    padding: 2px;
+    color: black;
+    width: 85%;
+    top: 3rem;
   }
 
   /* 讓底部的 'open-call' 按鈕可以顯示在手機版 */
@@ -607,14 +687,11 @@ p {
     display: none;
   }
 
-  .open-call:hover {
-    border: 2px solid red;
-  }
-
   /* 使背景圖層更適應手機螢幕 */
   .bgimg {
-    filter: saturate(800) hue-rotate(180deg) contrast(150%) brightness(90%)
-      sepia(20%);
+    display: none;
+    filter: saturate(800) hue-rotate(90deg) contrast(150%) brightness(90%)
+      sepia(20%) blur(100);
     position: fixed;
     z-index: -50;
     width: 100vw;
@@ -675,11 +752,6 @@ p {
       transform: translateX(-50%);
     }
   }
-}
-
-/* 大螢幕版排版 */
-@media screen and (min-width: 769px) {
-  /* 保持原有排版或進一步調整 */
 }
 
 /* 大人的大螢幕 */
