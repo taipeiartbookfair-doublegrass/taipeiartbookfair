@@ -23,7 +23,15 @@ document
       alert("Invalid file type. Please upload a JPEG, PNG, or PDF file.");
       return;
     }
-
+    console.log(
+      "檔案名稱：",
+      file.name,
+      "檔案大小：",
+      file.size,
+      "檔案類型：",
+      file.type,
+      "start encoding..."
+    );
     // 把檔案轉成 Base64
     const base64String = await new Promise((resolve, reject) => {
       const reader = new FileReader();
