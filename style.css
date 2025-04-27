@@ -528,9 +528,12 @@ p {
   padding: 3vh 4vw;
   box-sizing: border-box;
 }
+.open-call-m {
+  display: none;
+}
 
 /* 手機版 */
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 800px) {
   body {
     margin: 0;
     padding: 0;
@@ -539,11 +542,18 @@ p {
     position: relative;
     font-size: 1rem;
   }
+  .tag {
+    position: relative;
+    background: white;
+    font-size: 2rem;
+    top: 10px;
+    left: 10px;
+  }
 
   nav {
-    position: fixed;
+    position: relative;
     top: 10px;
-    left: 0;
+    left: 10px;
     right: 0;
     display: flex;
     flex-direction: column; /* 上下排列 */
@@ -556,18 +566,20 @@ p {
     writing-mode: horizontal-tb;
     text-orientation: initial;
     position: relative;
-    width: 90%; /* 每個按鈕寬度占螢幕90% */
+    width: 85%; /* 每個按鈕寬度占螢幕90% */
     height: 60px; /* 每個按鈕高度 */
-    font-size: 4rem;
+    font-size: 3rem;
     display: flex;
     align-items: left;
-    justify-content: center;
-
     text-decoration: none;
-
     font-weight: bold;
+    text-shadow: 3px 2px 0 #000, -1px -1px 0 #ffffff;
+  }
+  .open-call-m {
+    display: inline-block;
   }
 
+  .open-call-m,
   .about,
   .shop,
   .fb,
@@ -592,13 +604,7 @@ p {
 
   /* 讓底部的 'open-call' 按鈕可以顯示在手機版 */
   .open-call {
-    font-size: 4rem;
-    left: 0;
-    bottom: 5vh;
-    text-align: left;
-    color: #e0e0e0;
-    text-decoration: underline;
-    cursor: pointer;
+    display: none;
   }
 
   .open-call:hover {

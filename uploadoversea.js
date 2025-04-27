@@ -6,9 +6,11 @@ document
     const categoryInput = document.getElementById("category");
 
     if (!fileInput.files.length) {
-      alert("Please choose your file");
+      alert("請先選擇檔案");
       return;
     }
+
+    console.log(fileInput.files); // 檢查檔案是否正確選擇
 
     const formData = new FormData();
     formData.append("file", fileInput.files[0]);
@@ -27,8 +29,6 @@ document
       const fileUrl = await uploadRes.text(); // 回傳是純文字（網址）
       document.getElementById("uploadedFileUrl").value = fileUrl;
       console.log("上傳成功，檔案網址是：", fileUrl);
-
-      // 🔥 這裡你可以接著把檔案網址塞到表單的某一格，或者用 entry.xxx 一起送出
     } catch (error) {
       console.error("上傳失敗：", error);
     }
