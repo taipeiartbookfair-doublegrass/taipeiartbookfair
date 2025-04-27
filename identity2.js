@@ -103,7 +103,7 @@ boothTypeRadios.forEach((radio) => {
 
     // 重新塞子類別
     subSelect.innerHTML =
-      '<option value="" disabled selected hidden>請選擇作品詳細類別</option>';
+      '<option value="" disabled selected hidden>請選擇作品類別</option>';
     subCategoryOptions[categoryKey].forEach((opt) => {
       const option = document.createElement("option");
       option.value = opt.value;
