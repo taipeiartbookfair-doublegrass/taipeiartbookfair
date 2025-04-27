@@ -4,11 +4,9 @@ document
     const fileInput = document.getElementById("fileInput");
 
     if (!fileInput.files.length) {
-      alert("Please choose your file");
+      alert("請先選擇檔案");
       return;
     }
-
-    const file = fileInput.files[0];
 
     // 檢查檔案大小（限制 8MB）
     const maxSize = 8 * 1024 * 1024; // 8MB
