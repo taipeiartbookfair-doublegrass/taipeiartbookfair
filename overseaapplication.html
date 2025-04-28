@@ -820,21 +820,45 @@
         <!--Password-->
         <div class="column">
           <span class="from-header">Login Password</span>
-          This password will be use for the registration of website
-          accounts.<strong>Once registered, it cannot be modified.</strong>If
-          you registered multiple times, we will use the first password you
-          entered.
+          This password will be use for the registration of website accounts.
+          <strong>Once registered, it cannot be modified.</strong>If you
+          registered multiple times, we will use the first password you entered.
         </div>
         <div class="column layout-form-column-grid-1">
           <span class="from-description-header-ness">Required Question</span>
-          <input
-            autocomplete="email"
-            class="form-input"
-            name="entry.1848520839"
-            placeholder="Password"
-            maxlength="500"
-            required
-          />
+          <div style="position: relative">
+            <input
+              id="password"
+              type="password"
+              autocomplete="new-password"
+              class="form-input"
+              name="entry.1848520839"
+              placeholder="Password"
+              maxlength="500"
+              required
+              style="padding-right: 60px"
+            />
+            <button
+              type="button"
+              id="togglePassword"
+              style="
+                position: absolute;
+                right: 5px;
+                top: 50%;
+                transform: translateY(-50%);
+                font-size: 14px;
+              "
+            >
+              Show
+            </button>
+          </div>
+
+          <div id="password-rules" style="margin-top: 8px; font-size: 14px">
+            <div id="length-rule">✕ At least 8 characters</div>
+            <div id="uppercase-rule">✕ At least one uppercase letter</div>
+            <div id="lowercase-rule">✕ At least one lowercase letter</div>
+            <div id="number-rule">✕ At least one number</div>
+          </div>
         </div>
 
         <!--Telephone Number-->
@@ -960,6 +984,7 @@
     <script src="jump.js"></script>
     <script src="yes.js"></script>
     <script src="uploadoversea.js"></script>
+    <script src="password.js"></script>
     <!-- <script src="hide.js"></script> -->
   </body>
 </html>
