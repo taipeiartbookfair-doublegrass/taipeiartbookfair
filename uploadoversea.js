@@ -141,21 +141,13 @@ form.addEventListener("submit", async function (e) {
     console.log("start submit"); // Debugging
     form.submit();
 
-    var form = document.getElementById("BoothApplication");
-    var submitButton = document.getElementById("submitButton");
+    submitButton.disabled = true;
+    submitButton.innerText = "送出中...";
 
-    if (form && submitButton) {
-      form.addEventListener("submit", function (event) {
-        // 防呆：送出後馬上 disable 按鈕，不要在按了啊！！！！！
-        submitButton.disabled = true;
-        submitButton.innerText = "送出中..."; // 如果你想讓按鈕字變成「送出中...」
-
-        // 延遲 1.5秒，給 Google Form 時間收資料
-        setTimeout(function () {
-          window.location.href = "application-received.html";
-        }, 1500);
-      });
-    }
+    // 延遲 1.5 秒後進行頁面重定向
+    setTimeout(function () {
+      window.location.href = "application-received.html";
+    }, 1500);
   } catch (error) {
     console.log("file upload failed：", error);
     alert("File upload failed. Please try again.");
