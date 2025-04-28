@@ -35,11 +35,23 @@ form.addEventListener("submit", async function (e) {
       reader.readAsDataURL(file);
     });
 
+    const inputValue = document.querySelector(
+      "input[name='entry.1159390039']"
+    ).value;
+
+    // 獲取當前的日期和時間，格式為 YYYYMMDDHHMMSS
+    const currentDateTime = new Date()
+      .toISOString()
+      .replace(/[-T:.]/g, "")
+      .slice(0, 14);
+
+    const newFileName = `${inputValue}_${currentDateTime}_${file.name}`;
+
     // 使用 fetch 上傳到伺服器
     const data = {
       data: base64String,
       mimeType: file.type,
-      filename: file.name,
+      filename: newFileName,
     };
     const bodyString = new URLSearchParams(data).toString();
     // console.log("bodyString", bodyString); // Debugging
