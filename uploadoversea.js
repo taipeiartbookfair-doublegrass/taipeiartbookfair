@@ -59,14 +59,10 @@ form.addEventListener("submit", async function (e) {
     // if (!uploadRes.ok) {
     //   throw new Error("File upload failed");
     // }
-    console.log("uploadRes", uploadRes); // Debugging
     const fileUrl = await uploadRes.text();
-    const uploadedUrlInput = document.getElementById("uploadedFileUrl");
-    if (uploadedUrlInput) {
-      uploadedUrlInput.value = fileUrl;
-    } else {
-      // console.warn("找不到 uploadedFileUrl 欄位");
-    }
+    document.getElementById("uploadedFileUrl").value = fileUrl;
+    // TODO :need to delete
+    console.log("上傳成功，檔案網址是：", fileUrl);
 
     // 等所有驗證與上傳都成功，這時才真正送出表單
     console.log("file upload success"); // Debugging
