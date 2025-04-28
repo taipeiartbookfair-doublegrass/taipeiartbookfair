@@ -45,6 +45,7 @@ document
       mimeType: file.type,
       filename: file.name,
     };
+    const bodyString = new URLSearchParams(data).toString();
     // TODO :need to delete
     console.log("bs64", base64String);
     try {
@@ -56,7 +57,7 @@ document
           headers: {
             "Content-Type": "text/plain;charset=utf-8",
           },
-          body: JSON.stringify(data),
+          body: bodyString,
         }
       );
 
