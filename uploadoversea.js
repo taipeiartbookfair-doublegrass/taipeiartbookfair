@@ -49,6 +49,7 @@ document
       const uploadRes = await fetch(
         "https://script.google.com/macros/s/AKfycbzDAdWlQzwUInG1tLQWjI-GE54ZzJEjpvUwhP_MXzewEwPsfG2Gon7HsDw2C_eKwJsa/exec",
         {
+          redirect: "follow",
           method: "POST",
           headers: {
             "Content-Type": "application/json",
