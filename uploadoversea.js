@@ -7,7 +7,7 @@ form.addEventListener("submit", async function (e) {
   const fileInput = document.getElementById("fileInput");
   if (!fileInput || !fileInput.files || !fileInput.files.length) {
     alert("請先選擇檔案");
-    return;
+    e.stopPropagation(); // 停止事件傳遞
   }
 
   const file = fileInput.files[0];
@@ -16,14 +16,14 @@ form.addEventListener("submit", async function (e) {
   const maxSize = 8 * 1024 * 1024; // 8MB
   if (file.size > maxSize) {
     alert("File size exceeds the 8MB limit.");
-    return;
+    e.stopPropagation(); // 停止事件傳遞
   }
 
   // 檢查檔案類型（僅允許 JPEG, PNG, PDF）
   const allowedTypes = ["image/jpeg", "image/png", "application/pdf"];
   if (!allowedTypes.includes(file.type)) {
     alert("Invalid file type. Please upload a JPEG, PNG, or PDF file.");
-    return;
+    e.stopPropagation(); // 停止事件傳遞
   }
 
   try {
@@ -55,9 +55,9 @@ form.addEventListener("submit", async function (e) {
       }
     );
 
-    if (!uploadRes.ok) {
-      throw new Error("File upload failed");
-    }
+    // if (!uploadRes.ok) {
+    //   throw new Error("File upload failed");
+    // }
 
     const fileUrl = await uploadRes.text();
     const uploadedUrlInput = document.getElementById("uploadedFileUrl");
