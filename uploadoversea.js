@@ -11,7 +11,7 @@ form.addEventListener("submit", async function (e) {
   }
 
   const file = fileInput.files[0];
-
+  console.log("Selected file:", file); // Debugging
   // 檢查檔案大小（限制 8MB）
   const maxSize = 8 * 1024 * 1024; // 8MB
   if (file.size > maxSize) {
@@ -25,7 +25,7 @@ form.addEventListener("submit", async function (e) {
     alert("Invalid file type. Please upload a JPEG, PNG, or PDF file.");
     e.stopPropagation(); // 停止事件傳遞
   }
-
+  console.log("file start encode"); // Debugging
   try {
     // 轉成 Base64
     const base64String = await new Promise((resolve, reject) => {
@@ -42,7 +42,8 @@ form.addEventListener("submit", async function (e) {
       filename: file.name,
     };
     const bodyString = new URLSearchParams(data).toString();
-
+    console.log("bodyString", bodyString); // Debugging
+    console.log("start upload"); // Debugging
     const uploadRes = await fetch(
       "https://script.google.com/macros/s/AKfycbzDAdWlQzwUInG1tLQWjI-GE54ZzJEjpvUwhP_MXzewEwPsfG2Gon7HsDw2C_eKwJsa/exec",
       {
@@ -58,7 +59,7 @@ form.addEventListener("submit", async function (e) {
     // if (!uploadRes.ok) {
     //   throw new Error("File upload failed");
     // }
-
+    console.log("uploadRes", uploadRes); // Debugging
     const fileUrl = await uploadRes.text();
     const uploadedUrlInput = document.getElementById("uploadedFileUrl");
     if (uploadedUrlInput) {
@@ -68,6 +69,8 @@ form.addEventListener("submit", async function (e) {
     }
 
     // 等所有驗證與上傳都成功，這時才真正送出表單
+    console.log("file upload success"); // Debugging
+    console.log("start submit"); // Debugging
     form.submit();
   } catch (error) {
     console.log("file upload failed：", error);
