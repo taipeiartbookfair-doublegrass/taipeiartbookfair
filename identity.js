@@ -1,5 +1,5 @@
 const subCategoryOptions = {
-  book: [
+  書: [
     { value: "b00 攝影", text: "b00 攝影（Photography）" },
     { value: "b01 插畫", text: "b01 插畫（Illustration）" },
     { value: "b02 漫畫", text: "b02 漫畫（Comics）" },
@@ -30,7 +30,7 @@ const subCategoryOptions = {
       text: "b10 選集與收藏出版物（Collection）",
     },
   ],
-  nonbook: [
+  非書: [
     { value: "c00 角色週邊商品", text: "c00 角色週邊商品（Character Merch）" },
     { value: "c01 印刷品", text: "c01 印刷品（Printed Matter）" },
     {
@@ -48,7 +48,7 @@ const subCategoryOptions = {
     },
     { value: "c10 音樂", text: "c10 音樂（Music）" },
   ],
-  food: [
+  食物酒水: [
     { value: "f00 甜點", text: "f00 甜點（Desserts）" },
     { value: "f01 飲品", text: "f01 飲品（Beverages）" },
     { value: "f02 鹹食", text: "f02 鹹食（Savory Foods）" },
@@ -74,8 +74,9 @@ const hiddenSubCategoryInput = document.getElementById("hidden-sub-category");
 
 mainSelect.addEventListener("change", function () {
   const selected = this.value;
+  console.log("Main category selected:", selected); // Debugging
   subSelect.innerHTML =
-    '<option value="" disabled selected hidden>請選擇作品詳細類別 Please enter your sub-catagory</option>';
+    '<option value="" disabled selected hidden>Please enter your sub-category</option>';
 
   if (subCategoryOptions[selected]) {
     subCategoryOptions[selected].forEach((opt) => {
@@ -91,6 +92,7 @@ mainSelect.addEventListener("change", function () {
 });
 
 subSelect.addEventListener("change", function () {
+  console.log("Sub-category selected:", this.value); // Debugging
   // When a sub-category is selected, update the hidden input value for submission to Google Form
   hiddenSubCategoryInput.value = this.value;
 });

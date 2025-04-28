@@ -143,16 +143,49 @@ form {
   margin-bottom: 0rem !important;
 }
 @media screen and (max-width: 800px) {
+  body {
+    padding: 2.5rem;
+  }
+  form {
+    background-color: whitesmoke;
+    border: 1px solid black;
+    border-radius: 3rem;
+    padding: 1.5rem;
+  }
+  .layout-form-columnized .layout-form-column-grid-1 {
+    display: grid;
+    grid-template-columns: repeat(1, 1fr);
+    align-self: flex-start;
+    gap: 0.3rem;
+  }
   layout-form-columnized .layout-form-column-grid-4 {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
   }
   .layout-form-columnized {
-    gap: 3rem 2rem;
+    gap: 2rem 1rem;
   }
 
   .layout-form-columnized .column {
     flex: 0 0 auto;
-    flex-basis: calc(100% / 1 - 2rem);
+    flex-basis: calc(100% / 0.9 - 2rem);
+  }
+  form-input select {
+    max-width: 65%;
+  }
+
+  .backhome {
+    top: 0.3rem;
+    left: 0.4rem;
+  }
+  .backhome-smalltext {
+    top: 3.2rem;
+    left: 1.1rem;
+  }
+
+  /*Grid-2*/
+  .layout-form-columnized .layout-form-column-grid-2 {
+    display: grid;
+    grid-template-columns: repeat(1, 1fr);
   }
 }
