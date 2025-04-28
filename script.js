@@ -31,12 +31,12 @@ const imageFiles = [
 ];
 
 function shuffle(array) {
-  const copy = [...array];
-  for (let i = copy.length - 1; i > 0; i--) {
-    const j = Math.floor(Math.random() * (i + 1));
-    [copy[i], copy[j]] = [copy[j], copy[i]];
+  const arr = array.slice(); // 複製一個新的，不會改到原本的
+  for (let i = arr.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1)); // 隨機一個 0～i 的數字
+    [arr[i], arr[j]] = [arr[j], arr[i]]; // 交換位置
   }
-  return copy;
+  return arr;
 }
 
 function createRotator() {
@@ -44,7 +44,19 @@ function createRotator() {
   const totalPosters = 5;
   const imagesPerStrip = 5;
 
-  const shuffled = shuffle(imageFiles);
+  // 分開 horizontal 和 vertical 的檔名
+  const horizontalImages = Array.from(
+    { length: 59 },
+    (_, i) => `hori${i + 1}.jpg`
+  );
+  const verticalImages = Array.from(
+    { length: 35 },
+    (_, i) => `verti${i + 1}.jpg`
+  );
+
+  // 預先打亂
+  const shuffledHorizontal = shuffle(horizontalImages);
+  const shuffledVertical = shuffle(verticalImages);
 
   for (let i = 0; i < totalPosters; i++) {
     const posterRotator = document.createElement("div");
@@ -53,23 +65,35 @@ function createRotator() {
     const imageStrip = document.createElement("div");
     imageStrip.classList.add("image-strip");
 
-    const start = i * imagesPerStrip;
-    const selectedImages = shuffled.slice(start, start + imagesPerStrip);
+    // 第幾個 rotator 決定抓哪個資料夾
+    let sourceImages, folder;
+    if (i === 0 || i === 1 || i === 4) {
+      sourceImages = shuffledHorizontal;
+      folder = "horizental"; // 注意你的資料夾拼字
+    } else {
+      sourceImages = shuffledVertical;
+      folder = "vertical";
+    }
 
-    // Ensure we have enough images
+    // 取出5張
+    const start = (i * imagesPerStrip) % sourceImages.length;
+    let selectedImages = sourceImages.slice(start, start + imagesPerStrip);
+
+    // 補滿
     if (selectedImages.length < imagesPerStrip) {
-      selectedImages.push(
-        ...shuffle(imageFiles).slice(0, imagesPerStrip - selectedImages.length)
+      selectedImages = selectedImages.concat(
+        shuffle(sourceImages).slice(0, imagesPerStrip - selectedImages.length)
       );
     }
 
+    // 加到 image-strip
     for (const src of selectedImages) {
       const img = document.createElement("img");
-      img.src = `image/${src}`;
+      img.src = `image/${folder}/${src}`;
       imageStrip.appendChild(img);
     }
-
-    // Clone first for looping
+    imageStrip.innerHTML += imageStrip.innerHTML;
+    // 複製第一張做循環
     const firstImgClone = imageStrip.firstElementChild.cloneNode(true);
     imageStrip.appendChild(firstImgClone);
 

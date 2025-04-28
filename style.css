@@ -314,18 +314,18 @@ nav a:hover {
 }
 
 .rotata div:nth-child(3) .image-strip img {
-  width: auto; /* Maintain aspect ratio based on height */
-  height: 130% !important; /* Ensure the image fills the height of the container */
-  object-fit: cover; /* Cover the height without empty spaces */
+  width: auto;
+  height: 130% !important;
+  object-fit: fill;
   flex-shrink: 0;
   display: block;
   max-width: none;
 }
 
 .rotata div:nth-child(4) .image-strip img {
-  width: auto; /* Maintain aspect ratio based on height */
-  height: 200% !important; /* Ensure the image fills the height of the container */
-  object-fit: cover; /* Cover the height without empty spaces */
+  width: auto;
+  height: 200% !important;
+  object-fit: cover;
   flex-shrink: 0;
   display: block;
   max-width: none;
@@ -334,9 +334,9 @@ nav a:hover {
 .rotata div:nth-child(1) .image-strip img,
 .rotata div:nth-child(2) .image-strip img,
 .rotata div:nth-child(5) .image-strip img {
-  height: 100% !important; /* Maintain the current behavior for wider-than-tall containers */
-  width: auto; /* Maintain the aspect ratio based on width */
-  object-fit: cover; /* Ensure the image covers the container */
+  height: 100% !important;
+  width: auto;
+  object-fit: cover;
   flex-shrink: 0;
   display: block;
   max-width: none;
