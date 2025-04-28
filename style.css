@@ -584,6 +584,10 @@ p {
     background-color: rgb(255, 255, 255);
   }
 
+  nav a:hover {
+    transform: rotate(0deg) !important;
+  }
+
   .tag-m {
     background-color: white;
     border: 1px solid black;
