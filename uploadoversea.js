@@ -72,5 +72,6 @@ form.addEventListener("submit", async function (e) {
   } catch (error) {
     console.log("file upload failed：", error);
     alert("File upload failed. Please try again.");
+    e.stopPropagation(); // 停止事件傳遞
   }
 });
