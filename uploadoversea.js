@@ -70,7 +70,7 @@ form.addEventListener("submit", async function (e) {
     // 等所有驗證與上傳都成功，這時才真正送出表單
     form.submit();
   } catch (error) {
-    // console.error("file upload failed：", error);
+    console.error("file upload failed：", error);
     alert("File upload failed. Please try again.");
   }
 });
