@@ -40,9 +40,11 @@ document
       reader.readAsDataURL(file);
     });
     // 使用 FormData 發送檔案
-    const formData = new FormData();
-    formData.append("file_data", base64String);
-    formData.append("filename", file.name);
+    const data = {
+      data: base64String,
+      mimeType: file.type,
+      filename: file.name,
+    };
     // TODO :need to delete
     console.log("bs64", base64String);
     try {
@@ -54,7 +56,7 @@ document
           headers: {
             "Content-Type": "text/plain;charset=utf-8",
           },
-          body: formData,
+          body: JSON.stringify(data),
         }
       );
 
