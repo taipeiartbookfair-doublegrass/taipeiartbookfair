@@ -256,7 +256,7 @@
             class="form-input-radio"
             name="entry.133172086"
             id="PreferredBoothType_CreativeProducts"
-            value="創作型商品"
+            value="創作商品"
             required
           />
           <label for="PreferredBoothType_CreativeProducts" class="form-label">
@@ -291,7 +291,7 @@
             class="form-input-radio"
             name="entry.133172086"
             id="PreferredBoothType_Curation"
-            value="裝置類"
+            value="裝置類型攤位"
             required
           />
           <label for="PreferredBoothType_Curation" class="form-label">
@@ -383,7 +383,7 @@
             class="form-input"
             name="entry.1482635628"
             required
-            style="color: grey"
+            style="color: grey; max-width: 65%"
           >
             <option value="" disabled selected hidden>請選擇作品類別</option>
           </select>
@@ -478,7 +478,7 @@
               value="some-unique-id-or-timestamp"
             />
             <input type="hidden" name="category" value="product" />
-          </div> -->
+          </div> --><br />
           <input
             type="url"
             class="form-input"
@@ -716,14 +716,39 @@
         </div>
         <div class="column layout-form-column-grid-1">
           <span class="from-description-header-ness">必填問題</span>
-          <input
-            autocomplete="email"
-            class="form-input"
-            name="entry.174970451"
-            placeholder="密碼"
-            maxlength="500"
-            required
-          />
+          <div style="position: relative">
+            <input
+              id="password"
+              type="password"
+              autocomplete="new-password"
+              class="form-input"
+              name="entry.174970451"
+              placeholder="Password"
+              maxlength="500"
+              required
+              style="padding-right: 30px"
+            />
+            <button
+              type="button"
+              id="togglePassword"
+              style="
+                position: absolute;
+                right: 5px;
+                top: 50%;
+                transform: translateY(-50%);
+                font-size: 14px;
+              "
+            >
+              Show
+            </button>
+          </div>
+
+          <div id="password-rules" style="margin-top: 8px; font-size: 14px">
+            <div id="length-rule">✕ 至少 8 個字元</div>
+            <div id="uppercase-rule">✕ 至少一個大寫字母</div>
+            <div id="lowercase-rule">✕ 至少一個小寫字母</div>
+            <div id="number-rule">✕ 至少一個數字</div>
+          </div>
         </div>
 
         <!--Telephone Number-->
@@ -818,10 +843,12 @@
         </div>
       </div>
     </form>
+
+    <!-- <script src="upload.js"></script> -->
     <script src="identity2.js"></script>
     <script src="jump.js"></script>
     <script src="yes.js"></script>
-    <!-- <script src="upload.js"></script> -->
+    <script src="password.js"></script>
     <!-- <script src="hide.js"></script> -->
   </body>
 </html>

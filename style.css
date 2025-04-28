@@ -758,6 +758,18 @@ p {
     border-radius: 50%;
     margin: 5px 8px;
   }
+  .opencallframe {
+    overflow-y: scroll;
+    overflow-x: hidden;
+  }
+  .textcolumn {
+    text-align: left;
+    display: block;
+    gap: 2vw;
+  }
+  .application-button {
+    width: 100%;
+  }
 
   /* 滾動效果 */
   @keyframes scroll-loop {
