@@ -3,7 +3,7 @@ document
   .addEventListener("click", async function () {
     const fileInput = document.getElementById("fileInput");
 
-    if (!fileInput.files.length) {
+    if (!fileInput || !fileInput.files || !fileInput.files.length) {
       alert("請先選擇檔案");
       return;
     }
