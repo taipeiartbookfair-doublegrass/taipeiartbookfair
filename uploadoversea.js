@@ -24,6 +24,7 @@ document
       alert("Invalid file type. Please upload a JPEG, PNG, or PDF file.");
       return;
     }
+    // TODO :need to delete
     console.log(
       "檔案名稱：",
       fileInput.name,
@@ -40,6 +41,7 @@ document
       reader.onerror = (error) => reject(error);
       reader.readAsDataURL(fileInput);
     });
+    // TODO :need to delete
     console.log("bs64", base64String);
     try {
       const uploadRes = await fetch(
@@ -59,6 +61,7 @@ document
 
       const fileUrl = await uploadRes.text();
       document.getElementById("uploadedFileUrl").value = fileUrl;
+      // TODO :need to delete
       console.log("上傳成功，檔案網址是：", fileUrl);
     } catch (error) {
       console.error("上傳失敗：", error);
