@@ -2,7 +2,10 @@ document
   .getElementById("uploadButton")
   .addEventListener("click", async function () {
     const fileInput = document.getElementById("fileInput");
-
+    if (!fileInput) {
+      alert("請先選擇檔案");
+      return;
+    }
     if (!fileInput.files.length) {
       alert("請先選擇檔案");
       return;
@@ -10,24 +13,24 @@ document
 
     // 檢查檔案大小（限制 8MB）
     const maxSize = 8 * 1024 * 1024; // 8MB
-    if (file.size > maxSize) {
+    if (fileInput.size > maxSize) {
       alert("File size exceeds the 8MB limit.");
       return;
     }
 
     // 檢查檔案類型（限制為圖片或 PDF）
     const allowedTypes = ["image/jpeg", "image/png", "application/pdf"];
-    if (!allowedTypes.includes(file.type)) {
+    if (!allowedTypes.includes(fileInput.type)) {
       alert("Invalid file type. Please upload a JPEG, PNG, or PDF file.");
       return;
     }
     console.log(
       "檔案名稱：",
-      file.name,
+      fileInput.name,
       "檔案大小：",
-      file.size,
+      fileInput.size,
       "檔案類型：",
-      file.type,
+      fileInput.type,
       "start encoding..."
     );
     // 把檔案轉成 Base64
@@ -35,7 +38,7 @@ document
       const reader = new FileReader();
       reader.onload = () => resolve(reader.result.split(",")[1]); // 只取 Base64 的部分
       reader.onerror = (error) => reject(error);
-      reader.readAsDataURL(file);
+      reader.readAsDataURL(fileInput);
     });
     console.log("bs64", base64String);
     try {
@@ -47,8 +50,8 @@ document
             "Content-Type": "application/json",
           },
           body: JSON.stringify({
-            filename: file.name,
-            mimeType: file.type,
+            filename: fileInput.name,
+            mimeType: fileInput.type,
             data: base64String,
           }),
         }
