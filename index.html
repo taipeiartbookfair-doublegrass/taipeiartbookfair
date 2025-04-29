@@ -105,17 +105,14 @@
 
     <!-- Date & Location -->
     <div class="info">
-      <p>
+      <div>
         2025 草率季 Taipei Art Book Fair<br /><br />
         {時間Time}2025.11.21–23<br />
         {地址Address}華山1914文化創意產業園區 東二 ABCD棟 Huashan Creative
         Park<br />
-        {目前重要資訊}<br /><span
-          style="color: blue; cursor: pointer"
-          onclick="openThis(openopencall);"
-          >←← Open Call is out! 徵件，快投啊！</span
-        >
-      </p>
+        {重要資訊 Info Log}<br />
+        <div id="info-log" style="white-space: pre-wrap">讀取中...</div>
+      </div>
     </div>
 
     <!-- banana -->
@@ -339,6 +336,7 @@
       <button class="close-btn" onclick="closeThis(openopencall);">✕</button>
     </div>
 
+    <script src="infolog.js"></script>
     <script src="script.js"></script>
   </body>
 </html>
