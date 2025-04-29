@@ -1,5 +1,5 @@
 const etherpadUrl =
-  "https://pad.riseup.net/p/Ezz4lXqD5ksm3Sf-8b-2-keep/export/txt";
+  "https://pad.riseup.net/p/r.86bfc61ba2b07934807ac87259c8242d/export/txt";
 
 fetch(etherpadUrl)
   .then((res) => res.text())
