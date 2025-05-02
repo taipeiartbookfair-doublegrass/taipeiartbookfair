@@ -84,7 +84,7 @@ boothTypeRadios.forEach((radio) => {
 
     if (boothType === "書攤") {
       categoryKey = "book";
-    } else if (boothType === "創作型商品") {
+    } else if (boothType === "創作商品") {
       categoryKey = "nonbook";
     } else if (boothType === "食物酒水") {
       categoryKey = "food";
