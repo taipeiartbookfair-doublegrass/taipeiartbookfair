@@ -28,7 +28,7 @@ document.addEventListener("DOMContentLoaded", function () {
         productLinkl.style.display = "none";
         artworkUploadl.style.display = "none";
       } else if (
-        boothValue === "創作型商品" ||
+        boothValue === "創作商品" ||
         boothValue === "食物酒水" ||
         boothValue === "書攤"
       ) {
