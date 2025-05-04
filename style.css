@@ -1,3 +1,7 @@
+html {
+  scroll-behavior: smooth;
+}
+
 body {
   margin: 0;
   padding: 0;
@@ -136,34 +140,49 @@ nav a:hover {
   animation-delay: 0.2s;
 }
 .open-call span:nth-child(4) {
-  animation-delay: 0.3s;
+  animation-delay: 0.4s;
 }
 .open-call span:nth-child(5) {
-  animation-delay: 0.3s;
+  animation-delay: 0s;
 }
 .open-call span:nth-child(6) {
-  animation-delay: 0.3s;
+  animation-delay: 0.1s;
 }
 .open-call span:nth-child(7) {
-  animation-delay: 0.3s;
+  animation-delay: 0.2s;
 }
 .open-call span:nth-child(8) {
   animation-delay: 0.3s;
 }
 .open-call span:nth-child(9) {
-  animation-delay: 0.3s;
+  animation-delay: 0s;
 }
 .open-call span:nth-child(10) {
-  animation-delay: 0.3s;
+  animation-delay: 0.1s;
 }
 .open-call span:nth-child(11) {
-  animation-delay: 0.3s;
+  animation-delay: 0.2s;
 }
 .open-call span:nth-child(12) {
   animation-delay: 0.3s;
 }
 .open-call span:nth-child(13) {
+  animation-delay: 0.4s;
+}
+.open-call span:nth-child(14) {
+  animation-delay: 0s;
+}
+.open-call span:nth-child(15) {
+  animation-delay: 0.1s;
+}
+.open-call span:nth-child(16) {
+  animation-delay: 0s;
+}
+.open-call span:nth-child(17) {
   animation-delay: 0.3s;
+}
+.open-call span:nth-child(18) {
+  animation-delay: 0s;
 }
 
 /* ad廣告刷起來 */
@@ -545,6 +564,9 @@ p {
   cursor: pointer;
   z-index: 10;
 }
+.application-button-lang-container {
+  display: none;
+}
 
 /* .close-btn:hover {
   color: orangered; 
@@ -562,6 +584,19 @@ p {
   box-sizing: border-box;
 }
 .open-call-m {
+  display: none;
+}
+.opencall-title {
+  letter-spacing: 6rem;
+  font-size: 1rem;
+  text-align: center;
+  font-weight: 600;
+  padding-bottom: 20px;
+}
+.mobileline {
+  display: none;
+}
+.mobiledirection {
   display: none;
 }
 
@@ -598,7 +633,10 @@ p {
   }
 
   nav a:hover {
-    transform: rotate(0deg) !important;
+    transform: rotate(0turn) !important;
+  }
+  nav a::selection {
+    transform: rotate(0turn) !important;
   }
 
   .tag-m {
@@ -716,6 +754,9 @@ p {
   .open-call {
     display: none;
   }
+  .opencall-title {
+    display: none;
+  }
 
   /* 使背景圖層更適應手機螢幕 */
   .bgimg {
@@ -766,7 +807,6 @@ p {
   .textcolumn {
     text-align: left;
     display: block;
-    gap: 2vw;
   }
 
   .dot {
@@ -778,16 +818,41 @@ p {
   .opencallframe {
     overflow-y: scroll;
     overflow-x: hidden;
-  }
-  .textcolumn {
-    text-align: left;
-    display: block;
-    gap: 2vw;
+    padding: 0vh 4vw;
   }
   .application-button {
     width: 100%;
   }
-
+  .application-button-lang {
+    display: inline-block;
+    padding: 5px;
+    background: white;
+    border: 1px solid black;
+    font-size: 0.9rem;
+    text-decoration: none;
+    color: black;
+    text-align: center;
+  }
+  .application-button-lang-container {
+    display: block;
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    z-index: 20;
+  }
+  /* .close-btn {
+    top: 10px;
+    right: 10px;
+  } */
+  .mobileline {
+    display: block;
+    border-top: 1px dashed black;
+    border-bottom: none;
+  }
+  .mobiledirection {
+    display: block;
+    height: 4rem;
+  }
   /* 滾動效果 */
   @keyframes scroll-loop {
     0% {
