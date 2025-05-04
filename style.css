@@ -281,32 +281,32 @@ nav a:hover {
 .rotata div:nth-child(1) {
   top: 10vh;
   left: 25%;
-  width: 280px;
-  height: 170px;
+  width: 18rem;
+  height: 10.5rem;
 }
 .rotata div:nth-child(2) {
   top: 34vh;
   left: 25%;
-  width: 220px;
-  height: 150px;
+  width: 13.5rem;
+  height: 10rem;
 }
 .rotata div:nth-child(3) {
   top: 60vh;
   left: 8%;
-  width: 150px;
-  height: 220px;
+  width: 8rem;
+  height: 13.5rem;
 }
 .rotata div:nth-child(4) {
   top: 3vh;
   right: 4%;
-  width: 100px;
-  height: 340px;
+  width: 6.5rem;
+  height: 21rem;
 }
 .rotata div:nth-child(5) {
   top: 73vh;
   right: 8%;
-  width: 200px;
-  height: 130px;
+  width: 12rem;
+  height: 8rem;
 }
 
 .image-strip {
@@ -366,14 +366,12 @@ nav a:hover {
   bottom: 7vh;
   padding: 3px;
   color: black;
-  width: 240px;
+  width: 17rem;
   background: white;
   border: 1px solid black;
   max-height: 35vh;
   overflow: scroll;
-  /* box-shadow: -3px 2px 0px black; */
   font-size: 0.75rem;
-  /* text-shadow: 3px 2px 0 #000, -1px -1px 0 #000; */
 }
 p {
   margin-block-start: 0rem;
@@ -681,7 +679,7 @@ p {
     right: 0;
     display: flex;
     flex-direction: column; /* 上下排列 */
-    gap: 25px;
+    gap: 2rem;
   }
 
   nav a.vertical {
@@ -689,14 +687,12 @@ p {
     text-orientation: initial;
     position: relative;
     width: fit-content;
-    height: 60px;
     font-size: 2.5rem;
     display: flex;
     color: white;
     text-decoration: none;
     align-items: center;
     justify-content: center;
-    /* text-shadow: 3px 2px 0 #000, -1px -1px 0 #ffffff; */
   }
 
   .open-call-m,
@@ -865,6 +861,35 @@ p {
 }
 
 /* 大人的大螢幕 */
-@media screen and (min-width: 769px) {
-  /* 保持原有排版或進一步調整 */
+@media (min-width: 1920px) {
+  nav a.vertical {
+    font-size: 10rem; /* 更大字 */
+  }
+
+  .about,
+  .shop,
+  .fb,
+  .ig,
+  .email {
+    font-size: 10rem;
+  }
+
+  .open-call {
+    font-size: 4rem;
+    bottom: 10vh; /* 比原本低一點讓它可見 */
+  }
+
+  .rotata div:nth-child(1),
+  .rotata div:nth-child(2),
+  .rotata div:nth-child(3),
+  .rotata div:nth-child(4),
+  .rotata div:nth-child(5) {
+    transform: scale(1.2); /* 放大圖片 rotator */
+  }
+
+  .info {
+    font-size: 1rem;
+    width: 300px;
+    max-height: 45vh;
+  }
 }
