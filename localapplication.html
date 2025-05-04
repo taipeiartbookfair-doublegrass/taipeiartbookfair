@@ -56,6 +56,8 @@
             placeholder="品牌名稱"
             maxlength="150"
             required
+            pattern="^[\u4e00-\u9fa5a-zA-Z0-9\s]+$"
+            title="Please do not enter special characters."
           />
         </div>
       </div>
@@ -214,23 +216,12 @@
           <br />
           錄取時將通知檯面尺寸與細項，錄取後請於兩週內完成攤位費用繳交，逾時將自動取消參與資格。
           請注意：錄取後將同步開放工作證加購服務（每攤限加購一張），請務必於加購期限內申請，逾期不候。
-          <br />
-          <br />
-          <strong>關於裝置類攤種</strong
-          >：此屆另特別開設攤種。為鼓勵多元自由表達，體現將創作精神從藝術書籍一路延伸到空間體現，裝置類攤種讓你從空白開始發揮！
-          申請該攤種免報名費，裝置類攤種可為純展示，也可販售商品，不限類型。但需提供完整企劃書，企劃書需包含裝置草圖、計畫說明、販售商品價位供審核。
-          <br />
-          <a
-            href="https://drive.google.com/drive/folders/1Fg8dMsygdoCJJ7YBV0KBtheNOBruaBx-"
-            target="_blank"
-            >歷屆草率空間裝置參考</a
-          >
         </div>
         <div class="column layout-form-column-grid-2">
           <span class="from-description-header-ness">必填問題</span>
           <span class="from-description-header">
-            書攤類
-            至少需有三本書籍、刊物、小誌類型作品（可為過去出版或預計發行）
+            書攤類．
+            針對以書本為主要創作／販售的參展單位，申請時需提出三本以上的書及審查資料。
           </span>
           <input
             type="radio"
@@ -241,16 +232,16 @@
             required
           />
           <label for="PreferredBoothType_LargeBookStalls" class="form-label">
-            <span class="from-label-header">書攤</span>
-            <span class="from-label-sub-header">3800 NTD 三日（未稅）</span
-            ><br />
+            <span class="from-label-header">一般書攤</span>
+            <span class="from-label-sub-header">5,000 元（含稅）</span><br />
             <span class="from-label-description-header">
-              檯面 1 個、椅子 2 張、工作證 2 張之基礎設備
+              基礎設備：桌面（120*60cm) 1 個、椅子 2 張、工作證 2 張、草率簿 1
+              本（含露出一面）
             </span>
           </label>
 
           <span class="from-description-header">
-            非書攤類 沒有發行刊物，以各式商品為主
+            創作攤．針對以各類商品為主要創作／販售的參展單位。
           </span>
           <input
             type="radio"
@@ -261,11 +252,11 @@
             required
           />
           <label for="PreferredBoothType_CreativeProducts" class="form-label">
-            <span class="from-label-header">創作商品</span>
-            <span class="from-label-sub-header">6500 NTD 三日（未稅）</span
-            ><br />
+            <span class="from-label-header">創作攤</span>
+            <span class="from-label-sub-header">8,000 元（含稅）</span><br />
             <span class="from-label-description-header">
-              檯面 1 個、椅子 2 張、工作證 2 張之基礎設備
+              基礎設備：桌面（120*60cm) 1 個、椅子 2 張、工作證 2 張、草率簿 1
+              本（含露出一面）
             </span>
           </label>
           <input
@@ -277,17 +268,16 @@
             required
           />
           <label for="PreferredBoothType_FoodBeverages" class="form-label">
-            <span class="from-label-header">食物酒水</span>
-            <span class="from-label-sub-header">10000 NTD 三日（未稅）</span
-            ><br />
+            <span class="from-label-header">食物酒水攤</span>
+            <span class="from-label-sub-header">13,000 元（含稅）</span><br />
             <span class="from-label-description-header">
-              檯面 1 個、椅子 2 張、工作證 2 張之基礎設備
+              基礎設備：桌面（180*60cm) 1 個、椅子 2 張、工作證 2 張、草率簿 1
+              本（含露出一面）
             </span>
           </label>
 
           <span class="from-description-header">
-            裝置類
-            此屆另特別開設攤種．不限類型，可純展示亦可販售商品。需提交企劃書
+            裝置類．針對大型裝置或空間創作為主的參展單位。
           </span>
           <input
             type="radio"
@@ -298,10 +288,10 @@
             required
           />
           <label for="PreferredBoothType_Curation" class="form-label">
-            <span class="from-label-header">裝置類型攤位</span>
-            <span class="from-label-sub-header">免費 三日</span><br />
+            <span class="from-label-header">裝置攤</span>
+            <span class="from-label-sub-header">10,000 元（含稅） </span><br />
             <span class="from-label-description-header">
-              僅錄取 2 名，2x2m 空地、工作證 2 張之基礎設備
+              基礎設備：1.5M*1.5M空地、工作證 2 張、草率簿 1 本（含露出一面）
             </span>
           </label>
         </div>
@@ -396,7 +386,30 @@
             id="hidden-sub-category"
           />
         </div>
-
+        <!--Product Links-->
+        <div
+          class="column question-ProductLinks"
+          id="productLink"
+          style="display: none"
+        >
+          <span class="from-header">販售商品描述</span>
+          請簡述您攤位準備販售之商品品項。
+        </div>
+        <div
+          class="column layout-form-column-grid-1 question-ProductLinks"
+          id="productLink-l"
+          style="display: none"
+        >
+          <span class="from-description-header-ness">必填問題</span><br />
+          <textarea
+            class="form-input-textarea"
+            name="entry.1111437113"
+            placeholder="商品品項。例：五金雕塑、鑰匙圈、飲品⋯⋯"
+            maxlength="1000"
+            style="width: 100%"
+          ></textarea>
+        </div>
+        <!-- work link -->
         <div
           class="column question-WorkLinks"
           id="uploadArtwork"
@@ -426,44 +439,6 @@
             />
             <input type="hidden" name="category" value="artwork" />
           </div>
-        </div>
-
-        <!--Product Links-->
-        <div
-          class="column question-ProductLinks"
-          id="productLink"
-          style="display: none"
-        >
-          <span class="from-header">商品連結與販售品項描述</span>
-          內需包含商品圖片⋯⋯等內容
-          <br /><br />
-          另請簡述您攤位準備販售之商品品項。
-        </div>
-        <div
-          class="column layout-form-column-grid-1 question-ProductLinks"
-          id="productLink-l"
-          style="display: none"
-        >
-          <span class="from-description-header-ness"
-            >必填問題、請上傳PDF檔、檔案上限：<strong
-              >最多 10 頁 A4，檔案大小不超過 8MB</strong
-            ></span
-          ><br />
-          <div class="upload-container">
-            <input type="file" name="file" />
-            <input
-              type="hidden"
-              name="formId"
-              value="some-unique-id-or-timestamp"
-            />
-            <input type="hidden" name="category" value="product" />
-          </div>
-          <textarea
-            class="form-input-textarea"
-            name="entry.1425905511"
-            placeholder="商品品項。例：五金雕塑、鑰匙圈、飲品⋯⋯"
-            maxlength="1000"
-          ></textarea>
         </div>
 
         <!--Plan Links-->
@@ -629,6 +604,27 @@
             placeholder="主題工作坊提案"
             maxlength="1000"
           ></textarea>
+        </div>
+
+        <!-- 十年特場 -->
+        <div class="column">
+          <span class="from-header">2026 春季草率十年特場！</span>
+          草率十年特場預計於 2026 年 3–4 月舉行，請勾選是否有參展意願。
+        </div>
+
+        <div class="column layout-form-column-grid-1">
+          <span class="from-description-header-ness-no">非必填問題</span>
+          <input
+            type="checkbox"
+            class="form-input-checkbox"
+            name="entry.1381238601"
+            id="early_signup_2026"
+            value="要報名"
+            required
+          />
+          <label for="early_signup_2026" class="form-label-10y">
+            我要搶先報名 2026 春季草率十年特場！
+          </label>
         </div>
       </div>
 

@@ -59,6 +59,8 @@
             placeholder="Exhibitor's Name"
             maxlength="150"
             required
+            pattern="^[\u4e00-\u9fa5a-zA-Z0-9\s]+$"
+            title="請勿輸入特殊符號"
           />
         </div>
       </div>
@@ -235,10 +237,11 @@
           <label for="PreferredBoothType_OneRegularBooth" class="form-label">
             <span class="from-label-header">One Regular Booth</span>
             <span style="font-weight: 200" class="from-label-sub-header"
-              >&nbsp;120 USD incl. tax</span
+              >&nbsp;USD$165 incl. tax</span
             ><br />
             <span class="from-label-description-header">
-              Includes 1 table, 2 chairs, and 2 exhibitor badges.
+              Includes: 120 × 60 cm table ×1, chairs ×2, passes ×2, TPABF
+              Catalog ×1 (one page featured)
             </span>
           </label>
           <input
@@ -252,10 +255,11 @@
           <label for="PreferredBoothType_TwoRegularBooth" class="form-label">
             <span class="from-label-header">Two Regular Booths</span>
             <span style="font-weight: 200" class="from-label-sub-header"
-              >&nbsp;240 USD incl. tax</span
+              >&nbsp;USD$330 incl. tax</span
             ><br />
             <span class="from-label-description-header">
-              Includes 2 tables, 3 chairs, and 3 exhibitor badges.
+              Includes: 120 × 60 cm table ×2, chairs ×4, passes ×4, TPABF
+              Catalog ×1 (one page featured)
             </span>
           </label>
           <input
@@ -269,11 +273,11 @@
           <label for="PreferredBoothType_CurationBooth" class="form-label">
             <span class="from-label-header">Curation Booth</span>
             <span style="font-weight: 200" class="from-label-sub-header"
-              >&nbsp;760 USD incl. tax</span
+              >&nbsp;USD$780 incl. tax</span
             ><br />
             <span class="from-label-description-header">
-              Offers a 2x2m space, including 2 tables, 3 chairs, and 3 exhibitor
-              badges.
+              Includes: 3M*3M space, 120 × 60 cm table ×2, chairs ×4, passes ×3,
+              TPABF Catalog ×1 (one page featured)
             </span>
           </label>
         </div>
@@ -599,7 +603,6 @@
             </option>
             <option value="書">Book</option>
             <option value="非書">non-book</option>
-            <option value="食物酒水">Food and Drinks</option>
           </select>
         </div>
 
@@ -653,8 +656,6 @@
           />
           <input type="hidden" id="category" value="artwork" />
           <input type="hidden" name="entry.715764736" id="uploadedFileUrl" />
-          <!-- 應改為submit前upload -->
-          <!-- <button type="button" id="uploadButton">upload</button> -->
         </div>
 
         <!--Social Media-->
@@ -797,6 +798,30 @@
             placeholder="Workshop Proposal"
             maxlength="1000"
           ></textarea>
+        </div>
+        <!-- 十年特場 -->
+        <div class="column">
+          <span class="from-header"
+            >2026 Spring TPABF 10-year anniversary fair！ </span
+          ><br />
+          TPABF 10-year anniversary fair is going to take place in Spring (March
+          or April.) Please indicate whether you are interested in participating
+          as an exhibitor.
+        </div>
+
+        <div class="column layout-form-column-grid-1">
+          <span class="from-description-header-ness-no">Optional</span>
+          <input
+            type="checkbox"
+            class="form-input-checkbox"
+            name="entry.427732833"
+            id="early_signup_2026"
+            value="要報名"
+            required
+          />
+          <label for="early_signup_2026" class="form-label-10y">
+            Count me in for 2026 Spring TPABF 10-year anniversary fair！
+          </label>
         </div>
       </div>
 

@@ -48,24 +48,6 @@ const subCategoryOptions = {
     },
     { value: "c10 音樂", text: "c10 音樂（Music）" },
   ],
-  食物酒水: [
-    { value: "f00 甜點", text: "f00 甜點（Desserts）" },
-    { value: "f01 飲品", text: "f01 飲品（Beverages）" },
-    { value: "f02 鹹食", text: "f02 鹹食（Savory Foods）" },
-    { value: "f03 茶・咖啡", text: "f03 茶・咖啡（Tea & Coffee）" },
-    {
-      value: "f04 醃製・發酵食品",
-      text: "f04 醃製・發酵食品（Pickled & Fermented Foods）",
-    },
-    {
-      value: "f05 糕點・烘焙食品",
-      text: "f05 糕點・烘焙食品（Pastries & Baked Goods）",
-    },
-    {
-      value: "f06 地方特色食品",
-      text: "f06 地方特色食品（Local Specialty Foods）",
-    },
-  ],
 };
 
 const mainSelect = document.getElementById("main-category");

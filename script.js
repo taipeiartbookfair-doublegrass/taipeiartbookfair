@@ -213,7 +213,7 @@ for (let i = 0; i < 30; i++) {
 // 關羽
 function myAbout() {
   alert(
-    "一年一度的獨立藝文盛會「草率季」（Taipei Art Book Fair）在今年邁入第九屆。這個自2016年起年年舉行（除2021年因疫情停辦）的文創活動，迄今仍不斷打破大眾對市集的想像。現場集結各路創作者、出版社、獨立書店與藝術家等攤位，展出各項獨立刊物、畫冊、藝術雜誌、美術書刊、特色服飾、配件、手做小物⋯⋯等極具特色的出版品與實體創作品，堪稱是年度最大攤的獨立出版創作者派對。每年為期三天的活動裡皆湧入大量人潮，集結所有熱愛設計、攝影、插畫、漫畫、印刷等不同類型的各路文青＋潮青們齊聚一堂。\nTaipei Art Book Fair is a three-day event showcases a diverse range of art books from various publishers, artists, and creators from around the globe. It's a platform for exploring and discovering unique perspectives within the world of art and creativity.\n\n- Team -\nCo-Founder: Frank Huang\nCreative Producer: A君\nCoördinator: B君、C君\nCommunication: B君、C君\nGraphic Design: D君、F君\nWebsite Design/Front-end Developer: Nai-Syuan Ye\nBack-end Developer: Po-Chun Yeh\nData Management/Assistance: Po-Yu Yeh\n"
+    "「如果可以草莽率性，誰想要一本正經？」\n\n從2016年開始，草率季（Taipei Art Book Fair）每年聚集世界各地創作者、出版社、獨立書店、藝術家，展各種紙本刊物、攝影集、藝術書籍，也展各種創作作品、藝術計畫以及這些作品後獨一無二的靈魂，構成出版、學習、藝術、空間、體驗的大型共同創作。\n\n'If one could be wild and unrestrained, who would choose to be rigidly serious?'\n\nSince 2016, Taipei Art Book Fair (草率季) has brought together creators, publishers, independent bookstores, and artists from around the world each year. The fair showcases a diverse array of printed materials, including magazines, photography collections, and art books, alongside creative works, artistic projects, and the unique spirit behind each creation. It is a large-scale collaborative platform that interweaves publishing, learning, art, space, and experience.\n"
   );
 }
 

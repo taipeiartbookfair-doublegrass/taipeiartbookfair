@@ -54,6 +54,26 @@ form {
   position: absolute;
 }
 
+/* special 10y style */
+.form-input-checkbox:checked + .form-label-10y {
+  padding: 5px;
+  font-size: 2.5rem;
+  border: 2px solid olive;
+  color: palegreen !important;
+  background: repeating-linear-gradient(
+    150deg,
+    olive,
+    olive 4px,
+    darkolivegreen 3px,
+    #6b4ca5 7px
+  );
+}
+
+/* Inherit color for any inner elements */
+.form-input-checkbox:checked + .form-label-10y * {
+  color: inherit;
+}
+
 .module-form .form-input-checkbox:checked + .form-label,
 .module-form .form-input-radio:checked + .form-label {
   padding: 5px;
