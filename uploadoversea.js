@@ -71,7 +71,7 @@ form.addEventListener("submit", async function (e) {
     // if (!uploadRes.ok) {
     //   throw new Error("File upload failed");
     // }
-    console.log("uploadRes", uploadRes); // Debugging
+    // console.log("uploadRes", uploadRes); // Debugging
     const fileUrl = await uploadRes.text();
     document.getElementById("uploadedFileUrl").value = fileUrl;
     // TODO :need to delete
