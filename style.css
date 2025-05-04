@@ -346,13 +346,15 @@ nav a:hover {
   position: fixed;
   left: 35%;
   bottom: 7vh;
-  padding: 2px;
+  padding: 3px;
   color: black;
-  width: 220px;
+  width: 240px;
   background: white;
   border: 1px solid black;
+  max-height: 35vh;
+  overflow: scroll;
   /* box-shadow: -3px 2px 0px black; */
-  font-size: 0.7rem;
+  font-size: 0.75rem;
   /* text-shadow: 3px 2px 0 #000, -1px -1px 0 #000; */
 }
 p {
@@ -365,9 +367,9 @@ p {
   left: 10px;
   top: 50px;
   padding: 2px;
-  font-size: 0.9rem;
+  font-size: 0.85rem;
   color: black;
-  width: 300px;
+  width: 280px;
   height: auto;
   background: white;
   border: 1px solid black;
@@ -432,6 +434,9 @@ p {
 .tag2-m {
   display: none;
 }
+.tag3-m {
+  display: none;
+}
 .tag {
   position: absolute;
   background: white;
@@ -452,7 +457,16 @@ p {
   right: 15vw;
   transform: rotate(0.02turn);
 }
-
+.tag3 {
+  position: absolute;
+  background: white;
+  border: 1px solid black;
+  font-size: 1.3rem;
+  padding: 2px;
+  top: 10vh;
+  left: 5vw;
+  transform: rotate(0.01turn);
+}
 .opencallframe {
   z-index: 9 !important;
   position: fixed;
