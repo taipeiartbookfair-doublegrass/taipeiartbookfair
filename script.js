@@ -188,7 +188,7 @@ const phrases = [
 ];
 
 const flickersContainer = document.getElementById("flickers");
-const videoUrl = "https://youtu.be/pt0rWqLqZjE?si=odqEN4W-GnsbRYTB&t=69";
+const videoUrl = "https://youtu.be/pt0rWqLqZjE?si=o--Lq-p9_mRhFz4t&t=75";
 
 for (let i = 0; i < 30; i++) {
   const a = document.createElement("a");

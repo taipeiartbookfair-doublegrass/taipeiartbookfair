@@ -89,7 +89,7 @@ nav a:hover {
 
 .open-call {
   /* mix-blend-mode: difference; */
-  /* font-family: "PicNic"; */
+  font-family: "PicNic";
   font-size: 3.5rem;
   line-height: 3.5rem;
   position: absolute;
@@ -875,8 +875,8 @@ p {
   }
 
   .open-call {
-    font-size: 4rem;
-    bottom: 10vh; /* 比原本低一點讓它可見 */
+    font-size: 5rem;
+    line-height: 5.5rem;
   }
 
   .rotata div:nth-child(1),
