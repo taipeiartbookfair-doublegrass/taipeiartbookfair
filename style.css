@@ -84,22 +84,24 @@ nav a:hover {
 }
 
 .open-call {
-  mix-blend-mode: difference;
+  /* mix-blend-mode: difference; */
+  /* font-family: "PicNic"; */
   font-size: 3.5rem;
+  line-height: 3.5rem;
   position: absolute;
   left: 12vw;
   bottom: -107.5vh;
   font-weight: 600;
-  color: #e0e0e0;
+  color: white;
   text-decoration: underline;
   position: absolute;
   overflow: hidden;
   cursor: pointer;
+  text-shadow: 3px 2px 0 blue, -1px -1px 0 blueviolet;
 }
 .open-call span {
   margin: 0%;
   padding: 0px;
-  line-height: 0.3rem;
 }
 
 .open-call:hover {
@@ -108,22 +110,19 @@ nav a:hover {
 }
 @keyframes waveFlicker {
   0% {
-    opacity: 1;
     transform: translateY(0);
   }
   50% {
-    opacity: 0.1;
-    transform: translateY(-5px);
+    transform: translateY(-20px);
   }
   100% {
-    opacity: 1;
     transform: translateY(0);
   }
 }
 
 .open-call span {
   display: inline-block;
-  animation: waveFlicker 1.2s ease-in-out infinite;
+  animation: waveFlicker 3s ease-in-out infinite;
 }
 
 /* Stagger each span using nth-child */
