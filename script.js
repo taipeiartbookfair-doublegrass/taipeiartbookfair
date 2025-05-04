@@ -158,7 +158,7 @@ function startWaveFlicker() {
       setTimeout(() => {
         span.classList.remove("flicker");
       }, 10000);
-    }, index * 1000);
+    }, index * 2000);
   });
 }
 startWaveFlicker();
