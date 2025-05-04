@@ -3,7 +3,8 @@ const submitButton = document.getElementById("submitButton");
 
 form.addEventListener("submit", async function (e) {
   e.preventDefault(); // 阻止預設提交
-
+  submitButton.disabled = true;
+  submitButton.innerText = "送出中...";
   const fileInput = null;
   const selectedBoothType = document.querySelector(
     'input[name="entry.133172086"]:checked'
@@ -103,9 +104,6 @@ form.addEventListener("submit", async function (e) {
     // console.log("start submit"); // Debugging
 
     form.submit();
-
-    submitButton.disabled = true;
-    submitButton.innerText = "送出中...";
 
     // 延遲 1.5 秒後進行頁面重定向
     setTimeout(function () {
