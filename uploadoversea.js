@@ -4,7 +4,7 @@ const submitButton = document.getElementById("submitButton");
 form.addEventListener("submit", async function (e) {
   e.preventDefault(); // 阻止預設提交
   submitButton.disabled = true;
-  submitButton.innerText = "送出中...";
+  submitButton.innerText = "Submitting...";
   const fileInput = document.getElementById("fileInput");
   if (!fileInput || !fileInput.files || !fileInput.files.length) {
     alert("請先選擇檔案");
