@@ -862,12 +862,9 @@ p {
 
 /* 大人的大螢幕 */
 @media (min-width: 1920px) {
-  nav a.vertical {
-    font-size: 10rem; /* 更大字 */
-  }
-
   .about {
     font-size: 13rem;
+    width: 230px;
   }
   .shop {
     font-size: 18rem;
@@ -879,7 +876,7 @@ p {
   }
 
   .open-call {
-    font-size: 5rem;
+    font-size: 6rem;
     line-height: 5.5rem;
   }
 
@@ -892,8 +889,8 @@ p {
   }
 
   .info {
-    font-size: 1.3rem;
-    width: 300px;
+    font-size: 1.2rem;
+    width: 20vw;
     max-height: 45vh;
   }
 
