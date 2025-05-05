@@ -211,3 +211,55 @@ form {
     grid-template-columns: repeat(1, 1fr);
   }
 }
+
+/* 大人的大螢幕 */
+@media screen and (min-width: 1920px) {
+  body {
+    padding: 5rem;
+    font-size: 1.1rem;
+  }
+
+  .backhome {
+    font-size: 3rem;
+  }
+
+  .backhome-smalltext {
+    font-size: 0.9rem;
+    line-height: 1rem;
+  }
+
+  form {
+    max-width: 1400px;
+    margin: auto;
+    padding: 4rem;
+    border-radius: 8rem;
+  }
+
+  .layout-form-columnized {
+    gap: 4rem 4rem;
+    padding-top: 2rem;
+    padding-bottom: 4rem;
+  }
+
+  .from-description-header {
+    font-size: 1rem;
+  }
+
+  .from-description-header-ness,
+  .from-description-header-ness-no {
+    font-size: 0.9rem;
+  }
+
+  .from-header {
+    font-size: 1.3rem;
+  }
+
+  .description-header {
+    font-size: 1rem;
+    line-height: 1rem;
+  }
+
+  .form-input-checkbox:checked + .form-label-10y {
+    font-size: 3rem;
+  }
+}
