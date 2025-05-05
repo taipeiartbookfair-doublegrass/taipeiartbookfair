@@ -864,7 +864,7 @@ p {
 @media (min-width: 1920px) {
   .about {
     font-size: 13rem;
-    width: 250px;
+    width: 230px;
   }
   .shop {
     font-size: 18rem;
@@ -876,7 +876,7 @@ p {
   }
 
   .open-call {
-    font-size: 5rem;
+    font-size: 6rem;
     line-height: 5.5rem;
   }
 
