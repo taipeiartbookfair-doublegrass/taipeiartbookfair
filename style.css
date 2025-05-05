@@ -892,4 +892,50 @@ p {
     width: 300px;
     max-height: 45vh;
   }
+
+  .tag,
+  .tag2,
+  .tag3 {
+    font-size: 1.8rem;
+    padding: 4px;
+  }
+
+  .opencallframe {
+    padding: 4vh 6vw;
+  }
+
+  .textcolumn {
+    gap: 3vw;
+  }
+
+  .column {
+    font-size: 1.1rem;
+    line-height: 1.8rem;
+    padding: 1.5rem;
+  }
+
+  .column h2 {
+    font-size: 1.8rem;
+  }
+
+  .column h3 {
+    font-size: 1.4rem;
+  }
+
+  .column p,
+  .column small {
+    font-size: 1.05rem;
+  }
+
+  .application-button {
+    font-size: 1.1rem;
+    padding: 8px 12px;
+  }
+
+  .close-btn {
+    font-size: 2rem;
+    top: 25px;
+    right: 25px;
+    padding: 6px 10px;
+  }
 }
