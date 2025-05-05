@@ -20,10 +20,10 @@ form.addEventListener("submit", async function (e) {
     e.stopPropagation(); // 停止事件傳遞
   }
 
-  // 檢查檔案類型（僅允許 JPEG, PNG, PDF）
-  const allowedTypes = ["image/jpeg", "image/png", "application/pdf"];
+  // 檢查檔案類型（僅允許 PDF）
+  const allowedTypes = ["application/pdf"];
   if (!allowedTypes.includes(file.type)) {
-    alert("Invalid file type. Please upload a JPEG, PNG, or PDF file.");
+    alert("Invalid file type. Please upload a PDF file.");
     e.stopPropagation(); // 停止事件傳遞
   }
   // console.log("file start encode"); // Debugging
