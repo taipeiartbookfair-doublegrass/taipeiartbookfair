@@ -866,8 +866,12 @@ p {
     font-size: 10rem; /* 更大字 */
   }
 
-  .about,
-  .shop,
+  .about {
+    font-size: 13rem;
+  }
+  .shop {
+    font-size: 18rem;
+  }
   .fb,
   .ig,
   .email {
@@ -901,7 +905,7 @@ p {
   }
 
   .opencallframe {
-    padding: 5vh 8vw;
+    padding: 4vh 5vw;
   }
 
   .textcolumn {
@@ -909,17 +913,17 @@ p {
   }
 
   .column {
-    font-size: 1.5rem;
+    font-size: 1.6rem;
     line-height: 2.2rem;
     padding: 2rem;
   }
 
   .column h2 {
-    font-size: 2.4rem;
+    font-size: 2.5rem;
   }
 
   .column h3 {
-    font-size: 1.9rem;
+    font-size: 2rem;
   }
 
   .column p,
@@ -928,7 +932,7 @@ p {
   }
 
   .application-button {
-    font-size: 1.4rem;
+    font-size: 1.5rem;
     padding: 10px 14px;
   }
 
