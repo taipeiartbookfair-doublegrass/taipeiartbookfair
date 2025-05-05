@@ -122,16 +122,16 @@
   font-family: "PicNic";
   src: url("font/PicNic.woff2") format("woff2"),
     url("font/PicNic.woff") format("woff");
-  font-weight: bold;
-  font-style: italic;
+  font-weight: normal;
+  font-style: normal;
   font-display: swap;
 }
 @font-face {
   font-family: "fungal";
   src: url("font/Fungal-Grow0Thickness500.woff2") format("woff2"),
     url("font/Fungal-Grow0Thickness500.woff") format("woff");
-  font-weight: bold;
-  font-style: italic;
+  font-weight: normal;
+  font-style: normal;
   font-display: swap;
 }
 @font-face {
@@ -139,14 +139,14 @@
   src: url("font/Fungal-Grow100Thickness500.woff2") format("woff2"),
     url("font/Fungal-Grow100Thickness500.woff") format("woff");
   font-weight: bold;
-  font-style: italic;
+  font-style: normal;
   font-display: swap;
 }
 @font-face {
   font-family: "fungal-grow400";
   src: url("font/Fungal-Grow800Thickness500.woff2") format("woff2"),
     url("font/Fungal-Grow800Thickness500.woff") format("woff");
-  font-weight: bold;
-  font-style: italic;
+  font-weight: 800;
+  font-style: normal;
   font-display: swap;
 }
