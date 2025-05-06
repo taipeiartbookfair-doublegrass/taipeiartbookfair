@@ -164,7 +164,7 @@ form {
 }
 @media screen and (max-width: 800px) {
   body {
-    padding: 2.5rem;
+    padding: 1.8rem;
   }
   form {
     background-color: whitesmoke;
