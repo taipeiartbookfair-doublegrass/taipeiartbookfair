@@ -164,13 +164,17 @@ form {
 }
 @media screen and (max-width: 800px) {
   body {
-    padding: 2.5rem;
+    padding-left: 2rem;
+    padding-bottom: 1rem;
+    padding-right: 1rem;
+    padding-top: 1rem;
+    font-size: 0.85rem;
   }
   form {
     background-color: whitesmoke;
     border: 1px solid black;
     border-radius: 3rem;
-    padding: 1.5rem;
+    padding: 1.2rem;
   }
   .layout-form-columnized .layout-form-column-grid-1 {
     display: grid;
