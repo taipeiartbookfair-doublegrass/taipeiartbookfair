@@ -598,6 +598,23 @@ p {
   display: none;
 }
 
+.login-btn {
+  font-family: "Inclusive Sans", sans-serif;
+  width: 30%;
+  overflow: hidden;
+  background-color: seagreen;
+  /* background-color: rgb(214, 214, 192); */
+  /* border: 1px solid plum; */
+  white-space: nowrap;
+  position: fixed;
+  color: plum;
+  bottom: 0px;
+  right: 0px;
+  text-align: center;
+  font-weight: 500;
+  cursor: pointer;
+}
+
 /* 手機版 */
 @media screen and (max-width: 600px) {
   html {
@@ -628,6 +645,10 @@ p {
       rgba(0, 0, 0, 1) 100%
     ); */
     background-color: rgb(255, 255, 255);
+  }
+
+  .login-btn {
+    width: 50%;
   }
 
   nav a:hover {
