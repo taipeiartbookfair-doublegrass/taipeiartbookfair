@@ -676,13 +676,21 @@
         <div class="column layout-form-column-grid-1">
           <span class="from-description-header-ness">必填問題</span>
           <input
+            type="email"
             autocomplete="email"
             class="form-input"
             name="entry.529156755"
+            id="email-input"
             placeholder="電子信箱"
             maxlength="500"
             required
           />
+          <div
+            id="email-error"
+            style="color: plum; display: none; font-size: 13px"
+          >
+            請輸入有效的電子信箱，例如：example@gmail.com
+          </div>
         </div>
 
         <!--Password-->
