@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>Login - 草率季Taipei Art Book Fair</title>
+    <!-- <link rel="stylesheet" href="style.css" /> -->
+    <link rel="stylesheet" href="font.css" />
+    <link rel="shortcut icon" href="image/icon-1.ico" />
+    <!-- jquery這裡 -->
+    <script src="jquery-ui-1.14.1/external/jquery/jquery.js"></script>
+    <link
+      rel="stylesheet"
+      href="jquery-ui-1.14.1/themes/smoothness/jquery-ui.css"
+    />
+    <script src="jquery-ui-1.14.1/jquery-ui.js"></script>
+    <!-- safari background -->
+    <script>
+      document.addEventListener("DOMContentLoaded", () => {
+        const isSafari = /^((?!chrome|android).)*safari/i.test(
+          navigator.userAgent
+        );
+        const img = document.getElementById("sasa");
+
+        if (isSafari && img) {
+          img.src = "safaririp.jpg";
+          img.style.filter = "none";
+        }
+      });
+    </script>
+
+    <!-- Google tag (gtag.js) -->
+    <script
+      async
+      src="https://www.googletagmanager.com/gtag/js?id=G-EPSXJPDH6L"
+    ></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+      gtag("js", new Date());
+
+      gtag("config", "G-EPSXJPDH6L");
+    </script>
+    <style>
+      body {
+        margin: 0;
+        padding: 0;
+        font-family: "Poppins", sans-serif;
+        /* background: whitesmoke; */
+        overflow: hidden;
+        position: relative;
+        background-color: #f2f2f2;
+      }
+
+      h2 {
+        /* font-family: "PicNic"; */
+        margin: 0px 0px 0px 0px;
+        font-size: 1rem;
+        color: black;
+        width: 100%;
+        font-weight: 400;
+        padding: 5px 5px 5px 10px;
+        /* is he gay or european? So many shades of greeeeyyy */
+        background: linear-gradient(
+          180deg,
+          rgba(0, 0, 0, 1) 0%,
+          rgba(255, 255, 255, 1) 7%,
+          rgba(222, 222, 222, 1) 10%,
+          rgba(255, 255, 255, 1) 25%,
+          rgba(255, 255, 255, 1) 50%,
+          rgba(227, 227, 227, 1) 53%,
+          rgb(154, 154, 154) 65%,
+          rgba(255, 255, 255, 1) 82%,
+          rgba(174, 174, 174, 1) 93%,
+          rgba(0, 0, 0, 1) 100%
+        );
+        /* text-shadow: 3px 2px 0 ghostwhite, -1px -1px 0 ghostwhite; */
+      }
+      form {
+        padding: 15px 10px 5px 10px;
+        background: linear-gradient(
+          180deg,
+          rgba(0, 0, 0, 1) 0%,
+          rgba(255, 255, 255, 1) 7%,
+          rgba(222, 222, 222, 1) 18%,
+          rgba(255, 255, 255, 1) 21%,
+          rgba(255, 255, 255, 1) 46%,
+          rgba(227, 227, 227, 1) 53%,
+          rgba(237, 235, 235, 1) 79%,
+          rgba(255, 255, 255, 1) 82%,
+          rgba(174, 174, 174, 1) 90%,
+          rgba(0, 0, 0, 1) 100%
+        );
+        width: 100vw;
+      }
+
+      input[type="text"],
+      input[type="password"] {
+        justify-content: center;
+        align-items: center;
+        width: 97vw;
+        padding: 0.4rem;
+        font-size: 0.9rem;
+        background-color: white;
+        height: 1rem;
+        margin: 0px 0px 10px 0px;
+      }
+
+      button {
+        font-family: "Inclusive Sans", sans-serif;
+        overflow: hidden;
+        background-color: black;
+        white-space: nowrap;
+        color: white;
+        text-align: left;
+        padding-right: 10px;
+        padding-left: 10px;
+        font-weight: 500;
+        cursor: pointer;
+        font-size: 1rem;
+      }
+
+      button:hover {
+        background-color: rgb(68, 68, 68);
+      }
+      .bgimg {
+        filter: saturate(500) hue-rotate(185deg) contrast(200%) brightness(90%)
+          sepia(25%);
+        position: fixed;
+        z-index: -50;
+        width: 100vw;
+        height: 100vh;
+        -webkit-user-drag: none;
+        top: 0;
+        left: 0;
+      }
+      .fp {
+        padding-left: 5px;
+        padding-right: 5px;
+        font-size: 0.8rem;
+        text-decoration: underline;
+        color: grey;
+        display: inline-block;
+        background: linear-gradient(
+          90deg,
+          rgb(78, 78, 78) 0%,
+          rgba(255, 255, 255, 1) 2%,
+          rgba(222, 222, 222, 1) 18%,
+          rgba(255, 255, 255, 1) 21%,
+          rgba(255, 255, 255, 1) 46%,
+          rgba(227, 227, 227, 1) 53%,
+          rgba(237, 235, 235, 1) 79%,
+          rgba(255, 255, 255, 1) 82%,
+          rgba(174, 174, 174, 1) 99%,
+          rgb(61, 61, 61) 100%
+        );
+        margin-bottom: 1rem;
+      }
+      .back {
+        font-family: "Inclusive Sans", sans-serif;
+        width: 100%;
+        overflow: hidden;
+        background-color: black;
+        /* background-color: rgb(214, 214, 192); */
+        /* border: 1px solid plum; */
+        white-space: nowrap;
+        position: fixed;
+        color: white;
+        bottom: 0px;
+        left: 0px;
+        text-align: center;
+        font-weight: 500;
+        cursor: pointer;
+      }
+    </style>
+  </head>
+  <body>
+    <img
+      draggable="false"
+      (dragstart)="false;"
+      class="bgimg"
+      id="sasa"
+      src="image/bgimg4.jpg"
+    />
+    <h2>Exhibitor Login | 攤主登入</h2>
+    <div class="form">
+      <form action="/login" method="POST">
+        <input type="text" name="Email" placeholder="Email" required /><br />
+        <input
+          type="password"
+          name="password"
+          placeholder="Password"
+          required
+        />
+        <div>
+          <a href="forgotpassword.html" class="fp">
+            忘記密碼？Forgot Password?
+          </a>
+        </div>
+      </form>
+      <button type="submit">登入 Log In</button>
+    </div>
+    <a href="index-logingtryout.html"><div class="back">回主頁 Back</div></a>
+  </body>
+</html>

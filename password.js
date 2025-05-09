@@ -51,3 +51,20 @@ togglePassword.addEventListener("click", function () {
     togglePassword.textContent = "Show";
   }
 });
+
+//email驗證
+const emailInput = document.getElementById("email-input");
+const errorMessage = document.getElementById("email-error");
+
+emailInput.addEventListener("input", () => {
+  const email = emailInput.value;
+  const valid = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+
+  if (!valid) {
+    errorMessage.style.display = "block";
+    emailInput.style.border = "1px solid plum";
+  } else {
+    errorMessage.style.display = "none";
+    emailInput.style.border = "1px solid #ccc";
+  }
+});
