@@ -9,6 +9,7 @@ form.addEventListener("submit", async function (e) {
   if (!fileInput || !fileInput.files || !fileInput.files.length) {
     alert("請先選擇檔案");
     e.stopPropagation(); // 停止事件傳遞
+    return;
   }
 
   const file = fileInput.files[0];
@@ -18,6 +19,7 @@ form.addEventListener("submit", async function (e) {
   if (file.size > maxSize) {
     alert("File size exceeds the 8MB limit.");
     e.stopPropagation(); // 停止事件傳遞
+    return;
   }
 
   // 檢查檔案類型（僅允許 PDF）
@@ -25,6 +27,7 @@ form.addEventListener("submit", async function (e) {
   if (!allowedTypes.includes(file.type)) {
     alert("Invalid file type. Please upload a PDF file.");
     e.stopPropagation(); // 停止事件傳遞
+    return;
   }
   // console.log("file start encode"); // Debugging
   try {
@@ -92,5 +95,6 @@ form.addEventListener("submit", async function (e) {
     // console.log("file upload failed：", error);
     alert("File upload failed. Please try again.");
     e.stopPropagation(); // 停止事件傳遞
+    return;
   }
 });
