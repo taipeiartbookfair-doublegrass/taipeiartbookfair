@@ -15,7 +15,8 @@
     />
     <script src="jquery-ui-1.14.1/jquery-ui.js"></script>
     <script src="main.js"></script>
-
+    <!-- 圖靈測驗 -->
+    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
     <!-- Google tag (gtag.js) -->
     <script
       async
@@ -806,7 +807,6 @@
           </label>
         </div>
       </div>
-
       <span class="description-header">Submit</span>
       <div class="module-form layout-form-columnized">
         <div class="column">
@@ -816,6 +816,10 @@
           </span>
         </div>
         <div class="column">
+          <div
+            class="g-recaptcha"
+            data-sitekey="6Ld5yzUrAAAAANxGXgmtKuR3reXVdstBSKRu-iOO"
+          ></div>
           <button
             type="submit"
             class="button-from-submit"

@@ -68,3 +68,50 @@ emailInput.addEventListener("input", () => {
     emailInput.style.border = "1px solid #ccc";
   }
 });
+
+function showError(msgZh, msgEn) {
+  const err = document.getElementById("form-error");
+  err.textContent = msgZh + "／" + msgEn;
+  err.style.display = "block";
+}
+
+function validateCaptcha(event) {
+  event.preventDefault();
+  const recaptchaResponse = grecaptcha.getResponse();
+  if (!recaptchaResponse) {
+    showError("請確認您是人類！", "Please confirm you are human!");
+    return false;
+  }
+
+  const form = document.getElementById("myForm");
+  const formData = new FormData(form);
+  formData.append("recaptcha_response", recaptchaResponse);
+
+  fetch("你的 Apps Script URL", { method: "POST", body: formData })
+    .then((r) => r.json())
+    .then((data) => {
+      if (data.success) {
+        // 成功後可以顯示成功訊息或直接跳轉
+        alert(
+          "驗證成功！資料已送出！／Verified! Your form has been submitted."
+        );
+        form.reset();
+        grecaptcha.reset();
+        document.getElementById("form-error").style.display = "none";
+      } else {
+        showError(
+          "reCAPTCHA 驗證失敗，請再試一次！",
+          "reCAPTCHA failed, please try again!"
+        );
+      }
+    })
+    .catch((e) => {
+      console.error(e);
+      showError(
+        "發生錯誤，請稍後再試！",
+        "An error occurred, please try later!"
+      );
+    });
+
+  return false;
+}
