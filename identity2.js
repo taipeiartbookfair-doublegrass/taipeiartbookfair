@@ -57,7 +57,6 @@ const subCategoryOptions = {
 };
 
 const subSelect = document.getElementById("sub-category");
-const hiddenSubCategoryInput = document.getElementById("hidden-sub-category");
 const leftthing = document.getElementById("workcat");
 const rightthing = document.getElementById("workcat2");
 
@@ -81,7 +80,6 @@ boothTypeRadios.forEach((radio) => {
       subSelect.innerHTML = "";
       leftthing.style.display = "none";
       rightthing.style.display = "none";
-      hiddenSubCategoryInput.value = "";
       return;
     }
 
@@ -104,8 +102,7 @@ boothTypeRadios.forEach((radio) => {
   });
 });
 
-// 當子類別選到時，更新 hidden input
+// 當子類別選到時，更新選項顏色
 subSelect.addEventListener("change", function () {
-  hiddenSubCategoryInput.value = this.value;
   this.style.color = this.value ? "black" : "grey";
 });
