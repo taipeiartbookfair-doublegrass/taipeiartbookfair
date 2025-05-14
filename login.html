@@ -65,14 +65,16 @@
       }
 
       h2 {
-        font-size: 16px;
+        font-size: 1rem;
         font-weight: normal;
         text-transform: uppercase;
         margin-bottom: 10px;
         padding-left: 10px;
         padding-right: 10px;
-        color: white;
-        background-color: black;
+        color: black;
+        background-color: ghostwhite;
+        border: 1px solid black;
+        text-align: left;
       }
 
       .login-form {
@@ -81,21 +83,9 @@
         width: 100%;
         max-width: 380px;
         padding: 8px;
-        border: 1px solid black;
         box-sizing: border-box;
-        background: linear-gradient(
-          90deg,
-          rgb(78, 78, 78) 0%,
-          rgba(255, 255, 255, 1) 2%,
-          rgba(222, 222, 222, 1) 18%,
-          rgba(255, 255, 255, 1) 21%,
-          rgba(255, 255, 255, 1) 46%,
-          rgba(227, 227, 227, 1) 53%,
-          rgba(237, 235, 235, 1) 79%,
-          rgba(255, 255, 255, 1) 82%,
-          rgba(174, 174, 174, 1) 99%,
-          rgb(61, 61, 61) 100%
-        );
+        border: 1px solid black;
+        background-color: ghostwhite;
       }
 
       .input-box {
@@ -116,7 +106,7 @@
         padding: 6px;
         font-size: 12px;
         border: 1px solid #000;
-        background: linear-gradient(
+        /* background: linear-gradient(
           100deg,
           rgb(78, 78, 78) 0%,
           rgba(255, 255, 255, 1) 2%,
@@ -128,11 +118,11 @@
           rgba(255, 255, 255, 1) 82%,
           rgba(174, 174, 174, 1) 99%,
           rgb(61, 61, 61) 100%
-        );
+        ); */
       }
 
       .input-box input:focus {
-        background-color: #e6e6e6;
+        background-color: olive;
         outline: none;
       }
 
@@ -156,7 +146,6 @@
       }
 
       button {
-        font-size: 12px;
         padding: 8px;
         background-color: black;
         color: white;
@@ -165,10 +154,12 @@
         text-align: center;
         cursor: pointer;
         letter-spacing: 1px;
+        font-size: 0.9rem;
       }
 
       button:hover {
-        background-color: #333;
+        color: palegreen;
+        background-color: olive;
       }
 
       .bgimg {
@@ -189,7 +180,7 @@
         text-decoration: underline;
         color: grey;
         display: inline-block;
-        background: linear-gradient(
+        /* background: linear-gradient(
           0deg,
           rgb(78, 78, 78) 0%,
           rgba(255, 255, 255, 1) 2%,
@@ -201,22 +192,27 @@
           rgba(255, 255, 255, 1) 82%,
           rgba(174, 174, 174, 1) 99%,
           rgb(61, 61, 61) 100%
-        );
+        ); */
         margin-bottom: 1rem;
       }
       .back {
+        font-size: 0.9rem;
         font-family: "Inclusive Sans", sans-serif;
-        width: 30%;
         overflow: hidden;
-        color: palegreen;
-        background-color: olive;
+        color: black;
+        background-color: white;
         white-space: nowrap;
         position: fixed;
         bottom: 0px;
         left: 0px;
+        padding: 5px;
         text-align: center;
         font-weight: 500;
         cursor: pointer;
+      }
+      ::selection {
+        color: palegreen;
+        background-color: olive;
       }
     </style>
   </head>
