@@ -55,77 +55,113 @@
         background-color: #f2f2f2;
       }
 
-      h2 {
-        /* font-family: "PicNic"; */
-        margin: 0px 0px 0px 0px;
-        font-size: 1rem;
-        color: black;
-        width: 100%;
-        font-weight: 400;
-        padding: 5px 5px 5px 10px;
-        /* is he gay or european? So many shades of greeeeyyy */
-        background: linear-gradient(
-          180deg,
-          rgba(0, 0, 0, 1) 0%,
-          rgba(255, 255, 255, 1) 7%,
-          rgba(222, 222, 222, 1) 10%,
-          rgba(255, 255, 255, 1) 25%,
-          rgba(255, 255, 255, 1) 50%,
-          rgba(227, 227, 227, 1) 53%,
-          rgb(154, 154, 154) 65%,
-          rgba(255, 255, 255, 1) 82%,
-          rgba(174, 174, 174, 1) 93%,
-          rgba(0, 0, 0, 1) 100%
-        );
-        /* text-shadow: 3px 2px 0 ghostwhite, -1px -1px 0 ghostwhite; */
-      }
-      form {
-        padding: 15px 10px 5px 10px;
-        background: linear-gradient(
-          180deg,
-          rgba(0, 0, 0, 1) 0%,
-          rgba(255, 255, 255, 1) 7%,
-          rgba(222, 222, 222, 1) 18%,
-          rgba(255, 255, 255, 1) 21%,
-          rgba(255, 255, 255, 1) 46%,
-          rgba(227, 227, 227, 1) 53%,
-          rgba(237, 235, 235, 1) 79%,
-          rgba(255, 255, 255, 1) 82%,
-          rgba(174, 174, 174, 1) 90%,
-          rgba(0, 0, 0, 1) 100%
-        );
-        width: 100vw;
+      .login-wrapper {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        height: 60vh;
+        padding: 0 10px;
       }
 
-      input[type="text"],
-      input[type="password"] {
+      h2 {
+        font-size: 1rem;
+        font-weight: normal;
+        text-transform: uppercase;
+        margin-bottom: 10px;
+        padding-left: 10px;
+        padding-right: 10px;
+        color: black;
+        background-color: ghostwhite;
+        border: 1px solid black;
+        text-align: left;
+      }
+
+      .login-form {
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        max-width: 380px;
+        padding: 8px;
+        box-sizing: border-box;
+        border: 1px solid black;
+        background-color: ghostwhite;
+      }
+
+      .input-box {
+        display: flex;
+        flex-direction: column;
+        margin-bottom: 8px;
+        padding: 4px;
+        border: 1px solid #000;
+      }
+
+      .input-box label {
+        font-size: 12px;
+        color: black;
+        margin-bottom: 2px;
+      }
+
+      .input-box input {
+        padding: 6px;
+        font-size: 12px;
+        border: 1px solid #000;
+        /* background: linear-gradient(
+          100deg,
+          rgb(78, 78, 78) 0%,
+          rgba(255, 255, 255, 1) 2%,
+          rgba(222, 222, 222, 1) 10%,
+          rgba(255, 255, 255, 1) 21%,
+          rgba(255, 255, 255, 1) 38%,
+          rgba(227, 227, 227, 1) 70%,
+          rgba(237, 235, 235, 1) 79%,
+          rgba(255, 255, 255, 1) 82%,
+          rgba(174, 174, 174, 1) 99%,
+          rgb(61, 61, 61) 100%
+        ); */
+      }
+
+      .input-box input:focus {
+        background-color: olive;
+        outline: none;
+      }
+
+      .sub-actions {
+        display: flex;
+        justify-content: flex-end;
+        margin-top: 4px;
+        padding-right: 6px;
+      }
+
+      .fp {
+        text-decoration: underline;
+        font-size: 11px;
+        color: black;
+      }
+
+      .submit-box {
+        display: flex;
         justify-content: center;
-        align-items: center;
-        width: 97vw;
-        padding: 0.4rem;
-        font-size: 0.9rem;
-        background-color: white;
-        height: 1rem;
-        margin: 0px 0px 10px 0px;
+        margin-top: 10px;
       }
 
       button {
-        font-family: "Inclusive Sans", sans-serif;
-        overflow: hidden;
+        padding: 8px;
         background-color: black;
-        white-space: nowrap;
         color: white;
-        text-align: left;
-        padding-right: 10px;
-        padding-left: 10px;
-        font-weight: 500;
+        border: none;
+        width: 100%;
+        text-align: center;
         cursor: pointer;
-        font-size: 1rem;
+        letter-spacing: 1px;
+        font-size: 0.9rem;
       }
 
       button:hover {
-        background-color: rgb(68, 68, 68);
+        color: palegreen;
+        background-color: olive;
       }
+
       .bgimg {
         filter: saturate(500) hue-rotate(185deg) contrast(200%) brightness(90%)
           sepia(25%);
@@ -144,8 +180,8 @@
         text-decoration: underline;
         color: grey;
         display: inline-block;
-        background: linear-gradient(
-          90deg,
+        /* background: linear-gradient(
+          0deg,
           rgb(78, 78, 78) 0%,
           rgba(255, 255, 255, 1) 2%,
           rgba(222, 222, 222, 1) 18%,
@@ -156,24 +192,27 @@
           rgba(255, 255, 255, 1) 82%,
           rgba(174, 174, 174, 1) 99%,
           rgb(61, 61, 61) 100%
-        );
+        ); */
         margin-bottom: 1rem;
       }
       .back {
+        font-size: 0.9rem;
         font-family: "Inclusive Sans", sans-serif;
-        width: 100%;
         overflow: hidden;
-        background-color: black;
-        /* background-color: rgb(214, 214, 192); */
-        /* border: 1px solid plum; */
+        color: black;
+        background-color: white;
         white-space: nowrap;
         position: fixed;
-        color: white;
         bottom: 0px;
         left: 0px;
+        padding: 5px;
         text-align: center;
         font-weight: 500;
         cursor: pointer;
+      }
+      ::selection {
+        color: palegreen;
+        background-color: olive;
       }
     </style>
   </head>
@@ -185,23 +224,26 @@
       id="sasa"
       src="image/bgimg4.jpg"
     />
-    <h2>Exhibitor Login | 攤主登入</h2>
-    <div class="form">
-      <form action="/login" method="POST">
-        <input type="text" name="Email" placeholder="Email" required /><br />
-        <input
-          type="password"
-          name="password"
-          placeholder="Password"
-          required
-        />
-        <div>
-          <a href="forgotpassword.html" class="fp">
-            忘記密碼？Forgot Password?
-          </a>
+    <div class="login-wrapper">
+      <h2>Exhibitor Login | 攤主登入</h2>
+      <form action="/login" method="POST" class="login-form">
+        <div class="input-box">
+          <label for="email">Email</label>
+          <input type="text" name="Email" id="email" required />
+        </div>
+        <div class="input-box">
+          <label for="password">Password</label>
+          <input type="password" name="password" id="password" required />
+        </div>
+        <div class="sub-actions">
+          <a href="forgotpassword.html" class="fp"
+            >忘記密碼？Forgot Password?</a
+          >
+        </div>
+        <div class="submit-box">
+          <button type="submit">登入 Log In</button>
         </div>
       </form>
-      <button type="submit">登入 Log In</button>
     </div>
     <a href="index-logingtryout.html"><div class="back">回主頁 Back</div></a>
   </body>
