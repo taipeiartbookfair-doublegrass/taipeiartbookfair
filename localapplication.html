@@ -821,12 +821,16 @@
           <div
             class="g-recaptcha"
             data-sitekey="6Ld5yzUrAAAAANxGXgmtKuR3reXVdstBSKRu-iOO"
+            data-callback="onRecaptchaSuccess"
+            data-expired-callback="onRecaptchaExpired"
+            data-error-callback="onRecaptchaError"
           ></div>
           <button
             type="submit"
             class="button-from-submit"
             id="submitButton"
             value="submit"
+            disabled
           >
             提交
           </button>

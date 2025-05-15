@@ -65,3 +65,41 @@ document.addEventListener("DOMContentLoaded", function () {
   // 初始更新
   updateFormDisplay();
 });
+
+// 偵測使用者語言，支援 zh 開頭當作中文，其餘視為英文
+const isZH = navigator.language.toLowerCase().startsWith("zh");
+
+function alertMessage(zh, en) {
+  alert(isZH ? zh : en);
+}
+
+function onRecaptchaSuccess() {
+  document.getElementById("submitButton").disabled = false;
+}
+
+function onRecaptchaExpired() {
+  alertMessage(
+    "驗證已過期，請重新嘗試。",
+    "Verification expired. Please try again."
+  );
+}
+
+function onRecaptchaError() {
+  alertMessage(
+    "驗證失敗，請重新嘗試。",
+    "Verification failed. Please try again."
+  );
+}
+
+document
+  .getElementById("BoothApplication")
+  .addEventListener("submit", function (e) {
+    const response = grecaptcha.getResponse();
+    if (!response) {
+      e.preventDefault();
+      alertMessage(
+        "請完成驗證再提交表單！",
+        "Please complete the verification before submitting."
+      );
+    }
+  });
