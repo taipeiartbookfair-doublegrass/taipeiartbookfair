@@ -71,15 +71,7 @@ form.addEventListener("submit", async function (e) {
   const selectedBoothType = document.querySelector(
     'input[name="entry.133172086"]:checked'
   );
-  let fileInput;
-  if (selectedBoothType) {
-    const boothValue = selectedBoothType.value;
-    if (boothValue === "裝置類") {
-      fileInput = document.getElementById("fileInput2");
-    } else if (["創作商品", "食物酒水", "書攤"].includes(boothValue)) {
-      fileInput = document.getElementById("fileInput");
-    }
-  }
+  let fileInput = document.getElementById("fileInput");
 
   const uploadSuccess = await handleFileUpload(
     fileInput,
