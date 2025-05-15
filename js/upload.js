@@ -91,7 +91,7 @@ form.addEventListener("submit", async function (e) {
   if (uploadSuccess) {
     form.submit();
     setTimeout(() => {
-      window.location.href = "application-received.html";
+      window.location.href = "../application-received.html";
     }, 1500);
   } else {
     submitButton.disabled = false;
