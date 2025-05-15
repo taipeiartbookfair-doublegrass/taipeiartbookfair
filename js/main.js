@@ -9,6 +9,7 @@ document.addEventListener("DOMContentLoaded", function () {
   const productLinkl = document.getElementById("productLink-l");
   const artworkUpload = document.getElementById("uploadArtwork");
   const artworkUploadl = document.getElementById("uploadArtwork-l");
+  //const portdescription = document.getElementById("port-description");
 
   // 根據選擇的攤位類型顯示或隱藏元素
   function updateFormDisplay() {
@@ -27,17 +28,23 @@ document.addEventListener("DOMContentLoaded", function () {
         proposalLinkl.style.display = "block";
         productLinkl.style.display = "none";
         artworkUploadl.style.display = "none";
-      } else if (
-        boothValue === "創作商品" ||
-        boothValue === "食物酒水" ||
-        boothValue === "書攤"
-      ) {
+        //portdescription.style.display = "none";
+      } else if (boothValue === "書攤") {
         proposalLink.style.display = "none";
         productLink.style.display = "block";
         artworkUpload.style.display = "block";
         proposalLinkl.style.display = "none";
         productLinkl.style.display = "block";
         artworkUploadl.style.display = "block";
+        //portdescription.style.display = "block";
+      } else if (boothValue === "創作商品" || boothValue === "食物酒水") {
+        proposalLink.style.display = "none";
+        productLink.style.display = "block";
+        artworkUpload.style.display = "block";
+        proposalLinkl.style.display = "none";
+        productLinkl.style.display = "block";
+        artworkUploadl.style.display = "block";
+        //portdescription.style.display = "none";
       } else {
         // 預設隱藏
         proposalLink.style.display = "none";
