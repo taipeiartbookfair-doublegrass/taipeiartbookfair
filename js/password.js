@@ -69,49 +69,54 @@ emailInput.addEventListener("input", () => {
   }
 });
 
+// 語言判斷
+const isZH = navigator.language.toLowerCase().startsWith("zh");
+
+function alertMessage(zh, en) {
+  alert(isZH ? zh : en);
+}
+
 function showError(msgZh, msgEn) {
   const err = document.getElementById("form-error");
-  err.textContent = msgZh + "／" + msgEn;
-  err.style.display = "block";
-}
-
-function validateCaptcha(event) {
-  event.preventDefault();
-  const recaptchaResponse = grecaptcha.getResponse();
-  if (!recaptchaResponse) {
-    showError("請確認您是人類！", "Please confirm you are human!");
-    return false;
+  if (err) {
+    err.textContent = msgZh + "／" + msgEn;
+    err.style.display = "block";
+  } else {
+    alertMessage(msgZh, msgEn);
   }
-
-  const form = document.getElementById("myForm");
-  const formData = new FormData(form);
-  formData.append("recaptcha_response", recaptchaResponse);
-
-  fetch("你的 Apps Script URL", { method: "POST", body: formData })
-    .then((r) => r.json())
-    .then((data) => {
-      if (data.success) {
-        // 成功後可以顯示成功訊息或直接跳轉
-        alert(
-          "驗證成功！資料已送出！／Verified! Your form has been submitted."
-        );
-        form.reset();
-        grecaptcha.reset();
-        document.getElementById("form-error").style.display = "none";
-      } else {
-        showError(
-          "reCAPTCHA 驗證失敗，請再試一次！",
-          "reCAPTCHA failed, please try again!"
-        );
-      }
-    })
-    .catch((e) => {
-      console.error(e);
-      showError(
-        "發生錯誤，請稍後再試！",
-        "An error occurred, please try later!"
-      );
-    });
-
-  return false;
 }
+
+// ✅ Google reCAPTCHA callback functions 必須掛到 window 才會被觸發
+window.onRecaptchaSuccess = function () {
+  document.getElementById("submitButton").disabled = false;
+};
+
+window.onRecaptchaExpired = function () {
+  alertMessage(
+    "驗證已過期，請重新嘗試。",
+    "Verification expired. Please try again."
+  );
+  document.getElementById("submitButton").disabled = true;
+};
+
+window.onRecaptchaError = function () {
+  alertMessage(
+    "驗證失敗，請重新嘗試。",
+    "Verification failed. Please try again."
+  );
+  document.getElementById("submitButton").disabled = true;
+};
+
+// 表單送出前再次檢查 reCAPTCHA
+document
+  .getElementById("BoothApplication")
+  .addEventListener("submit", function (e) {
+    const response = grecaptcha.getResponse();
+    if (!response) {
+      e.preventDefault();
+      alertMessage(
+        "請完成驗證再提交表單！",
+        "Please complete the verification before submitting."
+      );
+    }
+  });
