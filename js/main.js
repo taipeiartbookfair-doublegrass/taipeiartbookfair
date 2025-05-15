@@ -65,3 +65,25 @@ document.addEventListener("DOMContentLoaded", function () {
   // 初始更新
   updateFormDisplay();
 });
+
+function onRecaptchaSuccess() {
+  // 當使用者完成驗證後，解鎖提交按鈕
+  document.getElementById("submitButton").disabled = false;
+}
+function onRecaptchaError() {
+  // 當驗證失敗時，顯示錯誤訊息
+  alert("驗證失敗，請重新嘗試。");
+}
+function onRecaptchaExpired() {
+  // 當驗證過期時，顯示錯誤訊息
+  alert("驗證已過期，請重新嘗試。");
+}
+document
+  .getElementById("BoothApplication")
+  .addEventListener("submit", function (e) {
+    const response = grecaptcha.getResponse();
+    if (!response) {
+      e.preventDefault();
+      alert("請完成驗證再提交表單！");
+    }
+  });
