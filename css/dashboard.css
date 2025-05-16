@@ -1,0 +1,18 @@
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: "Poppins", sans-serif;
+  /* background: whitesmoke; */
+  overflow: hidden;
+  position: relative;
+  background-color: ghostwhite;
+}
+
+::selection {
+  color: palegreen;
+  background-color: olive;
+}
