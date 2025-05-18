@@ -21,7 +21,7 @@ document.addEventListener("DOMContentLoaded", function () {
     }).toString;
 
     try {
-      const res = await fetch(uploadUrl, {
+      const loginRes = await fetch(apiUrl, {
         redirect: "follow",
         method: "POST",
         headers: {
@@ -29,12 +29,8 @@ document.addEventListener("DOMContentLoaded", function () {
         },
         body: params,
       });
-      if (!res.ok) {
-        alert("Server error, please try again later.");
-        return;
-      }
 
-      const data = await res.json();
+      const data = await loginRes.json();
 
       if (data.success) {
         setCookieSec("account", data.data.account, 21600);
