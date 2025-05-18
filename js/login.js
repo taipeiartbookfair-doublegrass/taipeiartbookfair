@@ -21,7 +21,7 @@ document.addEventListener("DOMContentLoaded", function () {
     }).toString;
 
     try {
-      const res = await fetch(uploadUrl, {
+      const res = await fetch(apiUrl, {
         redirect: "follow",
         method: "POST",
         headers: {
