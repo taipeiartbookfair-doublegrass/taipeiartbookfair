@@ -18,7 +18,7 @@ document.addEventListener("DOMContentLoaded", function () {
       action: "login",
       account: email,
       password: password,
-    }).toString;
+    }).toString();
 
     try {
       const loginRes = await fetch(apiUrl, {
