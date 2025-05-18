@@ -33,9 +33,9 @@ document.addEventListener("DOMContentLoaded", function () {
       const data = await loginRes.json();
 
       if (data.success) {
-        setCookieSec("account", data.data.account, 21600);
-        setCookieSec("region", data.data.region, 21600);
-        setCookieSec("login", "success", 21600);
+        setCookie("account", data.data.account, 21600);
+        setCookie("region", data.data.region, 21600);
+        setCookie("login", "success", 21600);
 
         // alert("登入成功！Login successful!");
         window.location.href = "dashboard-TPABF.html";
