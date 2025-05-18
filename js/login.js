@@ -22,7 +22,7 @@ document.addEventListener("DOMContentLoaded", function () {
     });
 
     fetch(`${apiUrl}?${params.toString()}`, {
-      method: "GET",
+      method: "POST",
     })
       .then((res) => res.json())
       .then((data) => {
