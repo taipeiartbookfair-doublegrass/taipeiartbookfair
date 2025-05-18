@@ -106,3 +106,22 @@ boothTypeRadios.forEach((radio) => {
 subSelect.addEventListener("change", function () {
   this.style.color = this.value ? "black" : "grey";
 });
+
+// 頁面載入時，檢查是否已有選中的攤種，並觸發一次對應的邏輯
+window.addEventListener("DOMContentLoaded", function () {
+  const selectedRadio = Array.from(boothTypeRadios).find((r) => r.checked);
+  const selectedSubCategory = subSelect.value;
+
+  if (selectedRadio) {
+    // 先觸發攤種選項，讓 sub-category 被建立出來
+    selectedRadio.dispatchEvent(new Event("change"));
+
+    // 稍微延遲，等下拉選單建立完後再設定原本的值
+    setTimeout(() => {
+      if (selectedSubCategory) {
+        subSelect.value = selectedSubCategory;
+        subSelect.style.color = "black";
+      }
+    }, 0);
+  }
+});
