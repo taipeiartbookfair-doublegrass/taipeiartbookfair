@@ -76,11 +76,11 @@ th {
   margin: 0px;
 }
 .mid {
-  background: ghostwhite;
+  background-color: aliceblue;
   width: 44vw;
 }
 .right {
-  background: #fce4ec;
+  background-color: ghostwhite;
   width: 55vw;
 }
 .label {
