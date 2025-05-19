@@ -124,10 +124,15 @@
               <td colspan="3" style="padding: 0; border: none">
                 <table style="width: 100%; table-layout: auto">
                   <tr>
-                    <!-- 左邊：攤種（上） -->
+                    <!-- 左邊：攤種區塊 -->
                     <td
                       rowspan="2"
-                      style="width: 30%; border-right: 1px dashed black"
+                      style="
+                        width: 30%;
+                        border-top: 0.5px solid pink;
+                        margin: 6px 0;
+                        border-left: 1px solid black;
+                      "
                     >
                       <span class="label">攤種 Booth Type</span><br />
                       大書攤
@@ -138,38 +143,78 @@
                           border-bottom: none;
                         "
                       />
-                      基礎設備： 桌面（120*60cm) 1 個、椅子 2 張、工作證 2
-                      張、草率簿 1 本（含露出一面）
+                      基礎設備：桌面（120×60cm）1個、椅子2張、工作證2張、草率簿1本（含露出一面）
                     </td>
 
-                    <!-- 右邊：付款方案 -->
-                    <td style="width: 70%">
-                      <tr>
-                        <td style="border-right: 1px solid black">
-                          <strong>方案一：基礎攤費</strong><br />5000 NTD
-                          (含稅)<br />
-                          僅基礎方案
-                          <p style="color: red; font-size: 12px">
-                            請在付款時務必填入以下資料：<br />Email:
-                            email@gmail.com<br />報名編號: 25-BC001
-                          </p>
-                          <div class="pay-button">付款 Pay</div>
-                        </td>
-                        <td>
-                          <strong>方案二：基礎攤費+工作證一張</strong><br />6000
-                          NTD (含稅)<br />
-                          適合有輪班擺攤需求之攤主
-                          <p style="color: red; font-size: 12px">
-                            請在付款時務必填入以下資料：<br />Email:
-                            email@gmail.com<br />報名編號: 25-BC001
-                          </p>
-                          <div class="pay-button">付款 Pay</div>
-                        </td>
-                      </tr>
+                    <!-- 右上：付款方案，兩格 -->
+                    <td
+                      colspan="2"
+                      style="
+                        width: 70%;
+                        padding: 0;
+                        border-top: 0.5px solid pink;
+                        border-left: none;
+                        border-bottom: none;
+                        border-right: 1px solid black;
+                      "
+                    >
+                      <table style="width: 100%">
+                        <tr>
+                          <td
+                            style="
+                              border-top: 0.5px solid pink;
+                              border-left: none;
+                              border-bottom: 1px dashed black;
+                            "
+                          >
+                            <strong>方案一：基礎攤費</strong><br />5000 NTD
+                            (含稅)<br />
+                            僅基礎方案
+                            <p style="color: red; font-size: 12px">
+                              請在付款時務必填入以下資料：<br />
+                              Email: email@gmail.com<br />
+                              報名編號: 25-BC001
+                            </p>
+                            <div class="pay-button">付款 Pay</div>
+                          </td>
+                          <td
+                            style="
+                              border-top: 0.5px solid pink;
+                              border-left: none;
+                              border-bottom: 1px dashed black;
+                              border-right: none;
+                            "
+                          >
+                            <strong>方案二：基礎攤費+工作證一張</strong
+                            ><br />6000 NTD (含稅)<br />
+                            適合有輪班擺攤需求之攤主
+                            <p style="color: red; font-size: 12px">
+                              請在付款時務必填入以下資料：<br />
+                              Email: email@gmail.com<br />
+                              報名編號: 25-BC001
+                            </p>
+                            <div class="pay-button">付款 Pay</div>
+                          </td>
+                        </tr>
+                      </table>
+                    </td>
+                  </tr>
+
+                  <!-- 右下：注意事項 -->
+                  <tr>
+                    <td
+                      colspan="2"
+                      style="
+                        padding-top: 12px;
+                        border-top: none;
+                        margin: 6px 0;
+                        border-left: 1px solid black;
+                      "
+                    >
                       <span class="label">注意事項 Notice</span><br />
-                      1. 請保留付款憑證。<br />
-                      2. 付款後無法修改方案。<br />
-                      3. 6/15 前將更新狀態。
+                      1. 請自行評估需求繳費，繳款後我們不再提供更改申請選項。<br />
+                      2. 付款之後請自行留存發票。<br />
+                      3. 我們將於7月15日對帳後更新報名以及付款狀態。
                     </td>
                   </tr>
                 </table>
