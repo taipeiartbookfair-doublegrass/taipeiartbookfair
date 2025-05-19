@@ -7,12 +7,103 @@ body {
   padding: 0;
   font-family: "Poppins", sans-serif;
   /* background: whitesmoke; */
-  overflow: hidden;
   position: relative;
   background-color: ghostwhite;
 }
-
 ::selection {
-  color: palegreen;
   background-color: olive;
+  color: palegreen;
+}
+a {
+  color: rgb(1, 176, 1);
+}
+table {
+  border-collapse: collapse;
+  table-layout: auto;
+}
+td,
+th {
+  border: 1px solid black;
+  padding: 6px 8px;
+  vertical-align: top;
+  word-break: break-word;
+}
+.layout {
+  width: 100vw;
+  height: 100vh;
+  vertical-align: top;
+}
+.sidebar {
+  border: none;
+  background: ghostwhite;
+  color: black;
+  width: 6vw;
+  height: 100vh;
+  padding: 0px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  position: relative;
+}
+.sidebar-middle {
+  flex: 1 1 auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+}
+.rotated-link {
+  writing-mode: vertical-rl;
+  transform: rotate(180deg);
+  font-size: 0.8rem;
+}
+.sidebar h1 {
+  font-size: 2rem;
+  padding: 5px;
+  margin: 0;
+}
+.sidebar p {
+  font-size: 0.8rem;
+  padding: 8px;
+  margin: 0;
+}
+.sidebar-hr {
+  border: 0;
+  height: 1px;
+  background: #000;
+  margin: 0px;
+}
+.mid {
+  background: ghostwhite;
+  width: 44vw;
+}
+.right {
+  background: #fce4ec;
+  width: 55vw;
+}
+.label {
+  background: #000;
+  color: #fff;
+  font-size: 0.75rem;
+  padding: 2px 6px;
+  display: inline-block;
+}
+.rotated {
+  transform: rotate(-45deg);
+  transform-origin: bottom left;
+  display: inline-block;
+  white-space: nowrap;
+  font-size: 0.75rem;
+}
+.pay-button {
+  background: #000;
+  color: #fff;
+  text-align: center;
+  padding: 10px;
+  margin-top: 8px;
+}
+.dashed {
+  border-style: dashed;
 }
