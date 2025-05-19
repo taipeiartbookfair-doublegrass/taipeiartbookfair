@@ -60,11 +60,26 @@
         <td class="mid">
           <table width="100%">
             <tr>
-              <td colspan="2">
-                <span class="label">品牌名稱 Brand Name</span><br /><span
-                  style="font-size: 3rem"
-                  >Yoshimi Saito</span
+              <td colspan="2" style="position: relative">
+                <span
+                  style="
+                    position: absolute;
+                    top: 0.2rem;
+                    right: 0.5rem;
+                    font-size: 1.5rem;
+                    color: black;
+                    cursor: pointer;
+                    transition: color 0.2s;
+                    translate: rotate(90deg);
+                  "
+                  onmouseover="this.style.color='blue'"
+                  onmouseout="this.style.color='black'"
+                  onclick="editBrandName()"
+                  title="編輯品牌名稱"
+                  >&#9998;</span
                 >
+                <span class="label">品牌名稱 Brand Name</span><br />
+                <span style="font-size: 3rem">Yoshimi Saito</span>
               </td>
             </tr>
             <tr>
@@ -93,20 +108,57 @@
               </td>
             </tr>
             <tr>
-              <td>
-                <span class="label">代表人 Contact Person</span><br />王大明
+              <td style="width: 40%">
+                <span class="label">國籍 Nationality</span><br />JAPAN
               </td>
-              <td><span class="label">Email</span><br />damin@gmail.com</td>
-            </tr>
-            <tr>
-              <td><span class="label">Phone</span><br />(+31)0923485729</td>
-              <td></td>
-            </tr>
-            <tr>
-              <td><span class="label">國籍 Nationality</span><br />JAPAN</td>
-              <td>
+              <td style="width: 60%">
                 <span class="label">簽證申請 Visa Requirement</span><br />Not
                 Require
+              </td>
+            </tr>
+            <tr>
+              <!-- 左欄：代表人，一格佔 5 行 -->
+              <td rowspan="2">
+                <span class="label">代表人 Contact Person</span><br />
+                <div style="vertical-align: middle; font-size: 3rem">
+                  <span style="font-size: 2rem">王大明</span>
+                </div>
+              </td>
+
+              <!-- 第一行右欄：Email -->
+              <td>
+                <span class="label">聯絡信箱 Contact Email</span
+                ><br />damin@gmail.com
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <span class="label">聯絡電話 Contact Phone</span
+                ><br />(+31)0923485729
+              </td>
+            </tr>
+            <tr>
+              <td colspan="2">
+                <span class="label">Website</span><br />
+                https://www.nowplacesf.com/publications
+              </td>
+            </tr>
+            <tr>
+              <td colspan="2">
+                <span class="label">Instagram</span><br />
+                @51personaeproject
+              </td>
+            </tr>
+            <tr>
+              <td colspan="2">
+                <span class="label">Facebook</span><br />
+                <i style="color: lightgray">None</i>
+              </td>
+            </tr>
+            <tr>
+              <td colspan="2">
+                <span class="label">Whatsapp</span><br />
+                <i style="color: lightgray">None</i>
               </td>
             </tr>
           </table>
@@ -130,7 +182,7 @@
 
                     <!-- 錄取結果 -->
                     <td style="width: 30%">
-                      <span class="label">錄取結果 Application Status</span
+                      <span class="label">錄取結果 Application Result</span
                       ><br />
                       <div style="vertical-align: middle; font-size: 2.7rem">
                         <span
@@ -148,7 +200,8 @@
 
                     <!-- 報名狀態 -->
                     <td style="width: 30%">
-                      <span class="label">報名狀態 Status & Billing</span><br />
+                      <span class="label">報名狀態 Registration Status</span
+                      ><br />
                       <div style="vertical-align: middle; font-size: 2.7rem">
                         <span style="font-size: 2rem; color: black"
                           >尚未完成報名</span
@@ -198,8 +251,6 @@
                         <li>– 工作證 ×2</li>
                         <li>– 草率簿 ×1<small> (含露出一面)</small></li>
                       </ul>
-
-                      <!-- 右上：付款方案，兩格 -->
                     </td>
 
                     <td
