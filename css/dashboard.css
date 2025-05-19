@@ -55,8 +55,7 @@ th {
   overflow: hidden;
 }
 .rotated-link {
-  writing-mode: vertical-rl;
-  transform: rotate(180deg);
+  writing-mode: vertical-lr;
   font-size: 0.8rem;
 }
 .sidebar h1 {
@@ -91,7 +90,7 @@ th {
   display: inline-block;
 }
 .rotated {
-  transform: rotate(-45deg);
+  /* transform: rotate(-45deg); */
   transform-origin: bottom left;
   display: inline-block;
   white-space: nowrap;
@@ -103,6 +102,11 @@ th {
   text-align: center;
   padding: 10px;
   margin-top: 8px;
+}
+.pay-button:hover {
+  background: ghostwhite;
+  color: #000;
+  cursor: pointer;
 }
 .dashed {
   border-style: dashed;
