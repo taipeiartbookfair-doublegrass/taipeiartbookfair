@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>Edit Dashboard - 草率季Taipei Art Book Fair</title>
+    <link rel="stylesheet" href="css/dashboard.css" />
+    <link rel="stylesheet" href="css/font.css" />
+    <link rel="shortcut icon" href="image/icon-1.ico" />
+
+    <!-- Google tag (gtag.js) -->
+    <script
+      async
+      src="https://www.googletagmanager.com/gtag/js?id=G-EPSXJPDH6L"
+    ></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+      gtag("js", new Date());
+
+      gtag("config", "G-EPSXJPDH6L");
+    </script>
+  </head>
+  <body>
+    <table class="layout">
+      <a href="dashboard-TPABF.html" class="close-button" title="返回 Dashboard"
+        >×</a
+      >
+      <tr>
+        <!-- Sidebar -->
+        <td class="sidebar">
+          <p style="background-color: olivedrab; color: ghostwhite">
+            <img
+              src="image/icon-1.ico"
+              alt="logo"
+              style="width: 4.5vw; height: auto; transform: rotate(45deg)"
+            />
+          </p>
+          <p style="background-color: black; color: ghostwhite">
+            攤商管理<br />Dashboard
+          </p>
+          <hr class="sidebar-hr" />
+          <p>聯絡我們<br />Contact</p>
+          <hr class="sidebar-hr" />
+          <p>常見問題<br />FAQ</p>
+          <hr class="sidebar-hr" />
+          <div class="sidebar-middle">
+            <p class="rotated-link">
+              草率季 Taipei Art Book Fair<br />
+              <a href="https://taipeiartbookfair.com/"
+                >https://taipeiartbookfair.com/</a
+              >
+            </p>
+          </div>
+          <p style="background-color: blueviolet; color: ghostwhite">
+            帳號管理<br />Account
+          </p>
+        </td>
+
+        <!-- Middle form -->
+        <td class="edit-page">
+          <div class="scroll-inner">
+            <form class="edit-form">
+              <h2 style="font-size: 1.5rem">編輯品牌資料 Edit Brand Info</h2>
+
+              <table width="100%">
+                <tr>
+                  <td colspan="2">
+                    <span class="label">品牌名稱 Brand Name</span><br />
+                    <input
+                      type="text"
+                      name="brandName"
+                      value="Yoshimi Saito"
+                      style="width: 100%"
+                    />
+                  </td>
+                </tr>
+                <tr>
+                  <td colspan="2">
+                    <span class="label">品牌簡介 Bio</span><br />
+                    <textarea name="bio" rows="6" style="width: 100%">
+這是一段品牌簡介...</textarea
+                    >
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <span class="label">代表人 Contact Person</span><br />
+                    <input
+                      type="text"
+                      name="contactPerson"
+                      value="王大明"
+                      style="width: 100%"
+                    />
+                  </td>
+                  <td>
+                    <span class="label">聯絡信箱 Email</span><br />
+                    <input
+                      type="email"
+                      name="email"
+                      value="damin@gmail.com"
+                      style="width: 100%"
+                    />
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <span class="label">聯絡電話 Phone</span><br />
+                    <input
+                      type="text"
+                      name="phone"
+                      value="(+31)0923485729"
+                      style="width: 100%"
+                    />
+                  </td>
+                  <td>
+                    <span class="label">Website</span><br />
+                    <input
+                      type="url"
+                      name="website"
+                      value="https://www.nowplacesf.com/publications"
+                      style="width: 100%"
+                    />
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <span class="label">Instagram</span><br />
+                    <input
+                      type="text"
+                      name="instagram"
+                      value="@51personaeproject"
+                      style="width: 100%"
+                    />
+                  </td>
+                  <td>
+                    <span class="label">Facebook</span><br />
+                    <input
+                      type="text"
+                      name="facebook"
+                      value=""
+                      style="width: 100%"
+                    />
+                  </td>
+                </tr>
+                <tr>
+                  <td colspan="2">
+                    <span class="label">Whatsapp</span><br />
+                    <input
+                      type="text"
+                      name="whatsapp"
+                      value=""
+                      style="width: 100%"
+                    />
+                  </td>
+                </tr>
+              </table>
+
+              <p style="margin-top: 2rem; color: darkgray">
+                請再次確認資訊是否正確後進行修改。請注意，草率簿將於 8
+                月底開始排版，最終資料將以工作同仁所彙整的版本為準。
+              </p>
+
+              <div style="margin-top: 1rem">
+                <button
+                  type="submit"
+                  class="pay-button"
+                  style="padding: 0.7rem 2rem"
+                >
+                  送出 Submit
+                </button>
+              </div>
+            </form>
+          </div>
+        </td>
+      </tr>
+    </table>
+  </body>
+</html>
