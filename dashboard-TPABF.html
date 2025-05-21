@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <title>草率季Taipei Art Book Fair</title>
+    <title>Dashboard - 草率季Taipei Art Book Fair</title>
     <link rel="stylesheet" href="css/dashboard.css" />
     <link rel="stylesheet" href="css/font.css" />
     <link rel="shortcut icon" href="image/icon-1.ico" />
@@ -37,7 +37,9 @@
               style="width: 4.5vw; height: auto; transform: rotate(45deg)"
             />
           </p>
-          <p>攤商管理<br />Dashboard</p>
+          <p style="background-color: black; color: ghostwhite">
+            攤商管理<br />Dashboard
+          </p>
           <hr class="sidebar-hr" />
           <p>聯絡我們<br />Contact</p>
           <hr class="sidebar-hr" />
@@ -72,53 +74,85 @@
                       color: black;
                       cursor: pointer;
                       transition: color 0.2s;
-                      translate: rotate(90deg);
+                      transform: rotate(90deg);
                     "
-                    onmouseover="this.style.color='blue'"
+                    onmouseover="this.style.color='darkolivegreen'"
                     onmouseout="this.style.color='black'"
-                    onclick="editBrandName()"
-                    title="編輯品牌名稱"
+                    onclick="location.href='edit.html'"
+                    title="編輯"
                     >&#9998;</span
                   >
+
                   <span class="label">品牌名稱 Brand Name</span><br />
                   <span style="font-size: 3rem">Yoshimi Saito</span>
                 </td>
               </tr>
               <tr>
-                <td>
+                <td style="width: 50%">
                   <span class="label">身份類別 Role</span><br />a1 Creator
                 </td>
-                <td>
-                  <span class="label">作品類別 Catagory</span><br />b3 Drawings
+                <td style="width: 50%">
+                  <span class="label">作品類別 Category</span><br />b3 Drawings
                 </td>
               </tr>
               <tr>
                 <td colspan="2">
                   <span class="label">品牌簡介 Bio</span><br />
-                  Born in Tokyo, currently based in Takanabe, in the southern
-                  region of Japan. After graduating from the Ceramic Art Course
-                  at Kyoto University of the Arts, I expanded my artistic
-                  practice to include clay sculpting, along with drawing on
-                  paper. In 2022, during an artist residency in Iceland, I
-                  created and exhibited a series of ceramic works titled
-                  Huldufólk. My recent activities include the solo exhibition
-                  Soft Wind (Kinkan Gallery, 2025), as well as starring in and
-                  contributing artworks to the short film Yume No Hate Made
-                  (Till the End of the World), directed by Natsuka Kusano, part
-                  of the omnibus film Performing Hiroshima (2023). At the Taipei
-                  Art Book Fair, I will present a new zine featuring recent
-                  works created in Takanabe, the town I recently moved to.
-                  Through this publication, I hope to share the unique charm and
-                  appeal of Takanabe with a wider audience.
+                  <div class="bio">
+                    Yoshimi Saito is a Japanese artist and ceramicist. She is
+                    known for her unique approach to ceramics, which combines
+                    traditional techniques with a contemporary aesthetic. Her
+                    work often explores themes of nature, mythology, and the
+                    human experience, resulting in pieces that are both visually
+                    striking and thought-provoking. Born in Tokyo, currently
+                    based in Takanabe, in the southern region of Japan. After
+                    graduating from the Ceramic Art Course at Kyoto University
+                    of the Arts, I expanded my artistic practice to include clay
+                    sculpting, along with drawing on paper. In 2022, during an
+                    artist residency in Iceland, I created and exhibited a
+                    series of ceramic works titled Huldufólk. My recent
+                    activities include the solo exhibition Soft Wind (Kinkan
+                    Gallery, 2025), as well as starring in and contributing
+                    artworks to the short film Yume No Hate Made (Till the End
+                    of the World), directed by Natsuka Kusano, part of the
+                    omnibus film Performing Hiroshima (2023). At the Taipei Art
+                    Book Fair, I will present a new zine featuring recent works
+                    created in Takanabe, the town I recently moved to. Through
+                    this publication, I hope to share the unique charm and
+                    appeal of Takanabe with a wider audience.
+                  </div>
                 </td>
               </tr>
               <tr>
-                <td style="width: 40%">
-                  <span class="label">國籍 Nationality</span><br />JAPAN
-                </td>
-                <td style="width: 60%">
-                  <span class="label">簽證申請 Visa Requirement</span><br />Not
-                  Require
+                <td colspan="2" style="padding: 0">
+                  <table style="width: 100%; table-layout: fixed">
+                    <tr>
+                      <td
+                        style="
+                          width: 25%;
+                          border-top: 0.5px solid pink;
+                          border-left: none;
+                          border-right: 1px dashed black;
+                          border-bottom: none;
+                        "
+                      >
+                        <span class="label">國籍 Nationality</span><br />JAPAN
+                      </td>
+                      <td
+                        style="
+                          width: 75%;
+
+                          border-top: 0.5px solid pink;
+                          border-left: none;
+                          border-right: none;
+                          border-bottom: none;
+                        "
+                      >
+                        <span class="label">簽證申請 Visa Requirement</span
+                        ><br />Not Require
+                      </td>
+                    </tr>
+                  </table>
                 </td>
               </tr>
               <tr>
@@ -143,25 +177,21 @@
                 </td>
               </tr>
               <tr>
-                <td colspan="2">
+                <td>
                   <span class="label">Website</span><br />
                   https://www.nowplacesf.com/publications
                 </td>
-              </tr>
-              <tr>
-                <td colspan="2">
+                <td>
                   <span class="label">Instagram</span><br />
-                  @51personaeproject
+                  https://www.instagram.com/robot.ocean/
                 </td>
               </tr>
               <tr>
-                <td colspan="2">
+                <td>
                   <span class="label">Facebook</span><br />
                   <i style="color: lightgray">None</i>
                 </td>
-              </tr>
-              <tr>
-                <td colspan="2">
+                <td>
                   <span class="label">Whatsapp</span><br />
                   <i style="color: lightgray">None</i>
                 </td>
@@ -304,7 +334,7 @@
                                   border-bottom: none;
                                 "
                               />
-                              <span style="font-size: 2rem">5,000 NTD </span
+                              <span style="font-size: 2rem">8,000 NTD </span
                               ><small>(含稅)</small>
                               <br />
                               僅基礎方案
@@ -333,7 +363,7 @@
                                   border-bottom: none;
                                 "
                               />
-                              <span style="font-size: 2rem">6,000 NTD </span
+                              <span style="font-size: 2rem">13,000 NTD </span
                               ><small>(含稅)</small><br />
                               適合有輪班擺攤需求之攤主
                               <p style="color: red; font-size: 12px">
@@ -377,7 +407,7 @@
               </tr>
 
               <tr>
-                <td style="border-top: none">
+                <td style="border-top: none; border-right: 2px solid black">
                   <span class="label">徵件流程表 Open Call Schedule</span><br />
                   <table style="width: 100%; margin-top: 10px">
                     <tr>
