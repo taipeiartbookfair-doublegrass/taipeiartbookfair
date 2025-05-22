@@ -35,6 +35,7 @@
             <img
               src="image/icon-1.ico"
               alt="logo"
+              class="machine-rotate-logo"
               style="width: 4.5vw; height: auto; transform: rotate(45deg)"
             />
           </p>
@@ -257,7 +258,6 @@
                             id="application-result"
                             >錄取</span
                           >
-                          >
                         </div>
                       </td>
 
@@ -270,7 +270,6 @@
                             style="font-size: 2rem; color: black"
                             id="registration-status"
                             >尚未完成報名</span
-                          >
                           >
                         </div>
                       </td>
@@ -372,14 +371,33 @@
                               ><small>(含稅)</small>
                               <br />
                               僅基礎方案
-                              <p
-                                style="color: red; font-size: 12px"
-                                id="billing1-note"
-                              >
+                              <p style="color: red; font-size: 0.9rem">
                                 ！請在付款時務必填入以下資料：<br />
-                                Email: email@gmail.com<br />
-                                備註欄位: 25-BC001<br /><br />
-                                如因填寫其他錯誤資料造成對帳問題，將導致報名失敗。
+                                Email:
+                                <span id="billing-email"
+                                  ><b>email@gmail.com</b></span
+                                ><button
+                                  class="copy-btn"
+                                  onclick="copyToClipboard('billing-email')"
+                                  title="Copy Email"
+                                  style="margin-left: 5px"
+                                >
+                                  📋</button
+                                ><br />
+                                備註欄位:
+                                <span id="billing-application-number"
+                                  ><b>25-BC001</b></span
+                                ><button
+                                  class="copy-btn"
+                                  onclick="copyToClipboard('billing-application-number')"
+                                  title="Copy Application Number"
+                                  style="margin-left: 5px"
+                                >
+                                  📋</button
+                                ><br /><br />
+                                <b
+                                  >如因填寫其他錯誤資料造成對帳問題，將導致報名失敗。</b
+                                >
                               </p>
                               <div class="pay-button" id="pay1">付款 Pay</div>
                             </td>
@@ -405,13 +423,35 @@
                               ><small>(含稅)</small><br />
                               適合有輪班擺攤需求之攤主
                               <p
-                                style="color: red; font-size: 12px"
+                                style="color: red; font-size: 0.9rem"
                                 id="billing2-note"
                               >
                                 ！請在付款時務必填入以下資料：<br />
-                                Email: email@gmail.com<br />
-                                備註欄位: 25-BC001<br /><br />
-                                如因填寫其他錯誤資料造成對帳問題，將導致報名失敗。
+                                Email:
+                                <span id="billing-email"
+                                  ><b>email@gmail.com</b></span
+                                ><button
+                                  class="copy-btn"
+                                  onclick="copyToClipboard('billing-email')"
+                                  title="Copy Email"
+                                  style="margin-left: 5px"
+                                >
+                                  📋</button
+                                ><br />
+                                備註欄位:
+                                <span id="billing-application-number"
+                                  ><b>25-BC001</b></span
+                                ><button
+                                  class="copy-btn"
+                                  onclick="copyToClipboard('billing-application-number')"
+                                  title="Copy Application Number"
+                                  style="margin-left: 5px"
+                                >
+                                  📋</button
+                                ><br /><br />
+                                <b
+                                  >如因填寫其他錯誤資料造成對帳問題，將導致報名失敗。</b
+                                >
                               </p>
                               <div class="pay-button" id="pay2">付款 Pay</div>
                             </td>
@@ -432,12 +472,21 @@
                         "
                       >
                         <span class="label">注意事項 Notice</span><br />
-                        <ul style="margin: 0; padding-left: 20px">
+                        <ul
+                          style="
+                            margin: 0;
+                            padding-left: 20px;
+                            font-size: 0.8rem;
+                          "
+                        >
                           <li id="notice1">
                             請自行評估需求繳費，繳款後我們不再提供更改申請選項。
                           </li>
-                          <li id="notice2">付款之後請自行留存發票。</li>
-                          <li id="notice3">
+                          <li id="notice2">
+                            每攤限加購 1 張工作證，如需更多數量請買當日票入場。
+                          </li>
+                          <li id="notice3">付款之後請自行留存發票。</li>
+                          <li id="notice4">
                             我們將於 7 月 15 日對帳後更新報名以及付款狀態。
                           </li>
                         </ul>
@@ -488,5 +537,51 @@
         </td>
       </tr>
     </table>
+    <script>
+      function copyToClipboard(id) {
+        const el = document.getElementById(id);
+        let text = el.innerText || el.textContent;
+        // Remove <b> if present
+        text = text.trim();
+        navigator.clipboard.writeText(text).then(() => {
+          // Optional: show feedback
+          const btn = event.target;
+          const original = btn.textContent;
+          btn.textContent = "✅";
+          setTimeout(() => {
+            btn.textContent = original;
+          }, 1000);
+        });
+      }
+      const logo = document.querySelector(".machine-rotate-logo");
+      let isHovering = false;
+
+      if (logo) {
+        // Mouse tracking for rotation when NOT hovering
+        document.addEventListener("mousemove", function (e) {
+          if (isHovering) return;
+          const rect = logo.getBoundingClientRect();
+          const cx = rect.left + rect.width / 2;
+          const cy = rect.top + rect.height / 2;
+          const dx = e.clientX - cx;
+          const dy = e.clientY - cy;
+          const angle = (Math.atan2(dy, dx) * 180) / Math.PI;
+          logo.style.transform = `rotate(${angle + 90}deg)`;
+        });
+
+        // On hover: add animation class, remove inline transform
+        logo.addEventListener("mouseenter", function () {
+          isHovering = true;
+          logo.style.transform = "";
+          logo.classList.add("machine-rotate-animating");
+        });
+
+        // On leave: remove animation class, reset to follow mouse
+        logo.addEventListener("mouseleave", function () {
+          isHovering = false;
+          logo.classList.remove("machine-rotate-animating");
+        });
+      }
+    </script>
   </body>
 </html>
