@@ -75,7 +75,7 @@ document.addEventListener("DOMContentLoaded", async function () {
   document.getElementById("registration-status").textContent =
     apiData["報名狀態"] || "";
 
-  document.getElementById("booth-type").textContent = apiData["攤種"] || "";
+  //document.getElementById("booth-type").textContent = apiData["攤種"] || "";
   // document.getElementById("equipment-table").textContent =
   //   apiData["設備-桌子"] || "– 桌面(120×60cm) ×1";
   // document.getElementById("equipment-chair").textContent =
