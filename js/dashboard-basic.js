@@ -37,7 +37,7 @@ document.addEventListener("DOMContentLoaded", async function () {
     });
 
     const data = await dashboardRes.json();
-
+    console.log(data);
     if (data.success) {
       apiData = data.data;
     } else {
