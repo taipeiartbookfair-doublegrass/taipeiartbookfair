@@ -43,6 +43,9 @@ document.addEventListener("DOMContentLoaded", async function () {
       apiData = data.data;
     } else {
       alert(data.message || "資料取得失敗，請重新登入。");
+      setCookie("account", "", -1);
+      setCookie("region", "", -1);
+      setCookie("login", "", -1);
       window.location.href = "login.html";
       return;
     }
