@@ -108,27 +108,15 @@
                 <td colspan="2">
                   <span class="label">品牌簡介 Bio</span><br />
                   <div class="bio" id="bio">
-                    Yoshimi Saito is a Japanese artist and ceramicist. She is
-                    known for her unique approach to ceramics, which combines
-                    traditional techniques with a contemporary aesthetic. Her
-                    work often explores themes of nature, mythology, and the
-                    human experience, resulting in pieces that are both visually
-                    striking and thought-provoking. Born in Tokyo, currently
-                    based in Takanabe, in the southern region of Japan. After
-                    graduating from the Ceramic Art Course at Kyoto University
-                    of the Arts, I expanded my artistic practice to include clay
-                    sculpting, along with drawing on paper. In 2022, during an
-                    artist residency in Iceland, I created and exhibited a
-                    series of ceramic works titled Huldufólk. My recent
-                    activities include the solo exhibition Soft Wind (Kinkan
-                    Gallery, 2025), as well as starring in and contributing
-                    artworks to the short film Yume No Hate Made (Till the End
-                    of the World), directed by Natsuka Kusano, part of the
-                    omnibus film Performing Hiroshima (2023). At the Taipei Art
-                    Book Fair, I will present a new zine featuring recent works
-                    created in Takanabe, the town I recently moved to. Through
-                    this publication, I hope to share the unique charm and
-                    appeal of Takanabe with a wider audience.
+                    "We are a group of four former classmates from art
+                    university, each bringing our unique personalities to zines
+                    filled with photography, writing, and original artworks.
+                    It’s been three years since we graduated, and during that
+                    time, each of us has been immersed in our own paths and
+                    creative pursuits. Now, we’re coming together again in
+                    Taipei—the place we once visited on our graduation
+                    trip—hoping to reconnect through zines with fellow lovers of
+                    design and art. Nothing would make us happier."
                   </div>
                 </td>
               </tr>
@@ -147,7 +135,7 @@
                       >
                         <span class="label">國籍 Nationality</span><br /><span
                           id="nationality"
-                          >JAPAN</span
+                          >JP</span
                         >
                       </td>
                       <td
@@ -371,11 +359,17 @@
                               ><small>(含稅)</small>
                               <br />
                               僅基礎方案
-                              <p style="color: red; font-size: 0.9rem">
+
+                              <p
+                                style="color: red; font-size: 0.9rem"
+                                id="billing2-note"
+                              >
                                 ！請在付款時務必填入以下資料：<br />
                                 Email:
-                                <span id="billing-email"
-                                  ><b>email@gmail.com</b></span
+                                <span
+                                  id="billing-email"
+                                  style="font-weight: bold"
+                                  >email@gmail.com</span
                                 ><button
                                   class="copy-btn"
                                   onclick="copyToClipboard('billing-email')"
@@ -385,8 +379,12 @@
                                   📋</button
                                 ><br />
                                 備註欄位:
-                                <span id="billing-application-number"
-                                  ><b>25-BC001</b></span
+
+                                <span
+                                  id="billing-application-number"
+                                  style="font-weight: bold"
+                                  >25-BC001</span
+
                                 ><button
                                   class="copy-btn"
                                   onclick="copyToClipboard('billing-application-number')"
@@ -399,7 +397,7 @@
                                   >如因填寫其他錯誤資料造成對帳問題，將導致報名失敗。</b
                                 >
                               </p>
-                              <div class="pay-button" id="pay1">付款 Pay</div>
+                              <div class="pay-button" id="pay2">付款 Pay</div>
                             </td>
                             <td
                               style="
@@ -428,8 +426,11 @@
                               >
                                 ！請在付款時務必填入以下資料：<br />
                                 Email:
-                                <span id="billing-email"
-                                  ><b>email@gmail.com</b></span
+
+                                <span
+                                  id="billing-email"
+                                  style="font-weight: bold"
+                                  >email@gmail.com</span
                                 ><button
                                   class="copy-btn"
                                   onclick="copyToClipboard('billing-email')"
@@ -439,8 +440,11 @@
                                   📋</button
                                 ><br />
                                 備註欄位:
-                                <span id="billing-application-number"
-                                  ><b>25-BC001</b></span
+
+                                <span
+                                  id="billing-application-number"
+                                  style="font-weight: bold"
+                                  >25-BC001</span
                                 ><button
                                   class="copy-btn"
                                   onclick="copyToClipboard('billing-application-number')"
@@ -537,51 +541,5 @@
         </td>
       </tr>
     </table>
-    <script>
-      function copyToClipboard(id) {
-        const el = document.getElementById(id);
-        let text = el.innerText || el.textContent;
-        // Remove <b> if present
-        text = text.trim();
-        navigator.clipboard.writeText(text).then(() => {
-          // Optional: show feedback
-          const btn = event.target;
-          const original = btn.textContent;
-          btn.textContent = "✅";
-          setTimeout(() => {
-            btn.textContent = original;
-          }, 1000);
-        });
-      }
-      const logo = document.querySelector(".machine-rotate-logo");
-      let isHovering = false;
-
-      if (logo) {
-        // Mouse tracking for rotation when NOT hovering
-        document.addEventListener("mousemove", function (e) {
-          if (isHovering) return;
-          const rect = logo.getBoundingClientRect();
-          const cx = rect.left + rect.width / 2;
-          const cy = rect.top + rect.height / 2;
-          const dx = e.clientX - cx;
-          const dy = e.clientY - cy;
-          const angle = (Math.atan2(dy, dx) * 180) / Math.PI;
-          logo.style.transform = `rotate(${angle + 90}deg)`;
-        });
-
-        // On hover: add animation class, remove inline transform
-        logo.addEventListener("mouseenter", function () {
-          isHovering = true;
-          logo.style.transform = "";
-          logo.classList.add("machine-rotate-animating");
-        });
-
-        // On leave: remove animation class, reset to follow mouse
-        logo.addEventListener("mouseleave", function () {
-          isHovering = false;
-          logo.classList.remove("machine-rotate-animating");
-        });
-      }
-    </script>
   </body>
 </html>
