@@ -10,6 +10,64 @@ const apiUrl =
   "https://script.google.com/macros/s/AKfycbwNWgPsLK_ldHUIvoIg5a9k3PNIlmjvJeTgbCZ5CZsvKFQ7e1DoxbMsAawi4nI3Rea4DA/exec";
 
 document.addEventListener("DOMContentLoaded", async function () {
+  let fakeProgress = 0.01; // 一開始就有一點進度
+  let progressTimer = null;
+
+  // 自動進度動畫
+  function startFakeProgress() {
+    progressTimer = setInterval(() => {
+      // 最多跑到 90%
+      if (fakeProgress < 0.82) {
+        fakeProgress += 0.006;
+        if (window.updateLoadingProgress) updateLoadingProgress(fakeProgress);
+      }
+    }, 25); // 每 25ms 跑一次
+  }
+
+  function stopFakeProgress() {
+    if (progressTimer) clearInterval(progressTimer);
+  }
+
+  startFakeProgress();
+
+  // --- loading-grid 填滿並預留右下角空位 ---
+  const grid = document.querySelector(".loading-grid");
+  const mask = document.getElementById("loading-mask");
+  if (grid && mask) {
+    const imgSrc = "image/loading1.jpg"; // 你的 loading 圖片
+    const imgSize = 70; // px
+
+    // 用 clientWidth/clientHeight 會更精準
+    const maskWidth = mask.clientWidth;
+    const maskHeight = mask.clientHeight;
+    const cols = Math.ceil(maskWidth / imgSize);
+    const rows = Math.ceil(maskHeight / imgSize);
+
+    grid.style.gridTemplateColumns = `repeat(${cols}, ${imgSize}px)`;
+    grid.style.gridTemplateRows = `repeat(${rows}, ${imgSize}px)`;
+
+    grid.innerHTML = "";
+    for (let r = 0; r < rows; r++) {
+      for (let c = 0; c < cols; c++) {
+        // 預留右下角一格空位
+        if (r === rows - 1 && c === cols - 1) {
+          const empty = document.createElement("div");
+          empty.style.width = imgSize + "px";
+          empty.style.height = imgSize + "px";
+          empty.style.background = "transparent";
+          grid.appendChild(empty);
+        } else {
+          const img = document.createElement("img");
+          img.src = imgSrc;
+          img.alt = "loading";
+          img.style.width = imgSize + "px";
+          img.style.height = imgSize + "px";
+          grid.appendChild(img);
+        }
+      }
+    }
+  }
+
   // 取得 dashboard 資料
   let apiData = {};
   const params = new URLSearchParams({
@@ -37,10 +95,14 @@ document.addEventListener("DOMContentLoaded", async function () {
       setCookie("region", "", -1);
       setCookie("login", "", -1);
       window.location.href = "login.html";
+      stopFakeProgress();
+      if (window.hideLoadingMask) hideLoadingMask();
       return;
     }
   } catch (error) {
     alert("Network error, please try again later.");
+    stopFakeProgress();
+    if (window.hideLoadingMask) hideLoadingMask();
     return;
   }
 
@@ -75,7 +137,7 @@ document.addEventListener("DOMContentLoaded", async function () {
   document.getElementById("registration-status").textContent =
     apiData["報名狀態"] || "";
 
-  document.getElementById("booth-type").textContent = apiData["攤種"] || "";
+  //document.getElementById("booth-type").textContent = apiData["攤種"] || "";
   // document.getElementById("equipment-table").textContent =
   //   apiData["設備-桌子"] || "– 桌面(120×60cm) ×1";
   // document.getElementById("equipment-chair").textContent =
@@ -96,26 +158,12 @@ document.addEventListener("DOMContentLoaded", async function () {
   //   apiData["方案二備註"] ||
   //   "！請在付款時務必填入以下資料：<br />Email: email@gmail.com<br />備註欄位: 25-BC001<br /><br />如因填寫其他錯誤資料造成對帳問題，將導致報名失敗。";
 
-  // ======= 國籍與簽證需求判斷，合併到這裡 =======
-  const nat = document.getElementById("nationality");
-  const visa = document.getElementById("visa-requirement");
-  if (nat && visa) {
-    const value = nat.textContent.trim().toUpperCase();
+  // 資料抓完，直接跳到 100%
+  stopFakeProgress();
+  if (window.updateLoadingProgress) updateLoadingProgress(1);
 
-    if (value === "TW") {
-      visa.innerHTML = "Not Require";
-    } else if (value === "CN") {
-      visa.innerHTML = `<a href="download/requirement-form-cn.pdf" target="_blank" style="color:blue;text-decoration:underline;">Download the requirement form</a>`;
-    } else {
-      visa.innerHTML = `
-        <a href="https://visawebapp.boca.gov.tw/BOCA_EVISA/MRV01FORM.do" target="_blank" style="color:blue;text-decoration:underline;">
-          Apply for Taiwan eVisa
-        </a>
-        <br>
-        <a href="download/visa-info.pdf" target="_blank" style="color:blue;text-decoration:underline;">
-          Download visa information
-        </a>
-      `;
-    }
-  }
+  // 0.5 秒後關掉 loading
+  setTimeout(function () {
+    if (window.hideLoadingMask) hideLoadingMask();
+  }, 500);
 });
