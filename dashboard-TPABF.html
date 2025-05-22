@@ -409,9 +409,35 @@
                                 id="billing2-note"
                               >
                                 ！請在付款時務必填入以下資料：<br />
-                                Email: email@gmail.com<br />
-                                備註欄位: 25-BC001<br /><br />
-                                如因填寫其他錯誤資料造成對帳問題，將導致報名失敗。
+                                Email:
+                                <span
+                                  id="billing-email"
+                                  style="font-weight: bold"
+                                  >email@gmail.com</span
+                                ><button
+                                  class="copy-btn"
+                                  onclick="copyToClipboard('billing-email')"
+                                  title="Copy Email"
+                                  style="margin-left: 5px"
+                                >
+                                  📋</button
+                                ><br />
+                                備註欄位:
+                                <span
+                                  id="billing-application-number"
+                                  style="font-weight: bold"
+                                  >25-BC001</span
+                                ><button
+                                  class="copy-btn"
+                                  onclick="copyToClipboard('billing-application-number')"
+                                  title="Copy Application Number"
+                                  style="margin-left: 5px"
+                                >
+                                  📋</button
+                                ><br /><br />
+                                <b
+                                  >如因填寫其他錯誤資料造成對帳問題，將導致報名失敗。</b
+                                >
                               </p>
                               <div class="pay-button" id="pay2">付款 Pay</div>
                             </td>
@@ -488,5 +514,6 @@
         </td>
       </tr>
     </table>
+    <script src="js/dashboard-body.js"></script>
   </body>
 </html>

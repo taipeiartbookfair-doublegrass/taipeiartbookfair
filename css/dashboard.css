@@ -147,7 +147,8 @@ html::-webkit-scrollbar-thumb:hover {
 }
 
 .bio {
-  height: 190px;
+  height: 22vh;
+  line-height: 1.58rem;
   overflow-y: scroll; /* always show vertical scrollbar */
 }
 
