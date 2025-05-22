@@ -1,12 +1,3 @@
-function getCookie(name) {
-  const value = `; ${document.cookie}`;
-  const parts = value.split(`; ${name}=`);
-
-  if (parts.length === 2) return parts.pop().split(";").shift();
-
-  return null;
-}
-
 // 先檢查 cookie
 const account = getCookie("account");
 const region = getCookie("region");
@@ -37,7 +28,7 @@ document.addEventListener("DOMContentLoaded", async function () {
     });
 
     const data = await dashboardRes.json();
-    console.log(data);
+
     if (data.success) {
       apiData = data.data;
     } else {
@@ -59,6 +50,7 @@ document.addEventListener("DOMContentLoaded", async function () {
   document.getElementById("role").textContent = apiData["身份類別"] || "";
   document.getElementById("category").textContent = apiData["作品類別"] || "";
   document.getElementById("nationality").textContent = region || "";
+
   document.getElementById("visa-requirement").textContent =
     apiData["簽證需求"] || "";
 
@@ -84,25 +76,25 @@ document.addEventListener("DOMContentLoaded", async function () {
     apiData["報名狀態"] || "";
 
   document.getElementById("booth-type").textContent = apiData["攤種"] || "";
-  document.getElementById("equipment-table").textContent =
-    apiData["設備-桌子"] || "– 桌面(120×60cm) ×1";
-  document.getElementById("equipment-chair").textContent =
-    apiData["設備-椅子"] || "– 椅子 ×2";
-  document.getElementById("equipment-badge").textContent =
-    apiData["設備-工作證"] || "– 工作證 ×2";
-  document.getElementById("equipment-book").textContent =
-    apiData["設備-草率簿"] || "– 草率簿 ×1 (含露出一面)";
+  // document.getElementById("equipment-table").textContent =
+  //   apiData["設備-桌子"] || "– 桌面(120×60cm) ×1";
+  // document.getElementById("equipment-chair").textContent =
+  //   apiData["設備-椅子"] || "– 椅子 ×2";
+  // document.getElementById("equipment-badge").textContent =
+  //   apiData["設備-工作證"] || "– 工作證 ×2";
+  // document.getElementById("equipment-book").textContent =
+  //   apiData["設備-草率簿"] || "– 草率簿 ×1 (含露出一面)";
 
-  document.getElementById("billing1-price").textContent =
-    apiData["方案一金額"] || "8,000 NTD";
-  document.getElementById("billing1-note").innerHTML =
-    apiData["方案一備註"] ||
-    "！請在付款時務必填入以下資料：<br />Email: email@gmail.com<br />備註欄位: 25-BC001<br /><br />如因填寫其他錯誤資料造成對帳問題，將導致報名失敗。";
-  document.getElementById("billing2-price").textContent =
-    apiData["方案二金額"] || "13,000 NTD";
-  document.getElementById("billing2-note").innerHTML =
-    apiData["方案二備註"] ||
-    "！請在付款時務必填入以下資料：<br />Email: email@gmail.com<br />備註欄位: 25-BC001<br /><br />如因填寫其他錯誤資料造成對帳問題，將導致報名失敗。";
+  // document.getElementById("billing1-price").textContent =
+  //   apiData["方案一金額"] || "8,000 NTD";
+  // document.getElementById("billing1-note").innerHTML =
+  //   apiData["方案一備註"] ||
+  //   "！請在付款時務必填入以下資料：<br />Email: email@gmail.com<br />備註欄位: 25-BC001<br /><br />如因填寫其他錯誤資料造成對帳問題，將導致報名失敗。";
+  // document.getElementById("billing2-price").textContent =
+  //   apiData["方案二金額"] || "13,000 NTD";
+  // document.getElementById("billing2-note").innerHTML =
+  //   apiData["方案二備註"] ||
+  //   "！請在付款時務必填入以下資料：<br />Email: email@gmail.com<br />備註欄位: 25-BC001<br /><br />如因填寫其他錯誤資料造成對帳問題，將導致報名失敗。";
 
   // ======= 國籍與簽證需求判斷，合併到這裡 =======
   const nat = document.getElementById("nationality");
