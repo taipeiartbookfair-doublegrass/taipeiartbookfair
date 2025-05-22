@@ -49,7 +49,8 @@ document.addEventListener("DOMContentLoaded", async function () {
   document.getElementById("bio").textContent = apiData["品牌簡介"] || "";
   document.getElementById("role").textContent = apiData["身份類別"] || "";
   document.getElementById("category").textContent = apiData["作品類別"] || "";
-  document.getElementById("nationality").textContent = apiData["國籍"] || "";
+  document.getElementById("nationality").textContent =
+    apiData["國籍代碼"] || "";
   document.getElementById("visa-requirement").textContent =
     apiData["簽證需求"] || "";
 
