@@ -6,10 +6,10 @@
     <meta
       http-equiv="Content-Security-Policy"
       content="default-src 'self'; 
-         script-src 'self' 'unsafe-inline' https://www.google.com https://www.gstatic.com https://code.jquery.com https://www.googletagmanager.com; 
-         style-src 'self' 'unsafe-inline'; 
-         connect-src https://www.google-analytics.com https://script.google.com;
-         frame-src https://www.google.com;"
+             script-src 'self' 'unsafe-inline' https://www.google.com https://www.gstatic.com https://code.jquery.com https://www.googletagmanager.com; 
+             style-src 'self' 'unsafe-inline'; 
+             connect-src https://www.google-analytics.com https://script.google.com https://script.googleusercontent.com/;
+             frame-src https://www.google.com;"
     />
     <title>Dashboard - 草率季Taipei Art Book Fair</title>
     <link rel="stylesheet" href="css/dashboard.css" />
@@ -30,6 +30,7 @@
 
       gtag("config", "G-EPSXJPDH6L");
     </script>
+    <script src="js/cookie.js"></script>
     <script src="js/dashboard-basic.js"></script>
   </head>
   <body>
@@ -142,7 +143,7 @@
                       >
                         <span class="label">國籍 Nationality</span><br /><span
                           id="nationality"
-                          >JP</span
+                          >TW</span
                         >
                       </td>
                       <td
