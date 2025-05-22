@@ -1,4 +1,55 @@
 document.addEventListener("DOMContentLoaded", function () {
+  // --- Loading mask setup ---
+  const loadingMask = document.getElementById("loading-mask");
+  const loadingGrid = loadingMask.querySelector(".loading-grid");
+  const loadingPercent = document.getElementById("loading-percent");
+  const imgSrc = "image/Cracked_dry_land.jpg";
+  const imgActiveSrc = "image/Moss_of_Bangladesh_2.jpg";
+  const imgSize = 70; // px，和 CSS 一致
+
+  // 取得 loading-mask 寬高ㄅ
+  const maskWidth = loadingMask.clientWidth;
+  const maskHeight = loadingMask.clientHeight;
+  const cols = Math.ceil(maskWidth / imgSize);
+  const rows = Math.ceil(maskHeight / imgSize);
+
+  // 設定 grid 樣式
+  loadingGrid.style.gridTemplateColumns = `repeat(${cols}, ${imgSize}px)`;
+  loadingGrid.style.gridTemplateRows = `repeat(${rows}, ${imgSize}px)`;
+
+  // 產生圖片，全部格子都放圖片
+  loadingGrid.innerHTML = "";
+  for (let r = 0; r < rows; r++) {
+    for (let c = 0; c < cols; c++) {
+      const img = document.createElement("img");
+      img.src = imgSrc;
+      img.className = "loading-img";
+      img.style.width = imgSize + "px";
+      img.style.height = imgSize + "px";
+      loadingGrid.appendChild(img);
+    }
+  }
+
+  // 更新進度函式
+  window.updateLoadingProgress = function (percent) {
+    const imgs = loadingGrid.querySelectorAll("img");
+    const total = imgs.length;
+    const progress = Math.floor(percent * total);
+    for (let i = 0; i < total; i++) {
+      imgs[i].src = i < progress ? imgActiveSrc : imgSrc;
+    }
+    // 更新右下角百分比
+    if (loadingPercent) {
+      const pct = Math.round(percent * 100);
+      loadingPercent.textContent = pct + "%";
+    }
+  };
+
+  // 資料抓取完成時呼叫
+  window.hideLoadingMask = function () {
+    loadingMask.style.display = "none";
+  };
+
   // Copy to clipboard function
   window.copyToClipboard = function (id) {
     const el = document.getElementById(id);
