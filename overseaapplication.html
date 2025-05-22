@@ -3,17 +3,19 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      http-equiv="Content-Security-Policy"
+      content="default-src 'self'; 
+             script-src 'self' 'unsafe-inline' https://www.google.com https://www.gstatic.com https://code.jquery.com https://www.googletagmanager.com; 
+             style-src 'self' 'unsafe-inline'; 
+             connect-src https://www.google-analytics.com;
+             frame-src https://www.google.com;"
+    />
+
     <title>Oversea Application - 草率季Taipei Art Book Fair</title>
     <link rel="shortcut icon" href="image/icon-1.ico" />
     <link rel="stylesheet" href="css/opencall.css" />
     <link rel="stylesheet" href="css/font.css" />
-    <!-- jquery這裡 -->
-    <script src="jquery-ui-1.14.1/external/jquery/jquery.js"></script>
-    <link
-      rel="stylesheet"
-      href="jquery-ui-1.14.1/themes/smoothness/jquery-ui.css"
-    />
-    <script src="jquery-ui-1.14.1/jquery-ui.js"></script>
     <!-- 圖靈測驗 -->
     <script src="https://www.google.com/recaptcha/api.js" async defer></script>
 
@@ -112,7 +114,6 @@
             name="entry.1144386047"
             id="participatedin_Firsttime"
             value="First Time"
-            required
           />
           <label for="participatedin_Firsttime" class="form-label">
             <span class="from-label-header">First Time</span>
@@ -131,8 +132,8 @@
         <div
           class="column layout-form-column-grid-4 question-ParticipatedYears"
         >
-          <span class="from-description-header"
-            >Optional, Multiple Selection Allowed</span
+          <span class="from-description-header-ness"
+            >Required Question, Multiple Selection Allowed</span
           >
           <input
             type="checkbox"
@@ -898,8 +899,7 @@
           <span class="from-header">Login Password</span>
           This password will be use for the registration of website accounts.
           <strong>Once registered, it cannot be modified.</strong> If you
-          registered multiple times, we will used the first password you
-          entered.
+          registered multiple times, we will used the last password you entered.
         </div>
         <div class="column layout-form-column-grid-1">
           <span class="from-description-header-ness">Required Question</span>

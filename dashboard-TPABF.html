@@ -36,6 +36,7 @@
             <img
               src="image/icon-1.ico"
               alt="logo"
+              class="machine-rotate-logo"
               style="width: 4.5vw; height: auto; transform: rotate(45deg)"
             />
           </p>
@@ -108,27 +109,15 @@
                 <td colspan="2">
                   <span class="label">品牌簡介 Bio</span><br />
                   <div class="bio" id="bio">
-                    Yoshimi Saito is a Japanese artist and ceramicist. She is
-                    known for her unique approach to ceramics, which combines
-                    traditional techniques with a contemporary aesthetic. Her
-                    work often explores themes of nature, mythology, and the
-                    human experience, resulting in pieces that are both visually
-                    striking and thought-provoking. Born in Tokyo, currently
-                    based in Takanabe, in the southern region of Japan. After
-                    graduating from the Ceramic Art Course at Kyoto University
-                    of the Arts, I expanded my artistic practice to include clay
-                    sculpting, along with drawing on paper. In 2022, during an
-                    artist residency in Iceland, I created and exhibited a
-                    series of ceramic works titled Huldufólk. My recent
-                    activities include the solo exhibition Soft Wind (Kinkan
-                    Gallery, 2025), as well as starring in and contributing
-                    artworks to the short film Yume No Hate Made (Till the End
-                    of the World), directed by Natsuka Kusano, part of the
-                    omnibus film Performing Hiroshima (2023). At the Taipei Art
-                    Book Fair, I will present a new zine featuring recent works
-                    created in Takanabe, the town I recently moved to. Through
-                    this publication, I hope to share the unique charm and
-                    appeal of Takanabe with a wider audience.
+                    "We are a group of four former classmates from art
+                    university, each bringing our unique personalities to zines
+                    filled with photography, writing, and original artworks.
+                    It’s been three years since we graduated, and during that
+                    time, each of us has been immersed in our own paths and
+                    creative pursuits. Now, we’re coming together again in
+                    Taipei—the place we once visited on our graduation
+                    trip—hoping to reconnect through zines with fellow lovers of
+                    design and art. Nothing would make us happier."
                   </div>
                 </td>
               </tr>
@@ -147,7 +136,7 @@
                       >
                         <span class="label">國籍 Nationality</span><br /><span
                           id="nationality"
-                          >JAPAN</span
+                          >JP</span
                         >
                       </td>
                       <td
@@ -258,7 +247,6 @@
                             id="application-result"
                             >錄取</span
                           >
-                          >
                         </div>
                       </td>
 
@@ -271,7 +259,6 @@
                             style="font-size: 2rem; color: black"
                             id="registration-status"
                             >尚未完成報名</span
-                          >
                           >
                         </div>
                       </td>
@@ -373,16 +360,45 @@
                               ><small>(含稅)</small>
                               <br />
                               僅基礎方案
+
                               <p
-                                style="color: red; font-size: 12px"
-                                id="billing1-note"
+                                style="color: red; font-size: 0.9rem"
+                                id="billing2-note"
                               >
                                 ！請在付款時務必填入以下資料：<br />
-                                Email: email@gmail.com<br />
-                                備註欄位: 25-BC001<br /><br />
-                                如因填寫其他錯誤資料造成對帳問題，將導致報名失敗。
+                                Email:
+                                <span
+                                  id="billing-email"
+                                  style="font-weight: bold"
+                                  >email@gmail.com</span
+                                ><button
+                                  class="copy-btn"
+                                  onclick="copyToClipboard('billing-email')"
+                                  title="Copy Email"
+                                  style="margin-left: 5px"
+                                >
+                                  📋</button
+                                ><br />
+                                備註欄位:
+
+                                <span
+                                  id="billing-application-number"
+                                  style="font-weight: bold"
+                                  >25-BC001</span
+
+                                ><button
+                                  class="copy-btn"
+                                  onclick="copyToClipboard('billing-application-number')"
+                                  title="Copy Application Number"
+                                  style="margin-left: 5px"
+                                >
+                                  📋</button
+                                ><br /><br />
+                                <b
+                                  >如因填寫其他錯誤資料造成對帳問題，將導致報名失敗。</b
+                                >
                               </p>
-                              <div class="pay-button" id="pay1">付款 Pay</div>
+                              <div class="pay-button" id="pay2">付款 Pay</div>
                             </td>
                             <td
                               style="
@@ -406,13 +422,41 @@
                               ><small>(含稅)</small><br />
                               適合有輪班擺攤需求之攤主
                               <p
-                                style="color: red; font-size: 12px"
+                                style="color: red; font-size: 0.9rem"
                                 id="billing2-note"
                               >
                                 ！請在付款時務必填入以下資料：<br />
-                                Email: email@gmail.com<br />
-                                備註欄位: 25-BC001<br /><br />
-                                如因填寫其他錯誤資料造成對帳問題，將導致報名失敗。
+                                Email:
+
+                                <span
+                                  id="billing-email"
+                                  style="font-weight: bold"
+                                  >email@gmail.com</span
+                                ><button
+                                  class="copy-btn"
+                                  onclick="copyToClipboard('billing-email')"
+                                  title="Copy Email"
+                                  style="margin-left: 5px"
+                                >
+                                  📋</button
+                                ><br />
+                                備註欄位:
+
+                                <span
+                                  id="billing-application-number"
+                                  style="font-weight: bold"
+                                  >25-BC001</span
+                                ><button
+                                  class="copy-btn"
+                                  onclick="copyToClipboard('billing-application-number')"
+                                  title="Copy Application Number"
+                                  style="margin-left: 5px"
+                                >
+                                  📋</button
+                                ><br /><br />
+                                <b
+                                  >如因填寫其他錯誤資料造成對帳問題，將導致報名失敗。</b
+                                >
                               </p>
                               <div class="pay-button" id="pay2">付款 Pay</div>
                             </td>
@@ -433,12 +477,21 @@
                         "
                       >
                         <span class="label">注意事項 Notice</span><br />
-                        <ul style="margin: 0; padding-left: 20px">
+                        <ul
+                          style="
+                            margin: 0;
+                            padding-left: 20px;
+                            font-size: 0.8rem;
+                          "
+                        >
                           <li id="notice1">
                             請自行評估需求繳費，繳款後我們不再提供更改申請選項。
                           </li>
-                          <li id="notice2">付款之後請自行留存發票。</li>
-                          <li id="notice3">
+                          <li id="notice2">
+                            每攤限加購 1 張工作證，如需更多數量請買當日票入場。
+                          </li>
+                          <li id="notice3">付款之後請自行留存發票。</li>
+                          <li id="notice4">
                             我們將於 7 月 15 日對帳後更新報名以及付款狀態。
                           </li>
                         </ul>
