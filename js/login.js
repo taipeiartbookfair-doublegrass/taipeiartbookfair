@@ -2,6 +2,13 @@ document.addEventListener("DOMContentLoaded", function () {
   const apiUrl =
     "https://script.google.com/macros/s/AKfycbwNWgPsLK_ldHUIvoIg5a9k3PNIlmjvJeTgbCZ5CZsvKFQ7e1DoxbMsAawi4nI3Rea4DA/exec";
   const form = document.querySelector(".login-form");
+  const loading = document.getElementById("login-loading");
+
+  if (form && loading) {
+    form.addEventListener("submit", function () {
+      loading.style.display = "block";
+    });
+  }
 
   form.addEventListener("submit", async function (e) {
     e.preventDefault();
