@@ -332,144 +332,157 @@
                           border-right: 1px solid black;
                         "
                       >
-                        <table style="width: 100%">
-                          <tr>
-                            <td
-                              colspan="2"
-                              style="
-                                border-left: none;
-                                background: #000;
-                                color: #fff;
-                                font-size: 0.75rem;
-                                padding: 2px 6px;
-                              "
-                            >
-                              付款方案 Billing Information
-                            </td>
-                          </tr>
-                          <tr>
-                            <td
-                              style="
-                                border-top: 0.5px solid pink;
-                                border-left: none;
-                                border-bottom: 1px dashed black;
-                                background-color: lemonchiffon;
-                              "
-                            >
-                              <strong>方案一：</strong>基礎攤費
-                              <hr
+                        <div id="billing-section">
+                          <table style="width: 100%">
+                            <tr>
+                              <td
+                                colspan="2"
                                 style="
-                                  border-top: 1px dashed black;
-                                  margin: 6px 0;
-                                  border-bottom: none;
+                                  border-left: none;
+                                  background: #000;
+                                  color: #fff;
+                                  font-size: 0.75rem;
+                                  padding: 2px 6px;
                                 "
-                              />
-                              <span style="font-size: 2rem" id="billing1-price"
-                                >8,000 NTD
-                              </span>
-                              <br />
-                              僅基礎方案
-
-                              <p
-                                style="color: red; font-size: 0.8rem"
-                                id="billing1-note"
                               >
-                                ！請在付款時務必填入以下資料：<br />
-                                Email:
-                                <span
-                                  id="billing-email"
-                                  style="font-weight: bold"
-                                  >email@gmail.com</span
-                                ><button
-                                  class="copy-btn"
-                                  onclick="copyToClipboard('billing-email')"
-                                  title="Copy Email"
-                                  style="margin-left: 5px"
-                                >
-                                  📋</button
-                                ><br />
-                                備註欄位:
-
-                                <span
-                                  id="billing-application-number"
-                                  style="font-weight: bold"
-                                  >25-BC001</span
-                                ><button
-                                  class="copy-btn"
-                                  onclick="copyToClipboard('billing-application-number')"
-                                  title="Copy Application Number"
-                                  style="margin-left: 5px"
-                                >
-                                  📋</button
-                                ><br /><br />
-                                <b
-                                  >如因填寫其他錯誤資料造成對帳問題，將導致報名失敗。</b
-                                >
-                              </p>
-                              <div class="pay-button" id="pay2">付款 Pay</div>
-                            </td>
-                            <td
-                              style="
-                                border-top: 0.5px solid pink;
-                                border-left: none;
-                                border-bottom: 1px dashed black;
-                                border-right: none;
-                                background-color: lemonchiffon;
-                              "
-                            >
-                              <strong>方案二：</strong>基礎攤費+工作證一張
-                              <hr
+                                付款方案 Billing Information
+                              </td>
+                            </tr>
+                            <tr>
+                              <td
                                 style="
-                                  border-top: 1px dashed black;
-                                  margin: 6px 0;
-                                  border-bottom: none;
+                                  border-top: 0.5px solid pink;
+                                  border-left: none;
+                                  border-bottom: 1px dashed black;
+                                  background-color: lemonchiffon;
                                 "
-                              />
-                              <span style="font-size: 2rem" id="billing2-price"
-                                >13,000 NTD </span
-                              ><br />
-                              適合有輪班擺攤需求之攤主
-                              <p
-                                style="color: red; font-size: 0.8rem"
-                                id="billing2-note"
                               >
-                                ！請在付款時務必填入以下資料：<br />
-                                Email:
-
-                                <span
-                                  id="billing-email"
-                                  style="font-weight: bold"
-                                  >email@gmail.com</span
-                                ><button
-                                  class="copy-btn"
-                                  onclick="copyToClipboard('billing-email')"
-                                  title="Copy Email"
-                                  style="margin-left: 5px"
+                                <span for-billing1-title
+                                  ><strong>方案一</strong>：基礎攤費</span
                                 >
-                                  📋</button
+                                <hr
+                                  style="
+                                    border-top: 1px dashed black;
+                                    margin: 6px 0;
+                                    border-bottom: none;
+                                  "
+                                />
+                                <span
+                                  style="font-size: 2rem"
+                                  id="billing1-price"
+                                  >8,000 NTD
+                                </span>
+                                <br />
+                                <span for-billing1-desc>僅基礎方案</span>
+
+                                <p
+                                  style="color: red; font-size: 0.8rem"
+                                  id="billing1-note"
+                                >
+                                  ！請在付款時務必填入以下資料：<br />
+                                  Email:
+                                  <span
+                                    id="billing-email"
+                                    style="font-weight: bold"
+                                    >email@gmail.com</span
+                                  ><button
+                                    class="copy-btn"
+                                    onclick="copyToClipboard('billing-email')"
+                                    title="Copy Email"
+                                    style="margin-left: 5px"
+                                  >
+                                    📋</button
+                                  ><br />
+                                  備註欄位:
+
+                                  <span
+                                    id="billing-application-number"
+                                    style="font-weight: bold"
+                                    >25-BC001</span
+                                  ><button
+                                    class="copy-btn"
+                                    onclick="copyToClipboard('billing-application-number')"
+                                    title="Copy Application Number"
+                                    style="margin-left: 5px"
+                                  >
+                                    📋</button
+                                  ><br /><br />
+                                  <b
+                                    >如因填寫其他錯誤資料造成對帳問題，將導致報名失敗。</b
+                                  >
+                                </p>
+                                <div class="pay-button" id="pay2">付款 Pay</div>
+                              </td>
+                              <td
+                                style="
+                                  border-top: 0.5px solid pink;
+                                  border-left: none;
+                                  border-bottom: 1px dashed black;
+                                  border-right: none;
+                                  background-color: lemonchiffon;
+                                "
+                              >
+                                <span for-billing2-title
+                                  ><strong>方案二：</strong
+                                  >基礎攤費+工作證一張</span
+                                >
+                                <hr
+                                  style="
+                                    border-top: 1px dashed black;
+                                    margin: 6px 0;
+                                    border-bottom: none;
+                                  "
+                                />
+                                <span
+                                  style="font-size: 2rem"
+                                  id="billing2-price"
+                                  >13,000 NTD </span
                                 ><br />
-                                備註欄位:
+                                <span for-billing2-desc
+                                  >適合有輪班擺攤需求之攤主</span
+                                >
+                                <p
+                                  style="color: red; font-size: 0.8rem"
+                                  id="billing2-note"
+                                >
+                                  ！請在付款時務必填入以下資料：<br />
+                                  Email:
 
-                                <span
-                                  id="billing-application-number"
-                                  style="font-weight: bold"
-                                  >25-BC001</span
-                                ><button
-                                  class="copy-btn"
-                                  onclick="copyToClipboard('billing-application-number')"
-                                  title="Copy Application Number"
-                                  style="margin-left: 5px"
-                                >
-                                  📋</button
-                                ><br /><br />
-                                <b
-                                  >如因填寫其他錯誤資料造成對帳問題，將導致報名失敗。</b
-                                >
-                              </p>
-                              <div class="pay-button" id="pay2">付款 Pay</div>
-                            </td>
-                          </tr>
-                        </table>
+                                  <span
+                                    id="billing-email"
+                                    style="font-weight: bold"
+                                    >email@gmail.com</span
+                                  ><button
+                                    class="copy-btn"
+                                    onclick="copyToClipboard('billing-email')"
+                                    title="Copy Email"
+                                    style="margin-left: 5px"
+                                  >
+                                    📋</button
+                                  ><br />
+                                  備註欄位:
+
+                                  <span
+                                    id="billing-application-number"
+                                    style="font-weight: bold"
+                                    >25-BC001</span
+                                  ><button
+                                    class="copy-btn"
+                                    onclick="copyToClipboard('billing-application-number')"
+                                    title="Copy Application Number"
+                                    style="margin-left: 5px"
+                                  >
+                                    📋</button
+                                  ><br /><br />
+                                  <b
+                                    >如因填寫其他錯誤資料造成對帳問題，將導致報名失敗。</b
+                                  >
+                                </p>
+                                <div class="pay-button" id="pay2">付款 Pay</div>
+                              </td>
+                            </tr>
+                          </table>
+                        </div>
                       </td>
                     </tr>
 

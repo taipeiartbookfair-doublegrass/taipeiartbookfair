@@ -161,10 +161,6 @@ document.addEventListener("DOMContentLoaded", async function () {
 
   document.getElementById("application-number").textContent =
     apiData["報名編號"] || "";
-  document.getElementById("application-result").textContent =
-    apiData["錄取"] || "";
-  document.getElementById("registration-status").textContent =
-    apiData["報名狀態"] || "";
 
   //document.getElementById("booth-type").textContent = apiData["攤種"] || "";
   // document.getElementById("equipment-table").textContent =
@@ -187,6 +183,8 @@ document.addEventListener("DOMContentLoaded", async function () {
   //   apiData["方案二備註"] ||
   //   "！請在付款時務必填入以下資料：<br />Email: email@gmail.com<br />備註欄位: 25-BC001<br /><br />如因填寫其他錯誤資料造成對帳問題，將導致報名失敗。";
 
+  document.getElementById("application-result").innerHTML =
+    getApplicationResultText(apiData["錄取"]);
   function getApplicationResultText(raw) {
     if (!raw) return "";
     // 條件式錄取
@@ -237,17 +235,49 @@ document.addEventListener("DOMContentLoaded", async function () {
         "repeating-linear-gradient(150deg, olive, olive 4px, darkolivegreen 3px, #6b4ca5 7px)";
     }
   }
-
   const applicationResultEl = document.getElementById("application-result");
   const resultText = getApplicationResultText(apiData["錄取"]);
   applicationResultEl.textContent = resultText;
   setApplicationResultStyle(applicationResultEl, resultText);
 
   const registrationStatusEl = document.getElementById("registration-status");
-  if (apiData["已匯款"]) {
-    registrationStatusEl.textContent = "已完成報名";
+  const rawResult = apiData["錄取"];
+
+  // 依錄取結果決定報名狀態顯示
+  if (
+    rawResult === "3-猶豫" ||
+    rawResult === "5-否" ||
+    rawResult === "否" ||
+    rawResult === "猶豫" ||
+    rawResult === "0-邀請" ||
+    rawResult === "0"
+  ) {
+    registrationStatusEl.textContent = "-";
+  } else if (
+    rawResult === "4-換攤-創作商品" ||
+    rawResult === "4-換攤-食物酒水" ||
+    rawResult === "4-換攤-書攤" ||
+    rawResult === "換攤-創作商品" ||
+    rawResult === "換攤-食物酒水" ||
+    rawResult === "換攤-書攤" ||
+    rawResult === "1-是-1波" ||
+    rawResult === "是" ||
+    rawResult === "1是"
+  ) {
+    if (apiData["已匯款"]) {
+      registrationStatusEl.textContent = "已完成報名";
+    } else {
+      registrationStatusEl.textContent = "未完成報名";
+    }
+  } else if (rawResult === "2-是-2波" || rawResult === "2是") {
+    registrationStatusEl.textContent = "暫不符合";
   } else {
-    registrationStatusEl.textContent = "未完成報名";
+    // 其他情況維持原本邏輯
+    if (apiData["已匯款"]) {
+      registrationStatusEl.textContent = "已完成報名";
+    } else {
+      registrationStatusEl.textContent = "未完成報名";
+    }
   }
 
   function getBoothTypeFromNumber(applicationNumber) {
@@ -436,14 +466,6 @@ document.addEventListener("DOMContentLoaded", async function () {
       } <small>incl. tax</small>`;
     }
 
-    // Email 與報名編號自動填入（兩個 note 都填）
-    document.querySelectorAll("#billing-email").forEach((el) => {
-      el.textContent = apiData["Email"] || "";
-    });
-    document.querySelectorAll("#billing-application-number").forEach((el) => {
-      el.textContent = apiData["報名編號"] || "";
-    });
-
     // 付款按鈕可依 boothType 設定不同連結
     // document.getElementById("pay2").onclick = ...;
   }
@@ -474,4 +496,74 @@ document.addEventListener("DOMContentLoaded", async function () {
   } else {
     equipmentTitleEl.textContent = "基礎設備：";
   }
+
+  function setBillingInfoLanguage(boothType) {
+    const isEnglishBooth =
+      boothType === "One Regular Booth" ||
+      boothType === "Two Regular Booth" ||
+      boothType === "Curation Booth";
+
+    // 方案一
+    document.querySelector("span[for-billing1-title]").innerHTML =
+      isEnglishBooth
+        ? "<strong>Plan 1</strong>: Basic Fee"
+        : "<strong>方案一</strong>：基礎攤費";
+    document.querySelector("span[for-billing1-desc]").innerHTML = isEnglishBooth
+      ? "Basic plan only"
+      : "僅基礎方案";
+    document.getElementById("billing1-note").innerHTML = isEnglishBooth
+      ? `! Please enter the following information when making payment:<br />
+          Email:
+          <span id="billing-email" style="font-weight: bold">email@gmail.com</span>
+          <button class="copy-btn" onclick="copyToClipboard('billing-email')" title="Copy Email" style="margin-left: 5px">📋</button><br />
+          Reference:
+          <span id="billing-application-number" style="font-weight: bold">25-BC001</span>
+          <button class="copy-btn" onclick="copyToClipboard('billing-application-number')" title="Copy Application Number" style="margin-left: 5px">📋</button><br /><br />
+          <b>If you enter incorrect information, your registration may fail.</b>`
+      : `！請在付款時務必填入以下資料：<br />
+          Email:
+          <span id="billing-email" style="font-weight: bold">email@gmail.com</span>
+          <button class="copy-btn" onclick="copyToClipboard('billing-email')" title="Copy Email" style="margin-left: 5px">📋</button><br />
+          備註欄位:
+          <span id="billing-application-number" style="font-weight: bold">25-BC001</span>
+          <button class="copy-btn" onclick="copyToClipboard('billing-application-number')" title="Copy Application Number" style="margin-left: 5px">📋</button><br /><br />
+          <b>如因填寫其他錯誤資料造成對帳問題，將導致報名失敗。</b>`;
+
+    // 方案二
+    document.querySelector("span[for-billing2-title]").innerHTML =
+      isEnglishBooth
+        ? "<strong>Plan 2</strong>: Basic Fee + Extra Pass"
+        : "<strong>方案二</strong>：基礎攤費+工作證一張";
+    document.querySelector("span[for-billing2-desc]").innerHTML = isEnglishBooth
+      ? "For those who shift-swaps"
+      : "適合有輪班擺攤需求之攤主";
+    document.getElementById("billing2-note").innerHTML = isEnglishBooth
+      ? `! Please enter the following information when making payment:<br />
+          Email:
+          <span id="billing-email" style="font-weight: bold">email@gmail.com</span>
+          <button class="copy-btn" onclick="copyToClipboard('billing-email')" title="Copy Email" style="margin-left: 5px">📋</button><br />
+          Reference:
+          <span id="billing-application-number" style="font-weight: bold">25-BC001</span>
+          <button class="copy-btn" onclick="copyToClipboard('billing-application-number')" title="Copy Application Number" style="margin-left: 5px">📋</button><br /><br />
+          <b>If you enter incorrect information, your registration may fail.</b>`
+      : `！請在付款時務必填入以下資料：<br />
+          Email:
+          <span id="billing-email" style="font-weight: bold">email@gmail.com</span>
+          <button class="copy-btn" onclick="copyToClipboard('billing-email')" title="Copy Email" style="margin-left: 5px">📋</button><br />
+          備註欄位:
+          <span id="billing-application-number" style="font-weight: bold">25-BC001</span>
+          <button class="copy-btn" onclick="copyToClipboard('billing-application-number')" title="Copy Application Number" style="margin-left: 5px">📋</button><br /><br />
+          <b>如因填寫其他錯誤資料造成對帳問題，將導致報名失敗。</b>`;
+  }
+
+  // 呼叫時機：boothType 設定好後
+  setBillingInfoLanguage(boothType);
+
+  // Always fill in email and application number after updating notes
+  document.querySelectorAll("#billing-email").forEach((el) => {
+    el.textContent = apiData["Email"] || "";
+  });
+  document.querySelectorAll("#billing-application-number").forEach((el) => {
+    el.textContent = apiData["報名編號"] || "";
+  });
 });

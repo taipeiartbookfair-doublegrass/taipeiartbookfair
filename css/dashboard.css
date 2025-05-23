@@ -285,3 +285,10 @@ html::-webkit-scrollbar-thumb:hover {
   line-height: 2.2rem !important;
   letter-spacing: 0.05em;
 }
+#brand-name {
+  display: block;
+  font-size: 3rem;
+  line-height: 1.1;
+  margin-top: 0.5rem;
+  margin-bottom: 0.5rem;
+}
