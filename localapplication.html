@@ -411,7 +411,6 @@
         <div
           class="column layout-form-column-grid-1 question-ProductLinks"
           id="productLink-l"
-          style="display: none"
         >
           <span class="from-description-header-ness">必填問題</span><br />
           <textarea
@@ -420,6 +419,7 @@
             placeholder="商品品項。例：五金雕塑、鑰匙圈、飲品⋯⋯"
             maxlength="1000"
             style="width: 100%"
+            required
           ></textarea>
         </div>
         <!-- work link -->
@@ -453,7 +453,6 @@
               name="entry.715764736"
               id="uploadedFileUrl"
               value="some-unique-id-or-timestamp"
-              required
             />
             <input type="hidden" name="category" value="artwork" />
           </div>
@@ -848,11 +847,20 @@
             document.getElementById("uploadArtwork-l").style.display = "none";
             document.getElementById("proposalLink").style.display = "none";
             document.getElementById("proposalLink-l").style.display = "none";
+            document.getElementById("productLink").style.display = "none";
+
+            document.getElementById("productLink-l").style.display = "none";
 
             // 根據選擇顯示
-            if (this.value === "書攤") {
+            if (
+              this.value === "書攤" ||
+              this.value === "創作商品" ||
+              this.value === "食物酒水"
+            ) {
               document.getElementById("uploadArtwork").style.display = "";
               document.getElementById("uploadArtwork-l").style.display = "";
+              document.getElementById("productLink-l").style.display = "";
+              document.getElementById("productLink").style.display = "";
             } else if (this.value === "裝置類") {
               document.getElementById("proposalLink").style.display = "";
               document.getElementById("proposalLink-l").style.display = "";
