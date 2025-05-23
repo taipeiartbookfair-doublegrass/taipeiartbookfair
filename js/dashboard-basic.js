@@ -277,6 +277,180 @@ document.addEventListener("DOMContentLoaded", async function () {
     }
   }
 
+  function updateBoothInfo(boothType) {
+    // 設定預設值
+    let price = "";
+    let equipment = [];
+    let payLink = "#";
+    let payText = "付款 Pay";
+    let note = "";
+
+    switch (boothType) {
+      case "書攤":
+        price = "5,000 元 <small>(含稅)</small>";
+        equipment = [
+          "– 桌面<small>(120×60cm)</small> ×1",
+          "– 椅子 ×2",
+          "– 工作證 ×2",
+          "– 草率簿 ×1<small> (含露出一面)</small>",
+        ];
+        payLink = "https://pay.taipeiartbookfair.com/book";
+        break;
+      case "創作商品攤":
+        price = "8,000 元 <small>(含稅)</small>";
+        equipment = [
+          "– 桌面<small>(120×60cm)</small> ×1",
+          "– 椅子 ×2",
+          "– 工作證 ×2",
+          "– 草率簿 ×1<small> (含露出一面)</small>",
+        ];
+
+        payLink = "https://pay.taipeiartbookfair.com/market";
+        break;
+      case "裝置攤":
+        price = "10,000 元 <small>(含稅)</small>";
+        equipment = [
+          "– 1.5M × 1.5M 空地",
+          "– 工作證 ×2",
+          "– 草率簿 ×1<small> (含露出一面)</small>",
+        ];
+
+        payLink = "https://pay.taipeiartbookfair.com/install";
+        break;
+      case "食物酒水攤":
+        price = "13,000 元 <small>(含稅)</small>";
+        equipment = [
+          "– 桌面<small>(180×60cm)</small> ×1",
+          "– 椅子 ×2",
+          "– 工作證 ×2",
+          "– 草率簿 ×1<small> (含露出一面)</small>",
+        ];
+
+        payLink = "https://pay.taipeiartbookfair.com/food";
+        break;
+      case "One Regular Booth":
+        price = "USD$165 <small>incl. tax</small>";
+        equipment = [
+          "– Table<small>(180×60cm)</small> ×1",
+          "– Chairs ×2",
+          "– Passes ×2",
+          "– TPABF Catalog ×1 <small>(one page featured)</small>",
+        ];
+        note = "";
+        payLink = "https://pay.taipeiartbookfair.com/one";
+        break;
+      case "Two Regular Booth":
+        price = "USD$330 <small>incl. tax</small>";
+        equipment = [
+          "– Table<small>(180×60cm)</small> ×2",
+          "– Chairs ×4",
+          "– Passes ×4",
+          "– TPABF Catalog ×1 <small>(one page featured)</small>",
+        ];
+        note = "";
+        payLink = "https://pay.taipeiartbookfair.com/two";
+        break;
+      case "Curation Booth":
+        price = "USD$780 <small>incl. tax</small>";
+        equipment = [
+          "– 3M × 3M space",
+          "– Table<small>(180×60cm)</small> ×2",
+          "– Chairs ×4",
+          "– Passes ×3",
+          "– TPABF Catalog ×1 <small>(one page featured)</small>",
+        ];
+
+        payLink = "https://pay.taipeiartbookfair.com/curation";
+        break;
+      default:
+        price = "";
+        equipment = [];
+
+        payLink = "#";
+    }
+
+    // 更新價錢
+    document.getElementById("billing1-price").innerHTML = price;
+    // 更新設備
+    const eqList = [
+      "equipment-table",
+      "equipment-chair",
+      "equipment-badge",
+      "equipment-book",
+    ];
+    eqList.forEach((id, idx) => {
+      const el = document.getElementById(id);
+      if (el) el.innerHTML = equipment[idx] || "";
+    });
+    // 更新付款按鈕
+    const payBtns = document.querySelectorAll(".pay-button");
+    payBtns.forEach((btn) => {
+      btn.onclick = () => window.open(payLink, "_blank");
+      btn.textContent = payText;
+    });
+
+    // 方案一價錢
+    let price1 = "";
+    switch (boothType) {
+      case "書攤":
+        price1 = "5,000";
+        break;
+      case "創作商品攤":
+        price1 = "8,000";
+        break;
+      case "裝置攤":
+        price1 = "10,000";
+        break;
+      case "食物酒水攤":
+        price1 = "13,000";
+        break;
+      default:
+        price1 = "";
+    }
+
+    // 方案一價錢顯示
+    if (price1) {
+      // 中文攤種（台幣）
+      document.getElementById("billing1-price").innerHTML = price1 + " NTD";
+      // 方案二自動加 1,000 元
+      const price2 = (
+        parseInt(price1.replace(/,/g, "")) + 1000
+      ).toLocaleString();
+      document.getElementById("billing2-price").innerHTML =
+        price2 + " NTD <small>(含稅)</small>";
+    } else if (
+      boothType === "One Regular Booth" ||
+      boothType === "Two Regular Booth" ||
+      boothType === "Curation Booth"
+    ) {
+      // 英文 booth（USD）
+      let usd1 = 0;
+      if (boothType === "One Regular Booth") usd1 = 165;
+      if (boothType === "Two Regular Booth") usd1 = 330;
+      if (boothType === "Curation Booth") usd1 = 780;
+      document.getElementById(
+        "billing1-price"
+      ).innerHTML = `USD$${usd1} <small>incl. tax</small>`;
+      document.getElementById("billing2-price").innerHTML = `USD$${
+        usd1 + 30
+      } <small>incl. tax</small>`;
+    }
+
+    // Email 與報名編號自動填入（兩個 note 都填）
+    document.querySelectorAll("#billing-email").forEach((el) => {
+      el.textContent = apiData["Email"] || "";
+    });
+    document.querySelectorAll("#billing-application-number").forEach((el) => {
+      el.textContent = apiData["報名編號"] || "";
+    });
+
+    // 付款按鈕可依 boothType 設定不同連結
+    // document.getElementById("pay2").onclick = ...;
+  }
+
+  // 在 boothType 設定後呼叫
+  updateBoothInfo(boothType);
+
   // 資料抓完，直接跳到 100%
   stopFakeProgress();
   if (window.updateLoadingProgress) updateLoadingProgress(1);
@@ -285,4 +459,19 @@ document.addEventListener("DOMContentLoaded", async function () {
   setTimeout(function () {
     if (window.hideLoadingMask) hideLoadingMask();
   }, 500);
+
+  document.getElementById("billing-email").textContent = apiData["Email"] || "";
+  document.getElementById("billing-application-number").textContent =
+    apiData["報名編號"] || "";
+
+  const equipmentTitleEl = document.getElementById("equipment-title");
+  if (
+    boothType === "One Regular Booth" ||
+    boothType === "Two Regular Booth" ||
+    boothType === "Curation Booth"
+  ) {
+    equipmentTitleEl.textContent = "Equipments:";
+  } else {
+    equipmentTitleEl.textContent = "基礎設備：";
+  }
 });
