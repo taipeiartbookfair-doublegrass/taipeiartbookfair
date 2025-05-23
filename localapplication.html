@@ -420,6 +420,7 @@
             placeholder="商品品項。例：五金雕塑、鑰匙圈、飲品⋯⋯"
             maxlength="1000"
             style="width: 100%"
+            required
           ></textarea>
         </div>
         <!-- work link -->
@@ -838,6 +839,29 @@
     </form>
 
     <script src="js/upload.js"></script>
+    <script>
+      document
+        .querySelectorAll('input[name="entry.133172086"]')
+        .forEach(function (radio) {
+          radio.addEventListener("change", function () {
+            // 先全部隱藏
+            document.getElementById("uploadArtwork").style.display = "none";
+            document.getElementById("uploadArtwork-l").style.display = "none";
+            document.getElementById("proposalLink").style.display = "none";
+            document.getElementById("proposalLink-l").style.display = "none";
+
+            // 根據選擇顯示
+            if (this.value === "書攤") {
+              document.getElementById("uploadArtwork").style.display = "";
+              document.getElementById("uploadArtwork-l").style.display = "";
+            } else if (this.value === "裝置類") {
+              document.getElementById("proposalLink").style.display = "";
+              document.getElementById("proposalLink-l").style.display = "";
+            }
+            // 你可以根據其他攤種加上對應顯示邏輯
+          });
+        });
+    </script>
     <script src="js/identity2.js"></script>
     <!-- <script src="js/jump.js"></script> -->
     <script src="js/yes.js"></script>
