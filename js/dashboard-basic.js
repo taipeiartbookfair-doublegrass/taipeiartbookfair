@@ -16,7 +16,7 @@ document.addEventListener("DOMContentLoaded", async function () {
   // 自動進度動畫
   function startFakeProgress() {
     progressTimer = setInterval(() => {
-      // 最多跑到 90%
+      // 最多跑到 82%
       if (fakeProgress < 0.82) {
         fakeProgress += 0.006;
         if (window.updateLoadingProgress) updateLoadingProgress(fakeProgress);
@@ -113,22 +113,51 @@ document.addEventListener("DOMContentLoaded", async function () {
   document.getElementById("category").textContent = apiData["作品類別"] || "";
   document.getElementById("nationality").textContent = region || "";
 
-  document.getElementById("visa-requirement").textContent =
-    apiData["簽證需求"] || "";
+  // 國籍判斷與簽證需求顯示
+  const nat = document.getElementById("nationality");
+  const visa = document.getElementById("visa-requirement");
+  if (nat && visa) {
+    const value = nat.textContent.trim().toUpperCase();
+    if (value === "TW") {
+      visa.innerHTML = "Not Require";
+    } else if (value === "CN") {
+      visa.innerHTML = `<a href="download/requirement-form-cn.pdf" target="_blank" style="text-decoration:underline;">請下載簽證申請文件包</a>`;
+    } else {
+      visa.innerHTML = `
+        <a href="https://visawebapp.boca.gov.tw/BOCA_EVISA/MRV01FORM.do" target="_blank" style="text-decoration:underline;">
+          Apply for Taiwan eVisa
+        </a>
+        <br>
+        <a href="download/visa-info.pdf" target="_blank" style="text-decoration:underline;">
+          Download visa information
+        </a>
+      `;
+    }
+  }
 
   document.getElementById("contact-person").textContent =
     apiData["代表人"] || "";
   document.getElementById("contact-email").textContent = apiData["Email"] || "";
   document.getElementById("contact-phone").textContent =
-    apiData["聯絡電話"] || "";
+    apiData["聯絡電話"] || apiData["WhatsApp"] || "";
 
-  document.getElementById("website").textContent = apiData["Website"] || "None";
-  document.getElementById("instagram").textContent =
-    apiData["Instagram"] || "None";
-  document.getElementById("facebook").textContent =
-    apiData["Facebook"] || "None";
-  document.getElementById("whatsapp").textContent =
-    apiData["WhatsApp"] || "None";
+  function setSocialText(id, value) {
+    const el = document.getElementById(id);
+    if (!value || value === "None") {
+      el.textContent = "None";
+      el.style.color = "lightgrey";
+      el.style.fontStyle = "italic";
+    } else {
+      el.textContent = value;
+      el.style.color = "";
+      el.style.fontStyle = "";
+    }
+  }
+
+  setSocialText("website", apiData["Website"]);
+  setSocialText("instagram", apiData["Instagram"]);
+  setSocialText("facebook", apiData["Facebook"]);
+  setSocialText("whatsapp", apiData["WhatsApp"]);
 
   document.getElementById("application-number").textContent =
     apiData["報名編號"] || "";
@@ -157,6 +186,69 @@ document.addEventListener("DOMContentLoaded", async function () {
   // document.getElementById("billing2-note").innerHTML =
   //   apiData["方案二備註"] ||
   //   "！請在付款時務必填入以下資料：<br />Email: email@gmail.com<br />備註欄位: 25-BC001<br /><br />如因填寫其他錯誤資料造成對帳問題，將導致報名失敗。";
+
+  function getApplicationResultText(raw) {
+    if (!raw) return "";
+    // 條件式錄取
+    if (
+      raw === "4-換攤-創作商品" ||
+      raw === "4-換攤-食物酒水" ||
+      raw === "4-換攤-書攤" ||
+      raw === "換攤-創作商品" ||
+      raw === "換攤-食物酒水" ||
+      raw === "換攤-書攤"
+    ) {
+      return "條件式錄取";
+    }
+    // 錄取
+    if (raw === "1-是-1波" || raw === "是" || raw === "1是") {
+      return "錄取";
+    }
+    // 備取
+    if (raw === "2-是-2波" || raw === "2是") {
+      return "備取";
+    }
+    // 邀請
+    if (raw === "0-邀請" || raw === "0") {
+      return "邀請";
+    }
+    // 未錄取
+    if (raw === "3-猶豫" || raw === "5-否" || raw === "否" || raw === "猶豫") {
+      return "未錄取";
+    }
+    return raw; // fallback: 顯示原始內容
+  }
+
+  function setApplicationResultStyle(el, resultText) {
+    el.style.backgroundColor = "";
+    el.style.color = "";
+    if (resultText === "錄取" || resultText === "條件式錄取") {
+      el.style.backgroundColor = "lime";
+      el.style.color = "";
+    } else if (resultText === "備取") {
+      el.style.backgroundColor = "lightgreen";
+      el.style.color = "";
+    } else if (resultText === "未錄取") {
+      el.style.backgroundColor = "lightgrey";
+      el.style.color = "DarkSlateGrey";
+    } else if (resultText === "邀請") {
+      el.style.color = "palegreen";
+      el.style.background =
+        "repeating-linear-gradient(150deg, olive, olive 4px, darkolivegreen 3px, #6b4ca5 7px)";
+    }
+  }
+
+  const applicationResultEl = document.getElementById("application-result");
+  const resultText = getApplicationResultText(apiData["錄取"]);
+  applicationResultEl.textContent = resultText;
+  setApplicationResultStyle(applicationResultEl, resultText);
+
+  const registrationStatusEl = document.getElementById("registration-status");
+  if (apiData["已匯款"]) {
+    registrationStatusEl.textContent = "已完成報名";
+  } else {
+    registrationStatusEl.textContent = "未完成報名";
+  }
 
   // 資料抓完，直接跳到 100%
   stopFakeProgress();

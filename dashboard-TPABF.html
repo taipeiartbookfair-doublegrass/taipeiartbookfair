@@ -163,7 +163,13 @@
                 <!-- 左欄：代表人，一格佔 5 行 -->
                 <td rowspan="2">
                   <span class="label">代表人 Contact Person</span><br />
-                  <div style="vertical-align: middle; font-size: 3rem">
+                  <div
+                    style="
+                      vertical-align: middle;
+                      font-size: 3rem;
+                      line-height: 2rem;
+                    "
+                  >
                     <span style="font-size: 2rem" id="contact-person"
                       >黃偉倫</span
                     >
@@ -201,11 +207,11 @@
               <tr>
                 <td>
                   <span class="label">Facebook</span><br />
-                  <i style="color: lightgray" id="facebook">None</i>
+                  <span id="facebook">None</span>
                 </td>
                 <td>
                   <span class="label">Whatsapp</span><br />
-                  <i style="color: lightgray" id="whatsapp">None</i>
+                  <span id="whatsapp">None</span>
                 </td>
               </tr>
             </table>
@@ -240,10 +246,9 @@
                           <span
                             style="
                               font-size: 2rem;
-                              color: black;
+                              line-height: 1rem;
                               font-weight: bold;
                               padding: 0px 10px 0px 10px;
-                              background-color: lime;
                             "
                             id="application-result"
                             >錄取</span
@@ -257,7 +262,11 @@
                         ><br />
                         <div style="vertical-align: middle; font-size: 2.7rem">
                           <span
-                            style="font-size: 2rem; color: black"
+                            style="
+                              font-size: 2rem;
+                              color: black;
+                              line-height: 1.5rem;
+                            "
                             id="registration-status"
                             >尚未完成報名</span
                           >
@@ -283,9 +292,9 @@
                         "
                       >
                         <span class="label">攤種 Booth Type</span><br /><span
-                          style="font-size: 2rem"
+                          style="font-size: 2rem; line-height: 1.5rem"
                           id="booth-type"
-                          >創作商品攤</span
+                          >One Regular Booth</span
                         >
                         <hr
                           style="
@@ -542,7 +551,6 @@
         </td>
       </tr>
     </table>
-    <script src="js/nationality.js"></script>
     <script src="js/dashboard-body.js"></script>
   </body>
 </html>
