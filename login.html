@@ -47,7 +47,7 @@
         flex-direction: column;
         align-items: center;
         justify-content: center;
-        height: 60vh;
+        height: 70vh;
         padding: 0 10px;
       }
 
@@ -201,6 +201,16 @@
         color: palegreen;
         background-color: olive;
       }
+      #login-loading {
+        display: none;
+        width: 100%;
+        max-width: 380px;
+        text-align: left;
+        color: ghostwhite;
+        margin-top: 8px;
+        font-size: 0.8rem;
+        text-shadow: 1.5px 1px 0 blue, -0.5px -0.5px 0 blueviolet;
+      }
     </style>
   </head>
   <body>
@@ -231,9 +241,34 @@
           <button type="submit">登入 Log In</button>
         </div>
       </form>
+      <div id="login-loading" style="cursor: pointer; position: relative">
+        資料讀取中 / Loading data...
+        <img
+          id="fetch-sticker"
+          src="image/meangirls-fetching.png"
+          alt="fetching"
+          style="
+            display: none;
+            position: absolute;
+            left: 0;
+            top: 1.8em;
+            width: 70px;
+            z-index: 10;
+            margin-top: 0;
+          "
+        />
+      </div>
     </div>
     <a href="index-logingtryout.html"><div class="back">回主頁 Back</div></a>
     <script src="js/cookie.js"></script>
     <script src="js/login.js"></script>
+    <script>
+      const loadingDiv = document.getElementById("login-loading");
+      const sticker = document.getElementById("fetch-sticker");
+
+      loadingDiv.addEventListener("click", function (e) {
+        sticker.style.display = "block";
+      });
+    </script>
   </body>
 </html>
