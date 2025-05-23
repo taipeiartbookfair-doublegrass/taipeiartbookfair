@@ -280,3 +280,8 @@ html::-webkit-scrollbar-thumb:hover {
   z-index: 10000;
   pointer-events: none;
 }
+.booth-type-en {
+  font-size: 2rem !important;
+  line-height: 2.2rem !important;
+  letter-spacing: 0.05em;
+}

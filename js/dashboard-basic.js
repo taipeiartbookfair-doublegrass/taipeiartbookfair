@@ -250,6 +250,33 @@ document.addEventListener("DOMContentLoaded", async function () {
     registrationStatusEl.textContent = "未完成報名";
   }
 
+  function getBoothTypeFromNumber(applicationNumber) {
+    if (applicationNumber.includes("LB")) return "書攤";
+    if (applicationNumber.includes("LM")) return "創作商品攤";
+    if (applicationNumber.includes("LI")) return "裝置攤";
+    if (applicationNumber.includes("LF")) return "食物酒水攤";
+    if (applicationNumber.includes("IO")) return "One Regular Booth";
+    if (applicationNumber.includes("IT")) return "Two Regular Booth";
+    if (applicationNumber.includes("IC")) return "Curation Booth";
+    return "";
+  }
+
+  // 報名編號填好後再執行這段
+  const applicationNumber = document
+    .getElementById("application-number")
+    .textContent.trim();
+  const boothType = getBoothTypeFromNumber(applicationNumber);
+  const boothTypeEl = document.getElementById("booth-type");
+  if (boothType) {
+    boothTypeEl.textContent = boothType;
+    // 判斷是否為全英文（含空白）
+    if (/^[A-Za-z\s]+$/.test(boothType)) {
+      boothTypeEl.classList.add("booth-type-en");
+    } else {
+      boothTypeEl.classList.remove("booth-type-en");
+    }
+  }
+
   // 資料抓完，直接跳到 100%
   stopFakeProgress();
   if (window.updateLoadingProgress) updateLoadingProgress(1);
