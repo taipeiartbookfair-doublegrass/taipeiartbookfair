@@ -241,6 +241,11 @@ document.addEventListener("DOMContentLoaded", async function () {
   setApplicationResultStyle(applicationResultEl, resultText);
 
   const registrationStatusEl = document.getElementById("registration-status");
+  const equipmentinfo = document.getElementById("equipmentinfo");
+  const letter = document.getElementById("negative-letter");
+  const conditionalyes = document.getElementById("booth-type-tooltip");
+  const mediaupload = document.getElementById("media-section");
+
   const rawResult = apiData["錄取"];
 
   // 依錄取結果決定報名狀態顯示
@@ -253,13 +258,9 @@ document.addEventListener("DOMContentLoaded", async function () {
     rawResult === "0"
   ) {
     registrationStatusEl.textContent = "-";
+    equipmentinfo.style.display = "none"; // 隱藏設備資訊
+    letter.style.display = "block";
   } else if (
-    rawResult === "4-換攤-創作商品" ||
-    rawResult === "4-換攤-食物酒水" ||
-    rawResult === "4-換攤-書攤" ||
-    rawResult === "換攤-創作商品" ||
-    rawResult === "換攤-食物酒水" ||
-    rawResult === "換攤-書攤" ||
     rawResult === "1-是-1波" ||
     rawResult === "是" ||
     rawResult === "1是"
@@ -269,12 +270,31 @@ document.addEventListener("DOMContentLoaded", async function () {
     } else {
       registrationStatusEl.textContent = "未完成報名";
     }
+  } else if (
+    rawResult === "4-換攤-創作商品" ||
+    rawResult === "4-換攤-食物酒水" ||
+    rawResult === "4-換攤-書攤" ||
+    rawResult === "換攤-創作商品" ||
+    rawResult === "換攤-食物酒水" ||
+    rawResult === "換攤-書攤"
+  ) {
+    conditionalyes.style.display = "inline-block";
+    if (apiData["已匯款"]) {
+      registrationStatusEl.textContent = "已完成報名";
+      equipmentinfo.style.display = "none"; // 隱藏設備資訊
+
+      mediaupload.style.display = "block"; // 隱藏媒體上傳
+    } else {
+      registrationStatusEl.textContent = "未完成報名";
+    }
   } else if (rawResult === "2-是-2波" || rawResult === "2是") {
     registrationStatusEl.textContent = "暫不符合";
   } else {
     // 其他情況維持原本邏輯
     if (apiData["已匯款"]) {
       registrationStatusEl.textContent = "已完成報名";
+      equipmentinfo.style.display = "none"; // 隱藏設備資訊
+      mediaupload.style.display = "block"; // 隱藏媒體上傳
     } else {
       registrationStatusEl.textContent = "未完成報名";
     }
@@ -441,13 +461,14 @@ document.addEventListener("DOMContentLoaded", async function () {
     // 方案一價錢顯示
     if (price1) {
       // 中文攤種（台幣）
-      document.getElementById("billing1-price").innerHTML = price1 + " NTD";
+      document.getElementById("billing1-price").innerHTML =
+        price1 + "元 <small>(含稅)</small>";
       // 方案二自動加 1,000 元
       const price2 = (
         parseInt(price1.replace(/,/g, "")) + 1000
       ).toLocaleString();
       document.getElementById("billing2-price").innerHTML =
-        price2 + " NTD <small>(含稅)</small>";
+        price2 + "元 <small>(含稅)</small>";
     } else if (
       boothType === "One Regular Booth" ||
       boothType === "Two Regular Booth" ||
