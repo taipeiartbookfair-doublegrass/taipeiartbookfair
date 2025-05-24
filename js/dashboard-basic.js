@@ -199,19 +199,23 @@ document.addEventListener("DOMContentLoaded", async function () {
       return "條件式錄取";
     }
     // 錄取
-    if (raw === "1-是-1波" || raw === "是" || raw === "1是") {
+    if (
+      raw === "1-是-1波" ||
+      raw === "是" ||
+      raw === "1是" ||
+      raw === "2-是-2波" ||
+      raw === "2是" ||
+      raw === "0-邀請" ||
+      raw === "0"
+    ) {
       return "錄取";
     }
     // 備取
-    if (raw === "2-是-2波" || raw === "2是") {
+    if (raw === "3-猶豫" || raw === "猶豫") {
       return "備取";
     }
-    // 邀請
-    if (raw === "0-邀請" || raw === "0") {
-      return "邀請";
-    }
     // 未錄取
-    if (raw === "3-猶豫" || raw === "5-否" || raw === "否" || raw === "猶豫") {
+    if (raw === "5-否" || raw === "否") {
       return "未錄取";
     }
     return raw; // fallback: 顯示原始內容
@@ -229,10 +233,6 @@ document.addEventListener("DOMContentLoaded", async function () {
     } else if (resultText === "未錄取") {
       el.style.backgroundColor = "lightgrey";
       el.style.color = "DarkSlateGrey";
-    } else if (resultText === "邀請") {
-      el.style.color = "palegreen";
-      el.style.background =
-        "repeating-linear-gradient(150deg, olive, olive 4px, darkolivegreen 3px, #6b4ca5 7px)";
     }
   }
   const applicationResultEl = document.getElementById("application-result");
@@ -249,27 +249,29 @@ document.addEventListener("DOMContentLoaded", async function () {
   const rawResult = apiData["錄取"];
 
   // 依錄取結果決定報名狀態顯示
-  if (
-    rawResult === "3-猶豫" ||
-    rawResult === "5-否" ||
-    rawResult === "否" ||
-    rawResult === "猶豫" ||
-    rawResult === "0-邀請" ||
-    rawResult === "0"
-  ) {
+  if (rawResult === "5-否" || rawResult === "否") {
     registrationStatusEl.textContent = "-";
     equipmentinfo.style.display = "none"; // 隱藏設備資訊
     letter.style.display = "block";
   } else if (
     rawResult === "1-是-1波" ||
     rawResult === "是" ||
-    rawResult === "1是"
+    rawResult === "1是" ||
+    rawResult === "2-是-2波" ||
+    rawResult === "2是" ||
+    rawResult === "0-邀請"
   ) {
     if (apiData["已匯款"]) {
       registrationStatusEl.textContent = "已完成報名";
+      equipmentinfo.style.display = "none"; // 隱藏設備資訊
+      mediaupload.style.display = "block"; // 隱藏媒體上傳
     } else {
       registrationStatusEl.textContent = "未完成報名";
     }
+  } else if (rawResult === "0") {
+    registrationStatusEl.textContent = "-";
+    equipmentinfo.style.display = "none"; // 隱藏設備資訊
+    mediaupload.style.display = "nonw"; // 隱藏媒體上傳
   } else if (
     rawResult === "4-換攤-創作商品" ||
     rawResult === "4-換攤-食物酒水" ||
@@ -286,7 +288,11 @@ document.addEventListener("DOMContentLoaded", async function () {
     } else {
       registrationStatusEl.textContent = "未完成報名";
     }
-  } else if (rawResult === "2-是-2波" || rawResult === "2是") {
+  } else if (
+    rawResult === "3-猶豫" ||
+    rawResult === "猶豫" ||
+    rawResult === "3-猶豫"
+  ) {
     registrationStatusEl.textContent = "暫不符合";
   } else {
     // 其他情況維持原本邏輯
