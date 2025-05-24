@@ -282,7 +282,6 @@ document.addEventListener("DOMContentLoaded", async function () {
     if (apiData["已匯款"]) {
       registrationStatusEl.textContent = "已完成報名";
       equipmentinfo.style.display = "none"; // 隱藏設備資訊
-
       mediaupload.style.display = "block"; // 隱藏媒體上傳
     } else {
       registrationStatusEl.textContent = "未完成報名";
