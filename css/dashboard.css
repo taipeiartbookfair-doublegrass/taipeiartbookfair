@@ -292,3 +292,42 @@ html::-webkit-scrollbar-thumb:hover {
   margin-top: 0.5rem;
   margin-bottom: 0.5rem;
 }
+.booth-change {
+  font-family: "Inclusive Sans", sans-serif;
+  width: 1.5em;
+  height: 1.5em;
+  line-height: 1.5em;
+  border-radius: 50%;
+  background: lime;
+  color: #222;
+  text-align: center;
+  font-size: 1em;
+  margin-left: 0.3em;
+  vertical-align: middle;
+  position: relative;
+  cursor: pointer;
+}
+.tooltip-text {
+  visibility: hidden;
+  width: max-content;
+  max-width: 200px;
+  background: lime;
+  color: black;
+  text-align: left;
+  border-radius: 6px;
+  padding: 6px 10px;
+  position: absolute;
+  z-index: 10;
+  left: 110%;
+  top: 50%;
+  transform: translateY(-50%);
+  opacity: 0;
+  transition: opacity 0.2s;
+  font-size: 0.9em;
+  white-space: pre-line;
+}
+
+.booth-change:hover .tooltip-text {
+  visibility: visible;
+  opacity: 1;
+}
