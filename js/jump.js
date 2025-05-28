@@ -11,7 +11,7 @@ document.addEventListener("DOMContentLoaded", function () {
       // 延遲 1.5秒，給 Google Form 時間收資料
       setTimeout(function () {
         window.location.href = "application-received.html";
-      }, 1500);
+      }, 3000);
     });
   }
 });
