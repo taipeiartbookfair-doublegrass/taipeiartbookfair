@@ -84,7 +84,7 @@ form.addEventListener("submit", async function (e) {
     form.submit();
     setTimeout(() => {
       window.location.href = "../application-received.html";
-    }, 1500);
+    }, 3000);
   } else {
     submitButton.disabled = false;
     submitButton.innerText = "Submit";
