@@ -55,9 +55,17 @@
             攤商管理<br />Dashboard
           </p>
           <hr class="sidebar-hr" />
-          <p>聯絡我們<br />Contact</p>
+          <a
+            href="dashboard-contact.html"
+            style="text-decoration: none; color: black"
+            ><p>聯絡我們<br />Contact</p></a
+          >
           <hr class="sidebar-hr" />
-          <p>常見問題<br />FAQ</p>
+          <a
+            href="dashboard-FAQ.html"
+            style="text-decoration: none; color: black"
+            ><p>常見問題<br />FAQ</p></a
+          >
           <hr class="sidebar-hr" />
           <div class="sidebar-middle">
             <p class="rotated-link">
@@ -117,7 +125,11 @@
                     "
                     onmouseover="this.style.color='darkolivegreen'"
                     onmouseout="this.style.color='black'"
-                    onclick="location.href='edit.html'"
+                    onclick="                    
+                    document.querySelector('.edit-page').style.display = 'table-cell';
+                    document.querySelector('.mid').style.display = 'none';
+                    document.querySelector('.right').style.display = 'none';
+                    document.querySelector('.account').style.display = 'none';document.getElementById('bio-edit').value = document.getElementById('bio').innerText.trim();"
                     title="編輯"
                     >&#9998;</span
                   >
@@ -496,7 +508,7 @@
                           </li>
                           <li id="notice3">付款之後請自行留存發票。</li>
                           <li id="notice4">
-                            我們將於 7 月 15 日對帳後更新報名以及付款狀態。
+                            報名以及付款狀態將於 7 月 15 日對帳後更新。
                           </li>
                         </ul>
                       </td>
@@ -635,7 +647,7 @@
             </table>
           </div>
         </td>
-
+        <!-- 帳號資料 -->
         <td class="account" style="display: none">
           <div class="scroll-inner">
             <table width="100%">
@@ -697,11 +709,32 @@
             </table>
           </div>
         </td>
-        <td class="edit-page" style="display: none">
+
+        <!-- 編輯品牌 -->
+        <td class="edit-page">
+          <span
+            style="
+              position: absolute;
+              top: 0.7rem;
+              right: 1.2rem;
+              font-size: 2rem;
+              color: black;
+              cursor: pointer;
+              z-index: 10;
+              transition: color 0.2s;
+            "
+            title="關閉"
+            onclick="
+      this.closest('.edit-page').style.display='none';
+      document.querySelector('.mid').style.display='table-cell';
+      document.querySelector('.right').style.display='table-cell';
+      document.querySelector('.account').style.display='none';
+    "
+            >&#10005;</span
+          >
           <div class="scroll-inner">
             <form class="edit-form">
               <h2 style="font-size: 1.5rem">編輯品牌資料 Edit Brand Info</h2>
-
               <table width="100%">
                 <tr>
                   <td colspan="2">
@@ -709,88 +742,36 @@
                     <input
                       type="text"
                       name="brandName"
-                      value="Yoshimi Saito"
-                      style="width: 100%"
+                      value="品牌名稱"
+                      style="width: 95%"
                     />
                   </td>
                 </tr>
                 <tr>
                   <td colspan="2">
                     <span class="label">品牌簡介 Bio</span><br />
-                    <textarea name="bio" rows="6" style="width: 100%">
-這是一段品牌簡介...</textarea
-                    >
+                    <textarea
+                      name="bio"
+                      rows="6"
+                      style="width: 95%"
+                      id="bio-edit"
+                    ></textarea>
                   </td>
                 </tr>
                 <tr>
                   <td>
-                    <span class="label">代表人 Contact Person</span><br />
-                    <input
-                      type="text"
-                      name="contactPerson"
-                      value="王大明"
-                      style="width: 100%"
-                    />
+                    <span class="label">身份類別 Role</span><br />
+                    <input value="身份類別" style="width: 95%" />
                   </td>
                   <td>
-                    <span class="label">聯絡信箱 Email</span><br />
-                    <input
-                      type="email"
-                      name="email"
-                      value="damin@gmail.com"
-                      style="width: 100%"
-                    />
-                  </td>
-                </tr>
-                <tr>
-                  <td>
-                    <span class="label">聯絡電話 Phone</span><br />
-                    <input
-                      type="text"
-                      name="phone"
-                      value="(+31)0923485729"
-                      style="width: 100%"
-                    />
-                  </td>
-                  <td>
-                    <span class="label">Website</span><br />
-                    <input
-                      type="url"
-                      name="website"
-                      value="https://www.nowplacesf.com/publications"
-                      style="width: 100%"
-                    />
-                  </td>
-                </tr>
-                <tr>
-                  <td>
-                    <span class="label">Instagram</span><br />
-                    <input
-                      type="text"
-                      name="instagram"
-                      value="@51personaeproject"
-                      style="width: 100%"
-                    />
-                  </td>
-                  <td>
-                    <span class="label">Facebook</span><br />
-                    <input
-                      type="text"
-                      name="facebook"
-                      value=""
-                      style="width: 100%"
-                    />
+                    <span class="label">作品類別 Category</span><br />
+                    <input value="作品類別" style="width: 95%" />
                   </td>
                 </tr>
                 <tr>
                   <td colspan="2">
-                    <span class="label">Whatsapp</span><br />
-                    <input
-                      type="text"
-                      name="whatsapp"
-                      value=""
-                      style="width: 100%"
-                    />
+                    <span class="label">國籍 Nationality</span><br />
+                    <input value="國籍" style="width: 95%" />
                   </td>
                 </tr>
               </table>
@@ -801,11 +782,7 @@
               </p>
 
               <div style="margin-top: 1rem">
-                <button
-                  type="submit"
-                  class="pay-button"
-                  style="padding: 0.7rem 2rem"
-                >
+                <button type="submit" style="padding: 0.7rem 2rem">
                   送出 Submit
                 </button>
               </div>
