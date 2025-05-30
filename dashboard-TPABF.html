@@ -110,21 +110,17 @@
                   </div>
                 </td>
               </tr>
-              <tr>
-                <td colspan="2" style="position: relative">
+              <!-- 編輯按鈕 -->
+              <tr style="background-color: black; text-align: right">
+                <td colspan="2" style="padding: 2px 5px">
                   <span
                     style="
-                      position: absolute;
-                      top: 0.2rem;
-                      right: 0.5rem;
-                      font-size: 1.5rem;
-                      color: black;
+                      text-align: right;
+                      font-size: 0.8rem;
+                      color: ghostwhite;
                       cursor: pointer;
-                      transition: color 0.2s;
-                      transform: rotate(90deg);
                     "
-                    onmouseover="this.style.color='darkolivegreen'"
-                    onmouseout="this.style.color='black'"
+                    title="編輯"
                     onclick="                    
                     document.querySelector('.edit-page').style.display = 'table-cell';
                     document.querySelector('.mid').style.display = 'none';
@@ -136,9 +132,12 @@
                     document.getElementById('category-edit').value = document.getElementById('category').innerText.trim();
                     document.getElementById('nationality-edit').value = document.getElementById('nationality').innerText.trim();
                     "
-                    title="編輯"
-                    >&#9998;</span
+                    >編輯 Edit</span
                   >
+                </td>
+              </tr>
+              <tr>
+                <td colspan="2" style="position: relative">
                   <span class="label">品牌名稱 Brand Name</span><br />
                   <span style="font-size: 3rem" id="brand-name">品牌名稱</span>
                 </td>
@@ -648,68 +647,6 @@
                       <td id="schedule-date-update">06/30</td>
                     </tr>
                   </table>
-                </td>
-              </tr>
-            </table>
-          </div>
-        </td>
-        <!-- 帳號資料 -->
-        <td class="account" style="display: none">
-          <div class="scroll-inner">
-            <table width="100%">
-              <tr colspan="2" style="position: relative">
-                <!-- 左欄：代表人，一格佔 5 行 -->
-                <td rowspan="2">
-                  <span class="label">代表人 Contact Person</span><br />
-                  <div
-                    style="
-                      vertical-align: middle;
-                      font-size: 3rem;
-                      line-height: 2rem;
-                    "
-                  >
-                    <span style="font-size: 2rem" id="contact-person"
-                      >黃偉倫</span
-                    >
-                  </div>
-                </td>
-
-                <!-- 第一行右欄：Email -->
-                <td>
-                  <span class="label">聯絡信箱 Contact Email</span><br /><span
-                    id="contact-email"
-                    >something@double-grass.com</span
-                  >
-                </td>
-              </tr>
-              <tr>
-                <td>
-                  <span class="label">聯絡電話 Contact Phone</span><br /><span
-                    id="contact-phone"
-                    >(+31)0923485729</span
-                  >
-                </td>
-              </tr>
-              <tr>
-                <td>
-                  <span class="label">Website</span><br />
-                  <span id="website">www.website.com</span>
-                </td>
-                <td>
-                  <span class="label">Instagram</span><br />
-                  <span id="instagram"
-                    >https://www.instagram.com/double-grass/</span
-                  >
-                </td>
-              </tr>
-              <tr>
-                <td>
-                  <span class="label">Facebook</span><br />
-                  <span id="facebook">None</span>
-                </td>
-                <td>
-                  <span class="label">Whatsapp</span><br />
-                  <span id="whatsapp">None</span>
                 </td>
               </tr>
             </table>

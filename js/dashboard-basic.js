@@ -34,7 +34,7 @@ document.addEventListener("DOMContentLoaded", async function () {
   const grid = document.querySelector(".loading-grid");
   const mask = document.getElementById("loading-mask");
   if (grid && mask) {
-    const imgSrc = "image/loading1.jpg"; // 你的 loading 圖片
+    const imgSrc = "image/loading1.jpg"; // loading 圖片
     const imgSize = 70; // px
 
     // 用 clientWidth/clientHeight 會更精準
@@ -134,30 +134,6 @@ document.addEventListener("DOMContentLoaded", async function () {
       `;
     }
   }
-
-  document.getElementById("contact-person").textContent =
-    apiData["代表人"] || "";
-  document.getElementById("contact-email").textContent = apiData["Email"] || "";
-  document.getElementById("contact-phone").textContent =
-    apiData["聯絡電話"] || apiData["WhatsApp"] || "";
-
-  function setSocialText(id, value) {
-    const el = document.getElementById(id);
-    if (!value || value === "None") {
-      el.textContent = "None";
-      el.style.color = "lightgrey";
-      el.style.fontStyle = "italic";
-    } else {
-      el.textContent = value;
-      el.style.color = "";
-      el.style.fontStyle = "";
-    }
-  }
-
-  setSocialText("website", apiData["Website"]);
-  setSocialText("instagram", apiData["Instagram"]);
-  setSocialText("facebook", apiData["Facebook"]);
-  setSocialText("whatsapp", apiData["WhatsApp"]);
 
   document.getElementById("application-number").textContent =
     apiData["報名編號"] || "";

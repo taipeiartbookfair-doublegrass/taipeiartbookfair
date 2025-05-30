@@ -80,6 +80,12 @@ th {
   background-color: aliceblue;
   width: 44vw;
 }
+.account {
+  background-color: rgb(230, 250, 222);
+  width: 99vw;
+  height: 100vh;
+  overflow-y: scroll !important;
+}
 .admin {
   background-color: rgb(254, 221, 214);
   width: 99vw;
