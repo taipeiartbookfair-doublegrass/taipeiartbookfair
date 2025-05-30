@@ -99,4 +99,37 @@ document.addEventListener("DOMContentLoaded", function () {
       logo.classList.remove("machine-rotate-animating");
     });
   }
+  window.openEditPage = function openEditPage() {
+    const editPage = document.querySelector(".edit-page");
+    const mid = document.querySelector(".mid");
+    const right = document.querySelector(".right");
+    const account = document.querySelector(".account");
+    if (editPage) editPage.style.display = "table-cell";
+    if (mid) mid.style.display = "none";
+    if (right) right.style.display = "none";
+    if (account) account.style.display = "none";
+
+    const bio = document.getElementById("bio");
+    const bioEdit = document.getElementById("bio-edit");
+    if (bio && bioEdit) bioEdit.value = bio.innerText.trim();
+
+    const brandName = document.getElementById("brand-name");
+    const brandNameEdit = document.getElementById("brandName-edit");
+    if (brandName && brandNameEdit)
+      brandNameEdit.value = brandName.innerText.trim();
+
+    const role = document.getElementById("role");
+    const roleEdit = document.getElementById("role-edit");
+    if (role && roleEdit) roleEdit.value = role.innerText.trim();
+
+    const category = document.getElementById("category");
+    const categoryEdit = document.getElementById("category-edit");
+    if (category && categoryEdit)
+      categoryEdit.value = category.innerText.trim();
+
+    const nationality = document.getElementById("nationality");
+    const nationalityEdit = document.getElementById("nationality-edit");
+    if (nationality && nationalityEdit)
+      nationalityEdit.value = nationality.innerText.trim();
+  };
 });

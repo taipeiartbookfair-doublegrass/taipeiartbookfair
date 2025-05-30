@@ -423,3 +423,6 @@ html::-webkit-scrollbar-thumb:hover {
   color: black;
   cursor: default;
 }
+#media-section-row5 {
+  width: 100%;
+}

@@ -121,17 +121,7 @@
                       cursor: pointer;
                     "
                     title="編輯"
-                    onclick="                    
-                    document.querySelector('.edit-page').style.display = 'table-cell';
-                    document.querySelector('.mid').style.display = 'none';
-                    document.querySelector('.right').style.display = 'none';
-                    document.querySelector('.account').style.display = 'none';
-                    document.getElementById('bio-edit').value = document.getElementById('bio').innerText.trim();
-                    document.getElementById('brandName-edit').value = document.getElementById('brand-name').innerText.trim();
-                    document.getElementById('role-edit').value = document.getElementById('role').innerText.trim();
-                    document.getElementById('category-edit').value = document.getElementById('category').innerText.trim();
-                    document.getElementById('nationality-edit').value = document.getElementById('nationality').innerText.trim();
-                    "
+                    onclick="openEditPage();"
                     >編輯 Edit</span
                   >
                 </td>
@@ -532,55 +522,33 @@
               </tr>
               <tr id="media-section" style="display: none">
                 <!-- 素材下載 Download -->
-                <td colspan="2" style="border-top: none">
+                <td
+                  colspan="2"
+                  style="border-top: none; width: 80%; border-right: none"
+                >
                   <span class="label">素材下載 Download Materials</span>
-                  <br /><br />
+
                   <div id="material-download">
-                    <b>草率季官方素材包：</b>
+                    若您需要使用草率季的官方素材，請下載以下壓縮檔案。此外，該素材包包含草率季媒體官版編輯AI檔，請照公版編輯後回傳。<br />
                     <a id="zip-link" href="downloads/material-tw.zip" download
-                      >下載 Download (TW)</a
-                    >
+                      >下載 Download
+                    </a>
                   </div>
                 </td>
                 <!-- 行銷素材上傳 Upload -->
-                <td colspan="1" style="border-top: none">
+                <td
+                  colspan="1"
+                  style="
+                    border-top: none;
+                    width: 20%;
+                    border-left: 1px dashed black;
+                  "
+                >
                   <form
                     id="marketing-upload-form"
                     enctype="multipart/form-data"
                   >
-                    <label for="marketing-file"
-                      >請上傳書本介紹po文（PDF/JPG/PNG）：</label
-                    >
-                    <input
-                      type="file"
-                      id="marketing-file"
-                      name="marketing-file"
-                      accept=".pdf,.jpg,.jpeg,.png"
-                    />
-                    <button type="submit">上傳 Upload</button>
-                  </form>
-                </td>
-              </tr>
-              <!-- 寄件訊息 Foreigner Form -->
-              <tr style="display: none" id="media-section-row2">
-                <td colspan="2" style="border-top: none">
-                  <div id="foreigner-form">
-                    <span class="label"
-                      >海外寄件服務 Overseas Shipping Service</span
-                    >
-                    <a href="https://your-form-link.com" target="_blank"
-                      >下載表單 Download Form</a
-                    >
-                  </div>
-                </td>
-                <td colspan="1" style="border-top: none">
-                  <form
-                    id="marketing-upload-form"
-                    enctype="multipart/form-data"
-                  >
-                    <label for="marketing-file"
-                      >請上傳書本介紹po文（PDF/JPG/PNG）：</label
-                    >
+                    <label for="marketing-file">請在此上傳宣傳資料</label>
                     <input
                       type="file"
                       id="marketing-file"
@@ -594,55 +562,103 @@
 
               <!-- 簽證資料上傳 Visa Upload -->
               <tr style="display: none" id="media-section-row3">
-                <td colspan="2" style="border-top: none">
+                <td
+                  colspan="2"
+                  style="border-top: none; width: 80%; border-right: none"
+                >
                   <div id="visa-upload">
-                    <span class="label">簽證資料上傳Visa Document Upload</span>
+                    <span class="label">簽證資料上傳Visa Document Upload</span
+                    ><br />
+                    請確認填妥以下資訊：<br />
+                    1. 航班號碼<br />
+                    2. 落地時間<br />
+                    <div
+                      id="visa-warning"
+                      style="color: #c00; font-size: 0.9em"
+                    >
+                      ! 請務必於期限內上傳完整資料，逾期恕不受理。
+                    </div>
+                  </div>
+                </td>
+                <!-- 簽證資料警語 Visa Notice -->
+                <td
+                  colspan="1"
+                  style="
+                    border-top: none;
+                    width: 20%;
+                    border-left: 1px dashed black;
+                  "
+                >
+                  <div>
                     <form id="visa-upload-form" enctype="multipart/form-data">
                       <input
                         type="file"
                         id="visa-file"
                         name="visa-file"
-                        accept=".pdf,.jpg,.jpeg,.png"
+                        accept=".pdf"
                       />
                       <button type="submit">上傳 Upload</button>
                     </form>
                   </div>
                 </td>
-                <!-- 簽證資料警語 Visa Notice -->
-                <td colspan="1" style="border-top: none">
-                  <div id="visa-warning" style="color: #c00; font-size: 0.9em">
-                    ※ 若需協助簽證，請務必於期限內上傳完整資料，逾期恕不受理。
+              </tr>
+              <!-- 寄件訊息 Foreigner Form -->
+              <tr style="display: none" id="media-section-row2">
+                <td style="border-top: none; width: 55vw">
+                  <div id="foreigner-form">
+                    <span class="label"
+                      >海外寄件服務 Overseas Shipping Service</span
+                    ><br />The Overseas Shipping Service is a convenient option
+                    provided by Taipei Art Book Fair for international
+                    exhibitors, allowing you to easily send your works to
+                    Taiwan. Please download and complete the following form, and
+                    upload it to our system before the deadline.<br /><a
+                      href="www.form.google.com"
+                      >表單連結 Form Link</a
+                    >
                   </div>
                 </td>
               </tr>
+
               <!-- 親友票購買 Shopline -->
               <tr style="display: none" id="media-section-row4">
-                <td style="border-top: none; border-right: 2px solid black">
-                  <span class="label">親友票購買：</span
-                  ><br />請在付款時填入以下代碼（每個攤主限購五張）：!89SJ89<br />
-                </td>
-                <td style="border-top: none; border-right: 2px solid black">
+                <td colspan="2" style="border-top: none; width: 55vw">
+                  <span class="label"
+                    >親友票購買 Friends & Family Ticket Purchase</span
+                  ><br />
+                  請在付款時填入以下代碼（每個攤主限購五張）：
+                  <span id="discountcode">!89SJ89</span>
+                  <button
+                    class="copy-btn"
+                    onclick="copyToClipboard('discountcode')"
+                    title="Copy Discount Code"
+                    style="margin-left: 5px"
+                  >
+                    📋
+                  </button>
+                  <br />
                   <a href="https://your-shopline-link.com" target="_blank"
-                    >前往 Shopline</a
+                    >購票連結 Ticket Link</a
                   >
                 </td>
               </tr>
-              <tr>
-                <td style="border-top: none; border-right: 2px solid black">
+
+              <tr style="display: none" id="media-section-row5">
+                <td style="border-top: none; width: 55vw">
                   <span class="label">攤主手冊 Exhibitor Manual</span><br />
                   <a href="https://your-shopline-link.com" target="_blank"
                     >下載 Download</a
                   >
                 </td>
               </tr>
-              <tr>
-                <td style="border-top: none; border-right: 2px solid black">
+              <tr style="display: none" id="media-section-row6">
+                <td style="border-top: none">
                   <span class="label">攤位地圖 Booth Map</span><br />
                   <img src="image/map-lol.png" style="width: 100%" />
                 </td>
               </tr>
               <tr>
-                <td style="border-top: none; border-right: 2px solid black">
+                <td style="border-top: none; border-right: 1px solid black">
                   <span class="label">徵件流程表 Open Call Schedule</span><br />
                   <table style="width: 100%; margin-top: 10px">
                     <tr>

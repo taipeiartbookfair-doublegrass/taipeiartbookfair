@@ -224,8 +224,11 @@ document.addEventListener("DOMContentLoaded", async function () {
   const foreignShipping = document.getElementById("media-section-row2");
   const visaupload = document.getElementById("media-section-row3");
   const familyticket = document.getElementById("media-section-row4");
+  const manual = document.getElementById("media-section-row5");
+  const map = document.getElementById("media-section-row6");
 
   const rawResult = apiData["錄取"];
+  const nationality = (region || "").trim().toUpperCase();
 
   // 依錄取結果決定報名狀態顯示
   if (rawResult === "5-否" || rawResult === "否") {
@@ -243,10 +246,23 @@ document.addEventListener("DOMContentLoaded", async function () {
     if (apiData["已匯款"]) {
       registrationStatusEl.textContent = "已完成報名";
       equipmentinfo.style.display = "none"; // 隱藏設備資訊
-      mediaupload.style.display = "block"; // 隱藏媒體上傳
-      foreignShipping.style.display = "block";
-      visaupload.style.display = "block"; // 顯示簽證上傳
+      mediaupload.style.display = "block"; // 顯示媒體上傳
+
+      // 國籍條件顯示
+      if (nationality !== "TW") {
+        foreignShipping.style.display = "block";
+      } else {
+        foreignShipping.style.display = "none";
+      }
+      if (nationality === "CN") {
+        visaupload.style.display = "block";
+      } else {
+        visaupload.style.display = "none";
+      }
+
       familyticket.style.display = "block"; // 顯示家庭票上傳
+      manual.style.display = "block"; // 顯示手冊下載
+      map.style.display = "block"; // 顯示地圖下載
     } else {
       registrationStatusEl.textContent = "未完成報名";
     }
@@ -255,8 +271,10 @@ document.addEventListener("DOMContentLoaded", async function () {
     equipmentinfo.style.display = "none"; // 隱藏設備資訊
     mediaupload.style.display = "none"; // 隱藏媒體上傳
     foreignShipping.style.display = "none";
-    visaupload.style.display = "none"; // 顯示簽證上傳
-    familyticket.style.display = "none"; // 顯示家庭票上傳
+    visaupload.style.display = "none";
+    familyticket.style.display = "none";
+    manual.style.display = "none";
+    map.style.display = "none";
   } else if (
     rawResult === "4-換攤-創作商品" ||
     rawResult === "4-換攤-食物酒水" ||
@@ -269,10 +287,23 @@ document.addEventListener("DOMContentLoaded", async function () {
     if (apiData["已匯款"]) {
       registrationStatusEl.textContent = "已完成報名";
       equipmentinfo.style.display = "none"; // 隱藏設備資訊
-      mediaupload.style.display = "block"; // 隱藏媒體上傳
-      foreignShipping.style.display = "block";
-      visaupload.style.display = "block"; // 顯示簽證上傳
+      mediaupload.style.display = "block"; // 顯示媒體上傳
+
+      // 國籍條件顯示
+      if (nationality !== "TW") {
+        foreignShipping.style.display = "block";
+      } else {
+        foreignShipping.style.display = "none";
+      }
+      if (nationality === "CN") {
+        visaupload.style.display = "block";
+      } else {
+        visaupload.style.display = "none";
+      }
+
       familyticket.style.display = "block"; // 顯示家庭票上傳
+      manual.style.display = "block"; // 顯示手冊下載
+      map.style.display = "block"; // 顯示地圖下載
     } else {
       registrationStatusEl.textContent = "未完成報名";
     }
@@ -288,9 +319,22 @@ document.addEventListener("DOMContentLoaded", async function () {
       registrationStatusEl.textContent = "已完成報名";
       equipmentinfo.style.display = "none";
       mediaupload.style.display = "block";
-      foreignShipping.style.display = "block";
-      visaupload.style.display = "block"; // 顯示簽證上傳
-      familyticket.style.display = "block"; // 顯示家庭票上傳
+
+      // 國籍條件顯示
+      if (nationality !== "TW") {
+        foreignShipping.style.display = "block";
+      } else {
+        foreignShipping.style.display = "none";
+      }
+      if (nationality === "CN") {
+        visaupload.style.display = "block";
+      } else {
+        visaupload.style.display = "none";
+      }
+
+      familyticket.style.display = "block";
+      manual.style.display = "block";
+      map.style.display = "block";
     } else {
       registrationStatusEl.textContent = "未完成報名";
     }
