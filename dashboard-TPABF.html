@@ -55,9 +55,17 @@
             攤商管理<br />Dashboard
           </p>
           <hr class="sidebar-hr" />
-          <p>聯絡我們<br />Contact</p>
+          <a
+            href="dashboard-contact.html"
+            style="text-decoration: none; color: black"
+            ><p>聯絡我們<br />Contact</p></a
+          >
           <hr class="sidebar-hr" />
-          <p>常見問題<br />FAQ</p>
+          <a
+            href="dashboard-FAQ.html"
+            style="text-decoration: none; color: black"
+            ><p>常見問題<br />FAQ</p></a
+          >
           <hr class="sidebar-hr" />
           <div class="sidebar-middle">
             <p class="rotated-link">
@@ -67,9 +75,11 @@
               >
             </p>
           </div>
-          <p style="background-color: blueviolet; color: ghostwhite">
-            帳號管理<br />Account
-          </p>
+          <a href="account.html" style="text-decoration: none"
+            ><p style="background-color: blueviolet; color: ghostwhite">
+              帳號管理<br />Account
+            </p></a
+          >
         </td>
 
         <!-- Middle Column -->
@@ -78,27 +88,48 @@
           <div class="scroll-inner">
             <table width="100%">
               <tr>
-                <td colspan="2" style="position: relative">
+                <td colspan="1" style="position: relative">
+                  <span class="label">報名編號 Application Number</span><br />
+                  <span style="font-size: 3rem" id="application-number"
+                    >25-LB001</span
+                  >
+                </td>
+                <td style="width: 30%">
+                  <span class="label">錄取結果 Application Result</span><br />
+                  <div style="vertical-align: middle; font-size: 2.7rem">
+                    <span
+                      style="
+                        font-size: 2rem;
+                        line-height: 1rem;
+                        font-weight: bold;
+                        padding: 0px 10px 0px 10px;
+                      "
+                      id="application-result"
+                      >錄取</span
+                    >
+                  </div>
+                </td>
+              </tr>
+              <!-- 編輯按鈕 -->
+              <tr style="background-color: black; text-align: right">
+                <td colspan="2" style="padding: 2px 5px">
                   <span
                     style="
-                      position: absolute;
-                      top: 0.2rem;
-                      right: 0.5rem;
-                      font-size: 1.5rem;
-                      color: black;
+                      text-align: right;
+                      font-size: 0.8rem;
+                      color: ghostwhite;
                       cursor: pointer;
-                      transition: color 0.2s;
-                      transform: rotate(90deg);
                     "
-                    onmouseover="this.style.color='darkolivegreen'"
-                    onmouseout="this.style.color='black'"
-                    onclick="location.href='edit.html'"
                     title="編輯"
-                    >&#9998;</span
+                    onclick="openEditPage();"
+                    >編輯 Edit</span
                   >
-
+                </td>
+              </tr>
+              <tr>
+                <td colspan="2" style="position: relative">
                   <span class="label">品牌名稱 Brand Name</span><br />
-                  <span style="font-size: 3rem" id="brand-name">草率</span>
+                  <span style="font-size: 3rem" id="brand-name">品牌名稱</span>
                 </td>
               </tr>
               <tr>
@@ -159,61 +190,6 @@
                   </table>
                 </td>
               </tr>
-              <tr>
-                <!-- 左欄：代表人，一格佔 5 行 -->
-                <td rowspan="2">
-                  <span class="label">代表人 Contact Person</span><br />
-                  <div
-                    style="
-                      vertical-align: middle;
-                      font-size: 3rem;
-                      line-height: 2rem;
-                    "
-                  >
-                    <span style="font-size: 2rem" id="contact-person"
-                      >黃偉倫</span
-                    >
-                  </div>
-                </td>
-
-                <!-- 第一行右欄：Email -->
-                <td>
-                  <span class="label">聯絡信箱 Contact Email</span><br /><span
-                    id="contact-email"
-                    >something@double-grass.com</span
-                  >
-                </td>
-              </tr>
-              <tr>
-                <td>
-                  <span class="label">聯絡電話 Contact Phone</span><br /><span
-                    id="contact-phone"
-                    >(+31)0923485729</span
-                  >
-                </td>
-              </tr>
-              <tr>
-                <td>
-                  <span class="label">Website</span><br />
-                  <span id="website">www.website.com</span>
-                </td>
-                <td>
-                  <span class="label">Instagram</span><br />
-                  <span id="instagram"
-                    >https://www.instagram.com/double-grass/</span
-                  >
-                </td>
-              </tr>
-              <tr>
-                <td>
-                  <span class="label">Facebook</span><br />
-                  <span id="facebook">None</span>
-                </td>
-                <td>
-                  <span class="label">Whatsapp</span><br />
-                  <span id="whatsapp">None</span>
-                </td>
-              </tr>
             </table>
           </div>
         </td>
@@ -226,32 +202,28 @@
                 <td colspan="3" style="padding: 0; border: none">
                   <table style="width: 100%; table-layout: auto">
                     <tr style="padding: 0; border: none">
-                      <!-- 報名編號 -->
+                      <!-- 攤商編號 -->
                       <td style="width: 40%">
-                        <span class="label">報名編號 Application Number</span
-                        ><br />
-                        <div>
-                          <span style="font-size: 3rem" id="application-number"
-                            >25-TP001</span
-                          >
-                        </div>
-                      </td>
-
-                      <!-- 錄取結果 -->
-                      <td style="width: 30%">
-                        <span class="label">錄取結果 Application Result</span
-                        ><br />
+                        <span class="label">攤商編號 Booth Number</span><br />
                         <div style="vertical-align: middle; font-size: 2.7rem">
                           <span
                             style="
                               font-size: 2rem;
-                              line-height: 1rem;
-                              font-weight: bold;
-                              padding: 0px 10px 0px 10px;
+                              color: black;
+                              line-height: 1.5rem;
                             "
-                            id="application-result"
-                            >錄取</span
-                          >
+                            id="Booth-number"
+                            >N/A
+                          </span>
+                          <span
+                            style="
+                              font-size: 1rem;
+                              color: darkgray;
+                              line-height: 1rem;
+                              display: block;
+                            "
+                            >11 月 21 日公佈
+                          </span>
                         </div>
                       </td>
 
@@ -269,6 +241,15 @@
                             id="registration-status"
                             >尚未完成報名</span
                           >
+                          <span
+                            style="
+                              font-size: 1rem;
+                              color: darkgray;
+                              line-height: 1rem;
+                              display: block;
+                            "
+                            >7 月 15 日對帳後一次性更新。
+                          </span>
                         </div>
                       </td>
                     </tr>
@@ -522,7 +503,7 @@
                           </li>
                           <li id="notice3">付款之後請自行留存發票。</li>
                           <li id="notice4">
-                            我們將於 7 月 15 日對帳後更新報名以及付款狀態。
+                            報名以及付款狀態將於 7 月 15 日對帳後更新。
                           </li>
                         </ul>
                       </td>
@@ -540,90 +521,144 @@
                 </td>
               </tr>
               <tr id="media-section" style="display: none">
-                <td colspan="3" style="border-top: none">
-                  <span class="label"
-                    >素材下載與上傳 Download & Upload Materials</span
-                  >
-                  <br /><br />
+                <!-- 素材下載 Download -->
+                <td
+                  colspan="2"
+                  style="border-top: none; width: 80%; border-right: none"
+                >
+                  <span class="label">素材下載 Download Materials</span>
 
-                  <!-- 地區選擇 -->
-                  <label for="region-select">選擇地區 Region：</label>
-                  <select id="region-select">
-                    <option value="taiwan">台灣 Taiwan</option>
-                    <option value="china">中國大陸 China</option>
-                    <option value="other">其他地區 Others</option>
-                  </select>
-                  <br /><br />
-
-                  <!-- 素材包下載 -->
                   <div id="material-download">
-                    <b>草率季官方素材包：</b>
+                    若您需要使用草率季的官方素材，請下載以下壓縮檔案。此外，該素材包包含草率季媒體官版編輯AI檔，請照公版編輯後回傳。<br />
                     <a id="zip-link" href="downloads/material-tw.zip" download
-                      >下載 Download (TW)</a
-                    >
+                      >下載 Download
+                    </a>
                   </div>
-                  <br />
+                </td>
+                <!-- 行銷素材上傳 Upload -->
+                <td
+                  colspan="1"
+                  style="
+                    border-top: none;
+                    width: 20%;
+                    border-left: 1px dashed black;
+                  "
+                >
+                  <form
+                    id="marketing-upload-form"
+                    enctype="multipart/form-data"
+                  >
+                    <label for="marketing-file">請在此上傳宣傳資料</label>
+                    <input
+                      type="file"
+                      id="marketing-file"
+                      name="marketing-file"
+                      accept=".pdf,.jpg,.jpeg,.png"
+                    />
+                    <button type="submit">上傳 Upload</button>
+                  </form>
+                </td>
+              </tr>
 
-                  <!-- 行銷素材上傳 -->
+              <!-- 簽證資料上傳 Visa Upload -->
+              <tr style="display: none" id="media-section-row3">
+                <td
+                  colspan="2"
+                  style="border-top: none; width: 80%; border-right: none"
+                >
+                  <div id="visa-upload">
+                    <span class="label">簽證資料上傳Visa Document Upload</span
+                    ><br />
+                    請確認填妥以下資訊：<br />
+                    1. 航班號碼<br />
+                    2. 落地時間<br />
+                    <div
+                      id="visa-warning"
+                      style="color: #c00; font-size: 0.9em"
+                    >
+                      ! 請務必於期限內上傳完整資料，逾期恕不受理。
+                    </div>
+                  </div>
+                </td>
+                <!-- 簽證資料警語 Visa Notice -->
+                <td
+                  colspan="1"
+                  style="
+                    border-top: none;
+                    width: 20%;
+                    border-left: 1px dashed black;
+                  "
+                >
                   <div>
-                    <b>行銷素材上傳：</b>
-                    <form
-                      id="marketing-upload-form"
-                      enctype="multipart/form-data"
-                    >
-                      <label for="marketing-file"
-                        >請上傳書本介紹po文（PDF/JPG/PNG）：</label
-                      >
-                      <input
-                        type="file"
-                        id="marketing-file"
-                        name="marketing-file"
-                        accept=".pdf,.jpg,.jpeg,.png"
-                      />
-                      <button type="submit">上傳 Upload</button>
-                    </form>
-                  </div>
-                  <br />
-
-                  <!-- 簽證資料上傳（僅外國人顯示） -->
-                  <div id="visa-upload" style="display: none">
-                    <b
-                      >簽證資料上傳（僅外國人）Visa Document Upload (For
-                      Foreigners Only)：</b
-                    >
                     <form id="visa-upload-form" enctype="multipart/form-data">
                       <input
                         type="file"
                         id="visa-file"
                         name="visa-file"
-                        accept=".pdf,.jpg,.jpeg,.png"
+                        accept=".pdf"
                       />
                       <button type="submit">上傳 Upload</button>
                     </form>
                   </div>
-                  <br />
-
-                  <!-- 外國人表單連結 -->
-                  <div id="foreigner-form" style="display: none">
-                    <b>外國人專用表單：</b>
-                    <a href="https://your-form-link.com" target="_blank"
-                      >填寫表單 Fill in Form</a
-                    >
-                  </div>
-                  <br />
-
-                  <!-- Shopline 連結 -->
-                  <div>
-                    <b>親友票購買：</b>
-                    <a href="https://your-shopline-link.com" target="_blank"
-                      >前往 Shopline</a
+                </td>
+              </tr>
+              <!-- 寄件訊息 Foreigner Form -->
+              <tr style="display: none" id="media-section-row2">
+                <td style="border-top: none; width: 55vw">
+                  <div id="foreigner-form">
+                    <span class="label"
+                      >海外寄件服務 Overseas Shipping Service</span
+                    ><br />The Overseas Shipping Service is a convenient option
+                    provided by Taipei Art Book Fair for international
+                    exhibitors, allowing you to easily send your works to
+                    Taiwan. Please download and complete the following form, and
+                    upload it to our system before the deadline.<br /><a
+                      href="www.form.google.com"
+                      >表單連結 Form Link</a
                     >
                   </div>
                 </td>
               </tr>
 
+              <!-- 親友票購買 Shopline -->
+              <tr style="display: none" id="media-section-row4">
+                <td colspan="2" style="border-top: none; width: 55vw">
+                  <span class="label"
+                    >親友票購買 Friends & Family Ticket Purchase</span
+                  ><br />
+                  請在付款時填入以下代碼（每個攤主限購五張）：
+                  <span id="discountcode">!89SJ89</span>
+                  <button
+                    class="copy-btn"
+                    onclick="copyToClipboard('discountcode')"
+                    title="Copy Discount Code"
+                    style="margin-left: 5px"
+                  >
+                    📋
+                  </button>
+                  <br />
+                  <a href="https://your-shopline-link.com" target="_blank"
+                    >購票連結 Ticket Link</a
+                  >
+                </td>
+              </tr>
+
+              <tr style="display: none" id="media-section-row5">
+                <td style="border-top: none; width: 55vw">
+                  <span class="label">攤主手冊 Exhibitor Manual</span><br />
+                  <a href="https://your-shopline-link.com" target="_blank"
+                    >下載 Download</a
+                  >
+                </td>
+              </tr>
+              <tr style="display: none" id="media-section-row6">
+                <td style="border-top: none">
+                  <span class="label">攤位地圖 Booth Map</span><br />
+                  <img src="image/map-lol.png" style="width: 100%" />
+                </td>
+              </tr>
               <tr>
-                <td style="border-top: none; border-right: 2px solid black">
+                <td style="border-top: none; border-right: 1px solid black">
                   <span class="label">徵件流程表 Open Call Schedule</span><br />
                   <table style="width: 100%; margin-top: 10px">
                     <tr>
@@ -661,40 +696,407 @@
             </table>
           </div>
         </td>
+
+        <!-- 編輯品牌 -->
+        <td class="edit-page">
+          <span
+            style="
+              position: absolute;
+              top: 0.7rem;
+              right: 1.2rem;
+              font-size: 2rem;
+              color: black;
+              cursor: pointer;
+              z-index: 10;
+              transition: color 0.2s;
+            "
+            title="關閉"
+            onclick="
+      this.closest('.edit-page').style.display='none';
+      document.querySelector('.mid').style.display='table-cell';
+      document.querySelector('.right').style.display='table-cell';
+      document.querySelector('.account').style.display='none';
+    "
+            >&#10005;</span
+          >
+          <div class="scroll-inner">
+            <form class="edit-form">
+              <h2 style="font-size: 1.5rem">編輯品牌資料 Edit Brand Info</h2>
+              <table width="100%">
+                <tr>
+                  <td colspan="2">
+                    <span class="label">品牌名稱 Brand Name</span><br />
+                    <input
+                      type="text"
+                      name="brandName"
+                      value="品牌名稱"
+                      style="width: 95%"
+                      id="brandName-edit"
+                    />
+                  </td>
+                </tr>
+                <tr>
+                  <td colspan="2">
+                    <span class="label">品牌簡介 Bio</span><br />
+                    <textarea
+                      name="bio"
+                      rows="6"
+                      style="width: 95%"
+                      id="bio-edit"
+                    ></textarea>
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <span class="label">身份類別 Role</span><br />
+                    <select id="role-edit">
+                      <option value="">請選擇身份類別</option>
+                      <option value="a0 Creator">a0 Creator 創作者</option>
+                      <option value="a1 Bookstore">a1 Bookstore 書店</option>
+                      <option value="a2 Publisher/Press">
+                        a2 Publisher/Press 出版商
+                      </option>
+                      <option value="a3 Printing/Paper">
+                        a3 Printing/Paper 印刷廠/紙廠
+                      </option>
+                      <option value="a4 Cultural Institution">
+                        a4 Cultural Institution 文化機構
+                      </option>
+                      <option value="a5 Select Shop">
+                        a5 Select Shop 選品店
+                      </option>
+                      <option value="a6 Group/Structure">
+                        a6 Group/Structure 團體
+                      </option>
+                    </select>
+                  </td>
+                  <td>
+                    <span class="label">作品類別 Category</span><br />
+                    <select id="category-edit">
+                      <option value="">請選擇作品類別</option>
+                      <option value="b00 攝影">b00 攝影（Photography）</option>
+                      <option value="b01 插畫">b01 插畫（Illustration）</option>
+                      <option value="b02 漫畫">b02 漫畫（Comics）</option>
+                      <option value="b03 平面設計">
+                        b03 平面設計（Graphic & Design）
+                      </option>
+                      <option value="b04 拼貼・混合媒材・聯合創作">
+                        b04 拼貼・混合媒材・聯合創作（Collage & Mixture &
+                        Collective）
+                      </option>
+                      <option value="b05 雜誌與紙本出版">
+                        b05 雜誌與紙本出版（Magazine & Papers）
+                      </option>
+                      <option value="b06 概念與實驗性出版">
+                        b06 概念與實驗性出版（Conceptual & Experimental）
+                      </option>
+                      <option value="b07 工藝與特殊材質">
+                        b07 工藝與特殊材質（Craftwork & Different Material）
+                      </option>
+                      <option value="b08 文學與寫作">
+                        b08 文學與寫作（Literature & Writing）
+                      </option>
+                      <option value="b09 專案・策展・議題">
+                        b09 專案・策展・議題（Project & Curatorial & Issue）
+                      </option>
+                      <option value="b10 選集與收藏出版物">
+                        b10 選集與收藏出版物（Collection）
+                      </option>
+                      <option value="c00 角色週邊商品">
+                        c00 角色週邊商品（Character Merch）
+                      </option>
+                      <option value="c01 印刷品">
+                        c01 印刷品（Printed Matter）
+                      </option>
+                      <option value="c02 手工藝與配件">
+                        c02 手工藝與配件（Crafts & Accessories）
+                      </option>
+                      <option value="c03 布料與刺繡">
+                        c03 布料與刺繡（Fabric & Embroidery）
+                      </option>
+                      <option value="c04 刺青">c04 刺青（Tattoo）</option>
+                      <option value="c05 玩具與模型">
+                        c05 玩具與模型（Toy & Model）
+                      </option>
+                      <option value="c06 生活風格商品">
+                        c06 生活風格商品（Life Attitude）
+                      </option>
+                      <option value="c07 古董">c07 古董（Antiques）</option>
+                      <option value="c08 花藝・植栽・精品">
+                        c08 花藝・植栽・精品（Ikebana & Plant & Boutique）
+                      </option>
+                      <option value="c10 音樂">c10 音樂（Music）</option>
+                      <option value="f00 甜點">f00 甜點（Desserts）</option>
+                      <option value="f01 飲品">f01 飲品（Beverages）</option>
+                      <option value="f02 鹹食">f02 鹹食（Savory Foods）</option>
+                      <option value="f03 茶・咖啡">
+                        f03 茶・咖啡（Tea & Coffee）
+                      </option>
+                    </select>
+                  </td>
+                </tr>
+                <tr>
+                  <td colspan="2">
+                    <span class="label">國籍 Nationality</span><br />
+                    <select id="nationality-edit">
+                      <option>Please select your nationality</option>
+                      <option value="AF">Afghanistan (AF)</option>
+                      <option value="AL">Albania (AL)</option>
+                      <option value="DZ">Algeria (DZ)</option>
+                      <option value="AS">American Samoa (AS)</option>
+                      <option value="AD">Andorra (AD)</option>
+                      <option value="AO">Angola (AO)</option>
+                      <option value="AI">Anguilla (AI)</option>
+                      <option value="AQ">Antarctica (AQ)</option>
+                      <option value="AG">Antigua and Barbuda (AG)</option>
+                      <option value="AR">Argentina (AR)</option>
+                      <option value="AM">Armenia (AM)</option>
+                      <option value="AW">Aruba (AW)</option>
+                      <option value="AU">Australia (AU)</option>
+                      <option value="AT">Austria (AT)</option>
+                      <option value="AZ">Azerbaijan (AZ)</option>
+                      <option value="BS">Bahamas, The (BS)</option>
+                      <option value="BH">Bahrain (BH)</option>
+                      <option value="BD">Bangladesh (BD)</option>
+                      <option value="BB">Barbados (BB)</option>
+                      <option value="BY">Belarus (BY)</option>
+                      <option value="BE">Belgium (BE)</option>
+                      <option value="BZ">Belize (BZ)</option>
+                      <option value="BJ">Benin (BJ)</option>
+                      <option value="BM">Bermuda (BM)</option>
+                      <option value="BT">Bhutan (BT)</option>
+                      <option value="BO">Bolivia (BO)</option>
+                      <option value="BA">Bosnia and Herzegovina (BA)</option>
+                      <option value="BW">Botswana (BW)</option>
+                      <option value="BR">Brazil (BR)</option>
+                      <option value="IO">
+                        British Indian Ocean Territory (IO)
+                      </option>
+                      <option value="VG">British Virgin Islands (VG)</option>
+                      <option value="BN">Brunei (BN)</option>
+                      <option value="BG">Bulgaria (BG)</option>
+                      <option value="BF">Burkina Faso (BF)</option>
+                      <option value="MM">Burma (MM)</option>
+                      <option value="BI">Burundi (BI)</option>
+                      <option value="KH">Cambodia (KH)</option>
+                      <option value="CM">Cameroon (CM)</option>
+                      <option value="CA">Canada (CA)</option>
+                      <option value="CV">Cape Verde (CV)</option>
+                      <option value="KY">Cayman Islands (KY)</option>
+                      <option value="CF">Central African Republic (CF)</option>
+                      <option value="TD">Chad (TD)</option>
+                      <option value="CL">Chile (CL)</option>
+                      <option value="CN">China (CN)</option>
+                      <option value="CX">Christmas Island (CX)</option>
+                      <option value="CC">Cocos (Keeling) Islands (CC)</option>
+                      <option value="CO">Colombia (CO)</option>
+                      <option value="KM">Comoros (KM)</option>
+                      <option value="CD">
+                        Congo, Democratic Republic of the (CD)
+                      </option>
+                      <option value="CG">Congo, Republic of the (CG)</option>
+                      <option value="CK">Cook Islands (CK)</option>
+                      <option value="CR">Costa Rica (CR)</option>
+                      <option value="CI">Cote d'Ivoire (CI)</option>
+                      <option value="HR">Croatia (HR)</option>
+                      <option value="CU">Cuba (CU)</option>
+                      <option value="CY">Cyprus (CY)</option>
+                      <option value="CZ">Czech Republic (CZ)</option>
+                      <option value="DK">Denmark (DK)</option>
+                      <option value="DJ">Djibouti (DJ)</option>
+                      <option value="DM">Dominica (DM)</option>
+                      <option value="DO">Dominican Republic (DO)</option>
+                      <option value="EC">Ecuador (EC)</option>
+                      <option value="EG">Egypt (EG)</option>
+                      <option value="SV">El Salvador (SV)</option>
+                      <option value="GQ">Equatorial Guinea (GQ)</option>
+                      <option value="ER">Eritrea (ER)</option>
+                      <option value="EE">Estonia (EE)</option>
+                      <option value="ET">Ethiopia (ET)</option>
+                      <option value="FK">
+                        Falkland Islands (Islas Malvinas) (FK)
+                      </option>
+                      <option value="FO">Faroe Islands (FO)</option>
+                      <option value="FJ">Fiji (FJ)</option>
+                      <option value="FI">Finland (FI)</option>
+                      <option value="FR">France (FR)</option>
+                      <option value="GF">French Guiana (GF)</option>
+                      <option value="PF">French Polynesia (PF)</option>
+                      <option value="TF">
+                        French Southern and Antarctic Lands (TF)
+                      </option>
+                      <option value="GA">Gabon (GA)</option>
+                      <option value="GM">Gambia, The (GM)</option>
+                      <option value="GE">Georgia (GE)</option>
+                      <option value="DE">Germany (DE)</option>
+                      <option value="GH">Ghana (GH)</option>
+                      <option value="GI">Gibraltar (GI)</option>
+                      <option value="GR">Greece (GR)</option>
+                      <option value="GL">Greenland (GL)</option>
+                      <option value="GD">Grenada (GD)</option>
+                      <option value="GP">Guadeloupe (GP)</option>
+                      <option value="GU">Guam (GU)</option>
+                      <option value="GT">Guatemala (GT)</option>
+                      <option value="GG">Guernsey (GG)</option>
+                      <option value="GN">Guinea (GN)</option>
+                      <option value="GW">Guinea-Bissau (GW)</option>
+                      <option value="GY">Guyana (GY)</option>
+                      <option value="HT">Haiti (HT)</option>
+                      <option value="VA">Holy See (Vatican City) (VA)</option>
+                      <option value="HN">Honduras (HN)</option>
+                      <option value="HK">Hong Kong (HK)</option>
+                      <option value="HU">Hungary (HU)</option>
+                      <option value="IS">Iceland (IS)</option>
+                      <option value="IN">India (IN)</option>
+                      <option value="ID">Indonesia (ID)</option>
+                      <option value="IR">Iran (IR)</option>
+                      <option value="IQ">Iraq (IQ)</option>
+                      <option value="IE">Ireland (IE)</option>
+                      <option value="IM">Isle of Man (IM)</option>
+                      <option value="IL">Israel (IL)</option>
+                      <option value="IT">Italy (IT)</option>
+                      <option value="JM">Jamaica (JM)</option>
+                      <option value="JP">Japan (JP)</option>
+                      <option value="JE">Jersey (JE)</option>
+                      <option value="JO">Jordan (JO)</option>
+                      <option value="KZ">Kazakhstan (KZ)</option>
+                      <option value="KE">Kenya (KE)</option>
+                      <option value="KI">Kiribati (KI)</option>
+                      <option value="KP">Korea, North (KP)</option>
+                      <option value="KR">Korea, South (KR)</option>
+                      <option value="KW">Kuwait (KW)</option>
+                      <option value="KG">Kyrgyzstan (KG)</option>
+                      <option value="LA">Laos (LA)</option>
+                      <option value="LV">Latvia (LV)</option>
+                      <option value="LB">Lebanon (LB)</option>
+                      <option value="LS">Lesotho (LS)</option>
+                      <option value="LR">Liberia (LR)</option>
+                      <option value="LY">Libya (LY)</option>
+                      <option value="LI">Liechtenstein (LI)</option>
+                      <option value="LT">Lithuania (LT)</option>
+                      <option value="LU">Luxembourg (LU)</option>
+                      <option value="MO">Macau (MO)</option>
+                      <option value="MK">Macedonia (MK)</option>
+                      <option value="MG">Madagascar (MG)</option>
+                      <option value="MW">Malawi (MW)</option>
+                      <option value="MY">Malaysia (MY)</option>
+                      <option value="MV">Maldives (MV)</option>
+                      <option value="ML">Mali (ML)</option>
+                      <option value="MT">Malta (MT)</option>
+                      <option value="MH">Marshall Islands (MH)</option>
+                      <option value="MQ">Martinique (MQ)</option>
+                      <option value="MR">Mauritania (MR)</option>
+                      <option value="MU">Mauritius (MU)</option>
+                      <option value="YT">Mayotte (YT)</option>
+                      <option value="MX">Mexico (MX)</option>
+                      <option value="FM">
+                        Micronesia, Federated States of (FM)
+                      </option>
+                      <option value="MD">Moldova (MD)</option>
+                      <option value="MC">Monaco (MC)</option>
+                      <option value="MN">Mongolia (MN)</option>
+                      <option value="MA">Morocco (MA)</option>
+                      <option value="MZ">Mozambique (MZ)</option>
+                      <option value="NA">Namibia (NA)</option>
+                      <option value="NR">Nauru (NR)</option>
+                      <option value="NP">Nepal (NP)</option>
+                      <option value="NL">Netherlands (NL)</option>
+                      <option value="NC">New Caledonia (NC)</option>
+                      <option value="NZ">New Zealand (NZ)</option>
+                      <option value="NI">Nicaragua (NI)</option>
+                      <option value="NE">Niger (NE)</option>
+                      <option value="NG">Nigeria (NG)</option>
+                      <option value="NO">Norway (NO)</option>
+                      <option value="OM">Oman (OM)</option>
+                      <option value="PK">Pakistan (PK)</option>
+                      <option value="PW">Palau (PW)</option>
+                      <option value="PA">Panama (PA)</option>
+                      <option value="PG">Papua New Guinea (PG)</option>
+                      <option value="PY">Paraguay (PY)</option>
+                      <option value="PE">Peru (PE)</option>
+                      <option value="PH">Philippines (PH)</option>
+                      <option value="PL">Poland (PL)</option>
+                      <option value="PT">Portugal (PT)</option>
+                      <option value="PR">Puerto Rico (PR)</option>
+                      <option value="QA">Qatar (QA)</option>
+                      <option value="RE">Reunion (RE)</option>
+                      <option value="RO">Romania (RO)</option>
+                      <option value="RU">Russia (RU)</option>
+                      <option value="RW">Rwanda (RW)</option>
+                      <option value="SH">Saint Helena (SH)</option>
+                      <option value="KN">Saint Kitts and Nevis (KN)</option>
+                      <option value="LC">Saint Lucia (LC)</option>
+                      <option value="PM">Saint Pierre and Miquelon (PM)</option>
+                      <option value="VC">
+                        Saint Vincent and the Grenadines (VC)
+                      </option>
+                      <option value="WS">Samoa (WS)</option>
+                      <option value="SM">San Marino (SM)</option>
+                      <option value="ST">Sao Tome and Principe (ST)</option>
+                      <option value="SA">Saudi Arabia (SA)</option>
+                      <option value="SN">Senegal (SN)</option>
+                      <option value="RS">Serbia (RS)</option>
+                      <option value="SC">Seychelles (SC)</option>
+                      <option value="SL">Sierra Leone (SL)</option>
+                      <option value="SG">Singapore (SG)</option>
+                      <option value="SK">Slovakia (SK)</option>
+                      <option value="SI">Slovenia (SI)</option>
+                      <option value="SB">Solomon Islands (SB)</option>
+                      <option value="SO">Somalia (SO)</option>
+                      <option value="ZA">South Africa (ZA)</option>
+                      <option value="ES">Spain (ES)</option>
+                      <option value="LK">Sri Lanka (LK)</option>
+                      <option value="SD">Sudan (SD)</option>
+                      <option value="SR">Suriname (SR)</option>
+                      <option value="SZ">Swaziland (SZ)</option>
+                      <option value="SE">Sweden (SE)</option>
+                      <option value="CH">Switzerland (CH)</option>
+                      <option value="SY">Syria (SY)</option>
+                      <option value="TW">Taiwan (TW)</option>
+                      <option value="TJ">Tajikistan (TJ)</option>
+                      <option value="TZ">Tanzania (TZ)</option>
+                      <option value="TH">Thailand (TH)</option>
+                      <option value="TL">Timor-Leste (TL)</option>
+                      <option value="TG">Togo (TG)</option>
+                      <option value="TO">Tonga (TO)</option>
+                      <option value="TT">Trinidad and Tobago (TT)</option>
+                      <option value="TN">Tunisia (TN)</option>
+                      <option value="TR">Turkey (TR)</option>
+                      <option value="TM">Turkmenistan (TM)</option>
+                      <option value="TV">Tuvalu (TV)</option>
+                      <option value="UG">Uganda (UG)</option>
+                      <option value="UA">Ukraine (UA)</option>
+                      <option value="AE">United Arab Emirates (AE)</option>
+                      <option value="GB">United Kingdom (GB)</option>
+                      <option value="US">United States (US)</option>
+                      <option value="UY">Uruguay (UY)</option>
+                      <option value="UZ">Uzbekistan (UZ)</option>
+                      <option value="VU">Vanuatu (VU)</option>
+                      <option value="VE">Venezuela (VE)</option>
+                      <option value="VN">Vietnam (VN)</option>
+                      <option value="YE">Yemen (YE)</option>
+                      <option value="ZM">Zambia (ZM)</option>
+                      <option value="ZW">Zimbabwe (ZW)</option>
+                    </select>
+                  </td>
+                </tr>
+              </table>
+
+              <p style="margin-top: 2rem; color: darkgray">
+                請再次確認資訊是否正確後進行修改。請注意，草率簿將於 8
+                月底開始排版，最終資料將以工作同仁所彙整的版本為準。
+              </p>
+
+              <div style="margin-top: 1rem">
+                <button type="submit" style="padding: 0.7rem 2rem">
+                  送出 Submit
+                </button>
+              </div>
+            </form>
+          </div>
+        </td>
       </tr>
     </table>
     <script src="js/dashboard-body.js"></script>
-    <!-- 建議加在 </body> 前 -->
-    <script>
-      // 根據地區切換素材包與簽證欄位
-      document
-        .getElementById("region-select")
-        .addEventListener("change", function () {
-          var region = this.value;
-          var zipLink = document.getElementById("zip-link");
-          var visaDiv = document.getElementById("visa-upload");
-          var foreignerForm = document.getElementById("foreigner-form");
-          if (region === "taiwan") {
-            zipLink.href = "downloads/material-tw.zip";
-            zipLink.textContent = "下載 Download (TW)";
-            visaDiv.style.display = "none";
-            foreignerForm.style.display = "none";
-          } else if (region === "china") {
-            zipLink.href = "downloads/material-cn.zip";
-            zipLink.textContent = "下載 Download (CN)";
-            visaDiv.style.display = "block";
-            foreignerForm.style.display = "block";
-          } else {
-            zipLink.href = "downloads/material-others.zip";
-            zipLink.textContent = "下載 Download (Others)";
-            visaDiv.style.display = "block";
-            foreignerForm.style.display = "block";
-          }
-        });
-      // 預設觸發一次
-      document
-        .getElementById("region-select")
-        .dispatchEvent(new Event("change"));
-    </script>
   </body>
 </html>

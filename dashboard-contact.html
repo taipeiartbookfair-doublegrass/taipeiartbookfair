@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      http-equiv="Content-Security-Policy"
+      content="default-src 'self'; 
+             script-src 'self' 'unsafe-inline' https://www.google.com https://www.gstatic.com https://code.jquery.com https://www.googletagmanager.com; 
+             style-src 'self' 'unsafe-inline'; 
+             connect-src https://www.google-analytics.com https://script.google.com https://script.googleusercontent.com/;
+             frame-src https://www.google.com;"
+    />
+    <title>Contact - 草率季Taipei Art Book Fair</title>
+    <link rel="stylesheet" href="css/dashboard.css" />
+    <link rel="stylesheet" href="css/font.css" />
+    <link rel="shortcut icon" href="image/icon-1.ico" />
+
+    <!-- Google tag (gtag.js) -->
+    <script
+      async
+      src="https://www.googletagmanager.com/gtag/js?id=G-EPSXJPDH6L"
+    ></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+      gtag("js", new Date());
+
+      gtag("config", "G-EPSXJPDH6L");
+    </script>
+    <script src="js/cookie.js"></script>
+  </head>
+  <body>
+    <table class="layout">
+      <tr>
+        <!-- Sidebar -->
+        <td class="sidebar">
+          <p style="background-color: olivedrab; color: ghostwhite">
+            <!-- 草率季<br />TPABF -->
+            <img
+              src="image/icon-1.ico"
+              alt="logo"
+              class="machine-rotate-logo"
+              style="width: 4.5vw; height: auto; transform: rotate(45deg)"
+            />
+          </p>
+          <a
+            href="dashboard-TPABF.html"
+            style="text-decoration: none; color: black"
+            ><p>攤商管理<br />Dashboard</p></a
+          >
+          <hr class="sidebar-hr" />
+          <a href="dashboard-contact.html" style="text-decoration: none"
+            ><p style="background-color: black; color: ghostwhite">
+              聯絡我們<br />Contact
+            </p></a
+          >
+          <hr class="sidebar-hr" />
+          <a
+            href="dashboard-FAQ.html"
+            style="text-decoration: none; color: black"
+            ><p>常見問題<br />FAQ</p></a
+          >
+          <hr class="sidebar-hr" />
+          <div class="sidebar-middle">
+            <p class="rotated-link">
+              草率季 Taipei Art Book Fair<br />
+              <a href="https://taipeiartbookfair.com/"
+                >https://taipeiartbookfair.com/</a
+              >
+            </p>
+          </div>
+          <a href="account.html" style="text-decoration: none"
+            ><p style="background-color: blueviolet; color: ghostwhite">
+              帳號管理<br />Account
+            </p></a
+          >
+        </td>
+
+        <td class="admin">
+          <div class="scroll-inner">
+            <table width="100%">
+              <tr>
+                <td style="border: none">
+                  <h3>Contact Method</h3>
+                  <br />
+
+                  <br />
+                  <div
+                    style="
+                      font-size: 1rem;
+                      font-family: 'Inclusive Sans', sans-serif;
+                    "
+                  >
+                    <span
+                      >EMAIL -
+                      <a href="mailto:shakyfloor@double-grass.com"
+                        >hooroo@double-grass.com</a
+                      ></span
+                    ><br />
+                    <span
+                      >INSTAGRAM -
+                      <a
+                        target="_blank"
+                        href="https://www.instagram.com/taipeiartbookfair/"
+                        >@taipeiartbookfair</a
+                      ></span
+                    ><br />
+                    <span
+                      >FACEBOOK -
+                      <a
+                        target="_blank"
+                        href="https://www.facebook.com/taipeiartbookfair/"
+                        >@taipeiartbookfair</a
+                      ></span
+                    >
+                  </div>
+                  <div id="tictactoe-container">
+                    <div
+                      id="tictactoe-board"
+                      style="
+                        display: grid;
+                        grid-template-columns: repeat(3, 1fr);
+                      "
+                    >
+                      <button class="ttt-cell"></button>
+                      <button class="ttt-cell"></button>
+                      <button class="ttt-cell"></button>
+                      <button class="ttt-cell"></button>
+                      <button class="ttt-cell"></button>
+                      <button class="ttt-cell"></button>
+                      <button class="ttt-cell"></button>
+                      <button class="ttt-cell"></button>
+                      <button class="ttt-cell"></button>
+                    </div>
+                    <div
+                      id="tictactoe-status"
+                      style="text-align: center; margin: 1em 0"
+                    ></div>
+                  </div>
+                </td>
+              </tr>
+            </table>
+          </div>
+        </td>
+      </tr>
+    </table>
+    <script>
+      // Logo rotation logic
+      const logo = document.querySelector(".machine-rotate-logo");
+      let isHovering = false;
+
+      if (logo) {
+        // Mouse tracking for rotation when NOT hovering
+        document.addEventListener("mousemove", function (e) {
+          if (isHovering) return;
+          const rect = logo.getBoundingClientRect();
+          const cx = rect.left + rect.width / 2;
+          const cy = rect.top + rect.height / 2;
+          const dx = e.clientX - cx;
+          const dy = e.clientY - cy;
+          const angle = (Math.atan2(dy, dx) * 180) / Math.PI;
+          logo.style.transform = `rotate(${angle + 90}deg)`;
+        });
+
+        // On hover: add animation class, remove inline transform
+        logo.addEventListener("mouseenter", function () {
+          isHovering = true;
+          logo.style.transform = "";
+          logo.classList.add("machine-rotate-animating");
+        });
+
+        // On leave: remove animation class, reset to follow mouse
+        logo.addEventListener("mouseleave", function () {
+          isHovering = false;
+          logo.classList.remove("machine-rotate-animating");
+        });
+      }
+    </script>
+    <script>
+      const cells = [];
+      let current = Math.random() < 0.5 ? "Ｏ" : "Ｘ"; // 隨機決定誰先
+      let board = Array(9).fill("");
+      let finished = false;
+      document.querySelectorAll(".ttt-cell").forEach((btn, i) => {
+        cells[i] = btn;
+        btn.onclick = function () {
+          if (board[i] || finished || current !== "Ｏ") return;
+          makeMove(i, "Ｏ");
+          if (!finished) setTimeout(aiMove, 400); // 電腦自動下
+        };
+      });
+      if (current === "Ｘ") {
+        setTimeout(aiMove, 400);
+      }
+
+      function makeMove(i, player) {
+        board[i] = player;
+        cells[i].textContent = player;
+        cells[i].disabled = true;
+        if (checkWin(player)) {
+          finished = true;
+        } else if (board.every((v) => v)) {
+          finished = true;
+        } else {
+          current = player === "Ｏ" ? "Ｘ" : "Ｏ";
+        }
+      }
+
+      function aiMove() {
+        if (finished) return;
+        // 1. 先檢查自己能不能贏
+        for (let i = 0; i < 9; i++) {
+          if (!board[i]) {
+            board[i] = "Ｘ";
+            if (checkWin("Ｘ")) {
+              makeMove(i, "Ｘ");
+              return;
+            }
+            board[i] = "";
+          }
+        }
+        // 2. 擋！
+        for (let i = 0; i < 9; i++) {
+          if (!board[i]) {
+            board[i] = "Ｏ";
+            if (checkWin("Ｏ")) {
+              board[i] = "";
+              makeMove(i, "Ｘ");
+              return;
+            }
+            board[i] = "";
+          }
+        }
+        // 3. otherwise隨機下
+        const empty = board
+          .map((v, i) => (v ? null : i))
+          .filter((v) => v !== null);
+        if (empty.length === 0) return;
+        const idx = empty[Math.floor(Math.random() * empty.length)];
+        makeMove(idx, "Ｘ");
+      }
+
+      function checkWin(player) {
+        const wins = [
+          [0, 1, 2],
+          [3, 4, 5],
+          [6, 7, 8],
+          [0, 3, 6],
+          [1, 4, 7],
+          [2, 5, 8],
+          [0, 4, 8],
+          [2, 4, 6],
+        ];
+        return wins.some((line) => line.every((idx) => board[idx] === player));
+      }
+    </script>
+  </body>
+</html>

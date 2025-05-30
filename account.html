@@ -6,12 +6,12 @@
     <meta
       http-equiv="Content-Security-Policy"
       content="default-src 'self'; 
-         script-src 'self' 'unsafe-inline' https://www.google.com https://www.gstatic.com https://code.jquery.com https://www.googletagmanager.com; 
-         style-src 'self' 'unsafe-inline'; 
-         connect-src https://www.google-analytics.com https://script.google.com;
-         frame-src https://www.google.com;"
+             script-src 'self' 'unsafe-inline' https://www.google.com https://www.gstatic.com https://code.jquery.com https://www.googletagmanager.com; 
+             style-src 'self' 'unsafe-inline'; 
+             connect-src https://www.google-analytics.com https://script.google.com https://script.googleusercontent.com/;
+             frame-src https://www.google.com;"
     />
-    <title>Edit Dashboard - 草率季Taipei Art Book Fair</title>
+    <title>Account - 草率季Taipei Art Book Fair</title>
     <link rel="stylesheet" href="css/dashboard.css" />
     <link rel="stylesheet" href="css/font.css" />
     <link rel="shortcut icon" href="image/icon-1.ico" />
@@ -30,30 +30,40 @@
 
       gtag("config", "G-EPSXJPDH6L");
     </script>
-    <script src="js/dashboard-basic.js"></script>
+    <script src="js/cookie.js"></script>
+    <script src="js/account.js"></script>
   </head>
   <body>
     <table class="layout">
-      <a href="dashboard-TPABF.html" class="close-button" title="返回 Dashboard"
-        >×</a
-      >
       <tr>
         <!-- Sidebar -->
         <td class="sidebar">
           <p style="background-color: olivedrab; color: ghostwhite">
+            <!-- 草率季<br />TPABF -->
             <img
               src="image/icon-1.ico"
               alt="logo"
+              class="machine-rotate-logo"
               style="width: 4.5vw; height: auto; transform: rotate(45deg)"
             />
           </p>
-          <p style="background-color: black; color: ghostwhite">
-            攤商管理<br />Dashboard
-          </p>
+          <a
+            href="dashboard-TPABF.html"
+            style="text-decoration: none; color: black"
+            ><p>攤商管理<br />Dashboard</p></a
+          >
           <hr class="sidebar-hr" />
-          <p>聯絡我們<br />Contact</p>
+          <a href="dashboard-contact.html" style="text-decoration: none"
+            ><p style="text-decoration: none; color: black">
+              聯絡我們<br />Contact
+            </p></a
+          >
           <hr class="sidebar-hr" />
-          <p>常見問題<br />FAQ</p>
+          <a
+            href="dashboard-FAQ.html"
+            style="text-decoration: none; color: black"
+            ><p>常見問題<br />FAQ</p></a
+          >
           <hr class="sidebar-hr" />
           <div class="sidebar-middle">
             <p class="rotated-link">
@@ -63,128 +73,132 @@
               >
             </p>
           </div>
-          <p style="background-color: blueviolet; color: ghostwhite">
-            帳號管理<br />Account
-          </p>
+          <a href="account.html" style="text-decoration: none"
+            ><p style="background-color: blueviolet; color: ghostwhite">
+              帳號管理<br />Account
+            </p></a
+          >
         </td>
 
-        <!-- Middle form -->
-        <td class="edit-page">
+        <!-- 帳號資料 -->
+        <td class="account">
+          <h3 style="color: blue">Account</h3>
+          <br />
           <div class="scroll-inner">
-            <form class="edit-form">
-              <h2 style="font-size: 1.5rem">編輯品牌資料 Edit Brand Info</h2>
-
-              <table width="100%">
-                <tr>
-                  <td colspan="2">
-                    <span class="label">品牌名稱 Brand Name</span><br />
-                    <input
-                      type="text"
-                      name="brandName"
-                      value="Yoshimi Saito"
-                      style="width: 100%"
-                    />
-                  </td>
-                </tr>
-                <tr>
-                  <td colspan="2">
-                    <span class="label">品牌簡介 Bio</span><br />
-                    <textarea name="bio" rows="6" style="width: 100%">
-這是一段品牌簡介...</textarea
+            <table width="100%">
+              <tr
+                style="
+                  background-color: blue;
+                  text-align: right;
+                  border-color: blue;
+                "
+              >
+                <td colspan="2">
+                  <span
+                    style="
+                      text-align: right;
+                      font-size: 1rem;
+                      color: ghostwhite;
+                      cursor: pointer;
+                    "
+                    onmouseover="this.style.color='darkolivegreen'"
+                    onmouseout="this.style.color='black'"
+                    onclick=""
+                    title="編輯"
+                    >編輯 Edit</span
+                  >
+                </td>
+              </tr>
+              <tr colspan="2" style="position: relative">
+                <!-- 左欄：代表人，一格佔 5 行 -->
+                <td rowspan="2">
+                  <span class="label">代表人 Contact Person</span><br />
+                  <div
+                    style="
+                      vertical-align: middle;
+                      font-size: 3rem;
+                      line-height: 2rem;
+                    "
+                  >
+                    <span style="font-size: 2rem" id="contact-person"
+                      >🚧 讀取中…</span
                     >
-                  </td>
-                </tr>
-                <tr>
-                  <td>
-                    <span class="label">代表人 Contact Person</span><br />
-                    <input
-                      type="text"
-                      name="contactPerson"
-                      value="王大明"
-                      style="width: 100%"
-                    />
-                  </td>
-                  <td>
-                    <span class="label">聯絡信箱 Email</span><br />
-                    <input
-                      type="email"
-                      name="email"
-                      value="damin@gmail.com"
-                      style="width: 100%"
-                    />
-                  </td>
-                </tr>
-                <tr>
-                  <td>
-                    <span class="label">聯絡電話 Phone</span><br />
-                    <input
-                      type="text"
-                      name="phone"
-                      value="(+31)0923485729"
-                      style="width: 100%"
-                    />
-                  </td>
-                  <td>
-                    <span class="label">Website</span><br />
-                    <input
-                      type="url"
-                      name="website"
-                      value="https://www.nowplacesf.com/publications"
-                      style="width: 100%"
-                    />
-                  </td>
-                </tr>
-                <tr>
-                  <td>
-                    <span class="label">Instagram</span><br />
-                    <input
-                      type="text"
-                      name="instagram"
-                      value="@51personaeproject"
-                      style="width: 100%"
-                    />
-                  </td>
-                  <td>
-                    <span class="label">Facebook</span><br />
-                    <input
-                      type="text"
-                      name="facebook"
-                      value=""
-                      style="width: 100%"
-                    />
-                  </td>
-                </tr>
-                <tr>
-                  <td colspan="2">
-                    <span class="label">Whatsapp</span><br />
-                    <input
-                      type="text"
-                      name="whatsapp"
-                      value=""
-                      style="width: 100%"
-                    />
-                  </td>
-                </tr>
-              </table>
+                  </div>
+                </td>
 
-              <p style="margin-top: 2rem; color: darkgray">
-                請再次確認資訊是否正確後進行修改。請注意，草率簿將於 8
-                月底開始排版，最終資料將以工作同仁所彙整的版本為準。
-              </p>
-
-              <div style="margin-top: 1rem">
-                <button
-                  type="submit"
-                  class="pay-button"
-                  style="padding: 0.7rem 2rem"
-                >
-                  送出 Submit
-                </button>
-              </div>
-            </form>
+                <!-- 第一行右欄：Email -->
+                <td>
+                  <span class="label">聯絡信箱 Contact Email</span><br /><span
+                    id="contact-email"
+                    >🚧 讀取中…</span
+                  >
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <span class="label">聯絡電話 Contact Phone</span><br /><span
+                    id="contact-phone"
+                    >🚧 讀取中…</span
+                  >
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <span class="label">Website</span><br />
+                  <span id="website">🚧 讀取中…</span>
+                </td>
+                <td>
+                  <span class="label">Instagram</span><br />
+                  <span id="instagram">🚧 讀取中…</span>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <span class="label">Facebook</span><br />
+                  <span id="facebook">🚧 讀取中…</span>
+                </td>
+                <td>
+                  <span class="label">Whatsapp</span><br />
+                  <span id="whatsapp">🚧 讀取中…</span>
+                </td>
+              </tr>
+            </table>
           </div>
         </td>
       </tr>
     </table>
+
+    <script>
+      // Logo rotation logic
+      const logo = document.querySelector(".machine-rotate-logo");
+      let isHovering = false;
+
+      if (logo) {
+        // Mouse tracking for rotation when NOT hovering
+        document.addEventListener("mousemove", function (e) {
+          if (isHovering) return;
+          const rect = logo.getBoundingClientRect();
+          const cx = rect.left + rect.width / 2;
+          const cy = rect.top + rect.height / 2;
+          const dx = e.clientX - cx;
+          const dy = e.clientY - cy;
+          const angle = (Math.atan2(dy, dx) * 180) / Math.PI;
+          logo.style.transform = `rotate(${angle + 90}deg)`;
+        });
+
+        // On hover: add animation class, remove inline transform
+        logo.addEventListener("mouseenter", function () {
+          isHovering = true;
+          logo.style.transform = "";
+          logo.classList.add("machine-rotate-animating");
+        });
+
+        // On leave: remove animation class, reset to follow mouse
+        logo.addEventListener("mouseleave", function () {
+          isHovering = false;
+          logo.classList.remove("machine-rotate-animating");
+        });
+      }
+    </script>
   </body>
 </html>

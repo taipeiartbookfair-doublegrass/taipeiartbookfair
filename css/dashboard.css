@@ -80,6 +80,50 @@ th {
   background-color: aliceblue;
   width: 44vw;
 }
+.account {
+  background-color: rgb(230, 250, 222);
+  width: 99vw;
+  height: 100vh;
+  overflow-y: scroll !important;
+}
+.admin {
+  background-color: rgb(254, 221, 214);
+  width: 99vw;
+  height: 100vh;
+  overflow-y: scroll !important;
+}
+.admin > div {
+  height: 97vh; /* or any value you prefer */
+  overflow-y: auto;
+  padding-bottom: 3rem;
+}
+.faqtable {
+  z-index: 3;
+}
+h3 {
+  text-align: center;
+  font-family: "PicNic";
+  font-size: 20rem;
+  line-height: 15rem;
+  margin: 0px;
+  color: lime;
+  z-index: -1;
+  position: initial;
+}
+.faq-number {
+  display: inline-block;
+  font-style: italic;
+  text-align: center;
+  color: rgb(0, 227, 0);
+  font-size: 3em;
+  vertical-align: middle;
+}
+.faq-number-cell {
+  vertical-align: top;
+  width: 2.5em;
+  border-right: none !important;
+}
+
 .right {
   background-color: ghostwhite;
   width: 55vw;
@@ -94,6 +138,13 @@ th {
   color: #fff;
   font-size: 0.75rem;
   padding: 2px 6px;
+  display: inline-block;
+}
+.labelAQ {
+  background: lemonchiffon;
+  color: black;
+  font-size: 1.1rem;
+  font-weight: 600;
   display: inline-block;
 }
 .rotated {
@@ -184,6 +235,7 @@ html::-webkit-scrollbar-thumb:hover {
 }
 
 .edit-page {
+  display: none;
   background-color: #f8f8f8;
   width: 100%;
   height: 95vh;
@@ -253,6 +305,7 @@ html::-webkit-scrollbar-thumb:hover {
 }
 
 .loading-grid {
+  background-image: url(../image/Cracked_dry_land.jpg);
   position: absolute;
   top: 0;
   left: 0;
@@ -261,6 +314,9 @@ html::-webkit-scrollbar-thumb:hover {
   width: 100%;
   height: 100%;
   display: grid;
+}
+.loading-grid img:not([src]) {
+  display: none;
 }
 .loading-grid img {
   width: 70px;
@@ -330,4 +386,43 @@ html::-webkit-scrollbar-thumb:hover {
 .booth-change:hover .tooltip-text {
   visibility: visible;
   opacity: 1;
+}
+#tictactoe-container {
+  position: fixed;
+  right: 30px;
+  bottom: 30px;
+  max-width: 150px;
+  padding: 1em;
+  z-index: 10001;
+}
+
+.ttt-cell {
+  width: 40px;
+  height: 40px;
+  font-size: 1.5rem;
+  font-family: inherit;
+  cursor: pointer;
+  background: none;
+  border: none;
+}
+.ttt-cell {
+  border: none;
+  border-right: 1px solid black;
+  border-bottom: 1px solid black;
+}
+.ttt-cell:nth-child(3n) {
+  /* 最右邊 */
+  border-right: none;
+}
+.ttt-cell:nth-child(n + 7) {
+  /* 最下排 */
+  border-bottom: none;
+}
+.ttt-cell:disabled {
+  background: none;
+  color: black;
+  cursor: default;
+}
+#media-section-row5 {
+  width: 100%;
 }

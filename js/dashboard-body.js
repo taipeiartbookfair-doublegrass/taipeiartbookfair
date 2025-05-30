@@ -3,7 +3,7 @@ document.addEventListener("DOMContentLoaded", function () {
   const loadingMask = document.getElementById("loading-mask");
   const loadingGrid = loadingMask.querySelector(".loading-grid");
   const loadingPercent = document.getElementById("loading-percent");
-  const imgSrc = "image/Cracked_dry_land.jpg";
+  const imgSrc = ""; // 不用先 load
   const imgActiveSrc = "image/Moss_of_Bangladesh_2.jpg";
   const imgSize = 70; // px，和 CSS 一致
 
@@ -17,12 +17,12 @@ document.addEventListener("DOMContentLoaded", function () {
   loadingGrid.style.gridTemplateColumns = `repeat(${cols}, ${imgSize}px)`;
   loadingGrid.style.gridTemplateRows = `repeat(${rows}, ${imgSize}px)`;
 
-  // 產生圖片，全部格子都放圖片
+  // 產生圖片，全部格子都放圖片（不設 src）
   loadingGrid.innerHTML = "";
   for (let r = 0; r < rows; r++) {
     for (let c = 0; c < cols; c++) {
       const img = document.createElement("img");
-      img.src = imgSrc;
+      // img.src = imgSrc; // 不設 src
       img.className = "loading-img";
       img.style.width = imgSize + "px";
       img.style.height = imgSize + "px";
@@ -36,7 +36,11 @@ document.addEventListener("DOMContentLoaded", function () {
     const total = imgs.length;
     const progress = Math.floor(percent * total);
     for (let i = 0; i < total; i++) {
-      imgs[i].src = i < progress ? imgActiveSrc : imgSrc;
+      if (i < progress) {
+        imgs[i].src = imgActiveSrc;
+      } else {
+        imgs[i].removeAttribute("src"); // 這樣才會隱藏
+      }
     }
     // 更新右下角百分比
     if (loadingPercent) {
@@ -95,4 +99,37 @@ document.addEventListener("DOMContentLoaded", function () {
       logo.classList.remove("machine-rotate-animating");
     });
   }
+  window.openEditPage = function openEditPage() {
+    const editPage = document.querySelector(".edit-page");
+    const mid = document.querySelector(".mid");
+    const right = document.querySelector(".right");
+    const account = document.querySelector(".account");
+    if (editPage) editPage.style.display = "table-cell";
+    if (mid) mid.style.display = "none";
+    if (right) right.style.display = "none";
+    if (account) account.style.display = "none";
+
+    const bio = document.getElementById("bio");
+    const bioEdit = document.getElementById("bio-edit");
+    if (bio && bioEdit) bioEdit.value = bio.innerText.trim();
+
+    const brandName = document.getElementById("brand-name");
+    const brandNameEdit = document.getElementById("brandName-edit");
+    if (brandName && brandNameEdit)
+      brandNameEdit.value = brandName.innerText.trim();
+
+    const role = document.getElementById("role");
+    const roleEdit = document.getElementById("role-edit");
+    if (role && roleEdit) roleEdit.value = role.innerText.trim();
+
+    const category = document.getElementById("category");
+    const categoryEdit = document.getElementById("category-edit");
+    if (category && categoryEdit)
+      categoryEdit.value = category.innerText.trim();
+
+    const nationality = document.getElementById("nationality");
+    const nationalityEdit = document.getElementById("nationality-edit");
+    if (nationality && nationalityEdit)
+      nationalityEdit.value = nationality.innerText.trim();
+  };
 });
