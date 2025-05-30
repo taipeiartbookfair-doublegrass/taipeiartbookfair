@@ -221,6 +221,9 @@ document.addEventListener("DOMContentLoaded", async function () {
   const letter = document.getElementById("negative-letter");
   const conditionalyes = document.getElementById("booth-type-tooltip");
   const mediaupload = document.getElementById("media-section");
+  const foreignShipping = document.getElementById("media-section-row2");
+  const visaupload = document.getElementById("media-section-row3");
+  const familyticket = document.getElementById("media-section-row4");
 
   const rawResult = apiData["錄取"];
 
@@ -241,13 +244,19 @@ document.addEventListener("DOMContentLoaded", async function () {
       registrationStatusEl.textContent = "已完成報名";
       equipmentinfo.style.display = "none"; // 隱藏設備資訊
       mediaupload.style.display = "block"; // 隱藏媒體上傳
+      foreignShipping.style.display = "block";
+      visaupload.style.display = "block"; // 顯示簽證上傳
+      familyticket.style.display = "block"; // 顯示家庭票上傳
     } else {
       registrationStatusEl.textContent = "未完成報名";
     }
   } else if (rawResult === "0") {
     registrationStatusEl.textContent = "-";
     equipmentinfo.style.display = "none"; // 隱藏設備資訊
-    mediaupload.style.display = "nonw"; // 隱藏媒體上傳
+    mediaupload.style.display = "none"; // 隱藏媒體上傳
+    foreignShipping.style.display = "none";
+    visaupload.style.display = "none"; // 顯示簽證上傳
+    familyticket.style.display = "none"; // 顯示家庭票上傳
   } else if (
     rawResult === "4-換攤-創作商品" ||
     rawResult === "4-換攤-食物酒水" ||
@@ -261,6 +270,9 @@ document.addEventListener("DOMContentLoaded", async function () {
       registrationStatusEl.textContent = "已完成報名";
       equipmentinfo.style.display = "none"; // 隱藏設備資訊
       mediaupload.style.display = "block"; // 隱藏媒體上傳
+      foreignShipping.style.display = "block";
+      visaupload.style.display = "block"; // 顯示簽證上傳
+      familyticket.style.display = "block"; // 顯示家庭票上傳
     } else {
       registrationStatusEl.textContent = "未完成報名";
     }
@@ -274,8 +286,11 @@ document.addEventListener("DOMContentLoaded", async function () {
     // 其他情況維持原本邏輯
     if (apiData["已匯款"]) {
       registrationStatusEl.textContent = "已完成報名";
-      equipmentinfo.style.display = "none"; // 隱藏設備資訊
-      mediaupload.style.display = "block"; // 隱藏媒體上傳
+      equipmentinfo.style.display = "none";
+      mediaupload.style.display = "block";
+      foreignShipping.style.display = "block";
+      visaupload.style.display = "block"; // 顯示簽證上傳
+      familyticket.style.display = "block"; // 顯示家庭票上傳
     } else {
       registrationStatusEl.textContent = "未完成報名";
     }

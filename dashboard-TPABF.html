@@ -531,57 +531,72 @@
                 </td>
               </tr>
               <tr id="media-section" style="display: none">
-                <td colspan="3" style="border-top: none">
-                  <span class="label"
-                    >素材下載與上傳 Download & Upload Materials</span
-                  >
+                <!-- 素材下載 Download -->
+                <td colspan="2" style="border-top: none">
+                  <span class="label">素材下載 Download Materials</span>
                   <br /><br />
-
-                  <!-- 地區選擇 -->
-                  <label for="region-select">選擇地區 Region：</label>
-                  <select id="region-select">
-                    <option value="taiwan">台灣 Taiwan</option>
-                    <option value="china">中國大陸 China</option>
-                    <option value="other">其他地區 Others</option>
-                  </select>
-                  <br /><br />
-
-                  <!-- 素材包下載 -->
                   <div id="material-download">
                     <b>草率季官方素材包：</b>
                     <a id="zip-link" href="downloads/material-tw.zip" download
                       >下載 Download (TW)</a
                     >
                   </div>
-                  <br />
-
-                  <!-- 行銷素材上傳 -->
-                  <div>
-                    <b>行銷素材上傳：</b>
-                    <form
-                      id="marketing-upload-form"
-                      enctype="multipart/form-data"
+                </td>
+                <!-- 行銷素材上傳 Upload -->
+                <td colspan="1" style="border-top: none">
+                  <form
+                    id="marketing-upload-form"
+                    enctype="multipart/form-data"
+                  >
+                    <label for="marketing-file"
+                      >請上傳書本介紹po文（PDF/JPG/PNG）：</label
                     >
-                      <label for="marketing-file"
-                        >請上傳書本介紹po文（PDF/JPG/PNG）：</label
-                      >
-                      <input
-                        type="file"
-                        id="marketing-file"
-                        name="marketing-file"
-                        accept=".pdf,.jpg,.jpeg,.png"
-                      />
-                      <button type="submit">上傳 Upload</button>
-                    </form>
+                    <input
+                      type="file"
+                      id="marketing-file"
+                      name="marketing-file"
+                      accept=".pdf,.jpg,.jpeg,.png"
+                    />
+                    <button type="submit">上傳 Upload</button>
+                  </form>
+                </td>
+              </tr>
+              <!-- 寄件訊息 Foreigner Form -->
+              <tr style="display: none" id="media-section-row2">
+                <td colspan="2" style="border-top: none">
+                  <div id="foreigner-form">
+                    <span class="label"
+                      >海外寄件服務 Overseas Shipping Service</span
+                    >
+                    <a href="https://your-form-link.com" target="_blank"
+                      >下載表單 Download Form</a
+                    >
                   </div>
-                  <br />
-
-                  <!-- 簽證資料上傳（僅外國人顯示） -->
-                  <div id="visa-upload" style="display: none">
-                    <b
-                      >簽證資料上傳（僅外國人）Visa Document Upload (For
-                      Foreigners Only)：</b
+                </td>
+                <td colspan="1" style="border-top: none">
+                  <form
+                    id="marketing-upload-form"
+                    enctype="multipart/form-data"
+                  >
+                    <label for="marketing-file"
+                      >請上傳書本介紹po文（PDF/JPG/PNG）：</label
                     >
+                    <input
+                      type="file"
+                      id="marketing-file"
+                      name="marketing-file"
+                      accept=".pdf,.jpg,.jpeg,.png"
+                    />
+                    <button type="submit">上傳 Upload</button>
+                  </form>
+                </td>
+              </tr>
+
+              <!-- 簽證資料上傳 Visa Upload -->
+              <tr style="display: none" id="media-section-row3">
+                <td colspan="2" style="border-top: none">
+                  <div id="visa-upload">
+                    <span class="label">簽證資料上傳Visa Document Upload</span>
                     <form id="visa-upload-form" enctype="multipart/form-data">
                       <input
                         type="file"
@@ -592,27 +607,40 @@
                       <button type="submit">上傳 Upload</button>
                     </form>
                   </div>
-                  <br />
-
-                  <!-- 外國人表單連結 -->
-                  <div id="foreigner-form" style="display: none">
-                    <b>外國人專用表單：</b>
-                    <a href="https://your-form-link.com" target="_blank"
-                      >填寫表單 Fill in Form</a
-                    >
-                  </div>
-                  <br />
-
-                  <!-- Shopline 連結 -->
-                  <div>
-                    <b>親友票購買：</b>
-                    <a href="https://your-shopline-link.com" target="_blank"
-                      >前往 Shopline</a
-                    >
+                </td>
+                <!-- 簽證資料警語 Visa Notice -->
+                <td colspan="1" style="border-top: none">
+                  <div id="visa-warning" style="color: #c00; font-size: 0.9em">
+                    ※ 若需協助簽證，請務必於期限內上傳完整資料，逾期恕不受理。
                   </div>
                 </td>
               </tr>
-
+              <!-- 親友票購買 Shopline -->
+              <tr style="display: none" id="media-section-row4">
+                <td style="border-top: none; border-right: 2px solid black">
+                  <span class="label">親友票購買：</span
+                  ><br />請在付款時填入以下代碼（每個攤主限購五張）：!89SJ89<br />
+                </td>
+                <td style="border-top: none; border-right: 2px solid black">
+                  <a href="https://your-shopline-link.com" target="_blank"
+                    >前往 Shopline</a
+                  >
+                </td>
+              </tr>
+              <tr>
+                <td style="border-top: none; border-right: 2px solid black">
+                  <span class="label">攤主手冊 Exhibitor Manual</span><br />
+                  <a href="https://your-shopline-link.com" target="_blank"
+                    >下載 Download</a
+                  >
+                </td>
+              </tr>
+              <tr>
+                <td style="border-top: none; border-right: 2px solid black">
+                  <span class="label">攤位地圖 Booth Map</span><br />
+                  <img src="image/map-lol.png" style="width: 100%" />
+                </td>
+              </tr>
               <tr>
                 <td style="border-top: none; border-right: 2px solid black">
                   <span class="label">徵件流程表 Open Call Schedule</span><br />
@@ -1054,36 +1082,5 @@
       </tr>
     </table>
     <script src="js/dashboard-body.js"></script>
-    <script>
-      // 根據地區切換素材包與簽證欄位
-      document
-        .getElementById("region-select")
-        .addEventListener("change", function () {
-          var region = this.value;
-          var zipLink = document.getElementById("zip-link");
-          var visaDiv = document.getElementById("visa-upload");
-          var foreignerForm = document.getElementById("foreigner-form");
-          if (region === "taiwan") {
-            zipLink.href = "downloads/material-tw.zip";
-            zipLink.textContent = "下載 Download (TW)";
-            visaDiv.style.display = "none";
-            foreignerForm.style.display = "none";
-          } else if (region === "china") {
-            zipLink.href = "downloads/material-cn.zip";
-            zipLink.textContent = "下載 Download (CN)";
-            visaDiv.style.display = "block";
-            foreignerForm.style.display = "block";
-          } else {
-            zipLink.href = "downloads/material-others.zip";
-            zipLink.textContent = "下載 Download (Others)";
-            visaDiv.style.display = "block";
-            foreignerForm.style.display = "block";
-          }
-        });
-      // 預設觸發一次
-      document
-        .getElementById("region-select")
-        .dispatchEvent(new Event("change"));
-    </script>
   </body>
 </html>
