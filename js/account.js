@@ -51,12 +51,12 @@ document.addEventListener("DOMContentLoaded", async function () {
   }
 
   console.log("apiData['代表人'] =", apiData["代表人"]);
-  document.getElementById("contact-person").textContent =
-    apiData["代表人"] || "";
+  document.getElementById("contact-person").textContent = apiData["name"] || "";
 
-  document.getElementById("contact-email").textContent = apiData["Email"] || "";
+  document.getElementById("contact-email").textContent =
+    apiData["account"] || "";
   document.getElementById("contact-phone").textContent =
-    apiData["聯絡電話"] || apiData["WhatsApp"] || "";
+    apiData["聯絡電話"] || apiData["phone"] || "";
 
   function setSocialText(id, value) {
     const el = document.getElementById(id);
@@ -71,8 +71,8 @@ document.addEventListener("DOMContentLoaded", async function () {
     }
   }
 
-  setSocialText("website", apiData["Website"]);
-  setSocialText("instagram", apiData["Instagram"]);
-  setSocialText("facebook", apiData["Facebook"]);
-  setSocialText("whatsapp", apiData["WhatsApp"]);
+  setSocialText("website", apiData["website"]);
+  setSocialText("instagram", apiData["instagram"]);
+  setSocialText("facebook", apiData["facebook"]);
+  setSocialText("whatsapp", apiData["whatsapp"]);
 });
