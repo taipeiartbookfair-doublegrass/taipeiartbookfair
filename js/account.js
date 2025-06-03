@@ -55,8 +55,7 @@ document.addEventListener("DOMContentLoaded", async function () {
 
   document.getElementById("contact-email").textContent =
     apiData["account"] || "";
-  document.getElementById("contact-phone").textContent =
-    apiData["聯絡電話"] || apiData["phone"] || "";
+  document.getElementById("contact-phone").textContent = apiData["phone"] || "";
 
   function setSocialText(id, value) {
     const el = document.getElementById(id);
