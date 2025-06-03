@@ -164,34 +164,19 @@ document.addEventListener("DOMContentLoaded", async function () {
   function getApplicationResultText(raw) {
     if (!raw) return "";
     // 條件式錄取
-    if (
-      raw === "4-換攤-創作商品" ||
-      raw === "4-換攤-食物酒水" ||
-      raw === "4-換攤-書攤" ||
-      raw === "換攤-創作商品" ||
-      raw === "換攤-食物酒水" ||
-      raw === "換攤-書攤"
-    ) {
+    if (raw === "4-是-條件式錄取") {
       return "條件式錄取";
     }
     // 錄取
-    if (
-      raw === "1-是-1波" ||
-      raw === "是" ||
-      raw === "1是" ||
-      raw === "2-是-2波" ||
-      raw === "2是" ||
-      raw === "0-邀請" ||
-      raw === "0"
-    ) {
+    if (raw === "1-是-1波" || raw === "2-是-2波" || raw === "0-邀請") {
       return "錄取";
     }
     // 備取
-    if (raw === "3-猶豫" || raw === "猶豫") {
+    if (raw === "3-猶豫") {
       return "備取";
     }
     // 未錄取
-    if (raw === "5-否" || raw === "否") {
+    if (raw === "5-否") {
       return "未錄取";
     }
     return raw; // fallback: 顯示原始內容
@@ -201,7 +186,7 @@ document.addEventListener("DOMContentLoaded", async function () {
     el.style.backgroundColor = "";
     el.style.color = "";
     if (resultText === "錄取" || resultText === "條件式錄取") {
-      el.style.backgroundColor = "lime";
+      el.style.backgroundColor = "rgb(0, 157, 255)";
       el.style.color = "";
     } else if (resultText === "備取") {
       el.style.backgroundColor = "lightgreen";
@@ -219,6 +204,7 @@ document.addEventListener("DOMContentLoaded", async function () {
   const registrationStatusEl = document.getElementById("registration-status");
   const equipmentinfo = document.getElementById("equipmentinfo");
   const letter = document.getElementById("negative-letter");
+  const runnerletter = document.getElementById("runnerup-letter");
   const conditionalyes = document.getElementById("booth-type-tooltip");
   const mediaupload = document.getElementById("media-section");
   const foreignShipping = document.getElementById("media-section-row2");
@@ -231,16 +217,13 @@ document.addEventListener("DOMContentLoaded", async function () {
   const nationality = (region || "").trim().toUpperCase();
 
   // 依錄取結果決定報名狀態顯示
-  if (rawResult === "5-否" || rawResult === "否") {
+  if (rawResult === "5-否") {
     registrationStatusEl.textContent = "-";
     equipmentinfo.style.display = "none"; // 隱藏設備資訊
     letter.style.display = "block";
   } else if (
     rawResult === "1-是-1波" ||
-    rawResult === "是" ||
-    rawResult === "1是" ||
     rawResult === "2-是-2波" ||
-    rawResult === "2是" ||
     rawResult === "0-邀請"
   ) {
     if (apiData["已匯款"]) {
@@ -275,14 +258,7 @@ document.addEventListener("DOMContentLoaded", async function () {
     familyticket.style.display = "none";
     manual.style.display = "none";
     map.style.display = "none";
-  } else if (
-    rawResult === "4-換攤-創作商品" ||
-    rawResult === "4-換攤-食物酒水" ||
-    rawResult === "4-換攤-書攤" ||
-    rawResult === "換攤-創作商品" ||
-    rawResult === "換攤-食物酒水" ||
-    rawResult === "換攤-書攤"
-  ) {
+  } else if (rawResult === "4-是-條件式錄取") {
     conditionalyes.style.display = "inline-block";
     if (apiData["已匯款"]) {
       registrationStatusEl.textContent = "已完成報名";
@@ -307,12 +283,11 @@ document.addEventListener("DOMContentLoaded", async function () {
     } else {
       registrationStatusEl.textContent = "未完成報名";
     }
-  } else if (
-    rawResult === "3-猶豫" ||
-    rawResult === "猶豫" ||
-    rawResult === "3-猶豫"
-  ) {
+  } else if (rawResult === "3-猶豫") {
     registrationStatusEl.textContent = "暫不符合";
+    registrationStatusEl.textContent = "-";
+    equipmentinfo.style.display = "none"; // 隱藏設備資訊
+    runnerletter.style.display = "block";
   } else {
     // 其他情況維持原本邏輯
     if (apiData["已匯款"]) {
@@ -622,7 +597,7 @@ document.addEventListener("DOMContentLoaded", async function () {
 
   // Always fill in email and application number after updating notes
   document.querySelectorAll("#billing-email").forEach((el) => {
-    el.textContent = apiData["Email"] || "";
+    el.textContent = apiData["account"] || "";
   });
   document.querySelectorAll("#billing-application-number").forEach((el) => {
     el.textContent = apiData["報名編號"] || "";
