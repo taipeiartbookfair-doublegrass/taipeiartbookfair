@@ -17,7 +17,7 @@ document.addEventListener("DOMContentLoaded", async function () {
   function startFakeProgress() {
     progressTimer = setInterval(() => {
       // 最多跑到 82%
-      if (fakeProgress < 0.82) {
+      if (fakeProgress < 0.99) {
         fakeProgress += 0.006;
         if (window.updateLoadingProgress) updateLoadingProgress(fakeProgress);
       }
