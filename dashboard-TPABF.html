@@ -282,17 +282,29 @@
               </tr>
 
               <tr id="equipmentinfo" style="display: block">
-                <td colspan="3" style="padding: 0; border: none">
+                <td
+                  colspan="3"
+                  style="
+                    padding: 0;
+                    border-top: none;
+                    border-left: none;
+                    border-right: none;
+                    border-bottom: 1px solid black;
+                  "
+                >
                   <table style="width: 100%; table-layout: auto">
                     <tr>
                       <!-- 左邊：攤種區塊 -->
                       <td
-                        rowspan="2"
                         style="
                           width: 25%;
                           border-top: 0.5px solid pink;
+                          border-bottom: 0.5px solid pink;
+
                           margin: 6px 0;
                           border-left: 1px solid black;
+
+                          vertical-align: top;
                         "
                       >
                         <span class="label">攤種 Booth Type</span
@@ -359,6 +371,7 @@
                           border-left: none;
                           border-bottom: none;
                           border-right: 1px solid black;
+                          vertical-align: top;
                         "
                       >
                         <div id="billing-section">
@@ -512,11 +525,38 @@
                             </tr>
                           </table>
                         </div>
+                        <div
+                          style="
+                            padding-top: 12px;
+                            padding-left: 12px;
+                            border-top: none;
+                            margin: 6px 0;
+                          "
+                        >
+                          <span class="label">注意事項 Notice</span><br />
+                          <ul
+                            style="
+                              margin: 0;
+                              padding-left: 20px;
+                              font-size: 0.8rem;
+                            "
+                          >
+                            <li>
+                              請自行評估需求繳費，繳款後我們不再提供更改申請選項。
+                            </li>
+                            <li>
+                              每攤限加購 1
+                              張工作證，如需更多數量請買當日票入場。
+                            </li>
+                            <li>付款之後請自行留存發票。</li>
+                            <li>報名以及付款狀態將於 7 月 15 日對帳後更新。</li>
+                          </ul>
+                        </div>
                       </td>
                     </tr>
 
                     <!-- 右下：注意事項 -->
-                    <tr>
+                    <!-- <tr>
                       <td
                         colspan="2"
                         style="
@@ -524,6 +564,7 @@
                           border-top: none;
                           margin: 6px 0;
                           border-left: 1px solid black;
+                          vertical-align: top !important;
                         "
                       >
                         <span class="label">注意事項 Notice</span><br />
@@ -546,7 +587,7 @@
                           </li>
                         </ul>
                       </td>
-                    </tr>
+                    </tr> -->
                   </table>
                 </td>
               </tr>
@@ -717,7 +758,7 @@
               </tr>
 
               <tr>
-                <td style="border-top: none; border-right: 1px solid black">
+                <td style="border-top: none; border-right: 1.5px solid black">
                   <span class="label">徵件流程表 Open Call Schedule</span><br />
                   <table style="width: 100%; margin-top: 10px">
                     <tr>
