@@ -349,7 +349,8 @@ document.addEventListener("DOMContentLoaded", async function () {
     let price = "";
     let equipment = [];
     let electricity = [];
-    let payLink = "#";
+    let payLink1 = "#";
+    let payLink2 = "#";
     let payText = "付款 Pay";
     let note = "";
 
@@ -367,7 +368,10 @@ document.addEventListener("DOMContentLoaded", async function () {
           "– 不得使用大電器",
           "– 非每攤都有，需自備延長線與他人協調",
         ];
-        payLink = "https://pay.taipeiartbookfair.com/book";
+        payLink1 =
+          "https://nomorehighwords.shoplineapp.com/products/報名費-書攤";
+        payLink2 =
+          "https://nomorehighwords.shoplineapp.com/products/報名費-書攤-1";
         break;
       case "創作商品攤":
         price = "8,000 元 <small>(含稅)</small>";
@@ -382,7 +386,10 @@ document.addEventListener("DOMContentLoaded", async function () {
           "– 不得使用大電器",
           "– 非每攤都有，需自備延長線與他人協調",
         ];
-        payLink = "https://pay.taipeiartbookfair.com/market";
+        payLink1 =
+          "https://nomorehighwords.shoplineapp.com/products/報名費-創作商品";
+        payLink2 =
+          "https://nomorehighwords.shoplineapp.com/products/報名費-創作商品-1";
         break;
       case "裝置攤":
         price = "10,000 元 <small>(含稅)</small>";
@@ -399,7 +406,10 @@ document.addEventListener("DOMContentLoaded", async function () {
             <li>220V需以1000元加購，不得使用變壓器</li>
           </ul>`,
         ];
-        payLink = "https://pay.taipeiartbookfair.com/install";
+        payLink1 =
+          "https://nomorehighwords.shoplineapp.com/products/報名費-裝置類";
+        payLink2 =
+          "https://nomorehighwords.shoplineapp.com/products/報名費-裝置類-1";
         break;
       case "食物酒水攤":
         price = "13,000 元 <small>(含稅)</small>";
@@ -417,7 +427,10 @@ document.addEventListener("DOMContentLoaded", async function () {
             <li>220V需以1000元加購，不得使用變壓器</li>
           </ul>`,
         ];
-        payLink = "https://pay.taipeiartbookfair.com/food";
+        payLink1 =
+          "https://nomorehighwords.shoplineapp.com/products/報名費-食物酒水";
+        payLink2 =
+          "https://nomorehighwords.shoplineapp.com/products/報名費-食物酒水-1";
         break;
       case "One Regular Booth":
         price = "USD$165 <small>incl. tax</small>";
@@ -432,9 +445,10 @@ document.addEventListener("DOMContentLoaded", async function () {
           "– High-power electrical appliances are not allowed",
           "– Not available at every booth; please bring your own extension cord and coordinate with others",
         ];
-
-        note = "";
-        payLink = "https://pay.taipeiartbookfair.com/one";
+        payLink1 =
+          "https://nomorehighwords.shoplineapp.com/products/報名費-one-regular-booth";
+        payLink2 =
+          "https://nomorehighwords.shoplineapp.com/products/報名費-one-regular-booth-1";
         break;
       case "Two Regular Booth":
         price = "USD$330 <small>incl. tax</small>";
@@ -449,8 +463,10 @@ document.addEventListener("DOMContentLoaded", async function () {
           "– High-power electrical appliances are not allowed",
           "– Not available at every booth; please bring your own extension cord and coordinate with others",
         ];
-        note = "";
-        payLink = "https://pay.taipeiartbookfair.com/two";
+        payLink1 =
+          "https://nomorehighwords.shoplineapp.com/products/報名費-two-regular-booth";
+        payLink2 =
+          "https://nomorehighwords.shoplineapp.com/products/報名費-two-regular-booth-1";
         break;
       case "Curation Booth":
         price = "USD$780 <small>incl. tax</small>";
@@ -469,14 +485,16 @@ document.addEventListener("DOMContentLoaded", async function () {
             <li>220V available for NT$1,000; no transformers allowed.</li>
           </ul>`,
         ];
-
-        payLink = "https://pay.taipeiartbookfair.com/curation";
+        payLink1 =
+          "https://nomorehighwords.shoplineapp.com/products/報名費-curation-booth";
+        payLink2 =
+          "https://nomorehighwords.shoplineapp.com/products/報名費-curation-booth-1";
         break;
       default:
         price = "";
         equipment = [];
-
-        payLink = "#";
+        payLink1 = "#";
+        payLink2 = "#";
     }
 
     // 更新價錢
@@ -505,7 +523,7 @@ document.addEventListener("DOMContentLoaded", async function () {
     // 更新付款按鈕
     const payBtns = document.querySelectorAll(".pay-button");
     payBtns.forEach((btn) => {
-      btn.onclick = () => window.open(payLink, "_blank");
+      btn.onclick = () => window.open(payLink1, "_blank");
       btn.textContent = payText;
     });
 
@@ -528,14 +546,14 @@ document.addEventListener("DOMContentLoaded", async function () {
         price1 = "";
     }
 
-    // 方案一價錢顯示
+    // 方案一價錢顯示，方案二自動加錢
     if (price1) {
       // 中文攤種（台幣）
       document.getElementById("billing1-price").innerHTML =
         price1 + "元 <small>(含稅)</small>";
       // 方案二自動加 1,000 元
       const price2 = (
-        parseInt(price1.replace(/,/g, "")) + 1000
+        parseInt(price1.replace(/,/g, "")) + 500
       ).toLocaleString();
       document.getElementById("billing2-price").innerHTML =
         price2 + "元 <small>(含稅)</small>";
@@ -557,8 +575,17 @@ document.addEventListener("DOMContentLoaded", async function () {
       } <small>incl. tax</small>`;
     }
 
-    // 付款按鈕可依 boothType 設定不同連結
-    // document.getElementById("pay2").onclick = ...;
+    // 更新付款按鈕（假設有兩個 pay-button 對應兩個方案）
+    const payBtn1 = document.getElementById("pay1");
+    const payBtn2 = document.getElementById("pay2");
+    if (payBtn1) {
+      payBtn1.onclick = () => window.open(payLink1, "_blank");
+      payBtn1.textContent = payText;
+    }
+    if (payBtn2) {
+      payBtn2.onclick = () => window.open(payLink2, "_blank");
+      payBtn2.textContent = payText;
+    }
   }
 
   // 在 boothType 設定後呼叫
