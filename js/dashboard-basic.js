@@ -185,7 +185,10 @@ document.addEventListener("DOMContentLoaded", async function () {
   function setApplicationResultStyle(el, resultText) {
     el.style.backgroundColor = "";
     el.style.color = "";
-    if (resultText === "錄取" || resultText === "條件式錄取") {
+    if (resultText === "錄取") {
+      el.style.backgroundColor = "lime";
+      el.style.color = "";
+    } else if (resultText === "條件式錄取") {
       el.style.backgroundColor = "rgb(0, 157, 255)";
       el.style.color = "";
     } else if (resultText === "備取") {
@@ -346,6 +349,7 @@ document.addEventListener("DOMContentLoaded", async function () {
     // 設定預設值
     let price = "";
     let equipment = [];
+    let electricity = [];
     let payLink = "#";
     let payText = "付款 Pay";
     let note = "";
@@ -359,6 +363,11 @@ document.addEventListener("DOMContentLoaded", async function () {
           "– 工作證 ×2",
           "– 草率簿 ×1<small> (含露出一面)</small>",
         ];
+        electricity = [
+          "– 供應一般電源110v",
+          "– 不得使用大電器",
+          "– 非每攤都有，需自備延長線與他人協調",
+        ];
         payLink = "https://pay.taipeiartbookfair.com/book";
         break;
       case "創作商品攤":
@@ -369,7 +378,11 @@ document.addEventListener("DOMContentLoaded", async function () {
           "– 工作證 ×2",
           "– 草率簿 ×1<small> (含露出一面)</small>",
         ];
-
+        electricity = [
+          "– 供應一般電源110v",
+          "– 不得使用大電器",
+          "– 非每攤都有，需自備延長線與他人協調",
+        ];
         payLink = "https://pay.taipeiartbookfair.com/market";
         break;
       case "裝置攤":
@@ -379,7 +392,14 @@ document.addEventListener("DOMContentLoaded", async function () {
           "– 工作證 ×2",
           "– 草率簿 ×1<small> (含露出一面)</small>",
         ];
-
+        electricity = [
+          "– 供應一般電源110v",
+          "– 9月前需提供電力需求申請，不得於現場臨時申請：",
+          `<ul style="margin:0 0 0 1.2em;padding:0;">
+            <li>條列使用電器＆瓦數</li>
+            <li>220V需以1000元加購，不得使用變壓器</li>
+          </ul>`,
+        ];
         payLink = "https://pay.taipeiartbookfair.com/install";
         break;
       case "食物酒水攤":
@@ -390,7 +410,14 @@ document.addEventListener("DOMContentLoaded", async function () {
           "– 工作證 ×2",
           "– 草率簿 ×1<small> (含露出一面)</small>",
         ];
-
+        electricity = [
+          "– 供應一般電源110v",
+          "– 9月前需提供電力需求申請，不得於現場臨時申請：",
+          `<ul style="margin:0 0 0 1.2em;padding:0;">
+            <li>條列使用電器＆瓦數</li>
+            <li>220V需以1000元加購，不得使用變壓器</li>
+          </ul>`,
+        ];
         payLink = "https://pay.taipeiartbookfair.com/food";
         break;
       case "One Regular Booth":
@@ -401,6 +428,12 @@ document.addEventListener("DOMContentLoaded", async function () {
           "– Passes ×2",
           "– TPABF Catalog ×1 <small>(one page featured)</small>",
         ];
+        electricity = [
+          "– Standard 110V power supply",
+          "– High-power electrical appliances are not allowed",
+          "– Not available at every booth; please bring your own extension cord and coordinate with others",
+        ];
+
         note = "";
         payLink = "https://pay.taipeiartbookfair.com/one";
         break;
@@ -411,6 +444,11 @@ document.addEventListener("DOMContentLoaded", async function () {
           "– Chairs ×4",
           "– Passes ×4",
           "– TPABF Catalog ×1 <small>(one page featured)</small>",
+        ];
+        electricity = [
+          "– Standard 110V power supply",
+          "– High-power electrical appliances are not allowed",
+          "– Not available at every booth; please bring your own extension cord and coordinate with others",
         ];
         note = "";
         payLink = "https://pay.taipeiartbookfair.com/two";
@@ -423,6 +461,14 @@ document.addEventListener("DOMContentLoaded", async function () {
           "– Chairs ×4",
           "– Passes ×3",
           "– TPABF Catalog ×1 <small>(one page featured)</small>",
+        ];
+        electricity = [
+          "– Standard 110V power supply",
+          "– Submit power requirements before September; on-site requests won’t be accepted:",
+          `<ul style="margin:0 0 0 1.2em;padding:0;">
+            <li>List all devices with wattage</li>
+            <li>220V available for NT$1,000; no transformers allowed.</li>
+          </ul>`,
         ];
 
         payLink = "https://pay.taipeiartbookfair.com/curation";
@@ -446,6 +492,16 @@ document.addEventListener("DOMContentLoaded", async function () {
     eqList.forEach((id, idx) => {
       const el = document.getElementById(id);
       if (el) el.innerHTML = equipment[idx] || "";
+    });
+    // 更新電源資訊
+    const elecList = [
+      "electricity-voltage",
+      "electricity-note-1",
+      "electricity-note-2",
+    ];
+    elecList.forEach((id, idx) => {
+      const el = document.getElementById(id);
+      if (el) el.innerHTML = electricity[idx] || "";
     });
     // 更新付款按鈕
     const payBtns = document.querySelectorAll(".pay-button");
@@ -523,14 +579,17 @@ document.addEventListener("DOMContentLoaded", async function () {
     apiData["報名編號"] || "";
 
   const equipmentTitleEl = document.getElementById("equipment-title");
+  const electricityTitleEl = document.getElementById("electricity-title");
   if (
     boothType === "One Regular Booth" ||
     boothType === "Two Regular Booth" ||
     boothType === "Curation Booth"
   ) {
     equipmentTitleEl.textContent = "Equipments:";
+    if (electricityTitleEl) electricityTitleEl.textContent = "Electricity:";
   } else {
     equipmentTitleEl.textContent = "基礎設備：";
+    if (electricityTitleEl) electricityTitleEl.textContent = "電源：";
   }
 
   function setBillingInfoLanguage(boothType) {

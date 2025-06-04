@@ -80,11 +80,30 @@
               帳號管理<br />Profile
             </p></a
           >
-          <a href="index.html" style="text-decoration: none"
-            ><p style="background-color: black; color: whitesmoke">
-              登出<br />Log out
-            </p></a
+          <a
+            href="index.html"
+            style="text-decoration: none"
+            onclick="logoutAndRedirect(event);"
           >
+            <p style="background-color: black; color: whitesmoke">
+              登出<br />Log out
+            </p>
+          </a>
+          <script>
+            function logoutAndRedirect(e) {
+              e.preventDefault();
+              // 刪除所有 cookie（可根據實際情況調整）
+              document.cookie.split(";").forEach(function (c) {
+                document.cookie = c
+                  .replace(/^ +/, "")
+                  .replace(
+                    /=.*/,
+                    "=;expires=" + new Date().toUTCString() + ";path=/"
+                  );
+              });
+              window.location.href = "index.html";
+            }
+          </script>
         </td>
 
         <!-- Middle Column -->
@@ -312,6 +331,21 @@
                           <li id="equipment-badge">– 工作證 ×2</li>
                           <li id="equipment-book">
                             – 草率簿 ×1<small> (含露出一面)</small>
+                          </li>
+                        </ul>
+                        <br />
+                        <span id="electricity-title">電源：</span>
+                        <ul
+                          style="
+                            list-style-type: none;
+                            margin: 0;
+                            padding-left: 0em;
+                          "
+                        >
+                          <li id="electricity-voltage">– 供應一般電源110v</li>
+                          <li id="electricity-note-1">– 不得使用大電器</li>
+                          <li id="electricity-note-2">
+                            – 非每攤都有，需自備延長線與他人協調
                           </li>
                         </ul>
                       </td>

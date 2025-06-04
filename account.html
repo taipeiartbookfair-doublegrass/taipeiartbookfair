@@ -78,11 +78,30 @@
               帳號管理<br />Profile
             </p></a
           >
-          <a href="index.html" style="text-decoration: none"
-            ><p style="background-color: black; color: whitesmoke">
-              登出<br />Log out
-            </p></a
+          <a
+            href="index.html"
+            style="text-decoration: none"
+            onclick="logoutAndRedirect(event);"
           >
+            <p style="background-color: black; color: whitesmoke">
+              登出<br />Log out
+            </p>
+          </a>
+          <script>
+            function logoutAndRedirect(e) {
+              e.preventDefault();
+              // 刪除所有 cookie（可根據實際情況調整）
+              document.cookie.split(";").forEach(function (c) {
+                document.cookie = c
+                  .replace(/^ +/, "")
+                  .replace(
+                    /=.*/,
+                    "=;expires=" + new Date().toUTCString() + ";path=/"
+                  );
+              });
+              window.location.href = "index.html";
+            }
+          </script>
         </td>
 
         <!-- 帳號資料 -->
