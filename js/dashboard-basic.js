@@ -260,7 +260,7 @@ document.addEventListener("DOMContentLoaded", async function () {
     visaupload.style.display = "none";
     familyticket.style.display = "none";
     manual.style.display = "none";
-    map.style.display = "none";
+    boothappearance.style.display = "none";
   } else if (rawResult === "4-是-條件式錄取") {
     conditionalyes.style.display = "inline-block";
     if (apiData["已匯款"]) {
@@ -282,7 +282,7 @@ document.addEventListener("DOMContentLoaded", async function () {
 
       familyticket.style.display = "block"; // 顯示家庭票上傳
       manual.style.display = "block"; // 顯示手冊下載
-      map.style.display = "block"; // 顯示地圖下載
+      boothappearance.style.display = "block"; // 顯示地圖下載
     } else {
       registrationStatusEl.textContent = "未完成報名";
     }
@@ -309,10 +309,9 @@ document.addEventListener("DOMContentLoaded", async function () {
       } else {
         visaupload.style.display = "none";
       }
-
       familyticket.style.display = "block";
       manual.style.display = "block";
-      map.style.display = "block";
+      boothappearance.style.display = "block";
     } else {
       registrationStatusEl.textContent = "未完成報名";
     }
