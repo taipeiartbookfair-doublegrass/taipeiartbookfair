@@ -53,10 +53,8 @@ document.addEventListener("DOMContentLoaded", async function () {
   console.log("apiData['代表人'] =", apiData["代表人"]);
   document.getElementById("contact-person").textContent = apiData["name"] || "";
 
-  document.getElementById("contact-email").textContent =
-    apiData["account"] || "";
-  document.getElementById("contact-phone").textContent =
-    apiData["聯絡電話"] || apiData["phone"] || "";
+  document.getElementById("email").textContent = apiData["account"] || "";
+  document.getElementById("phone").textContent = apiData["phone"];
   document.getElementById("nationality").textContent = region || "";
 
   function setSocialText(id, value) {

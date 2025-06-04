@@ -126,10 +126,7 @@
                       color: ghostwhite;
                       cursor: pointer;
                     "
-                    onclick="
-                        document.querySelector('.edit-page').style.display='table-cell';
-                        document.querySelector('.account').style.display='none';
-                      "
+                    onclick="openEditPage();"
                     title="編輯"
                     >編輯 Edit</span
                   >
@@ -155,7 +152,7 @@
                 <!-- 第一行右欄：Email -->
                 <td>
                   <span class="label">聯絡信箱 Contact Email</span><br /><span
-                    id="contact-email"
+                    id="email"
                     >🚧 讀取中…</span
                   >
                 </td>
@@ -163,7 +160,7 @@
               <tr>
                 <td>
                   <span class="label">聯絡電話 Contact Phone</span><br /><span
-                    id="contact-phone"
+                    id="phone"
                     >🚧 讀取中…</span
                   >
                 </td>
@@ -223,7 +220,17 @@
               <h2 style="font-size: 1.5rem">編輯帳戶資料 Edit Profile</h2>
               <table width="100%">
                 <tr>
-                  <td colspan="2">
+                  <td>
+                    <span class="label">代表人 Contact Person</span><br />
+                    <input
+                      type="text"
+                      name="contact-person"
+                      style="width: 95%"
+                      id="contact-person-edit"
+                      placeholder="代表人"
+                    />
+                  </td>
+                  <td>
                     <span class="label">聯絡電話 Contact Phone</span><br />
                     <input
                       type="text"
@@ -573,6 +580,48 @@
           logo.classList.remove("machine-rotate-animating");
         });
       }
+    </script>
+    <script>
+      window.openEditPage = function openEditPage() {
+        document.querySelector(".edit-page").style.display = "table-cell";
+        document.querySelector(".account").style.display = "none";
+
+        const contactPerson = document.getElementById("contact-person");
+        const contactPersonEdit = document.getElementById(
+          "contact-person-edit"
+        );
+        if (contactPerson && contactPersonEdit)
+          contactPersonEdit.value = contactPerson.innerText.trim();
+
+        const phone = document.getElementById("phone");
+        const phoneEdit = document.getElementById("phone-edit");
+        if (phone && phoneEdit) phoneEdit.value = phone.innerText.trim();
+
+        const website = document.getElementById("website");
+        const websiteEdit = document.getElementById("website-edit");
+        if (website && websiteEdit)
+          websiteEdit.value = website.innerText.trim();
+
+        const instagramName = document.getElementById("");
+        const instagramEdit = document.getElementById("instagram-edit");
+        if (instagram && instagramEdit)
+          instagramEdit.value = instagram.innerText.trim();
+
+        const facebook = document.getElementById("facebook");
+        const facebookEdit = document.getElementById("facebook-edit");
+        if (facebook && facebookEdit)
+          facebookEdit.value = facebook.innerText.trim();
+
+        const whatsapp = document.getElementById("whatsapp");
+        const whatsappEdit = document.getElementById("whatsapp-edit");
+        if (whatsapp && whatsappEdit)
+          whatsappEdit.value = whatsapp.innerText.trim();
+
+        const nationality = document.getElementById("nationality");
+        const nationalityEdit = document.getElementById("nationality-edit");
+        if (nationality && nationalityEdit)
+          nationalityEdit.value = nationality.innerText.trim();
+      };
     </script>
   </body>
 </html>
