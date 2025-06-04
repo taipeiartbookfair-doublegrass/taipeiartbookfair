@@ -214,7 +214,7 @@ document.addEventListener("DOMContentLoaded", async function () {
   const visaupload = document.getElementById("media-section-row3");
   const familyticket = document.getElementById("media-section-row4");
   const manual = document.getElementById("media-section-row5");
-  const map = document.getElementById("media-section-row6");
+  const boothappearance = document.getElementById("media-section-row6");
 
   const rawResult = apiData["錄取"];
   const nationality = (region || "").trim().toUpperCase();
@@ -248,7 +248,7 @@ document.addEventListener("DOMContentLoaded", async function () {
 
       familyticket.style.display = "block"; // 顯示家庭票上傳
       manual.style.display = "block"; // 顯示手冊下載
-      map.style.display = "block"; // 顯示地圖下載
+      boothappearance.style.display = "block"; // 顯示地圖下載
     } else {
       registrationStatusEl.textContent = "未完成報名";
     }

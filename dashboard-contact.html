@@ -147,6 +147,7 @@
                       style="
                         display: grid;
                         grid-template-columns: repeat(3, 1fr);
+                        position: relative;
                       "
                     >
                       <button class="ttt-cell"></button>
@@ -158,11 +159,29 @@
                       <button class="ttt-cell"></button>
                       <button class="ttt-cell"></button>
                       <button class="ttt-cell"></button>
+                      <button
+                        id="ttt-refresh"
+                        style="
+                          display: none;
+                          position: absolute;
+                          left: 50%;
+                          top: 50%;
+                          transform: translate(-50%, -50%);
+                          z-index: 10;
+                        "
+                      >
+                        refresh
+                      </button>
                     </div>
                     <div
                       id="tictactoe-status"
                       style="text-align: center; margin: 1em 0"
                     ></div>
+                    <div style="text-align: center; margin: 1em 0">
+                      <button id="ttt-refresh" style="display: none">
+                        refresh
+                      </button>
+                    </div>
                   </div>
                 </td>
               </tr>
@@ -226,8 +245,10 @@
         cells[i].disabled = true;
         if (checkWin(player)) {
           finished = true;
+          document.getElementById("ttt-refresh").style.display = "inline-block";
         } else if (board.every((v) => v)) {
           finished = true;
+          document.getElementById("ttt-refresh").style.display = "inline-block";
         } else {
           current = player === "Ｏ" ? "Ｘ" : "Ｏ";
         }
@@ -280,6 +301,18 @@
         ];
         return wins.some((line) => line.every((idx) => board[idx] === player));
       }
+
+      document.getElementById("ttt-refresh").onclick = function () {
+        board = Array(9).fill("");
+        finished = false;
+        current = Math.random() < 0.5 ? "Ｏ" : "Ｘ";
+        cells.forEach((btn, i) => {
+          btn.textContent = "";
+          btn.disabled = false;
+        });
+        this.style.display = "none";
+        if (current === "Ｘ") setTimeout(aiMove, 400);
+      };
     </script>
   </body>
 </html>

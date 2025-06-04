@@ -57,6 +57,7 @@ document.addEventListener("DOMContentLoaded", async function () {
     apiData["account"] || "";
   document.getElementById("contact-phone").textContent =
     apiData["聯絡電話"] || apiData["phone"] || "";
+  document.getElementById("nationality").textContent = region || "";
 
   function setSocialText(id, value) {
     const el = document.getElementById(id);
