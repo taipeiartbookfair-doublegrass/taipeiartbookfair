@@ -368,10 +368,8 @@ document.addEventListener("DOMContentLoaded", async function () {
           "– 不得使用大電器",
           "– 非每攤都有，需自備延長線與他人協調",
         ];
-        payLink1 =
-          "https://nomorehighwords.shoplineapp.com/products/報名費-書攤";
-        payLink2 =
-          "https://nomorehighwords.shoplineapp.com/products/報名費-書攤-1";
+        payLink1 = "https://nmhw.taipeiartbookfair.com/products/報名費-書攤";
+        payLink2 = "https://nmhw.taipeiartbookfair.com/products/報名費-書攤-1";
         break;
       case "創作商品攤":
         price = "8,000 元 <small>(含稅)</small>";
@@ -387,9 +385,9 @@ document.addEventListener("DOMContentLoaded", async function () {
           "– 非每攤都有，需自備延長線與他人協調",
         ];
         payLink1 =
-          "https://nomorehighwords.shoplineapp.com/products/報名費-創作商品";
+          "https://nmhw.taipeiartbookfair.com/products/報名費-創作商品";
         payLink2 =
-          "https://nomorehighwords.shoplineapp.com/products/報名費-創作商品-1";
+          "https://nmhw.taipeiartbookfair.com/products/報名費-創作商品-1";
         break;
       case "裝置攤":
         price = "10,000 元 <small>(含稅)</small>";
@@ -406,10 +404,9 @@ document.addEventListener("DOMContentLoaded", async function () {
             <li>220V需以1000元加購，不得使用變壓器</li>
           </ul>`,
         ];
-        payLink1 =
-          "https://nomorehighwords.shoplineapp.com/products/報名費-裝置類";
+        payLink1 = "https://nmhw.taipeiartbookfair.com/products/報名費-裝置類";
         payLink2 =
-          "https://nomorehighwords.shoplineapp.com/products/報名費-裝置類-1";
+          "https://nmhw.taipeiartbookfair.com/products/報名費-裝置類-1";
         break;
       case "食物酒水攤":
         price = "13,000 元 <small>(含稅)</small>";
@@ -428,9 +425,9 @@ document.addEventListener("DOMContentLoaded", async function () {
           </ul>`,
         ];
         payLink1 =
-          "https://nomorehighwords.shoplineapp.com/products/報名費-食物酒水";
+          "https://nmhw.taipeiartbookfair.com/products/報名費-食物酒水";
         payLink2 =
-          "https://nomorehighwords.shoplineapp.com/products/報名費-食物酒水-1";
+          "https://nmhw.taipeiartbookfair.com/products/報名費-食物酒水-1";
         break;
       case "One Regular Booth":
         price = "USD$165 <small>incl. tax</small>";
@@ -446,9 +443,9 @@ document.addEventListener("DOMContentLoaded", async function () {
           "– Not available at every booth; please bring your own extension cord and coordinate with others",
         ];
         payLink1 =
-          "https://nomorehighwords.shoplineapp.com/products/報名費-one-regular-booth";
+          "https://nmhw.taipeiartbookfair.com/products/報名費-one-regular-booth";
         payLink2 =
-          "https://nomorehighwords.shoplineapp.com/products/報名費-one-regular-booth-1";
+          "https://nmhw.taipeiartbookfair.com/products/報名費-one-regular-booth-1";
         break;
       case "Two Regular Booth":
         price = "USD$330 <small>incl. tax</small>";
@@ -464,9 +461,9 @@ document.addEventListener("DOMContentLoaded", async function () {
           "– Not available at every booth; please bring your own extension cord and coordinate with others",
         ];
         payLink1 =
-          "https://nomorehighwords.shoplineapp.com/products/報名費-two-regular-booth";
+          "https://nmhw.taipeiartbookfair.com/products/報名費-two-regular-booth";
         payLink2 =
-          "https://nomorehighwords.shoplineapp.com/products/報名費-two-regular-booth-1";
+          "https://nmhw.taipeiartbookfair.com/products/報名費-two-regular-booth-1";
         break;
       case "Curation Booth":
         price = "USD$780 <small>incl. tax</small>";
@@ -486,9 +483,9 @@ document.addEventListener("DOMContentLoaded", async function () {
           </ul>`,
         ];
         payLink1 =
-          "https://nomorehighwords.shoplineapp.com/products/報名費-curation-booth";
+          "https://nmhw.taipeiartbookfair.com/products/報名費-curation-booth";
         payLink2 =
-          "https://nomorehighwords.shoplineapp.com/products/報名費-curation-booth-1";
+          "https://nmhw.taipeiartbookfair.com/products/報名費-curation-booth-1";
         break;
       default:
         price = "";
