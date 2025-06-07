@@ -100,7 +100,7 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   }
   window.openEditPage = function openEditPage() {
-    const editPage = document.querySelector(".edit-page");
+    const editPage = document.getElementById("edit-brand-page");
     const mid = document.querySelector(".mid");
     const right = document.querySelector(".right");
     const account = document.querySelector(".account");
@@ -131,5 +131,60 @@ document.addEventListener("DOMContentLoaded", function () {
     const nationalityEdit = document.getElementById("nationality-edit");
     if (nationality && nationalityEdit)
       nationalityEdit.value = nationality.innerText.trim();
+  };
+  window.showAccountSection = function showAccountSection() {
+    // 隱藏主要內容
+    const mid = document.querySelector(".mid");
+    const right = document.querySelector(".right");
+    const editPage = document.getElementById("edit-account-page");
+    if (mid) mid.style.display = "none";
+    if (right) right.style.display = "none";
+    if (editPage) editPage.style.display = "none";
+    // 顯示帳號資料
+    const account = document.getElementById("account");
+    account.style.display = "table-cell";
+  };
+  window.showDashboardSection = function showDashboardSection() {
+    // 顯示主要內容
+    const mid = document.querySelector(".mid");
+    const right = document.querySelector(".right");
+    const editPage = document.getElementById("edit-account-page");
+    const account = document.querySelector(".account");
+    if (mid) mid.style.display = "table-cell";
+    if (right) right.style.display = "table-cell";
+    if (editPage) editPage.style.display = "none";
+    if (account) account.style.display = "none";
+  };
+  window.openAccountEditPage = function openAccountEditPage() {
+    const editAccountPage = document.getElementById("edit-account-page");
+    const account = document.getElementById("account");
+    const mid = document.querySelector(".mid");
+    const right = document.querySelector(".right");
+    if (editAccountPage) editAccountPage.style.display = "table-cell";
+    if (account) account.style.display = "none";
+    if (mid) mid.style.display = "none";
+    if (right) right.style.display = "none";
+
+    // 自動填入現有資料
+    const fields = [
+      ["contact-person", "contact-person-edit"],
+      ["phone", "phone-edit"],
+      ["website", "website-edit"],
+      ["instagram", "instagram-edit"],
+      ["facebook", "facebook-edit"],
+      ["whatsapp", "whatsapp-edit"],
+      ["nationality2", "nationality-edit"],
+    ];
+    fields.forEach(([from, to]) => {
+      const fromEl = document.getElementById(from);
+      const toEl = document.getElementById(to);
+      if (fromEl && toEl) {
+        if (to === "nationality-edit" && toEl.tagName === "SELECT") {
+          toEl.value = fromEl.textContent.trim();
+        } else {
+          toEl.value = fromEl.textContent.trim();
+        }
+      }
+    });
   };
 });
