@@ -684,4 +684,29 @@ document.addEventListener("DOMContentLoaded", async function () {
   document.querySelectorAll("#billing-application-number").forEach((el) => {
     el.textContent = apiData["報名編號"] || "";
   });
+
+  console.log("apiData['代表人'] =", apiData["代表人"]);
+  document.getElementById("contact-person").textContent = apiData["name"] || "";
+
+  document.getElementById("email").textContent = apiData["account"] || "";
+  document.getElementById("phone").textContent = apiData["phone"];
+  document.getElementById("nationality2").textContent = region || "";
+
+  function setSocialText(id, value) {
+    const el = document.getElementById(id);
+    if (!value || value === "None") {
+      el.textContent = "None";
+      el.style.color = "lightgrey";
+      el.style.fontStyle = "italic";
+    } else {
+      el.textContent = value;
+      el.style.color = "";
+      el.style.fontStyle = "";
+    }
+  }
+
+  setSocialText("website", apiData["website"]);
+  setSocialText("instagram", apiData["instagram"]);
+  setSocialText("facebook", apiData["facebook"]);
+  setSocialText("whatsapp", apiData["whatsapp"]);
 });
