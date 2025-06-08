@@ -95,15 +95,12 @@ document.addEventListener("DOMContentLoaded", function () {
        * @param {string} paramStr
        * @returns {string}
        */
-      function decodeFormParams(paramStr) {
-        return decodeURIComponent(paramStr.replace(/\+/g, " "));
-      }
 
       const params = new URLSearchParams({
         action: "update_account_info",
         account: account,
         phone: phone,
-        contactPerson: contactPerson,
+        name: contactPerson,
         region: nationality,
         website: website,
         facebook: facebook,
@@ -112,8 +109,6 @@ document.addEventListener("DOMContentLoaded", function () {
         主要創作據點: baselocation,
       }).toString();
 
-      const decodedParams = decodeFormParams(params); // decodedParams 就是所有符號都還原的字串
-
       try {
         const updateAccountRes = await fetch(apiUrl, {
           redirect: "follow",
@@ -121,7 +116,7 @@ document.addEventListener("DOMContentLoaded", function () {
           headers: {
             "Content-Type": "application/x-www-form-urlencoded",
           },
-          body: decodedParams,
+          body: params,
         });
 
         console.log("帳戶 fetch response:", updateAccountRes);
