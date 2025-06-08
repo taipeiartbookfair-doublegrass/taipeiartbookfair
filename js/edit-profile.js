@@ -7,7 +7,7 @@ document.addEventListener("DOMContentLoaded", function () {
   if (branch_summit_btn) {
     branch_summit_btn.addEventListener("click", async function (e) {
       e.preventDefault();
-      // 取得表單資料
+      //
       const account = getCookie("account");
       const region = getCookie("region");
 
@@ -66,15 +66,21 @@ document.addEventListener("DOMContentLoaded", function () {
   if (account_summit_btn) {
     account_summit_btn.addEventListener("click", async function (e) {
       e.preventDefault();
-      // 取得表單資料
+      //
+      const account = getCookie("account");
+      const region = getCookie("region");
+      if (!account || !region) {
+        window.location.href = "login.html";
+      }
+
+      const phone = document.getElementById("phone-edit").value.trim();
       const contactPerson = document
         .getElementById("contact-person-edit")
         .value.trim();
-      const phone = document.getElementById("phone-edit").value.trim();
       const nationality = document.getElementById("nationality-edit").value;
       const website = document.getElementById("website-edit").value.trim();
-      const instagram = document.getElementById("instagram-edit").value.trim();
       const facebook = document.getElementById("facebook-edit").value.trim();
+      const instagram = document.getElementById("instagram-edit").value.trim();
       const whatsapp = document.getElementById("whatsapp-edit").value.trim();
 
       // TODO: 送出 API 或處理資料
@@ -87,10 +93,11 @@ document.addEventListener("DOMContentLoaded", function () {
         website: website,
         facebook: facebook,
         instagram: instagram,
+        whatsapp: whatsapp,
       }).toString();
 
       try {
-        const updateBranchRes = await fetch(apiUrl, {
+        const updateAccountRes = await fetch(apiUrl, {
           redirect: "follow",
           method: "POST",
           headers: {
@@ -99,7 +106,7 @@ document.addEventListener("DOMContentLoaded", function () {
           body: params,
         });
 
-        const data = await updateBranchRes.json();
+        const data = await updateAccountRes.json();
 
         if (data.success) {
           setCookie("account", data.data.account, 21600);
