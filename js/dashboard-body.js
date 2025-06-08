@@ -132,29 +132,64 @@ document.addEventListener("DOMContentLoaded", function () {
     if (nationality && nationalityEdit)
       nationalityEdit.value = nationality.innerText.trim();
   };
-  window.showAccountSection = function showAccountSection() {
-    // 隱藏主要內容
-    const mid = document.querySelector(".mid");
-    const right = document.querySelector(".right");
-    const editPage = document.getElementById("edit-account-page");
-    if (mid) mid.style.display = "none";
-    if (right) right.style.display = "none";
-    if (editPage) editPage.style.display = "none";
-    // 顯示帳號資料
-    const account = document.getElementById("account");
-    account.style.display = "table-cell";
-  };
-  window.showDashboardSection = function showDashboardSection() {
-    // 顯示主要內容
+  window.showFAQSection = function showFAQSection() {
     const mid = document.querySelector(".mid");
     const right = document.querySelector(".right");
     const editPage = document.getElementById("edit-account-page");
     const account = document.querySelector(".account");
+    const faq = document.getElementById("faq");
+    const contact = document.getElementById("contact-method");
+    if (mid) mid.style.display = "none";
+    if (right) right.style.display = "none";
+    if (editPage) editPage.style.display = "none";
+    if (account) account.style.display = "none";
+    if (faq) faq.style.display = "table-cell";
+    if (contact) contact.style.display = "none";
+  };
+  window.showContactSection = function showContactSection() {
+    const mid = document.querySelector(".mid");
+    const right = document.querySelector(".right");
+    const editPage = document.getElementById("edit-account-page");
+    const account = document.querySelector(".account");
+    const faq = document.getElementById("faq");
+    const contact = document.getElementById("contact-method");
+    if (mid) mid.style.display = "none";
+    if (right) right.style.display = "none";
+    if (editPage) editPage.style.display = "none";
+    if (account) account.style.display = "none";
+    if (faq) faq.style.display = "none";
+    if (contact) contact.style.display = "table-cell";
+  };
+  window.showAccountSection = function showAccountSection() {
+    const mid = document.querySelector(".mid");
+    const right = document.querySelector(".right");
+    const editPage = document.getElementById("edit-account-page");
+    const account = document.getElementById("account");
+    const faq = document.getElementById("faq");
+    const contact = document.getElementById("contact-method");
+    if (mid) mid.style.display = "none";
+    if (right) right.style.display = "none";
+    if (editPage) editPage.style.display = "none";
+    if (account) account.style.display = "table-cell";
+    if (faq) faq.style.display = "none";
+    if (contact) contact.style.display = "none";
+  };
+
+  window.showDashboardSection = function showDashboardSection() {
+    const mid = document.querySelector(".mid");
+    const right = document.querySelector(".right");
+    const editPage = document.getElementById("edit-account-page");
+    const account = document.querySelector(".account");
+    const faq = document.getElementById("faq");
+    const contact = document.getElementById("contact-method");
     if (mid) mid.style.display = "table-cell";
     if (right) right.style.display = "table-cell";
     if (editPage) editPage.style.display = "none";
     if (account) account.style.display = "none";
+    if (faq) faq.style.display = "none";
+    if (contact) contact.style.display = "none";
   };
+
   window.openAccountEditPage = function openAccountEditPage() {
     const editAccountPage = document.getElementById("edit-account-page");
     const account = document.getElementById("account");

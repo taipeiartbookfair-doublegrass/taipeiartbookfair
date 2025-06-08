@@ -64,16 +64,20 @@
 
           <hr class="sidebar-hr" />
           <a
-            href="dashboard-contact.html"
+            href="#"
             style="text-decoration: none; color: black"
-            ><p>聯絡我們<br />Contact</p></a
+            onclick="showContactSection(); return false;"
           >
+            <p>聯絡我們<br />Contact</p>
+          </a>
           <hr class="sidebar-hr" />
           <a
-            href="dashboard-FAQ.html"
+            href="#"
             style="text-decoration: none; color: black"
-            ><p>常見問題<br />FAQ</p></a
+            onclick="showFAQSection(); return false;"
           >
+            <p>常見問題<br />FAQ</p>
+          </a>
           <hr class="sidebar-hr" />
           <div class="sidebar-middle">
             <p class="rotated-link">
@@ -971,7 +975,7 @@
         <!-- 帳號資料 -->
 
         <td class="account" id="account" style="display: none">
-          <h3 style="color: blue">Account</h3>
+          <h3 style="color: blue; margin-top: 15px">Profile</h3>
           <br />
           <div class="scroll-inner">
             <table width="100%">
@@ -1432,8 +1436,253 @@
             </form>
           </div>
         </td>
+
+        <td class="admin" id="contact-method" style="display: none">
+          <div class="scroll-inner">
+            <table width="100%">
+              <tr>
+                <td style="border: none">
+                  <h3>Contact Method</h3>
+                  <br />
+
+                  <br />
+                  <div
+                    style="
+                      font-size: 1rem;
+                      font-family: 'Inclusive Sans', sans-serif;
+                    "
+                  >
+                    <span
+                      >EMAIL -
+                      <a href="mailto:shakyfloor@double-grass.com"
+                        >hooroo@double-grass.com</a
+                      ></span
+                    ><br />
+                    <span
+                      >INSTAGRAM -
+                      <a
+                        target="_blank"
+                        href="https://www.instagram.com/taipeiartbookfair/"
+                        >@taipeiartbookfair</a
+                      ></span
+                    ><br />
+                    <span
+                      >FACEBOOK -
+                      <a
+                        target="_blank"
+                        href="https://www.facebook.com/taipeiartbookfair/"
+                        >@taipeiartbookfair</a
+                      ></span
+                    >
+                  </div>
+                  <!-- 我484故意寫個圈圈叉叉在這裡讓你忘記你為什麼要聯絡窗口? 嗯對，是。
+                   Do i purposely write an XOXO here to distract you from your original purpose? yish:P -->
+                  <div id="tictactoe-container">
+                    <div
+                      id="tictactoe-board"
+                      style="
+                        display: grid;
+                        grid-template-columns: repeat(3, 1fr);
+                        position: relative;
+                      "
+                    >
+                      <button class="ttt-cell"></button>
+                      <button class="ttt-cell"></button>
+                      <button class="ttt-cell"></button>
+                      <button class="ttt-cell"></button>
+                      <button class="ttt-cell"></button>
+                      <button class="ttt-cell"></button>
+                      <button class="ttt-cell"></button>
+                      <button class="ttt-cell"></button>
+                      <button class="ttt-cell"></button>
+                      <button
+                        id="ttt-refresh"
+                        style="
+                          display: none;
+                          position: absolute;
+                          left: 50%;
+                          top: 50%;
+                          transform: translate(-50%, -50%);
+                          z-index: 10;
+                        "
+                      >
+                        refresh
+                      </button>
+                    </div>
+                    <div
+                      id="tictactoe-status"
+                      style="text-align: center; margin: 1em 0"
+                    ></div>
+                    <div style="text-align: center; margin: 1em 0">
+                      <button id="ttt-refresh" style="display: none">
+                        refresh
+                      </button>
+                    </div>
+                  </div>
+                </td>
+              </tr>
+            </table>
+          </div>
+        </td>
+        <td class="admin" id="faq" style="display: none">
+          <div>
+            <h3>FAQ</h3>
+            <table width="100%" class="faqtable">
+              <tr>
+                <td class="faq-number-cell">
+                  <span class="faq-number">1</span>
+                </td>
+                <td>
+                  <span class="labelAQ">Q: 我國籍填錯該怎麼辦？</span><br />
+                  <span
+                    style="
+                      font-size: 1rem;
+                      font-family: 'Inclusive Sans', sans-serif;
+                    "
+                  >
+                    A: 請於您的攤商管理右上角✎符號做修改
+                  </span>
+                </td>
+              </tr>
+              <tr></tr>
+              <tr>
+                <td class="faq-number-cell">
+                  <span class="faq-number">2</span>
+                </td>
+                <td>
+                  <span class="labelAQ"
+                    >Q: 我顯示的攤種非我報名時填入的攤種？ </span
+                  ><br />
+                  <div
+                    style="
+                      font-size: 1rem;
+                      font-family: 'Inclusive Sans', sans-serif;
+                    "
+                  >
+                    A:
+                    您原先在表單中選擇的攤位類型，經由草率季工作團隊審核後，可能與我們對該類別的定義略有不符，因此顯現為條件式錄取。不過，我們仍然非常欣賞您的創作與提案，並希望能與您在草率季中相遇。若您願意接受攤種類別的調整，我們將非常樂意為您保留參與資格。
+                  </div>
+                </td>
+              </tr>
+              <tr></tr>
+              <tr>
+                <td class="faq-number-cell">
+                  <span class="faq-number">3</span>
+                </td>
+                <td>
+                  <span class="labelAQ">Q: Shopline付款信件沒收到？ </span
+                  ><br />
+                  <div
+                    style="
+                      font-size: 1rem;
+                      font-family: 'Inclusive Sans', sans-serif;
+                    "
+                  >
+                    A:
+                  </div>
+                </td>
+              </tr>
+              <tr></tr>
+              <tr>
+                <td class="faq-number-cell">
+                  <span class="faq-number">4</span>
+                </td>
+                <td>
+                  <span class="labelAQ">Q: 我已付款，但錄取狀態沒更新？</span
+                  ><br />
+                  <div
+                    style="
+                      font-size: 1rem;
+                      font-family: 'Inclusive Sans', sans-serif;
+                    "
+                  >
+                    A: 報名以及付款狀態將於 7 月 15 日對帳後更新。
+                  </div>
+                </td>
+              </tr>
+              <tr></tr>
+              <tr>
+                <td class="faq-number-cell">
+                  <span class="faq-number">5</span>
+                </td>
+                <td>
+                  <span class="labelAQ"
+                    >Q:
+                    我從別處取得連結付款，付到非我攤種的正確金額，該怎麼辦？</span
+                  ><br />
+                  <div
+                    style="
+                      font-size: 1rem;
+                      font-family: 'Inclusive Sans', sans-serif;
+                    "
+                  >
+                    A: :(
+                  </div>
+                </td>
+              </tr>
+              <tr></tr>
+              <tr>
+                <td class="faq-number-cell">
+                  <span class="faq-number">6</span>
+                </td>
+                <td>
+                  <span class="labelAQ"
+                    >Q: 我付款時備註的資料填錯，該怎麼辦？</span
+                  ><br />
+                  <div
+                    style="
+                      font-size: 1rem;
+                      font-family: 'Inclusive Sans', sans-serif;
+                    "
+                  >
+                    A: 請來信與我們同仁做確認
+                  </div>
+                </td>
+              </tr>
+              <tr></tr>
+              <tr>
+                <td class="faq-number-cell">
+                  <span class="faq-number">7</span>
+                </td>
+                <td>
+                  <span class="labelAQ"
+                    >Q: 我已付款基礎攤位費，但後續想加購工作證？ </span
+                  ><br />
+                  <div
+                    style="
+                      font-size: 1rem;
+                      font-family: 'Inclusive Sans', sans-serif;
+                    "
+                  >
+                    A:
+                  </div>
+                </td>
+              </tr>
+              <tr></tr>
+              <tr>
+                <td class="faq-number-cell">
+                  <span class="faq-number">8</span>
+                </td>
+                <td>
+                  <span class="labelAQ"
+                    >Q: 我可以不可以和別人合攤或和其他攤位排在一起 </span
+                  ><br />
+                  <div
+                    style="
+                      font-size: 1rem;
+                      font-family: 'Inclusive Sans', sans-serif;
+                    "
+                  >
+                    A:
+                  </div>
+                </td>
+              </tr>
+            </table>
+          </div>
+        </td>
       </tr>
     </table>
     <script src="js/dashboard-body.js"></script>
+    <script src="js/oxox.js"></script>
   </body>
 </html>
