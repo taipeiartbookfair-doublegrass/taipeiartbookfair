@@ -82,7 +82,16 @@ document.addEventListener("DOMContentLoaded", function () {
         .getElementById("baselocation-edit")
         .value.trim();
 
-      // TODO: 送出 API 或處理資料
+      /**
+       * 將 URLSearchParams 字串還原成原始字元（所有符號都還原）
+       * @param {string} paramStr
+       * @returns {string}
+       */
+      function decodeFormParams(paramStr) {
+        // 先將 + 換成空格，再 decodeURIComponent
+        return decodeURIComponent(paramStr.replace(/\+/g, " "));
+      }
+
       const params = new URLSearchParams({
         action: "update_account_info",
         account: account,
@@ -96,6 +105,8 @@ document.addEventListener("DOMContentLoaded", function () {
         主要創作據點: baselocation,
       }).toString();
 
+      const decodedParams = decodeFormParams(params); // decodedParams 就是所有符號都還原的字串
+
       try {
         const updateAccountRes = await fetch(apiUrl, {
           redirect: "follow",
@@ -103,7 +114,7 @@ document.addEventListener("DOMContentLoaded", function () {
           headers: {
             "Content-Type": "text/plain;charset=utf-8",
           },
-          body: params,
+          body: decodedParams, // 這裡送出還原後的字串
         });
 
         const data = await updateAccountRes.json();
