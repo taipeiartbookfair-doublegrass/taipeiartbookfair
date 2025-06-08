@@ -6,12 +6,14 @@ document.addEventListener("DOMContentLoaded", function () {
   const branch_summit_btn = document.getElementById("submit-edit-brand");
   if (branch_summit_btn) {
     branch_summit_btn.addEventListener("click", async function (e) {
-      e.preventDefault();
-      //
+      //   e.preventDefault();
       const account = getCookie("account");
       const region = getCookie("region");
 
+      console.log("品牌編輯送出: account", account, "region", region);
+
       if (!account || !region) {
+        console.log("未登入，跳轉 login.html");
         window.location.href = "login.html";
       }
 
@@ -19,6 +21,8 @@ document.addEventListener("DOMContentLoaded", function () {
       const bio = document.getElementById("bio-edit").value.trim();
       const role = document.getElementById("role-edit").value;
       const category = document.getElementById("category-edit").value;
+
+      console.log("品牌資料：", { brandName, bio, role, category });
 
       const params = new URLSearchParams({
         action: "update_dashboard_info",
@@ -28,31 +32,37 @@ document.addEventListener("DOMContentLoaded", function () {
         身分類別: role,
         作品類別: category,
       }).toString();
+
+      console.log("品牌 params:", params);
+
       try {
         const updateBranchRes = await fetch(apiUrl, {
           redirect: "follow",
           method: "POST",
           headers: {
-            "Content-Type": "text/plain;charset=utf-8",
+            "Content-Type": "application/x-www-form-urlencoded",
           },
           body: params,
         });
 
+        console.log("品牌 fetch response:", updateBranchRes);
+
         const data = await updateBranchRes.json();
+
+        console.log("品牌 API 回傳:", data);
 
         if (data.success) {
           setCookie("account", data.data.account, 21600);
           setCookie("region", data.data.region, 21600);
           setCookie("login", "success", 21600);
 
-          // alert("登入成功！Login successful!");
           window.location.href = "dashboard-TPABF.html";
         } else {
           alert("Network error, please try again later.");
         }
       } catch (error) {
         alert("Network error, please try again later.");
-        console.error(error);
+        console.error("品牌編輯 error:", error);
       }
     });
   }
@@ -61,11 +71,11 @@ document.addEventListener("DOMContentLoaded", function () {
   const account_summit_btn = document.getElementById("submit-edit-account");
   if (account_summit_btn) {
     account_summit_btn.addEventListener("click", async function (e) {
-      e.preventDefault();
-      //
+      //   e.preventDefault();
       const account = getCookie("account");
       const region = getCookie("region");
       if (!account || !region) {
+        console.log("未登入，跳轉 login.html");
         window.location.href = "login.html";
       }
 
@@ -88,7 +98,6 @@ document.addEventListener("DOMContentLoaded", function () {
        * @returns {string}
        */
       function decodeFormParams(paramStr) {
-        // 先將 + 換成空格，再 decodeURIComponent
         return decodeURIComponent(paramStr.replace(/\+/g, " "));
       }
 
@@ -112,26 +121,29 @@ document.addEventListener("DOMContentLoaded", function () {
           redirect: "follow",
           method: "POST",
           headers: {
-            "Content-Type": "text/plain;charset=utf-8",
+            "Content-Type": "application/x-www-form-urlencoded",
           },
-          body: decodedParams, // 這裡送出還原後的字串
+          body: decodedParams,
         });
 
+        console.log("帳戶 fetch response:", updateAccountRes);
+
         const data = await updateAccountRes.json();
+
+        console.log("帳戶 API 回傳:", data);
 
         if (data.success) {
           setCookie("account", data.data.account, 21600);
           setCookie("region", data.data.region, 21600);
           setCookie("login", "success", 21600);
 
-          // alert("登入成功！Login successful!");
           window.location.href = "dashboard-TPABF.html";
         } else {
           alert("Network error, please try again later.");
         }
       } catch (error) {
         alert("Network error, please try again later.");
-        console.error(error);
+        console.error("帳戶編輯 error:", error);
       }
     });
   }
