@@ -5,8 +5,14 @@ function setCookie(name, value, seconds) {
     date.setTime(date.getTime() + seconds * 1000);
     expires = "; expires=" + date.toUTCString();
   }
+  // 加上 SameSite=None; Secure
   document.cookie =
-    name + "=" + encodeURIComponent(value) + expires + "; path=/";
+    name +
+    "=" +
+    encodeURIComponent(value) +
+    expires +
+    "; path=/" +
+    "; SameSite=None; Secure";
 }
 
 // 取得 cookie
