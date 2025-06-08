@@ -10,10 +10,7 @@ document.addEventListener("DOMContentLoaded", function () {
       const account = getCookie("account");
       const region = getCookie("region");
 
-      console.log("品牌編輯送出: account", account, "region", region);
-
       if (!account || !region) {
-        console.log("未登入，跳轉 login.html");
         window.location.href = "login.html";
       }
 
@@ -21,8 +18,6 @@ document.addEventListener("DOMContentLoaded", function () {
       const bio = document.getElementById("bio-edit").value.trim();
       const role = document.getElementById("role-edit").value;
       const category = document.getElementById("category-edit").value;
-
-      console.log("品牌資料：", { brandName, bio, role, category });
 
       const params = new URLSearchParams({
         action: "update_dashboard_info",
@@ -32,8 +27,6 @@ document.addEventListener("DOMContentLoaded", function () {
         身分類別: role,
         作品類別: category,
       }).toString();
-
-      console.log("品牌 params:", params);
 
       try {
         const updateBranchRes = await fetch(apiUrl, {
@@ -45,11 +38,7 @@ document.addEventListener("DOMContentLoaded", function () {
           body: params,
         });
 
-        console.log("品牌 fetch response:", updateBranchRes);
-
         const data = await updateBranchRes.json();
-
-        console.log("品牌 API 回傳:", data);
 
         if (data.success) {
           //   等待 10 秒後跳轉到 dashboard-TPABF.html
@@ -60,7 +49,6 @@ document.addEventListener("DOMContentLoaded", function () {
         }
       } catch (error) {
         alert("Network error, please try again later.");
-        console.error("品牌編輯 error:", error);
       }
     });
   }
@@ -119,17 +107,13 @@ document.addEventListener("DOMContentLoaded", function () {
           body: params,
         });
 
-        console.log("帳戶 fetch response:", updateAccountRes);
-
         const data = await updateAccountRes.json();
-
-        console.log("帳戶 API 回傳:", data);
 
         if (data.success) {
           //   等待 10 秒後跳轉到 dashboard-TPABF.html
           await new Promise((resolve) => setTimeout(resolve, 10000));
 
-          window.location.href = "dashboard-TPABF.html";
+          window.location.href = "dashboard-TPABF.html?ts=" + Date.now();
         } else {
           alert("Network error, please try again later.");
         }
