@@ -19,9 +19,6 @@ document.addEventListener("DOMContentLoaded", function () {
       const bio = document.getElementById("bio-edit").value.trim();
       const role = document.getElementById("role-edit").value;
       const category = document.getElementById("category-edit").value;
-      const baselocation = document
-        .getElementById("baselocation-edit")
-        .value.trim();
 
       const params = new URLSearchParams({
         action: "update_dashboard_info",
@@ -30,7 +27,6 @@ document.addEventListener("DOMContentLoaded", function () {
         品牌簡介: bio,
         身分類別: role,
         作品類別: category,
-        主要創作據點: baselocation,
       }).toString();
       try {
         const updateBranchRes = await fetch(apiUrl, {
@@ -82,6 +78,9 @@ document.addEventListener("DOMContentLoaded", function () {
       const facebook = document.getElementById("facebook-edit").value.trim();
       const instagram = document.getElementById("instagram-edit").value.trim();
       const whatsapp = document.getElementById("whatsapp-edit").value.trim();
+      const baselocation = document
+        .getElementById("baselocation-edit")
+        .value.trim();
 
       // TODO: 送出 API 或處理資料
       const params = new URLSearchParams({
@@ -94,6 +93,7 @@ document.addEventListener("DOMContentLoaded", function () {
         facebook: facebook,
         instagram: instagram,
         whatsapp: whatsapp,
+        主要創作據點: baselocation,
       }).toString();
 
       try {

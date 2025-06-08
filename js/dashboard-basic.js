@@ -690,6 +690,7 @@ document.addEventListener("DOMContentLoaded", async function () {
 
   document.getElementById("email").textContent = apiData["account"] || "";
   document.getElementById("phone").textContent = apiData["phone"];
+  document.getElementById("baselocation").textContent = apiData["baselocation"];
   document.getElementById("nationality2").textContent = region || "";
 
   function setSocialText(id, value) {
@@ -709,4 +710,5 @@ document.addEventListener("DOMContentLoaded", async function () {
   setSocialText("instagram", apiData["instagram"]);
   setSocialText("facebook", apiData["facebook"]);
   setSocialText("whatsapp", apiData["whatsapp"]);
+  setSocialText("baselocation", apiData["baselocation"]);
 });
