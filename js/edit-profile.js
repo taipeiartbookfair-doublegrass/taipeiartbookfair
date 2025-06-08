@@ -62,9 +62,9 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 
   // 編輯帳戶資料
-  const accountForm = document.getElementById("submit-edit-account");
-  if (accountForm) {
-    accountForm.addEventListener("submit", async function (e) {
+  const account_summit_btn = document.getElementById("submit-edit-account");
+  if (account_summit_btn) {
+    account_summit_btn.addEventListener("click", async function (e) {
       e.preventDefault();
       // 取得表單資料
       const contactPerson = document

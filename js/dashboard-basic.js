@@ -685,7 +685,7 @@ document.addEventListener("DOMContentLoaded", async function () {
     el.textContent = apiData["報名編號"] || "";
   });
 
-  console.log("apiData['代表人'] =", apiData["代表人"]);
+  // console.log("apiData['代表人'] =", apiData["代表人"]);
   document.getElementById("contact-person").textContent = apiData["name"] || "";
 
   document.getElementById("email").textContent = apiData["account"] || "";
