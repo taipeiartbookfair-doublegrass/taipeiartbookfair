@@ -53,28 +53,30 @@
             />
           </p>
           <a
+            id="sidebar-dashboard"
             href="#"
-            style="text-decoration: none"
-            onclick="showDashboardSection(); return false;"
+            style="text-decoration: none; color: black"
+            onclick="showDashboardSection(); setSidebarActive('dashboard'); return false;"
           >
             <p>
               <mark>攤商管理<br />Dashboard</mark>
-            </p></a
-          >
-
+            </p>
+          </a>
           <hr class="sidebar-hr" />
           <a
+            id="sidebar-contact"
             href="#"
             style="text-decoration: none; color: black"
-            onclick="showContactSection(); return false;"
+            onclick="showContactSection(); setSidebarActive('contact'); return false;"
           >
             <p>聯絡我們<br />Contact</p>
           </a>
           <hr class="sidebar-hr" />
           <a
+            id="sidebar-faq"
             href="#"
             style="text-decoration: none; color: black"
-            onclick="showFAQSection(); return false;"
+            onclick="showFAQSection(); setSidebarActive('faq'); return false;"
           >
             <p>常見問題<br />FAQ</p>
           </a>
@@ -89,9 +91,10 @@
           </div>
           <!-- ...existing code... -->
           <a
+            id="sidebar-account"
             href="#"
             style="text-decoration: none"
-            onclick="showAccountSection(); return false;"
+            onclick="showAccountSection(); setSidebarActive('account'); return false;"
           >
             <p style="background-color: blueviolet; color: ghostwhite">
               帳號管理<br />Profile

@@ -99,6 +99,45 @@ document.addEventListener("DOMContentLoaded", function () {
       logo.classList.remove("machine-rotate-animating");
     });
   }
+
+  window.setSidebarActive = function (section) {
+    // 定義所有 sidebar id
+    const sidebarIds = [
+      "sidebar-dashboard",
+      "sidebar-contact",
+      "sidebar-faq",
+      "sidebar-account",
+    ];
+    sidebarIds.forEach((id) => {
+      const a = document.getElementById(id);
+      if (!a) return;
+      const p = a.querySelector("p");
+      // 移除所有 <mark>
+      if (p) {
+        const html = p.innerHTML.replace(/<mark>([\s\S]*?)<\/mark>/g, "$1");
+        p.innerHTML = html;
+      }
+      // 還原帳號管理顏色
+      if (id === "sidebar-account") {
+        p.style.backgroundColor = "blueviolet";
+        p.style.color = "ghostwhite";
+      } else {
+        p.style.backgroundColor = "";
+        p.style.color = "";
+      }
+    });
+
+    // 只給目前選到的加 <mark>
+    if (section === "dashboard" || section === "contact" || section === "faq") {
+      const a = document.getElementById("sidebar-" + section);
+      if (a) {
+        const p = a.querySelector("p");
+        if (p) {
+          p.innerHTML = `<mark>${p.innerText}</mark>`;
+        }
+      }
+    }
+  };
   window.openEditPage = function openEditPage() {
     const editPage = document.getElementById("edit-brand-page");
     const mid = document.querySelector(".mid");
