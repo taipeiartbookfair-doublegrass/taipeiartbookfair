@@ -101,12 +101,6 @@ document.addEventListener("DOMContentLoaded", function () {
         .getElementById("baselocation-edit")
         .value.trim();
 
-      /**
-       * 將 URLSearchParams 字串還原成原始字元（所有符號都還原）
-       * @param {string} paramStr
-       * @returns {string}
-       */
-
       const params = new URLSearchParams({
         action: "update_account_info",
         account: account,
@@ -133,10 +127,37 @@ document.addEventListener("DOMContentLoaded", function () {
         const data = await updateAccountRes.json();
 
         if (data.success) {
-          //   等待 10 秒後跳轉到 dashboard-TPABF.html
-          await new Promise((resolve) => setTimeout(resolve, 10000));
-
-          window.location.href = "dashboard-TPABF.html?ts=" + Date.now();
+          // 等待 2 秒
+          await new Promise((resolve) => setTimeout(resolve, 2000));
+          // 重新 fetch dashboard 資料，確認已更新
+          const checkParams = new URLSearchParams({
+            action: "get_dashboard_info",
+            account: account,
+          }).toString();
+          let updated = false;
+          for (let i = 0; i < 5; i++) {
+            // 最多重試5次
+            const checkRes = await fetch(apiUrl, {
+              method: "POST",
+              headers: {
+                "Content-Type": "application/x-www-form-urlencoded",
+              },
+              body: checkParams,
+            });
+            const checkData = await checkRes.json();
+            // 這裡根據你剛剛更新的欄位來判斷是否已經是新值
+            if (
+              checkData.success &&
+              checkData.data &&
+              checkData.data["phone"] === phone &&
+              checkData.data["name"] === contactPerson
+            ) {
+              updated = true;
+              break;
+            }
+            await new Promise((resolve) => setTimeout(resolve, 1000)); // 每秒重試
+          }
+          window.location.href = "dashboard-TPABF.html";
         } else {
           alert("Network error, please try again later.");
         }
