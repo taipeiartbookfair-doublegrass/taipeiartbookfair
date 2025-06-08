@@ -43,7 +43,7 @@ document.addEventListener("DOMContentLoaded", function () {
         if (data.success) {
           //   等待 10 秒後跳轉到 dashboard-TPABF.html
           await new Promise((resolve) => setTimeout(resolve, 10000));
-          window.location.href = "dashboard-TPABF.html";
+          window.location.href = "dashboard-TPABF.html" + Date.now();
         } else {
           alert("Network error, please try again later.");
         }
