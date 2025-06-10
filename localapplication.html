@@ -119,19 +119,16 @@
           <span class="from-header">攤商品牌名稱</span>
           輸入內容將公開顯示於官網目錄及標籤上。
         </div>
-        <div class="column layout-form-column-grid-1">
-          <span class="from-description-header-ness">必填問題</span>
-          <input
-            class="form-input"
-            name="entry.1159390039"
-            placeholder="品牌名稱"
-            maxlength="150"
-            required
-            pattern="^[\p{L}\p{N}\s]+$"
-            title="請勿輸入特殊符號"
-          />
-        </div>
-      </div>
+
+        <input
+          class="form-input"
+          name="entry.1159390039"
+          placeholder="品牌名稱"
+          maxlength="150"
+          required
+          pattern="^[\p{L}\p{N}\s!&quot;#$%&'()*+,\-./:;<=>?@[\\\]^_`{|}~]+$"
+          title="請勿輸入特殊符號"
+        />
 
       <span class="description-header">Participating in a record survey</span>
       <div class="module-form layout-form-columnized">
