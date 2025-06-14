@@ -349,8 +349,6 @@ document.addEventListener("DOMContentLoaded", async function () {
     let price = "";
     let equipment = [];
     let electricity = [];
-    let payLink1 = "#";
-    let payLink2 = "#";
     let payText = "付款 Pay";
     let note = "";
 
@@ -368,8 +366,6 @@ document.addEventListener("DOMContentLoaded", async function () {
           "– 不得使用大電器",
           "– 非每攤都有，需自備延長線與他人協調",
         ];
-        payLink1 = "https://nmhw.taipeiartbookfair.com/products/報名費-書攤";
-        payLink2 = "https://nmhw.taipeiartbookfair.com/products/報名費-書攤-1";
         break;
       case "創作商品攤":
         price = "8,000 元 <small>(含稅)</small>";
@@ -384,10 +380,7 @@ document.addEventListener("DOMContentLoaded", async function () {
           "– 不得使用大電器",
           "– 非每攤都有，需自備延長線與他人協調",
         ];
-        payLink1 =
-          "https://nmhw.taipeiartbookfair.com/products/報名費-創作商品";
-        payLink2 =
-          "https://nmhw.taipeiartbookfair.com/products/報名費-創作商品-1";
+
         break;
       case "裝置攤":
         price = "10,000 元 <small>(含稅)</small>";
@@ -404,9 +397,7 @@ document.addEventListener("DOMContentLoaded", async function () {
             <li>220V需以1000元加購，不得使用變壓器</li>
           </ul>`,
         ];
-        payLink1 = "https://nmhw.taipeiartbookfair.com/products/報名費-裝置類";
-        payLink2 =
-          "https://nmhw.taipeiartbookfair.com/products/報名費-裝置類-1";
+
         break;
       case "食物酒水攤":
         price = "13,000 元 <small>(含稅)</small>";
@@ -424,10 +415,6 @@ document.addEventListener("DOMContentLoaded", async function () {
             <li>220V需以1000元加購，不得使用變壓器</li>
           </ul>`,
         ];
-        payLink1 =
-          "https://nmhw.taipeiartbookfair.com/products/報名費-食物酒水";
-        payLink2 =
-          "https://nmhw.taipeiartbookfair.com/products/報名費-食物酒水-1";
         break;
       case "One Regular Booth":
         price = "USD$165 <small>incl. tax</small>";
@@ -442,10 +429,7 @@ document.addEventListener("DOMContentLoaded", async function () {
           "– High-power electrical appliances are not allowed",
           "– Not available at every booth; please bring your own extension cord and coordinate with others",
         ];
-        payLink1 =
-          "https://nmhw.taipeiartbookfair.com/products/報名費-one-regular-booth";
-        payLink2 =
-          "https://nmhw.taipeiartbookfair.com/products/報名費-one-regular-booth-1";
+
         break;
       case "Two Regular Booth":
         price = "USD$330 <small>incl. tax</small>";
@@ -460,10 +444,7 @@ document.addEventListener("DOMContentLoaded", async function () {
           "– High-power electrical appliances are not allowed",
           "– Not available at every booth; please bring your own extension cord and coordinate with others",
         ];
-        payLink1 =
-          "https://nmhw.taipeiartbookfair.com/products/報名費-two-regular-booth";
-        payLink2 =
-          "https://nmhw.taipeiartbookfair.com/products/報名費-two-regular-booth-1";
+
         break;
       case "Curation Booth":
         price = "USD$780 <small>incl. tax</small>";
@@ -482,16 +463,11 @@ document.addEventListener("DOMContentLoaded", async function () {
             <li>220V available for NT$1,000; no transformers allowed.</li>
           </ul>`,
         ];
-        payLink1 =
-          "https://nmhw.taipeiartbookfair.com/products/報名費-curation-booth";
-        payLink2 =
-          "https://nmhw.taipeiartbookfair.com/products/報名費-curation-booth-1";
+
         break;
       default:
         price = "";
         equipment = [];
-        payLink1 = "#";
-        payLink2 = "#";
     }
 
     // 更新價錢
@@ -572,16 +548,80 @@ document.addEventListener("DOMContentLoaded", async function () {
       } <small>incl. tax</small>`;
     }
 
-    // 更新付款按鈕（假設有兩個 pay-button 對應兩個方案）
+    // 取得報名編號
+    const applicationNumber = document
+      .getElementById("application-number")
+      .textContent.trim();
+
+    // 判斷是否海外攤
+    const isOversea =
+      boothType === "One Regular Booth" ||
+      boothType === "Two Regular Booth" ||
+      boothType === "Curation Booth";
+
+    // 商品名稱與金額
+    let productName1 = "",
+      productName2 = "",
+      amount1 = "",
+      amount2 = "";
+    if (isOversea) {
+      if (boothType === "One Regular Booth") {
+        productName1 = "Basic Fee";
+        productName2 = "Basic Fee + Extra Pass";
+        amount1 = "165";
+        amount2 = "195";
+      } else if (boothType === "Two Regular Booth") {
+        productName1 = "Basic Fee";
+        productName2 = "Basic Fee + Extra Pass";
+        amount1 = "330";
+        amount2 = "360";
+      } else if (boothType === "Curation Booth") {
+        productName1 = "Basic Fee";
+        productName2 = "Basic Fee + Extra Pass";
+        amount1 = "780";
+        amount2 = "810";
+      }
+    } else {
+      if (boothType === "書攤") {
+        productName1 = "基礎攤費";
+        productName2 = "基礎攤費 + 工作證一張";
+      } else if (boothType === "創作商品攤") {
+        productName1 = "基礎攤費";
+        productName2 = "基礎攤費 + 工作證一張";
+      } else if (boothType === "裝置攤") {
+        productName1 = "基礎攤費";
+        productName2 = "基礎攤費 + 工作證一張";
+      } else if (boothType === "食物酒水攤") {
+        productName1 = "基礎攤費";
+        productName2 = "基礎攤費 + 工作證一張";
+      }
+    }
+
+    // 產生連結
+    let payLink1 = "#",
+      payLink2 = "#";
+    if (isOversea) {
+      payLink1 = `https://www.paypal.com/cgi-bin/webscr?cmd=_xclick&business=xraypink@gmail.com&item_name=${encodeURIComponent(
+        applicationNumber + " - " + productName1
+      )}&amount=${amount1}&currency_code=USD&custom=${applicationNumber}`;
+      payLink2 = `https://www.paypal.com/cgi-bin/webscr?cmd=_xclick&business=xraypink@gmail.com&item_name=${encodeURIComponent(
+        applicationNumber + " - " + productName2
+      )}&amount=${amount2}&currency_code=USD&custom=${applicationNumber}`;
+    } else {
+      payLink1 = toProductUrl(applicationNumber, productName1);
+      payLink2 = toProductUrl(applicationNumber, productName2);
+    }
+
+    // 分別設定 pay1/pay2 按鈕
     const payBtn1 = document.getElementById("pay1");
     const payBtn2 = document.getElementById("pay2");
     if (payBtn1) {
       payBtn1.onclick = () => window.open(payLink1, "_blank");
-      payBtn1.textContent = payText;
+      payBtn1.textContent = isOversea ? "Pay (Plan 1)" : "付款（方案一）";
     }
     if (payBtn2) {
       payBtn2.onclick = () => window.open(payLink2, "_blank");
-      payBtn2.textContent = payText;
+      payBtn2.textContent = isOversea ? "Pay (Plan 2)" : "付款（方案二）";
     }
   }
 
@@ -615,64 +655,64 @@ document.addEventListener("DOMContentLoaded", async function () {
     if (electricityTitleEl) electricityTitleEl.textContent = "電源：";
   }
 
-  function setBillingInfoLanguage(boothType) {
-    const isEnglishBooth =
-      boothType === "One Regular Booth" ||
-      boothType === "Two Regular Booth" ||
-      boothType === "Curation Booth";
+  // function setBillingInfoLanguage(boothType) {
+  //   const isEnglishBooth =
+  //     boothType === "One Regular Booth" ||
+  //     boothType === "Two Regular Booth" ||
+  //     boothType === "Curation Booth";
 
-    // 方案一
-    document.querySelector("span[for-billing1-title]").innerHTML =
-      isEnglishBooth
-        ? "<strong>Plan 1</strong>: Basic Fee"
-        : "<strong>方案一</strong>：基礎攤費";
-    document.querySelector("span[for-billing1-desc]").innerHTML = isEnglishBooth
-      ? "Basic plan only"
-      : "僅基礎方案";
-    document.getElementById("billing1-note").innerHTML = isEnglishBooth
-      ? `! Please enter the following information when making payment:<br />
-          Email:
-          <span id="billing-email" style="font-weight: bold">email@gmail.com</span>
-          <button class="copy-btn" onclick="copyToClipboard('billing-email')" title="Copy Email" style="margin-left: 5px">📋</button><br />
-          Reference:
-          <span id="billing-application-number" style="font-weight: bold">25-BC001</span>
-          <button class="copy-btn" onclick="copyToClipboard('billing-application-number')" title="Copy Application Number" style="margin-left: 5px">📋</button><br /><br />
-          <b>If you enter incorrect information, your registration may fail.</b>`
-      : `！請在付款時務必填入以下資料：<br />
-          Email:
-          <span id="billing-email" style="font-weight: bold">email@gmail.com</span>
-          <button class="copy-btn" onclick="copyToClipboard('billing-email')" title="Copy Email" style="margin-left: 5px">📋</button><br />
-          備註欄位:
-          <span id="billing-application-number" style="font-weight: bold">25-BC001</span>
-          <button class="copy-btn" onclick="copyToClipboard('billing-application-number')" title="Copy Application Number" style="margin-left: 5px">📋</button><br /><br />
-          <b>如因填寫其他錯誤資料造成對帳問題，將導致報名失敗。</b>`;
+  //   // 方案一
+  //   document.querySelector("span[for-billing1-title]").innerHTML =
+  //     isEnglishBooth
+  //       ? "<strong>Plan 1</strong>: Basic Fee"
+  //       : "<strong>方案一</strong>：基礎攤費";
+  //   document.querySelector("span[for-billing1-desc]").innerHTML = isEnglishBooth
+  //     ? "Basic plan only"
+  //     : "僅基礎方案";
+  //   document.getElementById("billing1-note").innerHTML = isEnglishBooth
+  //     ? `! Please enter the following information when making payment:<br />
+  //         Email:
+  //         <span id="billing-email" style="font-weight: bold">email@gmail.com</span>
+  //         <button class="copy-btn" onclick="copyToClipboard('billing-email')" title="Copy Email" style="margin-left: 5px">📋</button><br />
+  //         Reference:
+  //         <span id="billing-application-number" style="font-weight: bold">25-BC001</span>
+  //         <button class="copy-btn" onclick="copyToClipboard('billing-application-number')" title="Copy Application Number" style="margin-left: 5px">📋</button><br /><br />
+  //         <b>If you enter incorrect information, your registration may fail.</b>`
+  //     : `！請在付款時務必填入以下資料：<br />
+  //         Email:
+  //         <span id="billing-email" style="font-weight: bold">email@gmail.com</span>
+  //         <button class="copy-btn" onclick="copyToClipboard('billing-email')" title="Copy Email" style="margin-left: 5px">📋</button><br />
+  //         備註欄位:
+  //         <span id="billing-application-number" style="font-weight: bold">25-BC001</span>
+  //         <button class="copy-btn" onclick="copyToClipboard('billing-application-number')" title="Copy Application Number" style="margin-left: 5px">📋</button><br /><br />
+  //         <b>如因填寫其他錯誤資料造成對帳問題，將導致報名失敗。</b>`;
 
-    // 方案二
-    document.querySelector("span[for-billing2-title]").innerHTML =
-      isEnglishBooth
-        ? "<strong>Plan 2</strong>: Basic Fee + Extra Pass"
-        : "<strong>方案二</strong>：基礎攤費+工作證一張";
-    document.querySelector("span[for-billing2-desc]").innerHTML = isEnglishBooth
-      ? "For those who shift-swaps"
-      : "適合有輪班擺攤需求之攤主";
-    document.getElementById("billing2-note").innerHTML = isEnglishBooth
-      ? `! Please enter the following information when making payment:<br />
-          Email:
-          <span id="billing-email" style="font-weight: bold">email@gmail.com</span>
-          <button class="copy-btn" onclick="copyToClipboard('billing-email')" title="Copy Email" style="margin-left: 5px">📋</button><br />
-          Reference:
-          <span id="billing-application-number" style="font-weight: bold">25-BC001</span>
-          <button class="copy-btn" onclick="copyToClipboard('billing-application-number')" title="Copy Application Number" style="margin-left: 5px">📋</button><br /><br />
-          <b>If you enter incorrect information, your registration may fail.</b>`
-      : `！請在付款時務必填入以下資料：<br />
-          Email:
-          <span id="billing-email" style="font-weight: bold">email@gmail.com</span>
-          <button class="copy-btn" onclick="copyToClipboard('billing-email')" title="Copy Email" style="margin-left: 5px">📋</button><br />
-          備註欄位:
-          <span id="billing-application-number" style="font-weight: bold">25-BC001</span>
-          <button class="copy-btn" onclick="copyToClipboard('billing-application-number')" title="Copy Application Number" style="margin-left: 5px">📋</button><br /><br />
-          <b>如因填寫其他錯誤資料造成對帳問題，將導致報名失敗。</b>`;
-  }
+  //   // 方案二
+  //   document.querySelector("span[for-billing2-title]").innerHTML =
+  //     isEnglishBooth
+  //       ? "<strong>Plan 2</strong>: Basic Fee + Extra Pass"
+  //       : "<strong>方案二</strong>：基礎攤費+工作證一張";
+  //   document.querySelector("span[for-billing2-desc]").innerHTML = isEnglishBooth
+  //     ? "For those who shift-swaps"
+  //     : "適合有輪班擺攤需求之攤主";
+  //   document.getElementById("billing2-note").innerHTML = isEnglishBooth
+  //     ? `! Please enter the following information when making payment:<br />
+  //         Email:
+  //         <span id="billing-email" style="font-weight: bold">email@gmail.com</span>
+  //         <button class="copy-btn" onclick="copyToClipboard('billing-email')" title="Copy Email" style="margin-left: 5px">📋</button><br />
+  //         Reference:
+  //         <span id="billing-application-number" style="font-weight: bold">25-BC001</span>
+  //         <button class="copy-btn" onclick="copyToClipboard('billing-application-number')" title="Copy Application Number" style="margin-left: 5px">📋</button><br /><br />
+  //         <b>If you enter incorrect information, your registration may fail.</b>`
+  //     : `！請在付款時務必填入以下資料：<br />
+  //         Email:
+  //         <span id="billing-email" style="font-weight: bold">email@gmail.com</span>
+  //         <button class="copy-btn" onclick="copyToClipboard('billing-email')" title="Copy Email" style="margin-left: 5px">📋</button><br />
+  //         備註欄位:
+  //         <span id="billing-application-number" style="font-weight: bold">25-BC001</span>
+  //         <button class="copy-btn" onclick="copyToClipboard('billing-application-number')" title="Copy Application Number" style="margin-left: 5px">📋</button><br /><br />
+  //         <b>如因填寫其他錯誤資料造成對帳問題，將導致報名失敗。</b>`;
+  // }
 
   // 呼叫時機：boothType 設定好後
   setBillingInfoLanguage(boothType);
@@ -713,3 +753,14 @@ document.addEventListener("DOMContentLoaded", async function () {
   setSocialText("whatsapp", apiData["whatsapp"]);
   setSocialText("baselocation", apiData["baselocation"]);
 });
+
+// 產生產品連結
+function toProductUrl(applicationNumber, productName) {
+  // 全部小寫、去掉空白、dash 連接
+  return (
+    "https://nmhw.taipeiartbookfair.com/products/" +
+    (applicationNumber + "-" + productName)
+      .replace(/\s+/g, "") // 去掉所有空白
+      .toLowerCase()
+  );
+}
