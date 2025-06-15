@@ -17,7 +17,7 @@ const subCategoryOptions = {
       text: "b06 概念與實驗性出版（Conceptual & Experimental）",
     },
     {
-      value: "b07 藝與特殊材質",
+      value: "b07 工藝與特殊材質",
       text: "b07 工藝與特殊材質（Craftwork & Different Material）",
     },
     { value: "b08 文學與寫作", text: "b08 文學與寫作（Literature & Writing）" },

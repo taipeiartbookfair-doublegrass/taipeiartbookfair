@@ -36,6 +36,12 @@ nav a.vertical {
   transition: transform 0.2s ease;
 }
 
+.deadline-highlight {
+  border: 1.5px solid #e53935;
+  padding: 1px 12px;
+  margin: 2px 0;
+}
+
 .about {
   font-size: 9rem;
   width: 170px;
