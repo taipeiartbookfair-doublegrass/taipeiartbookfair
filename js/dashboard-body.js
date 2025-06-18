@@ -172,12 +172,14 @@ document.addEventListener("DOMContentLoaded", function () {
       nationalityEdit.value = nationality.innerText.trim();
   };
   window.showFAQSection = function showFAQSection() {
+    const editBrandPage = document.getElementById("edit-brand-page");
     const mid = document.querySelector(".mid");
     const right = document.querySelector(".right");
     const editPage = document.getElementById("edit-account-page");
     const account = document.querySelector(".account");
     const faq = document.getElementById("faq");
     const contact = document.getElementById("contact-method");
+    if (editBrandPage) editBrandPage.style.display = "none";
     if (mid) mid.style.display = "none";
     if (right) right.style.display = "none";
     if (editPage) editPage.style.display = "none";
@@ -186,12 +188,14 @@ document.addEventListener("DOMContentLoaded", function () {
     if (contact) contact.style.display = "none";
   };
   window.showContactSection = function showContactSection() {
+    const editBrandPage = document.getElementById("edit-brand-page");
     const mid = document.querySelector(".mid");
     const right = document.querySelector(".right");
     const editPage = document.getElementById("edit-account-page");
     const account = document.querySelector(".account");
     const faq = document.getElementById("faq");
     const contact = document.getElementById("contact-method");
+    if (editBrandPage) editBrandPage.style.display = "none";
     if (mid) mid.style.display = "none";
     if (right) right.style.display = "none";
     if (editPage) editPage.style.display = "none";
@@ -200,12 +204,14 @@ document.addEventListener("DOMContentLoaded", function () {
     if (contact) contact.style.display = "table-cell";
   };
   window.showAccountSection = function showAccountSection() {
+    const editBrandPage = document.getElementById("edit-brand-page");
     const mid = document.querySelector(".mid");
     const right = document.querySelector(".right");
     const editPage = document.getElementById("edit-account-page");
     const account = document.getElementById("account");
     const faq = document.getElementById("faq");
     const contact = document.getElementById("contact-method");
+    if (editBrandPage) editBrandPage.style.display = "none";
     if (mid) mid.style.display = "none";
     if (right) right.style.display = "none";
     if (editPage) editPage.style.display = "none";
@@ -215,12 +221,14 @@ document.addEventListener("DOMContentLoaded", function () {
   };
 
   window.showDashboardSection = function showDashboardSection() {
+    const editBrandPage = document.getElementById("edit-brand-page");
     const mid = document.querySelector(".mid");
     const right = document.querySelector(".right");
     const editPage = document.getElementById("edit-account-page");
     const account = document.querySelector(".account");
     const faq = document.getElementById("faq");
     const contact = document.getElementById("contact-method");
+    if (editBrandPage) editBrandPage.style.display = "none";
     if (mid) mid.style.display = "table-cell";
     if (right) right.style.display = "table-cell";
     if (editPage) editPage.style.display = "none";
