@@ -219,7 +219,7 @@ document.addEventListener("DOMContentLoaded", function () {
     const editElectricityRow = document.getElementById("edit-electricity-row");
     if (editElectricityRow) {
       if (boothType === "食物酒水攤" || boothType === "裝置攤") {
-        editElectricityRow.style.display = "";
+        editElectricityRow.style.display = "block";
       } else {
         editElectricityRow.style.display = "none";
       }
