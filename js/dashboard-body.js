@@ -49,8 +49,28 @@ document.addEventListener("DOMContentLoaded", function () {
     }
   };
 
+  window.setLoading = function (percent) {
+    const imgs = loadingGrid.querySelectorAll("img");
+    const total = imgs.length;
+    const progress = Math.floor(percent * total);
+    for (let i = 0; i < total; i++) {
+      if (i < progress) {
+        imgs[i].src = imgActiveSrc;
+      } else {
+        imgs[i].removeAttribute("src");
+      }
+    }
+    if (loadingPercent) {
+      loadingPercent.textContent = Math.round(percent * 100) + "%";
+    }
+  };
+
   // 資料抓取完成時呼叫
   window.hideLoadingMask = function () {
+    loadingMask.style.display = "none";
+  };
+
+  window.hideLoading = function () {
     loadingMask.style.display = "none";
   };
 
@@ -170,6 +190,17 @@ document.addEventListener("DOMContentLoaded", function () {
         toEl.value = fromEl.textContent.trim();
       }
     });
+
+    // 控制編輯頁電力需求顯示
+    const boothType = document.getElementById("booth-type")?.textContent.trim();
+    const editElectricityRow = document.getElementById("edit-electricity-row");
+    if (editElectricityRow) {
+      if (boothType === "食物酒水攤" || boothType === "裝置攤") {
+        editElectricityRow.style.display = "";
+      } else {
+        editElectricityRow.style.display = "none";
+      }
+    }
   };
 
   window.showFAQSection = function showFAQSection() {

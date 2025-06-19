@@ -18,6 +18,22 @@ document.addEventListener("DOMContentLoaded", function () {
       const bio = document.getElementById("bio-edit").value.trim();
       const role = document.getElementById("role-edit").value;
       const category = document.getElementById("category-edit").value;
+      const website = document.getElementById("website-edit").value.trim();
+      const facebook = document.getElementById("facebook-edit").value.trim();
+      const instagram = document.getElementById("instagram-edit").value.trim();
+      const baselocation = document
+        .getElementById("baselocation-edit")
+        .value.trim();
+      const attendedYears = document
+        .getElementById("attendedYears-edit")
+        .value.trim();
+      const nationality = document.getElementById("nationality-edit").value;
+      const yearlyanswer = document
+        .getElementById("yearlyanswer-edit")
+        .value.trim();
+      const electricity = document
+        .getElementById("electricity-edit")
+        .value.trim();
 
       const params = new URLSearchParams({
         action: "update_dashboard_info",
@@ -26,6 +42,14 @@ document.addEventListener("DOMContentLoaded", function () {
         品牌簡介: bio,
         身分類別: role,
         作品類別: category,
+        website: website,
+        facebook: facebook,
+        instagram: instagram,
+        主要創作據點: baselocation,
+        參與年份: attendedYears,
+        國籍: nationality,
+        當屆問答: yearlyanswer,
+        電力需求: electricity,
       }).toString();
 
       try {
@@ -60,7 +84,11 @@ document.addEventListener("DOMContentLoaded", function () {
             });
             const checkData = await checkRes.json();
             // 這裡根據你剛剛更新的欄位來判斷是否已經是新值
-            if (checkData.success && checkData.data["品牌"] === brandName) {
+            if (
+              checkData.success &&
+              checkData.data["品牌"] === brandName &&
+              checkData.data["品牌簡介"] === bio
+            ) {
               updated = true;
               break;
             }
@@ -93,13 +121,6 @@ document.addEventListener("DOMContentLoaded", function () {
         .getElementById("contact-person-edit")
         .value.trim();
       const nationality = document.getElementById("nationality-edit").value;
-      const website = document.getElementById("website-edit").value.trim();
-      const facebook = document.getElementById("facebook-edit").value.trim();
-      const instagram = document.getElementById("instagram-edit").value.trim();
-      const whatsapp = document.getElementById("whatsapp-edit").value.trim();
-      const baselocation = document
-        .getElementById("baselocation-edit")
-        .value.trim();
 
       const params = new URLSearchParams({
         action: "update_account_info",
@@ -107,11 +128,6 @@ document.addEventListener("DOMContentLoaded", function () {
         phone: phone,
         name: contactPerson,
         region: nationality,
-        website: website,
-        facebook: facebook,
-        instagram: instagram,
-        whatsapp: whatsapp,
-        主要創作據點: baselocation,
       }).toString();
 
       try {
