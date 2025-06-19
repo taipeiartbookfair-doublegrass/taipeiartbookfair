@@ -190,6 +190,17 @@ document.addEventListener("DOMContentLoaded", function () {
         toEl.value = fromEl.textContent.trim();
       }
     });
+
+    // 控制編輯頁電力需求顯示
+    const boothType = document.getElementById("booth-type")?.textContent.trim();
+    const editElectricityRow = document.getElementById("edit-electricity-row");
+    if (editElectricityRow) {
+      if (boothType === "食物酒水攤" || boothType === "裝置攤") {
+        editElectricityRow.style.display = "";
+      } else {
+        editElectricityRow.style.display = "none";
+      }
+    }
   };
 
   window.showFAQSection = function showFAQSection() {
