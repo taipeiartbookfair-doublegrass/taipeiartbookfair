@@ -647,10 +647,7 @@ document.addEventListener("DOMContentLoaded", async function () {
   setTimeout(function () {
     if (window.hideLoadingMask) hideLoadingMask();
   }, 500);
-
-  document.getElementById("billing-email").textContent = apiData["Email"] || "";
-  document.getElementById("billing-application-number").textContent =
-    apiData["報名編號"] || "";
+  s;
 
   const equipmentTitleEl = document.getElementById("equipment-title");
   const electricityTitleEl = document.getElementById("electricity-title");
