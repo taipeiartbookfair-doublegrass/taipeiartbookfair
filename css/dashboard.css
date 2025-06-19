@@ -425,3 +425,187 @@ html::-webkit-scrollbar-thumb:hover {
 #media-section-row5 {
   width: 100%;
 }
+
+/* ===== 行動版 Mobile ===== */
+@media screen and (max-width: 600px) {
+  html,
+  body {
+    overflow: auto !important;
+  }
+  .layout {
+    width: 100vw;
+    height: auto;
+    display: block;
+  }
+  .sidebar {
+    width: 100vw;
+    height: auto;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    position: static;
+    border-bottom: 1px solid #ccc;
+    padding: 0;
+    font-size: 1rem;
+  }
+  .sidebar hr,
+  .sidebar-hr {
+    display: none;
+  }
+  .sidebar-middle {
+    display: none;
+  }
+  .sidebar a,
+  .sidebar > a,
+  .sidebar > div {
+    display: inline-block;
+    margin: 0 0.5em;
+    padding: 0;
+  }
+  .sidebar p,
+  .sidebar a p {
+    display: inline;
+    font-size: 1rem;
+    padding: 0 0.5em;
+    margin: 0;
+    background: none !important;
+    color: #222 !important;
+  }
+  .machine-rotate-logo {
+    width: 2.5em !important;
+    height: auto !important;
+    margin-right: 0.5em;
+  }
+  .mid,
+  .right,
+  .account,
+  .admin,
+  .edit-page {
+    display: block !important;
+    width: 100vw !important;
+    min-width: 0 !important;
+    max-width: 100vw !important;
+    height: auto !important;
+    overflow: visible !important;
+    box-sizing: border-box;
+  }
+  .scroll-inner {
+    height: auto !important;
+    max-height: none !important;
+    overflow: visible !important;
+    padding-bottom: 2em;
+  }
+  table.layout,
+  table,
+  .faqtable {
+    width: 100vw !important;
+    display: block;
+    table-layout: fixed;
+    overflow-x: auto;
+  }
+  td,
+  th {
+    display: block;
+    width: 100% !important;
+    box-sizing: border-box;
+    font-size: 1rem;
+    border: none;
+    padding: 0.7em 0.5em;
+  }
+  .bio {
+    font-size: 1rem;
+    line-height: 1.5;
+    height: auto;
+    overflow: visible;
+  }
+  #brand-name {
+    font-size: 2rem !important;
+  }
+  .booth-type-en {
+    font-size: 1.2rem !important;
+    line-height: 1.5 !important;
+  }
+  .edit-form {
+    max-width: 100vw;
+    padding: 1em 0.2em;
+  }
+  .close-button {
+    font-size: 2rem;
+    top: 0.2em;
+    right: 0.5em;
+  }
+  .pay-button {
+    font-size: 1rem;
+    padding: 0.5em 0;
+    margin-top: 0.5em;
+  }
+  .label,
+  .labelAQ {
+    font-size: 1rem !important;
+    padding: 2px 4px;
+  }
+  h3 {
+    font-size: 2.2rem !important;
+    line-height: 2.5rem !important;
+  }
+  /* FAQ number cell */
+  .faq-number-cell {
+    width: 2em !important;
+    font-size: 1.2em;
+  }
+  /* Hide some less important columns if needed */
+  #media-section-row5 td,
+  #media-section-row6 td {
+    font-size: 1rem !important;
+  }
+}
+
+/* ===== 大螢幕版 4K+ ===== */
+@media (min-width: 1920px) {
+  .layout {
+    max-width: 1800px;
+    margin: 0 auto;
+    font-size: 1.2rem;
+  }
+  .sidebar {
+    width: 5vw;
+    font-size: 1.1rem;
+  }
+  .mid {
+    width: 50vw;
+    font-size: 1.2rem;
+  }
+  .right {
+    width: 60vw;
+    font-size: 1.2rem;
+  }
+  .account,
+  .admin {
+    width: 100vw;
+    font-size: 1.2rem;
+  }
+  .edit-form {
+    max-width: 1200px;
+    font-size: 1.1rem;
+  }
+  #brand-name {
+    font-size: 4rem !important;
+  }
+  .booth-type-en {
+    font-size: 2.5rem !important;
+    line-height: 2.8rem !important;
+  }
+  .pay-button {
+    font-size: 1.3rem;
+    padding: 1em 0;
+  }
+  .label,
+  .labelAQ {
+    font-size: 1.2rem !important;
+    padding: 4px 10px;
+  }
+  h3 {
+    font-size: 28rem !important;
+    line-height: 20rem !important;
+  }
+}

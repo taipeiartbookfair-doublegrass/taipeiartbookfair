@@ -359,7 +359,6 @@ document.addEventListener("DOMContentLoaded", async function () {
     // 設定預設值
     let price = "";
     let equipment = [];
-    let electricity = [];
     let payText = "付款 Pay";
     let note = "";
 
@@ -372,11 +371,6 @@ document.addEventListener("DOMContentLoaded", async function () {
           "– 工作證 ×2",
           "– 草率簿 ×1<small> (含露出一面)</small>",
         ];
-        electricity = [
-          "– 供應一般電源110v",
-          "– 不得使用大電器",
-          "– 非每攤都有，需自備延長線與他人協調",
-        ];
         break;
       case "創作商品攤":
         price = "8,000 元 <small>(含稅)</small>";
@@ -386,12 +380,6 @@ document.addEventListener("DOMContentLoaded", async function () {
           "– 工作證 ×2",
           "– 草率簿 ×1<small> (含露出一面)</small>",
         ];
-        electricity = [
-          "– 供應一般電源110v",
-          "– 不得使用大電器",
-          "– 非每攤都有，需自備延長線與他人協調",
-        ];
-
         break;
       case "裝置攤":
         price = "10,000 元 <small>(含稅)</small>";
@@ -400,15 +388,6 @@ document.addEventListener("DOMContentLoaded", async function () {
           "– 工作證 ×2",
           "– 草率簿 ×1<small> (含露出一面)</small>",
         ];
-        electricity = [
-          "– 供應一般電源110v",
-          "– 9月前需提供電力需求申請，不得於現場臨時申請：",
-          `<ul style="margin:0 0 0 1.2em;padding:0;">
-            <li>條列使用電器＆瓦數</li>
-            <li>220V需以1000元加購，不得使用變壓器</li>
-          </ul>`,
-        ];
-
         break;
       case "食物酒水攤":
         price = "13,000 元 <small>(含稅)</small>";
@@ -417,14 +396,6 @@ document.addEventListener("DOMContentLoaded", async function () {
           "– 椅子 ×2",
           "– 工作證 ×2",
           "– 草率簿 ×1<small> (含露出一面)</small>",
-        ];
-        electricity = [
-          "– 供應一般電源110v",
-          "– 9月前需提供電力需求申請，不得於現場臨時申請：",
-          `<ul style="margin:0 0 0 1.2em;padding:0;">
-            <li>條列使用電器＆瓦數</li>
-            <li>220V需以1000元加購，不得使用變壓器</li>
-          </ul>`,
         ];
         break;
       case "One Regular Booth":
@@ -435,12 +406,6 @@ document.addEventListener("DOMContentLoaded", async function () {
           "– Passes ×2",
           "– TPABF Catalog ×1 <small>(one page featured)</small>",
         ];
-        electricity = [
-          "– Standard 110V power supply",
-          "– High-power electrical appliances are not allowed",
-          "– Not available at every booth; please bring your own extension cord and coordinate with others",
-        ];
-
         break;
       case "Two Regular Booth":
         price = "USD$330 <small>incl. tax</small>";
@@ -450,12 +415,6 @@ document.addEventListener("DOMContentLoaded", async function () {
           "– Passes ×4",
           "– TPABF Catalog ×1 <small>(one page featured)</small>",
         ];
-        electricity = [
-          "– Standard 110V power supply",
-          "– High-power electrical appliances are not allowed",
-          "– Not available at every booth; please bring your own extension cord and coordinate with others",
-        ];
-
         break;
       case "Curation Booth":
         price = "USD$780 <small>incl. tax</small>";
@@ -466,15 +425,6 @@ document.addEventListener("DOMContentLoaded", async function () {
           "– Passes ×3",
           "– TPABF Catalog ×1 <small>(one page featured)</small>",
         ];
-        electricity = [
-          "– Standard 110V power supply",
-          "– Submit power requirements before September; on-site requests won’t be accepted:",
-          `<ul style="margin:0 0 0 1.2em;padding:0;">
-            <li>List all devices with wattage</li>
-            <li>220V available for NT$1,000; no transformers allowed.</li>
-          </ul>`,
-        ];
-
         break;
       default:
         price = "";
@@ -494,16 +444,7 @@ document.addEventListener("DOMContentLoaded", async function () {
       const el = document.getElementById(id);
       if (el) el.innerHTML = equipment[idx] || "";
     });
-    // 更新電源資訊
-    const elecList = [
-      "electricity-voltage",
-      "electricity-note-1",
-      "electricity-note-2",
-    ];
-    elecList.forEach((id, idx) => {
-      const el = document.getElementById(id);
-      if (el) el.innerHTML = electricity[idx] || "";
-    });
+
     // 更新付款按鈕
     const payBtns = document.querySelectorAll(".pay-button");
     payBtns.forEach((btn) => {
@@ -649,77 +590,40 @@ document.addEventListener("DOMContentLoaded", async function () {
   }, 500);
 
   const equipmentTitleEl = document.getElementById("equipment-title");
-  const electricityTitleEl = document.getElementById("electricity-title");
   if (
     boothType === "One Regular Booth" ||
     boothType === "Two Regular Booth" ||
     boothType === "Curation Booth"
   ) {
     equipmentTitleEl.textContent = "Equipments:";
-    if (electricityTitleEl) electricityTitleEl.textContent = "Electricity:";
   } else {
     equipmentTitleEl.textContent = "基礎設備：";
-    if (electricityTitleEl) electricityTitleEl.textContent = "電源：";
   }
 
-  // function setBillingInfoLanguage(boothType) {
-  //   const isEnglishBooth =
-  //     boothType === "One Regular Booth" ||
-  //     boothType === "Two Regular Booth" ||
-  //     boothType === "Curation Booth";
+  function setBillingInfoLanguage(boothType) {
+    const isEnglishBooth =
+      boothType === "One Regular Booth" ||
+      boothType === "Two Regular Booth" ||
+      boothType === "Curation Booth";
 
-  //   // 方案一
-  //   document.querySelector("span[for-billing1-title]").innerHTML =
-  //     isEnglishBooth
-  //       ? "<strong>Plan 1</strong>: Basic Fee"
-  //       : "<strong>方案一</strong>：基礎攤費";
-  //   document.querySelector("span[for-billing1-desc]").innerHTML = isEnglishBooth
-  //     ? "Basic plan only"
-  //     : "僅基礎方案";
-  //   document.getElementById("billing1-note").innerHTML = isEnglishBooth
-  //     ? `! Please enter the following information when making payment:<br />
-  //         Email:
-  //         <span id="billing-email" style="font-weight: bold">email@gmail.com</span>
-  //         <button class="copy-btn" onclick="copyToClipboard('billing-email')" title="Copy Email" style="margin-left: 5px">📋</button><br />
-  //         Reference:
-  //         <span id="billing-application-number" style="font-weight: bold">25-BC001</span>
-  //         <button class="copy-btn" onclick="copyToClipboard('billing-application-number')" title="Copy Application Number" style="margin-left: 5px">📋</button><br /><br />
-  //         <b>If you enter incorrect information, your registration may fail.</b>`
-  //     : `！請在付款時務必填入以下資料：<br />
-  //         Email:
-  //         <span id="billing-email" style="font-weight: bold">email@gmail.com</span>
-  //         <button class="copy-btn" onclick="copyToClipboard('billing-email')" title="Copy Email" style="margin-left: 5px">📋</button><br />
-  //         備註欄位:
-  //         <span id="billing-application-number" style="font-weight: bold">25-BC001</span>
-  //         <button class="copy-btn" onclick="copyToClipboard('billing-application-number')" title="Copy Application Number" style="margin-left: 5px">📋</button><br /><br />
-  //         <b>如因填寫其他錯誤資料造成對帳問題，將導致報名失敗。</b>`;
+    // 方案一
+    document.querySelector("span[for-billing1-title]").innerHTML =
+      isEnglishBooth
+        ? "<strong>Plan 1</strong>: Basic Fee"
+        : "<strong>方案一</strong>：基礎攤費";
+    document.querySelector("span[for-billing1-desc]").innerHTML = isEnglishBooth
+      ? "Basic plan only"
+      : "僅基礎方案";
 
-  //   // 方案二
-  //   document.querySelector("span[for-billing2-title]").innerHTML =
-  //     isEnglishBooth
-  //       ? "<strong>Plan 2</strong>: Basic Fee + Extra Pass"
-  //       : "<strong>方案二</strong>：基礎攤費+工作證一張";
-  //   document.querySelector("span[for-billing2-desc]").innerHTML = isEnglishBooth
-  //     ? "For those who shift-swaps"
-  //     : "適合有輪班擺攤需求之攤主";
-  //   document.getElementById("billing2-note").innerHTML = isEnglishBooth
-  //     ? `! Please enter the following information when making payment:<br />
-  //         Email:
-  //         <span id="billing-email" style="font-weight: bold">email@gmail.com</span>
-  //         <button class="copy-btn" onclick="copyToClipboard('billing-email')" title="Copy Email" style="margin-left: 5px">📋</button><br />
-  //         Reference:
-  //         <span id="billing-application-number" style="font-weight: bold">25-BC001</span>
-  //         <button class="copy-btn" onclick="copyToClipboard('billing-application-number')" title="Copy Application Number" style="margin-left: 5px">📋</button><br /><br />
-  //         <b>If you enter incorrect information, your registration may fail.</b>`
-  //     : `！請在付款時務必填入以下資料：<br />
-  //         Email:
-  //         <span id="billing-email" style="font-weight: bold">email@gmail.com</span>
-  //         <button class="copy-btn" onclick="copyToClipboard('billing-email')" title="Copy Email" style="margin-left: 5px">📋</button><br />
-  //         備註欄位:
-  //         <span id="billing-application-number" style="font-weight: bold">25-BC001</span>
-  //         <button class="copy-btn" onclick="copyToClipboard('billing-application-number')" title="Copy Application Number" style="margin-left: 5px">📋</button><br /><br />
-  //         <b>如因填寫其他錯誤資料造成對帳問題，將導致報名失敗。</b>`;
-  // }
+    // 方案二
+    document.querySelector("span[for-billing2-title]").innerHTML =
+      isEnglishBooth
+        ? "<strong>Plan 2</strong>: Basic Fee + Extra Pass"
+        : "<strong>方案二</strong>：基礎攤費+工作證一張";
+    document.querySelector("span[for-billing2-desc]").innerHTML = isEnglishBooth
+      ? "For those who shift-swaps"
+      : "適合有輪班擺攤需求之攤主";
+  }
 
   // 呼叫時機：boothType 設定好後
   setBillingInfoLanguage(boothType);
