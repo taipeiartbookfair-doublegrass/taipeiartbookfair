@@ -10,63 +10,7 @@ const apiUrl =
   "https://script.google.com/macros/s/AKfycbwNWgPsLK_ldHUIvoIg5a9k3PNIlmjvJeTgbCZ5CZsvKFQ7e1DoxbMsAawi4nI3Rea4DA/exec";
 
 document.addEventListener("DOMContentLoaded", async function () {
-  let fakeProgress = 0.01; // 一開始就有一點進度
-  let progressTimer = null;
-
-  // 自動進度動畫
-  function startFakeProgress() {
-    progressTimer = setInterval(() => {
-      // 最多跑到 82%
-      if (fakeProgress < 0.99) {
-        fakeProgress += 0.006;
-        if (window.updateLoadingProgress) updateLoadingProgress(fakeProgress);
-      }
-    }, 25); // 每 25ms 跑一次
-  }
-
-  function stopFakeProgress() {
-    if (progressTimer) clearInterval(progressTimer);
-  }
-
-  startFakeProgress();
-
-  // --- loading-grid 填滿並預留右下角空位 ---
-  const grid = document.querySelector(".loading-grid");
-  const mask = document.getElementById("loading-mask");
-  if (grid && mask) {
-    const imgSrc = "image/loading1.jpg"; // loading 圖片
-    const imgSize = 70; // px
-
-    // 用 clientWidth/clientHeight 會更精準
-    const maskWidth = mask.clientWidth;
-    const maskHeight = mask.clientHeight;
-    const cols = Math.ceil(maskWidth / imgSize);
-    const rows = Math.ceil(maskHeight / imgSize);
-
-    grid.style.gridTemplateColumns = `repeat(${cols}, ${imgSize}px)`;
-    grid.style.gridTemplateRows = `repeat(${rows}, ${imgSize}px)`;
-
-    grid.innerHTML = "";
-    for (let r = 0; r < rows; r++) {
-      for (let c = 0; c < cols; c++) {
-        // 預留右下角一格空位
-        if (r === rows - 1 && c === cols - 1) {
-          const empty = document.createElement("div");
-          empty.style.width = imgSize + "px";
-          empty.style.height = imgSize + "px";
-          empty.style.background = "transparent";
-          grid.appendChild(empty);
-        } else {
-          const img = document.createElement("img");
-          img.src = imgSrc;
-          img.alt = "loading";
-          img.style.width = imgSize + "px";
-          img.style.height = imgSize + "px";
-          grid.appendChild(img);
-        }
-      }
-    }
-  }
+  // --- 已移除 loading 動畫相關程式碼 ---
 
   // 取得 dashboard 資料
   let apiData = {};
@@ -95,14 +39,10 @@ document.addEventListener("DOMContentLoaded", async function () {
       setCookie("region", "", -1);
       setCookie("login", "", -1);
       window.location.href = "login.html";
-      stopFakeProgress();
-      if (window.hideLoadingMask) hideLoadingMask();
       return;
     }
   } catch (error) {
     alert("Network error, please try again later.");
-    stopFakeProgress();
-    if (window.hideLoadingMask) hideLoadingMask();
     return;
   }
 
@@ -148,27 +88,6 @@ document.addEventListener("DOMContentLoaded", async function () {
 
   document.getElementById("application-number").textContent =
     apiData["報名編號"] || "";
-
-  //document.getElementById("booth-type").textContent = apiData["攤種"] || "";
-  // document.getElementById("equipment-table").textContent =
-  //   apiData["設備-桌子"] || "– 桌面(120×60cm) ×1";
-  // document.getElementById("equipment-chair").textContent =
-  //   apiData["設備-椅子"] || "– 椅子 ×2";
-  // document.getElementById("equipment-badge").textContent =
-  //   apiData["設備-工作證"] || "– 工作證 ×2";
-  // document.getElementById("equipment-book").textContent =
-  //   apiData["設備-草率簿"] || "– 草率簿 ×1 (含露出一面)";
-
-  // document.getElementById("billing1-price").textContent =
-  //   apiData["方案一金額"] || "8,000 NTD";
-  // document.getElementById("billing1-note").innerHTML =
-  //   apiData["方案一備註"] ||
-  //   "！請在付款時務必填入以下資料：<br />Email: email@gmail.com<br />備註欄位: 25-BC001<br /><br />如因填寫其他錯誤資料造成對帳問題，將導致報名失敗。";
-  // document.getElementById("billing2-price").textContent =
-  //   apiData["方案二金額"] || "13,000 NTD";
-  // document.getElementById("billing2-note").innerHTML =
-  //   apiData["方案二備註"] ||
-  //   "！請在付款時務必填入以下資料：<br />Email: email@gmail.com<br />備註欄位: 25-BC001<br /><br />如因填寫其他錯誤資料造成對帳問題，將導致報名失敗。";
 
   document.getElementById("application-result").innerHTML =
     getApplicationResultText(apiData["錄取"]);
@@ -580,14 +499,7 @@ document.addEventListener("DOMContentLoaded", async function () {
   // 在 boothType 設定後呼叫
   updateBoothInfo(boothType);
 
-  // 資料抓完，直接跳到 100%
-  stopFakeProgress();
-  if (window.updateLoadingProgress) updateLoadingProgress(1);
-
-  // 0.5 秒後關掉 loading
-  setTimeout(function () {
-    if (window.hideLoadingMask) hideLoadingMask();
-  }, 500);
+  // 已移除 fakeProgress、updateLoadingProgress、hideLoadingMask 等動畫控制
 
   const equipmentTitleEl = document.getElementById("equipment-title");
   if (
@@ -628,15 +540,6 @@ document.addEventListener("DOMContentLoaded", async function () {
   // 呼叫時機：boothType 設定好後
   setBillingInfoLanguage(boothType);
 
-  // Always fill in email and application number after updating notes
-  document.querySelectorAll("#billing-email").forEach((el) => {
-    el.textContent = apiData["account"] || "";
-  });
-  document.querySelectorAll("#billing-application-number").forEach((el) => {
-    el.textContent = apiData["報名編號"] || "";
-  });
-
-  // console.log("apiData['代表人'] =", apiData["代表人"]);
   document.getElementById("contact-person").textContent = apiData["name"] || "";
 
   document.getElementById("email").textContent = apiData["account"] || "";
