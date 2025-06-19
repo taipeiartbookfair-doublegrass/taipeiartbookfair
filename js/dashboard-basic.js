@@ -51,8 +51,39 @@ document.addEventListener("DOMContentLoaded", async function () {
     alert("Network error, please try again later.");
     return;
   }
-  if (window.stopFakeLoading) window.stopFakeLoading();
   if (window.setLoading) window.setLoading(0.9);
+  // 先抓 dashboard（品牌/攤主）資料
+  // 再抓 user（帳號）資料
+  try {
+    const userParams = new URLSearchParams({
+      action: "get_account_info",
+      account: account,
+    }).toString();
+
+    const userRes = await fetch(apiUrl, {
+      redirect: "follow",
+      method: "POST",
+      headers: {
+        "Content-Type": "text/plain;charset=utf-8",
+      },
+      body: userParams,
+    });
+
+    const userData = await userRes.json();
+
+    if (userData.success) {
+      document.getElementById("contact-person").textContent =
+        userData.data["name"] || "";
+      document.getElementById("email").textContent =
+        userData.data["account"] || "";
+      document.getElementById("phone").textContent =
+        userData.data["phone"] || "";
+      document.getElementById("nationality2").textContent =
+        userData.data["region"] || "";
+    }
+  } catch (error) {
+    // 可以顯示錯誤或略過
+  }
 
   // 對應 id 填入資料
   document.getElementById("brand-name").textContent = apiData["品牌"] || "";
@@ -60,8 +91,6 @@ document.addEventListener("DOMContentLoaded", async function () {
   document.getElementById("role").textContent = apiData["身份類別"] || "";
   document.getElementById("category").textContent = apiData["作品類別"] || "";
   document.getElementById("nationality").textContent = region || "";
-  document.getElementById("email").textContent = apiData["account"] || "";
-  document.getElementById("phone").textContent = apiData["phone"];
   document.getElementById("baselocation").textContent =
     apiData["主要創作據點"] || "";
   setSocialText("attendedYears", apiData["參與年份"]);
@@ -570,39 +599,6 @@ document.addEventListener("DOMContentLoaded", async function () {
   // 呼叫時機：boothType 設定好後
   setBillingInfoLanguage(boothType);
 
-  // 先抓 dashboard（品牌/攤主）資料
-  // 再抓 user（帳號）資料
-  try {
-    const userParams = new URLSearchParams({
-      action: "get_account_info",
-      account: account,
-    }).toString();
-
-    const userRes = await fetch(apiUrl, {
-      redirect: "follow",
-      method: "POST",
-      headers: {
-        "Content-Type": "text/plain;charset=utf-8",
-      },
-      body: userParams,
-    });
-
-    const userData = await userRes.json();
-
-    if (userData.success) {
-      document.getElementById("contact-person").textContent =
-        userData.data["name"] || "";
-      document.getElementById("email").textContent =
-        userData.data["account"] || "";
-      document.getElementById("phone").textContent =
-        userData.data["phone"] || "";
-      document.getElementById("nationality2").textContent =
-        userData.data["region"] || "";
-    }
-  } catch (error) {
-    // 可以顯示錯誤或略過
-  }
-
   function setSocialText(id, value) {
     const el = document.getElementById(id);
     if (!value || value === "None") {
@@ -615,6 +611,7 @@ document.addEventListener("DOMContentLoaded", async function () {
       el.style.fontStyle = "";
     }
   }
+  if (window.stopFakeLoading) window.stopFakeLoading();
 });
 
 // 產生產品連結
