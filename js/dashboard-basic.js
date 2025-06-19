@@ -197,7 +197,22 @@ document.addEventListener("DOMContentLoaded", async function () {
     if (checkPayment) checkPayment.checked = paymentChecked;
     if (checkDeclaration) checkDeclaration.checked = declarationChecked;
 
+    // 判斷攤位語言（英文攤位用英文，中文攤位用中文）
+    const boothType = apiData["攤位類型"] || "";
+    const isEnglishBooth =
+      boothType === "One Regular Booth" ||
+      boothType === "Two Regular Booth" ||
+      boothType === "Curation Booth";
+
     // 狀態顯示
+    function getStatusText(confirmed) {
+      if (isEnglishBooth) {
+        return confirmed ? "Confirmed" : "Unfulfilled";
+      } else {
+        return confirmed ? "成立" : "未完成";
+      }
+    }
+
     if (rawResult === "5-否") {
       registrationStatusEl.textContent = "-";
       equipmentinfo.style.display = "none";
@@ -207,27 +222,23 @@ document.addEventListener("DOMContentLoaded", async function () {
       rawResult === "2-是-2波" ||
       rawResult === "0-邀請"
     ) {
-      if (paymentChecked && declarationChecked) {
-        registrationStatusEl.textContent = "成立 Confirmed";
-        equipmentinfo.style.display = "none";
-        mediaupload.style.display = "block";
-        // 國籍條件顯示
-        if (nationality !== "TW") {
-          foreignShipping.style.display = "block";
-        } else {
-          foreignShipping.style.display = "none";
-        }
-        if (nationality === "CN") {
-          visaupload.style.display = "block";
-        } else {
-          visaupload.style.display = "none";
-        }
-        familyticket.style.display = "block";
-        manual.style.display = "block";
-        boothappearance.style.display = "block";
+      registrationStatusEl.textContent = getStatusText(paymentChecked && declarationChecked);
+      equipmentinfo.style.display = "none";
+      mediaupload.style.display = "block";
+      // 國籍條件顯示
+      if (nationality !== "TW") {
+        foreignShipping.style.display = "block";
       } else {
-        registrationStatusEl.textContent = "未完成 Unfulfilled";
+        foreignShipping.style.display = "none";
       }
+      if (nationality === "CN") {
+        visaupload.style.display = "block";
+      } else {
+        visaupload.style.display = "none";
+      }
+      familyticket.style.display = "block";
+      manual.style.display = "block";
+      boothappearance.style.display = "block";
     } else if (rawResult === "0") {
       registrationStatusEl.textContent = "-";
       equipmentinfo.style.display = "none";
@@ -239,53 +250,45 @@ document.addEventListener("DOMContentLoaded", async function () {
       boothappearance.style.display = "none";
     } else if (rawResult === "4-是-條件式錄取") {
       conditionalyes.style.display = "inline-block";
-      if (paymentChecked && declarationChecked) {
-        registrationStatusEl.textContent = "成立 Confirmed";
-        equipmentinfo.style.display = "none";
-        mediaupload.style.display = "block";
-        // 國籍條件顯示
-        if (nationality !== "TW") {
-          foreignShipping.style.display = "block";
-        } else {
-          foreignShipping.style.display = "none";
-        }
-        if (nationality === "CN") {
-          visaupload.style.display = "block";
-        } else {
-          visaupload.style.display = "none";
-        }
-        familyticket.style.display = "block";
-        manual.style.display = "block";
-        boothappearance.style.display = "block";
+      registrationStatusEl.textContent = getStatusText(paymentChecked && declarationChecked);
+      equipmentinfo.style.display = "none";
+      mediaupload.style.display = "block";
+      // 國籍條件顯示
+      if (nationality !== "TW") {
+        foreignShipping.style.display = "block";
       } else {
-        registrationStatusEl.textContent = "未完成 Unfulfilled";
+        foreignShipping.style.display = "none";
       }
+      if (nationality === "CN") {
+        visaupload.style.display = "block";
+      } else {
+        visaupload.style.display = "none";
+      }
+      familyticket.style.display = "block";
+      manual.style.display = "block";
+      boothappearance.style.display = "block";
     } else if (rawResult === "3-猶豫") {
       registrationStatusEl.textContent = "-";
       equipmentinfo.style.display = "none";
       runnerletter.style.display = "block";
     } else {
-      if (paymentChecked && declarationChecked) {
-        registrationStatusEl.textContent = "成立 Confirmed";
-        equipmentinfo.style.display = "none";
-        mediaupload.style.display = "block";
-        // 國籍條件顯示
-        if (nationality !== "TW") {
-          foreignShipping.style.display = "block";
-        } else {
-          foreignShipping.style.display = "none";
-        }
-        if (nationality === "CN") {
-          visaupload.style.display = "block";
-        } else {
-          visaupload.style.display = "none";
-        }
-        familyticket.style.display = "block";
-        manual.style.display = "block";
-        boothappearance.style.display = "block";
+      registrationStatusEl.textContent = getStatusText(paymentChecked && declarationChecked);
+      equipmentinfo.style.display = "none";
+      mediaupload.style.display = "block";
+      // 國籍條件顯示
+      if (nationality !== "TW") {
+        foreignShipping.style.display = "block";
       } else {
-        registrationStatusEl.textContent = "未完成 Unfulfilled";
+        foreignShipping.style.display = "none";
       }
+      if (nationality === "CN") {
+        visaupload.style.display = "block";
+      } else {
+        visaupload.style.display = "none";
+      }
+      familyticket.style.display = "block";
+      manual.style.display = "block";
+      boothappearance.style.display = "block";
     }
   }
 
