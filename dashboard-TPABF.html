@@ -191,7 +191,6 @@
                       border-bottom: none;
                     "
                   />
-
                   <table style="width: 100%">
                     <tr>
                       <td
@@ -199,6 +198,7 @@
                           vertical-align: top;
                           padding-right: 2em;
                           border: none;
+                          width: 50%;
                         "
                       >
                         <span id="equipment-title">基礎設備：</span>
@@ -219,7 +219,7 @@
                           </li>
                         </ul>
                       </td>
-                      <td style="vertical-align: top; border: none">
+                      <td style="vertical-align: top; border: none; width: 50%">
                         <span id="electricity-title">電源配置：</span>
                         <ul
                           style="
@@ -962,7 +962,6 @@
               </tr>
 
               <tr id="billing-info" style="display: block">
-                <td></td>
                 <td
                   colspan="3"
                   style="
@@ -974,7 +973,6 @@
                   "
                 >
                   <table style="width: 100%; table-layout: auto">
-                    <tr></tr>
                     <tr
                       id="agreement-row"
                       style="
@@ -989,36 +987,65 @@
                       "
                     >
                       <td colspan="3" style="padding: 0; border: none">
-                        <div style="padding: 1em 0 1em 1em">
-                          <span class="label"
-                            >參展同意書 Exhibitor Declaration</span
-                          ><br />
-                          <a
-                            href="downloads/TPABF_Exhibitor_Declaration.pdf"
-                            target="_blank"
-                          >
-                            下載參展同意書 Download Declaration
-                          </a>
-                          <br />
-                          <span style="font-size: 0.95em; color: #888">
-                            請下載並簽署參展同意書，完成後請上傳。<br />
-                            Please download and sign the declaration, then
-                            upload the signed file below.
-                          </span>
-                          <form
-                            id="declaration-upload-form"
-                            enctype="multipart/form-data"
-                            style="margin-top: 0.5em"
-                          >
-                            <input
-                              type="file"
-                              id="declaration-file"
-                              name="declaration-file"
-                              accept=".pdf,.jpg,.jpeg,.png"
-                            />
-                            <button type="submit">上傳 Upload</button>
-                          </form>
-                        </div>
+                        <table style="width: 100%">
+                          <tr>
+                            <td
+                              style="
+                                border-left: none;
+                                border-right: #fff 2px solid;
+                                background: #000;
+                                color: #fff;
+                                font-size: 0.75rem;
+                                padding: 2px 6px;
+                              "
+                            >
+                              參展同意書 Exhibitor Declaration
+                            </td>
+                          </tr>
+                          <tr>
+                            <td style="padding: 1em 0 1em 1em">
+                              <a
+                                href="downloads/TPABF_Exhibitor_Declaration.pdf"
+                                target="_blank"
+                                style="font-weight: bold"
+                              >
+                                下載參展同意書 Download Declaration
+                              </a>
+                              <br />
+                              <span style="font-size: 0.95em; color: #888">
+                                請下載並簽署參展同意書，完成後請上傳。<br />
+                                Please download and sign the declaration, then
+                                upload the signed file below.
+                              </span>
+                              <form
+                                id="declaration-upload-form"
+                                enctype="multipart/form-data"
+                                style="margin-top: 0.5em"
+                              >
+                                <input
+                                  type="file"
+                                  id="declaration-file"
+                                  name="declaration-file"
+                                  accept=".pdf,.jpg,.jpeg,.png"
+                                  style="margin-bottom: 0.5em"
+                                />
+                                <button
+                                  type="submit"
+                                  style="
+                                    padding: 0.3em 1.2em;
+                                    background: #000;
+                                    color: #fff;
+                                    border: none;
+                                    border-radius: 3px;
+                                    cursor: pointer;
+                                  "
+                                >
+                                  上傳 Upload
+                                </button>
+                              </form>
+                            </td>
+                          </tr>
+                        </table>
                       </td>
                       <td
                         colspan="2"
@@ -1026,7 +1053,7 @@
                           width: 75%;
                           padding: 0;
                           border-top: 0.5px solid pink;
-                          border-left: none;
+                          border-left: 1px solid black;
                           border-bottom: none;
                           border-right: 1px solid black;
                           vertical-align: top;
@@ -1070,11 +1097,10 @@
                                 <span
                                   style="font-size: 2rem"
                                   id="billing1-price"
-                                  >8,000 NTD
-                                </span>
+                                  >8,000 NTD</span
+                                >
                                 <br />
                                 <span for-billing1-desc>僅基礎方案</span>
-
                                 <div class="pay-button" id="pay1">付款 Pay</div>
                               </td>
                               <td
@@ -1105,7 +1131,6 @@
                                 <span for-billing2-desc
                                   >適合有輪班擺攤需求之攤主</span
                                 >
-
                                 <div class="pay-button" id="pay2">付款 Pay</div>
                               </td>
                             </tr>
@@ -1139,40 +1164,6 @@
                         </div>
                       </td>
                     </tr>
-
-                    <!-- 右下：注意事項 -->
-                    <!-- <tr>
-                      <td
-                        colspan="2"
-                        style="
-                          padding-top: 12px;
-                          border-top: none;
-                          margin: 6px 0;
-                          border-left: 1px solid black;
-                          vertical-align: top !important;
-                        "
-                      >
-                        <span class="label">注意事項 Notice</span><br />
-                        <ul
-                          style="
-                            margin: 0;
-                            padding-left: 20px;
-                            font-size: 0.8rem;
-                          "
-                        >
-                          <li id="notice1">
-                            請自行評估需求繳費，繳款後我們不再提供更改申請選項。
-                          </li>
-                          <li id="notice2">
-                            每攤限加購 1 張工作證，如需更多數量請買當日票入場。
-                          </li>
-                          <li id="notice3">付款之後請自行留存發票。</li>
-                          <li id="notice4">
-                            報名以及付款狀態將於 7 月 15 日對帳後更新。
-                          </li>
-                        </ul>
-                      </td>
-                    </tr> -->
                   </table>
                 </td>
               </tr>
