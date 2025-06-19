@@ -189,7 +189,7 @@ document.addEventListener("DOMContentLoaded", async function () {
   // 依錄取結果決定報名狀態顯示與資格勾勾
   function updateRegistrationStatusAndChecks() {
     const paymentChecked = !!apiData["已匯款"];
-    const declarationChecked = !!apiData["切結書"];
+    const declarationChecked = !!apiData["同意書"];
     const checkPayment = document.getElementById("check-payment");
     const checkDeclaration = document.getElementById("check-declaration");
 
