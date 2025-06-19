@@ -198,7 +198,8 @@ document.addEventListener("DOMContentLoaded", async function () {
     if (checkDeclaration) checkDeclaration.checked = declarationChecked;
 
     // 判斷攤位語言（英文攤位用英文，中文攤位用中文）
-    const boothType = document.getElementById("booth-type")?.textContent.trim() || "";
+    const boothType =
+      document.getElementById("booth-type")?.textContent.trim() || "";
     const isEnglishBooth =
       boothType === "One Regular Booth" ||
       boothType === "Two Regular Booth" ||
@@ -627,16 +628,17 @@ document.addEventListener("DOMContentLoaded", async function () {
 
   // 動態切換同意書區塊語言
   document.addEventListener("DOMContentLoaded", function () {
-    var boothType = document.getElementById("booth-type");
+    var boothTypeEl = document.getElementById("booth-type");
     var downloadLink = document.getElementById("declaration-download-link");
     var desc = document.getElementById("declaration-desc");
-    if (boothType && downloadLink && desc) {
-      var boothText = boothType.textContent.trim();
-      if (
-        boothText === "One Regular Booth" ||
-        boothText === "Two Regular Booth" ||
-        boothText === "Curation Booth"
-      ) {
+    if (boothTypeEl && downloadLink && desc) {
+      var boothText = boothTypeEl.textContent.trim();
+      const englishBoothTypes = [
+        "One Regular Booth",
+        "Two Regular Booth",
+        "Curation Booth",
+      ];
+      if (englishBoothTypes.includes(boothText)) {
         downloadLink.innerHTML = "Download Exhibitor Declaration";
         desc.innerHTML =
           "Please download and sign the exhibitor declaration, then upload the signed file below.";
