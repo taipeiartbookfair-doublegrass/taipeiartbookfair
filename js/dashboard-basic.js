@@ -648,10 +648,6 @@ document.addEventListener("DOMContentLoaded", async function () {
     if (window.hideLoadingMask) hideLoadingMask();
   }, 500);
 
-  document.getElementById("billing-email").textContent = apiData["Email"] || "";
-  document.getElementById("billing-application-number").textContent =
-    apiData["報名編號"] || "";
-
   const equipmentTitleEl = document.getElementById("equipment-title");
   const electricityTitleEl = document.getElementById("electricity-title");
   if (
