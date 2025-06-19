@@ -197,14 +197,6 @@ document.addEventListener("DOMContentLoaded", async function () {
     if (checkPayment) checkPayment.checked = paymentChecked;
     if (checkDeclaration) checkDeclaration.checked = declarationChecked;
 
-    // 判斷攤位語言（英文攤位用英文，中文攤位用中文）
-    const boothType =
-      document.getElementById("booth-type")?.textContent.trim() || "";
-    const isEnglishBooth =
-      boothType === "One Regular Booth" ||
-      boothType === "Two Regular Booth" ||
-      boothType === "Curation Booth";
-
     // 狀態顯示
     function getStatusText(confirmed) {
       if (isEnglishBooth) {
@@ -323,6 +315,12 @@ document.addEventListener("DOMContentLoaded", async function () {
       boothTypeEl.classList.remove("booth-type-en");
     }
   }
+  const englishBoothTypes = [
+    "One Regular Booth",
+    "Two Regular Booth",
+    "Curation Booth",
+  ];
+  const isEnglishBooth = englishBoothTypes.includes(boothType);
 
   function updateBoothInfo(boothType) {
     // 設定預設值
@@ -585,11 +583,6 @@ document.addEventListener("DOMContentLoaded", async function () {
   }
 
   function setBillingInfoLanguage(boothType) {
-    const isEnglishBooth =
-      boothType === "One Regular Booth" ||
-      boothType === "Two Regular Booth" ||
-      boothType === "Curation Booth";
-
     // 方案一
     document.querySelector("span[for-billing1-title]").innerHTML =
       isEnglishBooth
@@ -627,28 +620,18 @@ document.addEventListener("DOMContentLoaded", async function () {
   if (window.stopFakeLoading) window.stopFakeLoading();
 
   // 動態切換同意書區塊語言
-  document.addEventListener("DOMContentLoaded", function () {
-    var boothTypeEl = document.getElementById("booth-type");
-    var downloadLink = document.getElementById("declaration-download-link");
-    var desc = document.getElementById("declaration-desc");
-    if (boothTypeEl && downloadLink && desc) {
-      var boothText = boothTypeEl.textContent.trim();
-      const englishBoothTypes = [
-        "One Regular Booth",
-        "Two Regular Booth",
-        "Curation Booth",
-      ];
-      if (englishBoothTypes.includes(boothText)) {
-        downloadLink.innerHTML = "Download Exhibitor Declaration";
-        desc.innerHTML =
-          "Please download and sign the exhibitor declaration, then upload the signed file below.";
-      } else {
-        downloadLink.innerHTML = "下載參展同意書 <br />Download Declaration";
-        desc.innerHTML =
-          "請下載並簽署參展同意書，完成後請上傳。<br />Please download and sign the declaration, then upload the signed file below.";
-      }
+  var downloadLink = document.getElementById("declaration-download-link");
+  var desc = document.getElementById("declaration-desc");
+  if (boothTypeEl && downloadLink && desc) {
+    if (isEnglishBooth) {
+      downloadLink.innerHTML = "Download Exhibitor Declaration";
+      desc.innerHTML =
+        "Please download and sign the exhibitor declaration, then upload the signed file below.";
+    } else {
+      downloadLink.innerHTML = "下載參展同意書";
+      desc.innerHTML = "請下載並簽署參展同意書，完成後請上傳。";
     }
-  });
+  }
 
   // 更新電力需求列表
   function updateElectricityList(boothType) {
@@ -700,11 +683,11 @@ document.addEventListener("DOMContentLoaded", async function () {
       <li>Standard 110v power supply</li>
       <li>
         <span style="text-decoration: underline; cursor: pointer;" onclick="document.getElementById('electricity-row').scrollIntoView({behavior:'smooth'});">
-          Electricity requirement application before September
-        </span> is mandatory; on-site requests are not accepted:
+          Apply for electricity before September
+        </span>; on-site requests not accepted:
         <ul style="margin: 0.3em 0 0 1.5em; list-style-type: disc;">
-          <li>List all appliances & wattage</li>
-          <li>220V available for an extra NTD 1000; transformers are not allowed</li>
+          <li>List appliances & wattage</li>
+          <li>220V: extra NTD 1000; no transformers</li>
         </ul>
       </li>
     `;
