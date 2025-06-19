@@ -2,9 +2,9 @@
 const account = getCookie("account");
 const region = getCookie("region");
 
-if (!account || !region) {
-  window.location.href = "login.html";
-}
+// if (!account || !region) {
+//   window.location.href = "login.html";
+// }
 
 const apiUrl =
   "https://script.google.com/macros/s/AKfycbwNWgPsLK_ldHUIvoIg5a9k3PNIlmjvJeTgbCZ5CZsvKFQ7e1DoxbMsAawi4nI3Rea4DA/exec";
@@ -87,18 +87,18 @@ document.addEventListener("DOMContentLoaded", async function () {
 
     const data = await dashboardRes.json();
 
-    if (data.success) {
-      apiData = data.data;
-    } else {
-      alert(data.message || "資料取得失敗，請重新登入。");
-      setCookie("account", "", -1);
-      setCookie("region", "", -1);
-      setCookie("login", "", -1);
-      window.location.href = "login.html";
-      stopFakeProgress();
-      if (window.hideLoadingMask) hideLoadingMask();
-      return;
-    }
+    // if (data.success) {
+    //   apiData = data.data;
+    // } else {
+    //   alert(data.message || "資料取得失敗，請重新登入。");
+    //   setCookie("account", "", -1);
+    //   setCookie("region", "", -1);
+    //   setCookie("login", "", -1);
+    //   window.location.href = "login.html";
+    //   stopFakeProgress();
+    //   if (window.hideLoadingMask) hideLoadingMask();
+    //   return;
+    // }
   } catch (error) {
     alert("Network error, please try again later.");
     stopFakeProgress();
@@ -112,6 +112,17 @@ document.addEventListener("DOMContentLoaded", async function () {
   document.getElementById("role").textContent = apiData["身份類別"] || "";
   document.getElementById("category").textContent = apiData["作品類別"] || "";
   document.getElementById("nationality").textContent = region || "";
+  document.getElementById("email").textContent = apiData["account"] || "";
+  document.getElementById("phone").textContent = apiData["phone"];
+  document.getElementById("baselocation").textContent =
+    apiData["主要創作據點"] || "";
+  setSocialText("attendedYears", apiData["參與年份"]);
+  setSocialText("website", apiData["website"]);
+  setSocialText("instagram", apiData["IG帳號"]);
+  setSocialText("facebook", apiData["facebook"]);
+  setSocialText("baselocation", apiData["baselocation"]);
+  setSocialText("yearlyanswer", apiData["當屆問答"]);
+  setSocialText("electricity-answer", apiData["電力需求"]);
 
   // 國籍判斷與簽證需求顯示
   const nat = document.getElementById("nationality");
@@ -730,8 +741,6 @@ document.addEventListener("DOMContentLoaded", async function () {
 
   document.getElementById("email").textContent = apiData["account"] || "";
   document.getElementById("phone").textContent = apiData["phone"];
-  document.getElementById("baselocation").textContent =
-    apiData["主要創作據點"] || "";
   document.getElementById("nationality2").textContent = region || "";
 
   function setSocialText(id, value) {
@@ -746,12 +755,6 @@ document.addEventListener("DOMContentLoaded", async function () {
       el.style.fontStyle = "";
     }
   }
-
-  setSocialText("website", apiData["website"]);
-  setSocialText("instagram", apiData["instagram"]);
-  setSocialText("facebook", apiData["facebook"]);
-  setSocialText("whatsapp", apiData["whatsapp"]);
-  setSocialText("baselocation", apiData["baselocation"]);
 });
 
 // 產生產品連結
