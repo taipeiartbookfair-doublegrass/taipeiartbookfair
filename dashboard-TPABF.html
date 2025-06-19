@@ -786,37 +786,34 @@
           <div class="scroll-inner">
             <table width="100%">
               <tr>
+                <!-- 攤商編號 -->
+                <td style="width: 30%">
+                  <span class="label">攤商編號 Booth Number</span><br />
+                  <div style="vertical-align: middle; font-size: 2.7rem">
+                    <span
+                      style="font-size: 2rem; color: black; line-height: 1.5rem"
+                      id="Booth-number"
+                      >N/A
+                    </span>
+                    <span
+                      style="
+                        font-size: 1rem;
+                        color: darkgray;
+                        line-height: 1rem;
+                        display: block;
+                      "
+                      >攤位編號與攤位地圖將於報到當天（11/20）公布，屆時請留意公告。
+                    </span>
+                  </div>
+                </td>
+              </tr>
+              <tr>
                 <td colspan="3" style="padding: 0; border: none">
                   <table style="width: 100%; table-layout: auto">
                     <tr style="padding: 0; border: none">
-                      <!-- 攤商編號 -->
+                      <!-- 參展資格 -->
                       <td style="width: 40%">
-                        <span class="label">攤商編號 Booth Number</span><br />
-                        <div style="vertical-align: middle; font-size: 2.7rem">
-                          <span
-                            style="
-                              font-size: 2rem;
-                              color: black;
-                              line-height: 1.5rem;
-                            "
-                            id="Booth-number"
-                            >N/A
-                          </span>
-                          <span
-                            style="
-                              font-size: 1rem;
-                              color: darkgray;
-                              line-height: 1rem;
-                              display: block;
-                            "
-                            >11 月 21 日公佈
-                          </span>
-                        </div>
-                      </td>
-
-                      <!-- 報名狀態 -->
-                      <td style="width: 30%">
-                        <span class="label">報名狀態 Registration Status</span
+                        <span class="label">參展資格 Exhibitor Status</span
                         ><br />
                         <div style="vertical-align: middle; font-size: 2.7rem">
                           <span
@@ -826,7 +823,7 @@
                               line-height: 1.5rem;
                             "
                             id="registration-status"
-                            >尚未完成報名</span
+                            >未完成 Unfulfulled</span
                           >
                           <span
                             style="
@@ -835,8 +832,46 @@
                               line-height: 1rem;
                               display: block;
                             "
-                            >7 月 15 日對帳後一次性更新。
+                          >
                           </span>
+                        </div>
+                      </td>
+                      <!-- 資格勾勾 -->
+                      <td style="width: 30%">
+                        <div style="vertical-align: middle; font-size: 2rem">
+                          經確認完成繳費動作＆同意書上傳，才算是取得最終參展資格，團隊將於
+                          7 月 15 日核對後進行統一更新。
+                          <label
+                            style="
+                              display: flex;
+                              align-items: center;
+                              font-size: 1.1rem;
+                              margin-bottom: 0.5em;
+                            "
+                          >
+                            <input
+                              type="checkbox"
+                              id="check-payment"
+                              disabled
+                              style="margin-right: 0.5em"
+                            />
+                            參展費 Payment
+                          </label>
+                          <label
+                            style="
+                              display: flex;
+                              align-items: center;
+                              font-size: 1.1rem;
+                            "
+                          >
+                            <input
+                              type="checkbox"
+                              id="check-declaration"
+                              disabled
+                              style="margin-right: 0.5em"
+                            />
+                            同意書 Exhibitor Declaration
+                          </label>
                         </div>
                       </td>
                     </tr>
