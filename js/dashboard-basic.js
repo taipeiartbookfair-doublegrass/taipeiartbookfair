@@ -52,9 +52,9 @@ document.addEventListener("DOMContentLoaded", async function () {
     return;
   }
   if (window.setLoading) window.setLoading(0.9);
-  // 先抓 dashboard（品牌/攤主）資料
-  // 再抓 user（帳號）資料
+
   try {
+    console.log("userData", userData);
     const userParams = new URLSearchParams({
       action: "get_account_info",
       account: account,

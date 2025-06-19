@@ -46,7 +46,7 @@ document.addEventListener("DOMContentLoaded", function () {
         作品類別: category,
         website: website,
         facebook: facebook,
-        instagram: instagram,
+        IG帳號: instagram,
         主要創作據點: baselocation,
         參與年份: attendedYears,
         region: nationality,
