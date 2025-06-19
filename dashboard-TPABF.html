@@ -155,6 +155,57 @@
                   </div>
                 </td>
               </tr>
+              <tr>
+                <!-- 左邊：攤種區塊 -->
+                <td
+                  style="
+                    width: 25%;
+                    border-top: 0.5px solid pink;
+                    border-bottom: 0.5px solid pink;
+
+                    margin: 6px 0;
+                    border-left: 1px solid black;
+
+                    vertical-align: top;
+                  "
+                >
+                  <span class="label">攤種 Booth Type</span
+                  ><span
+                    class="booth-change"
+                    title="說明"
+                    id="booth-type-tooltip"
+                    style="display: none"
+                    >?<span class="tooltip-text"
+                      >您原先在表單中選擇的攤位類型，經由草率季工作團隊審核後，可能與我們對該類別的定義略有不符。不過，我們仍然非常欣賞您的創作與提案，並希望能與您在草率季中相遇。若您願意接受攤種類別的調整，我們將非常樂意為您保留參與資格。</span
+                    ></span
+                  ><br /><span
+                    style="font-size: 2rem; padding-top: 15px"
+                    id="booth-type"
+                    >One Regular Booth</span
+                  >
+                  <hr
+                    style="
+                      border-top: 1px dashed black;
+                      margin: 6px 0;
+                      border-bottom: none;
+                    "
+                  />
+                  <span id="equipment-title">基礎設備：</span>
+                  <ul
+                    style="list-style-type: none; margin: 0; padding-left: 0em"
+                  >
+                    <li id="equipment-table">
+                      – 桌面<small>(120×60cm)</small> ×1
+                    </li>
+                    <li id="equipment-chair">– 椅子 ×2</li>
+                    <li id="equipment-badge">– 工作證 ×2</li>
+                    <li id="equipment-book">
+                      – 草率簿 ×1<small> (含露出一面)</small>
+                    </li>
+                  </ul>
+                  <br />
+                </td>
+              </tr>
               <!-- 編輯按鈕 -->
               <tr style="background-color: black; text-align: right">
                 <td colspan="2" style="padding: 2px 5px">
@@ -823,7 +874,7 @@
                               line-height: 1.5rem;
                             "
                             id="registration-status"
-                            >未完成 Unfulfulled</span
+                            >未完成</span
                           >
                           <span
                             style="
@@ -837,7 +888,7 @@
                         </div>
                       </td>
                       <!-- 資格勾勾 -->
-                      <td style="width: 70%">
+                      <td style="width: 70%; border-left: none">
                         <div style="vertical-align: middle">
                           經確認完成繳費動作＆同意書上傳，才算是取得最終參展資格，團隊將於
                           7 月 15 日核對後進行統一更新。
@@ -879,6 +930,7 @@
               </tr>
 
               <tr id="equipmentinfo" style="display: block">
+                <td></td>
                 <td
                   colspan="3"
                   style="
@@ -890,61 +942,40 @@
                   "
                 >
                   <table style="width: 100%; table-layout: auto">
-                    <tr>
-                      <!-- 左邊：攤種區塊 -->
-                      <td
-                        style="
-                          width: 25%;
-                          border-top: 0.5px solid pink;
-                          border-bottom: 0.5px solid pink;
-
-                          margin: 6px 0;
-                          border-left: 1px solid black;
-
-                          vertical-align: top;
-                        "
-                      >
-                        <span class="label">攤種 Booth Type</span
-                        ><span
-                          class="booth-change"
-                          title="說明"
-                          id="booth-type-tooltip"
-                          style="display: none"
-                          >?<span class="tooltip-text"
-                            >您原先在表單中選擇的攤位類型，經由草率季工作團隊審核後，可能與我們對該類別的定義略有不符。不過，我們仍然非常欣賞您的創作與提案，並希望能與您在草率季中相遇。若您願意接受攤種類別的調整，我們將非常樂意為您保留參與資格。</span
-                          ></span
-                        ><br /><span
-                          style="font-size: 2rem; padding-top: 15px"
-                          id="booth-type"
-                          >One Regular Booth</span
-                        >
-                        <hr
-                          style="
-                            border-top: 1px dashed black;
-                            margin: 6px 0;
-                            border-bottom: none;
-                          "
-                        />
-                        <span id="equipment-title">基礎設備：</span>
-                        <ul
-                          style="
-                            list-style-type: none;
-                            margin: 0;
-                            padding-left: 0em;
-                          "
-                        >
-                          <li id="equipment-table">
-                            – 桌面<small>(120×60cm)</small> ×1
-                          </li>
-                          <li id="equipment-chair">– 椅子 ×2</li>
-                          <li id="equipment-badge">– 工作證 ×2</li>
-                          <li id="equipment-book">
-                            – 草率簿 ×1<small> (含露出一面)</small>
-                          </li>
-                        </ul>
-                        <br />
+                    <tr></tr>
+                    <tr id="agreement-row">
+                      <td colspan="3" style="padding: 0; border: none">
+                        <div style="padding: 1em 0 1em 1em">
+                          <span class="label"
+                            >參展同意書 Exhibitor Declaration</span
+                          ><br />
+                          <a
+                            href="downloads/TPABF_Exhibitor_Declaration.pdf"
+                            target="_blank"
+                          >
+                            下載參展同意書 Download Declaration
+                          </a>
+                          <br />
+                          <span style="font-size: 0.95em; color: #888">
+                            請下載並簽署參展同意書，完成後請上傳。<br />
+                            Please download and sign the declaration, then
+                            upload the signed file below.
+                          </span>
+                          <form
+                            id="declaration-upload-form"
+                            enctype="multipart/form-data"
+                            style="margin-top: 0.5em"
+                          >
+                            <input
+                              type="file"
+                              id="declaration-file"
+                              name="declaration-file"
+                              accept=".pdf,.jpg,.jpeg,.png"
+                            />
+                            <button type="submit">上傳 Upload</button>
+                          </form>
+                        </div>
                       </td>
-
                       <td
                         colspan="2"
                         style="
@@ -1000,42 +1031,6 @@
                                 <br />
                                 <span for-billing1-desc>僅基礎方案</span>
 
-                                <!-- <p
-                                  style="color: red; font-size: 0.8rem"
-                                  id="billing1-note"
-                                >
-                                  ！請在付款時務必填入以下資料：<br />
-                                  Email:
-                                  <span
-                                    id="billing-email"
-                                    style="font-weight: bold"
-                                    >email@gmail.com</span
-                                  ><button
-                                    class="copy-btn"
-                                    onclick="copyToClipboard('billing-email')"
-                                    title="Copy Email"
-                                    style="margin-left: 5px"
-                                  >
-                                    📋</button
-                                  ><br />
-                                  備註欄位:
-
-                                  <span
-                                    id="billing-application-number"
-                                    style="font-weight: bold"
-                                    >25-BC001</span
-                                  ><button
-                                    class="copy-btn"
-                                    onclick="copyToClipboard('billing-application-number')"
-                                    title="Copy Application Number"
-                                    style="margin-left: 5px"
-                                  >
-                                    📋</button
-                                  ><br /><br />
-                                  <b
-                                    >如因填寫其他錯誤資料造成對帳問題，將導致報名失敗。</b
-                                  >
-                                </p> -->
                                 <div class="pay-button" id="pay1">付款 Pay</div>
                               </td>
                               <td
@@ -1066,43 +1061,7 @@
                                 <span for-billing2-desc
                                   >適合有輪班擺攤需求之攤主</span
                                 >
-                                <!-- <p
-                                  style="color: red; font-size: 0.8rem"
-                                  id="billing2-note"
-                                >
-                                  ！請在付款時務必填入以下資料：<br />
-                                  Email:
 
-                                  <span
-                                    id="billing-email"
-                                    style="font-weight: bold"
-                                    >email@gmail.com</span
-                                  ><button
-                                    class="copy-btn"
-                                    onclick="copyToClipboard('billing-email')"
-                                    title="Copy Email"
-                                    style="margin-left: 5px"
-                                  >
-                                    📋</button
-                                  ><br />
-                                  備註欄位:
-
-                                  <span
-                                    id="billing-application-number"
-                                    style="font-weight: bold"
-                                    >25-BC001</span
-                                  ><button
-                                    class="copy-btn"
-                                    onclick="copyToClipboard('billing-application-number')"
-                                    title="Copy Application Number"
-                                    style="margin-left: 5px"
-                                  >
-                                    📋</button
-                                  ><br /><br />
-                                  <b
-                                    >如因填寫其他錯誤資料造成對帳問題，將導致報名失敗。</b
-                                  >
-                                </p> -->
                                 <div class="pay-button" id="pay2">付款 Pay</div>
                               </td>
                             </tr>
@@ -1132,7 +1091,6 @@
                               張工作證，如需更多數量請買當日票入場。
                             </li>
                             <li>付款之後請自行留存發票。</li>
-                            <li>報名以及付款狀態將於 7 月 15 日對帳後更新。</li>
                           </ul>
                         </div>
                       </td>
