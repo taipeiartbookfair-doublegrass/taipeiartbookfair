@@ -6,7 +6,7 @@ document.addEventListener("DOMContentLoaded", function () {
   const branch_summit_btn = document.getElementById("submit-edit-brand");
   if (branch_summit_btn) {
     branch_summit_btn.addEventListener("click", async function (e) {
-      //   e.preventDefault();
+      e.preventDefault();
       const account = getCookie("account");
       const region = getCookie("region");
 
@@ -47,7 +47,7 @@ document.addEventListener("DOMContentLoaded", function () {
         instagram: instagram,
         主要創作據點: baselocation,
         參與年份: attendedYears,
-        國籍: nationality,
+        region: nationality,
         當屆問答: yearlyanswer,
         電力需求: electricity,
       }).toString();
@@ -108,7 +108,7 @@ document.addEventListener("DOMContentLoaded", function () {
   const account_summit_btn = document.getElementById("submit-edit-account");
   if (account_summit_btn) {
     account_summit_btn.addEventListener("click", async function (e) {
-      //   e.preventDefault();
+      e.preventDefault();
       const account = getCookie("account");
       const region = getCookie("region");
       if (!account || !region) {
