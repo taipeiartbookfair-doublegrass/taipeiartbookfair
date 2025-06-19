@@ -52,9 +52,9 @@ document.addEventListener("DOMContentLoaded", async function () {
     return;
   }
   if (window.setLoading) window.setLoading(0.9);
-  // 先抓 dashboard（品牌/攤主）資料
-  // 再抓 user（帳號）資料
+
   try {
+    console.log("userData", userData);
     const userParams = new URLSearchParams({
       action: "get_account_info",
       account: account,
@@ -186,103 +186,111 @@ document.addEventListener("DOMContentLoaded", async function () {
   const rawResult = apiData["錄取"];
   const nationality = (region || "").trim().toUpperCase();
 
-  // 依錄取結果決定報名狀態顯示
-  if (rawResult === "5-否") {
-    registrationStatusEl.textContent = "-";
-    equipmentinfo.style.display = "none"; // 隱藏設備資訊
-    letter.style.display = "block";
-  } else if (
-    rawResult === "1-是-1波" ||
-    rawResult === "2-是-2波" ||
-    rawResult === "0-邀請"
-  ) {
-    if (apiData["已匯款"]) {
-      registrationStatusEl.textContent = "已完成報名";
-      equipmentinfo.style.display = "none"; // 隱藏設備資訊
-      mediaupload.style.display = "block"; // 顯示媒體上傳
+  // 依錄取結果決定報名狀態顯示與資格勾勾
+  function updateRegistrationStatusAndChecks() {
+    const paymentChecked = !!apiData["已匯款"];
+    const declarationChecked = !!apiData["切結書"];
+    const checkPayment = document.getElementById("check-payment");
+    const checkDeclaration = document.getElementById("check-declaration");
 
-      // 國籍條件顯示
-      if (nationality !== "TW") {
-        foreignShipping.style.display = "block";
-      } else {
-        foreignShipping.style.display = "none";
-      }
-      if (nationality === "CN") {
-        visaupload.style.display = "block";
-      } else {
-        visaupload.style.display = "none";
-      }
+    // 勾選資格勾勾
+    if (checkPayment) checkPayment.checked = paymentChecked;
+    if (checkDeclaration) checkDeclaration.checked = declarationChecked;
 
-      familyticket.style.display = "block"; // 顯示家庭票上傳
-      manual.style.display = "block"; // 顯示手冊下載
-      boothappearance.style.display = "block"; // 顯示地圖下載
-    } else {
-      registrationStatusEl.textContent = "未完成報名";
-    }
-  } else if (rawResult === "0") {
-    registrationStatusEl.textContent = "-";
-    equipmentinfo.style.display = "none"; // 隱藏設備資訊
-    mediaupload.style.display = "none"; // 隱藏媒體上傳
-    foreignShipping.style.display = "none";
-    visaupload.style.display = "none";
-    familyticket.style.display = "none";
-    manual.style.display = "none";
-    boothappearance.style.display = "none";
-  } else if (rawResult === "4-是-條件式錄取") {
-    conditionalyes.style.display = "inline-block";
-    if (apiData["已匯款"]) {
-      registrationStatusEl.textContent = "已完成報名";
-      equipmentinfo.style.display = "none"; // 隱藏設備資訊
-      mediaupload.style.display = "block"; // 顯示媒體上傳
-
-      // 國籍條件顯示
-      if (nationality !== "TW") {
-        foreignShipping.style.display = "block";
-      } else {
-        foreignShipping.style.display = "none";
-      }
-      if (nationality === "CN") {
-        visaupload.style.display = "block";
-      } else {
-        visaupload.style.display = "none";
-      }
-
-      familyticket.style.display = "block"; // 顯示家庭票上傳
-      manual.style.display = "block"; // 顯示手冊下載
-      boothappearance.style.display = "block"; // 顯示地圖下載
-    } else {
-      registrationStatusEl.textContent = "未完成報名";
-    }
-  } else if (rawResult === "3-猶豫") {
-    registrationStatusEl.textContent = "暫不符合";
-    registrationStatusEl.textContent = "-";
-    equipmentinfo.style.display = "none"; // 隱藏設備資訊
-    runnerletter.style.display = "block";
-  } else {
-    // 其他情況維持原本邏輯
-    if (apiData["已匯款"]) {
-      registrationStatusEl.textContent = "已完成報名";
+    // 狀態顯示
+    if (rawResult === "5-否") {
+      registrationStatusEl.textContent = "-";
       equipmentinfo.style.display = "none";
-      mediaupload.style.display = "block";
-
-      // 國籍條件顯示
-      if (nationality !== "TW") {
-        foreignShipping.style.display = "block";
+      letter.style.display = "block";
+    } else if (
+      rawResult === "1-是-1波" ||
+      rawResult === "2-是-2波" ||
+      rawResult === "0-邀請"
+    ) {
+      if (paymentChecked && declarationChecked) {
+        registrationStatusEl.textContent = "成立 Confirmed";
+        equipmentinfo.style.display = "none";
+        mediaupload.style.display = "block";
+        // 國籍條件顯示
+        if (nationality !== "TW") {
+          foreignShipping.style.display = "block";
+        } else {
+          foreignShipping.style.display = "none";
+        }
+        if (nationality === "CN") {
+          visaupload.style.display = "block";
+        } else {
+          visaupload.style.display = "none";
+        }
+        familyticket.style.display = "block";
+        manual.style.display = "block";
+        boothappearance.style.display = "block";
       } else {
-        foreignShipping.style.display = "none";
+        registrationStatusEl.textContent = "未完成 Unfulfilled";
       }
-      if (nationality === "CN") {
-        visaupload.style.display = "block";
+    } else if (rawResult === "0") {
+      registrationStatusEl.textContent = "-";
+      equipmentinfo.style.display = "none";
+      mediaupload.style.display = "none";
+      foreignShipping.style.display = "none";
+      visaupload.style.display = "none";
+      familyticket.style.display = "none";
+      manual.style.display = "none";
+      boothappearance.style.display = "none";
+    } else if (rawResult === "4-是-條件式錄取") {
+      conditionalyes.style.display = "inline-block";
+      if (paymentChecked && declarationChecked) {
+        registrationStatusEl.textContent = "成立 Confirmed";
+        equipmentinfo.style.display = "none";
+        mediaupload.style.display = "block";
+        // 國籍條件顯示
+        if (nationality !== "TW") {
+          foreignShipping.style.display = "block";
+        } else {
+          foreignShipping.style.display = "none";
+        }
+        if (nationality === "CN") {
+          visaupload.style.display = "block";
+        } else {
+          visaupload.style.display = "none";
+        }
+        familyticket.style.display = "block";
+        manual.style.display = "block";
+        boothappearance.style.display = "block";
       } else {
-        visaupload.style.display = "none";
+        registrationStatusEl.textContent = "未完成 Unfulfilled";
       }
-      familyticket.style.display = "block";
-      manual.style.display = "block";
-      boothappearance.style.display = "block";
+    } else if (rawResult === "3-猶豫") {
+      registrationStatusEl.textContent = "-";
+      equipmentinfo.style.display = "none";
+      runnerletter.style.display = "block";
     } else {
-      registrationStatusEl.textContent = "未完成報名";
+      if (paymentChecked && declarationChecked) {
+        registrationStatusEl.textContent = "成立 Confirmed";
+        equipmentinfo.style.display = "none";
+        mediaupload.style.display = "block";
+        // 國籍條件顯示
+        if (nationality !== "TW") {
+          foreignShipping.style.display = "block";
+        } else {
+          foreignShipping.style.display = "none";
+        }
+        if (nationality === "CN") {
+          visaupload.style.display = "block";
+        } else {
+          visaupload.style.display = "none";
+        }
+        familyticket.style.display = "block";
+        manual.style.display = "block";
+        boothappearance.style.display = "block";
+      } else {
+        registrationStatusEl.textContent = "未完成 Unfulfilled";
+      }
     }
   }
+
+  // 呼叫一次
+  updateRegistrationStatusAndChecks();
 
   function getBoothTypeFromNumber(applicationNumber) {
     if (applicationNumber.includes("LB")) return "書攤";
