@@ -541,7 +541,6 @@ document.addEventListener("DOMContentLoaded", async function () {
   setBillingInfoLanguage(boothType);
 
   document.getElementById("contact-person").textContent = apiData["name"] || "";
-
   document.getElementById("email").textContent = apiData["account"] || "";
   document.getElementById("phone").textContent = apiData["phone"];
   document.getElementById("nationality2").textContent = region || "";
