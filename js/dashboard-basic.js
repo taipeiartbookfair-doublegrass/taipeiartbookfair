@@ -198,7 +198,7 @@ document.addEventListener("DOMContentLoaded", async function () {
     if (checkDeclaration) checkDeclaration.checked = declarationChecked;
 
     // 判斷攤位語言（英文攤位用英文，中文攤位用中文）
-    const boothType = apiData["攤位類型"] || "";
+    const boothType = document.getElementById("booth-type")?.textContent.trim() || "";
     const isEnglishBooth =
       boothType === "One Regular Booth" ||
       boothType === "Two Regular Booth" ||
