@@ -158,6 +158,7 @@
               <tr>
                 <!-- 左邊：攤種區塊 -->
                 <td
+                  colspan="2"
                   style="
                     width: 25%;
                     border-top: 0.5px solid pink;
@@ -190,35 +191,51 @@
                       border-bottom: none;
                     "
                   />
-                  <span id="equipment-title">基礎設備：</span>
-                  <ul
-                    style="list-style-type: none; margin: 0; padding-left: 0em"
-                  >
-                    <li id="equipment-table">
-                      – 桌面<small>(120×60cm)</small> ×1
-                    </li>
-                    <li id="equipment-chair">– 椅子 ×2</li>
-                    <li id="equipment-badge">– 工作證 ×2</li>
-                    <li id="equipment-book">
-                      – 草率簿 ×1<small> (含露出一面)</small>
-                    </li>
-                  </ul>
-                  <br />
-                </td>
-                <td>
-                  <span id="electricity-title">電源配置：</span>
-                  <ul
-                    style="
-                      margin: 0 0 1em 1.5em;
-                      padding: 0;
-                      list-style-type: disc;
-                      font-size: 1em;
-                    "
-                  >
-                    <li>供應一般電源110v</li>
-                    <li>不得使用大電器</li>
-                    <li>非每攤都有，需自備延長線與他人協調</li>
-                  </ul>
+
+                  <table style="width: 100%">
+                    <tr>
+                      <td
+                        style="
+                          vertical-align: top;
+                          padding-right: 2em;
+                          border: none;
+                        "
+                      >
+                        <span id="equipment-title">基礎設備：</span>
+                        <ul
+                          style="
+                            list-style-type: none;
+                            margin: 0;
+                            padding-left: 0em;
+                          "
+                        >
+                          <li id="equipment-table">
+                            – 桌面<small>(120×60cm)</small> ×1
+                          </li>
+                          <li id="equipment-chair">– 椅子 ×2</li>
+                          <li id="equipment-badge">– 工作證 ×2</li>
+                          <li id="equipment-book">
+                            – 草率簿 ×1<small> (含露出一面)</small>
+                          </li>
+                        </ul>
+                      </td>
+                      <td style="vertical-align: top; border: none">
+                        <span id="electricity-title">電源配置：</span>
+                        <ul
+                          style="
+                            margin: 0 0 1em 1.5em;
+                            padding: 0;
+                            list-style-type: disc;
+                            font-size: 1em;
+                          "
+                        >
+                          <li>供應一般電源110v</li>
+                          <li>不得使用大電器</li>
+                          <li>非每攤都有，需自備延長線與他人協調</li>
+                        </ul>
+                      </td>
+                    </tr>
+                  </table>
                 </td>
               </tr>
               <!-- 編輯按鈕 -->
@@ -944,7 +961,7 @@
                 </td>
               </tr>
 
-              <tr id="equipmentinfo" style="display: block">
+              <tr id="billing-info" style="display: block">
                 <td></td>
                 <td
                   colspan="3"
@@ -958,7 +975,19 @@
                 >
                   <table style="width: 100%; table-layout: auto">
                     <tr></tr>
-                    <tr id="agreement-row">
+                    <tr
+                      id="agreement-row"
+                      style="
+                        width: 25%;
+                        border-top: 0.5px solid pink;
+                        border-bottom: 0.5px solid pink;
+
+                        margin: 6px 0;
+                        border-left: 1px solid black;
+
+                        vertical-align: top;
+                      "
+                    >
                       <td colspan="3" style="padding: 0; border: none">
                         <div style="padding: 1em 0 1em 1em">
                           <span class="label"

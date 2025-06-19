@@ -172,7 +172,7 @@ document.addEventListener("DOMContentLoaded", async function () {
   setApplicationResultStyle(applicationResultEl, resultText);
 
   const registrationStatusEl = document.getElementById("registration-status");
-  const equipmentinfo = document.getElementById("equipmentinfo");
+  const billinginfo = document.getElementById("billing-info");
   const letter = document.getElementById("negative-letter");
   const runnerletter = document.getElementById("runnerup-letter");
   const conditionalyes = document.getElementById("booth-type-tooltip");
@@ -214,7 +214,7 @@ document.addEventListener("DOMContentLoaded", async function () {
     }
 
     // 預設全部隱藏
-    equipmentinfo.style.display = "none";
+    billinginfo.style.display = "none";
     letter.style.display = "none";
     runnerletter.style.display = "none";
     conditionalyes.style.display = "none";
@@ -248,7 +248,7 @@ document.addEventListener("DOMContentLoaded", async function () {
         boothappearance.style.display = "block";
       } else {
         registrationStatusEl.textContent = getStatusText(false);
-        equipmentinfo.style.display = "block";
+        billinginfo.style.display = "block";
       }
     } else if (rawResult === "0") {
       registrationStatusEl.textContent = "-";
@@ -268,7 +268,7 @@ document.addEventListener("DOMContentLoaded", async function () {
         boothappearance.style.display = "block";
       } else {
         registrationStatusEl.textContent = getStatusText(false);
-        equipmentinfo.style.display = "block";
+        billinginfo.style.display = "block";
       }
     } else if (rawResult === "3-猶豫") {
       registrationStatusEl.textContent = "-";
@@ -288,7 +288,7 @@ document.addEventListener("DOMContentLoaded", async function () {
         boothappearance.style.display = "block";
       } else {
         registrationStatusEl.textContent = getStatusText(false);
-        equipmentinfo.style.display = "block";
+        billinginfo.style.display = "block";
       }
     }
   }
