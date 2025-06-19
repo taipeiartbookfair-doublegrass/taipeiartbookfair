@@ -10,7 +10,8 @@ const apiUrl =
   "https://script.google.com/macros/s/AKfycbwNWgPsLK_ldHUIvoIg5a9k3PNIlmjvJeTgbCZ5CZsvKFQ7e1DoxbMsAawi4nI3Rea4DA/exec";
 
 document.addEventListener("DOMContentLoaded", async function () {
-  // --- 已移除 loading 動畫相關程式碼 ---
+  // 加在最前面，顯示 loading 動畫
+  if (window.updateLoadingProgress) window.updateLoadingProgress(0.1);
 
   // 取得 dashboard 資料
   let apiData = {};
@@ -20,6 +21,8 @@ document.addEventListener("DOMContentLoaded", async function () {
   }).toString();
 
   try {
+    if (window.updateLoadingProgress) window.updateLoadingProgress(0.3);
+
     const dashboardRes = await fetch(apiUrl, {
       redirect: "follow",
       method: "POST",
@@ -28,6 +31,8 @@ document.addEventListener("DOMContentLoaded", async function () {
       },
       body: params,
     });
+
+    if (window.updateLoadingProgress) window.updateLoadingProgress(0.7);
 
     const data = await dashboardRes.json();
 
@@ -45,6 +50,9 @@ document.addEventListener("DOMContentLoaded", async function () {
     alert("Network error, please try again later.");
     return;
   }
+
+  // 填資料前
+  if (window.updateLoadingProgress) window.updateLoadingProgress(0.9);
 
   // 對應 id 填入資料
   document.getElementById("brand-name").textContent = apiData["品牌"] || "";
