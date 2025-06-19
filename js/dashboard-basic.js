@@ -647,7 +647,6 @@ document.addEventListener("DOMContentLoaded", async function () {
   setTimeout(function () {
     if (window.hideLoadingMask) hideLoadingMask();
   }, 500);
-  s;
 
   const equipmentTitleEl = document.getElementById("equipment-title");
   const electricityTitleEl = document.getElementById("electricity-title");
