@@ -627,28 +627,25 @@ document.addEventListener("DOMContentLoaded", async function () {
   if (window.stopFakeLoading) window.stopFakeLoading();
 
   // 動態切換同意書區塊語言
-  document.addEventListener("DOMContentLoaded", function () {
-    var boothTypeEl = document.getElementById("booth-type");
-    var downloadLink = document.getElementById("declaration-download-link");
-    var desc = document.getElementById("declaration-desc");
-    if (boothTypeEl && downloadLink && desc) {
-      var boothText = boothTypeEl.textContent.trim();
-      const englishBoothTypes = [
-        "One Regular Booth",
-        "Two Regular Booth",
-        "Curation Booth",
-      ];
-      if (englishBoothTypes.includes(boothText)) {
-        downloadLink.innerHTML = "Download Exhibitor Declaration";
-        desc.innerHTML =
-          "Please download and sign the exhibitor declaration, then upload the signed file below.";
-      } else {
-        downloadLink.innerHTML = "下載參展同意書 <br />Download Declaration";
-        desc.innerHTML =
-          "請下載並簽署參展同意書，完成後請上傳。<br />Please download and sign the declaration, then upload the signed file below.";
-      }
+
+  var downloadLink = document.getElementById("declaration-download-link");
+  var desc = document.getElementById("declaration-desc");
+  if (boothTypeEl && downloadLink && desc) {
+    var boothText = boothTypeEl.textContent.trim();
+    const englishBoothTypes = [
+      "One Regular Booth",
+      "Two Regular Booth",
+      "Curation Booth",
+    ];
+    if (englishBoothTypes.includes(boothText)) {
+      downloadLink.innerHTML = "Download Exhibitor Declaration";
+      desc.innerHTML =
+        "Please download and sign the exhibitor declaration, then upload the signed file below.";
+    } else {
+      downloadLink.innerHTML = "下載參展同意書";
+      desc.innerHTML = "請下載並簽署參展同意書，完成後請上傳。";
     }
-  });
+  }
 
   // 更新電力需求列表
   function updateElectricityList(boothType) {
