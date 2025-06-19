@@ -7,6 +7,8 @@ document.addEventListener("DOMContentLoaded", function () {
   if (branch_summit_btn) {
     branch_summit_btn.addEventListener("click", async function (e) {
       e.preventDefault();
+      // 顯示 loading 遮罩
+      document.getElementById("loading-mask").style.display = "flex";
       const account = getCookie("account");
       const region = getCookie("region");
 
@@ -96,6 +98,8 @@ document.addEventListener("DOMContentLoaded", function () {
           }
           window.location.href = "dashboard-TPABF.html";
         } else {
+          // 隱藏 loading 遮罩
+          document.getElementById("loading-mask").style.display = "none";
           alert("Network error, please try again later.");
         }
       } catch (error) {
@@ -109,6 +113,8 @@ document.addEventListener("DOMContentLoaded", function () {
   if (account_summit_btn) {
     account_summit_btn.addEventListener("click", async function (e) {
       e.preventDefault();
+      // 顯示 loading 遮罩
+      document.getElementById("loading-mask").style.display = "flex";
       const account = getCookie("account");
       const region = getCookie("region");
       if (!account || !region) {
@@ -175,6 +181,8 @@ document.addEventListener("DOMContentLoaded", function () {
           }
           window.location.href = "dashboard-TPABF.html";
         } else {
+          // 隱藏 loading 遮罩
+          document.getElementById("loading-mask").style.display = "none";
           alert("Network error, please try again later.");
         }
       } catch (error) {
