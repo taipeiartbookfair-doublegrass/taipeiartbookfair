@@ -10,6 +10,7 @@ const apiUrl =
   "https://script.google.com/macros/s/AKfycbwNWgPsLK_ldHUIvoIg5a9k3PNIlmjvJeTgbCZ5CZsvKFQ7e1DoxbMsAawi4nI3Rea4DA/exec";
 
 document.addEventListener("DOMContentLoaded", async function () {
+  if (window.startFakeLoading) window.startFakeLoading();
   // 等待 window.setLoading 可用
   if (window.setLoading) window.setLoading(0.1);
 
@@ -50,7 +51,7 @@ document.addEventListener("DOMContentLoaded", async function () {
     alert("Network error, please try again later.");
     return;
   }
-
+  if (window.stopFakeLoading) window.stopFakeLoading();
   if (window.setLoading) window.setLoading(0.9);
 
   // 對應 id 填入資料
