@@ -10,33 +10,8 @@ const apiUrl =
   "https://script.google.com/macros/s/AKfycbwNWgPsLK_ldHUIvoIg5a9k3PNIlmjvJeTgbCZ5CZsvKFQ7e1DoxbMsAawi4nI3Rea4DA/exec";
 
 document.addEventListener("DOMContentLoaded", async function () {
-  // --- loading 動畫控制 ---
-  const loadingMask = document.getElementById("loading-mask");
-  const loadingGrid = loadingMask
-    ? loadingMask.querySelector(".loading-grid")
-    : null;
-  const loadingPercent = document.getElementById("loading-percent");
-
-  function setLoading(percent) {
-    if (!loadingGrid) return;
-    const imgs = loadingGrid.querySelectorAll("img");
-    const total = imgs.length;
-    const progress = Math.floor(percent * total);
-    for (let i = 0; i < total; i++) {
-      if (i < progress) {
-        imgs[i].src = "image/Moss_of_Bangladesh_2.jpg";
-      } else {
-        imgs[i].removeAttribute("src");
-      }
-    }
-    if (loadingPercent) {
-      loadingPercent.textContent = Math.round(percent * 100) + "%";
-    }
-  }
-  function hideLoading() {
-    if (loadingMask) loadingMask.style.display = "none";
-  }
-  setLoading(0.1);
+  // 等待 window.setLoading 可用
+  if (window.setLoading) window.setLoading(0.1);
 
   // 取得 dashboard 資料
   let apiData = {};
@@ -46,7 +21,7 @@ document.addEventListener("DOMContentLoaded", async function () {
   }).toString();
 
   try {
-    setLoading(0.3);
+    if (window.setLoading) window.setLoading(0.3);
 
     const dashboardRes = await fetch(apiUrl, {
       redirect: "follow",
@@ -57,7 +32,7 @@ document.addEventListener("DOMContentLoaded", async function () {
       body: params,
     });
 
-    setLoading(0.7);
+    if (window.setLoading) window.setLoading(0.7);
 
     const data = await dashboardRes.json();
 
@@ -76,7 +51,7 @@ document.addEventListener("DOMContentLoaded", async function () {
     return;
   }
 
-  setLoading(0.9);
+  if (window.setLoading) window.setLoading(0.9);
 
   // 對應 id 填入資料
   document.getElementById("brand-name").textContent = apiData["品牌"] || "";
@@ -532,8 +507,8 @@ document.addEventListener("DOMContentLoaded", async function () {
   updateBoothInfo(boothType);
 
   // loading 動畫結束
-  setLoading(1);
-  hideLoading();
+  if (window.setLoading) window.setLoading(1);
+  if (window.hideLoading) window.hideLoading();
 
   const equipmentTitleEl = document.getElementById("equipment-title");
   if (

@@ -49,8 +49,28 @@ document.addEventListener("DOMContentLoaded", function () {
     }
   };
 
+  window.setLoading = function (percent) {
+    const imgs = loadingGrid.querySelectorAll("img");
+    const total = imgs.length;
+    const progress = Math.floor(percent * total);
+    for (let i = 0; i < total; i++) {
+      if (i < progress) {
+        imgs[i].src = imgActiveSrc;
+      } else {
+        imgs[i].removeAttribute("src");
+      }
+    }
+    if (loadingPercent) {
+      loadingPercent.textContent = Math.round(percent * 100) + "%";
+    }
+  };
+
   // 資料抓取完成時呼叫
   window.hideLoadingMask = function () {
+    loadingMask.style.display = "none";
+  };
+
+  window.hideLoading = function () {
     loadingMask.style.display = "none";
   };
 
