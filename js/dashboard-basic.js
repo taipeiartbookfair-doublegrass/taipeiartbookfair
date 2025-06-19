@@ -624,6 +624,66 @@ document.addEventListener("DOMContentLoaded", async function () {
     }
   }
   if (window.stopFakeLoading) window.stopFakeLoading();
+
+  function updateElectricityList(boothType) {
+    const electricityTitle = document.getElementById("electricity-title");
+    const electricityList = document.querySelector("#electricity-title + ul");
+    if (!electricityList) return;
+
+    // 中文攤種
+    if (boothType === "書攤" || boothType === "創作商品攤") {
+      electricityTitle.textContent = "電源配置：";
+      electricityList.innerHTML = `
+      <li>供應一般電源110v</li>
+      <li>不得使用大電器</li>
+      <li>非每攤都有，需自備延長線與他人協調</li>
+    `;
+    }
+    // 英文攤種
+    else if (boothType === "One Regular Booth" || boothType === "Two Regular Booth") {
+      electricityTitle.textContent = "Electricity:";
+      electricityList.innerHTML = `
+      <li>Standard 110v power supply</li>
+      <li>No high-power appliances allowed</li>
+      <li>Not available for every booth; please bring your own extension cord and coordinate with others</li>
+    `;
+    }
+    // 裝置攤、食物酒水攤
+    else if (boothType === "裝置攤" || boothType === "食物酒水攤") {
+      electricityTitle.textContent = "電源配置：";
+      electricityList.innerHTML = `
+      <li>供應一般電源110v</li>
+      <li>
+        <span style="text-decoration: underline; cursor: pointer;" onclick="document.getElementById('electricity-row').scrollIntoView({behavior:'smooth'});">
+          9月前需提供電力需求申請
+        </span>，不得於現場臨時申請：
+        <ul style="margin: 0.3em 0 0 1.5em; list-style-type: disc;">
+          <li>條列使用電器＆瓦數</li>
+          <li>220V需以1000元加購，不得使用變壓器</li>
+        </ul>
+      </li>
+    `;
+    }
+    // Curation Booth 英文
+    else if (boothType === "Curation Booth") {
+      electricityTitle.textContent = "Electricity:";
+      electricityList.innerHTML = `
+      <li>Standard 110v power supply</li>
+      <li>
+        <span style="text-decoration: underline; cursor: pointer;" onclick="document.getElementById('electricity-row').scrollIntoView({behavior:'smooth'});">
+          Electricity requirement application before September
+        </span> is mandatory; on-site requests are not accepted:
+        <ul style="margin: 0.3em 0 0 1.5em; list-style-type: disc;">
+          <li>List all appliances & wattage</li>
+          <li>220V available for an extra NTD 1000; transformers are not allowed</li>
+        </ul>
+      </li>
+    `;
+    }
+  }
+
+  // 在 boothType 設定後呼叫
+  updateElectricityList(boothType);
 });
 
 // 產生產品連結
