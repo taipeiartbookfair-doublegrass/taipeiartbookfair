@@ -49,6 +49,28 @@ document.addEventListener("DOMContentLoaded", function () {
     }
   };
 
+  let fakeLoadingInterval = null;
+  let fakeLoadingPercent = 0;
+
+  window.startFakeLoading = function () {
+    fakeLoadingPercent = 0;
+    window.setLoading(0);
+    fakeLoadingInterval = setInterval(() => {
+      if (fakeLoadingPercent < 0.99) {
+        fakeLoadingPercent += 0.01 + Math.random() * 0.01;
+        window.setLoading(fakeLoadingPercent);
+      }
+    }, 50); // 每 40ms 跑一格
+  };
+
+  window.stopFakeLoading = function () {
+    if (fakeLoadingInterval) clearInterval(fakeLoadingInterval);
+    window.setLoading(1); // 直接跳到 100%
+    setTimeout(() => {
+      document.getElementById("loading-mask").style.display = "none";
+    }, 300); // 給一點緩衝
+  };
+
   window.setLoading = function (percent) {
     const imgs = loadingGrid.querySelectorAll("img");
     const total = imgs.length;

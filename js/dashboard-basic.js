@@ -10,6 +10,7 @@ const apiUrl =
   "https://script.google.com/macros/s/AKfycbwNWgPsLK_ldHUIvoIg5a9k3PNIlmjvJeTgbCZ5CZsvKFQ7e1DoxbMsAawi4nI3Rea4DA/exec";
 
 document.addEventListener("DOMContentLoaded", async function () {
+  if (window.startFakeLoading) window.startFakeLoading();
   // 等待 window.setLoading 可用
   if (window.setLoading) window.setLoading(0.1);
 
@@ -50,7 +51,7 @@ document.addEventListener("DOMContentLoaded", async function () {
     alert("Network error, please try again later.");
     return;
   }
-
+  if (window.stopFakeLoading) window.stopFakeLoading();
   if (window.setLoading) window.setLoading(0.9);
 
   // 對應 id 填入資料
@@ -569,10 +570,38 @@ document.addEventListener("DOMContentLoaded", async function () {
   // 呼叫時機：boothType 設定好後
   setBillingInfoLanguage(boothType);
 
-  document.getElementById("contact-person").textContent = apiData["name"] || "";
-  document.getElementById("email").textContent = apiData["account"] || "";
-  document.getElementById("phone").textContent = apiData["phone"];
-  document.getElementById("nationality2").textContent = region || "";
+  // 先抓 dashboard（品牌/攤主）資料
+  // 再抓 user（帳號）資料
+  try {
+    const userParams = new URLSearchParams({
+      action: "get_account_info",
+      account: account,
+    }).toString();
+
+    const userRes = await fetch(apiUrl, {
+      redirect: "follow",
+      method: "POST",
+      headers: {
+        "Content-Type": "text/plain;charset=utf-8",
+      },
+      body: userParams,
+    });
+
+    const userData = await userRes.json();
+
+    if (userData.success) {
+      document.getElementById("contact-person").textContent =
+        userData.data["name"] || "";
+      document.getElementById("email").textContent =
+        userData.data["account"] || "";
+      document.getElementById("phone").textContent =
+        userData.data["phone"] || "";
+      document.getElementById("nationality2").textContent =
+        userData.data["region"] || "";
+    }
+  } catch (error) {
+    // 可以顯示錯誤或略過
+  }
 
   function setSocialText(id, value) {
     const el = document.getElementById(id);
