@@ -625,6 +625,30 @@ document.addEventListener("DOMContentLoaded", async function () {
   }
   if (window.stopFakeLoading) window.stopFakeLoading();
 
+  // 動態切換同意書區塊語言
+  document.addEventListener("DOMContentLoaded", function () {
+    var boothType = document.getElementById("booth-type");
+    var downloadLink = document.getElementById("declaration-download-link");
+    var desc = document.getElementById("declaration-desc");
+    if (boothType && downloadLink && desc) {
+      var boothText = boothType.textContent.trim();
+      if (
+        boothText === "One Regular Booth" ||
+        boothText === "Two Regular Booth" ||
+        boothText === "Curation Booth"
+      ) {
+        downloadLink.innerHTML = "Download Exhibitor Declaration";
+        desc.innerHTML =
+          "Please download and sign the exhibitor declaration, then upload the signed file below.";
+      } else {
+        downloadLink.innerHTML = "下載參展同意書 <br />Download Declaration";
+        desc.innerHTML =
+          "請下載並簽署參展同意書，完成後請上傳。<br />Please download and sign the declaration, then upload the signed file below.";
+      }
+    }
+  });
+
+  // 更新電力需求列表
   function updateElectricityList(boothType) {
     const electricityTitle = document.getElementById("electricity-title");
     const electricityList = document.querySelector("#electricity-title + ul");
@@ -640,7 +664,10 @@ document.addEventListener("DOMContentLoaded", async function () {
     `;
     }
     // 英文攤種
-    else if (boothType === "One Regular Booth" || boothType === "Two Regular Booth") {
+    else if (
+      boothType === "One Regular Booth" ||
+      boothType === "Two Regular Booth"
+    ) {
       electricityTitle.textContent = "Electricity:";
       electricityList.innerHTML = `
       <li>Standard 110v power supply</li>
