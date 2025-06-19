@@ -133,7 +133,7 @@ document.addEventListener("DOMContentLoaded", function () {
       if (a) {
         const p = a.querySelector("p");
         if (p) {
-          p.innerHTML = `<mark>${p.innerText}</mark>`;
+          p.innerHTML = `<mark>${p.innerHTML}</mark>`;
         }
       }
     }
@@ -148,29 +148,30 @@ document.addEventListener("DOMContentLoaded", function () {
     if (right) right.style.display = "none";
     if (account) account.style.display = "none";
 
-    const bio = document.getElementById("bio");
-    const bioEdit = document.getElementById("bio-edit");
-    if (bio && bioEdit) bioEdit.value = bio.innerText.trim();
-
-    const brandName = document.getElementById("brand-name");
-    const brandNameEdit = document.getElementById("brandName-edit");
-    if (brandName && brandNameEdit)
-      brandNameEdit.value = brandName.innerText.trim();
-
-    const role = document.getElementById("role");
-    const roleEdit = document.getElementById("role-edit");
-    if (role && roleEdit) roleEdit.value = role.innerText.trim();
-
-    const category = document.getElementById("category");
-    const categoryEdit = document.getElementById("category-edit");
-    if (category && categoryEdit)
-      categoryEdit.value = category.innerText.trim();
-
-    const nationality = document.getElementById("nationality");
-    const nationalityEdit = document.getElementById("nationality-edit");
-    if (nationality && nationalityEdit)
-      nationalityEdit.value = nationality.innerText.trim();
+    // 自動填入現有資料
+    const fields = [
+      ["brand-name", "brandName-edit"],
+      ["bio", "bio-edit"],
+      ["role", "role-edit"],
+      ["category", "category-edit"],
+      ["attendedYears", "attendedYears-edit"],
+      ["nationality", "nationality-edit"],
+      ["baselocation", "baselocation-edit"],
+      ["website", "website-edit"],
+      ["instagram", "instagram-edit"],
+      ["facebook", "facebook-edit"],
+      ["yearlyanswer", "yearlyanswer-edit"],
+      ["electricity-answer", "electricity-edit"],
+    ];
+    fields.forEach(([from, to]) => {
+      const fromEl = document.getElementById(from);
+      const toEl = document.getElementById(to);
+      if (fromEl && toEl) {
+        toEl.value = fromEl.textContent.trim();
+      }
+    });
   };
+
   window.showFAQSection = function showFAQSection() {
     const editBrandPage = document.getElementById("edit-brand-page");
     const mid = document.querySelector(".mid");
@@ -251,10 +252,6 @@ document.addEventListener("DOMContentLoaded", function () {
     const fields = [
       ["contact-person", "contact-person-edit"],
       ["phone", "phone-edit"],
-      ["website", "website-edit"],
-      ["instagram", "instagram-edit"],
-      ["facebook", "facebook-edit"],
-      ["whatsapp", "whatsapp-edit"],
       ["nationality2", "nationality-edit"],
     ];
     fields.forEach(([from, to]) => {

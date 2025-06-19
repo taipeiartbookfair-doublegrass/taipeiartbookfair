@@ -112,6 +112,17 @@ document.addEventListener("DOMContentLoaded", async function () {
   document.getElementById("role").textContent = apiData["身份類別"] || "";
   document.getElementById("category").textContent = apiData["作品類別"] || "";
   document.getElementById("nationality").textContent = region || "";
+  document.getElementById("email").textContent = apiData["account"] || "";
+  document.getElementById("phone").textContent = apiData["phone"];
+  document.getElementById("baselocation").textContent =
+    apiData["主要創作據點"] || "";
+  setSocialText("attendedYears", apiData["參與年份"]);
+  setSocialText("website", apiData["website"]);
+  setSocialText("instagram", apiData["IG帳號"]);
+  setSocialText("facebook", apiData["facebook"]);
+  setSocialText("baselocation", apiData["baselocation"]);
+  setSocialText("yearlyanswer", apiData["當屆問答"]);
+  setSocialText("electricity-answer", apiData["電力需求"]);
 
   // 國籍判斷與簽證需求顯示
   const nat = document.getElementById("nationality");
@@ -730,8 +741,6 @@ document.addEventListener("DOMContentLoaded", async function () {
 
   document.getElementById("email").textContent = apiData["account"] || "";
   document.getElementById("phone").textContent = apiData["phone"];
-  document.getElementById("baselocation").textContent =
-    apiData["主要創作據點"] || "";
   document.getElementById("nationality2").textContent = region || "";
 
   function setSocialText(id, value) {
@@ -746,12 +755,6 @@ document.addEventListener("DOMContentLoaded", async function () {
       el.style.fontStyle = "";
     }
   }
-
-  setSocialText("website", apiData["website"]);
-  setSocialText("instagram", apiData["instagram"]);
-  setSocialText("facebook", apiData["facebook"]);
-  setSocialText("whatsapp", apiData["whatsapp"]);
-  setSocialText("baselocation", apiData["baselocation"]);
 });
 
 // 產生產品連結
