@@ -700,11 +700,11 @@ document.addEventListener("DOMContentLoaded", async function () {
       <li>Standard 110v power supply</li>
       <li>
         <span style="text-decoration: underline; cursor: pointer;" onclick="document.getElementById('electricity-row').scrollIntoView({behavior:'smooth'});">
-          Electricity requirement application before September
-        </span> is mandatory; on-site requests are not accepted:
+          Apply for electricity before September
+        </span>; on-site requests not accepted:
         <ul style="margin: 0.3em 0 0 1.5em; list-style-type: disc;">
-          <li>List all appliances & wattage</li>
-          <li>220V available for an extra NTD 1000; transformers are not allowed</li>
+          <li>List appliances & wattage</li>
+          <li>220V: extra NTD 1000; no transformers</li>
         </ul>
       </li>
     `;
