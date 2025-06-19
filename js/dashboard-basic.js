@@ -2,9 +2,9 @@
 const account = getCookie("account");
 const region = getCookie("region");
 
-// if (!account || !region) {
-//   window.location.href = "login.html";
-// }
+if (!account || !region) {
+  window.location.href = "login.html";
+}
 
 const apiUrl =
   "https://script.google.com/macros/s/AKfycbwNWgPsLK_ldHUIvoIg5a9k3PNIlmjvJeTgbCZ5CZsvKFQ7e1DoxbMsAawi4nI3Rea4DA/exec";
@@ -87,18 +87,18 @@ document.addEventListener("DOMContentLoaded", async function () {
 
     const data = await dashboardRes.json();
 
-    // if (data.success) {
-    //   apiData = data.data;
-    // } else {
-    //   alert(data.message || "資料取得失敗，請重新登入。");
-    //   setCookie("account", "", -1);
-    //   setCookie("region", "", -1);
-    //   setCookie("login", "", -1);
-    //   window.location.href = "login.html";
-    //   stopFakeProgress();
-    //   if (window.hideLoadingMask) hideLoadingMask();
-    //   return;
-    // }
+    if (data.success) {
+      apiData = data.data;
+    } else {
+      alert(data.message || "資料取得失敗，請重新登入。");
+      setCookie("account", "", -1);
+      setCookie("region", "", -1);
+      setCookie("login", "", -1);
+      window.location.href = "login.html";
+      stopFakeProgress();
+      if (window.hideLoadingMask) hideLoadingMask();
+      return;
+    }
   } catch (error) {
     alert("Network error, please try again later.");
     stopFakeProgress();
