@@ -1,4 +1,5 @@
 document.addEventListener("DOMContentLoaded", function () {
+  if (window.startFakeLoading) window.startFakeLoading();
   // --- Loading mask setup ---
   const loadingMask = document.getElementById("loading-mask");
   const loadingGrid = loadingMask.querySelector(".loading-grid");
