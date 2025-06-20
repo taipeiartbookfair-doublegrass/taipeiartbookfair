@@ -291,10 +291,6 @@ document.addEventListener("DOMContentLoaded", async function () {
 
   // 報名編號填好後再執行這段
   function getBoothTypeFromNumber(applicationNumber) {
-    const applicationNumber = document
-      .getElementById("application-number")
-      .textContent.trim();
-
     if (applicationNumber.includes("LB")) return "書攤";
     if (applicationNumber.includes("LM")) return "創作商品攤";
     if (applicationNumber.includes("LI")) return "裝置攤";
@@ -305,6 +301,9 @@ document.addEventListener("DOMContentLoaded", async function () {
     return "";
   }
 
+  const applicationNumber = document
+    .getElementById("application-number")
+    .textContent.trim();
   const boothType = getBoothTypeFromNumber(applicationNumber);
   const boothTypeEl = document.getElementById("booth-type");
   const englishBoothTypes = [
