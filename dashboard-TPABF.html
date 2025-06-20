@@ -1199,6 +1199,113 @@
                   <small>hooroo@double-grass.com</small><br />
                 </td>
               </tr>
+              <!-- 簽證資料上傳 Visa Upload -->
+              <tr style="display: none" id="media-section-row3">
+                <td
+                  colspan="2"
+                  style="border-top: none; width: 80%; border-right: none"
+                >
+                  <div id="visa-upload">
+                    <span class="label">簽證資料上傳Visa Document Upload</span
+                    ><br />
+                    請確認填妥以下資訊：<br />
+                    1. 航班號碼<br />
+                    2. 落地時間<br />
+                    <div
+                      id="visa-warning"
+                      style="color: #c00; font-size: 0.9em"
+                    >
+                      ! 請務必於期限內上傳完整資料，逾期恕不受理。
+                    </div>
+                  </div>
+                </td>
+                <!-- 簽證資料警語 Visa Notice -->
+                <td
+                  colspan="1"
+                  style="
+                    border-top: none;
+                    width: 20%;
+                    border-left: 1px dashed black;
+                  "
+                >
+                  <div>
+                    <form id="visa-upload-form" enctype="multipart/form-data">
+                      <input
+                        type="file"
+                        id="visa-file"
+                        name="visa-file"
+                        accept=".pdf"
+                      />
+                      <button type="submit">上傳 Upload</button>
+                    </form>
+                  </div>
+                </td>
+              </tr>
+              <!-- 寄件訊息 Foreigner Form -->
+              <tr style="display: none" id="media-section-row2">
+                <td style="border-top: none; width: 55vw">
+                  <div id="foreigner-form">
+                    <span class="label"
+                      >海外寄件服務 Overseas Shipping Service</span
+                    ><br />
+                    為確保您的物品順利送達現場，請務必完成下方表單填寫，並確保包裹於
+                    <b>2025年11月7日（週五）前</b> 抵達指定收件地址。<br />
+                    如未填寫表單或逾期寄達，我們將無法提供轉送協助，敬請留意。<br />
+                    <br />
+                    寄來表單：<a
+                      href="https://forms.gle/hVu54wUfqqUMRxfG8"
+                      target="_blank"
+                      >https://forms.gle/hVu54wUfqqUMRxfG8</a
+                    >
+                    <br /><br />
+                    完成寄回服務的表單填寫，請於活動最後一天
+                    <b>2025/11/23（日）17:00</b>
+                    起將需寄回之包裹集合到報到台，請在此之前確認所有提交資訊正確無誤。請您備好現金，現場點交後支付。<br />
+                    <br />
+                    寄回表單：<a
+                      href="https://ezpost.post.gov.tw/ITMATT/#"
+                      target="_blank"
+                      >https://ezpost.post.gov.tw/ITMATT/#</a
+                    >
+                    <br /><br />
+                    <hr
+                      style="
+                        border-top: 1px dashed black;
+                        margin: 6px 0;
+                        border-bottom: none;
+                      "
+                    />
+                    To ensure your materials arrive safely, please make sure to
+                    complete the shipping form and have your package delivered
+                    before <b>November 7, 2025 (Fri.)</b> to the designated
+                    address.<br />
+                    Late or unregistered shipments will not be eligible for
+                    transfer service.<br />
+                    <br />
+                    Sending in advance:
+                    <a
+                      href="https://forms.gle/hVu54wUfqqUMRxfG8"
+                      target="_blank"
+                      >https://forms.gle/hVu54wUfqqUMRxfG8</a
+                    >
+                    <br /><br />
+                    If you may need us to send back, please reply to the Return
+                    Service survey below and you can re-edit the package
+                    information later. We will start collecting packages at the
+                    CHECK-IN desk at <b>5:00 PM on 11/23 (Sun.)</b>, so make
+                    sure all the information is correctly filled in by then.<br />
+                    Please prepare cash for on-site payment after checking the
+                    package.<br />
+                    <br />
+                    Sending back:
+                    <a
+                      href="https://ezpost.post.gov.tw/ITMATT/#"
+                      target="_blank"
+                      >https://ezpost.post.gov.tw/ITMATT/#</a
+                    >
+                  </div>
+                </td>
+              </tr>
               <tr id="media-section" style="display: none">
                 <!-- 素材下載 Download -->
                 <td
@@ -1258,11 +1365,11 @@
               </tr>
               <tr id="media-live-event-section" style="display: none">
                 <td
-                  colspan="1"
+                  colspan="2"
                   style="
                     border-top: none;
                     width: 30vw;
-                    border-left: 1px dashed black;
+
                     vertical-align: top;
                     padding-left: 1em;
                   "
@@ -1274,7 +1381,7 @@
                     programs such as short talks, performances, workshops, or DJ
                     sets!
                   </div>
-                  <div style="margin-top: 0.5em; font-size: 0.5rem">
+                  <div style="margin-top: 0.5em; font-size: 1rem">
                     <a
                       href="https://forms.gle/ckXiewW68i1VwKYt6"
                       target="_blank"
@@ -1348,108 +1455,6 @@
                       />
                       <button type="submit">上傳 Upload</button>
                     </form>
-                  </div>
-                </td>
-              </tr>
-
-              <!-- 簽證資料上傳 Visa Upload -->
-              <tr style="display: none" id="media-section-row3">
-                <td
-                  colspan="2"
-                  style="border-top: none; width: 80%; border-right: none"
-                >
-                  <div id="visa-upload">
-                    <span class="label">簽證資料上傳Visa Document Upload</span
-                    ><br />
-                    請確認填妥以下資訊：<br />
-                    1. 航班號碼<br />
-                    2. 落地時間<br />
-                    <div
-                      id="visa-warning"
-                      style="color: #c00; font-size: 0.9em"
-                    >
-                      ! 請務必於期限內上傳完整資料，逾期恕不受理。
-                    </div>
-                  </div>
-                </td>
-                <!-- 簽證資料警語 Visa Notice -->
-                <td
-                  colspan="1"
-                  style="
-                    border-top: none;
-                    width: 20%;
-                    border-left: 1px dashed black;
-                  "
-                >
-                  <div>
-                    <form id="visa-upload-form" enctype="multipart/form-data">
-                      <input
-                        type="file"
-                        id="visa-file"
-                        name="visa-file"
-                        accept=".pdf"
-                      />
-                      <button type="submit">上傳 Upload</button>
-                    </form>
-                  </div>
-                </td>
-              </tr>
-              <!-- 寄件訊息 Foreigner Form -->
-              <tr style="display: none" id="media-section-row2">
-                <td style="border-top: none; width: 55vw">
-                  <div id="foreigner-form">
-                    <span class="label"
-                      >海外寄件服務 Overseas Shipping Service</span
-                    ><br />
-                    為確保您的物品順利送達現場，請務必完成下方表單填寫，並確保包裹於
-                    <b>2025年11月7日（週五）前</b> 抵達指定收件地址。<br />
-                    如未填寫表單或逾期寄達，我們將無法提供轉送協助，敬請留意。<br />
-                    <br />
-                    寄來表單：<a
-                      href="https://forms.gle/hVu54wUfqqUMRxfG8"
-                      target="_blank"
-                      >https://forms.gle/hVu54wUfqqUMRxfG8</a
-                    >
-                    <br /><br />
-                    完成寄回服務的表單填寫，請於活動最後一天
-                    <b>2025/11/23（日）17:00</b>
-                    起將需寄回之包裹集合到報到台，請在此之前確認所有提交資訊正確無誤。請您備好現金，現場點交後支付。<br />
-                    <br />
-                    寄回表單：<a
-                      href="https://ezpost.post.gov.tw/ITMATT/#"
-                      target="_blank"
-                      >https://ezpost.post.gov.tw/ITMATT/#</a
-                    >
-                    <br /><br />
-                    <hr />
-                    To ensure your materials arrive safely, please make sure to
-                    complete the shipping form and have your package delivered
-                    before <b>November 7, 2025 (Fri.)</b> to the designated
-                    address.<br />
-                    Late or unregistered shipments will not be eligible for
-                    transfer service.<br />
-                    <br />
-                    Sending in advance:
-                    <a
-                      href="https://forms.gle/hVu54wUfqqUMRxfG8"
-                      target="_blank"
-                      >https://forms.gle/hVu54wUfqqUMRxfG8</a
-                    >
-                    <br /><br />
-                    If you may need us to send back, please reply to the Return
-                    Service survey below and you can re-edit the package
-                    information later. We will start collecting packages at the
-                    CHECK-IN desk at <b>5:00 PM on 11/23 (Sun.)</b>, so make
-                    sure all the information is correctly filled in by then.<br />
-                    Please prepare cash for on-site payment after checking the
-                    package.<br />
-                    <br />
-                    Sending back:
-                    <a
-                      href="https://ezpost.post.gov.tw/ITMATT/#"
-                      target="_blank"
-                      >https://ezpost.post.gov.tw/ITMATT/#</a
-                    >
                   </div>
                 </td>
               </tr>
