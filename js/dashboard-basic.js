@@ -503,8 +503,7 @@ document.addEventListener("DOMContentLoaded", async function () {
       electricityList.innerHTML = `
       <li>供應一般電源110v</li>
       <li>
-        <span style="text-decoration: underline; cursor: pointer;" onclick="document.getElementById('electricity-row').scrollIntoView({behavior:'smooth'});">
-          9月前需提供電力需求申請
+        9月前需提供<span style="text-decoration: underline; text-decoration-style: dashed; cursor: pointer;" onclick="document.getElementById('electricity-row').scrollIntoView({behavior:'smooth'});">電力需求申請
         </span>，不得於現場臨時申請：
         <ul style="margin: 0.3em 0 0 1.5em; list-style-type: disc;">
           <li>條列使用電器＆瓦數</li>
