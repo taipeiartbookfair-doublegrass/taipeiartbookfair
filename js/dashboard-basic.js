@@ -567,11 +567,22 @@ document.addEventListener("DOMContentLoaded", async function () {
       }
     }
 
+    // 取得三個區塊
+    const mediaupload = document.getElementById("media-section");
+    const catalogSection = document.getElementById(
+      "media-section-catalog-section"
+    );
+    const liveEventSection = document.getElementById(
+      "media-live-event-section"
+    );
+
     billinginfo.style.display = "none";
     letter.style.display = "none";
     runnerletter.style.display = "none";
     conditionalyes.style.display = "none";
-    mediaupload.style.display = "none";
+    if (mediaupload) mediaupload.style.display = "none";
+    if (catalogSection) catalogSection.style.display = "none";
+    if (liveEventSection) liveEventSection.style.display = "none";
     foreignShipping.style.display = "none";
     visaupload.style.display = "none";
     familyticket.style.display = "none";
@@ -588,7 +599,9 @@ document.addEventListener("DOMContentLoaded", async function () {
     ) {
       if (paymentChecked && declarationChecked) {
         registrationStatusEl.textContent = getStatusText(true);
-        mediaupload.style.display = "block";
+        if (mediaupload) mediaupload.style.display = "block";
+        if (catalogSection) catalogSection.style.display = "block";
+        if (liveEventSection) liveEventSection.style.display = "block";
         if (nationality !== "TW") {
           foreignShipping.style.display = "block";
         }
@@ -608,7 +621,9 @@ document.addEventListener("DOMContentLoaded", async function () {
       conditionalyes.style.display = "inline-block";
       if (paymentChecked && declarationChecked) {
         registrationStatusEl.textContent = getStatusText(true);
-        mediaupload.style.display = "block";
+        if (mediaupload) mediaupload.style.display = "block";
+        if (catalogSection) catalogSection.style.display = "block";
+        if (liveEventSection) liveEventSection.style.display = "block";
         if (nationality !== "TW") {
           foreignShipping.style.display = "block";
         }
@@ -628,7 +643,9 @@ document.addEventListener("DOMContentLoaded", async function () {
     } else {
       if (paymentChecked && declarationChecked) {
         registrationStatusEl.textContent = getStatusText(true);
-        mediaupload.style.display = "block";
+        if (mediaupload) mediaupload.style.display = "block";
+        if (catalogSection) catalogSection.style.display = "block";
+        if (liveEventSection) liveEventSection.style.display = "block";
         if (nationality !== "TW") {
           foreignShipping.style.display = "block";
         }
