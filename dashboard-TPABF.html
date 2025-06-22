@@ -1030,33 +1030,26 @@
                                 download and sign the declaration, then upload
                                 the signed file below.
                               </span>
-                              <form
-                                id="declaration-upload-form"
-                                enctype="multipart/form-data"
-                                style="margin-top: 0.5em"
+                              <input
+                                type="file"
+                                id="declaration-file"
+                                accept=".pdf,.jpg,.jpeg,.png"
+                                style="margin-bottom: 0.5em"
+                              />
+                              <button
+                                id="uploadBtnDeclaration"
+                                type="button"
+                                style="
+                                  padding: 0.3em 1.2em;
+                                  background: #000;
+                                  color: #fff;
+                                  border: none;
+                                  border-radius: 3px;
+                                  cursor: pointer;
+                                "
                               >
-                                <input
-                                  type="file"
-                                  id="declaration-file"
-                                  name="declaration-file"
-                                  accept=".pdf,.jpg,.jpeg,.png"
-                                  style="margin-bottom: 0.5em"
-                                />
-                                <button
-                                  id="uploadBtnDeclaration"
-                                  type="submit"
-                                  style="
-                                    padding: 0.3em 1.2em;
-                                    background: #000;
-                                    color: #fff;
-                                    border: none;
-                                    border-radius: 3px;
-                                    cursor: pointer;
-                                  "
-                                >
-                                  上傳 Upload
-                                </button>
-                              </form>
+                                上傳 Upload
+                              </button>
                             </td>
                           </tr>
                         </table>
@@ -1233,17 +1226,10 @@
                   "
                 >
                   <div>
-                    <form id="visa-upload-form" enctype="multipart/form-data">
-                      <input
-                        type="file"
-                        id="visa-file"
-                        name="visa-file"
-                        accept=".pdf"
-                      />
-                      <button type="submit" id="uploadBtnVisa">
-                        上傳 Upload
-                      </button>
-                    </form>
+                    <input type="file" id="visa-file" accept=".pdf" />
+                    <button type="button" id="uploadBtnVisa">
+                      上傳 Upload
+                    </button>
                   </div>
                 </td>
               </tr>
@@ -1345,7 +1331,7 @@
                     social media posts.
                   </div>
                 </td>
-                <!-- 行銷素材上傳 Upload -->
+                <!-- 行銷素材上傳 -->
                 <td
                   colspan="1"
                   style="
@@ -1354,21 +1340,15 @@
                     border-left: 1px dashed black;
                   "
                 >
-                  <form
-                    id="marketing-upload-form"
-                    enctype="multipart/form-data"
-                  >
-                    <label for="marketing-file">請在此上傳宣傳資料</label>
-                    <input
-                      type="file"
-                      id="marketing-file"
-                      name="marketing-file"
-                      accept=".pdf,.jpg,.jpeg,.png"
-                    />
-                    <button type="submit" id="uploadBtnMarketing">
-                      上傳 Upload
-                    </button>
-                  </form>
+                  <label for="marketing-file">請在此上傳宣傳資料</label>
+                  <input
+                    type="file"
+                    id="marketing-file"
+                    accept=".pdf,.jpg,.jpeg,.png"
+                  />
+                  <button type="button" id="uploadBtnMarketing">
+                    上傳 Upload
+                  </button>
                 </td>
               </tr>
               <tr id="media-live-event-section" style="display: none">
@@ -1449,20 +1429,10 @@
                   "
                 >
                   <div>
-                    <form
-                      id="catalog-upload-form"
-                      enctype="multipart/form-data"
-                    >
-                      <input
-                        type="file"
-                        id="catalog-file"
-                        name="catalog-file"
-                        accept=".pdf"
-                      />
-                      <button type="submit" id="uploadBtnCatalog">
-                        上傳 Upload
-                      </button>
-                    </form>
+                    <input type="file" id="catalog-file" accept=".pdf" />
+                    <button type="button" id="uploadBtnCatalog">
+                      上傳 Upload
+                    </button>
                   </div>
                 </td>
               </tr>
