@@ -55,7 +55,7 @@ document.addEventListener("DOMContentLoaded", async function () {
   // 取得 userData
   try {
     const userParams = new URLSearchParams({
-      action: "get_account_info",
+      action: "get_user_info",
       account: account,
     }).toString();
 
