@@ -238,6 +238,26 @@
                   </table>
                 </td>
               </tr>
+
+              <!-- 現場活動reminder -->
+              <tr>
+                <td>
+                  <span class="label"
+                    >現場活動場次資訊 Program Sessions Reminder</span
+                  ><br />
+                  <div
+                    style="margin-top: 0.5em; font-size: 1rem"
+                    id="live-event-schedule-desc"
+                  >
+                    我們將會在此列出你所報名現場提供的活動服務場次資訊，相關活動內容已寄到你的信箱，不要忘了提早15分鐘到相對應的區域報到喔。
+                  </div>
+                  <br />
+                  <div
+                    style="margin-top: 0.5em; font-size: 1rem"
+                    id="live-event-schedule-reminder"
+                  ></div>
+                </td>
+              </tr>
               <!-- 編輯按鈕 -->
               <tr style="background-color: black; text-align: right">
                 <td colspan="2" style="padding: 2px 5px">
@@ -1196,27 +1216,30 @@
                   <small>hooroo@double-grass.com</small><br />
                 </td>
               </tr>
-              <!-- 簽證資料上傳 Visa Upload -->
+              <!-- 中國簽證資料上傳 Visa Upload -->
               <tr style="display: none" id="media-section-row3">
                 <td
                   colspan="2"
                   style="border-top: none; width: 80%; border-right: none"
                 >
-                  <div id="visa-upload">
-                    <span class="label">簽證資料上傳Visa Document Upload</span
-                    ><br />
-                    請確認填妥以下資訊：<br />
-                    1. 航班號碼<br />
-                    2. 落地時間<br />
+                  <div id="visa-upload" style="background-color: mintcream">
+                    <span class="label">簽證申請 Visa Support</span><br />
+                    由於規定，目前中國地區人士來台需由在台單位協助申辦。
                     <div
                       id="visa-warning"
                       style="color: #c00; font-size: 0.9em"
                     >
-                      ! 請務必於期限內上傳完整資料，逾期恕不受理。
+                      請務必於 <b>7月7日</b>前
+                      填寫下列表單後上傳，以利安排申請流程。
                     </div>
+                    <br />
+                    <a
+                      href="https://forms.gle/hVu54wUfqqUMRxfG8"
+                      target="_blank"
+                      >下載表單</a
+                    >
                   </div>
                 </td>
-                <!-- 簽證資料警語 Visa Notice -->
                 <td
                   colspan="1"
                   style="
@@ -1233,73 +1256,61 @@
                   </div>
                 </td>
               </tr>
-              <!-- 寄件訊息 Foreigner Form -->
-              <tr style="display: none" id="media-section-row2">
+
+              <!-- 海外簽證資料連結 Visa Upload -->
+              <tr style="display: none" id="media-section-overseasvisa">
                 <td style="border-top: none; width: 55vw">
-                  <div id="foreigner-form">
-                    <span class="label"
-                      >海外寄件服務 Overseas Shipping Service</span
-                    ><br />
-                    為確保您的物品順利送達現場，請務必完成下方表單填寫，並確保包裹於
-                    <b>2025年11月7日（週五）前</b> 抵達指定收件地址。<br />
-                    如未填寫表單或逾期寄達，我們將無法提供轉送協助，敬請留意。<br />
-                    <br />
-                    寄來表單：<a
-                      href="https://forms.gle/hVu54wUfqqUMRxfG8"
-                      target="_blank"
-                      >https://forms.gle/hVu54wUfqqUMRxfG8</a
-                    >
+                  <div id="visa-upload">
+                    <span class="label">簽證申請 Visa Support</span><br />
+                    We provide a visa support package, including an official
+                    invitation letter and a brief introduction to TPABF. If you
+                    need any additional documents or information, feel free to
+                    contact us.
                     <br /><br />
-                    完成寄回服務的表單填寫，請於活動最後一天
-                    <b>2025/11/23（日）17:00</b>
-                    起將需寄回之包裹集合到報到台，請在此之前確認所有提交資訊正確無誤。請您備好現金，現場點交後支付。<br />
-                    <br />
-                    寄回表單：<a
-                      href="https://ezpost.post.gov.tw/ITMATT/#"
-                      target="_blank"
-                      >https://ezpost.post.gov.tw/ITMATT/#</a
-                    >
-                    <br /><br />
-                    <hr
-                      style="
-                        border-top: 1px dashed black;
-                        margin: 6px 0;
-                        border-bottom: none;
-                      "
-                    />
-                    To ensure your materials arrive safely, please make sure to
-                    complete the shipping form and have your package delivered
-                    before <b>November 7, 2025 (Fri.)</b> to the designated
-                    address.<br />
-                    Late or unregistered shipments will not be eligible for
-                    transfer service.<br />
-                    <br />
-                    Sending in advance:
                     <a
-                      href="https://forms.gle/hVu54wUfqqUMRxfG8"
+                      href="https://drive.google.com/drive/folders/1sN6Yl2VnHXzTWAwXyOrTQ_cMjrITii0p?usp=sharing"
                       target="_blank"
-                      >https://forms.gle/hVu54wUfqqUMRxfG8</a
-                    >
-                    <br /><br />
-                    If you may need us to send back, please reply to the Return
-                    Service survey below and you can re-edit the package
-                    information later. We will start collecting packages at the
-                    CHECK-IN desk at <b>5:00 PM on 11/23 (Sun.)</b>, so make
-                    sure all the information is correctly filled in by then.<br />
-                    Please prepare cash for on-site payment after checking the
-                    package.<br />
-                    <br />
-                    Sending back:
-                    <a
-                      href="https://ezpost.post.gov.tw/ITMATT/#"
-                      target="_blank"
-                      >https://ezpost.post.gov.tw/ITMATT/#</a
+                      >Download Package</a
                     >
                   </div>
                 </td>
               </tr>
+
+              <!-- 寄件訊息 Foreigner Form -->
+              <tr style="display: none" id="media-section-row2">
+                <td style="border-top: none; width: 55vw">
+                  <div id="foreigner-form">
+                    <u>>Sending in advance</u>：<br />
+                    To ensure your materials arrive safely, please make sure to
+                    complete the
+                    <a
+                      href="https://forms.gle/hVu54wUfqqUMRxfG8"
+                      target="_blank"
+                      >shipping service form</a
+                    >
+                    and have your package delivered
+                    <b>before November 7, 2025 (Fri.)</b> to the designated
+                    address. <br />Late or unregistered shipments will not be
+                    eligible for transfer service. <br /><br />
+                    <u>Sending back</u>： If you need us to send your packages
+                    back, please fill out and print the
+                    <a
+                      href="https://ezpost.post.gov.tw/ITMATT/#"
+                      target="_blank"
+                      >EZPost form</a
+                    >
+                    in advance: We will start collecting packages at the
+                    CHECK-IN desk from 5:00 PM on Sunday, 11/23. Please prepare
+                    exact change for postage fees. <br />If you use our shipping
+                    service, the final charge will be 1.5 times the official
+                    estimated postage. Alternatively, you can choose to send
+                    your packages yourself at the post office on Monday.
+                  </div>
+                </td>
+              </tr>
+
+              <!-- 素材下載 Download -->
               <tr id="media-section" style="display: none">
-                <!-- 素材下載 Download -->
                 <td
                   colspan="2"
                   style="border-top: none; width: 80%; border-right: none"
@@ -1308,27 +1319,15 @@
                     >行銷素材下載＆上傳<br />​​Download & Upload Marketing
                     Materials</span
                   >
-                  <div id="material-download" style="margin-bottom: 1em">
+                  <div id="material-download-desc" style="margin-bottom: 1em">
                     <strong>下載視覺素材包：</strong><br />
                     若您需要使用草率季官方行銷素材，點此下載檔案。<br />
-                    <strong>Media Kit Download:</strong><br />
-                    If you wish to use official TPABF promotional materials,
-                    please download the following ZIP file.<br />
-                    <a id="zip-link" href="downloads/material-tw.zip" download
-                      >下載 Download</a
+                    <a
+                      id="media-zip-link"
+                      href="https://drive.google.com/drive/folders/18CIdZXZi0wD4fGmh_YGyc-4PYUavMHSn?usp=sharing"
+                      download
+                      >Download</a
                     >
-                  </div>
-                  <div id="material-upload">
-                    <strong>上傳：</strong><br />
-                    請使用素材包內的官方模板（AI檔）製作，並上傳一張符合格式的圖片，我們將安排社群露出。(書攤需有三本書籍圖片上傳）<br />
-                    📌 格式：JPG、RGB、150 ppi、每單位限 1 張，zip包上傳<br />
-                    ⚠️ 未於期限內上傳，將可能無法安排社群曝光。<br />
-                    <strong>Upload:</strong><br />
-                    Please use the official AI template from the media kit to
-                    create and upload one image for social media promotion.<br />
-                    📌 Specs: JPG, RGB, 150 ppi, 1 image per exhibitor<br />
-                    ⚠️ Submissions after the deadline may not be included in our
-                    social media posts.
                   </div>
                 </td>
                 <!-- 行銷素材上傳 -->
@@ -1340,7 +1339,12 @@
                     border-left: 1px dashed black;
                   "
                 >
-                  <label for="marketing-file">請在此上傳宣傳資料</label>
+                  <div id="material-upload-desc">
+                    <strong>上傳：</strong><br />
+                    請使用素材包內的官方模板（AI檔）製作，並上傳一張符合格式的圖片，我們將安排社群露出。(書攤需有三本書籍圖片上傳）<br />
+                    📌 格式：JPG、RGB、150 ppi、每單位限 1 張，zip包上傳<br />
+                    ⚠️ 未於期限內上傳，將可能無法安排社群曝光。<br />
+                  </div>
                   <input
                     type="file"
                     id="marketing-file"
@@ -1361,7 +1365,10 @@
                   "
                 >
                   <span class="label">現場活動徵集<br />Program Open Call</span>
-                  <div style="margin-top: 0.5em; font-size: 1rem">
+                  <div
+                    style="margin-top: 0.5em; font-size: 1rem"
+                    id="live-event-desc"
+                  >
                     想與大家更近距離互動？我們開放以下形式的現場活動徵集：短講、表演、工作坊、DJ等。<br />
                     Want to engage with visitors more directly? Propose on-site
                     programs such as short talks, performances, workshops, or DJ
@@ -1371,8 +1378,9 @@
                     <a
                       href="https://forms.gle/ckXiewW68i1VwKYt6"
                       target="_blank"
+                      id="live-event-signup-link"
                     >
-                      報名表單 Sign Up Form
+                      報名表單
                     </a>
                   </div>
                 </td>
@@ -1389,7 +1397,10 @@
                   <span class="label"
                     >草率簿露出上傳<br />TPABF Catalog Submission</span
                   >
-                  <div style="margin-top: 0.5em; font-size: 1rem">
+                  <div
+                    style="margin-top: 0.5em; font-size: 1rem"
+                    id="catalog-desc"
+                  >
                     單位獲取參展資格即代表可於當年《草率簿 TPABF
                     Catalog》中露出一面，請使用行銷素材包提供的版型製作，並於期限內完成上傳與左側攤商基本資料修改，逾期視同放棄。<br /><br />
                     📌 規格：<br />
@@ -1397,24 +1408,10 @@
                     工作區域 Workspace：140×220mm<br />
                     四邊出血 Bleed：5mm<br />
                     色彩 Color Mode: 黑白 B&W<br />
-
-                    <br /><br />
-                    Once selected to exhibit, your project will be featured on
-                    one page in that year’s TPABF Catalog. Please use the
-                    template from the Marketing Kit and complete both the upload
-                    and any updates to your basic exhibitor info (left-side
-                    fields) by the deadline. Late submissions will not be
-                    included.<br /><br />
-                    📌 Specs:<br />
-                    File Format: PDF (Please ensure images are embedded and text
-                    is outlined)<br />
-                    Workspace: 140 × 220 mm<br />
-                    Bleed: 5 mm on all sides<br />
-                    Color Mode: Black & White (B&W)<br /><br />
-                    📥 公版下載 Template Download:<br />
                     <a
                       href="https://drive.google.com/file/d/1zm8dL5ElUdGKYjGFjN5y4R3Ml5baaEKw/view?usp=drive_link"
                       target="_blank"
+                      id="catalog-download-link"
                     >
                       Download Link
                     </a>
@@ -1437,13 +1434,16 @@
                 </td>
               </tr>
 
-              <!-- 親友票購買 Shopline -->
+              <!-- 親友票 Shopline -->
               <tr style="display: none" id="media-section-row4">
                 <td colspan="2" style="border-top: none; width: 55vw">
-                  <span class="label"
-                    >親友票購買 Friends & Family Ticket Purchase</span
-                  ><br />
-                  請在付款時填入以下代碼（每個攤主限購五張）：
+                  <span class="label">親友票 Family&Friends Tickets</span><br />
+                  <div
+                    style="margin-top: 0.5em; font-size: 1rem"
+                    id="familyticket-desc"
+                  >
+                    請在付款時填入以下代碼（每個攤主限購五張）：
+                  </div>
                   <span id="discountcode">!89SJ89</span>
                   <button
                     class="copy-btn"
@@ -1454,8 +1454,11 @@
                     📋
                   </button>
                   <br />
-                  <a href="https://your-shopline-link.com" target="_blank"
-                    >購票連結 Ticket Link</a
+                  <a
+                    href="https://your-shopline-link.com"
+                    target="_blank"
+                    id="ticket-link"
+                    >購票連結</a
                   >
                 </td>
               </tr>
@@ -1463,8 +1466,13 @@
               <tr style="display: none" id="media-section-row5">
                 <td style="border-top: none; width: 55vw">
                   <span class="label">攤主手冊 Exhibitor Manual</span><br />
-                  展前將提供完整《攤主手冊》供您下載，內含報到流程、進撤場時間、攤位樣式參考、現場規範與《罰金手冊》等所有參展須知，請務必詳閱並依說明準備。
-                  <!-- <a href="https://your-shopline-link.com" target="_blank"
+                  <div
+                    style="margin-top: 0.5em; font-size: 1rem"
+                    id="manual-desc"
+                  >
+                    展前將提供完整《攤主手冊》供您下載，內含報到流程、進撤場時間、攤位樣式參考、現場規範與《罰金手冊》等所有參展須知，請務必詳閱並依說明準備。
+                  </div>
+                  <!-- <a href="https://your-shopline-link.com" target="_blank id="manual-link"
                     >下載 Download</a
                   > -->
                 </td>
@@ -1946,45 +1954,50 @@
                       font-family: 'Inclusive Sans', sans-serif;
                     "
                   >
-                    如有任何問題，請依主題聯繫對應窗口，我們將盡快回覆您：<br />
-                    If you have any questions, please contact the appropriate
-                    email below:<br /><br />
-                    📌 簽證相關 Visa Support<br />
-                    ✉️
-                    <a href="mailto:anm@double-grass.com"
-                      >anm@double-grass.com</a
-                    ><br /><br />
-                    📌 草率簿資料上傳 & 行銷素材 Catalog Submission & Marketing
-                    Materials<br />
-                    ✉️
-                    <a href="mailto:shao@double-grass.com"
-                      >shao@double-grass.com</a
-                    ><br /><br />
-                    📌 攤位配置與參展相關 Booth & Exhibitor Inquiries<br />
-                    ✉️
-                    <a href="mailto:xavia@double-grass.com"
-                      >xavia@double-grass.com</a
-                    ><br /><br />
-                    📌 寄件服務 Shipping Service<br />
-                    ✉️
-                    <a href="mailto:shakyfloor@double-grass.com"
-                      >shakyfloor@double-grass.com</a
-                    ><br /><br />
-                    📌 現場活動相關（講座／工作坊／表演）Program Proposals<br />
-                    ✉️
-                    <a href="mailto:shakyfloor@double-grass.com"
-                      >shakyfloor@double-grass.com</a
-                    ><br /><br />
-                    📌 帳務與收據 Invoice & Payment Questions<br />
-                    ✉️
-                    <a href="mailto:anm@double-grass.com"
-                      >anm@double-grass.com</a
-                    ><br />
+                    如有任何問題，請依主題聯繫對應窗口，我們將盡快回覆您 If you
+                    have any questions, please contact the appropriate email
+                    below:
+                    <br /><br /><br />
+                    <div style="margin-left: 1em">
+                      📌 簽證相關 Visa Support<br />
+                      ✉️
+                      <a href="mailto:anm@double-grass.com"
+                        >anm@double-grass.com</a
+                      ><br /><br />
+                      📌 草率簿資料上傳 & 行銷素材 Catalog Submission &
+                      Marketing Materials<br />
+                      ✉️
+                      <a href="mailto:shao@double-grass.com"
+                        >shao@double-grass.com</a
+                      ><br /><br />
+                      📌 攤位配置與參展相關 Booth & Exhibitor Inquiries<br />
+                      ✉️
+                      <a href="mailto:xavia@double-grass.com"
+                        >xavia@double-grass.com</a
+                      ><br /><br />
+                      📌 寄件服務 Shipping Service<br />
+                      ✉️
+                      <a href="mailto:shakyfloor@double-grass.com"
+                        >shakyfloor@double-grass.com</a
+                      ><br /><br />
+                      📌 現場活動相關（講座／工作坊／表演）Program Proposals<br />
+                      ✉️
+                      <a href="mailto:shakyfloor@double-grass.com"
+                        >shakyfloor@double-grass.com</a
+                      ><br /><br />
+                      📌 帳務與收據 Invoice & Payment Questions<br />
+                      ✉️
+                      <a href="mailto:anm@double-grass.com"
+                        >anm@double-grass.com</a
+                      ><br />
+                    </div>
                     <br />
-                    📩 提醒 Reminder
-                    來信請註明您的報名編號，以利我們快速為您查詢與回覆。 Please
-                    include your application number in all emails to help us
-                    respond efficiently.
+                    <span style="text-decoration: underline"
+                      >提醒 Reminder:</span
+                    ><br />
+                    來信請註明您的<i>報名編號</i>，以利我們快速為您查詢與回覆。
+                    <br />Please include your <i>application number</i> in all
+                    emails to help us respond efficiently.
                   </div>
                   <!-- 我484故意寫個圈圈叉叉在這裡讓你忘記你為什麼要聯絡窗口? 嗯對，是。
                    Do i purposely write an XOXO here to distract you from your original purpose? yish:P -->

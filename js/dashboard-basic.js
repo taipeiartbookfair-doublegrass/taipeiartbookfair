@@ -452,28 +452,156 @@ document.addEventListener("DOMContentLoaded", async function () {
   }
   setLetterLanguage(boothType);
 
-  // 動態切換同意書區塊語言（for older html）
-  document.addEventListener("DOMContentLoaded", function () {
-    var boothType = document.getElementById("booth-type");
-    var downloadLink = document.getElementById("declaration-download-link");
-    var desc = document.getElementById("declaration-desc");
-    if (boothType && downloadLink && desc) {
+  // 動態切換同意書區塊語言
+  function setDeclarationLanguage(boothType) {
+    var declardownloadLink = document.getElementById(
+      "declaration-download-link"
+    );
+    var declarationdesc = document.getElementById("declaration-desc");
+    if (boothType && declardownloadLink && declarationdesc) {
       var boothText = boothType.textContent.trim();
       if (
         boothText === "One Regular Booth" ||
         boothText === "Two Regular Booth" ||
         boothText === "Curation Booth"
       ) {
-        downloadLink.innerHTML = "Download Exhibitor Declaration";
-        desc.innerHTML =
+        declardownloadLink.innerHTML = "Download Exhibitor Declaration";
+        declarationdesc.innerHTML =
           "Please download and sign the exhibitor declaration, then upload the signed file below.";
       } else {
-        downloadLink.innerHTML = "下載參展同意書 <br />Download Declaration";
-        desc.innerHTML =
-          "請下載並簽署參展同意書，完成後請上傳。<br />Please download and sign the declaration, then upload the signed file below.";
+        declardownloadLink.innerHTML = "下載參展同意書";
+        declarationdesc.innerHTML = "請下載並簽署參展同意書，完成後請上傳。";
       }
     }
-  });
+  }
+  setDeclarationLanguage(boothType);
+
+  // 動態切換草率簿區塊語言
+  function setCatalogLanguage(boothType) {
+    var catalogdownloadLink = document.getElementById("catalog-download-link");
+    var catalogdesc = document.getElementById("catalog-desc");
+    if (boothType && catalogdownloadLink && catalogdesc) {
+      var boothText = boothType.textContent.trim();
+      if (
+        boothText === "One Regular Booth" ||
+        boothText === "Two Regular Booth" ||
+        boothText === "Curation Booth"
+      ) {
+        catalogdownloadLink.innerHTML = "Template Download";
+        catalogdesc.innerHTML =
+          "Once selected to exhibit, your project will be featured on one page in that year’s TPABF Catalog. Please use the template from the Marketing Kit and complete both the upload and any updates to your basic exhibitor info (left-side fields) by the deadline. Late submissions will not be included.<br /><br /> 📌 Specs:<br /> File Format: PDF (Please ensure images are embedded and text is outlined)<br /> Workspace: 140 × 220 mm<br /> Bleed: 5 mm on all sides<br /> Color Mode: Black & White (B&W)<br /><br />";
+      } else {
+        catalogdownloadLink.innerHTML = "公版下載";
+        catalogdesc.innerHTML =
+          "單位獲取參展資格即代表可於當年《草率簿 TPABF Catalog》中露出一面，請使用行銷素材包提供的版型製作，並於期限內完成上傳與左側攤商基本資料修改，逾期視同放棄。<br /><br />📌 規格：<br />檔案類型 Format ：PDF（請確認圖片已置入、文字已轉外框）<br />工作區域 Workspace：140×220mm<br />四邊出血 Bleed：5mm<br />色彩 Color Mode: 黑白 B&W<br /><br />";
+      }
+    }
+  }
+  setCatalogLanguage(boothType);
+
+  // 動態切換親友票區塊語言
+  function setTicketLanguage(boothType) {
+    var ticketlink = document.getElementById("ticket-link");
+    var familyticketdesc = document.getElementById("familyticket-desc");
+    if (boothType && ticketlink && familyticketdesc) {
+      var boothText = boothType.textContent.trim();
+      if (
+        boothText === "One Regular Booth" ||
+        boothText === "Two Regular Booth" ||
+        boothText === "Curation Booth"
+      ) {
+        ticketlink.innerHTML = "Ticket Link";
+        familyticketdesc.innerHTML =
+          "Each exhibitor will receive an early bird discount code before the event, allowing them to purchase up to 5 tickets at the special price of $350 each. A total of 800 early bird tickets are available.<br><br />During the event (Nov 21–23), companion tickets will be available for purchase online at the regular price of $400. Ticket holders can still enjoy priority entry without waiting in line.<br /><br />";
+      } else {
+        ticketlink.innerHTML = "購票連結";
+        familyticketdesc.innerHTML =
+          "每位參展者可於活動前獲得早鳥優惠序號，每人限購5張，票價 $350，限量800張。11/21-23活動期間，親友票將以原價 $400 於線上開放購買，持票者仍可免排隊入場。<br /><br />";
+      }
+    }
+  }
+  setTicketLanguage(boothType);
+
+  // 動態切換現場活動區塊語言
+  function setLiveEventLanguage(boothType) {
+    var liveEventLink = document.getElementById("live-event-signup-link");
+    var liveEventdesc = document.getElementById("live-event-desc");
+    var liveEventScheduledesc = document.getElementById(
+      "live-event-schedule-desc"
+    );
+    if (boothType && liveEventLink && liveEventdesc) {
+      var boothText = boothType.textContent.trim();
+      if (
+        boothText === "One Regular Booth" ||
+        boothText === "Two Regular Booth" ||
+        boothText === "Curation Booth"
+      ) {
+        liveEventLink.innerHTML = "Sign Up Form";
+        liveEventdesc.innerHTML =
+          "Want to engage with visitors more directly? Propose on-site programs such as short talks, performances, workshops, or DJ sets!<br /><br />";
+        liveEventScheduledesc.innerHTML =
+          "We will list here the on-site program sessions you have registered to provide. Details of your activities have been sent to your email. Please remember to check in at the designated area 15 minutes before your session.";
+      } else {
+        liveEventLink.innerHTML = " 報名表單";
+        liveEventdesc.innerHTML =
+          "想與大家更近距離互動？我們開放以下形式的現場活動徵集：短講、表演、工作坊、DJ等。<br /><br />";
+        liveEventScheduledesc.innerHTML =
+          "我們將會在此列出你所報名現場提供的活動服務場次資訊，相關活動內容已寄到你的信箱，不要忘了提早15分鐘到相對應的區域報到喔。";
+      }
+    }
+  }
+  setLiveEventLanguage(boothType);
+
+  // 動態切換攤主手冊區塊語言
+  function setManualLanguage(boothType) {
+    var manualdownloadLink = document.getElementById("ticket-link");
+    var manualdesc = document.getElementById("manual-desc");
+    if (boothType && manualdownloadLink && manualdesc) {
+      var boothText = boothType.textContent.trim();
+      if (
+        boothText === "One Regular Booth" ||
+        boothText === "Two Regular Booth" ||
+        boothText === "Curation Booth"
+      ) {
+        manualdownloadLink.innerHTML = "Download Manual";
+        manualdesc.innerHTML =
+          "A complete <b>Exhibitor Manual</b> will be available for download before the event. It includes check-in procedures, setup and teardown schedule, booth layout references, on-site regulations, and the <b>Penalty Handbook</b>. Please read it thoroughly and follow all instructions.<br /><br />";
+      } else {
+        manualdownloadLink.innerHTML = "下載手冊";
+        manualdesc.innerHTML =
+          "展前將提供完整《攤主手冊》供您下載，內含報到流程、進撤場時間、攤位樣式參考、現場規範與《罰金手冊》等所有參展須知，請務必詳閱並依說明準備。<br /><br />";
+      }
+    }
+  }
+  setManualLanguage(boothType);
+
+  // 動態切換媒體上傳區塊語言
+  function setMediaUploadLanguage(boothType) {
+    var mediaziplink = document.getElementById("media-zip-link");
+    var mediamaterialdesc = document.getElementById("material-download-desc");
+    var materialuploaddesc = document.getElementById("material-upload-desc");
+    if (boothType && mediaziplink && mediamaterialdesc) {
+      var boothText = boothType.textContent.trim();
+      if (
+        boothText === "One Regular Booth" ||
+        boothText === "Two Regular Booth" ||
+        boothText === "Curation Booth"
+      ) {
+        mediaziplink.innerHTML = "Download";
+        mediamaterialdesc.innerHTML =
+          "<strong>Media Kit Download:</strong><br />If you wish to use official TPABF promotional materials, please download the following ZIP file.<br /><br />";
+        materialuploaddesc.innerHTML =
+          "<strong>Upload:</strong><br />Please use the official AI template from the media kit tocreate and upload one image for social media promotion.<br />📌 Specs: JPG, RGB, 150 ppi, 1 image per exhibitor<br />⚠️ Submissions after the deadline may not be included in our social media posts.<br /><br />";
+      } else {
+        mediaziplink.innerHTML = "下載";
+        mediamaterialdesc.innerHTML =
+          "<strong>下載視覺素材包：</strong><br />若您需要使用草率季官方行銷素材，點此下載檔案。<br /><br />";
+        materialuploaddesc.innerHTML =
+          "<strong>上傳：</strong><br />請使用素材包內的官方模板（AI檔）製作，並上傳一張符合格式的圖片，我們將安排社群露出。(書攤需有三本書籍圖片上傳）<br />📌 格式：JPG、RGB、150 ppi、每單位限 1 張，zip包上傳<br />⚠️ 未於期限內上傳，將可能無法安排社群曝光。<br /><br />";
+      }
+    }
+  }
+  setMediaUploadLanguage(boothType);
 
   // 電力資訊
   function updateElectricityList(boothType) {
@@ -522,12 +650,17 @@ document.addEventListener("DOMContentLoaded", async function () {
   const letter = document.getElementById("negative-letter");
   const runnerletter = document.getElementById("runnerup-letter");
   const conditionalyes = document.getElementById("booth-type-tooltip");
-  const mediaupload = document.getElementById("media-section");
   const foreignShipping = document.getElementById("media-section-row2");
   const visaupload = document.getElementById("media-section-row3");
+  const overseavisa = document.getElementById("media-section-overseasvisa");
   const familyticket = document.getElementById("media-section-row4");
   const manual = document.getElementById("media-section-row5");
   const boothappearance = document.getElementById("media-section-row6");
+  const mediaupload = document.getElementById("media-section");
+  const catalogSection = document.getElementById(
+    "media-section-catalog-section"
+  );
+  const liveEventSection = document.getElementById("media-live-event-section");
 
   const rawResult = apiData["錄取"];
   const nationality = (region || "").trim().toUpperCase();
@@ -553,15 +686,6 @@ document.addEventListener("DOMContentLoaded", async function () {
       }
     }
 
-    // 取得三個區塊
-    const mediaupload = document.getElementById("media-section");
-    const catalogSection = document.getElementById(
-      "media-section-catalog-section"
-    );
-    const liveEventSection = document.getElementById(
-      "media-live-event-section"
-    );
-
     billinginfo.style.display = "none";
     letter.style.display = "none";
     runnerletter.style.display = "none";
@@ -570,7 +694,8 @@ document.addEventListener("DOMContentLoaded", async function () {
     if (catalogSection) catalogSection.style.display = "none";
     if (liveEventSection) liveEventSection.style.display = "none";
     foreignShipping.style.display = "none";
-    visaupload.style.display = "none";
+    if (visaupload) visaupload.style.display = "none";
+    if (overseavisa) overseavisa.style.display = "none";
     familyticket.style.display = "none";
     manual.style.display = "none";
     boothappearance.style.display = "none";
@@ -591,15 +716,18 @@ document.addEventListener("DOMContentLoaded", async function () {
         if (nationality !== "TW") {
           foreignShipping.style.display = "block";
         }
-        if (nationality === "CN") {
-          visaupload.style.display = "block";
-        }
         familyticket.style.display = "block";
         manual.style.display = "block";
         boothappearance.style.display = "block";
       } else {
         registrationStatusEl.textContent = getStatusText(false);
         billinginfo.style.display = "block";
+        // 這裡加上 visaupload/overseavisa 的顯示條件
+        if (nationality === "CN") {
+          visaupload.style.display = "block";
+        } else if (nationality !== "TW" && nationality !== "CN") {
+          overseavisa.style.display = "block";
+        }
       }
     } else if (rawResult === "0") {
       registrationStatusEl.textContent = "-";
@@ -613,15 +741,17 @@ document.addEventListener("DOMContentLoaded", async function () {
         if (nationality !== "TW") {
           foreignShipping.style.display = "block";
         }
-        if (nationality === "CN") {
-          visaupload.style.display = "block";
-        }
         familyticket.style.display = "block";
         manual.style.display = "block";
         boothappearance.style.display = "block";
       } else {
         registrationStatusEl.textContent = getStatusText(false);
         billinginfo.style.display = "block";
+        if (nationality === "CN") {
+          visaupload.style.display = "block";
+        } else if (nationality !== "TW" && nationality !== "CN") {
+          overseavisa.style.display = "block";
+        }
       }
     } else if (rawResult === "3-猶豫") {
       registrationStatusEl.textContent = "-";
