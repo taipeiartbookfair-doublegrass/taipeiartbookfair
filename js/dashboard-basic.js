@@ -156,7 +156,7 @@ document.addEventListener("DOMContentLoaded", async function () {
       if (raw === "1-是-1波" || raw === "2-是-2波" || raw === "0-邀請")
         return "Accepted";
       if (raw === "3-猶豫") return "Waitlisted";
-      if (raw === "5-否") return "Rejected";
+      if (raw === "5-否") return "Not Selected";
       return raw;
     } else {
       if (raw === "4-是-條件式錄取") return "條件式錄取";
