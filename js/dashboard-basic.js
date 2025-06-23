@@ -522,6 +522,36 @@ document.addEventListener("DOMContentLoaded", async function () {
   }
   setTicketLanguage(boothType);
 
+  // 動態切換現場活動區塊語言
+  function setLiveEventLanguage(boothType) {
+    var liveEventLink = document.getElementById("live-event-signup-link");
+    var liveEventdesc = document.getElementById("live-event-desc");
+    var liveEventScheduledesc = document.getElementById(
+      "live-event-schedule-desc"
+    );
+    if (boothType && liveEventLink && liveEventdesc) {
+      var boothText = boothType.textContent.trim();
+      if (
+        boothText === "One Regular Booth" ||
+        boothText === "Two Regular Booth" ||
+        boothText === "Curation Booth"
+      ) {
+        liveEventLink.innerHTML = "Sign Up Form";
+        liveEventdesc.innerHTML =
+          "Want to engage with visitors more directly? Propose on-site programs such as short talks, performances, workshops, or DJ sets!<br /><br />";
+        liveEventScheduledesc.innerHTML =
+          "We will list here the on-site program sessions you have registered to provide. Details of your activities have been sent to your email. Please remember to check in at the designated area 15 minutes before your session.";
+      } else {
+        liveEventLink.innerHTML = " 報名表單";
+        liveEventdesc.innerHTML =
+          "想與大家更近距離互動？我們開放以下形式的現場活動徵集：短講、表演、工作坊、DJ等。<br /><br />";
+        liveEventScheduledesc.innerHTML =
+          "我們將會在此列出你所報名現場提供的活動服務場次資訊，相關活動內容已寄到你的信箱，不要忘了提早15分鐘到相對應的區域報到喔。";
+      }
+    }
+  }
+  setLiveEventLanguage(boothType);
+
   // 動態切換攤主手冊區塊語言
   function setManualLanguage(boothType) {
     var manualdownloadLink = document.getElementById("ticket-link");

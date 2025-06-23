@@ -238,6 +238,26 @@
                   </table>
                 </td>
               </tr>
+
+              <!-- 現場活動reminder -->
+              <tr>
+                <td>
+                  <span class="label"
+                    >現場活動場次資訊 Program Sessions Reminder</span
+                  ><br />
+                  <div
+                    style="margin-top: 0.5em; font-size: 1rem"
+                    id="live-event-schedule-desc"
+                  >
+                    我們將會在此列出你所報名現場提供的活動服務場次資訊，相關活動內容已寄到你的信箱，不要忘了提早15分鐘到相對應的區域報到喔。
+                  </div>
+                  <br />
+                  <div
+                    style="margin-top: 0.5em; font-size: 1rem"
+                    id="live-event-schedule-reminder"
+                  ></div>
+                </td>
+              </tr>
               <!-- 編輯按鈕 -->
               <tr style="background-color: black; text-align: right">
                 <td colspan="2" style="padding: 2px 5px">
@@ -1260,43 +1280,31 @@
               <tr style="display: none" id="media-section-row2">
                 <td style="border-top: none; width: 55vw">
                   <div id="foreigner-form">
-                    <span class="label"
-                      >海外寄件服務 Overseas Shipping Service</span
-                    ><br />
+                    <u>>Sending in advance</u>：<br />
                     To ensure your materials arrive safely, please make sure to
-                    complete the shipping form and have your package delivered
-                    before <b>November 7, 2025 (Fri.)</b> to the designated
-                    address.<br />
-                    Late or unregistered shipments will not be eligible for
-                    transfer service.<br />
-                    <br />
-                    Sending in advance:
+                    complete the
                     <a
                       href="https://forms.gle/hVu54wUfqqUMRxfG8"
                       target="_blank"
-                      >https://forms.gle/hVu54wUfqqUMRxfG8</a
+                      >shipping service form</a
                     >
-                    <hr
-                      style="
-                        border-top: 1px dashed black;
-                        margin: 6px 0;
-                        border-bottom: none;
-                      "
-                    />
-                    If you may need us to send back, please reply to the Return
-                    Service survey below and you can re-edit the package
-                    information later. We will start collecting packages at the
-                    CHECK-IN desk at <b>5:00 PM on 11/23 (Sun.)</b>, so make
-                    sure all the information is correctly filled in by then.<br />
-                    Please prepare cash for on-site payment after checking the
-                    package.<br />
-                    <br />
-                    Sending back:
+                    and have your package delivered
+                    <b>before November 7, 2025 (Fri.)</b> to the designated
+                    address. <br />Late or unregistered shipments will not be
+                    eligible for transfer service. <br /><br />
+                    <u>Sending back</u>： If you need us to send your packages
+                    back, please fill out and print the
                     <a
                       href="https://ezpost.post.gov.tw/ITMATT/#"
                       target="_blank"
-                      >https://ezpost.post.gov.tw/ITMATT/#</a
+                      >EZPost form</a
                     >
+                    in advance: We will start collecting packages at the
+                    CHECK-IN desk from 5:00 PM on Sunday, 11/23. Please prepare
+                    exact change for postage fees. <br />If you use our shipping
+                    service, the final charge will be 1.5 times the official
+                    estimated postage. Alternatively, you can choose to send
+                    your packages yourself at the post office on Monday.
                   </div>
                 </td>
               </tr>
@@ -1363,7 +1371,10 @@
                   "
                 >
                   <span class="label">現場活動徵集<br />Program Open Call</span>
-                  <div style="margin-top: 0.5em; font-size: 1rem">
+                  <div
+                    style="margin-top: 0.5em; font-size: 1rem"
+                    id="live-event-desc"
+                  >
                     想與大家更近距離互動？我們開放以下形式的現場活動徵集：短講、表演、工作坊、DJ等。<br />
                     Want to engage with visitors more directly? Propose on-site
                     programs such as short talks, performances, workshops, or DJ
@@ -1373,8 +1384,9 @@
                     <a
                       href="https://forms.gle/ckXiewW68i1VwKYt6"
                       target="_blank"
+                      id="live-event-signup-link"
                     >
-                      報名表單 Sign Up Form
+                      報名表單
                     </a>
                   </div>
                 </td>
