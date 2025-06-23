@@ -459,7 +459,7 @@ document.addEventListener("DOMContentLoaded", async function () {
     );
     var declarationdesc = document.getElementById("declaration-desc");
     if (boothType && declardownloadLink && declarationdesc) {
-      var boothText = boothType.textContent.trim();
+      var boothText = boothType.trim();
       if (
         boothText === "One Regular Booth" ||
         boothText === "Two Regular Booth" ||
@@ -481,7 +481,7 @@ document.addEventListener("DOMContentLoaded", async function () {
     var catalogdownloadLink = document.getElementById("catalog-download-link");
     var catalogdesc = document.getElementById("catalog-desc");
     if (boothType && catalogdownloadLink && catalogdesc) {
-      var boothText = boothType.textContent.trim();
+      var boothText = boothType.trim();
       if (
         boothText === "One Regular Booth" ||
         boothText === "Two Regular Booth" ||
@@ -504,7 +504,7 @@ document.addEventListener("DOMContentLoaded", async function () {
     var ticketlink = document.getElementById("ticket-link");
     var familyticketdesc = document.getElementById("familyticket-desc");
     if (boothType && ticketlink && familyticketdesc) {
-      var boothText = boothType.textContent.trim();
+      var boothText = boothType.trim();
       if (
         boothText === "One Regular Booth" ||
         boothText === "Two Regular Booth" ||
@@ -530,7 +530,7 @@ document.addEventListener("DOMContentLoaded", async function () {
       "live-event-schedule-desc"
     );
     if (boothType && liveEventLink && liveEventdesc) {
-      var boothText = boothType.textContent.trim();
+      var boothText = boothType.trim();
       if (
         boothText === "One Regular Booth" ||
         boothText === "Two Regular Booth" ||
@@ -557,7 +557,7 @@ document.addEventListener("DOMContentLoaded", async function () {
     var manualdownloadLink = document.getElementById("ticket-link");
     var manualdesc = document.getElementById("manual-desc");
     if (boothType && manualdownloadLink && manualdesc) {
-      var boothText = boothType.textContent.trim();
+      var boothText = boothType.trim();
       if (
         boothText === "One Regular Booth" ||
         boothText === "Two Regular Booth" ||
@@ -581,7 +581,7 @@ document.addEventListener("DOMContentLoaded", async function () {
     var mediamaterialdesc = document.getElementById("material-download-desc");
     var materialuploaddesc = document.getElementById("material-upload-desc");
     if (boothType && mediaziplink && mediamaterialdesc) {
-      var boothText = boothType.textContent.trim();
+      var boothText = boothType.trim();
       if (
         boothText === "One Regular Booth" ||
         boothText === "Two Regular Booth" ||
