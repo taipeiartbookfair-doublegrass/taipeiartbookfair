@@ -119,6 +119,31 @@ document.addEventListener("DOMContentLoaded", async function () {
   document.getElementById("application-number").textContent =
     apiData["報名編號"] || "";
 
+  // 取得報名編號與 boothType
+  function getBoothTypeFromNumber(applicationNumber) {
+    if (applicationNumber.includes("LB")) return "書攤";
+    if (applicationNumber.includes("LM")) return "創作商品攤";
+    if (applicationNumber.includes("LI")) return "裝置攤";
+    if (applicationNumber.includes("LF")) return "食物酒水攤";
+    if (applicationNumber.includes("IO")) return "One Regular Booth";
+    if (applicationNumber.includes("IT")) return "Two Regular Booth";
+    if (applicationNumber.includes("IC")) return "Curation Booth";
+    return "";
+  }
+  const applicationNumber = document
+    .getElementById("application-number")
+    .textContent.trim();
+  const boothType = getBoothTypeFromNumber(applicationNumber);
+  const boothTypeEl = document.getElementById("booth-type");
+  if (boothType) {
+    boothTypeEl.textContent = boothType;
+    if (/^[A-Za-z\s]+$/.test(boothType)) {
+      boothTypeEl.classList.add("booth-type-en");
+    } else {
+      boothTypeEl.classList.remove("booth-type-en");
+    }
+  }
+
   // 錄取狀態顯示
   function getApplicationResultText(raw, boothType) {
     const isEnglishBooth =
@@ -160,31 +185,6 @@ document.addEventListener("DOMContentLoaded", async function () {
   const resultText = getApplicationResultText(apiData["錄取"], boothType);
   applicationResultEl.textContent = resultText;
   setApplicationResultStyle(applicationResultEl, resultText);
-
-  // 取得報名編號與 boothType
-  function getBoothTypeFromNumber(applicationNumber) {
-    if (applicationNumber.includes("LB")) return "書攤";
-    if (applicationNumber.includes("LM")) return "創作商品攤";
-    if (applicationNumber.includes("LI")) return "裝置攤";
-    if (applicationNumber.includes("LF")) return "食物酒水攤";
-    if (applicationNumber.includes("IO")) return "One Regular Booth";
-    if (applicationNumber.includes("IT")) return "Two Regular Booth";
-    if (applicationNumber.includes("IC")) return "Curation Booth";
-    return "";
-  }
-  const applicationNumber = document
-    .getElementById("application-number")
-    .textContent.trim();
-  const boothType = getBoothTypeFromNumber(applicationNumber);
-  const boothTypeEl = document.getElementById("booth-type");
-  if (boothType) {
-    boothTypeEl.textContent = boothType;
-    if (/^[A-Za-z\s]+$/.test(boothType)) {
-      boothTypeEl.classList.add("booth-type-en");
-    } else {
-      boothTypeEl.classList.remove("booth-type-en");
-    }
-  }
 
   // boothType 設備、價錢、付款、電力、付款連結產生
   function updateBoothInfo(boothType) {
