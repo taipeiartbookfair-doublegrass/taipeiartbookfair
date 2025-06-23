@@ -434,24 +434,6 @@ document.addEventListener("DOMContentLoaded", async function () {
   }
   setBillingInfoLanguage(boothType);
 
-  // 同意書區塊語言切換
-  function setLetterLanguage(boothType) {
-    const letterTitle = document.getElementById("letter-title");
-    const letterBtn = document.getElementById("letter-btn");
-    if (
-      boothType === "One Regular Booth" ||
-      boothType === "Two Regular Booth" ||
-      boothType === "Curation Booth"
-    ) {
-      if (letterTitle) letterTitle.textContent = "Declaration";
-      if (letterBtn) letterBtn.textContent = "Download Declaration";
-    } else {
-      if (letterTitle) letterTitle.textContent = "同意書";
-      if (letterBtn) letterBtn.textContent = "下載同意書";
-    }
-  }
-  setLetterLanguage(boothType);
-
   // 動態切換同意書區塊語言
   function setDeclarationLanguage(boothType) {
     var declardownloadLink = document.getElementById(
