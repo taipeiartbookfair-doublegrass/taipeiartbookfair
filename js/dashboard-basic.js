@@ -106,15 +106,11 @@ document.addEventListener("DOMContentLoaded", async function () {
     if (value === "TW") {
       visa.innerHTML = "Not Require";
     } else if (value === "CN") {
-      visa.innerHTML = `<a href="download/requirement-form-cn.pdf" target="_blank" style="text-decoration:underline;">請下載簽證申請文件包</a>`;
+      visa.innerHTML = `若您被錄取且完成參展資格後，主辦單位將協助中國地區人士辦理來台相關申請。`;
     } else {
       visa.innerHTML = `
         <a href="https://visawebapp.boca.gov.tw/BOCA_EVISA/MRV01FORM.do" target="_blank" style="text-decoration:underline;">
           Apply for Taiwan eVisa
-        </a>
-        <br>
-        <a href="download/visa-info.pdf" target="_blank" style="text-decoration:underline;">
-          Download visa information
         </a>
       `;
     }
