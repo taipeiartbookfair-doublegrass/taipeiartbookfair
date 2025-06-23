@@ -106,15 +106,11 @@ document.addEventListener("DOMContentLoaded", async function () {
     if (value === "TW") {
       visa.innerHTML = "Not Require";
     } else if (value === "CN") {
-      visa.innerHTML = `<a href="download/requirement-form-cn.pdf" target="_blank" style="text-decoration:underline;">請下載簽證申請文件包</a>`;
+      visa.innerHTML = `若您被錄取且完成參展資格後，主辦單位將協助中國地區人士辦理來台相關申請。`;
     } else {
       visa.innerHTML = `
         <a href="https://visawebapp.boca.gov.tw/BOCA_EVISA/MRV01FORM.do" target="_blank" style="text-decoration:underline;">
           Apply for Taiwan eVisa
-        </a>
-        <br>
-        <a href="download/visa-info.pdf" target="_blank" style="text-decoration:underline;">
-          Download visa information
         </a>
       `;
     }
@@ -124,14 +120,27 @@ document.addEventListener("DOMContentLoaded", async function () {
     apiData["報名編號"] || "";
 
   // 錄取狀態顯示
-  function getApplicationResultText(raw) {
+  function getApplicationResultText(raw, boothType) {
+    const isEnglishBooth =
+      boothType === "One Regular Booth" ||
+      boothType === "Two Regular Booth" ||
+      boothType === "Curation Booth";
     if (!raw) return "";
-    if (raw === "4-是-條件式錄取") return "條件式錄取";
-    if (raw === "1-是-1波" || raw === "2-是-2波" || raw === "0-邀請")
-      return "錄取";
-    if (raw === "3-猶豫") return "備取";
-    if (raw === "5-否") return "未錄取";
-    return raw;
+    if (isEnglishBooth) {
+      if (raw === "4-是-條件式錄取") return "Conditional Acceptance";
+      if (raw === "1-是-1波" || raw === "2-是-2波" || raw === "0-邀請")
+        return "Accepted";
+      if (raw === "3-猶豫") return "Waitlisted";
+      if (raw === "5-否") return "Rejected";
+      return raw;
+    } else {
+      if (raw === "4-是-條件式錄取") return "條件式錄取";
+      if (raw === "1-是-1波" || raw === "2-是-2波" || raw === "0-邀請")
+        return "錄取";
+      if (raw === "3-猶豫") return "備取";
+      if (raw === "5-否") return "未錄取";
+      return raw;
+    }
   }
   function setApplicationResultStyle(el, resultText) {
     el.style.backgroundColor = "";
@@ -148,7 +157,7 @@ document.addEventListener("DOMContentLoaded", async function () {
     }
   }
   const applicationResultEl = document.getElementById("application-result");
-  const resultText = getApplicationResultText(apiData["錄取"]);
+  const resultText = getApplicationResultText(apiData["錄取"], boothType);
   applicationResultEl.textContent = resultText;
   setApplicationResultStyle(applicationResultEl, resultText);
 
@@ -455,6 +464,46 @@ document.addEventListener("DOMContentLoaded", async function () {
     }
   }
   setDeclarationLanguage(boothType);
+
+  // 動態勾勾區塊語言
+  function setYesLanguage(boothType) {
+    var yesdesc = document.getElementById("registration-status-desc");
+    if (boothType && yesdesc) {
+      var boothText = boothType.trim();
+      if (
+        boothText === "One Regular Booth" ||
+        boothText === "Two Regular Booth" ||
+        boothText === "Curation Booth"
+      ) {
+        yesdesc.innerHTML =
+          "Please complete the payment and upload the signed agreement by <b><mark>July 15</mark></b>; otherwise, you will not be able to participate in the fair. Only after both payment and agreement upload are confirmed will your participation be finalized. The team will verify and update all records on July 15.";
+      } else {
+        yesdesc.innerHTML =
+          "請於<b><mark>7 月 15 日</mark></b>前完成繳費與同意書上傳，否則將無法參展。經確認完成繳費動作＆同意書上傳，才算是取得最終參展資格，團隊將於7 月 15 日核對後進行統一更新。";
+      }
+    }
+  }
+  setYesLanguage(boothType);
+
+  // 動態勾勾區塊語言
+  function setBillingNoticeLanguage(boothType) {
+    var yesdesc = document.getElementById("registration-status-desc");
+    if (boothType && yesdesc) {
+      var boothText = boothType.trim();
+      if (
+        boothText === "One Regular Booth" ||
+        boothText === "Two Regular Booth" ||
+        boothText === "Curation Booth"
+      ) {
+        yesdesc.innerHTML =
+          "<li>Please assess your payment requirements before proceeding. Once payment is made, we will not accept changes to your application options.</li><li>Each booth may purchase only one additional staff badge. If you need more, please purchase a regular ticket for entry.</li><li>Please keep your invoice after payment for your own records.</li>";
+      } else {
+        yesdesc.innerHTML =
+          "<li>請自行評估需求繳費，繳款後我們不再提供更改申請選項。</li><li>每攤<u>限加購 1張工作證</u>，如需更多數量請買當日票入場。</li><li>付款之後請自行留存發票。</li>";
+      }
+    }
+  }
+  setBillingNoticeLanguage(boothType);
 
   // 動態切換草率簿區塊語言
   function setCatalogLanguage(boothType) {
