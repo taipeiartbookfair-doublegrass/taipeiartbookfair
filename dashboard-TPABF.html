@@ -1308,8 +1308,9 @@
                   </div>
                 </td>
               </tr>
+
+              <!-- 素材下載 Download -->
               <tr id="media-section" style="display: none">
-                <!-- 素材下載 Download -->
                 <td
                   colspan="2"
                   style="border-top: none; width: 80%; border-right: none"
@@ -1318,27 +1319,15 @@
                     >行銷素材下載＆上傳<br />​​Download & Upload Marketing
                     Materials</span
                   >
-                  <div id="material-download" style="margin-bottom: 1em">
+                  <div id="material-download-desc" style="margin-bottom: 1em">
                     <strong>下載視覺素材包：</strong><br />
                     若您需要使用草率季官方行銷素材，點此下載檔案。<br />
-                    <strong>Media Kit Download:</strong><br />
-                    If you wish to use official TPABF promotional materials,
-                    please download the following ZIP file.<br />
-                    <a id="zip-link" href="downloads/material-tw.zip" download
-                      >下載 Download</a
+                    <a
+                      id="media-zip-link"
+                      href="https://drive.google.com/drive/folders/18CIdZXZi0wD4fGmh_YGyc-4PYUavMHSn?usp=sharing"
+                      download
+                      >Download</a
                     >
-                  </div>
-                  <div id="material-upload">
-                    <strong>上傳：</strong><br />
-                    請使用素材包內的官方模板（AI檔）製作，並上傳一張符合格式的圖片，我們將安排社群露出。(書攤需有三本書籍圖片上傳）<br />
-                    📌 格式：JPG、RGB、150 ppi、每單位限 1 張，zip包上傳<br />
-                    ⚠️ 未於期限內上傳，將可能無法安排社群曝光。<br />
-                    <strong>Upload:</strong><br />
-                    Please use the official AI template from the media kit to
-                    create and upload one image for social media promotion.<br />
-                    📌 Specs: JPG, RGB, 150 ppi, 1 image per exhibitor<br />
-                    ⚠️ Submissions after the deadline may not be included in our
-                    social media posts.
                   </div>
                 </td>
                 <!-- 行銷素材上傳 -->
@@ -1350,7 +1339,12 @@
                     border-left: 1px dashed black;
                   "
                 >
-                  <label for="marketing-file">請在此上傳宣傳資料</label>
+                  <div id="material-upload-desc">
+                    <strong>上傳：</strong><br />
+                    請使用素材包內的官方模板（AI檔）製作，並上傳一張符合格式的圖片，我們將安排社群露出。(書攤需有三本書籍圖片上傳）<br />
+                    📌 格式：JPG、RGB、150 ppi、每單位限 1 張，zip包上傳<br />
+                    ⚠️ 未於期限內上傳，將可能無法安排社群曝光。<br />
+                  </div>
                   <input
                     type="file"
                     id="marketing-file"

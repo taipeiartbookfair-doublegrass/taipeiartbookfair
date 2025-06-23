@@ -575,6 +575,34 @@ document.addEventListener("DOMContentLoaded", async function () {
   }
   setManualLanguage(boothType);
 
+  // 動態切換媒體上傳區塊語言
+  function setMediaUploadLanguage(boothType) {
+    var mediaziplink = document.getElementById("media-zip-link");
+    var mediamaterialdesc = document.getElementById("material-download-desc");
+    var materialuploaddesc = document.getElementById("material-upload-desc");
+    if (boothType && mediaziplink && mediamaterialdesc) {
+      var boothText = boothType.textContent.trim();
+      if (
+        boothText === "One Regular Booth" ||
+        boothText === "Two Regular Booth" ||
+        boothText === "Curation Booth"
+      ) {
+        mediaziplink.innerHTML = "Download";
+        mediamaterialdesc.innerHTML =
+          "<strong>Media Kit Download:</strong><br />If you wish to use official TPABF promotional materials, please download the following ZIP file.<br /><br />";
+        materialuploaddesc.innerHTML =
+          "<strong>Upload:</strong><br />Please use the official AI template from the media kit tocreate and upload one image for social media promotion.<br />📌 Specs: JPG, RGB, 150 ppi, 1 image per exhibitor<br />⚠️ Submissions after the deadline may not be included in our social media posts.<br /><br />";
+      } else {
+        mediaziplink.innerHTML = "下載";
+        mediamaterialdesc.innerHTML =
+          "<strong>下載視覺素材包：</strong><br />若您需要使用草率季官方行銷素材，點此下載檔案。<br /><br />";
+        materialuploaddesc.innerHTML =
+          "<strong>上傳：</strong><br />請使用素材包內的官方模板（AI檔）製作，並上傳一張符合格式的圖片，我們將安排社群露出。(書攤需有三本書籍圖片上傳）<br />📌 格式：JPG、RGB、150 ppi、每單位限 1 張，zip包上傳<br />⚠️ 未於期限內上傳，將可能無法安排社群曝光。<br /><br />";
+      }
+    }
+  }
+  setMediaUploadLanguage(boothType);
+
   // 電力資訊
   function updateElectricityList(boothType) {
     const electricityTitle = document.getElementById("electricity-title");
