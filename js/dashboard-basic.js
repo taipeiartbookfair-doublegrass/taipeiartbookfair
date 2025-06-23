@@ -124,14 +124,27 @@ document.addEventListener("DOMContentLoaded", async function () {
     apiData["報名編號"] || "";
 
   // 錄取狀態顯示
-  function getApplicationResultText(raw) {
+  function getApplicationResultText(raw, boothType) {
+    const isEnglishBooth =
+      boothType === "One Regular Booth" ||
+      boothType === "Two Regular Booth" ||
+      boothType === "Curation Booth";
     if (!raw) return "";
-    if (raw === "4-是-條件式錄取") return "條件式錄取";
-    if (raw === "1-是-1波" || raw === "2-是-2波" || raw === "0-邀請")
-      return "錄取";
-    if (raw === "3-猶豫") return "備取";
-    if (raw === "5-否") return "未錄取";
-    return raw;
+    if (isEnglishBooth) {
+      if (raw === "4-是-條件式錄取") return "Conditional Acceptance";
+      if (raw === "1-是-1波" || raw === "2-是-2波" || raw === "0-邀請")
+        return "Accepted";
+      if (raw === "3-猶豫") return "Waitlisted";
+      if (raw === "5-否") return "Rejected";
+      return raw;
+    } else {
+      if (raw === "4-是-條件式錄取") return "條件式錄取";
+      if (raw === "1-是-1波" || raw === "2-是-2波" || raw === "0-邀請")
+        return "錄取";
+      if (raw === "3-猶豫") return "備取";
+      if (raw === "5-否") return "未錄取";
+      return raw;
+    }
   }
   function setApplicationResultStyle(el, resultText) {
     el.style.backgroundColor = "";
@@ -148,7 +161,7 @@ document.addEventListener("DOMContentLoaded", async function () {
     }
   }
   const applicationResultEl = document.getElementById("application-result");
-  const resultText = getApplicationResultText(apiData["錄取"]);
+  const resultText = getApplicationResultText(apiData["錄取"], boothType);
   applicationResultEl.textContent = resultText;
   setApplicationResultStyle(applicationResultEl, resultText);
 
