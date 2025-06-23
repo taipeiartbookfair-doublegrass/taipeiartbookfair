@@ -110,7 +110,7 @@ document.addEventListener("DOMContentLoaded", async function () {
     } else {
       visa.innerHTML = `
         <a href="https://visawebapp.boca.gov.tw/BOCA_EVISA/MRV01FORM.do" target="_blank" style="text-decoration:underline;">
-          Apply for Taiwan eVisa
+          Taiwan eVisa
         </a>
       `;
     }
@@ -170,13 +170,16 @@ document.addEventListener("DOMContentLoaded", async function () {
   function setApplicationResultStyle(el, resultText) {
     el.style.backgroundColor = "";
     el.style.color = "";
-    if (resultText === "錄取") {
+    if (resultText === "錄取" || resultText === "Accepted") {
       el.style.backgroundColor = "lime";
-    } else if (resultText === "條件式錄取") {
+    } else if (
+      resultText === "條件式錄取" ||
+      resultText === "Conditional Acceptance"
+    ) {
       el.style.backgroundColor = "rgb(0, 157, 255)";
-    } else if (resultText === "備取") {
+    } else if (resultText === "備取" || resultText === "Waitlisted") {
       el.style.backgroundColor = "lightgreen";
-    } else if (resultText === "未錄取") {
+    } else if (resultText === "未錄取" || resultText === "Rejected") {
       el.style.backgroundColor = "lightgrey";
       el.style.color = "DarkSlateGrey";
     }
@@ -485,9 +488,9 @@ document.addEventListener("DOMContentLoaded", async function () {
   }
   setYesLanguage(boothType);
 
-  // 動態勾勾區塊語言
+  // 動態Billing Notice 區塊語言
   function setBillingNoticeLanguage(boothType) {
-    var yesdesc = document.getElementById("registration-status-desc");
+    var billingNoticedesc = document.getElementById("billing-notice");
     if (boothType && yesdesc) {
       var boothText = boothType.trim();
       if (
@@ -495,10 +498,10 @@ document.addEventListener("DOMContentLoaded", async function () {
         boothText === "Two Regular Booth" ||
         boothText === "Curation Booth"
       ) {
-        yesdesc.innerHTML =
+        billingNoticedesc.innerHTML =
           "<li>Please assess your payment requirements before proceeding. Once payment is made, we will not accept changes to your application options.</li><li>Each booth may purchase only one additional staff badge. If you need more, please purchase a regular ticket for entry.</li><li>Please keep your invoice after payment for your own records.</li>";
       } else {
-        yesdesc.innerHTML =
+        billingNoticedesc.innerHTML =
           "<li>請自行評估需求繳費，繳款後我們不再提供更改申請選項。</li><li>每攤<u>限加購 1張工作證</u>，如需更多數量請買當日票入場。</li><li>付款之後請自行留存發票。</li>";
       }
     }
@@ -518,11 +521,11 @@ document.addEventListener("DOMContentLoaded", async function () {
       ) {
         catalogdownloadLink.innerHTML = "Template Download";
         catalogdesc.innerHTML =
-          "Once selected to exhibit, your project will be featured on one page in that year’s TPABF Catalog. Please use the template from the Marketing Kit and complete both the upload and any updates to your basic exhibitor info (left-side fields) by the deadline. Late submissions will not be included.<br /><br /> 📌 Specs:<br /> File Format: PDF (Please ensure images are embedded and text is outlined)<br /> Workspace: 140 × 220 mm<br /> Bleed: 5 mm on all sides<br /> Color Mode: Black & White (B&W)<br /><br />";
+          "Once selected to exhibit, your project will be featured on one page in that year’s TPABF Catalog. Please use the template from the Marketing Kit and complete both the upload and any updates to your basic exhibitor info (left-side fields) by the deadline. Late submissions will not be included.<br /><br /> 📌 Specs:<br /> File Format: PDF (Please ensure images are embedded and text is outlined)<br /> Workspace: 140 × 220 mm<br /> Bleed: 5 mm on all sides<br /> Color Mode: Black & White (B&W)";
       } else {
         catalogdownloadLink.innerHTML = "公版下載";
         catalogdesc.innerHTML =
-          "單位獲取參展資格即代表可於當年《草率簿 TPABF Catalog》中露出一面，請使用行銷素材包提供的版型製作，並於期限內完成上傳與左側攤商基本資料修改，逾期視同放棄。<br /><br />📌 規格：<br />檔案類型 Format ：PDF（請確認圖片已置入、文字已轉外框）<br />工作區域 Workspace：140×220mm<br />四邊出血 Bleed：5mm<br />色彩 Color Mode: 黑白 B&W<br /><br />";
+          "單位獲取參展資格即代表可於當年《草率簿 TPABF Catalog》中露出一面，請使用行銷素材包提供的版型製作，並於期限內完成上傳與左側攤商基本資料修改，逾期視同放棄。<br /><br />📌 規格：<br />檔案類型 Format ：PDF（請確認圖片已置入、文字已轉外框）<br />工作區域 Workspace：140×220mm<br />四邊出血 Bleed：5mm<br />色彩 Color Mode: 黑白 B&W";
       }
     }
   }
@@ -567,9 +570,9 @@ document.addEventListener("DOMContentLoaded", async function () {
       ) {
         liveEventLink.innerHTML = "Sign Up Form";
         liveEventdesc.innerHTML =
-          "Want to engage with visitors more directly? Propose on-site programs such as short talks, performances, workshops, or DJ sets!<br />";
+          "Want to engage with visitors more directly? Propose on-site programs such as short talks, performances, workshops, or DJ sets!";
         liveEventScheduledesc.innerHTML =
-          "We will list here the on-site program sessions you have registered to provide. Details of your activities have been sent to your email. Please remember to check in at the designated area 15 minutes before your session.<br />";
+          "We will list here the on-site program sessions you have registered to provide. Details of your activities have been sent to your email. Please remember to check in at the designated area 15 minutes before your session.";
       } else {
         liveEventLink.innerHTML = " 報名表單";
         liveEventdesc.innerHTML =
@@ -618,15 +621,15 @@ document.addEventListener("DOMContentLoaded", async function () {
       ) {
         mediaziplink.innerHTML = "Download";
         mediamaterialdesc.innerHTML =
-          "<strong>Media Kit Download:</strong><br />If you wish to use official TPABF promotional materials, please download the following ZIP file.";
+          "<b>Media Kit Download:</b><br />If you wish to use official TPABF promotional materials, please download the following ZIP file.";
         materialuploaddesc.innerHTML =
-          "<strong>Upload:</strong><br />Please use the official AI template from the media kit tocreate and upload one image for social media promotion.<br />📌 Specs: JPG, RGB, 150 ppi, 1 image per exhibitor<br />⚠️ Submissions after the deadline may not be included in our social media posts.";
+          "<b>Upload:</b><br />Please use the official AI template from the media kit tocreate and upload one image for social media promotion.<br />📌 Specs: JPG, RGB, 150 ppi, 1 image per exhibitor<br />⚠️ Submissions after the deadline may not be included in our social media posts.";
       } else {
         mediaziplink.innerHTML = "下載";
         mediamaterialdesc.innerHTML =
-          "<strong>下載視覺素材包：</strong><br />若您需要使用草率季官方行銷素材，點此下載檔案。";
+          "<b>下載視覺素材包：</b><br />若您需要使用草率季官方行銷素材，點此下載檔案。";
         materialuploaddesc.innerHTML =
-          "<strong>上傳：</strong><br />請使用素材包內的官方模板（AI檔）製作，並上傳一張符合格式的圖片，我們將安排社群露出。(書攤需有三本書籍圖片上傳）<br />📌 格式：JPG、RGB、150 ppi、每單位限 1 張，zip包上傳<br />⚠️ 未於期限內上傳，將可能無法安排社群曝光。";
+          "<b>上傳：</b><br />請使用素材包內的官方模板（AI檔）製作，並上傳一張符合格式的圖片，我們將安排社群露出。(書攤需有三本書籍圖片上傳）<br />📌 格式：JPG、RGB、150 ppi、每單位限 1 張，zip包上傳<br />⚠️ 未於期限內上傳，將可能無法安排社群曝光。";
       }
     }
   }
