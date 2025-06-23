@@ -491,7 +491,7 @@ document.addEventListener("DOMContentLoaded", async function () {
   // 動態Billing Notice 區塊語言
   function setBillingNoticeLanguage(boothType) {
     var billingNoticedesc = document.getElementById("billing-notice");
-    if (boothType && yesdesc) {
+    if (boothType && billingNoticedesc) {
       var boothText = boothType.trim();
       if (
         boothText === "One Regular Booth" ||
