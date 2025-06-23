@@ -181,8 +181,6 @@ document.addEventListener("DOMContentLoaded", async function () {
   function updateBoothInfo(boothType) {
     let price = "";
     let equipment = [];
-    let payText = "付款 Pay";
-    let note = "";
 
     switch (boothType) {
       case "書攤":
@@ -433,24 +431,6 @@ document.addEventListener("DOMContentLoaded", async function () {
       : "適合有輪班擺攤需求之攤主";
   }
   setBillingInfoLanguage(boothType);
-
-  // 同意書區塊語言切換
-  function setLetterLanguage(boothType) {
-    const letterTitle = document.getElementById("letter-title");
-    const letterBtn = document.getElementById("letter-btn");
-    if (
-      boothType === "One Regular Booth" ||
-      boothType === "Two Regular Booth" ||
-      boothType === "Curation Booth"
-    ) {
-      if (letterTitle) letterTitle.textContent = "Declaration";
-      if (letterBtn) letterBtn.textContent = "Download Declaration";
-    } else {
-      if (letterTitle) letterTitle.textContent = "同意書";
-      if (letterBtn) letterBtn.textContent = "下載同意書";
-    }
-  }
-  setLetterLanguage(boothType);
 
   // 動態切換同意書區塊語言
   function setDeclarationLanguage(boothType) {
