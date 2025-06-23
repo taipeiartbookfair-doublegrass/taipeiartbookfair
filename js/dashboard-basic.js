@@ -456,6 +456,46 @@ document.addEventListener("DOMContentLoaded", async function () {
   }
   setDeclarationLanguage(boothType);
 
+  // 動態勾勾區塊語言
+  function setYesLanguage(boothType) {
+    var yesdesc = document.getElementById("registration-status-desc");
+    if (boothType && yesdesc) {
+      var boothText = boothType.trim();
+      if (
+        boothText === "One Regular Booth" ||
+        boothText === "Two Regular Booth" ||
+        boothText === "Curation Booth"
+      ) {
+        yesdesc.innerHTML =
+          "Please complete the payment and upload the signed agreement by <b><mark>July 15</mark></b>; otherwise, you will not be able to participate in the fair. Only after both payment and agreement upload are confirmed will your participation be finalized. The team will verify and update all records on July 15.";
+      } else {
+        yesdesc.innerHTML =
+          "請於<b><mark>7 月 15 日</mark></b>前完成繳費與同意書上傳，否則將無法參展。經確認完成繳費動作＆同意書上傳，才算是取得最終參展資格，團隊將於7 月 15 日核對後進行統一更新。";
+      }
+    }
+  }
+  setYesLanguage(boothType);
+
+  // 動態勾勾區塊語言
+  function setBillingNoticeLanguage(boothType) {
+    var yesdesc = document.getElementById("registration-status-desc");
+    if (boothType && yesdesc) {
+      var boothText = boothType.trim();
+      if (
+        boothText === "One Regular Booth" ||
+        boothText === "Two Regular Booth" ||
+        boothText === "Curation Booth"
+      ) {
+        yesdesc.innerHTML =
+          "<li>Please assess your payment requirements before proceeding. Once payment is made, we will not accept changes to your application options.</li><li>Each booth may purchase only one additional staff badge. If you need more, please purchase a regular ticket for entry.</li><li>Please keep your invoice after payment for your own records.</li>";
+      } else {
+        yesdesc.innerHTML =
+          "<li>請自行評估需求繳費，繳款後我們不再提供更改申請選項。</li><li>每攤<u>限加購 1張工作證</u>，如需更多數量請買當日票入場。</li><li>付款之後請自行留存發票。</li>";
+      }
+    }
+  }
+  setBillingNoticeLanguage(boothType);
+
   // 動態切換草率簿區塊語言
   function setCatalogLanguage(boothType) {
     var catalogdownloadLink = document.getElementById("catalog-download-link");
