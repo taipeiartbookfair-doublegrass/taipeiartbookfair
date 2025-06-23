@@ -1391,7 +1391,10 @@
                   <span class="label"
                     >草率簿露出上傳<br />TPABF Catalog Submission</span
                   >
-                  <div style="margin-top: 0.5em; font-size: 1rem">
+                  <div
+                    style="margin-top: 0.5em; font-size: 1rem"
+                    id="catalog-desc"
+                  >
                     單位獲取參展資格即代表可於當年《草率簿 TPABF
                     Catalog》中露出一面，請使用行銷素材包提供的版型製作，並於期限內完成上傳與左側攤商基本資料修改，逾期視同放棄。<br /><br />
                     📌 規格：<br />
@@ -1399,24 +1402,10 @@
                     工作區域 Workspace：140×220mm<br />
                     四邊出血 Bleed：5mm<br />
                     色彩 Color Mode: 黑白 B&W<br />
-
-                    <br /><br />
-                    Once selected to exhibit, your project will be featured on
-                    one page in that year’s TPABF Catalog. Please use the
-                    template from the Marketing Kit and complete both the upload
-                    and any updates to your basic exhibitor info (left-side
-                    fields) by the deadline. Late submissions will not be
-                    included.<br /><br />
-                    📌 Specs:<br />
-                    File Format: PDF (Please ensure images are embedded and text
-                    is outlined)<br />
-                    Workspace: 140 × 220 mm<br />
-                    Bleed: 5 mm on all sides<br />
-                    Color Mode: Black & White (B&W)<br /><br />
-                    📥 公版下載 Template Download:<br />
                     <a
                       href="https://drive.google.com/file/d/1zm8dL5ElUdGKYjGFjN5y4R3Ml5baaEKw/view?usp=drive_link"
                       target="_blank"
+                      id="catalog-download-link"
                     >
                       Download Link
                     </a>
@@ -1439,13 +1428,16 @@
                 </td>
               </tr>
 
-              <!-- 親友票購買 Shopline -->
+              <!-- 親友票 Shopline -->
               <tr style="display: none" id="media-section-row4">
                 <td colspan="2" style="border-top: none; width: 55vw">
-                  <span class="label"
-                    >親友票購買 Friends & Family Ticket Purchase</span
-                  ><br />
-                  請在付款時填入以下代碼（每個攤主限購五張）：
+                  <span class="label">親友票 Family&Friends Tickets</span><br />
+                  <div
+                    style="margin-top: 0.5em; font-size: 1rem"
+                    id="familyticket-desc"
+                  >
+                    請在付款時填入以下代碼（每個攤主限購五張）：
+                  </div>
                   <span id="discountcode">!89SJ89</span>
                   <button
                     class="copy-btn"
@@ -1456,8 +1448,11 @@
                     📋
                   </button>
                   <br />
-                  <a href="https://your-shopline-link.com" target="_blank"
-                    >購票連結 Ticket Link</a
+                  <a
+                    href="https://your-shopline-link.com"
+                    target="_blank"
+                    id="ticket-link"
+                    >購票連結</a
                   >
                 </td>
               </tr>
@@ -1465,8 +1460,13 @@
               <tr style="display: none" id="media-section-row5">
                 <td style="border-top: none; width: 55vw">
                   <span class="label">攤主手冊 Exhibitor Manual</span><br />
-                  展前將提供完整《攤主手冊》供您下載，內含報到流程、進撤場時間、攤位樣式參考、現場規範與《罰金手冊》等所有參展須知，請務必詳閱並依說明準備。
-                  <!-- <a href="https://your-shopline-link.com" target="_blank"
+                  <div
+                    style="margin-top: 0.5em; font-size: 1rem"
+                    id="manual-desc"
+                  >
+                    展前將提供完整《攤主手冊》供您下載，內含報到流程、進撤場時間、攤位樣式參考、現場規範與《罰金手冊》等所有參展須知，請務必詳閱並依說明準備。
+                  </div>
+                  <!-- <a href="https://your-shopline-link.com" target="_blank id="manual-link"
                     >下載 Download</a
                   > -->
                 </td>

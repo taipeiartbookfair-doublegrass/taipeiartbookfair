@@ -452,28 +452,98 @@ document.addEventListener("DOMContentLoaded", async function () {
   }
   setLetterLanguage(boothType);
 
-  // 動態切換同意書區塊語言（for older html）
-  document.addEventListener("DOMContentLoaded", function () {
-    var boothType = document.getElementById("booth-type");
-    var downloadLink = document.getElementById("declaration-download-link");
-    var desc = document.getElementById("declaration-desc");
-    if (boothType && downloadLink && desc) {
+  // 動態切換同意書區塊語言
+  function setDeclarationLanguage(boothType) {
+    var declardownloadLink = document.getElementById(
+      "declaration-download-link"
+    );
+    var declarationdesc = document.getElementById("declaration-desc");
+    if (boothType && declardownloadLink && declarationdesc) {
       var boothText = boothType.textContent.trim();
       if (
         boothText === "One Regular Booth" ||
         boothText === "Two Regular Booth" ||
         boothText === "Curation Booth"
       ) {
-        downloadLink.innerHTML = "Download Exhibitor Declaration";
-        desc.innerHTML =
+        declardownloadLink.innerHTML = "Download Exhibitor Declaration";
+        declarationdesc.innerHTML =
           "Please download and sign the exhibitor declaration, then upload the signed file below.";
       } else {
-        downloadLink.innerHTML = "下載參展同意書 <br />Download Declaration";
-        desc.innerHTML =
-          "請下載並簽署參展同意書，完成後請上傳。<br />Please download and sign the declaration, then upload the signed file below.";
+        declardownloadLink.innerHTML = "下載參展同意書";
+        declarationdesc.innerHTML = "請下載並簽署參展同意書，完成後請上傳。";
       }
     }
-  });
+  }
+  setDeclarationLanguage(boothType);
+
+  // 動態切換草率簿區塊語言
+  function setCatalogLanguage(boothType) {
+    var catalogdownloadLink = document.getElementById("catalog-download-link");
+    var catalogdesc = document.getElementById("catalog-desc");
+    if (boothType && catalogdownloadLink && catalogdesc) {
+      var boothText = boothType.textContent.trim();
+      if (
+        boothText === "One Regular Booth" ||
+        boothText === "Two Regular Booth" ||
+        boothText === "Curation Booth"
+      ) {
+        catalogdownloadLink.innerHTML = "Template Download";
+        catalogdesc.innerHTML =
+          "Once selected to exhibit, your project will be featured on one page in that year’s TPABF Catalog. Please use the template from the Marketing Kit and complete both the upload and any updates to your basic exhibitor info (left-side fields) by the deadline. Late submissions will not be included.<br /><br /> 📌 Specs:<br /> File Format: PDF (Please ensure images are embedded and text is outlined)<br /> Workspace: 140 × 220 mm<br /> Bleed: 5 mm on all sides<br /> Color Mode: Black & White (B&W)<br /><br />";
+      } else {
+        catalogdownloadLink.innerHTML = "公版下載";
+        catalogdesc.innerHTML =
+          "單位獲取參展資格即代表可於當年《草率簿 TPABF Catalog》中露出一面，請使用行銷素材包提供的版型製作，並於期限內完成上傳與左側攤商基本資料修改，逾期視同放棄。<br /><br />📌 規格：<br />檔案類型 Format ：PDF（請確認圖片已置入、文字已轉外框）<br />工作區域 Workspace：140×220mm<br />四邊出血 Bleed：5mm<br />色彩 Color Mode: 黑白 B&W<br /><br />";
+      }
+    }
+  }
+  setCatalogLanguage(boothType);
+
+  // 動態切換親友票區塊語言
+  function setTicketLanguage(boothType) {
+    var ticketlink = document.getElementById("ticket-link");
+    var familyticketdesc = document.getElementById("familyticket-desc");
+    if (boothType && ticketlink && familyticketdesc) {
+      var boothText = boothType.textContent.trim();
+      if (
+        boothText === "One Regular Booth" ||
+        boothText === "Two Regular Booth" ||
+        boothText === "Curation Booth"
+      ) {
+        ticketlink.innerHTML = "Ticket Link";
+        familyticketdesc.innerHTML =
+          "Each exhibitor will receive an early bird discount code before the event, allowing them to purchase up to 5 tickets at the special price of $350 each. A total of 800 early bird tickets are available.<br><br />During the event (Nov 21–23), companion tickets will be available for purchase online at the regular price of $400. Ticket holders can still enjoy priority entry without waiting in line.<br /><br />";
+      } else {
+        ticketlink.innerHTML = "購票連結";
+        familyticketdesc.innerHTML =
+          "每位參展者可於活動前獲得早鳥優惠序號，每人限購5張，票價 $350，限量800張。11/21-23活動期間，親友票將以原價 $400 於線上開放購買，持票者仍可免排隊入場。<br /><br />";
+      }
+    }
+  }
+  setTicketLanguage(boothType);
+
+  // 動態切換攤主手冊區塊語言
+  function setManualLanguage(boothType) {
+    var manualdownloadLink = document.getElementById("ticket-link");
+    var manualdesc = document.getElementById("manual-desc");
+    if (boothType && manualdownloadLink && manualdesc) {
+      var boothText = boothType.textContent.trim();
+      if (
+        boothText === "One Regular Booth" ||
+        boothText === "Two Regular Booth" ||
+        boothText === "Curation Booth"
+      ) {
+        manualdownloadLink.innerHTML = "Download Manual";
+        manualdesc.innerHTML =
+          "A complete <b>Exhibitor Manual</b> will be available for download before the event. It includes check-in procedures, setup and teardown schedule, booth layout references, on-site regulations, and the <b>Penalty Handbook</b>. Please read it thoroughly and follow all instructions.<br /><br />";
+      } else {
+        manualdownloadLink.innerHTML = "下載手冊";
+        manualdesc.innerHTML =
+          "展前將提供完整《攤主手冊》供您下載，內含報到流程、進撤場時間、攤位樣式參考、現場規範與《罰金手冊》等所有參展須知，請務必詳閱並依說明準備。<br /><br />";
+      }
+    }
+  }
+  setManualLanguage(boothType);
 
   // 電力資訊
   function updateElectricityList(boothType) {
