@@ -1279,6 +1279,53 @@
                 </td>
               </tr>
 
+              <!-- 素材下載 Download -->
+              <tr id="media-section" style="display: none">
+                <td
+                  colspan="1"
+                  style="border-top: none; width: 80%; border-right: none"
+                >
+                  <span class="label"
+                    >行銷素材下載＆上傳 ​Download & Upload Marketing
+                    Materials</span
+                  >
+                  <div id="material-download-desc">
+                    <strong>下載視覺素材包：</strong><br />
+                    若您需要使用草率季官方行銷素材，點此下載檔案。
+                  </div>
+                  <a
+                    id="media-zip-link"
+                    href="https://drive.google.com/drive/folders/18CIdZXZi0wD4fGmh_YGyc-4PYUavMHSn?usp=sharing"
+                    download
+                    >Download</a
+                  ><br /><br />
+                  <div id="material-upload-desc">
+                    <strong>上傳：</strong><br />
+                    請使用素材包內的官方模板（AI檔）製作，並上傳一張符合格式的圖片，我們將安排社群露出。(書攤需有三本書籍圖片上傳）<br />
+                    📌 格式：JPG、RGB、150 ppi、每單位限 1 張，zip包上傳<br />
+                    ⚠️ 未於期限內上傳，將可能無法安排社群曝光。<br />
+                  </div>
+                </td>
+                <!-- 行銷素材上傳 -->
+                <td
+                  colspan="2"
+                  style="
+                    border-top: none;
+                    width: 20%;
+                    border-left: 1px dashed black;
+                  "
+                >
+                  <input
+                    type="file"
+                    id="marketing-file"
+                    accept=".pdf,.jpg,.jpeg,.png"
+                  /><br />
+                  <button type="button" id="uploadBtnMarketing">
+                    上傳 Upload
+                  </button>
+                </td>
+              </tr>
+
               <!-- 寄件訊息 Foreigner Form -->
               <tr style="display: none" id="media-section-row2">
                 <td style="border-top: none; width: 55vw">
@@ -1333,53 +1380,6 @@
                 </td>
               </tr>
 
-              <!-- 素材下載 Download -->
-              <tr id="media-section" style="display: none">
-                <td
-                  colspan="1"
-                  style="border-top: none; width: 80%; border-right: none"
-                >
-                  <span class="label"
-                    >行銷素材下載＆上傳 ​Download & Upload Marketing
-                    Materials</span
-                  >
-                  <div id="material-download-desc" style="margin-bottom: 1em">
-                    <strong>下載視覺素材包：</strong><br />
-                    若您需要使用草率季官方行銷素材，點此下載檔案。
-                  </div>
-                  <a
-                    id="media-zip-link"
-                    href="https://drive.google.com/drive/folders/18CIdZXZi0wD4fGmh_YGyc-4PYUavMHSn?usp=sharing"
-                    download
-                    >Download</a
-                  ><br /><br />
-                  <div id="material-upload-desc">
-                    <strong>上傳：</strong><br />
-                    請使用素材包內的官方模板（AI檔）製作，並上傳一張符合格式的圖片，我們將安排社群露出。(書攤需有三本書籍圖片上傳）<br />
-                    📌 格式：JPG、RGB、150 ppi、每單位限 1 張，zip包上傳<br />
-                    ⚠️ 未於期限內上傳，將可能無法安排社群曝光。<br />
-                  </div>
-                </td>
-                <!-- 行銷素材上傳 -->
-                <td
-                  colspan="2"
-                  style="
-                    border-top: none;
-                    width: 20%;
-                    border-left: 1px dashed black;
-                  "
-                >
-                  <input
-                    type="file"
-                    id="marketing-file"
-                    accept=".pdf,.jpg,.jpeg,.png"
-                  /><br />
-                  <button type="button" id="uploadBtnMarketing">
-                    上傳 Upload
-                  </button>
-                </td>
-              </tr>
-
               <tr id="media-section-catalog-section" style="display: none">
                 <td colspan="1" style="border-top: none; border-right: none">
                   <span class="label"
@@ -1397,6 +1397,7 @@
                     四邊出血 Bleed：5mm<br />
                     色彩 Color Mode: 黑白 B&W<br />
                   </div>
+                  <br />
                   <a
                     href="https://drive.google.com/file/d/1zm8dL5ElUdGKYjGFjN5y4R3Ml5baaEKw/view?usp=drive_link"
                     target="_blank"
