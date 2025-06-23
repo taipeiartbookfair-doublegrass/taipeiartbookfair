@@ -110,7 +110,7 @@ document.addEventListener("DOMContentLoaded", async function () {
     } else {
       visa.innerHTML = `
         <a href="https://visawebapp.boca.gov.tw/BOCA_EVISA/MRV01FORM.do" target="_blank" style="text-decoration:underline;">
-          Apply for Taiwan eVisa
+          Taiwan eVisa
         </a>
       `;
     }
@@ -170,13 +170,16 @@ document.addEventListener("DOMContentLoaded", async function () {
   function setApplicationResultStyle(el, resultText) {
     el.style.backgroundColor = "";
     el.style.color = "";
-    if (resultText === "錄取") {
+    if (resultText === "錄取" || resultText === "Accepted") {
       el.style.backgroundColor = "lime";
-    } else if (resultText === "條件式錄取") {
+    } else if (
+      resultText === "條件式錄取" ||
+      resultText === "Conditional Acceptance"
+    ) {
       el.style.backgroundColor = "rgb(0, 157, 255)";
-    } else if (resultText === "備取") {
+    } else if (resultText === "備取" || resultText === "Waitlisted") {
       el.style.backgroundColor = "lightgreen";
-    } else if (resultText === "未錄取") {
+    } else if (resultText === "未錄取" || resultText === "Rejected") {
       el.style.backgroundColor = "lightgrey";
       el.style.color = "DarkSlateGrey";
     }
@@ -567,9 +570,9 @@ document.addEventListener("DOMContentLoaded", async function () {
       ) {
         liveEventLink.innerHTML = "Sign Up Form";
         liveEventdesc.innerHTML =
-          "Want to engage with visitors more directly? Propose on-site programs such as short talks, performances, workshops, or DJ sets!<br />";
+          "Want to engage with visitors more directly? Propose on-site programs such as short talks, performances, workshops, or DJ sets!";
         liveEventScheduledesc.innerHTML =
-          "We will list here the on-site program sessions you have registered to provide. Details of your activities have been sent to your email. Please remember to check in at the designated area 15 minutes before your session.<br />";
+          "We will list here the on-site program sessions you have registered to provide. Details of your activities have been sent to your email. Please remember to check in at the designated area 15 minutes before your session.";
       } else {
         liveEventLink.innerHTML = " 報名表單";
         liveEventdesc.innerHTML =
