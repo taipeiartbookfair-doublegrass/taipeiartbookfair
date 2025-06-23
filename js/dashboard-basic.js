@@ -181,8 +181,6 @@ document.addEventListener("DOMContentLoaded", async function () {
   function updateBoothInfo(boothType) {
     let price = "";
     let equipment = [];
-    let payText = "付款 Pay";
-    let note = "";
 
     switch (boothType) {
       case "書攤":
