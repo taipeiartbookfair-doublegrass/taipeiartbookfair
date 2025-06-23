@@ -522,12 +522,17 @@ document.addEventListener("DOMContentLoaded", async function () {
   const letter = document.getElementById("negative-letter");
   const runnerletter = document.getElementById("runnerup-letter");
   const conditionalyes = document.getElementById("booth-type-tooltip");
-  const mediaupload = document.getElementById("media-section");
   const foreignShipping = document.getElementById("media-section-row2");
   const visaupload = document.getElementById("media-section-row3");
+  const overseavisa = document.getElementById("media-section-overseasvisa");
   const familyticket = document.getElementById("media-section-row4");
   const manual = document.getElementById("media-section-row5");
   const boothappearance = document.getElementById("media-section-row6");
+  const mediaupload = document.getElementById("media-section");
+  const catalogSection = document.getElementById(
+    "media-section-catalog-section"
+  );
+  const liveEventSection = document.getElementById("media-live-event-section");
 
   const rawResult = apiData["錄取"];
   const nationality = (region || "").trim().toUpperCase();
@@ -553,15 +558,6 @@ document.addEventListener("DOMContentLoaded", async function () {
       }
     }
 
-    // 取得三個區塊
-    const mediaupload = document.getElementById("media-section");
-    const catalogSection = document.getElementById(
-      "media-section-catalog-section"
-    );
-    const liveEventSection = document.getElementById(
-      "media-live-event-section"
-    );
-
     billinginfo.style.display = "none";
     letter.style.display = "none";
     runnerletter.style.display = "none";
@@ -570,7 +566,8 @@ document.addEventListener("DOMContentLoaded", async function () {
     if (catalogSection) catalogSection.style.display = "none";
     if (liveEventSection) liveEventSection.style.display = "none";
     foreignShipping.style.display = "none";
-    visaupload.style.display = "none";
+    if (visaupload) visaupload.style.display = "none";
+    if (overseavisa) overseavisa.style.display = "none";
     familyticket.style.display = "none";
     manual.style.display = "none";
     boothappearance.style.display = "none";
@@ -591,15 +588,18 @@ document.addEventListener("DOMContentLoaded", async function () {
         if (nationality !== "TW") {
           foreignShipping.style.display = "block";
         }
-        if (nationality === "CN") {
-          visaupload.style.display = "block";
-        }
         familyticket.style.display = "block";
         manual.style.display = "block";
         boothappearance.style.display = "block";
       } else {
         registrationStatusEl.textContent = getStatusText(false);
         billinginfo.style.display = "block";
+        // 這裡加上 visaupload/overseavisa 的顯示條件
+        if (nationality === "CN") {
+          visaupload.style.display = "block";
+        } else if (nationality !== "TW" && nationality !== "CN") {
+          overseavisa.style.display = "block";
+        }
       }
     } else if (rawResult === "0") {
       registrationStatusEl.textContent = "-";
@@ -613,15 +613,17 @@ document.addEventListener("DOMContentLoaded", async function () {
         if (nationality !== "TW") {
           foreignShipping.style.display = "block";
         }
-        if (nationality === "CN") {
-          visaupload.style.display = "block";
-        }
         familyticket.style.display = "block";
         manual.style.display = "block";
         boothappearance.style.display = "block";
       } else {
         registrationStatusEl.textContent = getStatusText(false);
         billinginfo.style.display = "block";
+        if (nationality === "CN") {
+          visaupload.style.display = "block";
+        } else if (nationality !== "TW" && nationality !== "CN") {
+          overseavisa.style.display = "block";
+        }
       }
     } else if (rawResult === "3-猶豫") {
       registrationStatusEl.textContent = "-";
