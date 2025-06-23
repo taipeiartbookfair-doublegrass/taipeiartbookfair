@@ -524,9 +524,9 @@ document.addEventListener("DOMContentLoaded", async function () {
       } else {
         liveEventLink.innerHTML = " 報名表單";
         liveEventdesc.innerHTML =
-          "想與大家更近距離互動？我們開放以下形式的現場活動徵集：短講、表演、工作坊、DJ等。<br />";
+          "想與大家更近距離互動？我們開放以下形式的現場活動徵集：短講、表演、工作坊、DJ等。";
         liveEventScheduledesc.innerHTML =
-          "我們將會在此列出你所報名現場提供的活動服務場次資訊，相關活動內容已寄到你的信箱，不要忘了提早15分鐘到相對應的區域報到喔。<br />";
+          "我們將會在此列出你所報名現場提供的活動服務場次資訊，相關活動內容已寄到你的信箱，不要忘了提早15分鐘到相對應的區域報到喔。";
       }
     }
   }
