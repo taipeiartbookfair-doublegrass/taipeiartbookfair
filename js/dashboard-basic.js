@@ -492,11 +492,11 @@ document.addEventListener("DOMContentLoaded", async function () {
       ) {
         ticketlink.innerHTML = "Ticket Link";
         familyticketdesc.innerHTML =
-          "Each exhibitor will receive an early bird discount code before the event, allowing them to purchase up to 5 tickets at the special price of $350 each. A total of 800 early bird tickets are available.<br><br />During the event (Nov 21–23), companion tickets will be available for purchase online at the regular price of $400. Ticket holders can still enjoy priority entry without waiting in line.<br /><br />";
+          "Each exhibitor will receive an early bird discount code before the event, allowing them to purchase up to 5 tickets at the special price of $350 each. A total of 800 early bird tickets are available.<br><br />During the event (Nov 21–23), companion tickets will be available for purchase online at the regular price of $400. Ticket holders can still enjoy priority entry without waiting in line.Please enter the following promo code at checkout (each code can only be used once):<br />";
       } else {
         ticketlink.innerHTML = "購票連結";
         familyticketdesc.innerHTML =
-          "每位參展者可於活動前獲得早鳥優惠序號，每人限購5張，票價 $350，限量800張。11/21-23活動期間，親友票將以原價 $400 於線上開放購買，持票者仍可免排隊入場。<br /><br />";
+          "每位參展者可於活動前獲得早鳥優惠序號，每人限購5張，票價 $350，限量800張。11/21-23活動期間，親友票將以原價 $400 於線上開放購買，持票者仍可免排隊入場。請在付款時填入以下代碼（每個代碼限用一次）：<br />";
       }
     }
   }
@@ -518,15 +518,15 @@ document.addEventListener("DOMContentLoaded", async function () {
       ) {
         liveEventLink.innerHTML = "Sign Up Form";
         liveEventdesc.innerHTML =
-          "Want to engage with visitors more directly? Propose on-site programs such as short talks, performances, workshops, or DJ sets!<br /><br />";
+          "Want to engage with visitors more directly? Propose on-site programs such as short talks, performances, workshops, or DJ sets!<br />";
         liveEventScheduledesc.innerHTML =
-          "We will list here the on-site program sessions you have registered to provide. Details of your activities have been sent to your email. Please remember to check in at the designated area 15 minutes before your session.";
+          "We will list here the on-site program sessions you have registered to provide. Details of your activities have been sent to your email. Please remember to check in at the designated area 15 minutes before your session.<br />";
       } else {
         liveEventLink.innerHTML = " 報名表單";
         liveEventdesc.innerHTML =
-          "想與大家更近距離互動？我們開放以下形式的現場活動徵集：短講、表演、工作坊、DJ等。<br /><br />";
+          "想與大家更近距離互動？我們開放以下形式的現場活動徵集：短講、表演、工作坊、DJ等。<br />";
         liveEventScheduledesc.innerHTML =
-          "我們將會在此列出你所報名現場提供的活動服務場次資訊，相關活動內容已寄到你的信箱，不要忘了提早15分鐘到相對應的區域報到喔。";
+          "我們將會在此列出你所報名現場提供的活動服務場次資訊，相關活動內容已寄到你的信箱，不要忘了提早15分鐘到相對應的區域報到喔。<br />";
       }
     }
   }

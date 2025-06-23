@@ -237,11 +237,8 @@
                     </tr>
                   </table>
                 </td>
-              </tr>
-
-              <!-- 現場活動reminder -->
-              <tr>
-                <td>
+                <!-- 現場活動reminder -->
+                <td colspan="2" style="position: relative">
                   <span class="label"
                     >現場活動場次資訊 Program Sessions Reminder</span
                   ><br />
@@ -258,6 +255,7 @@
                   ></div>
                 </td>
               </tr>
+
               <!-- 編輯按鈕 -->
               <tr style="background-color: black; text-align: right">
                 <td colspan="2" style="padding: 2px 5px">
@@ -1255,7 +1253,7 @@
                 </td>
               </tr>
 
-              <!-- 海外簽證資料連結 Visa Upload -->
+              <!-- 海外簽證資料連結-->
               <tr style="display: none" id="media-section-overseasvisa">
                 <td style="border-top: none; width: 55vw">
                   <div id="visa-upload">
@@ -1264,13 +1262,13 @@
                     invitation letter and a brief introduction to TPABF. If you
                     need any additional documents or information, feel free to
                     contact us.
-                    <br /><br />
-                    <a
-                      href="https://drive.google.com/drive/folders/1sN6Yl2VnHXzTWAwXyOrTQ_cMjrITii0p?usp=sharing"
-                      target="_blank"
-                      >Download Package</a
-                    >
                   </div>
+                  <br />
+                  <a
+                    href="https://drive.google.com/drive/folders/1sN6Yl2VnHXzTWAwXyOrTQ_cMjrITii0p?usp=sharing"
+                    target="_blank"
+                    >Download Package</a
+                  >
                 </td>
               </tr>
 
@@ -1307,93 +1305,77 @@
                 </td>
               </tr>
 
+              <tr id="media-live-event-section" style="display: none">
+                <td style="border-top: none; width: 55vw; vertical-align: top">
+                  <span class="label">現場活動徵集 Program Open Call</span>
+                  <div
+                    style="margin-top: 0.5em; font-size: 1rem"
+                    id="live-event-desc"
+                  >
+                    想與大家更近距離互動？我們開放以下形式的現場活動徵集：短講、表演、工作坊、DJ等。
+                  </div>
+                  <br />
+                  <a
+                    href="https://forms.gle/ckXiewW68i1VwKYt6"
+                    target="_blank"
+                    id="live-event-signup-link"
+                  >
+                    報名表單
+                  </a>
+                </td>
+              </tr>
+
               <!-- 素材下載 Download -->
               <tr id="media-section" style="display: none">
                 <td
-                  colspan="2"
+                  colspan="1"
                   style="border-top: none; width: 80%; border-right: none"
                 >
                   <span class="label"
-                    >行銷素材下載＆上傳<br />​​Download & Upload Marketing
+                    >行銷素材下載＆上傳 ​Download & Upload Marketing
                     Materials</span
                   >
                   <div id="material-download-desc" style="margin-bottom: 1em">
                     <strong>下載視覺素材包：</strong><br />
                     若您需要使用草率季官方行銷素材，點此下載檔案。<br />
-                    <a
-                      id="media-zip-link"
-                      href="https://drive.google.com/drive/folders/18CIdZXZi0wD4fGmh_YGyc-4PYUavMHSn?usp=sharing"
-                      download
-                      >Download</a
-                    >
                   </div>
-                </td>
-                <!-- 行銷素材上傳 -->
-                <td
-                  colspan="1"
-                  style="
-                    border-top: none;
-                    width: 20%;
-                    border-left: 1px dashed black;
-                  "
-                >
+                  <a
+                    id="media-zip-link"
+                    href="https://drive.google.com/drive/folders/18CIdZXZi0wD4fGmh_YGyc-4PYUavMHSn?usp=sharing"
+                    download
+                    >Download</a
+                  >
                   <div id="material-upload-desc">
                     <strong>上傳：</strong><br />
                     請使用素材包內的官方模板（AI檔）製作，並上傳一張符合格式的圖片，我們將安排社群露出。(書攤需有三本書籍圖片上傳）<br />
                     📌 格式：JPG、RGB、150 ppi、每單位限 1 張，zip包上傳<br />
                     ⚠️ 未於期限內上傳，將可能無法安排社群曝光。<br />
                   </div>
+                </td>
+                <!-- 行銷素材上傳 -->
+                <td
+                  colspan="2"
+                  style="
+                    border-top: none;
+                    width: 20%;
+                    border-left: 1px dashed black;
+                  "
+                >
                   <input
                     type="file"
                     id="marketing-file"
                     accept=".pdf,.jpg,.jpeg,.png"
-                  />
+                  /><br />
                   <button type="button" id="uploadBtnMarketing">
                     上傳 Upload
                   </button>
                 </td>
               </tr>
-              <tr id="media-live-event-section" style="display: none">
-                <td
-                  style="
-                    border-top: none;
-                    width: 55vw;
-                    vertical-align: top;
-                    padding-left: 1em;
-                  "
-                >
-                  <span class="label">現場活動徵集<br />Program Open Call</span>
-                  <div
-                    style="margin-top: 0.5em; font-size: 1rem"
-                    id="live-event-desc"
-                  >
-                    想與大家更近距離互動？我們開放以下形式的現場活動徵集：短講、表演、工作坊、DJ等。<br />
-                    Want to engage with visitors more directly? Propose on-site
-                    programs such as short talks, performances, workshops, or DJ
-                    sets!
-                  </div>
-                  <div style="margin-top: 0.5em; font-size: 1rem">
-                    <a
-                      href="https://forms.gle/ckXiewW68i1VwKYt6"
-                      target="_blank"
-                      id="live-event-signup-link"
-                    >
-                      報名表單
-                    </a>
-                  </div>
-                </td>
-              </tr>
+
               <tr id="media-section-catalog-section" style="display: none">
-                <td
-                  colspan="1"
-                  style="
-                    border-top: none;
-                    border-right: none;
-                    padding-top: 1.5em;
-                  "
-                >
+                <td colspan="1" style="border-top: none; border-right: none">
                   <span class="label"
-                    >草率簿露出上傳<br />TPABF Catalog Submission</span
+                    >草率簿露出上傳 TPABF Catalog Submission</span
                   >
                   <div
                     style="margin-top: 0.5em; font-size: 1rem"
@@ -1406,14 +1388,14 @@
                     工作區域 Workspace：140×220mm<br />
                     四邊出血 Bleed：5mm<br />
                     色彩 Color Mode: 黑白 B&W<br />
-                    <a
-                      href="https://drive.google.com/file/d/1zm8dL5ElUdGKYjGFjN5y4R3Ml5baaEKw/view?usp=drive_link"
-                      target="_blank"
-                      id="catalog-download-link"
-                    >
-                      Download Link
-                    </a>
                   </div>
+                  <a
+                    href="https://drive.google.com/file/d/1zm8dL5ElUdGKYjGFjN5y4R3Ml5baaEKw/view?usp=drive_link"
+                    target="_blank"
+                    id="catalog-download-link"
+                  >
+                    Download Link
+                  </a>
                 </td>
                 <td
                   colspan="1"
@@ -1439,9 +1421,7 @@
                   <div
                     style="margin-top: 0.5em; font-size: 1rem"
                     id="familyticket-desc"
-                  >
-                    請在付款時填入以下代碼（每個攤主限購五張）：
-                  </div>
+                  ></div>
                   <span id="discountcode">!89SJ89</span>
                   <button
                     class="copy-btn"
@@ -1470,9 +1450,12 @@
                   >
                     展前將提供完整《攤主手冊》供您下載，內含報到流程、進撤場時間、攤位樣式參考、現場規範與《罰金手冊》等所有參展須知，請務必詳閱並依說明準備。
                   </div>
-                  <!-- <a href="https://your-shopline-link.com" target="_blank id="manual-link"
+                  <a
+                    href="https://your-shopline-link.com"
+                    target="_blank"
+                    id="manual-link"
                     >下載 Download</a
-                  > -->
+                  >
                 </td>
                 <td style="border-top: none; width: 55vw">
                   <span class="label">展場地圖 Venue Map</span><br />
