@@ -534,7 +534,7 @@ document.addEventListener("DOMContentLoaded", async function () {
 
   // 動態切換攤主手冊區塊語言
   function setManualLanguage(boothType) {
-    var manualdownloadLink = document.getElementById("ticket-link");
+    var manualdownloadLink = document.getElementById("manual-link");
     var manualdesc = document.getElementById("manual-desc");
     if (boothType && manualdownloadLink && manualdesc) {
       var boothText = boothType.trim();
@@ -545,11 +545,11 @@ document.addEventListener("DOMContentLoaded", async function () {
       ) {
         manualdownloadLink.innerHTML = "Download Manual";
         manualdesc.innerHTML =
-          "A complete <b>Exhibitor Manual</b> will be available for download before the event. It includes check-in procedures, setup and teardown schedule, booth layout references, on-site regulations, and the <b>Penalty Handbook</b>. Please read it thoroughly and follow all instructions.<br /><br />";
+          "A complete <b>Exhibitor Manual</b> will be available for download before the event. It includes check-in procedures, setup and teardown schedule, booth layout references, on-site regulations, and the <b>Penalty Handbook</b>. Please read it thoroughly and follow all instructions.<br />";
       } else {
         manualdownloadLink.innerHTML = "下載手冊";
         manualdesc.innerHTML =
-          "展前將提供完整《攤主手冊》供您下載，內含報到流程、進撤場時間、攤位樣式參考、現場規範與《罰金手冊》等所有參展須知，請務必詳閱並依說明準備。<br /><br />";
+          "展前將提供完整《攤主手冊》供您下載，內含報到流程、進撤場時間、攤位樣式參考、現場規範與《罰金手冊》等所有參展須知，請務必詳閱並依說明準備。<br /";
       }
     }
   }
@@ -569,15 +569,15 @@ document.addEventListener("DOMContentLoaded", async function () {
       ) {
         mediaziplink.innerHTML = "Download";
         mediamaterialdesc.innerHTML =
-          "<strong>Media Kit Download:</strong><br />If you wish to use official TPABF promotional materials, please download the following ZIP file.<br /><br />";
+          "<strong>Media Kit Download:</strong><br />If you wish to use official TPABF promotional materials, please download the following ZIP file.";
         materialuploaddesc.innerHTML =
-          "<strong>Upload:</strong><br />Please use the official AI template from the media kit tocreate and upload one image for social media promotion.<br />📌 Specs: JPG, RGB, 150 ppi, 1 image per exhibitor<br />⚠️ Submissions after the deadline may not be included in our social media posts.<br /><br />";
+          "<strong>Upload:</strong><br />Please use the official AI template from the media kit tocreate and upload one image for social media promotion.<br />📌 Specs: JPG, RGB, 150 ppi, 1 image per exhibitor<br />⚠️ Submissions after the deadline may not be included in our social media posts.";
       } else {
         mediaziplink.innerHTML = "下載";
         mediamaterialdesc.innerHTML =
-          "<strong>下載視覺素材包：</strong><br />若您需要使用草率季官方行銷素材，點此下載檔案。<br /><br />";
+          "<strong>下載視覺素材包：</strong><br />若您需要使用草率季官方行銷素材，點此下載檔案。";
         materialuploaddesc.innerHTML =
-          "<strong>上傳：</strong><br />請使用素材包內的官方模板（AI檔）製作，並上傳一張符合格式的圖片，我們將安排社群露出。(書攤需有三本書籍圖片上傳）<br />📌 格式：JPG、RGB、150 ppi、每單位限 1 張，zip包上傳<br />⚠️ 未於期限內上傳，將可能無法安排社群曝光。<br /><br />";
+          "<strong>上傳：</strong><br />請使用素材包內的官方模板（AI檔）製作，並上傳一張符合格式的圖片，我們將安排社群露出。(書攤需有三本書籍圖片上傳）<br />📌 格式：JPG、RGB、150 ppi、每單位限 1 張，zip包上傳<br />⚠️ 未於期限內上傳，將可能無法安排社群曝光。";
       }
     }
   }
