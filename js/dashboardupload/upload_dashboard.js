@@ -143,6 +143,7 @@ const handleFileUpload = async (
       statusSpan.textContent = "Upload failed";
       statusSpan.style.color = "red";
       statusSpan.style.fontSize = "0.8em";
+      statusSpan.style.marginTop = "0.3rem";
     }
     return false;
   }
