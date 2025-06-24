@@ -619,6 +619,7 @@ document.addEventListener("DOMContentLoaded", async function () {
     var mediaziplink = document.getElementById("media-zip-link");
     var mediamaterialdesc = document.getElementById("material-download-desc");
     var materialuploaddesc = document.getElementById("material-upload-desc");
+
     if (boothType && mediaziplink && mediamaterialdesc) {
       var boothText = boothType.trim();
       if (
@@ -692,16 +693,15 @@ document.addEventListener("DOMContentLoaded", async function () {
   const registrationStatus = document.getElementById("registration-status-row");
   const boothnumber = document.getElementById("booth-number-row");
   const conditionalyes = document.getElementById("booth-type-tooltip");
-  const foreignShipping = document.getElementById("media-section-row2");
-  const visaCN = document.getElementById("media-section-row3");
-  const overseavisa = document.getElementById("media-section-overseasvisa");
-  const familyticket = document.getElementById("media-section-row4");
-  const manual = document.getElementById("media-section-row5");
-  const boothappearance = document.getElementById("media-section-row6");
-  const mediaupload = document.getElementById("media-section");
-  const catalogSection = document.getElementById(
-    "media-section-catalog-section"
+  const foreignShipping = document.getElementById("foreign-shipping");
+  const visaCN = document.getElementById("visaCN");
+  const overseavisa = document.getElementById("overseasvisa");
+  const familyticket = document.getElementById("familyticket");
+  const manualBoothappearance = document.getElementById(
+    "manual-boothappearance"
   );
+  const mediaupload = document.getElementById("media-section");
+  const catalogSection = document.getElementById("catalog-section");
   const liveEventSection = document.getElementById("media-live-event-section");
 
   const rawResult = apiData["錄取"];
@@ -739,7 +739,7 @@ document.addEventListener("DOMContentLoaded", async function () {
     if (visaCN) visaCN.style.display = "none";
     if (overseavisa) overseavisa.style.display = "none";
     familyticket.style.display = "none";
-    manual.style.display = "none";
+    manualBoothappearance.style.display = "none";
     registrationStatus.style.display = "none";
     boothnumber.style.display = "none";
     liveEventTime.style.display = "none";
@@ -758,12 +758,12 @@ document.addEventListener("DOMContentLoaded", async function () {
         if (mediaupload) mediaupload.style.display = "block";
         if (catalogSection) catalogSection.style.display = "block";
         if (liveEventSection) liveEventSection.style.display = "block";
-        if (liveEventTime) liveEventTime.style.display = "block";
+        if (liveEventTime) liveEventTime.style.display = "table-row";
         if (nationality !== "TW") {
           foreignShipping.style.display = "block";
         }
         familyticket.style.display = "block";
-        manual.style.display = "block";
+        manualBoothappearance.style.display = "block";
         registrationStatus.style.display = "block";
         boothnumber.style.display = "block";
         // boothappearance.style.display = "block";
@@ -788,12 +788,12 @@ document.addEventListener("DOMContentLoaded", async function () {
         if (mediaupload) mediaupload.style.display = "block";
         if (catalogSection) catalogSection.style.display = "block";
         if (liveEventSection) liveEventSection.style.display = "block";
-        if (liveEventTime) liveEventTime.style.display = "block";
+        if (liveEventTime) liveEventTime.style.display = "table-row";
         if (nationality !== "TW") {
           foreignShipping.style.display = "block";
         }
         familyticket.style.display = "block";
-        manual.style.display = "block";
+        manualBoothappearance.style.display = "block";
         registrationStatus.style.display = "block";
         boothnumber.style.display = "block";
         // boothappearance.style.display = "block";
@@ -818,7 +818,7 @@ document.addEventListener("DOMContentLoaded", async function () {
         if (mediaupload) mediaupload.style.display = "block";
         if (catalogSection) catalogSection.style.display = "block";
         if (liveEventSection) liveEventSection.style.display = "block";
-        if (liveEventTime) liveEventTime.style.display = "block";
+        if (liveEventTime) liveEventTime.style.display = "table-row";
         if (nationality !== "TW") {
           foreignShipping.style.display = "block";
         }
@@ -826,7 +826,7 @@ document.addEventListener("DOMContentLoaded", async function () {
           visaCN.style.display = "block";
         }
         familyticket.style.display = "block";
-        manual.style.display = "block";
+        manualBoothappearance.style.display = "block";
         registrationStatus.style.display = "block";
         boothnumber.style.display = "block";
         // boothappearance.style.display = "block";
@@ -890,6 +890,14 @@ document.addEventListener("DOMContentLoaded", async function () {
   }
   setDiscountCodes(apiData["親友票"]);
 
+  // 產生產品連結
+  function toProductUrl(applicationNumber, productName) {
+    return (
+      "https://nmhw.taipeiartbookfair.com/products/" +
+      (applicationNumber + "-" + productName).replace(/\s+/g, "").toLowerCase()
+    );
+  }
+
   let publishTimes = {};
   try {
     const publishRes = await fetch(publishApiUrl);
@@ -923,12 +931,83 @@ document.addEventListener("DOMContentLoaded", async function () {
     block.classList.remove("disabled");
     block.style.opacity = 1;
   }
-});
 
-// 產生產品連結
-function toProductUrl(applicationNumber, productName) {
-  return (
-    "https://nmhw.taipeiartbookfair.com/products/" +
-    (applicationNumber + "-" + productName).replace(/\s+/g, "").toLowerCase()
-  );
-}
+  // 你要控管的區塊對應表（key = publishTimes 的 key, value = 外層區塊 id）
+  // Section（整個功能區塊）對應表
+  const sectionMap = {
+    mediaupload_download: "media-section", // 行銷素材下載
+    mediaupload_upload: "material-upload-btn", // 行銷素材上傳
+    catalogSection_upload: "catalog-upload-btn", // 草率簿上傳
+    visaCN_download: "visaCN", // 中國簽證協助
+    overseavisa_download: "overseasvisa", // 海外簽證協助
+    foreignShipping_download: "foreign-shipping", // 海外寄件服務
+    liveEventSection_Link: "media-live-event-section", // 現場活動徵集
+    familyticket_Link: "familyticket", // 親友票
+    manual_download: "manual-boothappearance", // 攤主手冊
+    boothappearance_download: "manual-boothappearance", // 攤位外觀（同上）
+    "booth-map_download": "booth-number-row", // 攤位地圖
+  };
+
+  // Desc（說明文字）對應表
+  const descMap = {
+    mediaupload_download: "material-download-desc",
+    mediaupload_upload: "material-upload-desc",
+    catalogSection_upload: "catalog-desc",
+    visaCN_download: "visa-upload",
+    overseavisa_download: "overseasvisa-desc",
+    foreignShipping_download: "foreigner-form",
+    liveEventSection_Link: "live-event-desc",
+    familyticket_Link: "familyticket-desc",
+    manual_download: "manual-desc",
+    boothappearance_download: "boothappearance-desc",
+    "booth-map_download": "booth-number-desc",
+  };
+
+  // 假設 publishTimes 物件 key = section id, value = {descId, publishTime, deadline, preMessage}
+  Object.entries(publishTimes).forEach(([sectionId, info]) => {
+    const section = document.getElementById(sectionId);
+    const desc = document.getElementById(info.descId);
+    if (!section || !desc) return;
+
+    // 移除舊的遮罩和 pre-banner
+    const oldOverlay = section.querySelector(".overlay-closed");
+    if (oldOverlay) oldOverlay.remove();
+    const preBanner = desc.querySelector(".pre-banner");
+    if (preBanner) preBanner.remove();
+
+    const now = new Date();
+    const publishTime = info.publishTime ? new Date(info.publishTime) : null;
+    const deadline =
+      !info.deadline || info.deadline === "infinite"
+        ? null
+        : new Date(info.deadline);
+
+    // 公布前
+    if (publishTime && now < publishTime) {
+      let banner = document.createElement("div");
+      banner.className = "pre-banner";
+      banner.style.background = "#eee";
+      banner.style.color = "#888";
+      banner.style.padding = "0.5em";
+      banner.style.marginBottom = "0.5em";
+      banner.textContent = info.preMessage || "Not available yet.";
+      desc.insertBefore(banner, desc.firstChild);
+      section.classList.add("disabled");
+      section.style.opacity = 0.7;
+    }
+    // 已截止（有截止時間且已過）
+    else if (deadline && now > deadline) {
+      const overlay = document.createElement("div");
+      overlay.className = "overlay-closed";
+      overlay.textContent = "Closed";
+      section.appendChild(overlay);
+      section.classList.add("disabled");
+      section.style.opacity = 1;
+    }
+    // 公布後且未截止
+    else {
+      section.classList.remove("disabled");
+      section.style.opacity = 1;
+    }
+  });
+});
