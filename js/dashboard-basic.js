@@ -9,7 +9,7 @@ if (!account || !region) {
 const apiUrl =
   "https://script.google.com/macros/s/AKfycbwNWgPsLK_ldHUIvoIg5a9k3PNIlmjvJeTgbCZ5CZsvKFQ7e1DoxbMsAawi4nI3Rea4DA/exec";
 const publishApiUrl =
-  "https://script.google.com/macros/s/AKfycbyCVzqjoI95CVY_MheZmwSBuhZl_OOq6DYZo4mmVcY-rj-AHieUQeYcZtYUXoD-2q8oVg/exec";
+  "https://script.google.com/macros/s/AKfycbxJkcTqW6xJfhCSVFdI-Mk9SFSGTdQnCB2-_-8sluqgTHul2wjNS6jV9wJZMPtIdSy3Pw/exec?action=get_publish_times";
 
 document.addEventListener("DOMContentLoaded", async function () {
   if (window.startFakeLoading) window.startFakeLoading();
