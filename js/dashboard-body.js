@@ -97,21 +97,6 @@ document.addEventListener("DOMContentLoaded", function () {
     loadingMask.style.display = "none";
   };
 
-  // Copy to clipboard function
-  window.copyToClipboard = function (id) {
-    const el = document.getElementById(id);
-    let text = el.innerText || el.textContent;
-    text = text.trim();
-    navigator.clipboard.writeText(text).then(() => {
-      const btn = event.target;
-      const original = btn.textContent;
-      btn.textContent = "✅";
-      setTimeout(() => {
-        btn.textContent = original;
-      }, 1000);
-    });
-  };
-
   // Logo rotation logic
   const logo = document.querySelector(".machine-rotate-logo");
   let isHovering = false;

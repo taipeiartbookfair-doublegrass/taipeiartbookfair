@@ -156,7 +156,7 @@
                 </td>
               </tr>
               <!-- 現場活動reminder -->
-              <tr>
+              <tr id="live-event-schedule-row" style="display: none">
                 <td colspan="2" style="position: relative">
                   <span class="label"
                     >現場活動場次資訊 Program Sessions Reminder</span
@@ -902,7 +902,7 @@
           <div class="scroll-inner">
             <table style="width: 100%; table-layout: auto">
               <!-- 攤商編號 -->
-              <tr>
+              <tr id="booth-number-row" style="display: none">
                 <td colspan="3" style="padding: 0; border: none">
                   <table style="width: 100%; table-layout: auto">
                     <tr style="padding: 0; border: none">
@@ -955,7 +955,7 @@
               </tr>
 
               <!-- 資格勾勾區 -->
-              <tr>
+              <tr id="registration-status-row" display="none;">
                 <td colspan="3" style="padding: 0; border: none">
                   <table style="width: 100%; table-layout: auto">
                     <tr style="padding: 0; border: none">
@@ -1242,24 +1242,70 @@
               </tr>
               <tr id="negative-letter" style="display: none">
                 <td colspan="3" style="border-top: none">
-                  感謝您對本次徵件／申請活動的關注與投入。經過審慎評選，本屆草率季，我們收到了725封海內外具創意與潛力的申請作品／計畫。經評審團綜合討論後，遺憾地通知您，此次您所提交的申請未列入最終入選名單。<br />
+                  感謝您對本次徵件／申請活動的關注與投入。經過審慎評選，本屆草率季，我們收到了900多海內外具創意與潛力的申請作品／計畫。經評審團綜合討論後，遺憾地通知您，此次您所提交的申請未列入最終入選名單。<br />
                   我們非常感謝您願意分享您的創作／計畫，也十分肯定您在其中展現出的努力與思考。誠摯地希望未來仍有機會與您合作或再次收到您的申請。也歡迎您參與草率季的其他活動，或是持續關注我們的網站與社群媒體，了解更多最新消息。<br />
                   祝一切順利，創作茂盛。<br /><br />
                   草率季 2025.06.30<br />
+                  <small>hooroo@double-grass.com</small><br />
+                  <hr
+                    style="margin: 1rem 0; border: none; border-top: 1px solid"
+                  />
+                  Thank you for your interest and participation in this year’s
+                  open call/application event. After a careful selection
+                  process, we received over 900 creative and promising
+                  submissions and proposals from both Taiwan and abroad for this
+                  year’s Taipei Art Book Fair. After comprehensive discussions
+                  by the jury, we regret to inform you that your application was
+                  not selected for the final list.<br /><br />
+
+                  We sincerely appreciate your willingness to share your work or
+                  project, and we highly value the effort and thought you have
+                  put into it. We hope to have the opportunity to collaborate
+                  with you or receive your application again in the future. You
+                  are also welcome to participate in other activities of the
+                  Taipei Art Book Fair, or stay tuned to our website and social
+                  media for the latest updates. <br /><br />
+
+                  Wishing you all the best and continued creative growth.<br /><br />
+                  Taipei Art Book Fair 2025.06.30<br />
                   <small>hooroo@double-grass.com</small><br />
                 </td>
               </tr>
               <tr id="runnerup-letter" style="display: none">
                 <td colspan="3" style="border-top: none">
                   感謝您對本次徵件／申請活動的關注與投入。<br /><br />
-                  經過審慎評選，本屆草率季，我們收到了725封來自海內外具創意與潛力的申請作品／計畫。<br />
-                  經評審團綜合討論後，您的申請目前列為備取，我們將於7/16日公布備取錄取、繳費通知。<br />
+                  經過審慎評選，本屆草率季，我們收到了900多封來自海內外具創意與潛力的申請作品／計畫。<br />
+                  經評審團綜合討論後，您的申請目前列為備取，我們將於<u>7/16日</u>公布備取錄取、繳費通知。<br />
                   <br />
                   我們非常感謝您願意分享您的創作／計畫，也十分肯定您在其中展現出的努力與思考。誠摯地希望未來仍有機會與您合作或再次收到您的申請。也歡迎您參與草率季的其他活動，或是持續關注我們的網站與社群媒體，了解更多最新消息。<br />
                   <br />
                   祝一切順利，創作茂盛。<br /><br />
                   草率季 2025.06.30<br />
-                  <small>hooroo@double-grass.com</small><br />
+                  <small>hooroo@double-grass.com</small>
+                  <hr
+                    style="margin: 1rem 0; border: none; border-top: 1px solid"
+                  />
+                  Thank you for your interest and participation in this year’s
+                  open call/application event.<br /><br />
+                  After a careful selection process, we received over 900
+                  creative and promising submissions and proposals from both
+                  Taiwan and abroad for this year’s Taipei Art Book Fair.<br />
+                  Following comprehensive discussions by the jury, your
+                  application is currently on the waiting list. We will announce
+                  the results for waitlisted participants and provide payment
+                  instructions on <u>July 16</u>.<br />
+                  <br />
+                  We sincerely appreciate your willingness to share your work or
+                  project, and we highly value the effort and thought you have
+                  put into it. We hope to have the opportunity to collaborate
+                  with you or receive your application again in the future. You
+                  are also welcome to participate in other activities of the
+                  Taipei Art Book Fair, or stay tuned to our website and social
+                  media for the latest updates.<br />
+                  <br />
+                  Wishing you all the best and continued creative growth.<br /><br />
+                  Taipei Art Book Fair 2025.06.30<br />
+                  <small>hooroo@double-grass.com</small>
                 </td>
               </tr>
               <!-- 中國簽證資料上傳 Visa Upload -->
@@ -1491,15 +1537,7 @@
                     style="margin-top: 0.5em; font-size: 1rem"
                     id="familyticket-desc"
                   ></div>
-                  <span id="discountcode">!89SJ89</span>
-                  <button
-                    class="copy-btn"
-                    onclick="copyToClipboard('discountcode')"
-                    title="Copy Discount Code"
-                    style="margin-left: 5px"
-                  >
-                    📋
-                  </button>
+                  <span id="ticket-discountcode"></span>
                   <br /><br />
                   <a
                     href="https://your-shopline-link.com"

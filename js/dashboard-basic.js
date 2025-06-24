@@ -683,9 +683,12 @@ document.addEventListener("DOMContentLoaded", async function () {
 
   // 狀態與欄位顯示
   const registrationStatusEl = document.getElementById("registration-status");
+  const liveEventTime = document.getElementById("ive-event-schedule-row");
   const billinginfo = document.getElementById("billing-info");
   const letter = document.getElementById("negative-letter");
   const runnerletter = document.getElementById("runnerup-letter");
+  const registrationStatus = document.getElementById("registration-status-row");
+  const boothnumber = document.getElementById("booth-number-row");
   const conditionalyes = document.getElementById("booth-type-tooltip");
   const foreignShipping = document.getElementById("media-section-row2");
   const visaupload = document.getElementById("media-section-row3");
@@ -735,6 +738,9 @@ document.addEventListener("DOMContentLoaded", async function () {
     if (overseavisa) overseavisa.style.display = "none";
     familyticket.style.display = "none";
     manual.style.display = "none";
+    registrationStatus.style.display = "none";
+    boothnumber.style.display = "none";
+    liveEventTime.style.display = "none";
     // boothappearance.style.display = "none";
 
     if (rawResult === "5-否") {
@@ -750,15 +756,20 @@ document.addEventListener("DOMContentLoaded", async function () {
         if (mediaupload) mediaupload.style.display = "block";
         if (catalogSection) catalogSection.style.display = "block";
         if (liveEventSection) liveEventSection.style.display = "block";
+        if (liveEventTime) liveEventTime.style.display = "block";
         if (nationality !== "TW") {
           foreignShipping.style.display = "block";
         }
         familyticket.style.display = "block";
         manual.style.display = "block";
+        registrationStatus.style.display = "block";
+        boothnumber.style.display = "block";
         // boothappearance.style.display = "block";
       } else {
         registrationStatusEl.textContent = getStatusText(false);
         billinginfo.style.display = "block";
+        registrationStatus.style.display = "block";
+        boothnumber.style.display = "block";
         // 這裡加上 visaupload/overseavisa 的顯示條件
         if (nationality === "CN") {
           visaupload.style.display = "block";
@@ -775,15 +786,20 @@ document.addEventListener("DOMContentLoaded", async function () {
         if (mediaupload) mediaupload.style.display = "block";
         if (catalogSection) catalogSection.style.display = "block";
         if (liveEventSection) liveEventSection.style.display = "block";
+        if (liveEventTime) liveEventTime.style.display = "block";
         if (nationality !== "TW") {
           foreignShipping.style.display = "block";
         }
         familyticket.style.display = "block";
         manual.style.display = "block";
+        registrationStatus.style.display = "block";
+        boothnumber.style.display = "block";
         // boothappearance.style.display = "block";
       } else {
         registrationStatusEl.textContent = getStatusText(false);
         billinginfo.style.display = "block";
+        registrationStatus.style.display = "block";
+        boothnumber.style.display = "block";
         if (nationality === "CN") {
           visaupload.style.display = "block";
         } else if (nationality !== "TW" && nationality !== "CN") {
@@ -793,12 +809,14 @@ document.addEventListener("DOMContentLoaded", async function () {
     } else if (rawResult === "3-猶豫") {
       registrationStatusEl.textContent = "-";
       runnerletter.style.display = "block";
+      registrationStatus.style.display = "block";
     } else {
       if (paymentChecked && declarationChecked) {
         registrationStatusEl.textContent = getStatusText(true);
         if (mediaupload) mediaupload.style.display = "block";
         if (catalogSection) catalogSection.style.display = "block";
         if (liveEventSection) liveEventSection.style.display = "block";
+        if (liveEventTime) liveEventTime.style.display = "block";
         if (nationality !== "TW") {
           foreignShipping.style.display = "block";
         }
@@ -807,10 +825,14 @@ document.addEventListener("DOMContentLoaded", async function () {
         }
         familyticket.style.display = "block";
         manual.style.display = "block";
+        registrationStatus.style.display = "block";
+        boothnumber.style.display = "block";
         // boothappearance.style.display = "block";
       } else {
         registrationStatusEl.textContent = getStatusText(false);
         billinginfo.style.display = "block";
+        registrationStatus.style.display = "block";
+        boothnumber.style.display = "block";
       }
     }
   }
@@ -829,6 +851,42 @@ document.addEventListener("DOMContentLoaded", async function () {
       el.style.fontStyle = "";
     }
   }
+
+  // 產生優惠碼區塊
+  function setDiscountCodes(codes) {
+    const container = document.getElementById("ticket-discountcode");
+    if (!container) return;
+    container.innerHTML = "";
+    if (!codes || codes === "None") {
+      container.textContent = "None";
+      return;
+    }
+    const codeArr = codes.split(",");
+    codeArr.forEach((code, idx) => {
+      const span = document.createElement("span");
+      span.textContent = code;
+      span.style.marginRight = "0.5em";
+      span.style.fontWeight = "bold";
+      container.appendChild(span);
+
+      const btn = document.createElement("button");
+      btn.className = "copy-btn";
+      btn.title = "Copy Discount Code";
+      btn.style.marginLeft = "5px";
+      btn.style.fontSize = "1em";
+      btn.textContent = "📋";
+      btn.onclick = () => {
+        navigator.clipboard.writeText(code);
+        btn.textContent = "✅";
+        setTimeout(() => (btn.textContent = "📋"), 1000);
+      };
+      container.appendChild(btn);
+
+      // 每個 code 換行
+      container.appendChild(document.createElement("br"));
+    });
+  }
+  setDiscountCodes(apiData["親友票"]);
 
   if (window.setLoading) window.setLoading(1);
   if (window.hideLoading) window.hideLoading();
