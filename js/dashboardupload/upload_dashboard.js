@@ -23,14 +23,29 @@ document
     if (result) alert("Marketing material uploaded successfully!");
   });
 
-// Declaration 上傳
-document
-  .getElementById("uploadBtnDeclaration")
-  .addEventListener("click", async () => {
-    const fileInput = document.getElementById("declaration-file");
-    const result = await handleFileUpload(fileInput, folderIds.declaration);
-    if (result) alert("Declaration uploaded successfully!");
-  });
+// 綁定所有上傳按鈕
+Object.keys(uploadStatusMap).forEach((key) => {
+  const conf = uploadStatusMap[key];
+  const btn = document.getElementById(conf.btn);
+  if (btn) {
+    btn.addEventListener("click", async (e) => {
+      btn.disabled = true;
+      const fileInput = document.getElementById(conf.file);
+      const statusSpan = document.getElementById(conf.status);
+      const result = await handleFileUpload(
+        fileInput,
+        conf.folder,
+        conf.storage,
+        statusSpan
+      );
+      alert(result ? conf.successMsg : conf.failMsg);
+      // 延遲 0.5 秒再啟用
+      setTimeout(() => {
+        btn.disabled = false;
+      }, 500);
+    });
+  }
+});
 
 // 精簡 handleFileUpload
 const handleFileUpload = async (fileInput, folderId) => {
@@ -89,9 +104,22 @@ const handleFileUpload = async (fileInput, folderId) => {
     );
 
     await uploadRes.text();
+
+    // 上傳成功，顯示檔名並存 localStorage
+    if (statusSpan) {
+      statusSpan.textContent = `Uploaded: ${file.name}`;
+      statusSpan.style.color = "green";
+    }
+    if (storageKey) {
+      localStorage.setItem(storageKey, file.name);
+    }
     return true;
   } catch (error) {
-    alert("File upload failed. Please try again.");
+    // 上傳失敗
+    if (statusSpan) {
+      statusSpan.textContent = "Upload failed";
+      statusSpan.style.color = "red";
+    }
     return false;
   }
 };
