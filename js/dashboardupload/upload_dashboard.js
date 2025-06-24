@@ -8,28 +8,39 @@ const folderIds = {
 // Catalog 上傳
 document
   .getElementById("uploadBtnCatalog")
-  .addEventListener("click", async () => {
+  .addEventListener("click", async (e) => {
+    const btn = e.currentTarget;
+    btn.disabled = true;
     const fileInput = document.getElementById("catalog-file");
     const result = await handleFileUpload(fileInput, folderIds.catalog);
-    if (result) alert("Catalog uploaded successfully!");
+    alert(result ? "Catalog uploaded successfully!" : "Upload failed.");
+    btn.disabled = false;
   });
 
 // Marketing 上傳
 document
   .getElementById("uploadBtnMarketing")
-  .addEventListener("click", async () => {
+  .addEventListener("click", async (e) => {
+    const btn = e.currentTarget;
+    btn.disabled = true;
     const fileInput = document.getElementById("marketing-file");
     const result = await handleFileUpload(fileInput, folderIds.marketing);
-    if (result) alert("Marketing material uploaded successfully!");
+    alert(
+      result ? "Marketing material uploaded successfully!" : "Upload failed."
+    );
+    btn.disabled = false;
   });
 
 // Declaration 上傳
 document
   .getElementById("uploadBtnDeclaration")
-  .addEventListener("click", async () => {
+  .addEventListener("click", async (e) => {
+    const btn = e.currentTarget;
+    btn.disabled = true;
     const fileInput = document.getElementById("declaration-file");
     const result = await handleFileUpload(fileInput, folderIds.declaration);
-    if (result) alert("Declaration uploaded successfully!");
+    alert(result ? "Declaration uploaded successfully!" : "Upload failed.");
+    btn.disabled = false;
   });
 
 // 精簡 handleFileUpload
