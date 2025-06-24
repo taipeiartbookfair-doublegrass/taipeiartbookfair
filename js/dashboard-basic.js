@@ -179,7 +179,7 @@ document.addEventListener("DOMContentLoaded", async function () {
       el.style.backgroundColor = "rgb(0, 157, 255)";
     } else if (resultText === "備取" || resultText === "Waitlisted") {
       el.style.backgroundColor = "lightgreen";
-    } else if (resultText === "未錄取" || resultText === "Rejected") {
+    } else if (resultText === "未錄取" || resultText === "Not Selected") {
       el.style.backgroundColor = "lightgrey";
       el.style.color = "DarkSlateGrey";
     }
