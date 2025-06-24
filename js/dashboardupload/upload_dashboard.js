@@ -61,12 +61,14 @@ const handleFileUpload = async (fileInput, folderId) => {
       applicationNumber = appNumEl.textContent.trim();
     }
 
-    // 組合檔名：攤商編號_日期時間_原始檔名
-    const currentDateTime = new Date()
-      .toISOString()
-      .replace(/[-T:.]/g, "")
-      .slice(0, 14);
-    const newFileName = `${applicationNumber}_${currentDateTime}_${file.name}`;
+    // 在 handleFileUpload 裡，加入這段
+    let fileType = "";
+    if (folderId === folderIds.declaration) fileType = "declaration";
+    else if (folderId === folderIds.catalog) fileType = "catalog";
+    else if (folderId === folderIds.marketing) fileType = "marketing";
+
+    // 組合檔名：攤商編號_檔案類型_原始檔名
+    const newFileName = `${applicationNumber}_${fileType}_${file.name}`;
 
     const data = {
       data: base64String,
