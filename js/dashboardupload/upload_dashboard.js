@@ -1,6 +1,5 @@
-// 4 個 folder ID
+// 3 個 folder ID
 const folderIds = {
-  visa: "124lG9aAkp9HqsWiwMeBzF_MJbBib8EAj",
   marketing: "1GBQiVxTbCdl-kCCMvNTc9Ejjhfsxu9ds",
   catalog: "1uE7korPZDcMRCo0nTkoiowEh3sVpw5QA",
   declaration: "11CnK9JWKistOUUf8HocJNb_lyK1WYdJp",
@@ -32,13 +31,6 @@ document
     const result = await handleFileUpload(fileInput, folderIds.declaration);
     if (result) alert("Declaration uploaded successfully!");
   });
-
-// Visa 上傳
-document.getElementById("uploadBtnVisa").addEventListener("click", async () => {
-  const fileInput = document.getElementById("visa-file");
-  const result = await handleFileUpload(fileInput, folderIds.visa);
-  if (result) alert("Visa document uploaded successfully!");
-});
 
 // 精簡 handleFileUpload
 const handleFileUpload = async (fileInput, folderId) => {

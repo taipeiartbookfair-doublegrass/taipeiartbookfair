@@ -903,7 +903,7 @@
             <table width="100%">
               <tr>
                 <!-- 攤商編號 -->
-                <td style="border-right: 2px solid black">
+                <td style="border-right: 2px solid black; width: 80%">
                   <span class="label">攤商編號 Booth Number</span><br />
                   <div style="vertical-align: middle; font-size: 2.7rem">
                     <span
@@ -912,6 +912,7 @@
                       >N/A
                     </span>
                     <span
+                      id="booth-number-desc"
                       style="
                         font-size: 1rem;
                         color: darkgray;
@@ -921,6 +922,19 @@
                       >攤位編號與攤位地圖將於報到當天（11/20）公布，屆時請留意公告。
                     </span>
                   </div>
+                </td>
+                <td
+                  style="
+                    width: 20%;
+                    border-top: 0.5px solid pink;
+                    border-left: none;
+                    border-right: none;
+                    border-bottom: none;
+                  "
+                >
+                  <span class="label">攤位地圖 Booth Map</span><br /><span
+                    >N/A</span
+                  >
                 </td>
               </tr>
               <tr>
@@ -1228,10 +1242,7 @@
               </tr>
               <!-- 中國簽證資料上傳 Visa Upload -->
               <tr style="display: none" id="media-section-row3">
-                <td
-                  colspan="2"
-                  style="border-top: none; width: 80%; border-right: none"
-                >
+                <td style="border-top: none; width: 55vw; border-right: none">
                   <div id="visa-upload" style="background-color: mintcream">
                     <span class="label">簽證申請 Visa Support</span><br />
                     由於規定，目前中國地區人士來台需由在台單位協助申辦。
@@ -1239,41 +1250,14 @@
                       id="visa-warning"
                       style="color: #c00; font-size: 0.9em"
                     >
-                      請務必於 <b>7月7日</b>前
-                      填寫下列表單後上傳，以利安排申請流程。
+                      請務必於 <b>7月7日</b>前完成下列表單，以利安排申請流程。
                     </div>
                     <br />
                     <a
                       href="https://forms.gle/hVu54wUfqqUMRxfG8"
                       target="_blank"
-                      >下載表單</a
+                      >填寫表單</a
                     >
-                  </div>
-                </td>
-                <td
-                  colspan="1"
-                  style="
-                    border-top: none;
-                    width: 20%;
-                    border-left: 1px dashed black;
-                  "
-                >
-                  <div>
-                    <input type="file" id="visa-file" accept=".pdf" />
-                    <button
-                      style="
-                        padding: 0.3em 1.2em;
-                        background: #000;
-                        color: #fff;
-                        border: none;
-                        border-radius: 3px;
-                        cursor: pointer;
-                      "
-                      type="button"
-                      id="uploadBtnVisa"
-                    >
-                      上傳 Upload
-                    </button>
                   </div>
                 </td>
               </tr>
@@ -1335,7 +1319,8 @@
                   <input
                     type="file"
                     id="marketing-file"
-                    accept=".pdf,.jpg,.jpeg,.png"
+                    accept=".jpg,.jpeg"
+                    style="max-width: 198px"
                   /><br />
                   <button
                     style="
@@ -1444,7 +1429,12 @@
                   "
                 >
                   <div>
-                    <input type="file" id="catalog-file" accept=".pdf" />
+                    <input
+                      type="file"
+                      id="catalog-file"
+                      accept=".pdf"
+                      style="max-width: 198px"
+                    />
                     <button
                       style="
                         padding: 0.3em 1.2em;
@@ -1507,18 +1497,11 @@
                   >
                 </td>
                 <td style="border-top: none; width: 55vw">
-                  <span class="label">展場地圖 Venue Map</span><br />
-                  <a href="https://your-shopline-link.com" target="_blank"
-                    >在主網站查看</a
-                  >
-                </td>
-              </tr>
-              <tr style="display: none" id="media-section-row6">
-                <td style="border-top: none; width: 55vw">
                   <span class="label">攤位外觀 Booth Appearance</span><br />
                   10月公布
                 </td>
               </tr>
+              <!-- <tr style="display: none" id="media-section-row6"></tr> -->
 
               <tr>
                 <td style="border-top: none; border-right: 2px solid black">
