@@ -468,10 +468,11 @@ document.addEventListener("DOMContentLoaded", async function () {
   }
   setDeclarationLanguage(boothType);
 
-  // 動態勾勾區塊語言
+  // 動態勾勾區塊語言還有攤商編號說明搭便車
   function setYesLanguage(boothType) {
     var yesdesc = document.getElementById("registration-status-desc");
-    if (boothType && yesdesc) {
+    var boothnumberdesc = document.getElementById("booth-number-desc");
+    if (boothType && yesdesc && boothnumberdesc) {
       var boothText = boothType.trim();
       if (
         boothText === "One Regular Booth" ||
@@ -480,9 +481,13 @@ document.addEventListener("DOMContentLoaded", async function () {
       ) {
         yesdesc.innerHTML =
           "Please complete the payment and upload the signed agreement by <b><mark>July 15</mark></b>; otherwise, you will not be able to participate in the fair. Only after both payment and agreement upload are confirmed will your participation be finalized. The team will verify and update all records on July 15.";
+        boothnumberdesc.innerHTML =
+          "Booth numbers and the floor plan will be announced on <b>November 20</b>, the check-in day.";
       } else {
         yesdesc.innerHTML =
           "請於<b><mark>7 月 15 日</mark></b>前完成繳費與同意書上傳，否則將無法參展。經確認完成繳費動作＆同意書上傳，才算是取得最終參展資格，團隊將於7 月 15 日核對後進行統一更新。";
+        boothnumberdesc.innerHTML =
+          "攤位編號與攤位地圖將於報到當天（11/20）公布，屆時請留意公告。";
       }
     }
   }
