@@ -8,6 +8,8 @@ if (!account || !region) {
 
 const apiUrl =
   "https://script.google.com/macros/s/AKfycbwNWgPsLK_ldHUIvoIg5a9k3PNIlmjvJeTgbCZ5CZsvKFQ7e1DoxbMsAawi4nI3Rea4DA/exec";
+const publishApiUrl =
+  "https://script.google.com/macros/s/AKfycbyCVzqjoI95CVY_MheZmwSBuhZl_OOq6DYZo4mmVcY-rj-AHieUQeYcZtYUXoD-2q8oVg/exec";
 
 document.addEventListener("DOMContentLoaded", async function () {
   if (window.startFakeLoading) window.startFakeLoading();
@@ -691,7 +693,7 @@ document.addEventListener("DOMContentLoaded", async function () {
   const boothnumber = document.getElementById("booth-number-row");
   const conditionalyes = document.getElementById("booth-type-tooltip");
   const foreignShipping = document.getElementById("media-section-row2");
-  const visaupload = document.getElementById("media-section-row3");
+  const visaCN = document.getElementById("media-section-row3");
   const overseavisa = document.getElementById("media-section-overseasvisa");
   const familyticket = document.getElementById("media-section-row4");
   const manual = document.getElementById("media-section-row5");
@@ -734,7 +736,7 @@ document.addEventListener("DOMContentLoaded", async function () {
     if (catalogSection) catalogSection.style.display = "none";
     if (liveEventSection) liveEventSection.style.display = "none";
     foreignShipping.style.display = "none";
-    if (visaupload) visaupload.style.display = "none";
+    if (visaCN) visaCN.style.display = "none";
     if (overseavisa) overseavisa.style.display = "none";
     familyticket.style.display = "none";
     manual.style.display = "none";
@@ -770,9 +772,9 @@ document.addEventListener("DOMContentLoaded", async function () {
         billinginfo.style.display = "block";
         registrationStatus.style.display = "block";
         boothnumber.style.display = "block";
-        // 這裡加上 visaupload/overseavisa 的顯示條件
+        // 這裡加上 visaCN/overseavisa 的顯示條件
         if (nationality === "CN") {
-          visaupload.style.display = "block";
+          visaCN.style.display = "block";
         } else if (nationality !== "TW" && nationality !== "CN") {
           overseavisa.style.display = "block";
         }
@@ -801,7 +803,7 @@ document.addEventListener("DOMContentLoaded", async function () {
         registrationStatus.style.display = "block";
         boothnumber.style.display = "block";
         if (nationality === "CN") {
-          visaupload.style.display = "block";
+          visaCN.style.display = "block";
         } else if (nationality !== "TW" && nationality !== "CN") {
           overseavisa.style.display = "block";
         }
@@ -821,7 +823,7 @@ document.addEventListener("DOMContentLoaded", async function () {
           foreignShipping.style.display = "block";
         }
         if (nationality === "CN") {
-          visaupload.style.display = "block";
+          visaCN.style.display = "block";
         }
         familyticket.style.display = "block";
         manual.style.display = "block";
@@ -888,9 +890,39 @@ document.addEventListener("DOMContentLoaded", async function () {
   }
   setDiscountCodes(apiData["親友票"]);
 
+  let publishTimes = {};
+  try {
+    const publishRes = await fetch(publishApiUrl);
+    publishTimes = await publishRes.json();
+  } catch (e) {
+    console.warn("Failed to load publish times:", e);
+  }
+
   if (window.setLoading) window.setLoading(1);
   if (window.hideLoading) window.hideLoading();
   if (window.stopFakeLoading) window.stopFakeLoading();
+
+  // 時間控管範例
+  const now = new Date();
+  const info = publishTimes["mediaupload_upload"]; // 以行銷素材上傳為例
+  const publishTime = new Date(info.publishTime);
+  const deadline = info.deadline ? new Date(info.deadline) : null;
+
+  if (now < publishTime) {
+    // 尚未開放
+    block.textContent = info.preMessage || "Not available yet.";
+    block.classList.add("disabled");
+  } else if (deadline && now > deadline) {
+    // 已截止
+    block.textContent = "Closed";
+    block.classList.add("disabled");
+    block.style.opacity = 0.5; // 灰掉
+  } else {
+    // 正常顯示
+    block.textContent = "";
+    block.classList.remove("disabled");
+    block.style.opacity = 1;
+  }
 });
 
 // 產生產品連結
