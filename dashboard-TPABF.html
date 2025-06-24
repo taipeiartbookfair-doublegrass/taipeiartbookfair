@@ -952,7 +952,7 @@
                         "
                       >
                         <span class="label">攤位地圖 Booth Map</span><br /><span
-                          id="booth-map"
+                          id="booth-map-desc"
                           >N/A</span
                         >
                       </td>
@@ -1316,7 +1316,7 @@
                 </td>
               </tr>
               <!-- 中國簽證資料上傳 Visa Upload -->
-              <tr style="display: none" id="media-section-row3">
+              <tr style="display: none" id="visaCN">
                 <td style="border-top: none; width: 55vw; border-right: none">
                   <div id="visa-upload" style="background-color: mintcream">
                     <span class="label">簽證申請 Visa Support</span><br />
@@ -1338,9 +1338,9 @@
               </tr>
 
               <!-- 海外簽證資料連結-->
-              <tr style="display: none" id="media-section-overseasvisa">
+              <tr style="display: none" id="overseasvisa">
                 <td style="border-top: none; width: 55vw">
-                  <div>
+                  <div id="overseasvisa-desc">
                     <span class="label">簽證申請 Visa Support</span><br />
                     We provide a visa support package, including an official
                     invitation letter and a brief introduction to TPABF. If you
@@ -1390,6 +1390,7 @@
                     width: 20%;
                     border-left: 1px dashed black;
                   "
+                  id="material-upload-btn"
                 >
                   <input
                     type="file"
@@ -1419,7 +1420,7 @@
               </tr>
 
               <!-- 寄件訊息 Foreigner Form -->
-              <tr style="display: none" id="media-section-row2">
+              <tr style="display: none" id="foreign-shipping">
                 <td style="border-top: none; width: 55vw">
                   <span class="label">寄件服務 Shipping Service</span>
                   <div id="foreigner-form" style="margin-top: 0.5rem">
@@ -1473,7 +1474,7 @@
                 </td>
               </tr>
 
-              <tr id="media-section-catalog-section" style="display: none">
+              <tr id="catalog-section" style="display: none">
                 <td colspan="1" style="border-top: none; border-right: none">
                   <span class="label"
                     >草率簿露出上傳 TPABF Catalog Submission</span
@@ -1506,6 +1507,7 @@
                     width: 20%;
                     border-left: 1px dashed black;
                   "
+                  id="catalog-upload-btn"
                 >
                   <div>
                     <input
@@ -1537,7 +1539,7 @@
               </tr>
 
               <!-- 親友票 Shopline -->
-              <tr style="display: none" id="media-section-row4">
+              <tr style="display: none" id="familyticket">
                 <td colspan="2" style="border-top: none; width: 55vw">
                   <span class="label">親友票 Family&Friends Tickets</span><br />
                   <div
@@ -1555,7 +1557,7 @@
                 </td>
               </tr>
 
-              <tr style="display: none" id="media-section-row5">
+              <tr style="display: none" id="manual-boothappearance">
                 <td style="border-top: none; width: 55vw">
                   <span class="label">攤主手冊 Exhibitor Manual</span><br />
                   <div
@@ -1573,7 +1575,12 @@
                 </td>
                 <td style="border-top: none; width: 55vw">
                   <span class="label">攤位外觀 Booth Appearance</span><br />
-                  10月公布
+                  <div
+                    style="margin-top: 0.5em; font-size: 1rem"
+                    id="boothappearance-desc"
+                  >
+                    10月公布
+                  </div>
                 </td>
               </tr>
               <!-- <tr style="display: none" id="media-section-row6"></tr> -->
