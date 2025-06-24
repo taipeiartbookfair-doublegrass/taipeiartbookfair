@@ -1230,7 +1230,7 @@
               <tr style="display: none" id="media-section-row3">
                 <td
                   colspan="2"
-                  style="border-top: none; width: 80%; border-right: none"
+                  style="border-top: none; width: 55vw; border-right: none"
                 >
                   <div id="visa-upload" style="background-color: mintcream">
                     <span class="label">簽證申請 Visa Support</span><br />
@@ -1239,8 +1239,7 @@
                       id="visa-warning"
                       style="color: #c00; font-size: 0.9em"
                     >
-                      請務必於 <b>7月7日</b>前
-                      填寫下列表單後上傳，以利安排申請流程。
+                      請務必於 <b>7月7日</b>前完成下列表單，以利安排申請流程。
                     </div>
                     <br />
                     <a
@@ -1248,32 +1247,6 @@
                       target="_blank"
                       >下載表單</a
                     >
-                  </div>
-                </td>
-                <td
-                  colspan="1"
-                  style="
-                    border-top: none;
-                    width: 20%;
-                    border-left: 1px dashed black;
-                  "
-                >
-                  <div>
-                    <input type="file" id="visa-file" accept=".pdf" />
-                    <button
-                      style="
-                        padding: 0.3em 1.2em;
-                        background: #000;
-                        color: #fff;
-                        border: none;
-                        border-radius: 3px;
-                        cursor: pointer;
-                      "
-                      type="button"
-                      id="uploadBtnVisa"
-                    >
-                      上傳 Upload
-                    </button>
                   </div>
                 </td>
               </tr>
@@ -1335,7 +1308,8 @@
                   <input
                     type="file"
                     id="marketing-file"
-                    accept=".pdf,.jpg,.jpeg,.png"
+                    accept=".jpg,.jpeg"
+                    style="max-width: 198px"
                   /><br />
                   <button
                     style="
@@ -1444,7 +1418,12 @@
                   "
                 >
                   <div>
-                    <input type="file" id="catalog-file" accept=".pdf" />
+                    <input
+                      type="file"
+                      id="catalog-file"
+                      accept=".pdf"
+                      style="max-width: 198px"
+                    />
                     <button
                       style="
                         padding: 0.3em 1.2em;
