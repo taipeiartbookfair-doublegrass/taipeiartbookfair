@@ -683,7 +683,7 @@ document.addEventListener("DOMContentLoaded", async function () {
 
   // 狀態與欄位顯示
   const registrationStatusEl = document.getElementById("registration-status");
-  const liveEventTime = document.getElementById("ive-event-schedule-row");
+  const liveEventTime = document.getElementById("live-event-schedule-row");
   const billinginfo = document.getElementById("billing-info");
   const letter = document.getElementById("negative-letter");
   const runnerletter = document.getElementById("runnerup-letter");
