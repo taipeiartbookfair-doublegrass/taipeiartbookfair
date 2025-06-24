@@ -906,63 +906,6 @@ document.addEventListener("DOMContentLoaded", async function () {
     console.warn("Failed to load publish times:", e);
   }
 
-  if (window.setLoading) window.setLoading(1);
-  if (window.hideLoading) window.hideLoading();
-  if (window.stopFakeLoading) window.stopFakeLoading();
-
-  // 時間控管範例
-  const now = new Date();
-  const info = publishTimes["mediaupload_upload"]; // 以行銷素材上傳為例
-  const publishTime = new Date(info.publishTime);
-  const deadline = info.deadline ? new Date(info.deadline) : null;
-
-  if (now < publishTime) {
-    // 尚未開放
-    block.textContent = info.preMessage || "Not available yet.";
-    block.classList.add("disabled");
-  } else if (deadline && now > deadline) {
-    // 已截止
-    block.textContent = "Closed";
-    block.classList.add("disabled");
-    block.style.opacity = 0.5; // 灰掉
-  } else {
-    // 正常顯示
-    block.textContent = "";
-    block.classList.remove("disabled");
-    block.style.opacity = 1;
-  }
-
-  // 你要控管的區塊對應表（key = publishTimes 的 key, value = 外層區塊 id）
-  // Section（整個功能區塊）對應表
-  const sectionMap = {
-    mediaupload_download: "media-section", // 行銷素材下載
-    mediaupload_upload: "material-upload-btn", // 行銷素材上傳
-    catalogSection_upload: "catalog-upload-btn", // 草率簿上傳
-    visaCN_download: "visaCN", // 中國簽證協助
-    overseavisa_download: "overseasvisa", // 海外簽證協助
-    foreignShipping_download: "foreign-shipping", // 海外寄件服務
-    liveEventSection_Link: "media-live-event-section", // 現場活動徵集
-    familyticket_Link: "familyticket", // 親友票
-    manual_download: "manual-boothappearance", // 攤主手冊
-    boothappearance_download: "manual-boothappearance", // 攤位外觀（同上）
-    "booth-map_download": "booth-number-row", // 攤位地圖
-  };
-
-  // Desc（說明文字）對應表
-  const descMap = {
-    mediaupload_download: "material-download-desc",
-    mediaupload_upload: "material-upload-desc",
-    catalogSection_upload: "catalog-desc",
-    visaCN_download: "visa-upload",
-    overseavisa_download: "overseasvisa-desc",
-    foreignShipping_download: "foreigner-form",
-    liveEventSection_Link: "live-event-desc",
-    familyticket_Link: "familyticket-desc",
-    manual_download: "manual-desc",
-    boothappearance_download: "boothappearance-desc",
-    "booth-map_download": "booth-number-desc",
-  };
-
   // 假設 publishTimes 物件 key = section id, value = {descId, publishTime, deadline, preMessage}
   Object.entries(publishTimes).forEach(([sectionId, info]) => {
     const section = document.getElementById(sectionId);
@@ -1010,4 +953,8 @@ document.addEventListener("DOMContentLoaded", async function () {
       section.style.opacity = 1;
     }
   });
+
+  if (window.setLoading) window.setLoading(1);
+  if (window.hideLoading) window.hideLoading();
+  if (window.stopFakeLoading) window.stopFakeLoading();
 });
