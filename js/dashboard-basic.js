@@ -852,6 +852,42 @@ document.addEventListener("DOMContentLoaded", async function () {
     }
   }
 
+  // 產生優惠碼區塊
+  function setDiscountCodes(codes) {
+    const container = document.getElementById("ticket-discountcode");
+    if (!container) return;
+    container.innerHTML = "";
+    if (!codes || codes === "None") {
+      container.textContent = "None";
+      return;
+    }
+    const codeArr = codes.split(",");
+    codeArr.forEach((code, idx) => {
+      const span = document.createElement("span");
+      span.textContent = code;
+      span.style.marginRight = "0.5em";
+      span.style.fontWeight = "bold";
+      container.appendChild(span);
+
+      const btn = document.createElement("button");
+      btn.className = "copy-btn";
+      btn.title = "Copy Discount Code";
+      btn.style.marginLeft = "5px";
+      btn.style.fontSize = "1em";
+      btn.textContent = "📋";
+      btn.onclick = () => {
+        navigator.clipboard.writeText(code);
+        btn.textContent = "✅";
+        setTimeout(() => (btn.textContent = "📋"), 1000);
+      };
+      container.appendChild(btn);
+
+      // 每個 code 換行
+      container.appendChild(document.createElement("br"));
+    });
+  }
+  setDiscountCodes(apiData["親友票"]);
+
   if (window.setLoading) window.setLoading(1);
   if (window.hideLoading) window.hideLoading();
   if (window.stopFakeLoading) window.stopFakeLoading();
