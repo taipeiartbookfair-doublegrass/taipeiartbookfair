@@ -131,6 +131,7 @@ const handleFileUpload = async (
     if (statusSpan) {
       statusSpan.textContent = `Uploaded: ${file.name}`;
       statusSpan.style.color = "green";
+      statusSpan.style.fontSize = "0.8em";
     }
     if (storageKey) {
       localStorage.setItem(storageKey, file.name);
@@ -141,6 +142,7 @@ const handleFileUpload = async (
     if (statusSpan) {
       statusSpan.textContent = "Upload failed";
       statusSpan.style.color = "red";
+      statusSpan.style.fontSize = "0.8em";
     }
     return false;
   }
