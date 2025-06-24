@@ -52,12 +52,11 @@ Object.keys(uploadStatusMap).forEach((key) => {
         conf.storage,
         statusSpan
       );
-      if (result) {
-        alert(conf.successMsg);
-      } else {
-        alert(conf.failMsg);
-      }
-      btn.disabled = false;
+      alert(result ? conf.successMsg : conf.failMsg);
+      // 延遲 0.5 秒再啟用
+      setTimeout(() => {
+        btn.disabled = false;
+      }, 500);
     });
   }
 });
