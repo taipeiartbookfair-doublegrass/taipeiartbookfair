@@ -735,7 +735,7 @@ document.addEventListener("DOMContentLoaded", async function () {
     if (overseavisa) overseavisa.style.display = "none";
     familyticket.style.display = "none";
     manual.style.display = "none";
-    boothappearance.style.display = "none";
+    // boothappearance.style.display = "none";
 
     if (rawResult === "5-否") {
       registrationStatusEl.textContent = "-";
@@ -755,7 +755,7 @@ document.addEventListener("DOMContentLoaded", async function () {
         }
         familyticket.style.display = "block";
         manual.style.display = "block";
-        boothappearance.style.display = "block";
+        // boothappearance.style.display = "block";
       } else {
         registrationStatusEl.textContent = getStatusText(false);
         billinginfo.style.display = "block";
@@ -780,7 +780,7 @@ document.addEventListener("DOMContentLoaded", async function () {
         }
         familyticket.style.display = "block";
         manual.style.display = "block";
-        boothappearance.style.display = "block";
+        // boothappearance.style.display = "block";
       } else {
         registrationStatusEl.textContent = getStatusText(false);
         billinginfo.style.display = "block";
@@ -807,7 +807,7 @@ document.addEventListener("DOMContentLoaded", async function () {
         }
         familyticket.style.display = "block";
         manual.style.display = "block";
-        boothappearance.style.display = "block";
+        // boothappearance.style.display = "block";
       } else {
         registrationStatusEl.textContent = getStatusText(false);
         billinginfo.style.display = "block";
