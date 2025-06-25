@@ -11,107 +11,106 @@ const apiUrl =
 const publishApiUrl =
   "https://script.google.com/macros/s/AKfycbxJkcTqW6xJfhCSVFdI-Mk9SFSGTdQnCB2-_-8sluqgTHul2wjNS6jV9wJZMPtIdSy3Pw/exec";
 
-// --- Loading mask setup ---
-if (window.startFakeLoading) window.startFakeLoading();
-// --- Loading mask setup ---
-const loadingMask = document.getElementById("loading-mask");
-const loadingGrid = loadingMask.querySelector(".loading-grid");
-const loadingPercent = document.getElementById("loading-percent");
-const imgSrc = ""; // 不用先 load
-const imgActiveSrc = "image/Moss_of_Bangladesh_2.jpg";
-const imgSize = 70; // px，和 CSS 一致
-
-// 取得 loading-mask 寬高ㄅ
-const maskWidth = loadingMask.clientWidth;
-const maskHeight = loadingMask.clientHeight;
-const cols = Math.ceil(maskWidth / imgSize);
-const rows = Math.ceil(maskHeight / imgSize);
-
-// 設定 grid 樣式
-loadingGrid.style.gridTemplateColumns = `repeat(${cols}, ${imgSize}px)`;
-loadingGrid.style.gridTemplateRows = `repeat(${rows}, ${imgSize}px)`;
-
-// 產生圖片，全部格子都放圖片（不設 src）
-loadingGrid.innerHTML = "";
-for (let r = 0; r < rows; r++) {
-  for (let c = 0; c < cols; c++) {
-    const img = document.createElement("img");
-    // img.src = imgSrc; // 不設 src
-    img.className = "loading-img";
-    img.style.width = imgSize + "px";
-    img.style.height = imgSize + "px";
-    loadingGrid.appendChild(img);
-  }
-}
-
-// 更新進度函式
-window.updateLoadingProgress = function (percent) {
-  const imgs = loadingGrid.querySelectorAll("img");
-  const total = imgs.length;
-  const progress = Math.floor(percent * total);
-  for (let i = 0; i < total; i++) {
-    if (i < progress) {
-      imgs[i].src = imgActiveSrc;
-    } else {
-      imgs[i].removeAttribute("src"); // 這樣才會隱藏
-    }
-  }
-  // 更新右下角百分比
-  if (loadingPercent) {
-    const pct = Math.round(percent * 100);
-    loadingPercent.textContent = pct + "%";
-  }
-};
-
-let fakeLoadingInterval = null;
-let fakeLoadingPercent = 0;
-
-window.startFakeLoading = function () {
-  fakeLoadingPercent = 0;
-  window.setLoading(0);
-  fakeLoadingInterval = setInterval(() => {
-    if (fakeLoadingPercent < 0.99) {
-      fakeLoadingPercent += 0.01 + Math.random() * 0.01;
-      window.setLoading(fakeLoadingPercent);
-    }
-  }, 50); // 每 40ms 跑一格
-};
-
-window.stopFakeLoading = function () {
-  if (fakeLoadingInterval) clearInterval(fakeLoadingInterval);
-  window.setLoading(1); // 直接跳到 100%
-  setTimeout(() => {
-    document.getElementById("loading-mask").style.display = "none";
-  }, 300); // 給一點緩衝
-};
-
-window.setLoading = function (percent) {
-  const imgs = loadingGrid.querySelectorAll("img");
-  const total = imgs.length;
-  const progress = Math.floor(percent * total);
-  for (let i = 0; i < total; i++) {
-    if (i < progress) {
-      imgs[i].src = imgActiveSrc;
-    } else {
-      imgs[i].removeAttribute("src");
-    }
-  }
-  if (loadingPercent) {
-    loadingPercent.textContent = Math.round(percent * 100) + "%";
-  }
-};
-
-// 資料抓取完成時呼叫
-window.hideLoadingMask = function () {
-  loadingMask.style.display = "none";
-};
-
-window.hideLoading = function () {
-  loadingMask.style.display = "none";
-};
-// fake loading end
-
 document.addEventListener("DOMContentLoaded", async function () {
+  if (window.startFakeLoading) window.startFakeLoading();
+  // --- Loading mask setup ---
+  const loadingMask = document.getElementById("loading-mask");
+  const loadingGrid = loadingMask.querySelector(".loading-grid");
+  const loadingPercent = document.getElementById("loading-percent");
+  const imgSrc = ""; // 不用先 load
+  const imgActiveSrc = "image/Moss_of_Bangladesh_2.jpg";
+  const imgSize = 70; // px，和 CSS 一致
+
+  // 取得 loading-mask 寬高ㄅ
+  const maskWidth = loadingMask.clientWidth;
+  const maskHeight = loadingMask.clientHeight;
+  const cols = Math.ceil(maskWidth / imgSize);
+  const rows = Math.ceil(maskHeight / imgSize);
+
+  // 設定 grid 樣式
+  loadingGrid.style.gridTemplateColumns = `repeat(${cols}, ${imgSize}px)`;
+  loadingGrid.style.gridTemplateRows = `repeat(${rows}, ${imgSize}px)`;
+
+  // 產生圖片，全部格子都放圖片（不設 src）
+  loadingGrid.innerHTML = "";
+  for (let r = 0; r < rows; r++) {
+    for (let c = 0; c < cols; c++) {
+      const img = document.createElement("img");
+      // img.src = imgSrc; // 不設 src
+      img.className = "loading-img";
+      img.style.width = imgSize + "px";
+      img.style.height = imgSize + "px";
+      loadingGrid.appendChild(img);
+    }
+  }
+
+  // 更新進度函式
+  window.updateLoadingProgress = function (percent) {
+    const imgs = loadingGrid.querySelectorAll("img");
+    const total = imgs.length;
+    const progress = Math.floor(percent * total);
+    for (let i = 0; i < total; i++) {
+      if (i < progress) {
+        imgs[i].src = imgActiveSrc;
+      } else {
+        imgs[i].removeAttribute("src"); // 這樣才會隱藏
+      }
+    }
+    // 更新右下角百分比
+    if (loadingPercent) {
+      const pct = Math.round(percent * 100);
+      loadingPercent.textContent = pct + "%";
+    }
+  };
+
+  let fakeLoadingInterval = null;
+  let fakeLoadingPercent = 0;
+
+  window.startFakeLoading = function () {
+    fakeLoadingPercent = 0;
+    window.setLoading(0);
+    fakeLoadingInterval = setInterval(() => {
+      if (fakeLoadingPercent < 0.99) {
+        fakeLoadingPercent += 0.01 + Math.random() * 0.01;
+        window.setLoading(fakeLoadingPercent);
+      }
+    }, 50); // 每 40ms 跑一格
+  };
+
+  window.stopFakeLoading = function () {
+    if (fakeLoadingInterval) clearInterval(fakeLoadingInterval);
+    window.setLoading(1); // 直接跳到 100%
+    setTimeout(() => {
+      document.getElementById("loading-mask").style.display = "none";
+    }, 300); // 給一點緩衝
+  };
+
+  window.setLoading = function (percent) {
+    const imgs = loadingGrid.querySelectorAll("img");
+    const total = imgs.length;
+    const progress = Math.floor(percent * total);
+    for (let i = 0; i < total; i++) {
+      if (i < progress) {
+        imgs[i].src = imgActiveSrc;
+      } else {
+        imgs[i].removeAttribute("src");
+      }
+    }
+    if (loadingPercent) {
+      loadingPercent.textContent = Math.round(percent * 100) + "%";
+    }
+  };
+
+  // 資料抓取完成時呼叫
+  window.hideLoadingMask = function () {
+    loadingMask.style.display = "none";
+  };
+
+  window.hideLoading = function () {
+    loadingMask.style.display = "none";
+  };
+  // fake loading end
+
   if (window.startFakeLoading) window.startFakeLoading();
   if (window.setLoading) window.setLoading(0.1);
 
