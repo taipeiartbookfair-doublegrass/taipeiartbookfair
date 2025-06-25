@@ -74,7 +74,7 @@ document.addEventListener("DOMContentLoaded", async function () {
         fakeLoadingPercent += 0.01 + Math.random() * 0.01;
         window.setLoading(fakeLoadingPercent);
       }
-    }, 100); // 每 40ms 跑一格
+    }, 250); // 每 40ms 跑一格
   };
 
   window.stopFakeLoading = function () {
@@ -1034,7 +1034,7 @@ document.addEventListener("DOMContentLoaded", async function () {
       desc.innerHTML = "";
       let banner = document.createElement("div");
       banner.className = "pre-banner";
-      banner.style.color = "black";
+      banner.style.color = "darkgrey";
       banner.style.fontSize = "1em";
       banner.style.marginTop = "0.5em";
       banner.textContent = info.preMessage || "Not available yet.";
