@@ -82,7 +82,7 @@ document.addEventListener("DOMContentLoaded", async function () {
     window.setLoading(1); // 直接跳到 100%
     setTimeout(() => {
       document.getElementById("loading-mask").style.display = "none";
-    }, 100); // 給一點緩衝
+    }, 30); // 給一點緩衝
   };
 
   window.setLoading = function (percent) {
