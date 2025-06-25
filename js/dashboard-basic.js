@@ -419,7 +419,7 @@ document.addEventListener("DOMContentLoaded", async function () {
         "billing1-price"
       ).innerHTML = `USD$${usd1} <small>incl. tax</small>`;
       document.getElementById("billing2-price").innerHTML = `USD$${
-        usd1 + 30
+        usd1 + 20
       } <small>incl. tax</small>`;
     }
 
@@ -437,17 +437,17 @@ document.addEventListener("DOMContentLoaded", async function () {
         productName1 = "Basic Fee";
         productName2 = "Basic Fee + Extra Pass";
         amount1 = "165";
-        amount2 = "195";
+        amount2 = "185";
       } else if (boothType === "Two Regular Booth") {
         productName1 = "Basic Fee";
         productName2 = "Basic Fee + Extra Pass";
         amount1 = "330";
-        amount2 = "360";
+        amount2 = "350";
       } else if (boothType === "Curation Booth") {
         productName1 = "Basic Fee";
         productName2 = "Basic Fee + Extra Pass";
         amount1 = "780";
-        amount2 = "810";
+        amount2 = "800";
       }
     } else {
       if (boothType === "書攤") {
