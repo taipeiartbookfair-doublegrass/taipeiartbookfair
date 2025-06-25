@@ -238,17 +238,27 @@ document.addEventListener("DOMContentLoaded", async function () {
     if (!raw) return "";
     if (isEnglishBooth) {
       if (raw === "4-是-條件式錄取") return "Conditional Acceptance";
-      if (raw === "1-是-1波" || raw === "2-是-2波" || raw === "0-邀請")
+      if (
+        raw === "1-是-1波" ||
+        raw === "2-是-2波" ||
+        raw === "0-邀請" ||
+        raw === "6-NGO"
+      )
         return "Accepted";
       if (raw === "3-猶豫") return "Waitlisted";
-      if (raw === "5-否") return "Not Selected";
+      if (raw === "5-否" || raw === "9-重複") return "Not Selected";
       return raw;
     } else {
       if (raw === "4-是-條件式錄取") return "條件式錄取";
-      if (raw === "1-是-1波" || raw === "2-是-2波" || raw === "0-邀請")
+      if (
+        raw === "1-是-1波" ||
+        raw === "2-是-2波" ||
+        raw === "0-邀請" ||
+        raw === "6-NGO"
+      )
         return "錄取";
       if (raw === "3-猶豫") return "備取";
-      if (raw === "5-否") return "未錄取";
+      if (raw === "5-否" || raw === "9-重複") return "未錄取";
       return raw;
     }
   }
@@ -451,10 +461,10 @@ document.addEventListener("DOMContentLoaded", async function () {
     let payLink1 = "#",
       payLink2 = "#";
     if (isOversea) {
-      payLink1 = `https://www.paypal.com/cgi-bin/webscr?cmd=_xclick&business=xraypink@gmail.com&item_name=${encodeURIComponent(
+      payLink1 = `https://www.paypal.com/cgi-bin/webscr?cmd=_xclick&business=hooroo@double-grass.com&item_name=${encodeURIComponent(
         applicationNumber + " - " + productName1
       )}&amount=${amount1}&currency_code=USD&custom=${applicationNumber}`;
-      payLink2 = `https://www.paypal.com/cgi-bin/webscr?cmd=_xclick&business=xraypink@gmail.com&item_name=${encodeURIComponent(
+      payLink2 = `https://www.paypal.com/cgi-bin/webscr?cmd=_xclick&business=hooroo@double-grass.com&item_name=${encodeURIComponent(
         applicationNumber + " - " + productName2
       )}&amount=${amount2}&currency_code=USD&custom=${applicationNumber}`;
     } else {
@@ -828,13 +838,14 @@ document.addEventListener("DOMContentLoaded", async function () {
     liveEventTime.style.display = "none";
     // boothappearance.style.display = "none";
 
-    if (rawResult === "5-否") {
+    if (rawResult === "5-否" || rawResult === "9-重複") {
       registrationStatusEl.textContent = "-";
       letter.style.display = "block";
     } else if (
       rawResult === "1-是-1波" ||
       rawResult === "2-是-2波" ||
-      rawResult === "0-邀請"
+      rawResult === "0-邀請" ||
+      rawResult === "6-NGO"
     ) {
       if (paymentChecked && declarationChecked) {
         registrationStatusEl.textContent = getStatusText(true);
