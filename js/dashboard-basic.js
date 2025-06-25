@@ -836,7 +836,7 @@ document.addEventListener("DOMContentLoaded", async function () {
     if (liveEventSection) liveEventSection.style.display = "none";
     foreignShipping.style.display = "none";
     if (visaCN) visaCN.style.display = "none";
-    if (overseavisa) overseavisa.style.display = "none";
+    overseavisa.style.display = "none";
     familyticket.style.display = "none";
     manualBoothappearance.style.display = "none";
     registrationStatus.style.display = "none";
@@ -923,6 +923,8 @@ document.addEventListener("DOMContentLoaded", async function () {
         }
         if (nationality === "CN") {
           visaCN.style.display = "block";
+        } else if (nationality !== "TW" && nationality !== "CN") {
+          overseavisa.style.display = "block";
         }
         familyticket.style.display = "block";
         manualBoothappearance.style.display = "block";
@@ -1026,13 +1028,12 @@ document.addEventListener("DOMContentLoaded", async function () {
       desc.innerHTML = "";
       let banner = document.createElement("div");
       banner.className = "pre-banner";
-      banner.style.color = "lightgrey";
+      banner.style.color = "darkgrey";
       banner.style.marginTop = "0.5em";
       banner.textContent = info.preMessage || "Not available yet.";
       desc.appendChild(banner);
 
       section.classList.add("disabled");
-      section.style.opacity = 0.7;
       // 移除舊遮罩
       let oldOverlay = section.querySelector(".overlay-closed");
       if (oldOverlay) oldOverlay.remove();
