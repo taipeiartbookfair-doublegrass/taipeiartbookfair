@@ -1001,14 +1001,20 @@ document.addEventListener("DOMContentLoaded", async function () {
   try {
     const publishRes = await fetch(publishApiUrl);
     publishTimes = await publishRes.json();
+    console.log("publishTimes", publishTimes);
   } catch (e) {
     console.warn("Failed to load publish times:", e);
   }
 
   // 假設 publishTimes 物件 key = section id, value = {descId, publishTime, deadline, preMessage}
+
   Object.entries(publishTimes).forEach(([sectionId, info]) => {
     const section = document.getElementById(sectionId);
     const desc = document.getElementById(info.descId);
+
+    if (!section) console.warn("No section for", sectionId);
+    if (!desc) console.warn("No desc for", info.descId);
+
     if (!section || !desc) return;
 
     // 移除舊的遮罩和 pre-banner
