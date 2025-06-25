@@ -1016,26 +1016,48 @@ document.addEventListener("DOMContentLoaded", async function () {
     // 解析時間
     const now = new Date();
     const publishTime = info.publishTime ? new Date(info.publishTime) : null;
+    const deadline = info.deadline ? new Date(info.deadline) : null;
 
+    // 先確保 section 有 position: relative
+    section.style.position = "relative";
+
+    // 未公布前
     if (publishTime && now < publishTime) {
-      // 未公佈，顯示 preMessage，隱藏原本內容
-      desc.innerHTML = ""; // 清空原本內容
+      desc.innerHTML = "";
       let banner = document.createElement("div");
       banner.className = "pre-banner";
-      banner.style.background = "#eee";
-      banner.style.color = "#888";
-      banner.style.padding = "0.5em";
-      banner.style.marginBottom = "0.5em";
+      banner.style.color = "lightgrey";
+      banner.style.marginTop = "0.5em";
       banner.textContent = info.preMessage || "Not available yet.";
       desc.appendChild(banner);
 
       section.classList.add("disabled");
       section.style.opacity = 0.7;
-    } else {
-      // 已公佈，恢復原本樣式
+      // 移除舊遮罩
+      let oldOverlay = section.querySelector(".overlay-closed");
+      if (oldOverlay) oldOverlay.remove();
+    }
+    // 截止後
+    else if (deadline && now > deadline) {
+      // 清空內容
+      desc.innerHTML = "";
+      // 加遮罩
+      let overlay = document.createElement("div");
+      overlay.className = "overlay-closed";
+      overlay.textContent = "Close";
+      section.appendChild(overlay);
+
+      section.classList.add("disabled");
+      section.style.opacity = 1;
+    }
+    // 公布期間
+    else {
       section.classList.remove("disabled");
       section.style.opacity = "";
-      // desc.innerHTML 不要動，保留原本內容
+      // 移除舊遮罩
+      let oldOverlay = section.querySelector(".overlay-closed");
+      if (oldOverlay) oldOverlay.remove();
+      // desc.innerHTML 不動
     }
   });
 
