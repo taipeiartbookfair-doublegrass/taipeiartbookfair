@@ -478,7 +478,6 @@ html::-webkit-scrollbar-thumb:hover {
   pointer-events: all;
   user-select: none;
   font-weight: bold;
-  filter: contrast(1.2);
 }
 .section-class {
   position: relative;
