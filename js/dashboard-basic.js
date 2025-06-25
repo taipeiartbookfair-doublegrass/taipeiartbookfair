@@ -1044,8 +1044,6 @@ document.addEventListener("DOMContentLoaded", async function () {
     }
     // 截止後
     else if (deadline && now > deadline) {
-      // 清空內容
-      desc.innerHTML = "";
       // 加遮罩
       let overlay = document.createElement("div");
       overlay.className = "overlay-closed";
@@ -1062,7 +1060,6 @@ document.addEventListener("DOMContentLoaded", async function () {
       // 移除舊遮罩
       let oldOverlay = section.querySelector(".overlay-closed");
       if (oldOverlay) oldOverlay.remove();
-      // desc.innerHTML 不動
     }
   });
 
