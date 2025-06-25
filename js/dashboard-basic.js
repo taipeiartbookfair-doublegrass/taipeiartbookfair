@@ -74,7 +74,7 @@ document.addEventListener("DOMContentLoaded", async function () {
         fakeLoadingPercent += 0.01 + Math.random() * 0.01;
         window.setLoading(fakeLoadingPercent);
       }
-    }, 50); // 每 40ms 跑一格
+    }, 100); // 每 40ms 跑一格
   };
 
   window.stopFakeLoading = function () {
@@ -82,7 +82,7 @@ document.addEventListener("DOMContentLoaded", async function () {
     window.setLoading(1); // 直接跳到 100%
     setTimeout(() => {
       document.getElementById("loading-mask").style.display = "none";
-    }, 300); // 給一點緩衝
+    }, 100); // 給一點緩衝
   };
 
   window.setLoading = function (percent) {
@@ -1001,14 +1001,20 @@ document.addEventListener("DOMContentLoaded", async function () {
   try {
     const publishRes = await fetch(publishApiUrl);
     publishTimes = await publishRes.json();
+    console.log("publishTimes", publishTimes);
   } catch (e) {
     console.warn("Failed to load publish times:", e);
   }
 
   // 假設 publishTimes 物件 key = section id, value = {descId, publishTime, deadline, preMessage}
+
   Object.entries(publishTimes).forEach(([sectionId, info]) => {
     const section = document.getElementById(sectionId);
     const desc = document.getElementById(info.descId);
+
+    if (!section) console.warn("No section for", sectionId);
+    if (!desc) console.warn("No desc for", info.descId);
+
     if (!section || !desc) return;
 
     // 移除舊的遮罩和 pre-banner
