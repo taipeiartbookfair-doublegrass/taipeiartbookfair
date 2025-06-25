@@ -201,24 +201,6 @@ document.addEventListener("DOMContentLoaded", async function () {
   setSocialText("yearlyanswer", apiData["當屆問答"]);
   setSocialText("electricity-answer", apiData["電力需求"]);
 
-  // 國籍判斷與簽證需求顯示
-  const nat = document.getElementById("nationality");
-  const visa = document.getElementById("visa-requirement");
-  if (nat && visa) {
-    const value = nat.textContent.trim().toUpperCase();
-    if (value === "TW") {
-      visa.innerHTML = "Not Require";
-    } else if (value === "CN") {
-      visa.innerHTML = `若您被錄取且完成參展資格後，主辦單位將協助中國地區人士辦理來台相關申請。`;
-    } else {
-      visa.innerHTML = `
-        <a href="https://visawebapp.boca.gov.tw/BOCA_EVISA/MRV01FORM.do" target="_blank" style="text-decoration:underline;">
-          Taiwan eVisa
-        </a>
-      `;
-    }
-  }
-
   document.getElementById("application-number").textContent =
     apiData["報名編號"] || "";
 
