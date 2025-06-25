@@ -871,12 +871,11 @@ document.addEventListener("DOMContentLoaded", async function () {
         billinginfo.style.display = "block";
         registrationStatus.style.display = "block";
         boothnumber.style.display = "block";
-        // 這裡加上 visaCN/overseavisa 的顯示條件
-        if (nationality === "CN") {
-          visaCN.style.display = "block";
-        } else if (nationality !== "TW" && nationality !== "CN") {
-          overseavisa.style.display = "block";
-        }
+      }
+      if (nationality === "CN") {
+        visaCN.style.display = "block";
+      } else if (nationality !== "TW" && nationality !== "CN") {
+        overseavisa.style.display = "block";
       }
     } else if (rawResult === "0") {
       registrationStatusEl.textContent = "-";
@@ -895,6 +894,11 @@ document.addEventListener("DOMContentLoaded", async function () {
         manualBoothappearance.style.display = "block";
         registrationStatus.style.display = "block";
         boothnumber.style.display = "block";
+        if (nationality === "CN") {
+          visaCN.style.display = "block";
+        } else if (nationality !== "TW" && nationality !== "CN") {
+          overseavisa.style.display = "block";
+        }
         // boothappearance.style.display = "block";
       } else {
         registrationStatusEl.textContent = getStatusText(false);
