@@ -1011,27 +1011,15 @@ document.addEventListener("DOMContentLoaded", async function () {
   Object.entries(publishTimes).forEach(([sectionId, info]) => {
     const section = document.getElementById(sectionId);
     const desc = document.getElementById(info.descId);
-
-    if (!section) console.warn("No section for", sectionId);
-    if (!desc) console.warn("No desc for", info.descId);
-
     if (!section || !desc) return;
 
-    // 移除舊的遮罩和 pre-banner
-    const oldOverlay = section.querySelector(".overlay-closed");
-    if (oldOverlay) oldOverlay.remove();
-    const preBanner = desc.querySelector(".pre-banner");
-    if (preBanner) preBanner.remove();
-
+    // 解析時間
     const now = new Date();
     const publishTime = info.publishTime ? new Date(info.publishTime) : null;
-    const deadline =
-      !info.deadline || info.deadline === "infinite"
-        ? null
-        : new Date(info.deadline);
 
-    // 公布前
     if (publishTime && now < publishTime) {
+      // 未公佈，顯示 preMessage，隱藏原本內容
+      desc.innerHTML = ""; // 清空原本內容
       let banner = document.createElement("div");
       banner.className = "pre-banner";
       banner.style.background = "#eee";
@@ -1039,23 +1027,15 @@ document.addEventListener("DOMContentLoaded", async function () {
       banner.style.padding = "0.5em";
       banner.style.marginBottom = "0.5em";
       banner.textContent = info.preMessage || "Not available yet.";
-      desc.insertBefore(banner, desc.firstChild);
+      desc.appendChild(banner);
+
       section.classList.add("disabled");
       section.style.opacity = 0.7;
-    }
-    // 已截止（有截止時間且已過）
-    else if (deadline && now > deadline) {
-      const overlay = document.createElement("div");
-      overlay.className = "overlay-closed";
-      overlay.textContent = "Closed";
-      section.appendChild(overlay);
-      section.classList.add("disabled");
-      section.style.opacity = 1;
-    }
-    // 公布後且未截止
-    else {
+    } else {
+      // 已公佈，恢復原本樣式
       section.classList.remove("disabled");
-      section.style.opacity = 1;
+      section.style.opacity = "";
+      // desc.innerHTML 不要動，保留原本內容
     }
   });
 
