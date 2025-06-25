@@ -1032,7 +1032,8 @@ document.addEventListener("DOMContentLoaded", async function () {
       desc.innerHTML = "";
       let banner = document.createElement("div");
       banner.className = "pre-banner";
-      banner.style.color = "darkgrey";
+      banner.style.color = "black";
+      banner.style.fontSize = "1em";
       banner.style.marginTop = "0.5em";
       banner.textContent = info.preMessage || "Not available yet.";
       desc.appendChild(banner);
