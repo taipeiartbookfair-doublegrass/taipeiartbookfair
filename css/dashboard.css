@@ -643,8 +643,8 @@ html::-webkit-scrollbar-thumb:hover {
   }
   #grass-canvas {
     z-index: 1;
-    width: 100vw;
-    height: 100vh;
+    width: 100%;
+    height: 100%;
     display: block;
     touch-action: none;
     margin: 0;
