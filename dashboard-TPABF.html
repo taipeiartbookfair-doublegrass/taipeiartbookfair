@@ -801,7 +801,10 @@
                   </td>
                 </tr>
                 <tr id="edit-electricity-row">
-                  <td colspan="2">
+                  <td
+                    colspan="2"
+                    style="width: 100%; position: relative; border-top: 0px"
+                  >
                     <span class="label">電力需求 Electricity Requirement</span
                     ><br />
                     <textarea
@@ -2262,11 +2265,15 @@
         </td>
       </tr>
     </table>
-    <!-- 草地遮罩 -->
+
+    <!-- 手機版要大家拔點草 -->
     <div id="grass-mask" style="display: none">
-      <canvas id="grass-canvas"></canvas>
-      <div id="grass-progress"></div>
-    </div>
+  <div id="grass-tip" style="text-align:center; color:#222; font-size:1.2em; font-weight:bold; margin-top:2em;">
+    手機版還在整理中<br>Mobile version is under construction
+  </div>
+  <canvas id="grass-canvas"></canvas>
+  <div id="grass-progress"></div>
+</div>
     <script src="js/dashboardupload/upload_dashboard.js"></script>
     <script src="js/dashboard-body.js"></script>
     <script src="js/oxox.js"></script>
