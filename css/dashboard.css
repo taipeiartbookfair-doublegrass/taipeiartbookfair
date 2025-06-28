@@ -667,11 +667,12 @@ html::-webkit-scrollbar-thumb:hover {
     margin: 0;
     font-size: 1.3rem;
     text-align: center;
-    color: #ff7477;
+    color: #ff6f4c;
     font-weight: bold;
     z-index: 1;
     font-family: "Inclusive Sans", sans serif;
-    transform: translate(-50%, -50%) rotate(-5deg) skewX(-8deg);
+
+    text-shadow: 1px 1px #4ed9b8, -1px -1px #ffd966;
   }
   #grass-cursor {
     position: absolute;
