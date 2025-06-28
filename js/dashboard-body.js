@@ -237,26 +237,24 @@ function showGrassMask() {
   const ctx = canvas.getContext("2d");
   const grassImg = new window.Image();
   grassImg.src = "image/Moss_of_Bangladesh_2.jpg";
-  const grassSize = 56; // 草大一點
+  const grassSize = 40;
   let grassArr = [];
-  let growTimer = null;
   let deepnessTimer = null;
 
-  // 均勻分布草
-  const rows = 8,
-    cols = 9;
+  // 更密集均勻分布
+  const rows = 14,
+    cols = 16;
   for (let i = 0; i < rows; i++) {
     for (let j = 0; j < cols; j++) {
       grassArr.push({
-        x: (canvas.width / cols) * (j + 0.5) + (Math.random() - 0.5) * 20,
-        y: (canvas.height / rows) * (i + 0.5) + (Math.random() - 0.5) * 20,
+        x: (canvas.width / cols) * (j + 0.5) + (Math.random() - 0.5) * 8,
+        y: (canvas.height / rows) * (i + 0.5) + (Math.random() - 0.5) * 8,
         erased: false,
         deepness: 0,
       });
     }
   }
 
-  // 草慢慢變深色（速度變慢）
   function deepenGrass() {
     grassArr.forEach((g) => {
       if (!g.erased && g.deepness < 2) {
@@ -266,7 +264,6 @@ function showGrassMask() {
     drawGrass();
   }
 
-  // 畫草
   function drawGrass() {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
     grassArr.forEach((g) => {
@@ -289,10 +286,9 @@ function showGrassMask() {
   grassImg.onload = function () {
     drawGrass();
     if (deepnessTimer) clearInterval(deepnessTimer);
-    deepnessTimer = setInterval(deepenGrass, 3500); // 變深速度變慢
+    deepnessTimer = setInterval(deepenGrass, 5000);
   };
 
-  // 除草：深色變淺，淺色才消失
   function eraseGrass(x, y) {
     let changed = false;
     grassArr.forEach((g) => {
@@ -310,10 +306,8 @@ function showGrassMask() {
       }
     });
     if (changed) drawGrass();
-    // 不再動 tip.innerHTML
   }
 
-  // 支援滑鼠與觸控
   function handle(e) {
     let x, y;
     if (e.touches) {
