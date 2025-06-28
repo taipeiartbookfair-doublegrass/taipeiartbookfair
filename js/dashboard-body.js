@@ -219,17 +219,27 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   };
 
+  document.addEventListener("DOMContentLoaded", function () {
+    // ...原本的程式...
+
+    // 手機自動顯示草地遮罩
+    if (/Mobi|Android|iPhone|iPad|iPod/i.test(navigator.userAgent)) {
+      setTimeout(showGrassMask, 300); // 頁面載入後自動出現
+    }
+  });
+
+  // 草地遮罩小遊戲
   function showGrassMask() {
     const mask = document.getElementById("grass-mask");
     const canvas = document.getElementById("grass-canvas");
     const progress = document.getElementById("grass-progress");
-    mask.style.display = "block";
+    mask.style.display = "flex";
     // 設定 canvas 尺寸
     canvas.width = window.innerWidth;
-    canvas.height = window.innerHeight;
+    canvas.height = Math.floor(window.innerHeight * 0.6);
 
     const ctx = canvas.getContext("2d");
-    const grassCount = 80;
+    const grassCount = 60;
     let grassArr = [];
     let erased = 0;
 
@@ -293,6 +303,4 @@ document.addEventListener("DOMContentLoaded", function () {
     // 初始進度
     progress.textContent = `已鋤草 0/${grassCount}`;
   }
-
-  // 可以在需要時呼叫 showGrassMask() 例如：showGrassMask();
 });

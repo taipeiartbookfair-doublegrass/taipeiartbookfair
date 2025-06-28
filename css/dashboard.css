@@ -479,36 +479,6 @@ html::-webkit-scrollbar-thumb:hover {
 
 /* ===== 行動版 Mobile ===== */
 @media screen and (max-width: 600px) {
-  #grass-mask {
-    position: fixed;
-    left: 0;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    background: linear-gradient(to bottom, #b6e388 60%, #7ec850 100%);
-    z-index: 9999;
-    touch-action: none;
-    user-select: none;
-  }
-  #grass-canvas {
-    width: 100vw;
-    height: 100vh;
-    display: block;
-    touch-action: none;
-  }
-  #grass-progress {
-    position: absolute;
-    top: 10px;
-    left: 50%;
-    transform: translateX(-50%);
-    background: rgba(255, 255, 255, 0.8);
-    color: #222;
-    padding: 0.5em 1em;
-    border-radius: 1em;
-    font-size: 1.2em;
-    font-weight: bold;
-    z-index: 2;
-  }
   html,
   body {
     overflow: auto !important;
@@ -689,4 +659,47 @@ html::-webkit-scrollbar-thumb:hover {
     font-size: 28rem !important;
     line-height: 20rem !important;
   }
+}
+
+#grass-mask {
+  position: fixed;
+  left: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(to bottom, #b6e388 60%, #7ec850 100%);
+  z-index: 9999;
+  touch-action: none;
+  user-select: none;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+}
+#grass-canvas {
+  width: 100vw;
+  height: 60vh;
+  display: block;
+  touch-action: none;
+  margin-top: 1em;
+}
+#grass-progress {
+  margin-top: 1em;
+  background: rgba(255, 255, 255, 0.8);
+  color: #222;
+  padding: 0.5em 1em;
+  border-radius: 1em;
+  font-size: 1.2em;
+  font-weight: bold;
+  z-index: 2;
+}
+#grass-tip {
+  margin-top: 2em;
+  margin-bottom: 0.5em;
+  background: rgba(255, 255, 255, 0.85);
+  border-radius: 1em;
+  padding: 0.7em 1.5em;
+  font-size: 1.1em;
+  color: #222;
+  z-index: 3;
 }
