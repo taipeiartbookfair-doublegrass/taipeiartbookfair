@@ -609,12 +609,56 @@ html::-webkit-scrollbar-thumb:hover {
   #media-section-row6 td {
     font-size: 1rem !important;
   }
-  .tictactoe-container {
+  #tictactoe-container {
     display: none !important;
   }
   /* 手機版來不及做所以先劃掉 */
   #loading-mask {
     display: none !important;
+  }
+
+  #grass-mask {
+    position: fixed;
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    background-image: url(../image/Cracked_dry_land.jpg);
+    z-index: 9999;
+    touch-action: none;
+    user-select: none;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+  }
+  #grass-canvas {
+    width: 100vw;
+    height: 60vh;
+    display: block;
+    touch-action: none;
+    margin-top: 1em;
+  }
+  #grass-tip {
+    margin-top: 2em;
+    margin-bottom: 0.5em;
+    background: rgba(255, 255, 255, 0.85);
+    border-radius: 1em;
+    padding: 0.7em 1.5em;
+    font-size: 1.1em;
+    color: #222;
+    z-index: 3;
+  }
+  #grass-cursor {
+    position: absolute;
+    z-index: 10;
+    font-size: 2.2em;
+    pointer-events: none;
+    user-select: none;
+    transition: transform 0.05s;
+  }
+  #grass-mask {
+    cursor: none !important; /* 隱藏原生游標 */
   }
 }
 
@@ -666,37 +710,4 @@ html::-webkit-scrollbar-thumb:hover {
     font-size: 28rem !important;
     line-height: 20rem !important;
   }
-}
-
-#grass-mask {
-  position: fixed;
-  left: 0;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  background: linear-gradient(to bottom, #b6e388 60%, #7ec850 100%);
-  z-index: 9999;
-  touch-action: none;
-  user-select: none;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: flex-start;
-}
-#grass-canvas {
-  width: 100vw;
-  height: 60vh;
-  display: block;
-  touch-action: none;
-  margin-top: 1em;
-}
-#grass-tip {
-  margin-top: 2em;
-  margin-bottom: 0.5em;
-  background: rgba(255, 255, 255, 0.85);
-  border-radius: 1em;
-  padding: 0.7em 1.5em;
-  font-size: 1.1em;
-  color: #222;
-  z-index: 3;
 }

@@ -226,43 +226,58 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 
 // 除草戰士
+
 function showGrassMask() {
   const mask = document.getElementById("grass-mask");
   const canvas = document.getElementById("grass-canvas");
+  const tip = document.getElementById("grass-tip");
   mask.style.display = "flex";
-  // 設定 canvas 尺寸
   canvas.width = window.innerWidth;
   canvas.height = Math.floor(window.innerHeight * 0.6);
 
   const ctx = canvas.getContext("2d");
   const grassImg = new window.Image();
   grassImg.src = "image/Moss_of_Bangladesh_2.jpg";
-  const grassSize = 32; // 小顆一點
+  const grassSize = 32;
   let grassArr = [];
-  let grassGrowTimer = null;
-  let grassGrowCount = 0;
+  let growTimer = null;
+  let deepnessTimer = null;
 
-  // 隨機生成初始草
-  function addGrass(deepness = 0) {
-    // deepness: 0=淺, 1=中, 2=深
+  const maxGrass = 70;
+  const initialGrass = 35;
+
+  // 初始一半草
+  for (let i = 0; i < initialGrass; i++) {
     grassArr.push({
       x: Math.random() * (canvas.width - grassSize),
       y: Math.random() * (canvas.height - grassSize),
       erased: false,
-      deepness,
+      deepness: 0,
     });
   }
-  for (let i = 0; i < 30; i++) addGrass(0);
 
-  // 草會越長越多，顏色越深
+  // 慢慢長出新草
   function growGrass() {
-    grassGrowCount++;
-    let deepness = 0;
-    if (grassGrowCount > 10) deepness = 1;
-    if (grassGrowCount > 20) deepness = 2;
-    if (grassArr.length < 120) addGrass(deepness);
+    if (grassArr.length < maxGrass) {
+      grassArr.push({
+        x: Math.random() * (canvas.width - grassSize),
+        y: Math.random() * (canvas.height - grassSize),
+        erased: false,
+        deepness: 0,
+      });
+      drawGrass();
+      growTimer = setTimeout(growGrass, 600 + Math.random() * 800);
+    }
+  }
+
+  // 草慢慢變深色
+  function deepenGrass() {
+    grassArr.forEach((g) => {
+      if (!g.erased && g.deepness < 2) {
+        g.deepness++;
+      }
+    });
     drawGrass();
-    grassGrowTimer = setTimeout(growGrass, 700 + Math.random() * 600);
   }
 
   // 畫草
@@ -270,7 +285,6 @@ function showGrassMask() {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
     grassArr.forEach((g) => {
       if (!g.erased) {
-        // 顏色變深
         ctx.save();
         if (g.deepness === 1) {
           ctx.filter = "brightness(0.7) saturate(1.2)";
@@ -288,12 +302,15 @@ function showGrassMask() {
 
   grassImg.onload = function () {
     drawGrass();
-    if (grassGrowTimer) clearTimeout(grassGrowTimer);
-    grassGrowCount = 0;
+    // 開始長草
+    if (growTimer) clearTimeout(growTimer);
     growGrass();
+    // 開始變深色
+    if (deepnessTimer) clearInterval(deepnessTimer);
+    deepnessTimer = setInterval(deepenGrass, 1800);
   };
 
-  // 鋤草
+  // 除草：深色變淺，淺色才消失
   function eraseGrass(x, y) {
     let changed = false;
     grassArr.forEach((g) => {
@@ -302,17 +319,21 @@ function showGrassMask() {
         Math.hypot(g.x + grassSize / 2 - x, g.y + grassSize / 2 - y) <
           grassSize * 0.7
       ) {
-        g.erased = true;
+        if (g.deepness > 0) {
+          g.deepness--;
+        } else {
+          g.erased = true;
+        }
         changed = true;
       }
     });
     if (changed) drawGrass();
-    // 如果全部都被鋤掉就關掉遮罩
+    // 全部都被鋤掉就顯示提示
     if (grassArr.every((g) => g.erased)) {
-      if (grassGrowTimer) clearTimeout(grassGrowTimer);
-      setTimeout(() => {
-        mask.style.display = "none";
-      }, 800);
+      if (deepnessTimer) clearInterval(deepnessTimer);
+      if (growTimer) clearTimeout(growTimer);
+      tip.innerHTML =
+        "手機版現在不能用<br>Mobile version is under construction";
     }
   }
 
@@ -334,7 +355,7 @@ function showGrassMask() {
   canvas.addEventListener("mousemove", handle);
   canvas.addEventListener("touchmove", handle);
 
-  // 若視窗大小改變，重設草地
+  // 視窗大小改變時重畫
   window.addEventListener("resize", () => {
     if (mask.style.display === "flex") {
       canvas.width = window.innerWidth;
@@ -342,11 +363,35 @@ function showGrassMask() {
       drawGrass();
     }
   });
-}
 
-// 手機自動顯示草地遮罩
-document.addEventListener("DOMContentLoaded", function () {
-  if (/Mobi|Android|iPhone|iPad|iPod/i.test(navigator.userAgent)) {
-    setTimeout(showGrassMask, 300);
-  }
-});
+  const grassCursor = document.getElementById("grass-cursor");
+
+  // 滑鼠移動時顯示並跟隨
+  canvas.addEventListener("mousemove", function (e) {
+    grassCursor.style.display = "block";
+    grassCursor.style.left = e.clientX - 18 + "px";
+    grassCursor.style.top = e.clientY - 18 + "px";
+  });
+  canvas.addEventListener("mouseleave", function () {
+    grassCursor.style.display = "none";
+  });
+
+  // 觸控時也顯示
+  canvas.addEventListener("touchmove", function (e) {
+    if (e.touches && e.touches.length > 0) {
+      grassCursor.style.display = "block";
+      grassCursor.style.left = e.touches[0].clientX - 18 + "px";
+      grassCursor.style.top = e.touches[0].clientY - 18 + "px";
+    }
+  });
+  canvas.addEventListener("touchend", function () {
+    grassCursor.style.display = "none";
+  });
+
+  // 手機自動顯示草地遮罩
+  document.addEventListener("DOMContentLoaded", function () {
+    if (/Mobi|Android|iPhone|iPad|iPod/i.test(navigator.userAgent)) {
+      setTimeout(showGrassMask, 300);
+    }
+  });
+}
