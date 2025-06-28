@@ -850,7 +850,7 @@ document.addEventListener("DOMContentLoaded", async function () {
     // boothappearance.style.display = "none";
 
     //勾勾區的鐵門
-    if (checkDeclaration) {
+    if (declarationChecked) {
       agreementsection.style.position = "relative";
 
       let oldOverlay = agreementsection.querySelector(".overlay-closed");
@@ -862,7 +862,7 @@ document.addEventListener("DOMContentLoaded", async function () {
       }
     }
 
-    if (checkPayment) {
+    if (paymentChecked) {
       billingsection.style.position = "relative";
 
       let oldOverlay = billingsection.querySelector(".overlay-closed");
