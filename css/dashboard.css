@@ -634,6 +634,7 @@ html::-webkit-scrollbar-thumb:hover {
     justify-content: flex-start;
   }
   #grass-canvas {
+    z-index: 2;
     display: block;
     touch-action: none;
   }
@@ -645,6 +646,7 @@ html::-webkit-scrollbar-thumb:hover {
     margin: 0;
     font-size: 2em;
     text-align: center;
+    z-index: 1;
   }
   #grass-cursor {
     position: absolute;
