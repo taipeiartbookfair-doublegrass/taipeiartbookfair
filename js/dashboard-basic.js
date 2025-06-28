@@ -443,16 +443,16 @@ document.addEventListener("DOMContentLoaded", async function () {
     } else {
       if (boothType === "書攤") {
         productName1 = "基礎攤費";
-        productName2 = "基礎攤費 + 工作證一張";
+        productName2 = "基礎攤費-工作證一張";
       } else if (boothType === "創作商品攤") {
         productName1 = "基礎攤費";
-        productName2 = "基礎攤費 + 工作證一張";
+        productName2 = "基礎攤費-工作證一張";
       } else if (boothType === "裝置攤") {
         productName1 = "基礎攤費";
-        productName2 = "基礎攤費 + 工作證一張";
+        productName2 = "基礎攤費-工作證一張";
       } else if (boothType === "食物酒水攤") {
         productName1 = "基礎攤費";
-        productName2 = "基礎攤費 + 工作證一張";
+        productName2 = "基礎攤費-工作證一張";
       }
     }
 
