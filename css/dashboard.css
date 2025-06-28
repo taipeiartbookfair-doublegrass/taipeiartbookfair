@@ -642,6 +642,10 @@ html::-webkit-scrollbar-thumb:hover {
     z-index: 2;
     display: block;
     touch-action: none;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    margin: 0;
   }
   #grass-tip {
     position: absolute;
@@ -649,10 +653,11 @@ html::-webkit-scrollbar-thumb:hover {
     left: 50%;
     transform: translate(-50%, -50%);
     margin: 0;
-    font-size: 1.8em;
+    font-size: 1.2rem;
     text-align: center;
     color: olive;
     z-index: 1;
+    font-family: "Inclusive Sans", sans serif;
   }
   #grass-cursor {
     position: absolute;
