@@ -305,7 +305,7 @@ function showGrassMask() {
         // 疊加 riso 綠色
         ctx.globalCompositeOperation = "multiply";
         ctx.globalAlpha = 0.5;
-        ctx.fillStyle = "#00a95c";
+        ctx.fillStyle = "#407060";
         ctx.fillRect(g.x, g.y, grassSize, grassSize);
 
         // 還原
