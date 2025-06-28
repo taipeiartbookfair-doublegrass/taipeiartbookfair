@@ -232,7 +232,9 @@ function showGrassMask() {
   const canvas = document.getElementById("grass-canvas");
   mask.style.display = "flex";
   canvas.width = window.innerWidth;
-  canvas.height = Math.floor(window.innerHeight * 0.6);
+  canvas.height = Math.floor(window.innerHeight * 0.8);
+  canvas.style.width = window.innerWidth + "px";
+  canvas.style.height = Math.floor(window.innerHeight * 0.8) + "px";
 
   const ctx = canvas.getContext("2d");
   const grassImg = new window.Image();
@@ -240,15 +242,27 @@ function showGrassMask() {
   const grassSize = 40;
   let grassArr = [];
   let deepnessTimer = null;
+  let growTimer = null;
+  const maxGrass = 300; // 最多草數，可依需求調整
 
   // 更密集均勻分布
   const rows = 14,
     cols = 16;
+  const holeCenterX = canvas.width / 2;
+  const holeCenterY = canvas.height * 0.7; // 警語在下方
+  const holeRadius = 90; // 缺口半徑
+
   for (let i = 0; i < rows; i++) {
     for (let j = 0; j < cols; j++) {
+      let x = (canvas.width / cols) * (j + 0.5) + (Math.random() - 0.5) * 8;
+      let y = (canvas.height / rows) * (i + 0.5) + (Math.random() - 0.5) * 8;
+      // 中間區域草的生成機率降低
+      if (Math.hypot(x - holeCenterX, y - holeCenterY) < holeRadius) {
+        if (Math.random() > 0.25) continue; // 只有25%機率生成
+      }
       grassArr.push({
-        x: (canvas.width / cols) * (j + 0.5) + (Math.random() - 0.5) * 8,
-        y: (canvas.height / rows) * (i + 0.5) + (Math.random() - 0.5) * 8,
+        x,
+        y,
         erased: false,
         deepness: 0,
       });
@@ -283,10 +297,31 @@ function showGrassMask() {
     });
   }
 
+  function growGrass() {
+    if (grassArr.length >= maxGrass) return;
+    let x =
+      (canvas.width / cols) * (Math.random() * cols) +
+      (Math.random() - 0.5) * 8;
+    let y =
+      (canvas.height / rows) * (Math.random() * rows) +
+      (Math.random() - 0.5) * 8;
+    grassArr.push({
+      x,
+      y,
+      erased: false,
+      deepness: 0,
+    });
+    drawGrass();
+    // 每2~4秒長一根新草
+    growTimer = setTimeout(growGrass, 2000 + Math.random() * 2000);
+  }
+
   grassImg.onload = function () {
     drawGrass();
     if (deepnessTimer) clearInterval(deepnessTimer);
     deepnessTimer = setInterval(deepenGrass, 5000);
+    if (growTimer) clearTimeout(growTimer);
+    growGrass();
   };
 
   function eraseGrass(x, y) {
