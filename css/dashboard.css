@@ -643,9 +643,8 @@ html::-webkit-scrollbar-thumb:hover {
     left: 50%;
     transform: translate(-50%, -50%);
     margin: 0;
-    font-size: 1.2em;
+    font-size: 2em;
     text-align: center;
-    font-weight: bold;
   }
   #grass-cursor {
     position: absolute;
