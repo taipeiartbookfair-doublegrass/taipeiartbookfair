@@ -989,9 +989,9 @@ document.addEventListener("DOMContentLoaded", async function () {
         boothType === "Two Regular Booth" ||
         boothType === "Curation Booth"
       ) {
-        extrapasstxt.textContent = "Extra Pass x1";
+        extrapasstxt.textContent = "- Extra Pass x1";
       } else {
-        extrapasstxt.textContent = "加購工作證 x1";
+        extrapasstxt.textContent = "- 加購工作證 x1";
       }
     } else {
       extrapasstxt.style.display = "none"; // 沒有加購就隱藏
