@@ -634,11 +634,8 @@ html::-webkit-scrollbar-thumb:hover {
     justify-content: flex-start;
   }
   #grass-canvas {
-    width: 100vw;
-    height: 60vh;
     display: block;
     touch-action: none;
-    margin-top: 1em;
   }
   #grass-tip {
     position: absolute;
@@ -646,10 +643,6 @@ html::-webkit-scrollbar-thumb:hover {
     left: 50%;
     transform: translate(-50%, -50%);
     margin: 0;
-    z-index: 3;
-    background: rgba(255, 255, 255, 0.85);
-    padding: 1em 2em;
-    border-radius: 1em;
     font-size: 1.2em;
     text-align: center;
     font-weight: bold;

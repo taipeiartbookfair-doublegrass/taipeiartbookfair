@@ -232,7 +232,9 @@ function showGrassMask() {
   const canvas = document.getElementById("grass-canvas");
   mask.style.display = "flex";
   canvas.width = window.innerWidth;
-  canvas.height = Math.floor(window.innerHeight * 0.6);
+  canvas.height = Math.floor(window.innerHeight * 0.8);
+  canvas.style.width = window.innerWidth + "px";
+  canvas.style.height = Math.floor(window.innerHeight * 0.8) + "px";
 
   const ctx = canvas.getContext("2d");
   const grassImg = new window.Image();
