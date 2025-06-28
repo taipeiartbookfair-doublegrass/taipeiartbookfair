@@ -239,18 +239,18 @@ function showGrassMask() {
   const ctx = canvas.getContext("2d");
   const grassImg = new window.Image();
   grassImg.src = "image/Moss_of_Bangladesh_2.jpg";
-  const grassSize = 65;
+  const grassSize = 54;
   let grassArr = [];
   let deepnessTimer = null;
   let growTimer = null;
-  const maxGrass = 600; // 最多草數，可依需求調整
+  const maxGrass = 400; // 最多草數，可依需求調整
 
   // 更密集均勻分布
   const rows = 14,
     cols = 16;
   const holeCenterX = canvas.width / 2;
   const holeCenterY = canvas.height * 0.7; // 警語在下方
-  const holeRadius = 90; // 缺口半徑
+  const holeRadius = 150; // 缺口半徑
 
   for (let i = 0; i < rows; i++) {
     for (let j = 0; j < cols; j++) {
