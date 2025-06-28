@@ -609,6 +609,9 @@ html::-webkit-scrollbar-thumb:hover {
   #media-section-row6 td {
     font-size: 1rem !important;
   }
+  .tictactoe-container {
+    display: none;
+  }
 }
 
 /* ===== 大螢幕版 4K+ ===== */
@@ -658,6 +661,11 @@ html::-webkit-scrollbar-thumb:hover {
   h3 {
     font-size: 28rem !important;
     line-height: 20rem !important;
+  }
+
+  /* 手機版來不及做所以先劃掉 */
+  #loading-mask {
+    display: none;
   }
 }
 
