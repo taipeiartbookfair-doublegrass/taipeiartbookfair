@@ -363,25 +363,30 @@ function showGrassMask() {
     if (changed) drawGrass();
   }
 
+  // 掃地功能：讓草被掃把推開而不是消失
   function sweepGrass(x, y) {
     let changed = false;
     grassArr.forEach((g) => {
+      // 判斷滑鼠/手指是否碰到這根草
       if (
         !g.erased &&
         Math.hypot(g.x + grassSize / 2 - x, g.y + grassSize / 2 - y) <
-          grassSize * 0.7
+          grassSize * 0.7 // 距離小於草半徑的0.7倍就算碰到
       ) {
-        // 隨機往外推開
+        // 隨機產生一個方向（角度）
         const angle = Math.random() * Math.PI * 2;
-        const distance = grassSize * (1.2 + Math.random()); // 推遠一點
+        // 隨機產生一個距離（1.2~2.2倍草的大小）
+        const distance = grassSize * (1.2 + Math.random());
+        // 根據角度和距離，計算新的 x/y，讓草往外推開
         g.x += Math.cos(angle) * distance;
         g.y += Math.sin(angle) * distance;
-        // 邊界檢查
+        // 邊界檢查，避免草被推出畫布外
         g.x = Math.max(0, Math.min(canvas.width - grassSize, g.x));
         g.y = Math.max(0, Math.min(canvas.height - grassSize, g.y));
-        changed = true;
+        changed = true; // 有草被推動就標記
       }
     });
+    // 如果有任何草被推動，重畫畫面
     if (changed) drawGrass();
   }
 
