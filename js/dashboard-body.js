@@ -237,8 +237,8 @@ function showGrassMask() {
 
   const ctx = canvas.getContext("2d");
   const grassImg = new window.Image();
-  grassImg.src = "image/Moss_of_Bangladesh_2.jpg";
-  const grassSize = 65;
+  grassImg.src = "../image/moss2.jpg";
+  const grassSize = 60;
   let grassArr = [];
   let deepnessTimer = null;
   let growTimer = null;
@@ -287,7 +287,7 @@ function showGrassMask() {
     grassArr.forEach((g) => {
       if (!g.erased) {
         ctx.save();
-        // 先畫草圖
+        // 根據 deepness 設定不同濾鏡
         if (g.deepness === 1) {
           ctx.filter = "brightness(0.7) saturate(1.2)";
         } else if (g.deepness === 2) {
@@ -300,7 +300,7 @@ function showGrassMask() {
 
         // 疊加 riso 綠色
         ctx.globalCompositeOperation = "multiply";
-        ctx.globalAlpha = 0.5; // 疊色透明度可調整
+        ctx.globalAlpha = 0.5;
         ctx.fillStyle = "#00a95c";
         ctx.fillRect(g.x, g.y, grassSize, grassSize);
 
