@@ -387,11 +387,4 @@ function showGrassMask() {
   canvas.addEventListener("touchend", function () {
     grassCursor.style.display = "none";
   });
-
-  // 手機自動顯示草地遮罩
-  document.addEventListener("DOMContentLoaded", function () {
-    if (/Mobi|Android|iPhone|iPad|iPod/i.test(navigator.userAgent)) {
-      setTimeout(showGrassMask, 300);
-    }
-  });
 }
