@@ -7,8 +7,9 @@ document.addEventListener("DOMContentLoaded", function () {
   if (branch_summit_btn) {
     branch_summit_btn.addEventListener("click", async function (e) {
       e.preventDefault();
-      // 顯示 loading 遮罩
       document.getElementById("loading-mask").style.display = "flex";
+      if (window.startFakeLoading) window.startFakeLoading(); // 新增這行
+
       const account = getCookie("account");
       const region = getCookie("region");
 
