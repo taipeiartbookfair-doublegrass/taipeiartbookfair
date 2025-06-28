@@ -226,7 +226,6 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 
 // 除草戰士
-
 function showGrassMask() {
   const mask = document.getElementById("grass-mask");
   const canvas = document.getElementById("grass-canvas");
@@ -270,11 +269,16 @@ function showGrassMask() {
   }
 
   function deepenGrass() {
-    grassArr.forEach((g) => {
-      if (!g.erased && g.deepness < 2) {
-        g.deepness++;
-      }
-    });
+    // 只讓部分草變深
+    const candidates = grassArr.filter((g) => !g.erased && g.deepness < 2);
+    // 每次只讓 1/4 的草變深
+    const count = Math.ceil(candidates.length / 4);
+    for (let i = 0; i < count; i++) {
+      if (candidates.length === 0) break;
+      const idx = Math.floor(Math.random() * candidates.length);
+      candidates[idx].deepness++;
+      candidates.splice(idx, 1);
+    }
     drawGrass();
   }
 
@@ -319,7 +323,7 @@ function showGrassMask() {
   grassImg.onload = function () {
     drawGrass();
     if (deepnessTimer) clearInterval(deepnessTimer);
-    deepnessTimer = setInterval(deepenGrass, 5000);
+    deepnessTimer = setInterval(deepenGrass, 9000);
     if (growTimer) clearTimeout(growTimer);
     growGrass();
   };
