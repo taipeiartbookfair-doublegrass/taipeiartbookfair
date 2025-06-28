@@ -612,6 +612,7 @@ html::-webkit-scrollbar-thumb:hover {
   #tictactoe-container {
     display: none !important;
   }
+
   /* 手機版來不及做所以先劃掉 */
   #loading-mask {
     display: none !important;
@@ -652,7 +653,7 @@ html::-webkit-scrollbar-thumb:hover {
   #grass-cursor {
     position: absolute;
     z-index: 10;
-    font-size: 2.2em;
+    font-size: 4em;
     pointer-events: none;
     user-select: none;
     transition: transform 0.05s;

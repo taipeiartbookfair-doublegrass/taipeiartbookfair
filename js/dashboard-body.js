@@ -230,7 +230,6 @@ document.addEventListener("DOMContentLoaded", function () {
 function showGrassMask() {
   const mask = document.getElementById("grass-mask");
   const canvas = document.getElementById("grass-canvas");
-  const tip = document.getElementById("grass-tip");
   mask.style.display = "flex";
   canvas.width = window.innerWidth;
   canvas.height = Math.floor(window.innerHeight * 0.6);
@@ -238,39 +237,26 @@ function showGrassMask() {
   const ctx = canvas.getContext("2d");
   const grassImg = new window.Image();
   grassImg.src = "image/Moss_of_Bangladesh_2.jpg";
-  const grassSize = 32;
+  const grassSize = 56; // 草大一點
   let grassArr = [];
   let growTimer = null;
   let deepnessTimer = null;
 
-  const maxGrass = 70;
-  const initialGrass = 35;
-
-  // 初始一半草
-  for (let i = 0; i < initialGrass; i++) {
-    grassArr.push({
-      x: Math.random() * (canvas.width - grassSize),
-      y: Math.random() * (canvas.height - grassSize),
-      erased: false,
-      deepness: 0,
-    });
-  }
-
-  // 慢慢長出新草
-  function growGrass() {
-    if (grassArr.length < maxGrass) {
+  // 均勻分布草
+  const rows = 8,
+    cols = 9;
+  for (let i = 0; i < rows; i++) {
+    for (let j = 0; j < cols; j++) {
       grassArr.push({
-        x: Math.random() * (canvas.width - grassSize),
-        y: Math.random() * (canvas.height - grassSize),
+        x: (canvas.width / cols) * (j + 0.5) + (Math.random() - 0.5) * 20,
+        y: (canvas.height / rows) * (i + 0.5) + (Math.random() - 0.5) * 20,
         erased: false,
         deepness: 0,
       });
-      drawGrass();
-      growTimer = setTimeout(growGrass, 600 + Math.random() * 800);
     }
   }
 
-  // 草慢慢變深色
+  // 草慢慢變深色（速度變慢）
   function deepenGrass() {
     grassArr.forEach((g) => {
       if (!g.erased && g.deepness < 2) {
@@ -302,12 +288,8 @@ function showGrassMask() {
 
   grassImg.onload = function () {
     drawGrass();
-    // 開始長草
-    if (growTimer) clearTimeout(growTimer);
-    growGrass();
-    // 開始變深色
     if (deepnessTimer) clearInterval(deepnessTimer);
-    deepnessTimer = setInterval(deepenGrass, 1800);
+    deepnessTimer = setInterval(deepenGrass, 3500); // 變深速度變慢
   };
 
   // 除草：深色變淺，淺色才消失
@@ -328,13 +310,7 @@ function showGrassMask() {
       }
     });
     if (changed) drawGrass();
-    // 全部都被鋤掉就顯示提示
-    if (grassArr.every((g) => g.erased)) {
-      if (deepnessTimer) clearInterval(deepnessTimer);
-      if (growTimer) clearTimeout(growTimer);
-      tip.innerHTML =
-        "手機版現在不能用<br>Mobile version is under construction";
-    }
+    // 不再動 tip.innerHTML
   }
 
   // 支援滑鼠與觸控
