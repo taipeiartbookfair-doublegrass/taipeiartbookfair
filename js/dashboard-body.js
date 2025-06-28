@@ -287,6 +287,7 @@ function showGrassMask() {
     grassArr.forEach((g) => {
       if (!g.erased) {
         ctx.save();
+        // 先畫草圖
         if (g.deepness === 1) {
           ctx.filter = "brightness(0.7) saturate(1.2)";
         } else if (g.deepness === 2) {
@@ -296,6 +297,17 @@ function showGrassMask() {
         }
         ctx.globalAlpha = 0.95;
         ctx.drawImage(grassImg, g.x, g.y, grassSize, grassSize);
+
+        // 疊加 riso 綠色
+        ctx.globalCompositeOperation = "multiply";
+        ctx.globalAlpha = 0.5; // 疊色透明度可調整
+        ctx.fillStyle = "#00a95c";
+        ctx.fillRect(g.x, g.y, grassSize, grassSize);
+
+        // 還原
+        ctx.globalCompositeOperation = "source-over";
+        ctx.globalAlpha = 1;
+        ctx.filter = "none";
         ctx.restore();
       }
     });
