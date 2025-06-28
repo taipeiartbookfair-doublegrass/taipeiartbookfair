@@ -74,7 +74,7 @@ document.addEventListener("DOMContentLoaded", async function () {
         fakeLoadingPercent += 0.01 + Math.random() * 0.01;
         window.setLoading(fakeLoadingPercent);
       }
-    }, 250); // 每 40ms 跑一格
+    }, 400); // 每 40ms 跑一格
   };
 
   window.stopFakeLoading = function () {
@@ -82,7 +82,7 @@ document.addEventListener("DOMContentLoaded", async function () {
     window.setLoading(1); // 直接跳到 100%
     setTimeout(() => {
       document.getElementById("loading-mask").style.display = "none";
-    }, 30); // 給一點緩衝
+    }, 10); // 給一點緩衝
   };
 
   window.setLoading = function (percent) {
