@@ -19,7 +19,6 @@ document.addEventListener("DOMContentLoaded", function () {
       const brandName = document.getElementById("brandName-edit").value.trim();
       const bio = document.getElementById("bio-edit").value.trim();
       const role = document.getElementById("role-edit").value;
-      const category = document.getElementById("category-edit").value;
       const website = document.getElementById("website-edit").value.trim();
       const facebook = document.getElementById("facebook-edit").value.trim();
       const instagram = document.getElementById("instagram-edit").value.trim();
