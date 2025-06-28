@@ -380,9 +380,7 @@ function showGrassMask() {
         // 根據角度和距離，計算新的 x/y，讓草往外推開
         g.x += Math.cos(angle) * distance;
         g.y += Math.sin(angle) * distance;
-        // 邊界檢查，避免草被推出畫布外
-        g.x = Math.max(0, Math.min(canvas.width - grassSize, g.x));
-        g.y = Math.max(0, Math.min(canvas.height - grassSize, g.y));
+
         changed = true; // 有草被推動就標記
       }
     });
