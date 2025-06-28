@@ -641,14 +641,18 @@ html::-webkit-scrollbar-thumb:hover {
     margin-top: 1em;
   }
   #grass-tip {
-    margin-top: 2em;
-    margin-bottom: 0.5em;
-    background: rgba(255, 255, 255, 0.85);
-    border-radius: 1em;
-    padding: 0.7em 1.5em;
-    font-size: 1.1em;
-    color: #222;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    margin: 0;
     z-index: 3;
+    background: rgba(255, 255, 255, 0.85);
+    padding: 1em 2em;
+    border-radius: 1em;
+    font-size: 1.2em;
+    text-align: center;
+    font-weight: bold;
   }
   #grass-cursor {
     position: absolute;
