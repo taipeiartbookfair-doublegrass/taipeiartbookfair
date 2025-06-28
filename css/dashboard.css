@@ -677,7 +677,7 @@ html::-webkit-scrollbar-thumb:hover {
   #grass-cursor {
     position: absolute;
     z-index: 10;
-    font-size: 4em;
+    font-size: 5em;
     pointer-events: none;
     user-select: none;
     transition: transform 0.05s;
