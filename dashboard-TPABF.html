@@ -292,19 +292,7 @@
                   <span style="font-size: 3rem" id="brand-name">品牌名稱</span>
                 </td>
               </tr>
-              <tr>
-                <td style="width: 50%">
-                  <span class="label">身份類別 Role</span><br /><span id="role"
-                    >t0 Organizer</span
-                  >
-                </td>
-                <td style="width: 50%">
-                  <span class="label">作品類別 Category</span><br /><span
-                    id="category"
-                    >t0 book fair</span
-                  >
-                </td>
-              </tr>
+
               <tr>
                 <td colspan="2">
                   <span class="label">品牌簡介 Bio</span><br />
@@ -316,21 +304,14 @@
                 </td>
               </tr>
               <tr>
-                <td colspan="2">
-                  <span class="label">過往參與年份 Years Attended</span
-                  ><br /><span id="attendedYears"></span>
-                </td>
-              </tr>
-              <tr>
                 <td colspan="2" style="padding: 0">
                   <table style="width: 100%; table-layout: fixed">
                     <tr>
                       <td
                         style="
-                          width: 25%;
                           border-top: 0.5px solid pink;
                           border-left: none;
-                          border-right: 1px dashed black;
+                          border-right: 1px solid black;
                           border-bottom: none;
                         "
                       >
@@ -339,7 +320,14 @@
                           >TW</span
                         >
                       </td>
-                      <td>
+                      <td
+                        style="
+                          border-top: 0.5px solid pink;
+                          border-left: none;
+                          border-right: none;
+                          border-bottom: none;
+                        "
+                      >
                         <span class="label">主要創作據點 Based at</span
                         ><br /><span id="baselocation"></span>
                       </td>
@@ -347,6 +335,20 @@
                   </table>
                 </td>
               </tr>
+              <tr>
+                <td colspan="2">
+                  <span class="label">過往參與年份 Years Attended</span
+                  ><br /><span id="attendedYears"></span>
+                </td>
+              </tr>
+              <tr>
+                <td style="width: 50%" colspan="2">
+                  <span class="label">身份類別 Role</span><br /><span id="role"
+                    >t0 Organizer</span
+                  >
+                </td>
+              </tr>
+
               <tr>
                 <td colspan="2">
                   <span class="label">Website</span><br />
@@ -449,7 +451,7 @@
                   </td>
                 </tr>
                 <tr>
-                  <td>
+                  <td colspan="2">
                     <span class="label">身份類別 Role</span><br />
                     <select id="role-edit">
                       <option value="">請選擇身份類別</option>
@@ -469,70 +471,6 @@
                       </option>
                       <option value="a6 Group/Structure">
                         a6 Group/Structure 團體
-                      </option>
-                    </select>
-                  </td>
-                  <td>
-                    <span class="label">作品類別 Category</span><br />
-                    <select id="category-edit">
-                      <option value="">請選擇作品類別</option>
-                      <option value="b00 攝影">b00 攝影（Photography）</option>
-                      <option value="b01 插畫">b01 插畫（Illustration）</option>
-                      <option value="b02 漫畫">b02 漫畫（Comics）</option>
-                      <option value="b03 平面設計">
-                        b03 平面設計（Graphic & Design）
-                      </option>
-                      <option value="b04 拼貼・混合媒材・聯合創作">
-                        b04 拼貼・混合媒材・聯合創作（Collage & Mixture &
-                        Collective）
-                      </option>
-                      <option value="b05 雜誌與紙本出版">
-                        b05 雜誌與紙本出版（Magazine & Papers）
-                      </option>
-                      <option value="b06 概念與實驗性出版">
-                        b06 概念與實驗性出版（Conceptual & Experimental）
-                      </option>
-                      <option value="b07 工藝與特殊材質">
-                        b07 工藝與特殊材質（Craftwork & Different Material）
-                      </option>
-                      <option value="b08 文學與寫作">
-                        b08 文學與寫作（Literature & Writing）
-                      </option>
-                      <option value="b09 專案・策展・議題">
-                        b09 專案・策展・議題（Project & Curatorial & Issue）
-                      </option>
-                      <option value="b10 選集與收藏出版物">
-                        b10 選集與收藏出版物（Collection）
-                      </option>
-                      <option value="c00 角色週邊商品">
-                        c00 角色週邊商品（Character Merch）
-                      </option>
-                      <option value="c01 印刷品">
-                        c01 印刷品（Printed Matter）
-                      </option>
-                      <option value="c02 手工藝與配件">
-                        c02 手工藝與配件（Crafts & Accessories）
-                      </option>
-                      <option value="c03 布料與刺繡">
-                        c03 布料與刺繡（Fabric & Embroidery）
-                      </option>
-                      <option value="c04 刺青">c04 刺青（Tattoo）</option>
-                      <option value="c05 玩具與模型">
-                        c05 玩具與模型（Toy & Model）
-                      </option>
-                      <option value="c06 生活風格商品">
-                        c06 生活風格商品（Life Attitude）
-                      </option>
-                      <option value="c07 古董">c07 古董（Antiques）</option>
-                      <option value="c08 花藝・植栽・精品">
-                        c08 花藝・植栽・精品（Ikebana & Plant & Boutique）
-                      </option>
-                      <option value="c10 音樂">c10 音樂（Music）</option>
-                      <option value="f00 甜點">f00 甜點（Desserts）</option>
-                      <option value="f01 飲品">f01 飲品（Beverages）</option>
-                      <option value="f02 鹹食">f02 鹹食（Savory Foods）</option>
-                      <option value="f03 茶・咖啡">
-                        f03 茶・咖啡（Tea & Coffee）
                       </option>
                     </select>
                   </td>

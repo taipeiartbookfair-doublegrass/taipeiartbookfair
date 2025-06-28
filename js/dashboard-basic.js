@@ -187,7 +187,6 @@ document.addEventListener("DOMContentLoaded", async function () {
   document.getElementById("brand-name").textContent = apiData["品牌"] || "";
   document.getElementById("bio").textContent = apiData["品牌簡介"] || "";
   document.getElementById("role").textContent = apiData["身份類別"] || "";
-  document.getElementById("category").textContent = apiData["作品類別"] || "";
   document.getElementById("live-event-schedule-reminder").textContent =
     apiData["活動場次資訊"] || "";
   document.getElementById("nationality").textContent = region || "";
