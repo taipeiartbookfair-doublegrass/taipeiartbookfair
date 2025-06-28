@@ -229,11 +229,14 @@ document.addEventListener("DOMContentLoaded", function () {
 function showGrassMask() {
   const mask = document.getElementById("grass-mask");
   const canvas = document.getElementById("grass-canvas");
-  // mask.style.display = "flex";
-  // canvas.width = window.innerWidth;
-  // canvas.height = window.innerHeight;
-  // canvas.style.width = window.innerWidth + "px";
-  // canvas.style.height = window.innerHeight + "px";
+  const vw = Math.round(window.innerWidth * 1.1);
+  const vh = Math.round(window.innerHeight * 1.1);
+  canvas.width = vw;
+  canvas.height = vh;
+  canvas.style.width = "110vw";
+  canvas.style.height = "110vh";
+  canvas.style.left = "-2.5vw";
+  canvas.style.top = "-2.5vh";
 
   const ctx = canvas.getContext("2d");
   const grassImg = new window.Image();
@@ -398,13 +401,16 @@ function showGrassMask() {
   canvas.addEventListener("mousemove", handle);
   canvas.addEventListener("touchmove", handle);
 
-  // 視窗大小改變時重畫
   window.addEventListener("resize", () => {
-    if (mask.style.display === "flex") {
-      canvas.width = window.innerWidth;
-      canvas.height = window.innerHeight;
-      drawGrass();
-    }
+    const vw = Math.round(window.innerWidth * 1.1);
+    const vh = Math.round(window.innerHeight * 1.1);
+    canvas.width = vw;
+    canvas.height = vh;
+    canvas.style.width = "110vw";
+    canvas.style.height = "110vh";
+    canvas.style.left = "-2.5vw";
+    canvas.style.top = "-2.5vh";
+    drawGrass();
   });
 
   const grassCursor = document.getElementById("grass-cursor");
