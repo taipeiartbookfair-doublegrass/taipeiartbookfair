@@ -612,6 +612,10 @@ html::-webkit-scrollbar-thumb:hover {
   .tictactoe-container {
     display: none;
   }
+  /* 手機版來不及做所以先劃掉 */
+  #loading-mask {
+    display: none;
+  }
 }
 
 /* ===== 大螢幕版 4K+ ===== */
@@ -662,11 +666,6 @@ html::-webkit-scrollbar-thumb:hover {
     font-size: 28rem !important;
     line-height: 20rem !important;
   }
-
-  /* 手機版來不及做所以先劃掉 */
-  #loading-mask {
-    display: none;
-  }
 }
 
 #grass-mask {
@@ -690,16 +689,6 @@ html::-webkit-scrollbar-thumb:hover {
   display: block;
   touch-action: none;
   margin-top: 1em;
-}
-#grass-progress {
-  margin-top: 1em;
-  background: rgba(255, 255, 255, 0.8);
-  color: #222;
-  padding: 0.5em 1em;
-  border-radius: 1em;
-  font-size: 1.2em;
-  font-weight: bold;
-  z-index: 2;
 }
 #grass-tip {
   margin-top: 2em;
