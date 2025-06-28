@@ -624,9 +624,10 @@ html::-webkit-scrollbar-thumb:hover {
 
   #grass-mask {
     background-image: url(../image/Cracked_dry_land.jpg);
+    background-color: #5c3e1e;
+    background-blend-mode: multiply;
     background-position: center;
     background-attachment: fixed;
-    background-color: burlywood;
     position: fixed;
     left: 0;
     top: 0;
@@ -663,6 +664,7 @@ html::-webkit-scrollbar-thumb:hover {
     font-weight: bold;
     z-index: 1;
     font-family: "Inclusive Sans", sans serif;
+    transform: translate(-50%, -50%) rotate(-5deg) skewX(-8deg);
   }
   #grass-cursor {
     position: absolute;
