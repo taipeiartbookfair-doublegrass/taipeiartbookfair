@@ -225,10 +225,12 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 });
 
-// 除草戰士
+// 除草戰士主程式
 function showGrassMask() {
   const mask = document.getElementById("grass-mask");
   const canvas = document.getElementById("grass-canvas");
+
+  // 設定 canvas 寬高為螢幕的 1.1 倍，並偏移，確保不會有白邊
   const vw = Math.round(window.innerWidth * 1.1);
   const vh = Math.round(window.innerHeight * 1.1);
   mask.style.display = "block";
@@ -241,56 +243,59 @@ function showGrassMask() {
 
   const ctx = canvas.getContext("2d");
   const grassImg = new window.Image();
-  grassImg.src = "../image/moss2.jpg";
-  const grassSize = 60;
-  let grassArr = [];
-  let deepnessTimer = null;
-  let growTimer = null;
-  const maxGrass = 400; // 最多草數，可依需求調整
+  grassImg.src = "../image/moss2.jpg"; // 草的圖片
+  const grassSize = 60; // 每根草的大小
+  let grassArr = []; // 草的資料陣列
+  let deepnessTimer = null; // 草變深的 timer
+  let growTimer = null; // 草長出來的 timer
+  const maxGrass = 400; // 最多草數
 
-  // 更密集均勻分布
+  // 產生初始草（均勻分布，中央區域較稀疏）
   const rows = 14,
     cols = 16;
   const holeCenterX = canvas.width / 2;
   const holeCenterY = canvas.height * 0.7; // 警語在下方
-  const holeRadiusX = 240; // 橫向半徑
-  const holeRadiusY = 160; // 縱向半徑
+  const holeRadiusX = 180; // 橫向半徑
+  const holeRadiusY = 130; // 縱向半徑
 
   for (let i = 0; i < rows; i++) {
     for (let j = 0; j < cols; j++) {
-      let x = (canvas.width / cols) * (j + 0.6) + (Math.random() - 0.6);
-      let y = (canvas.height / rows) * (i + 0.6) + (Math.random() - 0.6);
-      // 中間區域草的生成機率降低
+      // 均勻分布加一點亂數
+      let x = (canvas.width / cols) * (j + 0.4) + (Math.random() - 0.4);
+      let y = (canvas.height / rows) * (i + 0.4) + (Math.random() - 0.4);
+      // 中間橢圓區域草的生成機率降低
       if (
         Math.pow((x - holeCenterX) / holeRadiusX, 2) +
           Math.pow((y - holeCenterY) / holeRadiusY, 2) <
         1
       ) {
-        if (Math.random() > 0.2) continue; // 只有25%機率生成
+        if (Math.random() > 0.2) continue; // 只有 20% 機率生成
       }
       grassArr.push({
         x,
         y,
-        erased: false,
-        deepness: 0,
+        erased: false, // 是否已被掃掉
+        deepness: 0, // 0=淺色, 1=中, 2=深
       });
     }
   }
 
+  // 草慢慢變深色（每次只讓一小部分草變深）
   function deepenGrass() {
-    // 只讓部分草變深
+    // 找出所有還沒最深的草
     const candidates = grassArr.filter((g) => !g.erased && g.deepness < 2);
-    // 每次只讓 1/4 的草變深
+    // 每次只讓 1/6 的草變深
     const count = Math.ceil(candidates.length / 6);
     for (let i = 0; i < count; i++) {
       if (candidates.length === 0) break;
       const idx = Math.floor(Math.random() * candidates.length);
       candidates[idx].deepness++;
-      candidates.splice(idx, 1);
+      candidates.splice(idx, 1); // 避免重複
     }
     drawGrass();
   }
 
+  // 畫出所有草
   function drawGrass() {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
     grassArr.forEach((g) => {
@@ -316,7 +321,7 @@ function showGrassMask() {
           ctx.fillRect(g.x, g.y, grassSize, grassSize);
         }
 
-        // 還原
+        // 還原畫布狀態
         ctx.globalCompositeOperation = "source-over";
         ctx.globalAlpha = 1;
         ctx.restore();
@@ -324,8 +329,10 @@ function showGrassMask() {
     });
   }
 
+  // 慢慢長出新草（隨機分布，不限中間區域）
   function growGrass() {
     if (grassArr.length >= maxGrass) return;
+    // 隨機產生新草的位置
     let x =
       (canvas.width / cols) * (Math.random() * cols) +
       (Math.random() - 0.5) * 8;
@@ -339,36 +346,18 @@ function showGrassMask() {
       deepness: 0,
     });
     drawGrass();
-    // 每2~4秒長一根新草
+    // 每 2~4 秒長一根新草
     growTimer = setTimeout(growGrass, 2000 + Math.random() * 2000);
   }
 
+  // 草圖載入後啟動變深與長草
   grassImg.onload = function () {
     drawGrass();
     if (deepnessTimer) clearInterval(deepnessTimer);
-    deepnessTimer = setInterval(deepenGrass, 9000);
+    deepnessTimer = setInterval(deepenGrass, 9000); // 每 9 秒變深
     if (growTimer) clearTimeout(growTimer);
     growGrass();
   };
-
-  function eraseGrass(x, y) {
-    let changed = false;
-    grassArr.forEach((g) => {
-      if (
-        !g.erased &&
-        Math.hypot(g.x + grassSize / 2 - x, g.y + grassSize / 2 - y) <
-          grassSize * 0.7
-      ) {
-        if (g.deepness > 0) {
-          g.deepness--;
-        } else {
-          g.erased = true;
-        }
-        changed = true;
-      }
-    });
-    if (changed) drawGrass();
-  }
 
   // 掃地功能：讓草被掃把推開而不是消失
   function sweepGrass(x, y) {
@@ -387,7 +376,6 @@ function showGrassMask() {
         // 根據角度和距離，計算新的 x/y，讓草往外推開
         g.x += Math.cos(angle) * distance;
         g.y += Math.sin(angle) * distance;
-
         changed = true; // 有草被推動就標記
       }
     });
@@ -395,6 +383,7 @@ function showGrassMask() {
     if (changed) drawGrass();
   }
 
+  // 處理滑鼠或觸控事件，呼叫掃地功能
   function handle(e) {
     let x, y;
     if (e.touches) {
@@ -412,6 +401,7 @@ function showGrassMask() {
   canvas.addEventListener("mousemove", handle);
   canvas.addEventListener("touchmove", handle);
 
+  // 視窗大小改變時，canvas 跟著調整並重畫草
   window.addEventListener("resize", () => {
     const vw = Math.round(window.innerWidth * 1.1);
     const vh = Math.round(window.innerHeight * 1.1);
@@ -424,6 +414,7 @@ function showGrassMask() {
     drawGrass();
   });
 
+  // 掃把 emoji 游標跟隨滑鼠或手指
   const grassCursor = document.getElementById("grass-cursor");
 
   // 滑鼠移動時顯示並跟隨
