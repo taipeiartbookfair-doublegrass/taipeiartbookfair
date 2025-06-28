@@ -232,25 +232,25 @@ function showGrassMask() {
   const canvas = document.getElementById("grass-canvas");
   mask.style.display = "flex";
   canvas.width = window.innerWidth;
-  canvas.height = Math.floor(window.innerHeight * 0.8);
+  canvas.height = window.innerHeight;
   canvas.style.width = window.innerWidth + "px";
-  canvas.style.height = Math.floor(window.innerHeight * 0.8) + "px";
+  canvas.style.height = window.innerHeight + "px";
 
   const ctx = canvas.getContext("2d");
   const grassImg = new window.Image();
   grassImg.src = "image/Moss_of_Bangladesh_2.jpg";
-  const grassSize = 65;
+  const grassSize = 54;
   let grassArr = [];
   let deepnessTimer = null;
   let growTimer = null;
-  const maxGrass = 600; // 最多草數，可依需求調整
+  const maxGrass = 400; // 最多草數，可依需求調整
 
   // 更密集均勻分布
   const rows = 14,
     cols = 16;
   const holeCenterX = canvas.width / 2;
   const holeCenterY = canvas.height * 0.7; // 警語在下方
-  const holeRadius = 90; // 缺口半徑
+  const holeRadius = 150; // 缺口半徑
 
   for (let i = 0; i < rows; i++) {
     for (let j = 0; j < cols; j++) {
@@ -343,18 +343,40 @@ function showGrassMask() {
     if (changed) drawGrass();
   }
 
+  function sweepGrass(x, y) {
+    let changed = false;
+    grassArr.forEach((g) => {
+      if (
+        !g.erased &&
+        Math.hypot(g.x + grassSize / 2 - x, g.y + grassSize / 2 - y) <
+          grassSize * 0.7
+      ) {
+        // 隨機往外推開
+        const angle = Math.random() * Math.PI * 2;
+        const distance = grassSize * (1.2 + Math.random()); // 推遠一點
+        g.x += Math.cos(angle) * distance;
+        g.y += Math.sin(angle) * distance;
+        // 邊界檢查
+        g.x = Math.max(0, Math.min(canvas.width - grassSize, g.x));
+        g.y = Math.max(0, Math.min(canvas.height - grassSize, g.y));
+        changed = true;
+      }
+    });
+    if (changed) drawGrass();
+  }
+
   function handle(e) {
     let x, y;
     if (e.touches) {
       for (let t of e.touches) {
         x = t.clientX;
         y = t.clientY;
-        eraseGrass(x, y);
+        sweepGrass(x, y);
       }
     } else {
       x = e.clientX;
       y = e.clientY;
-      eraseGrass(x, y);
+      sweepGrass(x, y);
     }
   }
   canvas.addEventListener("mousemove", handle);
@@ -364,7 +386,7 @@ function showGrassMask() {
   window.addEventListener("resize", () => {
     if (mask.style.display === "flex") {
       canvas.width = window.innerWidth;
-      canvas.height = Math.floor(window.innerHeight * 0.6);
+      canvas.height = window.innerHeight;
       drawGrass();
     }
   });

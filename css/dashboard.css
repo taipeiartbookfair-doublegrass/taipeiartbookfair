@@ -630,22 +630,20 @@ html::-webkit-scrollbar-thumb:hover {
     background-repeat: no-repeat;
     background-attachment: fixed;
     background-color: burlywood;
+    width: 100vw;
+    height: 100vh;
     z-index: 9999;
-    touch-action: none;
-    user-select: none;
     display: flex;
-    flex-direction: column;
     align-items: center;
-    justify-content: flex-start;
+    justify-content: center;
   }
   #grass-canvas {
-    z-index: 2;
+    width: 100vw;
+    height: 100vh;
     display: block;
     touch-action: none;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
     margin: 0;
+    padding: 0;
   }
   #grass-tip {
     position: absolute;
@@ -655,7 +653,7 @@ html::-webkit-scrollbar-thumb:hover {
     margin: 0;
     font-size: 1.2rem;
     text-align: center;
-    color: olive;
+    color: orangered;
     z-index: 1;
     font-family: "Inclusive Sans", sans serif;
   }
