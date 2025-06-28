@@ -655,7 +655,7 @@ html::-webkit-scrollbar-thumb:hover {
     margin: 0;
     font-size: 1.2rem;
     text-align: center;
-    color: olive;
+    color: orangered;
     z-index: 1;
     font-family: "Inclusive Sans", sans serif;
   }
