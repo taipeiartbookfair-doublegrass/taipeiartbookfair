@@ -660,20 +660,19 @@ html::-webkit-scrollbar-thumb:hover {
     z-index: 1;
   }
   #grass-tip {
+    font-size: 2rem;
+    font-weight: bold;
+    font-family: "Inclusive Sans", sans-serif;
+    color: #ff6f4c;
+    text-align: center;
     position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    margin: 0;
-    font-size: 1.3rem;
-    text-align: center;
-    color: #ff6f4c;
-    font-weight: bold;
-    z-index: 1;
-    font-family: "Inclusive Sans", sans serif;
-
-    text-shadow: 1px 1px ghostwhite, -1px -1px #ffd966;
+    filter: blur(0.5px) contrast(120%) saturate(80%);
+    transform: translate(-50%, -50%) rotate(-0.3deg);
   }
+
   #grass-cursor {
     position: absolute;
     z-index: 10;
