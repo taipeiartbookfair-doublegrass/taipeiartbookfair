@@ -623,32 +623,33 @@ html::-webkit-scrollbar-thumb:hover {
   }
 
   #grass-mask {
+    background-image: url(../image/Cracked_dry_land.jpg);
+    background-position: center;
+    background-attachment: fixed;
+    background-color: burlywood;
     position: fixed;
     left: 0;
     top: 0;
     right: 0;
     bottom: 0;
-    background-image: url(../image/Cracked_dry_land.jpg);
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-    background-attachment: fixed;
-    background-color: burlywood;
     width: 100vw;
     height: 100vh;
     z-index: 9999;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-  #grass-canvas {
-    z-index: 1;
-    width: 100%;
-    height: 100%;
     display: block;
-    touch-action: none;
     margin: 0;
     padding: 0;
+    overflow: hidden;
+  }
+  #grass-canvas {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100vw;
+    height: 100vh;
+    display: block;
+    margin: 0;
+    padding: 0;
+    z-index: 1;
   }
   #grass-tip {
     position: absolute;
@@ -659,6 +660,7 @@ html::-webkit-scrollbar-thumb:hover {
     font-size: 1.2rem;
     text-align: center;
     color: orangered;
+    font-weight: bold;
     z-index: 1;
     font-family: "Inclusive Sans", sans serif;
   }

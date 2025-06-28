@@ -226,7 +226,6 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 
 // 除草戰士
-
 function showGrassMask() {
   const mask = document.getElementById("grass-mask");
   const canvas = document.getElementById("grass-canvas");
