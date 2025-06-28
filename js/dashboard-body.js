@@ -227,6 +227,8 @@ document.addEventListener("DOMContentLoaded", function () {
 
 // 草地遮罩小遊戲
 function showGrassMask() {
+  console.log("showGrassMask called!");
+
   const mask = document.getElementById("grass-mask");
   const canvas = document.getElementById("grass-canvas");
   const progress = document.getElementById("grass-progress");
