@@ -661,7 +661,7 @@ html::-webkit-scrollbar-thumb:hover {
     z-index: 1;
   }
   #grass-tip {
-    font-size: 2rem;
+    font-size: 1.7rem;
     font-weight: bold;
     font-family: "Inclusive Sans", sans-serif;
     color: #ff6f4c;

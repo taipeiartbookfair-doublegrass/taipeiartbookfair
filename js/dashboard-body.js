@@ -231,7 +231,7 @@ function showGrassMask() {
   const canvas = document.getElementById("grass-canvas");
   const vw = Math.round(window.innerWidth * 1.1);
   const vh = Math.round(window.innerHeight * 1.1);
-  mask.style.display = "block";
+  mask.style.display = "flex";
   canvas.width = vw;
   canvas.height = vh;
   canvas.style.width = "110vw";
@@ -257,11 +257,11 @@ function showGrassMask() {
 
   for (let i = 0; i < rows; i++) {
     for (let j = 0; j < cols; j++) {
-      let x = (canvas.width / cols) * (j + 0.5) + (Math.random() - 0.5);
-      let y = (canvas.height / rows) * (i + 0.5) + (Math.random() - 0.5);
+      let x = (canvas.width / cols) * (j + 0.6) + (Math.random() - 0.6);
+      let y = (canvas.height / rows) * (i + 0.6) + (Math.random() - 0.6);
       // 中間區域草的生成機率降低
       if (Math.hypot(x - holeCenterX, y - holeCenterY) < holeRadius) {
-        if (Math.random() > 0.25) continue; // 只有25%機率生成
+        if (Math.random() > 0.2) continue; // 只有25%機率生成
       }
       grassArr.push({
         x,
@@ -276,7 +276,7 @@ function showGrassMask() {
     // 只讓部分草變深
     const candidates = grassArr.filter((g) => !g.erased && g.deepness < 2);
     // 每次只讓 1/4 的草變深
-    const count = Math.ceil(candidates.length / 4);
+    const count = Math.ceil(candidates.length / 6);
     for (let i = 0; i < count; i++) {
       if (candidates.length === 0) break;
       const idx = Math.floor(Math.random() * candidates.length);
@@ -291,27 +291,29 @@ function showGrassMask() {
     grassArr.forEach((g) => {
       if (!g.erased) {
         ctx.save();
-        // 根據 deepness 設定不同濾鏡
-        if (g.deepness === 1) {
-          ctx.filter = "brightness(0.7) saturate(1.2)";
-        } else if (g.deepness === 2) {
-          ctx.filter = "brightness(0.5) saturate(1.5)";
-        } else {
-          ctx.filter = "brightness(1)";
-        }
         ctx.globalAlpha = 0.95;
         ctx.drawImage(grassImg, g.x, g.y, grassSize, grassSize);
 
         // 疊加 riso 綠色
         ctx.globalCompositeOperation = "multiply";
         ctx.globalAlpha = 0.5;
-        ctx.fillStyle = "#407060";
+        ctx.fillStyle = "#00a95c";
         ctx.fillRect(g.x, g.y, grassSize, grassSize);
+
+        // 疊加深色（模擬變深）
+        if (g.deepness === 1) {
+          ctx.globalAlpha = 0.18;
+          ctx.fillStyle = "#000";
+          ctx.fillRect(g.x, g.y, grassSize, grassSize);
+        } else if (g.deepness === 2) {
+          ctx.globalAlpha = 0.33;
+          ctx.fillStyle = "#000";
+          ctx.fillRect(g.x, g.y, grassSize, grassSize);
+        }
 
         // 還原
         ctx.globalCompositeOperation = "source-over";
         ctx.globalAlpha = 1;
-        ctx.filter = "none";
         ctx.restore();
       }
     });
