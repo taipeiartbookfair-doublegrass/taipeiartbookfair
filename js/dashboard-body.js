@@ -236,10 +236,10 @@ function showGrassMask() {
   mask.style.display = "block";
   canvas.width = vw;
   canvas.height = vh;
-  canvas.style.width = "110vw";
-  canvas.style.height = "110vh";
-  canvas.style.left = "-2.5vw";
-  canvas.style.top = "-2.5vh";
+  canvas.style.width = "105vw";
+  canvas.style.height = "105vh";
+  canvas.style.left = "-1.5vw";
+  canvas.style.top = "-1.5vh";
 
   const ctx = canvas.getContext("2d");
   const grassImg = new window.Image();
@@ -321,9 +321,13 @@ function showGrassMask() {
           ctx.fillRect(g.x, g.y, grassSize, grassSize);
         }
 
-        // 還原畫布狀態
+        // 加上 0.5px 黑色邊框
         ctx.globalCompositeOperation = "source-over";
         ctx.globalAlpha = 1;
+        ctx.lineWidth = 0.5;
+        ctx.strokeStyle = "black";
+        ctx.strokeRect(g.x, g.y, grassSize, grassSize);
+
         ctx.restore();
       }
     });
