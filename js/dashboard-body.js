@@ -229,11 +229,11 @@ document.addEventListener("DOMContentLoaded", function () {
 function showGrassMask() {
   const mask = document.getElementById("grass-mask");
   const canvas = document.getElementById("grass-canvas");
-  mask.style.display = "flex";
-  canvas.width = window.innerWidth;
-  canvas.height = window.innerHeight;
-  canvas.style.width = window.innerWidth + "px";
-  canvas.style.height = window.innerHeight + "px";
+  // mask.style.display = "flex";
+  // canvas.width = window.innerWidth;
+  // canvas.height = window.innerHeight;
+  // canvas.style.width = window.innerWidth + "px";
+  // canvas.style.height = window.innerHeight + "px";
 
   const ctx = canvas.getContext("2d");
   const grassImg = new window.Image();
