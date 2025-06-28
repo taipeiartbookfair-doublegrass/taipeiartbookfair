@@ -1,4 +1,15 @@
 document.addEventListener("DOMContentLoaded", function () {
+  // 重設 loading 遮罩
+  const loadingMask = document.getElementById("loading-mask");
+  const loadingPercent = document.getElementById("loading-percent");
+  if (loadingMask) loadingMask.style.display = "flex";
+  if (loadingPercent) loadingPercent.textContent = "0%";
+
+  // 這裡啟動你的 fake loading 動畫
+  if (window.startFakeLoading) {
+    window.startFakeLoading();
+  }
+
   // Logo rotation logic
   const logo = document.querySelector(".machine-rotate-logo");
   let isHovering = false;
