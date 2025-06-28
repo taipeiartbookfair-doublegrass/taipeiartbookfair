@@ -254,8 +254,8 @@ function showGrassMask() {
 
   for (let i = 0; i < rows; i++) {
     for (let j = 0; j < cols; j++) {
-      let x = (canvas.width / cols) * (j + 0.5) + (Math.random() - 0.5) * 8;
-      let y = (canvas.height / rows) * (i + 0.5) + (Math.random() - 0.5) * 8;
+      let x = (canvas.width / cols) * (j + 0.5) + (Math.random() - 0.5);
+      let y = (canvas.height / rows) * (i + 0.5) + (Math.random() - 0.5);
       // 中間區域草的生成機率降低
       if (Math.hypot(x - holeCenterX, y - holeCenterY) < holeRadius) {
         if (Math.random() > 0.25) continue; // 只有25%機率生成
