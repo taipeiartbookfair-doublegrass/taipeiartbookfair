@@ -231,7 +231,7 @@ function showGrassMask() {
   const canvas = document.getElementById("grass-canvas");
   const vw = Math.round(window.innerWidth * 1.1);
   const vh = Math.round(window.innerHeight * 1.1);
-  mask.style.display = "flex";
+  mask.style.display = "block";
   canvas.width = vw;
   canvas.height = vh;
   canvas.style.width = "110vw";
