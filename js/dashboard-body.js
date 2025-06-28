@@ -239,7 +239,7 @@ function showGrassMask() {
   const ctx = canvas.getContext("2d");
   const grassImg = new window.Image();
   grassImg.src = "image/Moss_of_Bangladesh_2.jpg";
-  const grassSize = 54;
+  const grassSize = 65;
   let grassArr = [];
   let deepnessTimer = null;
   let growTimer = null;
