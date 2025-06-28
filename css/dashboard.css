@@ -479,10 +479,10 @@ html::-webkit-scrollbar-thumb:hover {
 
 /* ===== 行動版 Mobile ===== */
 @media screen and (max-width: 600px) {
-  html,
+  /* html,
   body {
     overflow: auto !important;
-  }
+  } */
   .layout {
     width: 100vw;
     height: auto;
@@ -618,6 +618,10 @@ html::-webkit-scrollbar-thumb:hover {
     display: none !important;
   }
 
+  body {
+    overflow: hidden;
+  }
+
   #grass-mask {
     position: fixed;
     left: 0;
@@ -638,6 +642,7 @@ html::-webkit-scrollbar-thumb:hover {
     justify-content: center;
   }
   #grass-canvas {
+    z-index: 1;
     width: 100vw;
     height: 100vh;
     display: block;
