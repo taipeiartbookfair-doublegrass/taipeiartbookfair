@@ -321,13 +321,9 @@ function showGrassMask() {
           ctx.fillRect(g.x, g.y, grassSize, grassSize);
         }
 
-        // 加上 0.5px 黑色邊框
+        // 還原畫布狀態
         ctx.globalCompositeOperation = "source-over";
         ctx.globalAlpha = 1;
-        ctx.lineWidth = 0.5;
-        ctx.strokeStyle = "black";
-        ctx.strokeRect(g.x, g.y, grassSize, grassSize);
-
         ctx.restore();
       }
     });
