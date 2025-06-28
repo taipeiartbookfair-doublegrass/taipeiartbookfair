@@ -649,6 +649,7 @@ html::-webkit-scrollbar-thumb:hover {
     background-attachment: fixed;
   }
   #grass-canvas {
+    overflow: hidden;
     position: absolute;
     width: 110vw;
     height: 110vh;
