@@ -187,7 +187,6 @@ document.addEventListener("DOMContentLoaded", async function () {
   document.getElementById("brand-name").textContent = apiData["品牌"] || "";
   document.getElementById("bio").textContent = apiData["品牌簡介"] || "";
   document.getElementById("role").textContent = apiData["身份類別"] || "";
-  document.getElementById("category").textContent = apiData["作品類別"] || "";
   document.getElementById("live-event-schedule-reminder").textContent =
     apiData["活動場次資訊"] || "";
   document.getElementById("nationality").textContent = region || "";
@@ -482,6 +481,16 @@ document.addEventListener("DOMContentLoaded", async function () {
     if (payBtn2) {
       payBtn2.onclick = () => window.open(payLink2, "_blank");
       payBtn2.textContent = isOversea ? "Pay (Plan 2)" : "付款（方案二）";
+    }
+
+    // 產生產品連結
+    function toProductUrl(applicationNumber, productName) {
+      return (
+        "https://nmhw.taipeiartbookfair.com/products/" +
+        (applicationNumber + "-" + productName)
+          .replace(/\s+/g, "")
+          .toLowerCase()
+      );
     }
 
     // 控制電力需求顯示
@@ -781,6 +790,8 @@ document.addEventListener("DOMContentLoaded", async function () {
   const registrationStatusEl = document.getElementById("registration-status");
   const liveEventTime = document.getElementById("live-event-schedule-row");
   const billinginfo = document.getElementById("billing-info");
+  const agreementsection = document.getElementById("agreement-section");
+  const billingsection = document.getElementById("billing-section");
   const letter = document.getElementById("negative-letter");
   const runnerletter = document.getElementById("runnerup-letter");
   const registrationStatus = document.getElementById("registration-status-row");
@@ -837,6 +848,31 @@ document.addEventListener("DOMContentLoaded", async function () {
     boothnumber.style.display = "none";
     liveEventTime.style.display = "none";
     // boothappearance.style.display = "none";
+
+    //勾勾區的鐵門
+    if (checkDeclaration) {
+      agreementsection.style.position = "relative";
+
+      let oldOverlay = agreementsection.querySelector(".overlay-closed");
+      if (!oldOverlay) {
+        let overlay = document.createElement("div");
+        overlay.className = "overlay-closed";
+        overlay.textContent = "Completed";
+        agreementsection.appendChild(overlay);
+      }
+    }
+
+    if (checkPayment) {
+      billingsection.style.position = "relative";
+
+      let oldOverlay = billingsection.querySelector(".overlay-closed");
+      if (!oldOverlay) {
+        let overlay = document.createElement("div");
+        overlay.className = "overlay-closed";
+        overlay.textContent = "Completed";
+        billingsection.appendChild(overlay);
+      }
+    }
 
     if (rawResult === "5-否" || rawResult === "9-重複") {
       registrationStatusEl.textContent = "-";
@@ -940,6 +976,29 @@ document.addEventListener("DOMContentLoaded", async function () {
   }
   updateRegistrationStatusAndChecks();
 
+  function extraPass() {
+    const paymentChecked = !!apiData["證"];
+    const extrapasstxt = document.getElementById("extrapasstxt");
+
+    if (!extrapasstxt) return; // 防呆
+
+    if (paymentChecked) {
+      extrapasstxt.style.display = "block"; // ← 這裡要加 .style
+      if (
+        boothType === "One Regular Booth" ||
+        boothType === "Two Regular Booth" ||
+        boothType === "Curation Booth"
+      ) {
+        extrapasstxt.textContent = "Extra Pass x1";
+      } else {
+        extrapasstxt.textContent = "加購工作證 x1";
+      }
+    } else {
+      extrapasstxt.style.display = "none"; // 沒有加購就隱藏
+    }
+  }
+  extraPass();
+
   // 社群欄位顯示
   function setSocialText(id, value) {
     const el = document.getElementById(id);
@@ -989,14 +1048,6 @@ document.addEventListener("DOMContentLoaded", async function () {
     });
   }
   setDiscountCodes(apiData["親友票"]);
-
-  // 產生產品連結
-  function toProductUrl(applicationNumber, productName) {
-    return (
-      "https://nmhw.taipeiartbookfair.com/products/" +
-      (applicationNumber + "-" + productName).replace(/\s+/g, "").toLowerCase()
-    );
-  }
 
   let publishTimes = {};
   try {

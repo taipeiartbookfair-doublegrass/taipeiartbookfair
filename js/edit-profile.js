@@ -43,7 +43,6 @@ document.addEventListener("DOMContentLoaded", function () {
         品牌: brandName,
         品牌簡介: bio,
         身分類別: role,
-        作品類別: category,
         website: website,
         facebook: facebook,
         IG帳號: instagram,
