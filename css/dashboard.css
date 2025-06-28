@@ -625,6 +625,9 @@ html::-webkit-scrollbar-thumb:hover {
     margin: 0;
     padding: 0;
     overflow: hidden !important;
+    user-select: none !important;
+    -webkit-user-select: none !important; /* for Safari */
+    -ms-user-select: none !important; /* for IE/Edge */
   }
   #grass-mask {
     position: fixed;
@@ -647,8 +650,8 @@ html::-webkit-scrollbar-thumb:hover {
   }
   #grass-canvas {
     position: absolute;
-    width: 105vw;
-    height: 105vh;
+    width: 110vw;
+    height: 110vh;
     left: -2.5vw;
     top: -2.5vh;
     display: block;
