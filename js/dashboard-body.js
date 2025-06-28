@@ -218,4 +218,81 @@ document.addEventListener("DOMContentLoaded", function () {
       }
     });
   };
+
+  function showGrassMask() {
+    const mask = document.getElementById("grass-mask");
+    const canvas = document.getElementById("grass-canvas");
+    const progress = document.getElementById("grass-progress");
+    mask.style.display = "block";
+    // 設定 canvas 尺寸
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+
+    const ctx = canvas.getContext("2d");
+    const grassCount = 80;
+    let grassArr = [];
+    let erased = 0;
+
+    // 隨機生成草
+    for (let i = 0; i < grassCount; i++) {
+      grassArr.push({
+        x: Math.random() * canvas.width,
+        y: Math.random() * canvas.height,
+        erased: false,
+      });
+    }
+
+    function drawGrass() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      ctx.font = "32px serif";
+      grassArr.forEach((g) => {
+        if (!g.erased) ctx.fillText("🌱", g.x, g.y);
+      });
+    }
+
+    drawGrass();
+
+    // 鋤草
+    function eraseGrass(x, y) {
+      let changed = false;
+      grassArr.forEach((g) => {
+        if (!g.erased && Math.hypot(g.x - x, g.y - y) < 32) {
+          g.erased = true;
+          erased++;
+          changed = true;
+        }
+      });
+      if (changed) drawGrass();
+      progress.textContent = `已鋤草 ${erased}/${grassCount}`;
+      if (erased === grassCount) {
+        progress.textContent = "全部鋤完啦！";
+        setTimeout(() => {
+          mask.style.display = "none";
+        }, 1200);
+      }
+    }
+
+    // 支援滑鼠與觸控
+    function handle(e) {
+      let x, y;
+      if (e.touches) {
+        for (let t of e.touches) {
+          x = t.clientX;
+          y = t.clientY;
+          eraseGrass(x, y);
+        }
+      } else {
+        x = e.clientX;
+        y = e.clientY;
+        eraseGrass(x, y);
+      }
+    }
+    canvas.addEventListener("mousemove", handle);
+    canvas.addEventListener("touchmove", handle);
+
+    // 初始進度
+    progress.textContent = `已鋤草 0/${grassCount}`;
+  }
+
+  // 可以在需要時呼叫 showGrassMask() 例如：showGrassMask();
 });
