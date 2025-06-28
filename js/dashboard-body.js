@@ -253,14 +253,19 @@ function showGrassMask() {
     cols = 16;
   const holeCenterX = canvas.width / 2;
   const holeCenterY = canvas.height * 0.7; // 警語在下方
-  const holeRadius = 150; // 缺口半徑
+  const holeRadiusX = 240; // 橫向半徑
+  const holeRadiusY = 160; // 縱向半徑
 
   for (let i = 0; i < rows; i++) {
     for (let j = 0; j < cols; j++) {
       let x = (canvas.width / cols) * (j + 0.6) + (Math.random() - 0.6);
       let y = (canvas.height / rows) * (i + 0.6) + (Math.random() - 0.6);
       // 中間區域草的生成機率降低
-      if (Math.hypot(x - holeCenterX, y - holeCenterY) < holeRadius) {
+      if (
+        Math.pow((x - holeCenterX) / holeRadiusX, 2) +
+          Math.pow((y - holeCenterY) / holeRadiusY, 2) <
+        1
+      ) {
         if (Math.random() > 0.2) continue; // 只有25%機率生成
       }
       grassArr.push({
