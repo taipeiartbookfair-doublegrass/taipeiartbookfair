@@ -1113,4 +1113,9 @@ document.addEventListener("DOMContentLoaded", async function () {
   if (window.setLoading) window.setLoading(1);
   if (window.hideLoading) window.hideLoading();
   if (window.stopFakeLoading) window.stopFakeLoading();
+
+  // 手機移除 loading mask
+  if (/Mobi|Android|iPhone|iPad|iPod/i.test(navigator.userAgent)) {
+    if (loadingMask) loadingMask.style.display = "none";
+  }
 });
