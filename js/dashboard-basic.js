@@ -617,6 +617,26 @@ document.addEventListener("DOMContentLoaded", async function () {
   }
   setBillingNoticeLanguage(boothType);
 
+  // 動態Billing Notice 區塊語言
+  function setConditionalAcceptence(boothType) {
+    var tooltip = document.getElementById("tooltip-text");
+    if (boothType && tooltip) {
+      var boothText = boothType.trim();
+      if (
+        boothText === "One Regular Booth" ||
+        boothText === "Two Regular Booth" ||
+        boothText === "Curation Booth"
+      ) {
+        tooltip.innerHTML =
+          "Your application did not fully meet the criteria for your originally selected booth type. However, we truly appreciate your work and proposal, and hope to see you at the fair. If you are willing to accept an adjustment to your booth category, we will be happy to reserve your participation.";
+      } else {
+        tooltip.innerHTML =
+          "您原先在表單中選擇的攤位類型，經由草率季工作團隊審核後，可能與我們對該類別的定義略有不符。不過，我們仍然非常欣賞您的創作與提案，並希望能與您在草率季中相遇。若您願意接受攤種類別的調整，我們將非常樂意為您保留參與資格。";
+      }
+    }
+  }
+  setConditionalAcceptence(boothType);
+
   // 動態切換草率簿區塊語言
   function setCatalogLanguage(boothType) {
     var catalogdownloadLink = document.getElementById("catalog-download-link");
