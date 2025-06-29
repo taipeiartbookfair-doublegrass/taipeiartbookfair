@@ -493,6 +493,9 @@ html::-webkit-scrollbar-thumb:hover {
   text-align: center;
   font-weight: bold;
 }
+.QA-section {
+  border-left: none;
+}
 
 /* ===== 行動版 Mobile ===== */
 @media screen and (max-width: 600px) {
