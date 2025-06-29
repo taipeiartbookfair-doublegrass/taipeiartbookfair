@@ -266,11 +266,12 @@ document.addEventListener("DOMContentLoaded", async function () {
     el.style.color = "";
     if (resultText === "錄取" || resultText === "Accepted") {
       el.style.backgroundColor = "lime";
-    } else if (
-      resultText === "條件式錄取" ||
-      resultText === "Conditionally Accepted"
-    ) {
+    } else if (resultText === "條件式錄取") {
       el.style.backgroundColor = "rgb(0, 157, 255)";
+    } else if (resultText === "Conditionally Accepted") {
+      el.style.backgroundColor = "rgb(0, 157, 255)";
+      el.style.fontSize = "1.6rem";
+      el.style.padding = "0px";
     } else if (resultText === "備取" || resultText === "Waitlisted") {
       el.style.backgroundColor = "lightgreen";
     } else if (resultText === "未錄取" || resultText === "Not Selected") {

@@ -171,7 +171,8 @@ document.addEventListener("DOMContentLoaded", function () {
               checkData.success &&
               checkData.data &&
               checkData.data["phone"] === phone &&
-              checkData.data["name"] === contactPerson
+              checkData.data["name"] === contactPerson &&
+              checkData.data["region"] === nationality2
             ) {
               updated = true;
               break;
