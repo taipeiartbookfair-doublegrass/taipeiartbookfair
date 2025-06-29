@@ -617,7 +617,7 @@ document.addEventListener("DOMContentLoaded", async function () {
   }
   setBillingNoticeLanguage(boothType);
 
-  // 動態Billing Notice 區塊語言
+  // 動態條件是錄取 區塊語言
   function setConditionalAcceptence(boothType) {
     var tooltip = document.getElementById("tooltip-text");
     if (boothType && tooltip) {
@@ -636,6 +636,25 @@ document.addEventListener("DOMContentLoaded", async function () {
     }
   }
   setConditionalAcceptence(boothType);
+
+  // 動態同意書 區塊語言
+  function setDeclaration(boothType) {
+    var declarationdesc = document.getElementById("declaration-desc");
+    if (boothType && declarationdesc) {
+      var boothText = boothType.trim();
+      if (
+        boothText === "One Regular Booth" ||
+        boothText === "Two Regular Booth" ||
+        boothText === "Curation Booth"
+      ) {
+        declarationdesc.innerHTML =
+          "Please download and sign the exhibitor declaration, then upload the signed file.";
+      } else {
+        declarationdesc.innerHTML = "請下載並簽署參展同意書，完成後請上傳。";
+      }
+    }
+  }
+  setDeclaration(boothType);
 
   // 動態切換草率簿區塊語言
   function setCatalogLanguage(boothType) {
