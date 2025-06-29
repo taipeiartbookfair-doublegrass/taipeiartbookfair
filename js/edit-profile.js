@@ -125,14 +125,14 @@ document.addEventListener("DOMContentLoaded", function () {
       const contactPerson = document
         .getElementById("contact-person-edit")
         .value.trim();
-      const nationality = document.getElementById("nationality-edit").value;
+      const nationality2 = document.getElementById("nationality-edit2").value;
 
       const params = new URLSearchParams({
         action: "update_account_info",
         account: account,
         phone: phone,
         name: contactPerson,
-        region: nationality,
+        region: nationality2,
       }).toString();
 
       try {
