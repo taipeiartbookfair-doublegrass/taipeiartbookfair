@@ -112,10 +112,8 @@ document.addEventListener("DOMContentLoaded", function () {
   if (account_summit_btn) {
     account_summit_btn.addEventListener("click", async function (e) {
       e.preventDefault();
-      // 先重置動畫
-      if (window.stopFakeLoading) window.stopFakeLoading();
       document.getElementById("loading-mask").style.display = "flex";
-      if (window.startFakeLoading) window.startFakeLoading();
+      if (window.startFakeLoading) window.startFakeLoading(); // 只要這樣
 
       const account = getCookie("account");
       const region = getCookie("region");
