@@ -481,20 +481,21 @@ html::-webkit-scrollbar-thumb:hover {
   width: 100%;
   table-layout: fixed;
 }
-.faqtable td {
-  width: 50%;
-  vertical-align: top;
-  word-break: break-word;
-  padding: 0.7em 1em 0.7em 0.5em;
-}
-.faq-number-cell {
-  width: 2.5em;
-  min-width: 2em;
-  text-align: center;
-  font-weight: bold;
-}
 .QA-section {
   border-left: none;
+}
+
+.labelAQ.en {
+  background: #e6f0ff;
+  color: #1a237e;
+  font-weight: 600;
+}
+.faq-answer-en {
+  color: #888;
+  font-size: 1rem;
+  font-family: "Inclusive Sans", sans-serif;
+  display: block;
+  margin-top: 0.2em;
 }
 
 /* ===== 行動版 Mobile ===== */
