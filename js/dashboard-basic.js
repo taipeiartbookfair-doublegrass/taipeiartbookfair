@@ -586,11 +586,19 @@ document.addEventListener("DOMContentLoaded", async function () {
   setDeclarationLanguage(boothType);
 
   // 動態勾勾區塊語言還有攤商編號說明搭便車
-  function setYesLanguage(boothType) {
+  function setYesLanguage(boothType, rawResult) {
     var yesdesc = document.getElementById("registration-status-desc");
     var boothnumberdesc = document.getElementById("booth-number-desc");
     var billingnote1 = document.getElementById("billing-note1");
     var billingnote2 = document.getElementById("billing-note2");
+
+    // 判斷期限
+    let deadline = "7 月 13 日";
+    let deadlineEn = "July 13";
+    if (rawResult === "2-是-2波") {
+      deadline = "7 月 22 日";
+      deadlineEn = "July 22";
+    }
 
     if (boothType && yesdesc && boothnumberdesc) {
       var boothText = boothType.trim();
@@ -599,23 +607,21 @@ document.addEventListener("DOMContentLoaded", async function () {
         boothText === "Two Regular Booth" ||
         boothText === "Curation Booth"
       ) {
-        yesdesc.innerHTML =
-          "Please complete the payment and upload the signed agreement by <b><mark>July 13</mark></b>; otherwise, you will not be able to participate in the fair. Only after both payment and agreement upload are confirmed will your participation be finalized. The team will verify and update all records on July 15.";
+        yesdesc.innerHTML = `Please complete the payment and upload the signed agreement by <b><mark>${deadlineEn}</mark></b>; otherwise, you will not be able to participate in the fair. Only after both payment and agreement upload are confirmed will your participation be finalized. The team will verify and update all records on July 15.`;
         boothnumberdesc.innerHTML =
           "Booth numbers and the floor plan will be announced on <b>November 20</b>, the check-in day.";
-        billingnote1.innerHTML = "Payment Deadline: July 13";
-        billingnote2.innerHTML = "Payment Deadline: July 13";
+        billingnote1.innerHTML = `Payment Deadline: ${deadlineEn}`;
+        billingnote2.innerHTML = `Payment Deadline: ${deadlineEn}`;
       } else {
-        yesdesc.innerHTML =
-          "請於<b><mark>7 月 13 日</mark></b>前完成繳費與同意書上傳，否則將無法參展。經確認完成繳費動作＆同意書上傳，才算是取得最終參展資格，團隊將於7 月 15 日核對後進行統一更新。";
+        yesdesc.innerHTML = `請於<b><mark>${deadline}</mark></b>前完成繳費與同意書上傳，否則將無法參展。經確認完成繳費動作＆同意書上傳，才算是取得最終參展資格，團隊將於7 月 15 日核對後進行統一更新。`;
         boothnumberdesc.innerHTML =
           "攤位編號與攤位地圖將於報到當天（11/20）公布，屆時請留意公告。";
-        billingnote1.innerHTML = "付款期限: 7 月 13 日";
-        billingnote2.innerHTML = "付款期限: 7 月 13 日";
+        billingnote1.innerHTML = `付款期限: ${deadline}`;
+        billingnote2.innerHTML = `付款期限: ${deadline}`;
       }
     }
   }
-  setYesLanguage(boothType);
+  setYesLanguage(boothType, apiData["錄取"]);
 
   // 動態Billing Notice 區塊語言
   function setBillingNoticeLanguage(boothType) {
