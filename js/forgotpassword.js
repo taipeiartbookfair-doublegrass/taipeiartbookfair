@@ -3,6 +3,7 @@
  * 支援兩種模式：
  * 1. 使用 HTML 中現有的表單結構
  * 2. 動態生成多步驟表單
+
  */
 document.addEventListener("DOMContentLoaded", function () {
   // Google Apps Script API 端點
@@ -55,11 +56,16 @@ document.addEventListener("DOMContentLoaded", function () {
       userEmail = email; // 保存電子郵件以供後續使用
 
       try {
+        // 顯示載入狀態
+        sendVerificationButton.disabled = true;
+        sendVerificationButton.textContent = "發送中... Sending...";
+
         // 調用 Google Apps Script API 發送驗證碼
         const params = new URLSearchParams({
           action: "forgot_password_send_email",
           account: email,
         }).toString();
+
         const response = await fetch(apiUrl, {
           redirect: "follow",
           method: "POST",
@@ -87,6 +93,11 @@ document.addEventListener("DOMContentLoaded", function () {
       } catch (error) {
         alert("網絡錯誤，請稍後再試 Network error, please try again later");
         console.error("Send verification error:", error);
+      } finally {
+        // 恢復按鈕狀態
+        sendVerificationButton.disabled = false;
+        sendVerificationButton.textContent =
+          "發送驗證碼 Send Verification Code";
       }
     });
 
@@ -271,6 +282,7 @@ document.addEventListener("DOMContentLoaded", function () {
   async function resetPassword(email, verificationCode) {
     const newPassword = document.getElementById("newPassword").value;
     const confirmPassword = document.getElementById("confirmPassword").value;
+    const resetPasswordBtn = document.getElementById("reset-password-btn");
 
     // 檢查密碼和確認密碼是否都已輸入
     if (!newPassword || !confirmPassword) {
@@ -295,6 +307,10 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
     try {
+      // 顯示載入狀態
+      resetPasswordBtn.disabled = true;
+      resetPasswordBtn.textContent = "重設中... Resetting...";
+
       // 調用 Google Apps Script API 重設密碼
       const params = new URLSearchParams({
         action: "reset_password",
@@ -302,6 +318,7 @@ document.addEventListener("DOMContentLoaded", function () {
         new_password: newPassword,
         token: verificationCode,
       }).toString();
+
       const response = await fetch(apiUrl, {
         redirect: "follow",
         method: "POST",
@@ -328,6 +345,10 @@ document.addEventListener("DOMContentLoaded", function () {
     } catch (error) {
       alert("網絡錯誤，請稍後再試 Network error, please try again later");
       console.error("Reset password error:", error);
+    } finally {
+      // 恢復按鈕狀態 (只有在沒有成功重導向時才會執行)
+      resetPasswordBtn.disabled = false;
+      resetPasswordBtn.textContent = "設置新密碼 Set New Password";
     }
   }
 
