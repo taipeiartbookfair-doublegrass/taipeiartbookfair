@@ -1090,7 +1090,6 @@ document.addEventListener("DOMContentLoaded", async function () {
   }
 
   // 假設 publishTimes 物件 key = section id, value = {descId, publishTime, deadline, preMessage}
-
   Object.entries(publishTimes).forEach(([sectionId, info]) => {
     const section = document.getElementById(sectionId);
     const desc = document.getElementById(info.descId);
