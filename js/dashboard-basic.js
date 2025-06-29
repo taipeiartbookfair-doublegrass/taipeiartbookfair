@@ -608,10 +608,10 @@ document.addEventListener("DOMContentLoaded", async function () {
         boothText === "Curation Booth"
       ) {
         billingNoticedesc.innerHTML =
-          "<li>Please assess your payment requirements before proceeding. Once payment is made, we will not accept changes to your application options.</li><li>Each booth may purchase only one additional staff badge. If you need more, please purchase a regular ticket for entry.</li><li>Please keep your invoice after payment for your own records.</li>";
+          "<li>Please assess your payment requirements before proceeding. Once payment is made, we will not accept changes to your application options.</li><li>Each booth may purchase only one additional staff badge. If you need more, please purchase a regular ticket for entry.</li><li>Please keep your invoice after payment for your own records.</li><li>Even if the payment link remains accessible, any payment made after the deadline may result in disqualification at the organizer’s discretion, and no refund will be issued.</li>";
       } else {
         billingNoticedesc.innerHTML =
-          "<li>請自行評估需求繳費，繳款後我們不再提供更改申請選項。</li><li>每攤<u>限加購 1張工作證</u>，如需更多數量請買當日票入場。</li><li>付款之後請自行留存發票。</li>";
+          "<li>請自行評估需求繳費，繳款後我們不再提供更改申請選項。</li><li>每攤<u>限加購 1張工作證</u>，如需更多數量請買當日票入場。</li><li>付款之後請自行留存發票。</li><li>即使付款連結仍可操作，若超過繳費期限付款，主辦單位有權取消資格，並不予退款。</li>";
       }
     }
   }
