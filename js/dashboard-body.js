@@ -204,7 +204,7 @@ document.addEventListener("DOMContentLoaded", function () {
     const fields = [
       ["contact-person", "contact-person-edit"],
       ["phone", "phone-edit"],
-      ["nationality2", "nationality-edit"],
+      ["nationality2", "nationality-edit2"],
     ];
     fields.forEach(([from, to]) => {
       const fromEl = document.getElementById(from);
