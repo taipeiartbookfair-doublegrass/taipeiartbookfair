@@ -60,7 +60,7 @@ document.addEventListener("DOMContentLoaded", function () {
         sendVerificationButton.disabled = true;
         sendVerificationButton.textContent = "發送中... Sending...";
 
-        // 調用 Google Apps Script API 發送驗證碼
+        // 發送驗證碼
         const params = new URLSearchParams({
           action: "forgot_password_send_email",
           account: email,
@@ -83,7 +83,9 @@ document.addEventListener("DOMContentLoaded", function () {
           );
           // 顯示驗證碼輸入區域
           codeBox.style.display = "block";
-          verifyBox.style.display = "flex";
+
+          // 直接創建密碼重設表單
+          createPasswordResetForm(userEmail);
         } else {
           alert(
             data.message ||
@@ -101,28 +103,23 @@ document.addEventListener("DOMContentLoaded", function () {
       }
     });
 
-    // 步驟 2: 驗證驗證碼按鈕的事件處理器
-    verifyButton.addEventListener("click", function (event) {
-      event.preventDefault();
-      const enteredCode = verificationCodeInput.value.trim();
-
-      // 檢查驗證碼是否為空
-      if (!enteredCode) {
-        alert("請輸入驗證碼 Please enter verification code");
-        return;
-      }
-
-      // 動態創建密碼重設表單 (步驟 3)
-      createPasswordResetForm(userEmail, enteredCode);
-    });
+    // 步驟 2: 原本的驗證按鈕邏輯已移除，因為現在驗證碼和密碼重設合併為一個步驟
+    // verifyButton.addEventListener("click", function (event) {
+    //   event.preventDefault();
+    //   const enteredCode = verificationCodeInput.value.trim();
+    //   if (!enteredCode) {
+    //     alert("請輸入驗證碼 Please enter verification code");
+    //     return;
+    //   }
+    //   createPasswordResetForm(userEmail, enteredCode);
+    // });
   }
 
   /**
-   * 創建密碼重設表單 (步驟 3)
+   * 創建密碼重設表單 (步驟 2)
    * @param {string} userEmail - 用戶電子郵件
-   * @param {string} verificationCode - 驗證碼
    */
-  function createPasswordResetForm(userEmail, verificationCode) {
+  function createPasswordResetForm(userEmail) {
     // 創建新的表單容器
     const step2Div = document.createElement("div");
     step2Div.className = "login-form";
@@ -130,6 +127,10 @@ document.addEventListener("DOMContentLoaded", function () {
 
     // 插入密碼重設表單的 HTML 結構
     step2Div.innerHTML = `
+      <div class="input-box">
+        <label for="resetVerificationCode">驗證碼 Verification Code</label>
+        <input type="text" id="resetVerificationCode" name="resetVerificationCode" required />
+      </div>
       <div class="input-box">
         <label for="newPassword">設置新密碼 Set new password</label>
         <input type="password" id="newPassword" name="newPassword" required />
@@ -167,7 +168,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
       // 綁定重設密碼按鈕事件
       resetPasswordBtn.addEventListener("click", async function () {
-        await resetPassword(userEmail, verificationCode);
+        await resetPassword(userEmail);
       });
     }, 100);
   }
@@ -277,12 +278,20 @@ document.addEventListener("DOMContentLoaded", function () {
    * 執行密碼重設操作
    * 向後端 API 發送密碼重設請求
    * @param {string} email - 用戶電子郵件
-   * @param {string} verificationCode - 驗證碼
    */
-  async function resetPassword(email, verificationCode) {
+  async function resetPassword(email) {
+    const verificationCode = document
+      .getElementById("resetVerificationCode")
+      .value.trim();
     const newPassword = document.getElementById("newPassword").value;
     const confirmPassword = document.getElementById("confirmPassword").value;
     const resetPasswordBtn = document.getElementById("reset-password-btn");
+
+    // 檢查驗證碼是否已輸入
+    if (!verificationCode) {
+      alert("請輸入驗證碼 Please enter verification code");
+      return;
+    }
 
     // 檢查密碼和確認密碼是否都已輸入
     if (!newPassword || !confirmPassword) {
