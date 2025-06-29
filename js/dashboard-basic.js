@@ -236,7 +236,7 @@ document.addEventListener("DOMContentLoaded", async function () {
       boothType === "Curation Booth";
     if (!raw) return "";
     if (isEnglishBooth) {
-      if (raw === "4-是-條件式錄取") return "Conditional Acceptance";
+      if (raw === "4-是-條件式錄取") return "Conditionally Accepted";
       if (
         raw === "1-是-1波" ||
         raw === "2-是-2波" ||
@@ -268,7 +268,7 @@ document.addEventListener("DOMContentLoaded", async function () {
       el.style.backgroundColor = "lime";
     } else if (
       resultText === "條件式錄取" ||
-      resultText === "Conditional Acceptance"
+      resultText === "Conditionally Accepted"
     ) {
       el.style.backgroundColor = "rgb(0, 157, 255)";
     } else if (resultText === "備取" || resultText === "Waitlisted") {
