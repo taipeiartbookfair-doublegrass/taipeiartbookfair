@@ -307,7 +307,7 @@ html::-webkit-scrollbar-thumb:hover {
 
 .billing-note {
   padding-top: 2px;
-  color: rebeccapurple;
+  color: red orange;
   font-size: 0.9rem;
 }
 
