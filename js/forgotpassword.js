@@ -82,8 +82,6 @@ document.addEventListener("DOMContentLoaded", function () {
           alert(
             "驗證碼已發送至您的電子郵件 Verification code sent to your email"
           );
-          // 顯示驗證碼輸入區域
-          codeBox.style.display = "block";
 
           // 直接創建密碼重設表單
           createPasswordResetForm(userEmail);
