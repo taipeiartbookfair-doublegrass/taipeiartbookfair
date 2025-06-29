@@ -477,6 +477,26 @@ html::-webkit-scrollbar-thumb:hover {
   position: relative;
 }
 
+.faqtable {
+  width: 100%;
+  table-layout: fixed;
+}
+.faqtable td {
+  width: 50%;
+  vertical-align: top;
+  word-break: break-word;
+  padding: 0.7em 1em 0.7em 0.5em;
+}
+.faq-number-cell {
+  width: 2.5em;
+  min-width: 2em;
+  text-align: center;
+  font-weight: bold;
+}
+.QA-section {
+  border-left: none;
+}
+
 /* ===== 行動版 Mobile ===== */
 @media screen and (max-width: 600px) {
   /* html,
