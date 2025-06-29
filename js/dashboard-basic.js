@@ -573,6 +573,7 @@ document.addEventListener("DOMContentLoaded", async function () {
       console.log("desc after set:", declarationdesc.innerHTML);
     }
   }
+  setDeclarationLanguage(boothType);
 
   // 動態勾勾區塊語言還有攤商編號說明搭便車
   function setYesLanguage(boothType) {
