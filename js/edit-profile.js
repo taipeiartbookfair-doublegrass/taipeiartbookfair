@@ -114,6 +114,8 @@ document.addEventListener("DOMContentLoaded", function () {
       e.preventDefault();
       // 顯示 loading 遮罩
       document.getElementById("loading-mask").style.display = "flex";
+      if (window.startFakeLoading) window.startFakeLoading();
+
       const account = getCookie("account");
       const region = getCookie("region");
       if (!account || !region) {
