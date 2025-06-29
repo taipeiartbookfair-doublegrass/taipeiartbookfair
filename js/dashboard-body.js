@@ -206,17 +206,22 @@ document.addEventListener("DOMContentLoaded", function () {
       ["phone", "phone-edit"],
       ["nationality2", "nationality-edit2"],
     ];
+    // 先填一般欄位
     fields.forEach(([from, to]) => {
       const fromEl = document.getElementById(from);
       const toEl = document.getElementById(to);
       if (fromEl && toEl) {
-        if (to === "nationality-edit" && toEl.tagName === "SELECT") {
-          toEl.value = fromEl.textContent.trim();
-        } else {
-          toEl.value = fromEl.textContent.trim();
-        }
+        toEl.value = fromEl.textContent.trim();
       }
     });
+    // 再正確填入國籍 select
+    const nationalityVal = document
+      .getElementById("nationality2")
+      ?.textContent.trim();
+    const nationalitySelect = document.getElementById("nationality-edit2");
+    if (nationalitySelect && nationalityVal) {
+      nationalitySelect.value = nationalityVal;
+    }
   };
 
   // 手機自動顯示草地遮罩
