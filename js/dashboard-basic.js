@@ -262,14 +262,22 @@ document.addEventListener("DOMContentLoaded", async function () {
     }
   }
   function setApplicationResultStyle(el, resultText) {
+    const applicationResultWrapper = document.getElementById(
+      "application-result-wrapper"
+    );
     el.style.backgroundColor = "";
     el.style.color = "";
+    if (applicationResultWrapper)
+      applicationResultWrapper.style.fontSize = "2.7rem";
+    el.style.fontSize = "";
     if (resultText === "錄取" || resultText === "Accepted") {
       el.style.backgroundColor = "lime";
     } else if (resultText === "條件式錄取") {
       el.style.backgroundColor = "rgb(0, 157, 255)";
     } else if (resultText === "Conditionally Accepted") {
       el.style.backgroundColor = "rgb(0, 157, 255)";
+      if (applicationResultWrapper)
+        applicationResultWrapper.style.fontSize = "1.7rem";
       el.style.fontSize = "1.6rem";
       el.style.padding = "0px";
     } else if (resultText === "備取" || resultText === "Waitlisted") {
@@ -280,6 +288,7 @@ document.addEventListener("DOMContentLoaded", async function () {
     }
   }
   const applicationResultEl = document.getElementById("application-result");
+
   const resultText = getApplicationResultText(apiData["錄取"], boothType);
   applicationResultEl.textContent = resultText;
   setApplicationResultStyle(applicationResultEl, resultText);
