@@ -112,7 +112,8 @@ document.addEventListener("DOMContentLoaded", function () {
   if (account_summit_btn) {
     account_summit_btn.addEventListener("click", async function (e) {
       e.preventDefault();
-      // 顯示 loading 遮罩
+      // 先重置動畫
+      if (window.stopFakeLoading) window.stopFakeLoading();
       document.getElementById("loading-mask").style.display = "flex";
       if (window.startFakeLoading) window.startFakeLoading();
 
@@ -159,7 +160,6 @@ document.addEventListener("DOMContentLoaded", function () {
           }).toString();
           let updated = false;
           for (let i = 0; i < 5; i++) {
-            // 最多重試5次
             const checkRes = await fetch(apiUrl, {
               method: "POST",
               headers: {
@@ -168,7 +168,6 @@ document.addEventListener("DOMContentLoaded", function () {
               body: checkParams,
             });
             const checkData = await checkRes.json();
-            // 這裡根據你剛剛更新的欄位來判斷是否已經是新值
             if (
               checkData.success &&
               checkData.data &&
@@ -179,15 +178,18 @@ document.addEventListener("DOMContentLoaded", function () {
               updated = true;
               break;
             }
-            await new Promise((resolve) => setTimeout(resolve, 1000)); // 每秒重試
+            await new Promise((resolve) => setTimeout(resolve, 1000));
           }
+          if (window.stopFakeLoading) window.stopFakeLoading();
           window.location.href = "dashboard-TPABF.html";
         } else {
-          // 隱藏 loading 遮罩
+          if (window.stopFakeLoading) window.stopFakeLoading();
           document.getElementById("loading-mask").style.display = "none";
           alert("Network error, please try again later.");
         }
       } catch (error) {
+        if (window.stopFakeLoading) window.stopFakeLoading();
+        document.getElementById("loading-mask").style.display = "none";
         alert("Network error, please try again later.");
         console.error("帳戶編輯 error:", error);
       }
