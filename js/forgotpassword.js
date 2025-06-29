@@ -12,9 +12,9 @@ document.addEventListener("DOMContentLoaded", function () {
 
   // 檢查是否已經有 HTML 中的元素存在，如果有就使用現有的結構
   const existingSendButton = document.getElementById("send-verification-btn");
-  const existingVerifyButton = document.getElementById("verify-btn");
+  // 注意：verify-btn 已在HTML中註解掉，所以不再檢查它
 
-  if (existingSendButton && existingVerifyButton) {
+  if (existingSendButton) {
     // 使用現有的 HTML 結構 (適用於 forgotpassword.html)
     initializeExistingStructure();
   }
@@ -28,10 +28,11 @@ document.addEventListener("DOMContentLoaded", function () {
     const sendVerificationButton = document.getElementById(
       "send-verification-btn"
     );
-    const verificationCodeInput = document.getElementById("verification-code");
-    const codeBox = document.getElementById("code-box");
-    const verifyButton = document.getElementById("verify-btn");
-    const verifyBox = document.getElementById("verify-box");
+    // 注意：以下元素已在HTML中註解掉，所以不再使用
+    // const verificationCodeInput = document.getElementById("verification-code");
+    // const codeBox = document.getElementById("code-box");
+    // const verifyButton = document.getElementById("verify-btn");
+    // const verifyBox = document.getElementById("verify-box");
     let userEmail = ""; // 儲存用戶輸入的電子郵件
 
     // 步驟 1: 發送驗證碼按鈕的事件處理器
