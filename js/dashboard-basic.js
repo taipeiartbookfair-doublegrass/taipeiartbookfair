@@ -269,7 +269,7 @@ document.addEventListener("DOMContentLoaded", async function () {
     el.style.color = "";
     if (applicationResultWrapper)
       applicationResultWrapper.style.fontSize = "2.7rem";
-    el.style.fontSize = "";
+    el.style.fontSize = "2rem";
     if (resultText === "錄取" || resultText === "Accepted") {
       el.style.backgroundColor = "lime";
     } else if (resultText === "條件式錄取") {
@@ -921,7 +921,6 @@ document.addEventListener("DOMContentLoaded", async function () {
     }
 
     if (rawResult === "5-否" || rawResult === "9-重複") {
-      registrationStatusEl.textContent = "-";
       letter.style.display = "block";
     } else if (
       rawResult === "1-是-1波" ||
@@ -989,9 +988,7 @@ document.addEventListener("DOMContentLoaded", async function () {
         }
       }
     } else if (rawResult === "3-猶豫") {
-      registrationStatusEl.textContent = "-";
       runnerletter.style.display = "block";
-      registrationStatus.style.display = "block";
     } else {
       if (paymentChecked && declarationChecked) {
         registrationStatusEl.textContent = getStatusText(true);
