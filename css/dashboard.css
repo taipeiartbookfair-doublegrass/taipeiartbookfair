@@ -305,6 +305,12 @@ html::-webkit-scrollbar-thumb:hover {
   overflow: hidden;
 }
 
+.billing-note {
+  padding-top: 2px;
+  color: rebeccapurple;
+  font-size: 0.9rem;
+}
+
 .loading-grid {
   background-image: url(../image/Cracked_dry_land.jpg);
   position: absolute;

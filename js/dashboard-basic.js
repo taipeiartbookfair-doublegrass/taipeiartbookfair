@@ -554,6 +554,8 @@ document.addEventListener("DOMContentLoaded", async function () {
       "declaration-download-link"
     );
     var declarationdesc = document.getElementById("declaration-desc");
+    console.log("boothType:", boothType);
+    console.log("declarationdesc:", declarationdesc);
     if (boothType && declardownloadLink && declarationdesc) {
       var boothText = boothType.trim();
       if (
@@ -568,14 +570,17 @@ document.addEventListener("DOMContentLoaded", async function () {
         declardownloadLink.innerHTML = "下載參展同意書";
         declarationdesc.innerHTML = "請下載並簽署參展同意書，完成後請上傳。";
       }
+      console.log("desc after set:", declarationdesc.innerHTML);
     }
   }
-  setDeclarationLanguage(boothType);
 
   // 動態勾勾區塊語言還有攤商編號說明搭便車
   function setYesLanguage(boothType) {
     var yesdesc = document.getElementById("registration-status-desc");
     var boothnumberdesc = document.getElementById("booth-number-desc");
+    var billingnote1 = document.getElementById("billing-note1");
+    var billingnote2 = document.getElementById("billing-note2");
+
     if (boothType && yesdesc && boothnumberdesc) {
       var boothText = boothType.trim();
       if (
@@ -584,14 +589,18 @@ document.addEventListener("DOMContentLoaded", async function () {
         boothText === "Curation Booth"
       ) {
         yesdesc.innerHTML =
-          "Please complete the payment and upload the signed agreement by <b><mark>July 15</mark></b>; otherwise, you will not be able to participate in the fair. Only after both payment and agreement upload are confirmed will your participation be finalized. The team will verify and update all records on July 15.";
+          "Please complete the payment and upload the signed agreement by <b><mark>July 13</mark></b>; otherwise, you will not be able to participate in the fair. Only after both payment and agreement upload are confirmed will your participation be finalized. The team will verify and update all records on July 15.";
         boothnumberdesc.innerHTML =
           "Booth numbers and the floor plan will be announced on <b>November 20</b>, the check-in day.";
+        billingnote1.innerHTML = "Payment Deadline: July 13";
+        billingnote2.innerHTML = "Payment Deadline: July 13";
       } else {
         yesdesc.innerHTML =
-          "請於<b><mark>7 月 15 日</mark></b>前完成繳費與同意書上傳，否則將無法參展。經確認完成繳費動作＆同意書上傳，才算是取得最終參展資格，團隊將於7 月 15 日核對後進行統一更新。";
+          "請於<b><mark>7 月 13 日</mark></b>前完成繳費與同意書上傳，否則將無法參展。經確認完成繳費動作＆同意書上傳，才算是取得最終參展資格，團隊將於7 月 15 日核對後進行統一更新。";
         boothnumberdesc.innerHTML =
           "攤位編號與攤位地圖將於報到當天（11/20）公布，屆時請留意公告。";
+        billingnote1.innerHTML = "付款期限: 7 月 13 日";
+        billingnote2.innerHTML = "付款期限: 7 月 13 日";
       }
     }
   }
@@ -636,25 +645,6 @@ document.addEventListener("DOMContentLoaded", async function () {
     }
   }
   setConditionalAcceptence(boothType);
-
-  // 動態同意書 區塊語言
-  function setDeclaration(boothType) {
-    var declarationdesc = document.getElementById("declaration-desc");
-    if (boothType && declarationdesc) {
-      var boothText = boothType.trim();
-      if (
-        boothText === "One Regular Booth" ||
-        boothText === "Two Regular Booth" ||
-        boothText === "Curation Booth"
-      ) {
-        declarationdesc.innerHTML =
-          "Please download and sign the exhibitor declaration, then upload the signed file.";
-      } else {
-        declarationdesc.innerHTML = "請下載並簽署參展同意書，完成後請上傳。";
-      }
-    }
-  }
-  setDeclaration(boothType);
 
   // 動態切換草率簿區塊語言
   function setCatalogLanguage(boothType) {
