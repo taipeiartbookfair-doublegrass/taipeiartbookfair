@@ -904,6 +904,7 @@ document.addEventListener("DOMContentLoaded", async function () {
     //勾勾區的鐵門
     if (declarationChecked) {
       agreementsection.style.position = "relative";
+      agreementsection.style.overflow = "hidden";
 
       let oldOverlay = agreementsection.querySelector(".overlay-completed");
       if (!oldOverlay) {
@@ -917,6 +918,7 @@ document.addEventListener("DOMContentLoaded", async function () {
 
     if (paymentChecked) {
       billingsection.style.position = "relative";
+      billingsection.style.overflow = "hidden";
 
       let oldOverlay = billingsection.querySelector(".overlay-completed");
       if (!oldOverlay) {
@@ -1123,6 +1125,7 @@ document.addEventListener("DOMContentLoaded", async function () {
 
     // 先確保 section 有 position: relative
     section.style.position = "relative";
+    section.style.overflow = "hidden";
 
     // 未公布前
     if (publishTime && now < publishTime) {
