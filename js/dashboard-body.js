@@ -6,9 +6,9 @@ document.addEventListener("DOMContentLoaded", function () {
   if (loadingPercent) loadingPercent.textContent = "0%";
 
   // 這裡啟動你的 fake loading 動畫
-  if (window.startFakeLoading) {
-    window.startFakeLoading();
-  }
+  // if (window.startFakeLoading) {
+  //   window.startFakeLoading();
+  // }
 
   // Logo rotation logic
   const logo = document.querySelector(".machine-rotate-logo");
