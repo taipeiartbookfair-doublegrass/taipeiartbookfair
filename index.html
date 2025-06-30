@@ -467,5 +467,25 @@ font in use: Poppins, PicNic, and Inclusive Sans
 
     <script src="js/infolog.js"></script>
     <script src="js/script.js"></script>
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        const track = document.querySelector(".banner-track");
+        const content = track.querySelector(".banner-content");
+        if (!track || !content) return;
+
+        // 取得 banner-content 寬度
+        const contentWidth = content.offsetWidth;
+        // 取得 banner-track 寬度（可視區域）
+        const trackWidth = track.offsetWidth;
+
+        // 設定每秒移動 60px（可依需求調整速度）
+        const pxPerSec = 60;
+        // 動畫總長度 = (內容寬度 + 可視區域寬度) / pxPerSec
+        const duration = (contentWidth + trackWidth) / pxPerSec;
+
+        // 設定動畫時間
+        track.style.animationDuration = duration + "s";
+      });
+    </script>
   </body>
 </html>
