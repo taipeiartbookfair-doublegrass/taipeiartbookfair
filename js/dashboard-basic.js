@@ -911,6 +911,7 @@ document.addEventListener("DOMContentLoaded", async function () {
         overlay.className = "overlay-completed";
         overlay.textContent = "Completed";
         agreementsection.appendChild(overlay);
+        setTimeout(() => overlay.classList.add("active"), 10);
       }
     }
 
@@ -923,6 +924,7 @@ document.addEventListener("DOMContentLoaded", async function () {
         overlay.className = "overlay-completed";
         overlay.textContent = "Completed";
         billingsection.appendChild(overlay);
+        setTimeout(() => overlay.classList.add("active"), 10);
       }
     }
 
@@ -1145,6 +1147,7 @@ document.addEventListener("DOMContentLoaded", async function () {
       overlay.className = "overlay-closed";
       overlay.textContent = "Close";
       section.appendChild(overlay);
+      setTimeout(() => overlay.classList.add("active"), 10);
 
       section.classList.add("disabled");
       section.style.opacity = 1;

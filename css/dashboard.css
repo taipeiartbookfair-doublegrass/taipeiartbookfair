@@ -435,35 +435,7 @@ html::-webkit-scrollbar-thumb:hover {
   width: 100%;
 }
 
-.overlay-completed {
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: repeating-linear-gradient(
-      to bottom,
-      #3e3e3e 0px,
-      #aaa 6px,
-      #3a7d6a 6px,
-      #2d2d2d 9px
-    ),
-    linear-gradient(to bottom, #d0d0d0, #0f0f0f);
-  border: 1px solid #777;
-  box-shadow: inset 0 0 8px rgba(0, 0, 0, 0.4);
-  color: #a2b5b5;
-  font-size: 2rem;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  z-index: 10;
-  pointer-events: all;
-  user-select: none;
-  font-weight: bold;
-}
-.block-relative {
-  position: relative;
-}
+.overlay-completed,
 .overlay-closed {
   position: absolute;
   top: 0;
@@ -489,7 +461,19 @@ html::-webkit-scrollbar-thumb:hover {
   pointer-events: all;
   user-select: none;
   font-weight: bold;
+  transform: translateY(-100%);
+  transition: transform 0.9s cubic-bezier(0.77, 0, 0.18, 1);
 }
+
+.overlay-completed.active,
+.overlay-closed.active {
+  transform: translateY(0);
+}
+
+.block-relative {
+  position: relative;
+}
+
 .section-class {
   position: relative;
 }
