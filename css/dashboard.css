@@ -97,7 +97,7 @@ th {
   overflow-y: auto;
   padding-bottom: 3rem;
 }
-.faqtable {
+.table {
   z-index: 3;
 }
 h3 {
@@ -120,8 +120,9 @@ h3 {
 }
 .faq-number-cell {
   vertical-align: top;
-  width: 2.5em;
+  width: 2em;
   border-right: none !important;
+  padding: 20px 15px;
 }
 
 .right {
@@ -489,6 +490,7 @@ html::-webkit-scrollbar-thumb:hover {
 }
 .QA-section {
   border-left: none;
+  padding: 20px 20px;
 }
 
 .labelAQ.en {
