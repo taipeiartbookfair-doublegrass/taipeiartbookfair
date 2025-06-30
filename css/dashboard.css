@@ -81,7 +81,7 @@ th {
   width: 44vw;
 }
 .account {
-  background-color: rgb(230, 250, 222);
+  background-color: rgba(104, 114, 77, 0.25);
   width: 99vw;
   height: 100vh;
   overflow-y: scroll !important;
