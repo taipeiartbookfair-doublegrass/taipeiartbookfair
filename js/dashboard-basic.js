@@ -905,10 +905,10 @@ document.addEventListener("DOMContentLoaded", async function () {
     if (declarationChecked) {
       agreementsection.style.position = "relative";
 
-      let oldOverlay = agreementsection.querySelector(".overlay-closed");
+      let oldOverlay = agreementsection.querySelector(".overlay-completed");
       if (!oldOverlay) {
         let overlay = document.createElement("div");
-        overlay.className = "overlay-closed";
+        overlay.className = "overlay-completed";
         overlay.textContent = "Completed";
         agreementsection.appendChild(overlay);
       }
@@ -917,10 +917,10 @@ document.addEventListener("DOMContentLoaded", async function () {
     if (paymentChecked) {
       billingsection.style.position = "relative";
 
-      let oldOverlay = billingsection.querySelector(".overlay-closed");
+      let oldOverlay = billingsection.querySelector(".overlay-completed");
       if (!oldOverlay) {
         let overlay = document.createElement("div");
-        overlay.className = "overlay-closed";
+        overlay.className = "overlay-completed";
         overlay.textContent = "Completed";
         billingsection.appendChild(overlay);
       }
