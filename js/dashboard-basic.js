@@ -905,6 +905,7 @@ document.addEventListener("DOMContentLoaded", async function () {
     if (declarationChecked) {
       agreementsection.style.position = "relative";
       agreementsection.style.overflow = "hidden";
+      agreementsection.style.pointerEvents = "none";
 
       let oldOverlay = agreementsection.querySelector(".overlay-completed");
       if (!oldOverlay) {
@@ -919,6 +920,7 @@ document.addEventListener("DOMContentLoaded", async function () {
     if (paymentChecked) {
       billingsection.style.position = "relative";
       billingsection.style.overflow = "hidden";
+      billingsection.style.pointerEvents = "none";
 
       let oldOverlay = billingsection.querySelector(".overlay-completed");
       if (!oldOverlay) {
@@ -1145,6 +1147,7 @@ document.addEventListener("DOMContentLoaded", async function () {
     }
     // 截止後
     else if (deadline && now > deadline) {
+      section.style.pointerEvents = "none";
       // 加遮罩
       let overlay = document.createElement("div");
       overlay.className = "overlay-closed";
