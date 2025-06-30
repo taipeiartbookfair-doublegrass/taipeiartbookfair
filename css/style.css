@@ -411,7 +411,7 @@ p {
 
 .banner-track {
   display: flex;
-  animation: scroll-loop 20s linear infinite;
+  animation: scroll-loop 60s linear infinite;
 }
 
 .banner-content {
