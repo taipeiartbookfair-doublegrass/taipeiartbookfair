@@ -907,6 +907,7 @@ document.addEventListener("DOMContentLoaded", async function () {
       agreementsection.style.overflow = "hidden";
       agreementsection.style.pointerEvents = "none";
 
+
       let oldOverlay = agreementsection.querySelector(".overlay-completed");
       if (!oldOverlay) {
         let overlay = document.createElement("div");
@@ -1163,6 +1164,7 @@ document.addEventListener("DOMContentLoaded", async function () {
       section.classList.remove("disabled");
       section.style.opacity = "";
       // 移除舊遮罩
+      section.style.pointerEvents = "";
       let oldOverlay = section.querySelector(".overlay-closed");
       if (oldOverlay) oldOverlay.remove();
     }
