@@ -905,7 +905,8 @@ document.addEventListener("DOMContentLoaded", async function () {
     if (declarationChecked) {
       agreementsection.style.position = "relative";
       agreementsection.style.overflow = "hidden";
-      agreementsection.style.pointerEvents = "";
+      agreementsection.style.pointerEvents = "none";
+
 
       let oldOverlay = agreementsection.querySelector(".overlay-completed");
       if (!oldOverlay) {
@@ -920,7 +921,7 @@ document.addEventListener("DOMContentLoaded", async function () {
     if (paymentChecked) {
       billingsection.style.position = "relative";
       billingsection.style.overflow = "hidden";
-      billingsection.style.pointerEvents = "";
+      billingsection.style.pointerEvents = "none";
 
       let oldOverlay = billingsection.querySelector(".overlay-completed");
       if (!oldOverlay) {
