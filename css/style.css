@@ -411,7 +411,7 @@ p {
 
 .banner-track {
   display: flex;
-  animation: scroll-loop 180s linear infinite;
+  animation: scroll-loop 240s linear infinite;
 }
 
 .banner-content {
@@ -432,7 +432,7 @@ p {
     transform: translateX(0);
   }
   100% {
-    transform: translateX(-50%);
+    transform: translateX(-400%);
   }
 }
 
