@@ -286,8 +286,8 @@ document.addEventListener("DOMContentLoaded", async function () {
       el.style.backgroundColor = "lightgrey";
       el.style.color = "DarkSlateGrey";
       if (applicationResultWrapper)
-        applicationResultWrapper.style.fontSize = "1.7rem";
-      el.style.fontSize = "1.6rem";
+        applicationResultWrapper.style.fontSize = "2.7rem";
+      el.style.fontSize = "2rem";
       el.style.padding = "0px";
     }
   }
