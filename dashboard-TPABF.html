@@ -473,6 +473,10 @@
                       value="品牌名稱"
                       style="width: 95%"
                       id="brandName-edit"
+                      maxlength="150"
+                      required
+                      pattern="^[\p{L}\p{N}\s!&quot;#$%&'()*+,\-./:;<=>?@[\\\]^_`{|}~]+$"
+                      title="請勿輸入特殊符號 Please do not use special characters"
                     />
                   </td>
                 </tr>
@@ -484,6 +488,7 @@
                       rows="6"
                       style="width: 95%"
                       id="bio-edit"
+                      maxlength="1000"
                     ></textarea>
                   </td>
                 </tr>
@@ -789,6 +794,7 @@
                       style="width: 95%"
                       id="website-edit"
                       placeholder="None"
+                      maxlength="150"
                     />
                   </td>
                 </tr>
@@ -801,6 +807,7 @@
                       style="width: 95%"
                       id="instagram-edit"
                       placeholder="None"
+                      maxlength="150"
                     />
                   </td>
                   <td>
@@ -811,6 +818,7 @@
                       style="width: 95%"
                       id="facebook-edit"
                       placeholder="None"
+                      maxlength="150"
                     />
                   </td>
                 </tr>
