@@ -285,6 +285,10 @@ document.addEventListener("DOMContentLoaded", async function () {
     } else if (resultText === "未錄取" || resultText === "Not Selected") {
       el.style.backgroundColor = "lightgrey";
       el.style.color = "DarkSlateGrey";
+      if (applicationResultWrapper)
+        applicationResultWrapper.style.fontSize = "1.7rem";
+      el.style.fontSize = "1.6rem";
+      el.style.padding = "0px";
     }
   }
   const applicationResultEl = document.getElementById("application-result");
