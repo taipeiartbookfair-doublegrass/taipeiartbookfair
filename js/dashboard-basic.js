@@ -242,7 +242,8 @@ document.addEventListener("DOMContentLoaded", async function () {
         raw === "2-是-2波" ||
         raw === "0-邀請" ||
         raw === "6-NGO" ||
-        raw === "6-是-NGO"
+        raw === "6-是-NGO" ||
+        raw === "0-是-邀請"
       )
         return "Accepted";
       if (raw === "3-猶豫") return "Waitlisted";
@@ -255,7 +256,8 @@ document.addEventListener("DOMContentLoaded", async function () {
         raw === "2-是-2波" ||
         raw === "0-邀請" ||
         raw === "6-NGO" ||
-        raw === "6-是-NGO"
+        raw === "6-是-NGO" ||
+        raw === "0-是-邀請"
       )
         return "錄取";
       if (raw === "3-猶豫") return "備取";
@@ -939,7 +941,8 @@ document.addEventListener("DOMContentLoaded", async function () {
       rawResult === "2-是-2波" ||
       rawResult === "0-邀請" ||
       rawResult === "6-NGO" ||
-      rawResult === "6-是-NGO"
+      rawResult === "6-是-NGO" ||
+      rawResult === "0-是-邀請"
     ) {
       if (paymentChecked && declarationChecked) {
         registrationStatusEl.textContent = getStatusText(true);
