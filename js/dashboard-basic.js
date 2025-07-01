@@ -1119,14 +1119,25 @@ document.addEventListener("DOMContentLoaded", async function () {
 
   // 假設 publishTimes 物件 key = section id, value = {descId, publishTime, deadline, preMessage}
   Object.entries(publishTimes).forEach(([sectionId, info]) => {
-    const section = document.getElementById(sectionId);
-    const desc = document.getElementById(info.descId);
+    let section = document.getElementById(sectionId);
+    let desc = document.getElementById(info.descId);
     if (!section || !desc) return;
+
+    // 預設用 deadline
+    let deadline = info.deadline;
+    // 如果是備取，且有 backupDeadline 就用它
+    if (
+      (sectionId === "billing-section" || sectionId === "agreement-section") &&
+      apiData["錄取"] === "2-是-2波" &&
+      info.backupDeadline
+    ) {
+      deadline = info.backupDeadline;
+    }
 
     // 解析時間
     const now = new Date();
     const publishTime = info.publishTime ? new Date(info.publishTime) : null;
-    const deadline = info.deadline ? new Date(info.deadline) : null;
+    const deadlineDate = deadline ? new Date(deadline) : null;
 
     // 先確保 section 有 position: relative
     section.style.position = "relative";
@@ -1149,7 +1160,7 @@ document.addEventListener("DOMContentLoaded", async function () {
       if (oldOverlay) oldOverlay.remove();
     }
     // 截止後
-    else if (deadline && now > deadline) {
+    else if (deadlineDate && now > deadlineDate) {
       section.style.pointerEvents = "none";
       // 加遮罩
       let overlay = document.createElement("div");
