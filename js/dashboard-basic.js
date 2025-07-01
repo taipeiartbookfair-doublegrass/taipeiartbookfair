@@ -602,10 +602,10 @@ document.addEventListener("DOMContentLoaded", async function () {
 
     // 判斷期限
     let deadline = "7 月 13 日";
-    let deadlineEn = "July 13";
+    let deadlineEn = "July 13, 2025 at 11:59 PM (UTC+8)";
     if (rawResult === "2-是-2波") {
       deadline = "7 月 22 日";
-      deadlineEn = "July 22";
+      deadlineEn = "July 22, 2025 at 11:59 PM (UTC+8)";
     }
 
     if (boothType && yesdesc && boothnumberdesc) {
