@@ -241,11 +241,10 @@ document.addEventListener("DOMContentLoaded", async function () {
         raw === "1-是-1波" ||
         raw === "2-是-2波" ||
         raw === "0-邀請" ||
-        raw === "6-NGO" ||
-        raw === "6-是-NGO" ||
         raw === "0-是-邀請"
       )
         return "Accepted";
+      if (raw === "6-NGO" || raw === "6-是-NGO") return "NGO";
       if (raw === "3-猶豫") return "Waitlisted";
       if (raw === "5-否" || raw === "9-重複") return "Not Selected";
       return raw;
@@ -255,11 +254,10 @@ document.addEventListener("DOMContentLoaded", async function () {
         raw === "1-是-1波" ||
         raw === "2-是-2波" ||
         raw === "0-邀請" ||
-        raw === "6-NGO" ||
-        raw === "6-是-NGO" ||
         raw === "0-是-邀請"
       )
         return "錄取";
+      if (raw === "6-NGO" || raw === "6-是-NGO") return "NGO";
       if (raw === "3-猶豫") return "備取";
       if (raw === "5-否" || raw === "9-重複") return "未錄取";
       return raw;
@@ -284,6 +282,8 @@ document.addEventListener("DOMContentLoaded", async function () {
         applicationResultWrapper.style.fontSize = "1.7rem";
       el.style.fontSize = "1.6rem";
       el.style.padding = "0px";
+    } else if (resultText === "NGO") {
+      el.style.backgroundColor = "ForestGreen";
     } else if (resultText === "備取" || resultText === "Waitlisted") {
       el.style.backgroundColor = "lightgreen";
     } else if (resultText === "未錄取" || resultText === "Not Selected") {
