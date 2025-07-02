@@ -282,6 +282,8 @@ document.addEventListener("DOMContentLoaded", async function () {
         applicationResultWrapper.style.fontSize = "1.7rem";
       el.style.fontSize = "1.6rem";
       el.style.padding = "0px";
+    } else if (resultText === "NGO") {
+      el.style.backgroundColor = "ForestGreen";
     } else if (resultText === "備取" || resultText === "Waitlisted") {
       el.style.backgroundColor = "lightgreen";
     } else if (resultText === "未錄取" || resultText === "Not Selected") {
