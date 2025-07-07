@@ -343,7 +343,7 @@ document.addEventListener("DOMContentLoaded", async function () {
         ];
         break;
       case "One Regular Booth":
-        price = "USD$165 <small>incl. tax</small>";
+        price = 'USD$165 <span style="font-size:1.3rem;">incl. tax</span>';
         equipment = [
           "– Table<small>(120×60cm)</small> ×1",
           "– Chairs ×2",
@@ -352,7 +352,7 @@ document.addEventListener("DOMContentLoaded", async function () {
         ];
         break;
       case "Two Regular Booth":
-        price = "USD$330 <small>incl. tax</small>";
+        price = 'USD$330 <span style="font-size:1.3rem;">incl. tax</span>';
         equipment = [
           "– Table<small>(120×60cm)</small> ×2",
           "– Chairs ×4",
@@ -361,7 +361,7 @@ document.addEventListener("DOMContentLoaded", async function () {
         ];
         break;
       case "Curation Booth":
-        price = "USD$780 <small>incl. tax</small>";
+        price = 'USD$780 <span style="font-size:1.3rem;">incl. tax</span>';
         equipment = [
           "– 3M × 3M space",
           "– Table<small>(120×60cm)</small> ×2",
