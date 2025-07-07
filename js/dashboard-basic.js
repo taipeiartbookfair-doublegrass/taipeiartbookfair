@@ -345,7 +345,7 @@ document.addEventListener("DOMContentLoaded", async function () {
       case "One Regular Booth":
         price = "USD$165 <small>incl. tax</small>";
         equipment = [
-          "– Table<small>(180×60cm)</small> ×1",
+          "– Table<small>(120×60cm)</small> ×1",
           "– Chairs ×2",
           "– Passes ×2",
           "– TPABF Catalog ×1 <small>(one page featured)</small>",
@@ -354,7 +354,7 @@ document.addEventListener("DOMContentLoaded", async function () {
       case "Two Regular Booth":
         price = "USD$330 <small>incl. tax</small>";
         equipment = [
-          "– Table<small>(180×60cm)</small> ×2",
+          "– Table<small>(120×60cm)</small> ×2",
           "– Chairs ×4",
           "– Passes ×4",
           "– TPABF Catalog ×1 <small>(one page featured)</small>",
@@ -364,7 +364,7 @@ document.addEventListener("DOMContentLoaded", async function () {
         price = "USD$780 <small>incl. tax</small>";
         equipment = [
           "– 3M × 3M space",
-          "– Table<small>(180×60cm)</small> ×2",
+          "– Table<small>(120×60cm)</small> ×2",
           "– Chairs ×4",
           "– Passes ×3",
           "– TPABF Catalog ×1 <small>(one page featured)</small>",
