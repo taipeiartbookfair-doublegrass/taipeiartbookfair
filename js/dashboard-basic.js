@@ -426,10 +426,10 @@ document.addEventListener("DOMContentLoaded", async function () {
       if (boothType === "Curation Booth") usd1 = 780;
       document.getElementById(
         "billing1-price"
-      ).innerHTML = `USD$${usd1} <small>incl. tax</small>`;
+      ).innerHTML = `USD$${usd1} <span style="font-size:1.3rem;">incl. tax</span>`;
       document.getElementById("billing2-price").innerHTML = `USD$${
         usd1 + 20
-      } <small>incl. tax</small>`;
+      } <span style="font-size:1.3rem;">incl. tax</span>`;
     }
 
     // 商品名稱與金額
