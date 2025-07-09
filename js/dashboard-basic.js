@@ -615,13 +615,13 @@ document.addEventListener("DOMContentLoaded", async function () {
         boothText === "Two Regular Booth" ||
         boothText === "Curation Booth"
       ) {
-        yesdesc.innerHTML = `Please complete the payment and upload the signed agreement by <b><mark>${deadlineEn}</mark></b>; otherwise, you will not be able to participate in the fair. Only after both payment and agreement upload are confirmed will your participation be finalized. The team will verify and update all records on July 15.`;
+        yesdesc.innerHTML = `Please complete your payment and upload the signed agreement by <b><mark>${deadlineEn}</mark></b>. Late submissions will be considered a forfeiture of your participation. <br><br>Our team will manually verify all payment and agreement uploads by July 15.<br>If you have already completed the process, please keep a screenshot of your payment or upload confirmation. If your status hasn’t been updated after July 15, feel free to contact us again.`;
         boothnumberdesc.innerHTML =
           "Booth numbers and the floor plan will be announced on <b>November 20</b>, the check-in day.";
         billingnote1.innerHTML = `Payment Deadline: ${deadlineEn}`;
         billingnote2.innerHTML = `Payment Deadline: ${deadlineEn}`;
       } else {
-        yesdesc.innerHTML = `請於<b><mark>${deadline}</mark></b>前完成繳費與同意書上傳，否則將無法參展。經確認完成繳費動作＆同意書上傳，才算是取得最終參展資格，團隊將於7 月 15 日核對後進行統一更新。`;
+        yesdesc.innerHTML = `請於<b><mark>${deadline}</mark></b>前完成繳費與同意書上傳，逾期將視同放棄參展資格。<br><br>團隊將於 7 月 15 日前 逐一人工確認繳費與同意書的上傳狀態。<br>如您已完成繳交，請先保留相關繳費或上傳截圖；若狀態在 7 月 15 日後仍未更新，請與我們聯繫。`;
         boothnumberdesc.innerHTML =
           "攤位編號與攤位地圖將於報到當天（11/20）公布，屆時請留意公告。";
         billingnote1.innerHTML = `付款期限: ${deadline}`;
