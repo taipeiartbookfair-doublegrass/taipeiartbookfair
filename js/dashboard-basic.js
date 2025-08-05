@@ -684,11 +684,11 @@ document.addEventListener("DOMContentLoaded", async function () {
       ) {
         catalogdownloadLink.innerHTML = "Template Download";
         catalogdesc.innerHTML =
-          "Once selected to exhibit, your project will be featured on one page in that year’s TPABF Catalog. Please use the template from the Marketing Kit and complete both the upload and any updates to your basic exhibitor info (left-side fields) by the deadline. Late submissions will not be included.<br /><br /> 📌 Specs:<br /> File Format: PDF (Please ensure images are embedded and text is outlined)<br /> Workspace: 140 × 220 mm<br /> Bleed: 5 mm on all sides<br /> Color Mode: Black & White (B&W)";
+          "Each exhibitor is entitled to a one-page feature in this year’s <i>TPABF Catalog</i>. Late submissions will be considered as forfeiting the opportunity.<br /><br />📌 Submission requirements: <br />1. <b>Image file</b>: PDF format, final size <b>120 × 195 mm</b>, with <b>5 mm bleed</b>. Please use <b>black and white</b> only.<br />2. <b>Text content</b>: Please edit and complete the information on the left side of the exhibitor info sheet.<br />";
       } else {
         catalogdownloadLink.innerHTML = "公版下載";
         catalogdesc.innerHTML =
-          "單位獲取參展資格即代表可於當年《草率簿 TPABF Catalog》中露出一面，請使用行銷素材包提供的版型製作，並於期限內完成上傳與左側攤商基本資料修改，逾期視同放棄。<br /><br />📌 規格：<br />檔案類型 Format ：PDF（請確認圖片已置入、文字已轉外框）<br />工作區域 Workspace：140×220mm<br />四邊出血 Bleed：5mm<br />色彩 Color Mode: 黑白 B&W";
+          "每個參展單位可於本屆《草率簿 TPABF Catalog》中獲得一面頁面露出，逾期未繳交者將視同放棄刊登權益。<br /><br />📌 繳交內容如下：<br />1. <b>圖檔</b>：PDF 格式，完稿尺寸 120 × 195 mm，需包含 5 mm 出血，色彩請設為黑白。<br />2. <b>文字資料</b>：請依左方參展資訊進行修改與補充。<br />";
       }
     }
   }
@@ -785,15 +785,15 @@ document.addEventListener("DOMContentLoaded", async function () {
       ) {
         mediaziplink.innerHTML = "Download";
         mediamaterialdesc.innerHTML =
-          "<b>Media Kit Download:</b><br />If you wish to use official TPABF promotional materials, please download the following ZIP file.";
+          "<b>Media Kit:</b><br />You're welcome to use the 2025 TPABF key visual assets — click here to download.";
         materialuploaddesc.innerHTML =
-          "<b>Upload:</b><br />Please use the official AI template from the media kit tocreate and upload one image for social media promotion.<br />📌 Specs: JPG, RGB, 150 ppi, 1 image per exhibitor<br />⚠️ Submissions after the deadline may not be included in our social media posts.";
+          "<b>Social Media Promo Images Upload:</b><br />Please follow the instructions in the asset kit to create your <b>post and story</b> images, then upload them as a zipped file.<br><br>⚠️ Submissions received after the deadline may not be included in our social media promotion—thank you for your understanding ;)";
       } else {
         mediaziplink.innerHTML = "下載";
         mediamaterialdesc.innerHTML =
-          "<b>下載視覺素材包：</b><br />若您需要使用草率季官方行銷素材，點此下載檔案。";
+          "<b>視覺素材包：</b><br />歡迎使用 2025 草率季主視覺素材，點此下載檔案。";
         materialuploaddesc.innerHTML =
-          "<b>上傳：</b><br />請使用素材包內的官方模板（AI檔）製作，並上傳一張符合格式的圖片，我們將安排社群露出。(書攤需有三本書籍圖片上傳）<br />📌 格式：JPG、RGB、150 ppi、每單位限 1 張，zip包上傳<br />⚠️ 未於期限內上傳，將可能無法安排社群曝光。";
+          "<b>社群宣傳圖檔上傳：</b><br />請依照素材包內的說明製作，並將製作完成的<b>貼文、限時動態圖檔</b>打包為 zip上傳。<br><br>⚠️ 若未於期限內完成上傳，可能無法安排社群曝光，敬請留意;)";
       }
     }
   }
