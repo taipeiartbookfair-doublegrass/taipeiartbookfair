@@ -247,6 +247,8 @@ document.addEventListener("DOMContentLoaded", async function () {
       if (raw === "6-NGO" || raw === "6-是-NGO") return "NGO";
       if (raw === "3-猶豫") return "Waitlisted";
       if (raw === "5-否" || raw === "9-重複") return "Not Selected";
+      if (raw === "6-1-繳費後取消-已退費" || raw === "6-2-繳費後取消-無退費")
+        return "Cancelled";
       return raw;
     } else {
       if (raw === "4-是-條件式錄取") return "條件式錄取";
@@ -259,6 +261,8 @@ document.addEventListener("DOMContentLoaded", async function () {
         return "錄取";
       if (raw === "6-NGO" || raw === "6-是-NGO") return "NGO";
       if (raw === "3-猶豫") return "備取";
+      if (raw === "6-1-繳費後取消-已退費" || raw === "6-2-繳費後取消-無退費")
+        return "已取消";
       if (raw === "5-否" || raw === "9-重複") return "未錄取";
       return raw;
     }
@@ -286,7 +290,12 @@ document.addEventListener("DOMContentLoaded", async function () {
       el.style.backgroundColor = "ForestGreen";
     } else if (resultText === "備取" || resultText === "Waitlisted") {
       el.style.backgroundColor = "lightgreen";
-    } else if (resultText === "未錄取" || resultText === "Not Selected") {
+    } else if (
+      resultText === "未錄取" ||
+      resultText === "Not Selected" ||
+      resultText === "已取消" ||
+      resultText === "Cancelled"
+    ) {
       el.style.backgroundColor = "lightgrey";
       el.style.color = "DarkSlateGrey";
       if (applicationResultWrapper)
@@ -971,6 +980,11 @@ document.addEventListener("DOMContentLoaded", async function () {
       }
     } else if (rawResult === "0") {
       registrationStatusEl.textContent = "-";
+    } else if (
+      rawResult === "6-1-繳費後取消-已退費" ||
+      rawResult === "6-2-繳費後取消-無退費"
+    ) {
+      registrationStatusEl.textContent = "已取消";
     } else if (rawResult === "4-是-條件式錄取") {
       conditionalyes.style.display = "inline-block";
       if (paymentChecked && declarationChecked) {
