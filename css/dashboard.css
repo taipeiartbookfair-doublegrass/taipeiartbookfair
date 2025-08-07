@@ -501,6 +501,20 @@ html::-webkit-scrollbar-thumb:hover {
   margin-top: 0.2em;
 }
 
+.ddl {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 5px;
+  font-size: 1rem;
+  background-color: #ff6f4c;
+  font-family: "Inclusive Sans", sans-serif;
+  display: block;
+  margin-left: 0.5em;
+  margin-right: 0.5em;
+  padding: 0.5px;
+}
+
 /* ===== 行動版 Mobile ===== */
 @media screen and (max-width: 600px) {
   /* html,
