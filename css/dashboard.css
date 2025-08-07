@@ -502,16 +502,13 @@ html::-webkit-scrollbar-thumb:hover {
 }
 
 .ddl {
-  position: absolute;
-  left: 0;
-  right: 0;
-  bottom: 5px;
-  font-size: 1rem;
+  font-size: 0.8rem;
   background-color: #ff6f4c;
   font-family: "Inclusive Sans", sans-serif;
   display: block;
   margin-left: 0.5em;
   margin-right: 0.5em;
+  margin-top: 1rem;
   padding: 0.5px;
 }
 
