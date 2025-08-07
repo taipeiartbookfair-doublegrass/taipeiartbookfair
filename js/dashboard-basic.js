@@ -1140,7 +1140,6 @@ document.addEventListener("DOMContentLoaded", async function () {
 
     // 預設用 deadline
     let deadline = info.deadline;
-    // 如果是備取，且有 backupDeadline 就用它
     if (
       (sectionId === "billing-section" || sectionId === "agreement-section") &&
       apiData["錄取"] === "2-是-2波" &&
@@ -1148,12 +1147,39 @@ document.addEventListener("DOMContentLoaded", async function () {
     ) {
       deadline = info.backupDeadline;
     }
+    const deadlineTime = deadline ? new Date(deadline) : null;
+
+    // 填入 ddl-區塊id
+    const ddlDiv = document.getElementById("ddl-" + sectionId);
+    if (ddlDiv && deadline) {
+      // 判斷語言
+      const isEnglishBooth =
+        boothType === "One Regular Booth" ||
+        boothType === "Two Regular Booth" ||
+        boothType === "Curation Booth";
+      // 格式化日期
+      const deadlineStr = deadlineTime
+        ? deadlineTime.toLocaleString("zh-TW", { hour12: false })
+        : deadline;
+      ddlDiv.textContent = isEnglishBooth
+        ? `Deadline: ${deadlineStr}`
+        : `截止日期：${deadlineStr}`;
+    }
+
+    // 預設用 deadline
+    // let deadline = info.deadline;
+    // 如果是備取，且有 backupDeadline 就用它
+    // if (
+    //   (sectionId === "billing-section" || sectionId === "agreement-section") &&
+    //   apiData["錄取"] === "2-是-2波" &&
+    //   info.backupDeadline
+    // ) {
+    //   deadline = info.backupDeadline;
+    // }
 
     // 解析時間
     const now = new Date();
     const publishTime = info.publishTime ? new Date(info.publishTime) : null;
-    const deadlineDate = deadline ? new Date(deadline) : null;
-
     // 先確保 section 有 position: relative
     section.style.position = "relative";
     section.style.overflow = "hidden";
@@ -1175,7 +1201,7 @@ document.addEventListener("DOMContentLoaded", async function () {
       if (oldOverlay) oldOverlay.remove();
     }
     // 截止後
-    else if (deadlineDate && now > deadlineDate) {
+    else if (deadlineTime && now > deadlineTime) {
       section.style.pointerEvents = "none";
       // 加遮罩
       let overlay = document.createElement("div");

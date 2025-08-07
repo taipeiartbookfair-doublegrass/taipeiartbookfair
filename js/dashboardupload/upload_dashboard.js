@@ -133,9 +133,10 @@ const handleFileUpload = async (
       statusSpan.style.color = "green";
       statusSpan.style.fontSize = "0.8em";
     }
-    if (storageKey) {
-      localStorage.setItem(storageKey, file.name);
-    }
+    // 不再存 localStorage
+    // if (storageKey) {
+    //   localStorage.setItem(storageKey, file.name);
+    // }
     return true;
   } catch (error) {
     // 上傳失敗
@@ -149,15 +150,15 @@ const handleFileUpload = async (
   }
 };
 
-// 頁面載入時自動顯示 localStorage 狀態
-window.addEventListener("DOMContentLoaded", function () {
-  Object.keys(uploadStatusMap).forEach((key) => {
-    const conf = uploadStatusMap[key];
-    const statusSpan = document.getElementById(conf.status);
-    const filename = localStorage.getItem(conf.storage);
-    if (statusSpan && filename) {
-      statusSpan.textContent = `Uploaded: ${filename}`;
-      statusSpan.style.color = "green";
-    }
-  });
-});
+// 刪除這段：頁面載入時自動顯示 localStorage 狀態
+// window.addEventListener("DOMContentLoaded", function () {
+//   Object.keys(uploadStatusMap).forEach((key) => {
+//     const conf = uploadStatusMap[key];
+//     const statusSpan = document.getElementById(conf.status);
+//     const filename = localStorage.getItem(conf.storage);
+//     if (statusSpan && filename) {
+//       statusSpan.textContent = `Uploaded: ${filename}`;
+//       statusSpan.style.color = "green";
+//     }
+//   });
+// });

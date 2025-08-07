@@ -1105,10 +1105,10 @@
                               >
                                 上傳 Upload</button
                               ><br />
-                              <span
+                              <!-- <span
                                 id="declaration-upload-status"
                                 style="color: green"
-                              ></span>
+                              ></span> -->
                             </td>
                           </tr>
                         </table>
@@ -1378,6 +1378,7 @@
                     </div>
                   </div>
                 </td>
+
                 <!-- 行銷素材上傳 -->
                 <td
                   colspan="2"
@@ -1409,38 +1410,59 @@
                       >
                         上傳 Upload</button
                       ><br />
-                      <span
+                      <!-- <span
                         id="marketing-upload-status"
                         style="color: green"
-                      ></span>
+                      ></span> -->
                     </div>
+                    <div id="ddl-material-upload-section" class="ddl"></div>
                   </div>
                 </td>
               </tr>
 
               <!-- 寄件訊息 Foreigner Form -->
               <tr style="display: none" id="foreign-shipping">
-                <td style="border-top: none; width: 55vw">
+                <td
+                  colspan="1"
+                  style="border-top: none; width: 80%; border-right: none"
+                >
                   <span class="label">寄件服務 Shipping Service</span>
                   <div id="foreigner-form" style="margin-top: 0.5rem">
                     <b>Sending in advance</b>：<br />
                     To ensure your materials arrive safely, please make sure to
-                    complete the
-                    <a
-                      href="https://forms.gle/hVu54wUfqqUMRxfG8"
-                      target="_blank"
-                      >shipping service form</a
-                    >
-                    and have your package delivered
-                    <b>before November 7, 2025 (Fri.)</b> to the designated
+                    complete the shipping service form and have your package
+                    delivered before November 7, 2025 (Fri.) to the designated
                     address. <br />Late or unregistered shipments will not be
                     eligible for transfer service. <br /><br />
+                  </div>
+                </td>
+                <!-- 寄件表格 -->
+                <td
+                  colspan="2"
+                  style="
+                    border-top: none;
+                    width: 20%;
+                    border-left: 1px dashed black;
+                  "
+                >
+                  <div id="foreign-shipping-form-section">
+                    <div style="min-width: 198px" id="foreign-shipping-form">
+                      <a
+                        href="https://forms.gle/hVu54wUfqqUMRxfG8"
+                        target="_blank"
+                        >shipping service form</a
+                      >
+                    </div>
+                    <div
+                      id="ddl-foreign-shipping-form-section"
+                      class="ddl"
+                    ></div>
                   </div>
                 </td>
               </tr>
 
               <tr id="media-live-event-section" style="display: none">
-                <td style="border-top: none; width: 55vw; vertical-align: top">
+                <td colspan="1" style="border-top: none; border-right: none">
                   <span class="label">現場活動徵集 Program Open Call</span>
                   <div id="live-even-annouce-time">
                     <div
@@ -1449,14 +1471,30 @@
                     >
                       想與大家更近距離互動？我們開放以下形式的現場活動徵集：短講、表演、工作坊、DJ等。
                     </div>
-                    <br />
-                    <a
-                      href="https://forms.gle/ckXiewW68i1VwKYt6"
-                      target="_blank"
-                      id="live-event-signup-link"
-                    >
-                      報名表單
-                    </a>
+                  </div>
+                </td>
+                <td
+                  colspan="1"
+                  style="
+                    border-top: none;
+                    width: 20%;
+                    border-left: 1px dashed black;
+                  "
+                >
+                  <div id="media-live-event-form-section">
+                    <div id="media-live-event-form" style="min-width: 198px">
+                      <a
+                        href="https://forms.gle/ckXiewW68i1VwKYt6"
+                        target="_blank"
+                        id="live-event-signup-link"
+                      >
+                        報名表單
+                      </a>
+                    </div>
+                    <div
+                      id="ddl-media-live-event-form-section"
+                      class="ddl"
+                    ></div>
                   </div>
                 </td>
               </tr>
@@ -1496,31 +1534,34 @@
                     border-left: 1px dashed black;
                   "
                 >
-                  <div id="catalog-upload-btn" style="min-width: 198px">
-                    <input
-                      type="file"
-                      id="catalog-file"
-                      accept=".pdf"
-                      style="max-width: 198px"
-                    />
-                    <button
-                      style="
-                        padding: 0.3em 1.2em;
-                        background: #000;
-                        color: #fff;
-                        border: none;
-                        border-radius: 3px;
-                        cursor: pointer;
-                      "
-                      type="button"
-                      id="uploadBtnCatalog"
-                    >
-                      上傳 Upload</button
-                    ><br />
-                    <span
-                      id="catalog-upload-status"
-                      style="color: green"
-                    ></span>
+                  <div id="catalog-upload-section">
+                    <div id="catalog-upload-btn" style="min-width: 198px">
+                      <input
+                        type="file"
+                        id="catalog-file"
+                        accept=".pdf"
+                        style="max-width: 198px"
+                      />
+                      <button
+                        style="
+                          padding: 0.3em 1.2em;
+                          background: #000;
+                          color: #fff;
+                          border: none;
+                          border-radius: 3px;
+                          cursor: pointer;
+                        "
+                        type="button"
+                        id="uploadBtnCatalog"
+                      >
+                        上傳 Upload</button
+                      ><br />
+                      <div id="ddl-catalog-upload-section" class="ddl"></div>
+                      <!-- <span
+                        id="catalog-upload-status"
+                        style="color: green"
+                      ></span> -->
+                    </div>
                   </div>
                 </td>
               </tr>
