@@ -1159,7 +1159,18 @@ document.addEventListener("DOMContentLoaded", async function () {
         boothType === "Curation Booth";
       // 格式化日期
       const deadlineStr = deadlineTime
-        ? deadlineTime.toLocaleString("zh-TW", { hour12: false })
+        ? `${deadlineTime.getFullYear()}-${(deadlineTime.getMonth() + 1)
+            .toString()
+            .padStart(2, "0")}-${deadlineTime
+            .getDate()
+            .toString()
+            .padStart(2, "0")} ${deadlineTime
+            .getHours()
+            .toString()
+            .padStart(2, "0")}:${deadlineTime
+            .getMinutes()
+            .toString()
+            .padStart(2, "0")}`
         : deadline;
       ddlDiv.textContent = isEnglishBooth
         ? `Deadline: ${deadlineStr}`
