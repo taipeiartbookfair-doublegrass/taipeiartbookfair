@@ -503,11 +503,11 @@ html::-webkit-scrollbar-thumb:hover {
 
 .ddl {
   font-size: 0.85rem;
-  background-color: #ff6f4c;
+  /* background-color: #ff6f4c; */
   font-family: "Inclusive Sans", sans-serif;
   display: block;
   margin-top: 1rem;
-  padding: 0.5px 2px;
+  /* padding: 0.5px 2px; */
   position: absolute;
   bottom: 1rem;
 }
