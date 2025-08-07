@@ -870,6 +870,7 @@ document.addEventListener("DOMContentLoaded", async function () {
   const mediaupload = document.getElementById("media-section");
   const catalogSection = document.getElementById("catalog-section");
   const liveEventSection = document.getElementById("media-live-event-section");
+  const opencallschedule = document.getElementById("open-call-schedule");
 
   const rawResult = apiData["錄取"];
   const nationality = (region || "").trim().toUpperCase();
@@ -984,7 +985,7 @@ document.addEventListener("DOMContentLoaded", async function () {
       rawResult === "6-1-繳費後取消-已退費" ||
       rawResult === "6-2-繳費後取消-無退費"
     ) {
-      registrationStatusEl.textContent = "已取消";
+      opencallschedule.style.display = "none";
     } else if (rawResult === "4-是-條件式錄取") {
       conditionalyes.style.display = "inline-block";
       if (paymentChecked && declarationChecked) {
