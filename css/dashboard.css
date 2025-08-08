@@ -506,10 +506,9 @@ html::-webkit-scrollbar-thumb:hover {
   /* background-color: #ff6f4c; */
   font-family: "Inclusive Sans", sans-serif;
   display: block;
-  margin-top: 1rem;
   /* padding: 0.5px 2px; */
   position: absolute;
-  bottom: 1rem;
+  bottom: 0.8rem;
 }
 
 /* ===== 行動版 Mobile ===== */
