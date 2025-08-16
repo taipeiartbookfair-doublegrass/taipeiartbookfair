@@ -744,7 +744,7 @@ document.addEventListener("DOMContentLoaded", async function () {
         liveEventdesc.innerHTML =
           "Want to engage with visitors more directly? Propose on-site programs such as short talks, performances, or workshops!";
         liveEventScheduledesc.innerHTML =
-          "We will list here the on-site program sessions you have registered to provide. Details of your activities have been sent to your email. Please remember to check in at the designated area 15 minutes before your session.";
+          "Your registered on-site program sessions will be listed here. Details have been emailed to you. Please check in at the designated area 15 minutes before your session.";
       } else {
         liveEventLink.innerHTML = " 報名表單";
         liveEventdesc.innerHTML =
