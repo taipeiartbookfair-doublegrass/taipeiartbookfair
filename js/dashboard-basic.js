@@ -195,7 +195,6 @@ document.addEventListener("DOMContentLoaded", async function () {
   setSocialText("website", apiData["website"]);
   setSocialText("instagram", apiData["IG帳號"]);
   setSocialText("facebook", apiData["facebook"]);
-  setSocialText("baselocation", apiData["baselocation"]);
   setSocialText("yearlyanswer", apiData["當屆問答"]);
   setSocialText("electricity-answer", apiData["電力需求"]);
 
