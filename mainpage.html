@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>草率季 Taipei Art Book Fair</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&family=JetBrains+Mono:wght@100;200;300;400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <!-- 滾動指示器 -->
+    <div class="scroll-indicator">
+      <div class="scroll-progress" id="scrollProgress"></div>
+    </div>
+
+    <!-- 導航欄 -->
+    <nav class="navbar">
+      <div class="container">
+        <div class="nav-content">
+          <a id="site-name">HOME</a>
+          <ul class="nav-menu">
+            <li class="language-switcher">
+              <button id="language-toggle" class="language-btn">English</button>
+            </li>
+            <li><a href="#exhibitors" id="nav-exhibitors">EXHIBITORS</a></li>
+            <li><a href="#program" id="nav-program">CALENDER</a></li>
+            <li>
+              <a
+                href="https://nmhw.taipeiartbookfair.com/"
+                target="_blank"
+                id="nav-shop"
+                >SHOP</a
+              >
+            </li>
+            <li><a href="#about" id="nav-about">ABOUT</a></li>
+            <li><a href="#ASSESS" id="nav-assess">ASSESS</a></li>
+
+            <li class="ticket-button">
+              <a href="#ticket" id="nav-ticket">TICKET</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+    <div class="event-info">
+      <div class="event-info-content">
+        <div class="event-info-row">
+          <p>草率季 Taipei Art Book Fair 2025 - 無限柔軟 SOFT POW</p>
+        </div>
+        <div class="event-info-row">
+          <p>11/21 - 11/23</p>
+        </div>
+        <div class="event-info-row">
+          <p>華山1914文化創意產業園區 東二 ABCD棟 Huashan Creative Park</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- start of main-content -->
+    <div class="main-content">
+      <!-- start of exhibitors-roller-section -->
+      <section class="exhibitors-roller-section" id="Exhibitors-1">
+        <h3>EXHIBITORS</h3>
+        <div class="exhibitors-grid">
+          <div class="exhibitor-card">
+            <img src="images/exhibitor-1.jpg" alt="Exhibitor 1" />
+            <h3>Exhibitor 1</h3>
+          </div>
+        </div>
+      </section>
+      <!-- end of exhibitors-roller-section -->
+
+      <!-- start of poster-section -->
+      <section class="poster-section" id="Poster">
+        <img class="poster" src="25TPABF_poster_RGB.png" alt="Poster" />
+      </section>
+      <!-- end of poster-section -->
+
+      <!-- start of shop-section -->
+      <section class="multifunction-section" id="Multifunction">
+        <div>
+          <!-- 開始標籤 -->
+          <a href="#ticket" id="nav-ticket">TICKET</a>
+          <hr />
+          <h3>SHOP</h3>
+          <div class="product-title">product-title</div>
+          <img src="images/product-1.jpg" alt="Product 1" />
+          <button>CHECK MORE</button>
+        </div>
+        <!-- 結束標籤 -->
+      </section>
+      <!-- end of shop-section -->
+    </div>
+
+    <!-- end of main-content -->
+
+    <!-- 頁腳 -->
+    <footer class="footer">
+      <div class="footer-content">
+        <div class="footer-left">
+          <p class="footer-text">© 2025 TPABF</p>
+        </div>
+        <div class="footer-right">
+          <a href="#vacancy" class="footer-link">VACANCIES</a>
+          <a href="#contact" class="footer-link">CONTACT</a>
+          <a href="#contact" class="footer-link exhibitor-login"
+            >EXHIBITOR LOGIN</a
+          >
+        </div>
+      </div>
+    </footer>
+
+    <!-- 右下角浮動的 Newsletter Signup -->
+    <div class="newsletter-popup" id="newsletterPopup">
+      <div class="newsletter-header">
+        <h4>SIGN UP FOR THE NEWSLETTER</h4>
+        <button class="close-btn" id="closeNewsletter">×</button>
+      </div>
+      <div class="newsletter-content">
+        <form class="newsletter-form">
+          <input type="email" placeholder="Email@Email.com" required />
+          <button type="submit">JOIN</button>
+        </form>
+      </div>
+    </div>
+
+    <script>
+      // Newsletter 彈出視窗功能
+      const newsletterPopup = document.getElementById("newsletterPopup");
+      const closeNewsletter = document.getElementById("closeNewsletter");
+
+      // 語言切換器功能
+      const languageToggle = document.getElementById("language-toggle");
+      let currentLanguage = "zh"; // 預設中文
+
+      // 根據當前語言設置按鈕文字
+      function updateLanguageButton() {
+        if (currentLanguage === "zh") {
+          // 當前是中文，顯示 English 按鈕
+          languageToggle.textContent = "English";
+        } else {
+          // 當前是英文，顯示中文按鈕
+          languageToggle.textContent = "中文";
+        }
+      }
+
+      // 點擊切換按鈕
+      languageToggle.addEventListener("click", () => {
+        if (currentLanguage === "zh") {
+          currentLanguage = "en";
+          // 調用 duolanguage.js 的更新功能
+          if (typeof updateText === "function") {
+            updateText("en");
+          }
+          console.log("切換到英文");
+        } else {
+          currentLanguage = "zh";
+          // 調用 duolanguage.js 的更新功能
+          if (typeof updateText === "function") {
+            updateText("zh");
+          }
+          console.log("切換到中文");
+        }
+        updateLanguageButton();
+      });
+
+      // 監聽語言變化事件
+      window.addEventListener("languageChanged", function (event) {
+        currentLanguage = event.detail.language;
+        updateLanguageButton();
+      });
+
+      // 初始化按鈕文字
+      updateLanguageButton();
+
+      // 點擊關閉按鈕隱藏彈出視窗
+      closeNewsletter.addEventListener("click", () => {
+        newsletterPopup.classList.add("hidden");
+      });
+
+      // 處理表單提交
+      const newsletterForm = document.querySelector(".newsletter-form");
+      newsletterForm.addEventListener("submit", (e) => {
+        e.preventDefault();
+        const email = e.target.querySelector("input[type='email']").value;
+        if (email) {
+          alert("感謝您的訂閱！我們會定期發送最新活動資訊給您。");
+          e.target.reset();
+          newsletterPopup.classList.add("hidden");
+        }
+      });
+    </script>
+    <script src="calender.js"></script>
+    <script src="duolanguage.js"></script>
+  </body>
+</html>
