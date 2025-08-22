@@ -190,8 +190,7 @@ document.addEventListener("DOMContentLoaded", async function () {
   document.getElementById("live-event-schedule-reminder").textContent =
     apiData["活動場次資訊"] || "";
   document.getElementById("nationality").textContent = region || "";
-  document.getElementById("baselocation").textContent =
-    apiData["主要創作據點"] || "";
+  setSocialText("baselocation", apiData["主要創作據點"]);
   setSocialText("attendedYears", apiData["參與年份"]);
   setSocialText("website", apiData["website"]);
   setSocialText("instagram", apiData["IG帳號"]);
