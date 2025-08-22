@@ -7,15 +7,22 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&family=JetBrains+Mono:wght@100;200;300;400;500;600;700;800&display=swap"
+      href="https://fonts.googleapis.com/css2?family=BioRhyme+Expanded:wght@200;300;400;700;800&family=IBM+Plex+Mono:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100;1,200;1,300;1,400;1,500;1,600;1,700&family=IBM+Plex+Sans+JP&family=IBM+Plex+Sans:ital,wght@0,100..700;1,100..700&family=IBM+Plex+Serif:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100;1,200;1,300;1,400;1,500;1,600;1,700&family=Libre+Franklin:ital,wght@0,100..900;1,100..900&family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap"
       rel="stylesheet"
     />
     <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="css/exhibitors.css" />
   </head>
   <body>
-    <!-- 滾動指示器 -->
-    <div class="scroll-indicator">
-      <div class="scroll-progress" id="scrollProgress"></div>
+    <div class="event-info social-links">
+      <div class="event-info-content">
+        <div class="event-info-row"></div>
+        <div class="event-info-row"></div>
+        <div class="event-info-row">
+          <p style="color: ghostwhite">INSTAGRAM</p>
+          <p style="color: ghostwhite">FACEBOOK</p>
+        </div>
+      </div>
     </div>
 
     <!-- 導航欄 -->
@@ -39,9 +46,11 @@
             </li>
             <li><a href="#about" id="nav-about">ABOUT</a></li>
             <li><a href="#ASSESS" id="nav-assess">ASSESS</a></li>
-
-            <li class="ticket-button">
-              <a href="#ticket" id="nav-ticket">TICKET</a>
+            <li><a href="#ticket" id="nav-ticket">TICKETS</a></li>
+            <li>
+              <a href="#contact" class="footer-link exhibitor-login"
+                >EXHIBITOR LOGIN</a
+              >
             </li>
           </ul>
         </div>
@@ -68,17 +77,31 @@
       <section class="exhibitors-roller-section" id="Exhibitors-1">
         <h3>EXHIBITORS</h3>
         <div class="exhibitors-grid">
-          <div class="exhibitor-card">
-            <img src="images/exhibitor-1.jpg" alt="Exhibitor 1" />
-            <h3>Exhibitor 1</h3>
+          <div class="loading-message">
+            <p>Loading...</p>
           </div>
         </div>
+        <hr
+          style="border: none; border-bottom: 1px solid black; margin: 10px 0"
+        />
+        <div style="text-align: center">CHECK OUT THE FULL LIST</div>
+        <hr
+          style="border: none; border-bottom: 1px solid black; margin: 10px 0"
+        />
       </section>
       <!-- end of exhibitors-roller-section -->
 
       <!-- start of poster-section -->
       <section class="poster-section" id="Poster">
+        <div class="poster-credit-left">無限柔軟</div>
         <img class="poster" src="25TPABF_poster_RGB.png" alt="Poster" />
+        <div class="poster-credit-right">SOFT POW</div>
+        <div>
+          made by
+          <a href="https://www.instagram.com/sidandgeri/" target="_blank"
+            >Sid&Geri</a
+          >
+        </div>
       </section>
       <!-- end of poster-section -->
 
@@ -86,17 +109,196 @@
       <section class="multifunction-section" id="Multifunction">
         <div>
           <!-- 開始標籤 -->
-          <a href="#ticket" id="nav-ticket">TICKET</a>
-          <hr />
+          <div style="width: 100%; margin-bottom: 15px">
+            <a
+              style="
+                background: black;
+                color: ghostwhite;
+                font-weight: 400;
+                padding: 3px;
+                font-size: 1.8rem;
+                display: block;
+                text-decoration: none;
+                text-align: center;
+                transition: all 0.2s ease;
+                letter-spacing: 0.1rem;
+                cursor: pointer;
+              "
+              >TICKETS</a
+            >
+          </div>
+          <hr
+            style="border: none; border-bottom: 1px solid black; margin: 15px 0"
+          />
           <h3>SHOP</h3>
-          <div class="product-title">product-title</div>
-          <img src="images/product-1.jpg" alt="Product 1" />
-          <button>CHECK MORE</button>
+          <img
+            src="https://shoplineimg.com/67e660195ef93c003d3ac6d9/68526029ff7c14000f7167fa/800x.png?"
+            alt="Product 1"
+            class="product-image"
+          /><br />
+          <hr
+            style="border: none; border-bottom: 1px solid black; margin: 10px 0"
+          />
+          <div style="text-align: center">SEE MORE</div>
+          <hr
+            style="border: none; border-bottom: 1px solid black; margin: 10px 0"
+          />
+
+          <!-- 搜尋區塊 -->
+          <div style="width: 100%; margin: 15px 0">
+            <div
+              style="
+                border: 1px solid black;
+                background: ghostwhite;
+                padding: 3px;
+                font-size: 1.8rem;
+                display: block;
+                min-height: 2rem;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+              "
+            >
+              <input
+                type="text"
+                placeholder="SEARCH..."
+                style="
+                  border: none;
+                  background: transparent;
+                  width: 100%;
+                  text-align: left;
+                  font-size: 1.2rem;
+                  outline: none;
+                  font-family: inherit;
+                "
+              />
+            </div>
+            <hr
+              style="
+                border: none;
+                border-bottom: 1px solid black;
+                margin: 10px 0;
+              "
+            />
+            <div style="text-align: center">
+              <a
+                style="
+                  background: olivedrab;
+                  color: ghostwhite;
+                  font-weight: 800;
+                  padding: 15px;
+                  font-size: 1.8rem;
+                  display: block;
+                  text-decoration: none;
+                  text-align: center;
+                  transition: all 0.2s ease;
+                  cursor: pointer;
+                  line-height: 1.8rem;
+                "
+                >FOLLOW UPDATES</a
+              >
+            </div>
+          </div>
         </div>
         <!-- 結束標籤 -->
       </section>
       <!-- end of shop-section -->
     </div>
+
+    <hr
+      style="
+        border: none;
+        border-bottom: 1px solid black;
+        margin: 20px 16px 20px 16px;
+      "
+    />
+
+    <div class="second-content">
+      <section class="workshop-section">
+        <h3>WORKSHOPS</h3>
+
+        <!-- 工作坊項目 1 -->
+        <div class="workshop-item">
+          <h4>BOOK BINDING MASTERCLASS</h4>
+          <p class="workshop-description">
+            Learn traditional Japanese bookbinding techniques with master
+            craftsman
+          </p>
+          <div class="workshop-time">March 15, 2025 | 14:00-17:00</div>
+          <div class="workshop-location">Workshop Room A</div>
+        </div>
+
+        <hr
+          style="border: none; border-bottom: 1px solid black; margin: 15px 0"
+        />
+
+        <!-- 工作坊項目 2 -->
+        <div class="workshop-item">
+          <h4>DIGITAL PRINTING TECHNIQUES</h4>
+          <p class="workshop-description">
+            Explore modern digital printing methods for artists and designers
+          </p>
+          <div class="workshop-time">March 16, 2025 | 10:00-13:00</div>
+          <div class="workshop-location">Digital Lab</div>
+        </div>
+
+        <hr
+          style="border: none; border-bottom: 1px solid black; margin: 15px 0"
+        />
+
+        <!-- 工作坊項目 3 -->
+        <div class="workshop-item">
+          <h4>ZINE MAKING WORKSHOP</h4>
+          <p class="workshop-description">
+            Create your own zine from concept to final publication
+          </p>
+          <div class="workshop-time">March 17, 2025 | 15:00-18:00</div>
+          <div class="workshop-location">Creative Studio</div>
+        </div>
+      </section>
+      <section class="calender-section">
+        <h3>CALENDER</h3>
+        <p style="font-size: 0.8rem; color: green; text-align: right">
+          Suscribe to TPABF's calender
+        </p>
+
+        <!-- 日曆內容區域 -->
+        <div class="calender-content">
+          <div id="eventsTimeline" class="events-timeline">
+            <!-- 日曆事件將由 calender.js 動態生成 -->
+          </div>
+          <div style="text-align: center">SEE MORE</div>
+        </div>
+      </section>
+    </div>
+
+    <hr
+      style="border: none; border-bottom: 1px solid black; margin: 15px 16px"
+    />
+    <section class="newsletter-section">
+      <div class="newsletter-container">
+        <div class="newsletter-left">
+          <h3>NEWSLETTERS</h3>
+        </div>
+        <div class="newsletter-right">
+          <p class="newsletter-description">
+            Sign up to receive news and updates about our events, new books and
+            processes.
+          </p>
+          <div class="newsletter-signup-form">
+            <input
+              type="email"
+              placeholder="Enter your email"
+              class="newsletter-input"
+            />
+            <button type="submit" class="newsletter-submit-btn">SIGN UP</button>
+          </div>
+        </div>
+      </div>
+    </section>
+    <hr
+      style="border: none; border-bottom: 1px solid black; margin: 15px 16px"
+    />
 
     <!-- end of main-content -->
 
@@ -109,9 +311,6 @@
         <div class="footer-right">
           <a href="#vacancy" class="footer-link">VACANCIES</a>
           <a href="#contact" class="footer-link">CONTACT</a>
-          <a href="#contact" class="footer-link exhibitor-login"
-            >EXHIBITOR LOGIN</a
-          >
         </div>
       </div>
     </footer>
@@ -198,5 +397,6 @@
     </script>
     <script src="calender.js"></script>
     <script src="duolanguage.js"></script>
+    <script src="js/exhibitors-list.js"></script>
   </body>
 </html>
