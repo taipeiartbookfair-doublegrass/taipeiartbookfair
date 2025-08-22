@@ -38,13 +38,13 @@ body {
 }
 
 /* 為可點擊元素設定不同的游標 */
-a,
+/* a,
 button,
 .workshop-register-btn,
 .view-all-workshops-btn,
 .language-btn {
   cursor: url("image/Face-Chair.png") 16 16, pointer;
-}
+} */
 
 /* 為輸入框設定文字游標 */
 input,
