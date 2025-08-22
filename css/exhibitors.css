@@ -1,0 +1,287 @@
+.exhibitors-grid {
+  width: 100%;
+  height: 450px; /* 精確計算：15個攤商 × 30px = 450px，與海報區域等高 */
+  overflow: hidden;
+  position: relative;
+}
+
+/* 攤商流動容器 */
+.exhibitors-flow-container {
+  width: 100%;
+  animation: exhibitorsFlow 45s linear infinite; /* 調整動畫時間，讓滑動更流暢 */
+}
+
+/* 攤商流動動畫 */
+@keyframes exhibitorsFlow {
+  0% {
+    transform: translateY(0);
+  }
+  100% {
+    transform: translateY(-100%);
+  }
+}
+
+/* 攤商列表容器 */
+.exhibitors-flow-container {
+  width: 100%;
+}
+
+/* 攤商條列項目 */
+.exhibitor-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 30px;
+  width: 100%;
+  padding: 0 1rem;
+  margin: 0;
+  border-bottom: 1px solid black;
+  font-size: 0.9rem;
+  font-weight: 400;
+  transition: background-color 0.2s ease;
+  position: relative;
+}
+
+/* 攤位類型指示點 */
+.exhibitor-item::before {
+  content: "";
+  position: absolute;
+  left: 0.5rem;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background-color: #666; /* 預設顏色 */
+}
+
+/* 攤商名稱左邊間距 */
+.exhibitor-name {
+  margin-left: 3px;
+}
+
+/* 不同攤位類型的顏色 */
+.exhibitor-item.book-booth::before {
+  background-color: #392100; /* 藍色 - 書攤 */
+}
+
+.exhibitor-item.creative-booth::before {
+  background-color: #083154; /* 紅色 - 創作商品攤 */
+}
+
+.exhibitor-item.installation-booth::before {
+  background-color: #000000; /* 橙色 - 裝置攤 */
+}
+
+.exhibitor-item.food-booth::before {
+  background-color: #063500; /* 綠色 - 食物酒水攤 */
+}
+
+.exhibitor-item.international-booth::before {
+  background-color: #50006f; /* 紫色 - 國際攤位 */
+}
+
+.exhibitor-item:hover {
+  background-color: #f8f9fa;
+}
+
+.exhibitor-item:last-child {
+  border-bottom: none;
+}
+
+/* 讀取中訊息 */
+.loading-message {
+  text-align: center;
+  padding: 2rem;
+  color: black;
+}
+
+.loading-message p {
+  margin: 0.5rem 0;
+  font-size: 1rem;
+}
+
+/* 攤商名稱（左側） */
+.exhibitor-name {
+  flex: 1;
+  text-align: left;
+  color: #333;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* 攤位編號（右側） */
+.exhibitor-booth {
+  text-align: right;
+  color: black;
+  margin-left: 1rem;
+  min-width: 60px;
+}
+
+/* 響應式設計 */
+@media (max-width: 768px) {
+  .exhibitors-grid {
+    max-width: 100%;
+    padding: 0 0.5rem;
+  }
+
+  .exhibitor-item {
+    padding: 0 0.5rem;
+    font-size: 0.8rem;
+  }
+
+  .exhibitor-booth {
+    min-width: 50px;
+  }
+}
+
+.calender-content {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 2rem;
+}
+
+/* 事件時間軸樣式 - 條列式佈局 */
+.events-timeline {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  padding: 2rem 0;
+}
+
+.timeline-day {
+  font-size: 1rem;
+  font-weight: 600;
+  color: #000;
+  margin-bottom: 0.5rem;
+  padding: 0.2rem 0;
+  text-transform: uppercase;
+  letter-spacing: 0.1rem;
+  border-bottom: 1px solid #000;
+}
+
+.timeline-item {
+  border-bottom: 1px solid #000;
+  padding: 1rem 0;
+  position: relative;
+  display: flex;
+  flex-direction: row;
+  gap: 2rem;
+  align-items: flex-start;
+}
+
+.poster-credit-left {
+  font-family: "IBM Sans JP", sans-serif;
+  writing-mode: sideways-lr;
+  text-orientation: mixed;
+  font-size: 1rem;
+  color: black;
+  position: absolute;
+  left: 0px; /* 放在海報區左邊*/
+  top: 50%; /* 垂直置中 */
+  transform: translateY(-50%); /* 精確置中 */
+  line-height: 1;
+  z-index: 10;
+  white-space: nowrap; /* 防止文字換行 */
+}
+.poster-credit-right {
+  font-family: "IBM Plex Mono", monospace;
+  writing-mode: sideways-rl;
+  text-orientation: mixed;
+  font-size: 1rem;
+  color: black;
+  position: absolute;
+  right: 0px; /* 放在海報區左邊*/
+  top: 50%; /* 垂直置中 */
+  transform: translateY(-50%); /* 精確置中 */
+  line-height: 1;
+  z-index: 10;
+  white-space: nowrap; /* 防止文字換行 */
+}
+
+.timeline-time {
+  font-family: "IBM Plex Mono", monospace;
+  min-width: 80px;
+  color: #000;
+  font-size: 0.8rem;
+  padding-top: 0.2rem;
+  text-align: left;
+  align-self: flex-start;
+}
+
+.timeline-content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.timeline-main {
+  flex: 1;
+}
+
+.event-title {
+  font-family: "IBM Plex Sans", sans-serif;
+  font-size: 2rem;
+  color: #000;
+  margin-bottom: 0.5rem;
+  line-height: 1.2;
+  text-transform: uppercase;
+  letter-spacing: 0.1rem;
+}
+
+.event-meta {
+  font-size: 0.9rem;
+  color: #000;
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.event-location {
+  color: #000;
+  font-weight: 600;
+}
+
+.event-thumb {
+  flex-shrink: 0;
+  width: 150px;
+}
+
+.event-thumb img {
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+}
+
+/* 響應式設計 */
+@media (max-width: 768px) {
+  .calender-content {
+    padding: 0 1rem;
+  }
+
+  .timeline-item {
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .timeline-time {
+    min-width: auto;
+    text-align: left;
+  }
+
+  .timeline-content {
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .event-thumb {
+    width: 100%;
+    max-width: 200px;
+  }
+
+  .event-thumb img {
+    width: 100%;
+  }
+}
