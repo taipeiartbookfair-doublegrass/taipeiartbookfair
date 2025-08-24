@@ -33,7 +33,6 @@ body {
   line-height: 1.4;
   overflow-x: hidden;
   font-size: 12px;
-  min-height: 100vh;
   cursor: url("image/eye.png") 12 12, auto;
 }
 
@@ -142,20 +141,19 @@ p {
 
 /* 主要內容區域 - 確保在導航欄下方 */
 .main-content {
-  margin-top: 110px; /* Instagram/Facebook行(16px) + 導航欄(50px) + 第二個event-info(20px) + 間距(24px) */
-
+  margin-top: 85px; /* Instagram/Facebook行(16px) + 導航欄(50px) + 第二個event-info(20px) + 間距(24px) */
   position: relative;
   z-index: 1;
   display: flex; /* 讓三個section並排 */
   align-items: flex-start; /* 從頂部對齊 */
-  gap: 40px; /* 三個section之間的間隔 */
+  gap: 16px; /* 三個section之間的間隔調整為16px */
 }
 .second-content {
   position: relative;
   z-index: 1;
   display: flex; /* 讓三個section並排 */
   align-items: flex-start; /* 從頂部對齊 */
-  gap: 40px; /* 三個section之間的間隔 */
+  gap: 16px; /* 三個section之間的間隔調整為16px */
 }
 
 /* Event Info 區塊 */
@@ -321,30 +319,52 @@ p {
 
 /* Multifunction Section */
 .multifunction-section {
+  border-left: 1px solid black;
+  padding: 16px;
   width: 15vw; /* 減少寬度 */
   position: relative;
-  margin-right: 16px;
 }
 
-/* 垂直分隔線 */
-.calender-section ::before {
-  content: "";
+/* 垂直分隔線 - 統一樣式 */
+.section-divider {
   position: absolute;
-  left: -20px; /* 調整位置，讓分隔線在間隔中間 */
-  top: 0px;
-  bottom: 0px;
+  top: 0;
+  bottom: 0;
   width: 1px;
+  background: var(--border);
+  z-index: 1;
+  pointer-events: none; /* 防止分隔線干擾互動 */
+}
+
+.section-divider.left {
+  left: -20px;
+}
+
+.section-divider.right {
+  right: -20px;
+}
+
+/* 為不同區域設定分隔線顏色（可選） */
+.poster-section .section-divider {
   background: var(--border);
 }
 
-.calender-section ::after {
-  content: "";
-  position: absolute;
-  right: -20px; /* 調整位置，讓分隔線在間隔中間 */
-  top: 0px;
-  bottom: 0px;
-  width: 1px;
+.calender-section .section-divider {
   background: var(--border);
+}
+
+.multifunction-section .section-divider {
+  background: var(--border);
+}
+
+/* 移除舊的偽元素分隔線 */
+.calender-section::before,
+.calender-section::after,
+.poster-section::before,
+.poster-section::after,
+.multifunction-section::before,
+.multifunction-section::after {
+  display: none;
 }
 
 .product-image {
@@ -366,6 +386,11 @@ p {
   .workshop-section {
     width: 100%;
     margin-bottom: 20px;
+  }
+
+  /* 在小螢幕上隱藏所有分隔線 */
+  .section-divider {
+    display: none;
   }
 
   .exhibitors-roller-section::after,
@@ -467,15 +492,29 @@ p {
 }
 
 .calender-section {
-  width: 55vw; /* 增加寬度，讓中間區塊大一倍 */
+  width: 50vw; /* 調整寬度，與海報區段保持一致的間距 */
   position: relative;
+  padding: 16px 0px;
 }
 
 /* Poster Section */
 .poster-section {
   width: 35vw; /* 增加寬度，讓中間區塊大一倍 */
   position: relative;
-  margin-left: 16px;
+  padding: 16px;
+  background: linear-gradient(
+    90deg,
+    rgba(0, 0, 0, 1) 0%,
+    rgba(255, 255, 255, 1) 7%,
+    rgba(222, 222, 222, 1) 18%,
+    rgba(255, 255, 255, 1) 21%,
+    rgba(255, 255, 255, 1) 46%,
+    rgba(227, 227, 227, 1) 53%,
+    rgba(237, 235, 235, 1) 79%,
+    rgba(255, 255, 255, 1) 82%,
+    rgba(174, 174, 174, 1) 97%,
+    rgba(0, 0, 0, 1) 100%
+  );
 }
 
 #Poster {
@@ -634,7 +673,6 @@ p {
   text-align: center;
   border-top: 1px solid var(--border);
   background: var(--secondary);
-  margin-top: 50px;
   clear: both;
   width: 100%;
 }
@@ -1044,5 +1082,54 @@ p {
     box-shadow: 0 12px 40px rgba(221, 160, 221, 0.4),
       0 6px 20px rgba(221, 160, 221, 0.3),
       inset 0 2px 4px rgba(255, 255, 255, 0.2);
+  }
+}
+
+/* Event Photos Section Styles */
+
+.event-photos-section h3 {
+  font-size: 2rem;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.event-photos-container {
+  width: 100%;
+  overflow: hidden;
+  border: 1px solid black;
+  background: white;
+  margin-bottom: 20px;
+}
+
+.event-photos-strip {
+  display: flex;
+  flex-shrink: 0;
+  white-space: nowrap;
+  animation: slideEventPhotos 60s linear infinite;
+  will-change: transform;
+  width: max-content;
+  height: 240px; /* 固定高度 */
+}
+
+.event-photos-strip img {
+  height: 100%;
+  width: auto;
+  object-fit: cover;
+  flex-shrink: 0;
+  display: block;
+  max-width: none;
+  border-right: 1px solid #eee;
+}
+
+.event-photos-strip:hover {
+  animation-play-state: paused;
+}
+
+@keyframes slideEventPhotos {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
   }
 }

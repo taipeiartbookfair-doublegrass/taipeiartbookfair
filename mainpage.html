@@ -75,27 +75,131 @@
       <!-- start of poster-section -->
       <section class="poster-section" id="Poster">
         <img class="poster" src="25TPABF_poster_RGB.png" alt="Poster" />
-        <div>
-          made by
-          <a href="https://www.instagram.com/sidandgeri/" target="_blank"
-            >Sid&Geri</a
+        <div
+          style="
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+          "
+        >
+          <span
+            style="
+              font-family: 'IBM Plex Sans', sans-serif;
+              font-size: 1.5rem;
+              text-align: left;
+            "
           >
+            ←
+          </span>
+          <span
+            style="font-family: 'IBM Plex Mono', monospace; text-align: center"
+            >2025</span
+          >
+          <span
+            style="
+              font-family: 'IBM Plex Sans', sans-serif;
+              font-size: 1.5rem;
+              text-align: right;
+            "
+          >
+            →
+          </span>
+        </div>
+        <div
+          style="
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+          "
+        >
+          <span
+            style="font-family: 'IBM Plex Mono', monospace; text-align: left"
+          >
+            無限柔軟
+          </span>
+          <span
+            style="font-family: 'IBM Plex Mono', monospace; text-align: center"
+          >
+            <a href="https://www.instagram.com/sidandgeri/" target="_blank"
+              >Sid&Geri</a
+            ></span
+          >
+
+          <span
+            style="font-family: 'IBM Plex Mono', monospace; text-align: right"
+          >
+            SOFT POW
+          </span>
         </div>
       </section>
       <!-- end of poster-section -->
 
-      <section class="calender-section">
+      <section class="calender-section" id="calender">
         <h3>CALENDER</h3>
-        <p style="font-size: 0.8rem; color: green; text-align: right">
-          Suscribe to TPABF's calender
-        </p>
+
+        <!-- 頂部控制區域：箭頭按鈕和訂閱文字 -->
+        <div class="calender-header">
+          <!-- 滑動導航按鈕 -->
+          <div class="calender-nav-group">
+            <button class="calender-nav-btn prev" id="prevBtn">←</button>
+            <button class="calender-nav-btn next" id="nextBtn">→</button>
+          </div>
+
+          <!-- 模式切換按鈕 -->
+          <div class="calender-mode-switch">
+            <button class="mode-btn active" data-mode="card" id="cardMode">
+              ＋＋
+            </button>
+            <button class="mode-btn" data-mode="timeline" id="timelineMode">
+              ｜｜
+            </button>
+          </div>
+
+          <p class="calender-subscribe">Suscribe to TPABF's calender</p>
+        </div>
 
         <!-- 日曆內容區域 -->
         <div class="calender-content">
-          <div id="eventsTimeline" class="events-timeline">
-            <!-- 日曆事件將由 calender.js 動態生成 -->
+          <!-- 卡片模式容器 -->
+          <div class="calender-mode-container card-mode" id="cardModeContainer">
+            <!-- 日曆滑動容器 -->
+            <div class="calender-scroll-container" id="calenderScroll">
+              <div id="eventsTimeline" class="events-timeline">
+                <!-- 日曆事件將由 calender.js 動態生成 -->
+              </div>
+            </div>
           </div>
-          <div style="text-align: center">SEE MORE</div>
+
+          <!-- 時間軸模式容器 -->
+          <div
+            class="calender-mode-container timeline-mode hidden"
+            id="timelineModeContainer"
+          >
+            <div class="timeline-scroll-container" id="timelineScroll">
+              <div class="timeline-calendar" id="timelineCalendar">
+                <!-- 時間軸日曆將由 JavaScript 動態生成 -->
+              </div>
+            </div>
+          </div>
+
+          <hr
+            style="border: none; border-bottom: 1px solid black; margin: 10px 0"
+          />
+          <div style="text-align: center">CHECK THE FULL CALENDER</div>
+          <hr
+            style="border: none; border-bottom: 1px solid black; margin: 10px 0"
+          />
+        </div>
+
+        <!-- Event Photos Section -->
+        <div class="event-photos-section">
+          <div class="event-photos-container">
+            <div class="event-photos-strip" id="eventPhotosStrip">
+              <!-- 圖片將由 JavaScript 動態添加 -->
+            </div>
+          </div>
         </div>
       </section>
 
@@ -118,34 +222,45 @@
             style="border: none; border-bottom: 1px solid black; margin: 10px 0"
           />
 
-          <!-- 搜尋區塊 -->
+          <!-- Newsletter Subscribe 區塊 -->
           <div style="width: 100%; margin: 15px 0">
-            <div
-              style="
-                border: 1px solid black;
-                background: ghostwhite;
-                padding: 3px;
-                font-size: 1.8rem;
-                display: block;
-                min-height: 2rem;
-                display: flex;
-                align-items: center;
-                justify-content: center;
-              "
-            >
-              <input
-                type="text"
-                placeholder="SEARCH..."
-                style="
-                  border: none;
-                  background: transparent;
-                  width: 100%;
-                  text-align: left;
-                  font-size: 1.2rem;
-                  outline: none;
-                  font-family: inherit;
-                "
-              />
+            <div style="text-align: center; margin-bottom: 15px">
+              <h3>NEWS</h4>
+              <p style="margin: 10px 0; font-size: 0.9rem; color: #666">
+                Sign up to receive news and updates about our events, new books
+                and processes.
+              </p>
+                             <div style="text-align: center;">
+                 <input
+                   type="email"
+                   placeholder="Enter your email"
+                   style="
+                     border: 1px solid black;
+                     background: ghostwhite;
+                     padding: 8px;
+                     font-size: 1rem;
+                     width: 100%;
+                     outline: none;
+                     font-family: inherit;
+                     margin-bottom: 10px;
+                   "
+                 />
+                 <button
+                   type="submit"
+                   style="
+                     background: black;
+                     color: ghostwhite;
+                     padding: 5px 5px;
+                     font-size: 1rem;
+                     border: none;
+                     cursor: pointer;
+                     transition: all 0.2s ease;
+                     width: 100%;
+                   "
+                 >
+                   SIGN UP
+                 </button>
+               </div>
             </div>
             <hr
               style="
@@ -178,34 +293,6 @@
       </section>
       <!-- end of shop-section -->
     </div>
-
-    <hr
-      style="border: none; border-bottom: 1px solid black; margin: 15px 16px"
-    />
-    <section class="newsletter-section">
-      <div class="newsletter-container">
-        <div class="newsletter-left">
-          <h3>NEWSLETTERS</h3>
-        </div>
-        <div class="newsletter-right">
-          <p class="newsletter-description">
-            Sign up to receive news and updates about our events, new books and
-            processes.
-          </p>
-          <div class="newsletter-signup-form">
-            <input
-              type="email"
-              placeholder="Enter your email"
-              class="newsletter-input"
-            />
-            <button type="submit" class="newsletter-submit-btn">SIGN UP</button>
-          </div>
-        </div>
-      </div>
-    </section>
-    <hr
-      style="border: none; border-bottom: 1px solid black; margin: 15px 16px"
-    />
 
     <!-- end of main-content -->
 
@@ -352,5 +439,6 @@
     <script src="calender.js"></script>
     <script src="duolanguage.js"></script>
     <script src="js/exhibitors-list.js"></script>
+    <script src="js/event-photos.js"></script>
   </body>
 </html>
