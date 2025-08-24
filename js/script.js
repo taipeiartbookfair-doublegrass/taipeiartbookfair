@@ -102,9 +102,38 @@ function createRotator() {
   }
 }
 
+function createEventPhotos() {
+  const eventPhotosStrip = document.getElementById("eventPhotosStrip");
+  const imagesPerStrip = 8; // 一次顯示8張圖片
+
+  // 使用 horizontal 圖片作為 event photos
+  const horizontalImages = Array.from(
+    { length: 59 },
+    (_, i) => `hori${i + 1}.jpg`
+  );
+
+  // 預先打亂圖片順序
+  const shuffledImages = shuffle(horizontalImages);
+
+  // 取出前8張圖片
+  const selectedImages = shuffledImages.slice(0, imagesPerStrip);
+
+  // 加到 event-photos-strip
+  for (const src of selectedImages) {
+    const img = document.createElement("img");
+    img.src = `image/horizental/${src}`;
+    img.alt = "Event Photo";
+    eventPhotosStrip.appendChild(img);
+  }
+
+  // 複製圖片做循環效果
+  eventPhotosStrip.innerHTML += eventPhotosStrip.innerHTML;
+}
+
 // Add event listener to trigger the creation after the DOM is loaded
 document.addEventListener("DOMContentLoaded", () => {
   createRotator();
+  createEventPhotos();
 
   // Adjust timing for smoother transitions
   const rotataDivs = document.querySelectorAll(".poster-rotator");

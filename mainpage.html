@@ -36,17 +36,16 @@
             </li>
             <li><a href="#exhibitors" id="nav-exhibitors">EXHIBITORS</a></li>
             <li><a href="#program" id="nav-program">CALENDER</a></li>
+            <li><a href="#vacancy" id="nav-vacancy">VACANCIES</a></li>
             <li>
               <a
                 href="https://nmhw.taipeiartbookfair.com/"
                 target="_blank"
                 id="nav-shop"
-                >SHOP</a
+                >NMHW</a
               >
             </li>
             <li><a href="#about" id="nav-about">ABOUT</a></li>
-            <li><a href="#ASSESS" id="nav-assess">ASSESS</a></li>
-            <li><a href="#ticket" id="nav-ticket">TICKETS</a></li>
             <li>
               <a href="#contact" class="footer-link exhibitor-login"
                 >EXHIBITOR LOGIN</a
@@ -73,69 +72,151 @@
 
     <!-- start of main-content -->
     <div class="main-content">
-      <!-- start of exhibitors-roller-section -->
-      <section class="exhibitors-roller-section" id="Exhibitors-1">
-        <h3>EXHIBITORS</h3>
-        <div class="exhibitors-grid">
-          <div class="loading-message">
-            <p>Loading...</p>
-          </div>
-        </div>
-        <hr
-          style="border: none; border-bottom: 1px solid black; margin: 10px 0"
-        />
-        <div style="text-align: center">CHECK OUT THE FULL LIST</div>
-        <hr
-          style="border: none; border-bottom: 1px solid black; margin: 10px 0"
-        />
-      </section>
-      <!-- end of exhibitors-roller-section -->
-
       <!-- start of poster-section -->
       <section class="poster-section" id="Poster">
-        <div class="poster-credit-left">無限柔軟</div>
         <img class="poster" src="25TPABF_poster_RGB.png" alt="Poster" />
-        <div class="poster-credit-right">SOFT POW</div>
-        <div>
-          made by
-          <a href="https://www.instagram.com/sidandgeri/" target="_blank"
-            >Sid&Geri</a
+        <div
+          style="
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+          "
+        >
+          <span
+            style="
+              font-family: 'IBM Plex Sans', sans-serif;
+              font-size: 1.5rem;
+              text-align: left;
+            "
           >
+            ←
+          </span>
+          <span
+            style="font-family: 'IBM Plex Mono', monospace; text-align: center"
+            >2025</span
+          >
+          <span
+            style="
+              font-family: 'IBM Plex Sans', sans-serif;
+              font-size: 1.5rem;
+              text-align: right;
+            "
+          >
+            →
+          </span>
+        </div>
+        <div
+          style="
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+          "
+        >
+          <span
+            style="font-family: 'IBM Plex Mono', monospace; text-align: left"
+          >
+            無限柔軟
+          </span>
+          <span
+            style="font-family: 'IBM Plex Mono', monospace; text-align: center"
+          >
+            <a href="https://www.instagram.com/sidandgeri/" target="_blank"
+              >Sid&Geri</a
+            ></span
+          >
+
+          <span
+            style="font-family: 'IBM Plex Mono', monospace; text-align: right"
+          >
+            SOFT POW
+          </span>
         </div>
       </section>
       <!-- end of poster-section -->
+
+      <section class="calender-section" id="calender">
+        <h3>CALENDER</h3>
+
+        <!-- 頂部控制區域：箭頭按鈕和訂閱文字 -->
+        <div class="calender-header">
+          <!-- 模式切換按鈕 -->
+          <div class="calender-mode-switch">
+            <button class="mode-btn active" data-mode="card" id="cardMode">
+              ＋＋
+            </button>
+            <button class="mode-btn" data-mode="timeline" id="timelineMode">
+              ｜｜
+            </button>
+          </div>
+
+          <p class="calender-subscribe">Suscribe to TPABF's calender</p>
+          
+          <!-- 左左右右 -->
+          <div class="calender-nav-group">
+            <button class="calender-nav-btn prev" id="prevBtn">←</button>
+            <button class="calender-nav-btn next" id="nextBtn">→</button>
+          </div>
+
+         
+        </div>
+
+        <!-- 日曆內容區域 -->
+        <div class="calender-content">
+          <!-- 卡片模式容器 -->
+          <div class="calender-mode-container card-mode" id="cardModeContainer">
+            <!-- 日曆滑動容器 -->
+            <div class="calender-scroll-container" id="calenderScroll">
+              <div id="eventsTimeline" class="events-timeline">
+                <!-- 日曆事件將由 calender.js 動態生成 -->
+              </div>
+            </div>
+          </div>
+
+          <!-- 時間軸模式容器 -->
+          <div
+            class="calender-mode-container timeline-mode hidden"
+            id="timelineModeContainer"
+          >
+            <div class="timeline-scroll-container" id="timelineScroll">
+              <div class="timeline-calendar" id="timelineCalendar">
+                <!-- 時間軸日曆將由 JavaScript 動態生成 -->
+              </div>
+            </div>
+          </div>
+
+          <hr
+            style="border: none; border-bottom: 1px solid black; margin: 10px 0"
+          />
+          <div style="text-align: center">CHECK THE FULL CALENDER</div>
+          <hr
+            style="border: none; border-bottom: 1px solid black; margin: 10px 0"
+          />
+        </div>
+
+        <!-- Event Photos Section -->
+        <div class="event-photos-section">
+          <div class="event-photos-container">
+            <div class="event-photos-strip" id="eventPhotosStrip">
+              <!-- 圖片將由 JavaScript 動態添加 -->
+            </div>
+          </div>
+        </div>
+      </section>
 
       <!-- start of shop-section -->
       <section class="multifunction-section" id="Multifunction">
         <div>
           <!-- 開始標籤 -->
-          <div style="width: 100%; margin-bottom: 15px">
-            <a
-              style="
-                background: black;
-                color: ghostwhite;
-                font-weight: 400;
-                padding: 3px;
-                font-size: 1.8rem;
-                display: block;
-                text-decoration: none;
-                text-align: center;
-                transition: all 0.2s ease;
-                letter-spacing: 0.1rem;
-                cursor: pointer;
-              "
-              >TICKETS</a
-            >
-          </div>
-          <hr
-            style="border: none; border-bottom: 1px solid black; margin: 15px 0"
-          />
-          <h3>SHOP</h3>
+
+          <h3>ZINE WALL</h3>
           <img
             src="https://shoplineimg.com/67e660195ef93c003d3ac6d9/68526029ff7c14000f7167fa/800x.png?"
             alt="Product 1"
             class="product-image"
-          /><br />
+          />
+          <br />
           <hr
             style="border: none; border-bottom: 1px solid black; margin: 10px 0"
           />
@@ -144,34 +225,45 @@
             style="border: none; border-bottom: 1px solid black; margin: 10px 0"
           />
 
-          <!-- 搜尋區塊 -->
+          <!-- Newsletter Subscribe 區塊 -->
           <div style="width: 100%; margin: 15px 0">
-            <div
-              style="
-                border: 1px solid black;
-                background: ghostwhite;
-                padding: 3px;
-                font-size: 1.8rem;
-                display: block;
-                min-height: 2rem;
-                display: flex;
-                align-items: center;
-                justify-content: center;
-              "
-            >
-              <input
-                type="text"
-                placeholder="SEARCH..."
-                style="
-                  border: none;
-                  background: transparent;
-                  width: 100%;
-                  text-align: left;
-                  font-size: 1.2rem;
-                  outline: none;
-                  font-family: inherit;
-                "
-              />
+            <div style="text-align: center; margin-bottom: 15px">
+              <h3>NEWS</h4>
+              <p style="margin: 10px 0; font-size: 0.9rem; color: #666">
+                Sign up to receive news and updates about our events, new books
+                and processes.
+              </p>
+                             <div style="text-align: center;">
+                 <input
+                   type="email"
+                   placeholder="Enter your email"
+                   style="
+                     border: 1px solid black;
+                     background: ghostwhite;
+                     padding: 8px;
+                     font-size: 1rem;
+                     width: 100%;
+                     outline: none;
+                     font-family: inherit;
+                     margin-bottom: 10px;
+                   "
+                 />
+                 <button
+                   type="submit"
+                   style="
+                     background: black;
+                     color: ghostwhite;
+                     padding: 5px 5px;
+                     font-size: 1rem;
+                     border: none;
+                     cursor: pointer;
+                     transition: all 0.2s ease;
+                     width: 100%;
+                   "
+                 >
+                   SIGN UP
+                 </button>
+               </div>
             </div>
             <hr
               style="
@@ -205,102 +297,14 @@
       <!-- end of shop-section -->
     </div>
 
-    <hr
-      style="
-        border: none;
-        border-bottom: 1px solid black;
-        margin: 20px 16px 20px 16px;
-      "
-    />
-
-    <div class="second-content">
-      <section class="workshop-section">
-        <h3>WORKSHOPS</h3>
-
-        <!-- 工作坊項目 1 -->
-        <div class="workshop-item">
-          <h4>BOOK BINDING MASTERCLASS</h4>
-          <p class="workshop-description">
-            Learn traditional Japanese bookbinding techniques with master
-            craftsman
-          </p>
-          <div class="workshop-time">March 15, 2025 | 14:00-17:00</div>
-          <div class="workshop-location">Workshop Room A</div>
-        </div>
-
-        <hr
-          style="border: none; border-bottom: 1px solid black; margin: 15px 0"
-        />
-
-        <!-- 工作坊項目 2 -->
-        <div class="workshop-item">
-          <h4>DIGITAL PRINTING TECHNIQUES</h4>
-          <p class="workshop-description">
-            Explore modern digital printing methods for artists and designers
-          </p>
-          <div class="workshop-time">March 16, 2025 | 10:00-13:00</div>
-          <div class="workshop-location">Digital Lab</div>
-        </div>
-
-        <hr
-          style="border: none; border-bottom: 1px solid black; margin: 15px 0"
-        />
-
-        <!-- 工作坊項目 3 -->
-        <div class="workshop-item">
-          <h4>ZINE MAKING WORKSHOP</h4>
-          <p class="workshop-description">
-            Create your own zine from concept to final publication
-          </p>
-          <div class="workshop-time">March 17, 2025 | 15:00-18:00</div>
-          <div class="workshop-location">Creative Studio</div>
-        </div>
-      </section>
-      <section class="calender-section">
-        <h3>CALENDER</h3>
-        <p style="font-size: 0.8rem; color: green; text-align: right">
-          Suscribe to TPABF's calender
-        </p>
-
-        <!-- 日曆內容區域 -->
-        <div class="calender-content">
-          <div id="eventsTimeline" class="events-timeline">
-            <!-- 日曆事件將由 calender.js 動態生成 -->
-          </div>
-          <div style="text-align: center">SEE MORE</div>
-        </div>
-      </section>
-    </div>
-
-    <hr
-      style="border: none; border-bottom: 1px solid black; margin: 15px 16px"
-    />
-    <section class="newsletter-section">
-      <div class="newsletter-container">
-        <div class="newsletter-left">
-          <h3>NEWSLETTERS</h3>
-        </div>
-        <div class="newsletter-right">
-          <p class="newsletter-description">
-            Sign up to receive news and updates about our events, new books and
-            processes.
-          </p>
-          <div class="newsletter-signup-form">
-            <input
-              type="email"
-              placeholder="Enter your email"
-              class="newsletter-input"
-            />
-            <button type="submit" class="newsletter-submit-btn">SIGN UP</button>
-          </div>
-        </div>
-      </div>
-    </section>
-    <hr
-      style="border: none; border-bottom: 1px solid black; margin: 15px 16px"
-    />
-
     <!-- end of main-content -->
+
+    <!-- 浮動的Ticket按鈕 -->
+    <div class="floating-ticket" id="floatingTicket">
+      <button class="hide-ticket-btn" id="hideTicketBtn">X</button>
+
+      <span><a  style="text-decoration: none; color: ghostwhite;" href="https://www.taipeiartbookfair.com/2025/ticket" target="_blank">GET A TICKET</a></span>
+    </div>
 
     <!-- 頁腳 -->
     <footer class="footer">
@@ -309,25 +313,10 @@
           <p class="footer-text">© 2025 TPABF</p>
         </div>
         <div class="footer-right">
-          <a href="#vacancy" class="footer-link">VACANCIES</a>
           <a href="#contact" class="footer-link">CONTACT</a>
         </div>
       </div>
     </footer>
-
-    <!-- 右下角浮動的 Newsletter Signup -->
-    <div class="newsletter-popup" id="newsletterPopup">
-      <div class="newsletter-header">
-        <h4>SIGN UP FOR THE NEWSLETTER</h4>
-        <button class="close-btn" id="closeNewsletter">×</button>
-      </div>
-      <div class="newsletter-content">
-        <form class="newsletter-form">
-          <input type="email" placeholder="Email@Email.com" required />
-          <button type="submit">JOIN</button>
-        </form>
-      </div>
-    </div>
 
     <script>
       // Newsletter 彈出視窗功能
@@ -378,25 +367,94 @@
       // 初始化按鈕文字
       updateLanguageButton();
 
-      // 點擊關閉按鈕隱藏彈出視窗
-      closeNewsletter.addEventListener("click", () => {
-        newsletterPopup.classList.add("hidden");
+      // 浮動Ticket按鈕動畫
+      const floatingTicket = document.getElementById("floatingTicket");
+      let ticketX = Math.random() * (window.innerWidth - 240); // 15rem = 240px
+      let ticketY = Math.random() * (window.innerHeight - 48); // 3rem = 48px
+      let ticketSpeedX = (Math.random() - 0.5) * 1.5 + 0.8; // 0.8-2.3 或 -0.8 到 -2.3
+      let ticketSpeedY = (Math.random() - 0.5) * 1.5 + 0.8; // 0.8-2.3 或 -0.8 到 -2.3
+      let isAnimating = true; // 控制動畫狀態
+      let isHovered = false; // 控制hover狀態
+
+      function animateTicket() {
+        if (!isAnimating || isHovered) return; // 如果動畫被停止或正在hover，直接返回
+        
+        // 更新位置
+        ticketX += ticketSpeedX;
+        ticketY += ticketSpeedY;
+
+        // 邊界碰撞檢測 - 更精確的邊界計算
+        if (ticketX <= 0 || ticketX >= window.innerWidth - 120) {
+          ticketSpeedX = -ticketSpeedX;
+          // 添加一點隨機性，讓碰撞後的運動更自然
+          ticketSpeedY += (Math.random() - 0.5) * 0.5;
+        }
+        if (ticketY <= 0 || ticketY >= window.innerHeight - 60) {
+          ticketSpeedY = -ticketSpeedY;
+          // 添加一點隨機性，讓碰撞後的運動更自然
+          ticketSpeedX += (Math.random() - 0.5) * 0.5;
+        }
+
+        // 限制速度範圍，避免過快或過慢
+        ticketSpeedX = Math.max(-3, Math.min(3, ticketSpeedX));
+        ticketSpeedY = Math.max(-3, Math.min(3, ticketSpeedY));
+
+        // 確保按鈕不會超出螢幕邊界
+        ticketX = Math.max(0, Math.min(ticketX, window.innerWidth - 120));
+        ticketY = Math.max(0, Math.min(ticketY, window.innerHeight - 60));
+
+        // 應用位置
+        floatingTicket.style.left = ticketX + "px";
+        floatingTicket.style.top = ticketY + "px";
+      }
+
+      // 每100毫秒更新一次位置，減少動畫頻率
+      const animationInterval = setInterval(animateTicket, 100);
+
+      // Hover 事件處理
+      floatingTicket.addEventListener("mouseenter", () => {
+        isHovered = true;
+        console.log("Ticket hovered - animation paused");
+      });
+
+      floatingTicket.addEventListener("mouseleave", () => {
+        isHovered = false;
+        console.log("Ticket unhovered - animation resumed");
+      });
+
+      // Hide按鈕功能 - 改進版本
+      const hideTicketBtn = document.getElementById("hideTicketBtn");
+      hideTicketBtn.addEventListener("click", (e) => {
+        e.preventDefault(); // 防止默認行為
+        e.stopPropagation(); // 防止觸發ticket按鈕的點擊事件
+        e.stopImmediatePropagation(); // 防止其他事件監聽器
+        
+        // 停止動畫
+        isAnimating = false;
+        clearInterval(animationInterval);
+        
+        // 隱藏按鈕
+        floatingTicket.style.display = "none";
+        
+        console.log("Ticket button hidden"); // 調試用
       });
 
       // 處理表單提交
-      const newsletterForm = document.querySelector(".newsletter-form");
-      newsletterForm.addEventListener("submit", (e) => {
-        e.preventDefault();
-        const email = e.target.querySelector("input[type='email']").value;
-        if (email) {
-          alert("感謝您的訂閱！我們會定期發送最新活動資訊給您。");
-          e.target.reset();
-          newsletterPopup.classList.add("hidden");
-        }
-      });
+      const newsletterForm = document.querySelector("input[type='email']").closest('div').querySelector('button');
+      if (newsletterForm) {
+        newsletterForm.addEventListener("click", (e) => {
+          e.preventDefault();
+          const email = document.querySelector("input[type='email']").value;
+          if (email) {
+            alert("感謝您的訂閱！我們會定期發送最新活動資訊給您。");
+            document.querySelector("input[type='email']").value = "";
+          }
+        });
+      }
     </script>
     <script src="calender.js"></script>
     <script src="duolanguage.js"></script>
     <script src="js/exhibitors-list.js"></script>
+    <script src="js/event-photos.js"></script>
   </body>
 </html>

@@ -139,75 +139,121 @@
 .calender-content {
   max-width: 1200px;
   margin: 0 auto;
-  padding: 0 2rem;
+  border: none;
+  overflow: hidden; /* 隱藏超出容器的內容 */
+  position: relative;
 }
 
-/* 事件時間軸樣式 - 條列式佈局 */
+/* 日曆頂部控制區域 */
+.calender-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 15px;
+  padding: 0 0.5rem;
+}
+
+/* 箭頭按鈕組 */
+.calender-nav-group {
+  display: flex;
+  gap: 0.5rem;
+}
+
+/* 訂閱文字 */
+.calender-subscribe {
+  font-size: 0.8rem;
+  color: green;
+  margin: 0;
+}
+
+/* 滑動導航按鈕 */
+.calender-nav-btn {
+  position: static; /* 改為靜態定位 */
+  color: black;
+  background: ghostwhite;
+  border: none;
+  width: 32px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
+  z-index: 10;
+}
+
+.calender-nav-btn.prev {
+  left: auto;
+}
+
+.calender-nav-btn.next {
+  right: auto;
+}
+
+/* 日曆滑動容器 */
+.calender-scroll-container {
+  display: flex;
+  overflow-x: auto;
+  overflow-y: hidden;
+  scroll-behavior: smooth;
+  -webkit-overflow-scrolling: touch; /* iOS 流暢滾動 */
+  scrollbar-width: none; /* Firefox 隱藏滾動條 */
+  -ms-overflow-style: none; /* IE/Edge 隱藏滾動條 */
+  gap: 2rem;
+  padding: 16px 0;
+  height: 100%; /* 填滿父容器高度 */
+}
+
+/* 隱藏 Webkit 瀏覽器的滾動條 */
+.calender-scroll-container::-webkit-scrollbar {
+  display: none;
+}
+
+/* 事件時間軸樣式 - 水平佈局 */
 .events-timeline {
   display: flex;
-  flex-direction: column;
-  gap: 0;
-  padding: 2rem 0;
+  flex-direction: row; /* 改為水平排列 */
+  gap: 2rem;
+  padding: 0;
+  min-width: max-content; /* 確保內容不會被壓縮 */
 }
 
-.timeline-day {
-  font-size: 1rem;
-  font-weight: 600;
-  color: #000;
-  margin-bottom: 0.5rem;
-  padding: 0.2rem 0;
-  text-transform: uppercase;
-  letter-spacing: 0.1rem;
-  border-bottom: 1px solid #000;
-}
-
+/* 日曆項目容器 */
 .timeline-item {
-  border-bottom: 1px solid #000;
-  padding: 1rem 0;
   position: relative;
   display: flex;
-  flex-direction: row;
-  gap: 2rem;
-  align-items: flex-start;
+  flex-direction: column;
+  gap: 0.5rem;
+  min-width: 300px; /* 設定最小寬度 */
+  max-width: 400px; /* 增加最大寬度，讓標題有更多換行空間 */
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
-.poster-credit-left {
-  font-family: "IBM Sans JP", sans-serif;
-  writing-mode: sideways-lr;
-  text-orientation: mixed;
-  font-size: 1rem;
-  color: black;
-  position: absolute;
-  left: 0px; /* 放在海報區左邊*/
-  top: 50%; /* 垂直置中 */
-  transform: translateY(-50%); /* 精確置中 */
-  line-height: 1;
-  z-index: 10;
-  white-space: nowrap; /* 防止文字換行 */
+/* 事件標題行 */
+.event-header {
+  display: flex;
+  align-items: center;
+  text-align: center;
+  justify-content: space-between;
+  gap: 1rem;
+  order: 1; /* 確保標題行在上面 */
 }
-.poster-credit-right {
-  font-family: "IBM Plex Mono", monospace;
-  writing-mode: sideways-rl;
-  text-orientation: mixed;
-  font-size: 1rem;
-  color: black;
-  position: absolute;
-  right: 0px; /* 放在海報區左邊*/
-  top: 50%; /* 垂直置中 */
-  transform: translateY(-50%); /* 精確置中 */
-  line-height: 1;
-  z-index: 10;
-  white-space: nowrap; /* 防止文字換行 */
+
+/* 事件日期 */
+.event-date {
+  writing-mode: sideways-lr;
+  font-family: "IBM Plex Sans", sans-serif;
+  font-size: 0.8rem;
+  color: #000;
+  flex-shrink: 0;
 }
 
 .timeline-time {
-  font-family: "IBM Plex Mono", monospace;
-  min-width: 80px;
+  writing-mode: sideways-rl;
+  font-family: "IBM Plex Sans", sans-serif;
   color: #000;
   font-size: 0.8rem;
-  padding-top: 0.2rem;
-  text-align: left;
-  align-self: flex-start;
+  text-align: right;
+  flex-shrink: 0;
 }
 
 .timeline-content {
@@ -221,14 +267,20 @@
   flex: 1;
 }
 
+/* 事件標題 */
 .event-title {
-  font-family: "IBM Plex Sans", sans-serif;
-  font-size: 2rem;
+  font-family: "IBM Plex Sans JP", sans-serif;
+  font-size: 1rem;
   color: #000;
-  margin-bottom: 0.5rem;
+  margin-top: 1rem;
   line-height: 1.2;
-  text-transform: uppercase;
-  letter-spacing: 0.1rem;
+  color: #50006f;
+  order: 2; /* 確保標題在下面 */
+  word-wrap: break-word; /* 允許長單詞換行 */
+  overflow-wrap: break-word; /* 現代瀏覽器的換行屬性 */
+  white-space: normal; /* 允許正常換行 */
+  text-align: center; /* 標題置中對齊 */
+  max-width: 300px;
 }
 
 .event-meta {
@@ -246,7 +298,10 @@
 
 .event-thumb {
   flex-shrink: 0;
-  width: 150px;
+  width: 200px; /* 調整為更合適的寬度 */
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .event-thumb img {
@@ -261,9 +316,34 @@
     padding: 0 1rem;
   }
 
-  .timeline-item {
+  .calender-header {
     flex-direction: column;
     gap: 1rem;
+    align-items: flex-start;
+    padding: 0;
+  }
+
+  .calender-nav-group {
+    align-self: center;
+  }
+
+  .calender-mode-switch {
+    align-self: center;
+  }
+
+  .calender-subscribe {
+    align-self: flex-end;
+  }
+
+  .calender-scroll-container {
+    gap: 1rem;
+    padding: 1rem 0;
+  }
+
+  .timeline-item {
+    min-width: 250px;
+    max-width: 300px;
+    padding: 1rem;
   }
 
   .timeline-time {
@@ -284,4 +364,340 @@
   .event-thumb img {
     width: 100%;
   }
+
+  .event-title {
+    font-size: 1.5rem;
+  }
+
+  /* 在小螢幕上隱藏導航按鈕，依賴觸控滑動 */
+  .calender-nav-btn {
+    display: none;
+  }
+
+  /* 時間軸模式響應式調整 */
+  .timeline-month {
+    min-width: 250px;
+  }
+
+  .timeline-month-header {
+    font-size: 0.6rem;
+  }
+
+  .timeline-days {
+    height: 35px;
+  }
+
+  .timeline-day {
+    height: 16px;
+    font-size: 0.5rem;
+    min-width: 6px;
+  }
+
+  .timeline-events-area {
+    min-height: 150px;
+  }
+
+  .timeline-event-bar {
+    height: 25px;
+    min-width: 15px;
+    padding: 0 0.3rem;
+    transform: translateX(-1.5px); /* 平板端的微調 */
+  }
+
+  .timeline-event-content::before {
+    left: -0.6rem;
+    width: 5px;
+    height: 5px;
+  }
+
+  /* 平板端的全天活動樣式 */
+  .timeline-event-bar.all-day .timeline-event-content::before {
+    height: 3px;
+    left: -0.6rem;
+  }
+
+  .timeline-event-title {
+    font-size: 0.6rem;
+  }
+
+  .timeline-event-time {
+    font-size: 0.5rem;
+    min-width: 70px; /* 平板端的時間寬度 */
+  }
+}
+
+@media (max-width: 480px) {
+  .timeline-item {
+    min-width: 200px;
+    max-width: 250px;
+    padding: 0.8rem;
+  }
+
+  .event-title {
+    font-size: 1.2rem;
+  }
+
+  .event-meta {
+    font-size: 0.8rem;
+  }
+
+  /* 更小螢幕的時間軸調整 */
+  .timeline-month {
+    min-width: 200px;
+  }
+
+  .timeline-days {
+    height: 30px;
+  }
+
+  .timeline-day {
+    height: 14px;
+    font-size: 0.4rem;
+    min-width: 5px;
+  }
+
+  .timeline-events-area {
+    min-height: 120px;
+  }
+
+  .timeline-event-bar {
+    height: 20px;
+    min-width: 12px;
+    padding: 0 0.2rem;
+    transform: translateX(-1px); /* 手機端的微調 */
+  }
+
+  .timeline-event-content::before {
+    left: -0.5rem;
+    width: 4px;
+    height: 4px;
+  }
+
+  /* 手機端的全天活動樣式 */
+  .timeline-event-bar.all-day .timeline-event-content::before {
+    height: 2px;
+    left: -0.5rem;
+  }
+
+  .timeline-event-title {
+    font-size: 0.5rem;
+  }
+
+  .timeline-event-time {
+    font-size: 0.4rem;
+    min-width: 60px; /* 手機端的時間寬度 */
+  }
+}
+
+/* 模式切換按鈕 */
+.calender-mode-switch {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.mode-btn {
+  padding: 0px 5px;
+  border: 1px solid #000;
+  background: transparent;
+  color: #000;
+  cursor: pointer;
+  font-size: 0.8rem;
+  transition: all 0.3s ease;
+}
+
+.mode-btn.active {
+  background: #000;
+  color: #fff;
+}
+
+.mode-btn:hover {
+  background: #000;
+  color: #fff;
+}
+
+/* 模式容器 */
+.calender-mode-container {
+  width: 100%;
+  height: 250px; /* 設定固定高度，確保兩個模式一致 */
+  transition: all 0.3s ease;
+}
+
+.calender-mode-container.hidden {
+  display: none !important;
+  opacity: 0;
+  visibility: hidden;
+}
+
+.calender-mode-container:not(.hidden) {
+  display: block;
+  opacity: 1;
+  visibility: visible;
+}
+
+/* 特定模式樣式 */
+.calender-mode-container.card-mode {
+  display: block;
+}
+
+.calender-mode-container.timeline-mode {
+  display: block;
+}
+
+.calender-mode-container.card-mode.hidden {
+  display: none !important;
+}
+
+.calender-mode-container.timeline-mode.hidden {
+  display: none !important;
+}
+
+/* 時間軸日曆樣式 */
+.timeline-scroll-container {
+  overflow-x: auto;
+  overflow-y: hidden; /* 防止垂直滾動 */
+  scroll-behavior: smooth;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+  height: 100%; /* 填滿父容器高度 */
+}
+
+.timeline-scroll-container::-webkit-scrollbar {
+  display: none;
+}
+
+.timeline-calendar {
+  display: flex;
+  min-width: max-content;
+  position: relative;
+  padding: 0 50vw; /* 讓內容從螢幕中心開始 */
+}
+
+.timeline-month {
+  min-width: 300px;
+  position: relative;
+  border-right: 1px dashed darkgreen;
+}
+
+.timeline-month:last-child {
+  border-right: none;
+}
+
+.timeline-month-header {
+  font-size: 0.7rem;
+  padding-bottom: 5px;
+  margin-bottom: 5px;
+  text-align: center;
+  text-transform: uppercase;
+  letter-spacing: 0.1rem;
+  border-bottom: 1px solid #000000;
+  font-family: "IBM Plex Mono", sans-serif;
+}
+
+.timeline-days {
+  position: relative;
+  height: 20px;
+  display: block; /* 改為 block，因為日期點現在是絕對定位 */
+  font-family: "IBM Plex Mono", sans-serif;
+  width: 300px; /* 固定寬度，與月份容器一致 */
+}
+
+.timeline-day {
+  font-family: "IBM Plex Mono", sans-serif;
+  flex: none; /* 移除 flex: 1，使用固定寬度 */
+  height: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.5rem;
+  z-index: 1;
+  letter-spacing: -1px;
+  width: 15px;
+  position: absolute; /* 絕對定位 */
+  top: 0; /* 垂直居中 */
+}
+
+.timeline-day.today {
+  background: #000;
+  color: #fff;
+  font-weight: bold;
+}
+
+/* 活動區域 - 甘特圖樣式 */
+.timeline-events-area {
+  position: relative;
+  min-height: 200px;
+  padding-left: 0.5rem;
+}
+
+/* 活動長條樣式 - 甘特圖樣式 */
+.timeline-event-bar {
+  position: absolute;
+  left: 0.5rem;
+  height: 30px;
+  z-index: 2;
+  cursor: pointer;
+  min-width: 20px;
+  display: flex;
+  align-items: center;
+  padding: 0 0.5rem;
+  box-sizing: border-box;
+  /* 微調位置，確保與日期點完美對準 */
+  transform: translateX(-2px);
+}
+
+/* 跨天數活動的特殊樣式 */
+.timeline-event-bar.multi-day {
+  background: rgba(0, 0, 0, 0.05); /* 淡灰色背景 */
+  border-left: 3px solid #000; /* 左邊黑色邊框 */
+}
+
+/* 活動內容 */
+.timeline-event-content {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  overflow: visible; /* 改為 visible */
+  position: relative;
+}
+
+.timeline-event-content::before {
+  content: "";
+  position: absolute;
+  left: -0.8rem;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 6px;
+  height: 6px;
+  background: #000;
+  border-radius: 50%;
+  z-index: 3;
+}
+
+/* 全天活動的特殊樣式 */
+.timeline-event-bar.all-day .timeline-event-content::before {
+  width: 100%; /* 黑點拉長到整個活動寬度 */
+  height: 4px; /* 稍微降低高度，更像長條 */
+  border-radius: 2px; /* 圓角改為長條樣式 */
+  left: -0.8rem; /* 保持左邊距 */
+}
+
+.timeline-event-title {
+  font-size: 0.7rem;
+  color: #000; /* 改為黑色 */
+  font-weight: 600;
+  white-space: nowrap;
+  overflow: visible; /* 改為 visible */
+  text-overflow: clip; /* 移除省略號 */
+  line-height: 1.2;
+}
+
+.timeline-event-time {
+  font-size: 0.6rem;
+  color: #000; /* 改為黑色 */
+  white-space: nowrap;
+  overflow: visible; /* 改為 visible */
+  text-overflow: clip; /* 移除省略號 */
+  line-height: 1;
+  min-width: 80px; /* 確保有足夠空間顯示時間範圍 */
 }
