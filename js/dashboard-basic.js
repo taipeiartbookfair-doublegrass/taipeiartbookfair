@@ -714,11 +714,11 @@ document.addEventListener("DOMContentLoaded", async function () {
       ) {
         ticketlink.innerHTML = "Ticket Link";
         familyticketdesc.innerHTML =
-          "Each exhibitor will receive an early bird discount code before the event, allowing them to purchase up to 5 tickets at the special price of $350 each. A total of 800 early bird tickets are available.<br><br />During the event (Nov 21–23), companion tickets will be available for purchase online at the regular price of $400. Ticket holders can still enjoy priority entry without waiting in line.Please enter the following promo code at checkout (each code can only be used once):<br />";
+          "Each exhibitor will receive an early bird discount code before the event, allowing them to purchase up to 5 tickets at the special price of $350 each. A total of 800 early bird tickets are available.<br><br />During the event (Nov 21–23), companion tickets will be available for purchase online at the regular price of $400. Ticket holders can still enjoy priority entry without waiting in line.Please enter the following promo code at checkout:<br />";
       } else {
         ticketlink.innerHTML = "購票連結";
         familyticketdesc.innerHTML =
-          "每位參展者可於活動前獲得早鳥優惠序號，每人限購5張，票價 $350，限量800張。11/21-23活動期間，親友票將以原價 $400 於線上開放購買，持票者仍可免排隊入場。請在付款時填入以下代碼（每個代碼限用一次）：<br />";
+          "每位參展者可於活動前獲得早鳥優惠序號，每人限購5張，票價 $350，限量800張。11/21-23活動期間，親友票將以原價 $400 於線上開放購買，持票者仍可免排隊入場。請在付款時填入以下代碼：<br />";
       }
     }
   }

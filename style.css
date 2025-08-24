@@ -327,7 +327,7 @@ p {
 }
 
 /* 垂直分隔線 */
-.poster-section::before {
+.calender-section ::before {
   content: "";
   position: absolute;
   left: -20px; /* 調整位置，讓分隔線在間隔中間 */
@@ -337,20 +337,10 @@ p {
   background: var(--border);
 }
 
-.poster-section::after {
+.calender-section ::after {
   content: "";
   position: absolute;
   right: -20px; /* 調整位置，讓分隔線在間隔中間 */
-  top: 0px;
-  bottom: 0px;
-  width: 1px;
-  background: var(--border);
-}
-
-.calender-section::before {
-  content: "";
-  position: absolute;
-  left: -15px; /* 調整位置，讓分隔線在間隔中間 */
   top: 0px;
   bottom: 0px;
   width: 1px;
@@ -477,15 +467,15 @@ p {
 }
 
 .calender-section {
-  width: 80vw; /* 增加寬度，讓中間區塊大一倍 */
+  width: 55vw; /* 增加寬度，讓中間區塊大一倍 */
   position: relative;
-  margin-right: 16px;
 }
 
 /* Poster Section */
 .poster-section {
-  width: 60vw; /* 增加寬度，讓中間區塊大一倍 */
+  width: 35vw; /* 增加寬度，讓中間區塊大一倍 */
   position: relative;
+  margin-left: 16px;
 }
 
 #Poster {
@@ -494,7 +484,7 @@ p {
 
 #Poster img {
   max-width: 100%;
-  width: 50%;
+  width: 100%;
   height: auto;
   border: 1px solid var(--border);
 }
@@ -689,8 +679,9 @@ p {
 
 /* EXHIBITOR LOGIN 特殊樣式 */
 .exhibitor-login {
-  background: olivedrab;
-  color: ghostwhite !important;
+  background: forestgreen;
+  color: plum !important;
+  font-weight: 600;
   padding: 4px 16px;
   border-radius: 10px;
   transition: all 0.2s ease;
@@ -964,4 +955,94 @@ p {
   cursor: pointer;
   font-family: inherit;
   text-transform: uppercase;
+}
+
+/* 浮動Ticket按鈕樣式 */
+.floating-ticket {
+  position: fixed;
+  width: 15rem;
+  height: 3rem;
+  background: radial-gradient(circle, #dda0dd, #d8bfd8);
+  border-radius: 60px 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  z-index: 1000;
+  box-shadow: 0 8px 32px rgba(221, 160, 221, 0.3),
+    0 4px 16px rgba(221, 160, 221, 0.2),
+    inset 0 2px 4px rgba(255, 255, 255, 0.1);
+  transition: all 0.3s ease;
+  user-select: none;
+  font-family: "Libre Franklin", sans-serif;
+  font-size: 2rem;
+  text-transform: uppercase;
+  animation: pulse 8s ease-in-out infinite;
+}
+
+.floating-ticket span {
+  color: white;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+}
+
+.floating-ticket:hover {
+  transform: scale(1.05);
+  box-shadow: 0 12px 40px rgba(221, 160, 221, 0.4),
+    0 6px 20px rgba(221, 160, 221, 0.3),
+    inset 0 2px 4px rgba(255, 255, 255, 0.2);
+  animation: none;
+}
+
+.floating-ticket:active {
+  transform: scale(2);
+  background: blueviolet;
+  box-shadow: 0 4px 16px rgba(221, 160, 221, 0.3),
+    0 2px 8px rgba(221, 160, 221, 0.2), inset 0 1px 2px rgba(255, 255, 255, 0.1);
+}
+
+/* Hide按鈕樣式 */
+.hide-ticket-btn {
+  position: absolute;
+  top: -8px;
+  right: -8px;
+  width: 20px;
+  height: 20px;
+  background: white;
+  border: 1px solid black;
+  border-radius: 50%;
+  color: black;
+  font-size: 0.8rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
+  z-index: 1001;
+  font-family: "IBM Plex Mono", sans-serif;
+  text-transform: lowercase;
+}
+
+.hide-ticket-btn:hover {
+  background: #dda0dd;
+  color: white;
+  transform: scale(1.1);
+}
+
+.hide-ticket-btn:active {
+  transform: scale(0.9);
+}
+
+/* 脈衝動畫 */
+@keyframes pulse {
+  0%,
+  100% {
+    box-shadow: 0 8px 32px rgba(221, 160, 221, 0.3),
+      0 4px 16px rgba(221, 160, 221, 0.2),
+      inset 0 2px 4px rgba(255, 255, 255, 0.1);
+  }
+  50% {
+    box-shadow: 0 12px 40px rgba(221, 160, 221, 0.4),
+      0 6px 20px rgba(221, 160, 221, 0.3),
+      inset 0 2px 4px rgba(255, 255, 255, 0.2);
+  }
 }

@@ -139,7 +139,7 @@
 .calender-content {
   max-width: 1200px;
   margin: 0 auto;
-  padding: 0 2rem;
+  border: none;
 }
 
 /* 事件時間軸樣式 - 條列式佈局 */

@@ -11,7 +11,7 @@ const url = `https://www.googleapis.com/calendar/v3/calendars/${encodeURICompone
 const eventsTimeline = document.getElementById("eventsTimeline");
 
 // 預設顯示4個活動
-let maxEvents = 4;
+let maxEvents = 2;
 let calendarData = null;
 
 // 渲染事件的函數
@@ -82,7 +82,7 @@ function renderEvents(items) {
             }
             <div class="event-title">${event.summary || "（無標題）"}</div>
             <div class="event-meta">
-This is going to be the description of the events. This is going to be the description of the events. This is going to be the description of the events.This is going to be the description of the events.This is going to be the description of the events.This is going to be the description of the events.This is going to be the description of the events.This is going to be the description of the events.VThis is going to be the description of the events.This is going to be the description of the events.This is going to be the description of the events.vThis is going to be the description of the events.This is going to be the description of the events.This is going to be the description of the events.s
+This is going to be the description of the events. This is going to be the description of the events. 
             </div>
           </div>
           <div class="timeline-time">${timeOnly}</div>
