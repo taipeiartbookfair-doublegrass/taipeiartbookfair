@@ -141,12 +141,6 @@
 
         <!-- 頂部控制區域：箭頭按鈕和訂閱文字 -->
         <div class="calender-header">
-          <!-- 滑動導航按鈕 -->
-          <div class="calender-nav-group">
-            <button class="calender-nav-btn prev" id="prevBtn">←</button>
-            <button class="calender-nav-btn next" id="nextBtn">→</button>
-          </div>
-
           <!-- 模式切換按鈕 -->
           <div class="calender-mode-switch">
             <button class="mode-btn active" data-mode="card" id="cardMode">
@@ -158,6 +152,14 @@
           </div>
 
           <p class="calender-subscribe">Suscribe to TPABF's calender</p>
+          
+          <!-- 左左右右 -->
+          <div class="calender-nav-group">
+            <button class="calender-nav-btn prev" id="prevBtn">←</button>
+            <button class="calender-nav-btn next" id="nextBtn">→</button>
+          </div>
+
+         
         </div>
 
         <!-- 日曆內容區域 -->
@@ -213,7 +215,8 @@
             src="https://shoplineimg.com/67e660195ef93c003d3ac6d9/68526029ff7c14000f7167fa/800x.png?"
             alt="Product 1"
             class="product-image"
-          /><br />
+          />
+          <br />
           <hr
             style="border: none; border-bottom: 1px solid black; margin: 10px 0"
           />
@@ -300,7 +303,7 @@
     <div class="floating-ticket" id="floatingTicket">
       <button class="hide-ticket-btn" id="hideTicketBtn">X</button>
 
-      <span>GET A TICKET</span>
+      <span><a  style="text-decoration: none; color: ghostwhite;" href="https://www.taipeiartbookfair.com/2025/ticket" target="_blank">GET A TICKET</a></span>
     </div>
 
     <!-- 頁腳 -->
@@ -370,8 +373,12 @@
       let ticketY = Math.random() * (window.innerHeight - 48); // 3rem = 48px
       let ticketSpeedX = (Math.random() - 0.5) * 1.5 + 0.8; // 0.8-2.3 或 -0.8 到 -2.3
       let ticketSpeedY = (Math.random() - 0.5) * 1.5 + 0.8; // 0.8-2.3 或 -0.8 到 -2.3
+      let isAnimating = true; // 控制動畫狀態
+      let isHovered = false; // 控制hover狀態
 
       function animateTicket() {
+        if (!isAnimating || isHovered) return; // 如果動畫被停止或正在hover，直接返回
+        
         // 更新位置
         ticketX += ticketSpeedX;
         ticketY += ticketSpeedY;
@@ -401,40 +408,49 @@
         floatingTicket.style.top = ticketY + "px";
       }
 
-      // 每50毫秒更新一次位置，創造流暢的動畫
-      setInterval(animateTicket, 50);
+      // 每100毫秒更新一次位置，減少動畫頻率
+      const animationInterval = setInterval(animateTicket, 100);
 
-      // Hide按鈕功能
+      // Hover 事件處理
+      floatingTicket.addEventListener("mouseenter", () => {
+        isHovered = true;
+        console.log("Ticket hovered - animation paused");
+      });
+
+      floatingTicket.addEventListener("mouseleave", () => {
+        isHovered = false;
+        console.log("Ticket unhovered - animation resumed");
+      });
+
+      // Hide按鈕功能 - 改進版本
       const hideTicketBtn = document.getElementById("hideTicketBtn");
       hideTicketBtn.addEventListener("click", (e) => {
+        e.preventDefault(); // 防止默認行為
         e.stopPropagation(); // 防止觸發ticket按鈕的點擊事件
+        e.stopImmediatePropagation(); // 防止其他事件監聽器
+        
+        // 停止動畫
+        isAnimating = false;
+        clearInterval(animationInterval);
+        
+        // 隱藏按鈕
         floatingTicket.style.display = "none";
-      });
-
-      // Ticket按鈕點擊事件
-      floatingTicket.addEventListener("click", () => {
-        // 可以連結到購票頁面或顯示購票信息
-        alert("🎫 購票功能即將推出！敬請期待！");
-        // 或者可以連結到購票頁面：
-        // window.open("https://ticket-page-url.com", "_blank");
-      });
-
-      // 點擊關閉按鈕隱藏彈出視窗
-      closeNewsletter.addEventListener("click", () => {
-        newsletterPopup.classList.add("hidden");
+        
+        console.log("Ticket button hidden"); // 調試用
       });
 
       // 處理表單提交
-      const newsletterForm = document.querySelector(".newsletter-form");
-      newsletterForm.addEventListener("submit", (e) => {
-        e.preventDefault();
-        const email = e.target.querySelector("input[type='email']").value;
-        if (email) {
-          alert("感謝您的訂閱！我們會定期發送最新活動資訊給您。");
-          e.target.reset();
-          newsletterPopup.classList.add("hidden");
-        }
-      });
+      const newsletterForm = document.querySelector("input[type='email']").closest('div').querySelector('button');
+      if (newsletterForm) {
+        newsletterForm.addEventListener("click", (e) => {
+          e.preventDefault();
+          const email = document.querySelector("input[type='email']").value;
+          if (email) {
+            alert("感謝您的訂閱！我們會定期發送最新活動資訊給您。");
+            document.querySelector("input[type='email']").value = "";
+          }
+        });
+      }
     </script>
     <script src="calender.js"></script>
     <script src="duolanguage.js"></script>
