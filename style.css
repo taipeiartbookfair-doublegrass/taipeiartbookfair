@@ -310,7 +310,7 @@ p {
   top: 16px; /* 在 Instagram/Facebook 行下方 */
   left: 0;
   right: 0;
-  background: url("wall1.png");
+  background: url("wall2.png");
   border-bottom: 1px solid var(--border);
   z-index: 999;
   padding: 16px 8px; /* 減少padding讓導航欄更緊湊 */
