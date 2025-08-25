@@ -11,17 +11,14 @@
       rel="stylesheet"
     />
     <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="css/font.css" />
     <link rel="stylesheet" href="css/exhibitors.css" />
   </head>
   <body>
-    <div class="event-info social-links">
-      <div class="event-info-content">
-        <div class="event-info-row"></div>
-        <div class="event-info-row"></div>
-        <div class="event-info-row">
-          <p style="color: ghostwhite">INSTAGRAM</p>
-          <p style="color: ghostwhite">FACEBOOK</p>
-        </div>
+    <div class="social-links">
+      <div style="display: flex; justify-content: flex-end; margin-right: 16px">
+        <p style="color: ghostwhite">INSTAGRAM</p>
+        <p style="color: ghostwhite">FACEBOOK</p>
       </div>
     </div>
 
@@ -29,14 +26,22 @@
     <nav class="navbar">
       <div class="container">
         <div class="nav-content">
-          <a id="site-name">HOME</a>
+          <a
+            id="site-name"
+            style="
+              font-family: 'Xiaoyuan-Trackpad', sans-serif;
+              color: lime;
+              text-shadow: 1px 1px black;
+              font-size: 2.9rem;
+              line-height: 1rem;
+            "
+            ><b>TAIPEI ART BOOK FAIR</b></a
+          >
           <ul class="nav-menu">
             <li class="language-switcher">
               <button id="language-toggle" class="language-btn">English</button>
             </li>
-            <li><a href="#exhibitors" id="nav-exhibitors">EXHIBITORS</a></li>
-            <li><a href="#program" id="nav-program">CALENDER</a></li>
-            <li><a href="#vacancy" id="nav-vacancy">VACANCIES</a></li>
+            <li><a href="#exhibitors" id="nav-exhibitors">ZINE WALL</a></li>
             <li>
               <a
                 href="https://nmhw.taipeiartbookfair.com/"
@@ -45,6 +50,7 @@
                 >NMHW</a
               >
             </li>
+            <li><a href="#exhibitors" id="nav-exhibitors">ARCHIVE</a></li>
             <li><a href="#about" id="nav-about">ABOUT</a></li>
             <li>
               <a href="#contact" class="footer-link exhibitor-login"
@@ -59,14 +65,23 @@
     <div class="event-info">
       <div class="event-info-content">
         <div class="event-info-row">
-          <p>草率季 Taipei Art Book Fair 2025 - 無限柔軟 SOFT POW</p>
+          <p>A-103</p>
         </div>
         <div class="event-info-row">
-          <p>11/21 - 11/23</p>
+          <p>攤商名字</p>
         </div>
         <div class="event-info-row">
-          <p>華山1914文化創意產業園區 東二 ABCD棟 Huashan Creative Park</p>
+          <p>GE</p>
         </div>
+      </div>
+
+      <!-- Ticket 購票區塊 -->
+      <div class="ticket-info">
+        <div class="ticket-left-notch"></div>
+        <div class="ticket-content">
+          <p>Tickets | 購票</p>
+        </div>
+        <div class="ticket-right-notch"></div>
       </div>
     </div>
 
@@ -74,18 +89,29 @@
     <div class="main-content">
       <!-- start of poster-section -->
       <section class="poster-section" id="Poster">
-        <img class="poster" src="25TPABF_poster_RGB.png" alt="Poster" />
-        <div
+        <div class="poster-container" data-flipped="false">
+          <div class="poster-card">
+            <div class="poster-front">
+              <img class="poster" src="image/25TPABF_poster_RGB.png" />
+            </div>
+            <div class="poster-back">
+              <img class="poster" src="image/25TPABF_poster_RGB-2.png" />
+            </div>
+          </div>
+        </div>
+        <!-- <div
           style="
             width: 100%;
             display: flex;
             justify-content: space-between;
             align-items: center;
+            cursor: pointer;
           "
+          id="posterControls"
         >
           <span
             style="
-              font-family: 'IBM Plex Sans', sans-serif;
+              font-family: 'IBM Plex Sans JP', sans-serif !important;
               font-size: 1.5rem;
               text-align: left;
             "
@@ -93,46 +119,21 @@
             ←
           </span>
           <span
-            style="font-family: 'IBM Plex Mono', monospace; text-align: center"
-            >2025</span
+            >Visual by
+            <a href="https://www.instagram.com/sidandgeri/" target="_blank"
+              >Sid&Geri</a
+            ></span
           >
           <span
             style="
-              font-family: 'IBM Plex Sans', sans-serif;
+              font-family: 'IBM Plex Sans JP', sans-serif !important;
               font-size: 1.5rem;
               text-align: right;
             "
           >
             →
           </span>
-        </div>
-        <div
-          style="
-            width: 100%;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-          "
-        >
-          <span
-            style="font-family: 'IBM Plex Mono', monospace; text-align: left"
-          >
-            無限柔軟
-          </span>
-          <span
-            style="font-family: 'IBM Plex Mono', monospace; text-align: center"
-          >
-            <a href="https://www.instagram.com/sidandgeri/" target="_blank"
-              >Sid&Geri</a
-            ></span
-          >
-
-          <span
-            style="font-family: 'IBM Plex Mono', monospace; text-align: right"
-          >
-            SOFT POW
-          </span>
-        </div>
+        </div> -->
       </section>
       <!-- end of poster-section -->
 
@@ -152,14 +153,12 @@
           </div>
 
           <p class="calender-subscribe">Suscribe to TPABF's calender</p>
-          
+
           <!-- 左左右右 -->
           <div class="calender-nav-group">
             <button class="calender-nav-btn prev" id="prevBtn">←</button>
             <button class="calender-nav-btn next" id="nextBtn">→</button>
           </div>
-
-         
         </div>
 
         <!-- 日曆內容區域 -->
@@ -185,14 +184,6 @@
               </div>
             </div>
           </div>
-
-          <hr
-            style="border: none; border-bottom: 1px solid black; margin: 10px 0"
-          />
-          <div style="text-align: center">CHECK THE FULL CALENDER</div>
-          <hr
-            style="border: none; border-bottom: 1px solid black; margin: 10px 0"
-          />
         </div>
 
         <!-- Event Photos Section -->
@@ -207,91 +198,22 @@
 
       <!-- start of shop-section -->
       <section class="multifunction-section" id="Multifunction">
-        <div>
-          <!-- 開始標籤 -->
+        <!-- 開始標籤 -->
+        <h3>NMHW</h3>
+        <img
+          src="https://shoplineimg.com/67e660195ef93c003d3ac6d9/68526029ff7c14000f7167fa/800x.png?"
+          alt="Product 1"
+          class="product-image"
+        />
+        <br />
+        <hr
+          style="border: none; border-bottom: 1px solid black; margin: 10px 0"
+        />
+        <div style="text-align: center">SEE MORE</div>
+        <hr
+          style="border: none; border-bottom: 1px solid black; margin: 10px 0"
+        />
 
-          <h3>ZINE WALL</h3>
-          <img
-            src="https://shoplineimg.com/67e660195ef93c003d3ac6d9/68526029ff7c14000f7167fa/800x.png?"
-            alt="Product 1"
-            class="product-image"
-          />
-          <br />
-          <hr
-            style="border: none; border-bottom: 1px solid black; margin: 10px 0"
-          />
-          <div style="text-align: center">SEE MORE</div>
-          <hr
-            style="border: none; border-bottom: 1px solid black; margin: 10px 0"
-          />
-
-          <!-- Newsletter Subscribe 區塊 -->
-          <div style="width: 100%; margin: 15px 0">
-            <div style="text-align: center; margin-bottom: 15px">
-              <h3>NEWS</h4>
-              <p style="margin: 10px 0; font-size: 0.9rem; color: #666">
-                Sign up to receive news and updates about our events, new books
-                and processes.
-              </p>
-                             <div style="text-align: center;">
-                 <input
-                   type="email"
-                   placeholder="Enter your email"
-                   style="
-                     border: 1px solid black;
-                     background: ghostwhite;
-                     padding: 8px;
-                     font-size: 1rem;
-                     width: 100%;
-                     outline: none;
-                     font-family: inherit;
-                     margin-bottom: 10px;
-                   "
-                 />
-                 <button
-                   type="submit"
-                   style="
-                     background: black;
-                     color: ghostwhite;
-                     padding: 5px 5px;
-                     font-size: 1rem;
-                     border: none;
-                     cursor: pointer;
-                     transition: all 0.2s ease;
-                     width: 100%;
-                   "
-                 >
-                   SIGN UP
-                 </button>
-               </div>
-            </div>
-            <hr
-              style="
-                border: none;
-                border-bottom: 1px solid black;
-                margin: 10px 0;
-              "
-            />
-            <div style="text-align: center">
-              <a
-                style="
-                  background: olivedrab;
-                  color: ghostwhite;
-                  font-weight: 800;
-                  padding: 15px;
-                  font-size: 1.8rem;
-                  display: block;
-                  text-decoration: none;
-                  text-align: center;
-                  transition: all 0.2s ease;
-                  cursor: pointer;
-                  line-height: 1.8rem;
-                "
-                >FOLLOW UPDATES</a
-              >
-            </div>
-          </div>
-        </div>
         <!-- 結束標籤 -->
       </section>
       <!-- end of shop-section -->
@@ -300,20 +222,67 @@
     <!-- end of main-content -->
 
     <!-- 浮動的Ticket按鈕 -->
-    <div class="floating-ticket" id="floatingTicket">
+    <div class="floating-ticket" id="floatingTicket" style="display: none">
       <button class="hide-ticket-btn" id="hideTicketBtn">X</button>
 
-      <span><a  style="text-decoration: none; color: ghostwhite;" href="https://www.taipeiartbookfair.com/2025/ticket" target="_blank">GET A TICKET</a></span>
+      <span
+        ><a
+          style="text-decoration: none; color: ghostwhite"
+          href="https://www.taipeiartbookfair.com/2025/ticket"
+          target="_blank"
+          >GET A TICKET</a
+        ></span
+      >
     </div>
 
     <!-- 頁腳 -->
     <footer class="footer">
       <div class="footer-content">
         <div class="footer-left">
-          <p class="footer-text">© 2025 TPABF</p>
+          <div style="display: flex; align-items: center; gap: 10px">
+            <span
+              class="footer-text"
+              style="
+                font-family: 'Xiaoyuan-01', sans-serif;
+                color: black;
+                font-size: 1.5rem;
+                vertical-align: middle;
+                transform: translateY(4px);
+              "
+              >NEWSLETTER</span
+            >
+            <input
+              type="email"
+              placeholder="Enter your email"
+              style="
+                border: 1px solid black;
+                background: olive;
+                color: aliceblue;
+                font-size: 1rem;
+                width: 400px;
+                outline: none;
+                font-family: inherit;
+                text-indent: 10px;
+                border-radius: 15px;
+              "
+            />
+            <button
+              type="submit"
+              style="
+                background: ghostwhite;
+                color: black;
+                font-size: 0.9rem;
+                border: none;
+                cursor: pointer;
+                white-space: nowrap;
+              "
+            >
+              SIGN UP
+            </button>
+          </div>
         </div>
         <div class="footer-right">
-          <a href="#contact" class="footer-link">CONTACT</a>
+          <a href="#contact" class="footer-link">CREDITS</a>
         </div>
       </div>
     </footer>
@@ -367,6 +336,23 @@
       // 初始化按鈕文字
       updateLanguageButton();
 
+      // Open Call 資訊展開/收合功能
+      const posterControls = document.getElementById("posterControls");
+      const openCallInfo = document.getElementById("openCallInfo");
+      let isOpenCallExpanded = false;
+
+      posterControls.addEventListener("click", () => {
+        if (isOpenCallExpanded) {
+          // 收合
+          openCallInfo.style.maxHeight = "0";
+          isOpenCallExpanded = false;
+        } else {
+          // 展開
+          openCallInfo.style.maxHeight = "800px"; // 設定足夠的高度來顯示內容
+          isOpenCallExpanded = true;
+        }
+      });
+
       // 浮動Ticket按鈕動畫
       const floatingTicket = document.getElementById("floatingTicket");
       let ticketX = Math.random() * (window.innerWidth - 240); // 15rem = 240px
@@ -378,7 +364,7 @@
 
       function animateTicket() {
         if (!isAnimating || isHovered) return; // 如果動畫被停止或正在hover，直接返回
-        
+
         // 更新位置
         ticketX += ticketSpeedX;
         ticketY += ticketSpeedY;
@@ -428,19 +414,22 @@
         e.preventDefault(); // 防止默認行為
         e.stopPropagation(); // 防止觸發ticket按鈕的點擊事件
         e.stopImmediatePropagation(); // 防止其他事件監聽器
-        
+
         // 停止動畫
         isAnimating = false;
         clearInterval(animationInterval);
-        
+
         // 隱藏按鈕
         floatingTicket.style.display = "none";
-        
+
         console.log("Ticket button hidden"); // 調試用
       });
 
       // 處理表單提交
-      const newsletterForm = document.querySelector("input[type='email']").closest('div').querySelector('button');
+      const newsletterForm = document
+        .querySelector("input[type='email']")
+        .closest("div")
+        .querySelector("button");
       if (newsletterForm) {
         newsletterForm.addEventListener("click", (e) => {
           e.preventDefault();
@@ -452,6 +441,7 @@
         });
       }
     </script>
+    <script src="poster-flip.js"></script>
     <script src="calender.js"></script>
     <script src="duolanguage.js"></script>
     <script src="js/exhibitors-list.js"></script>

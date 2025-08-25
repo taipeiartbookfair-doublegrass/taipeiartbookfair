@@ -575,6 +575,7 @@
 
 .timeline-month {
   min-width: 300px;
+
   position: relative;
   border-right: 1px dashed darkgreen;
 }
@@ -592,6 +593,7 @@
   letter-spacing: 0.1rem;
   border-bottom: 1px solid #000000;
   font-family: "IBM Plex Mono", sans-serif;
+  background: radial-gradient(circle, ghostwhite, yellow);
 }
 
 .timeline-days {
