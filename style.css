@@ -181,6 +181,11 @@ p {
   top: 0; /* 在導航欄上方 */
   font-size: 0.8rem;
 }
+.social-links p {
+  margin-left: 16px;
+  text-align: right;
+  display: inline-block;
+}
 
 /* 社交連結靠右對齊 */
 .social-links .event-info-content {
@@ -194,7 +199,7 @@ p {
 
 /* 第二個 event-info (主要活動資訊) */
 .event-info:nth-of-type(2) {
-  top: 66px; /* 在導航欄下方 (16px + 50px) */
+  top: 70px; /* 在導航欄下方 (16px + 50px) */
 }
 
 .event-info-content {
@@ -211,24 +216,52 @@ p {
 /* Ticket 購票區塊 */
 .ticket-info {
   position: absolute;
+  width: 15rem;
   right: 0px;
   height: 2.1rem;
-  top: 50%;
-  transform: translateY(-50%);
   background: orangered;
-  padding: 0.2rem 4rem;
   color: ghostwhite;
-  border: 1px solid var(--border);
-  line-height: 1.8rem;
+  line-height: 2rem;
+  display: flex;
+  align-items: center;
+  position: relative;
+}
+
+.ticket-info .ticket-content {
+  flex: 1;
+  text-align: center;
+  padding: 0.3rem 2rem;
+}
+
+.ticket-info .ticket-left-notch,
+.ticket-info .ticket-right-notch {
+  position: absolute;
+  width: 1rem;
+  height: 1rem;
+  background: lightgoldenrodyellow;
+
+  border-radius: 50%;
+  top: 53%;
+  transform: translateY(-50%);
+}
+
+.ticket-info .ticket-left-notch {
+  left: -0.5rem;
+}
+
+.ticket-info .ticket-right-notch {
+  right: -0.5rem;
 }
 
 .ticket-info p {
   color: aliceblue;
   margin: 0;
+  font-weight: 600;
+  width: 12rem;
   font-size: 1rem;
   font-family: "IBM Plex Sans JP", sans-serif;
   text-transform: uppercase;
-  letter-spacing: 0.5px;
+  letter-spacing: 2px;
 }
 
 .event-info-row {
@@ -250,7 +283,7 @@ p {
 .event-info-row:last-child {
   flex: 1;
   justify-content: flex-end;
-  margin-right: 18rem; /* 為右邊的 Ticket 區塊留出空間 */
+  margin-right: 3rem; /* 為右邊的 Ticket 區塊留出空間 */
 }
 
 .event-info-content p {
@@ -260,7 +293,7 @@ p {
   font-size: 1rem;
   text-transform: uppercase;
   letter-spacing: 0.8px;
-  line-height: 1.2;
+  line-height: 1.3rem;
 }
 
 .event-info-item p {
