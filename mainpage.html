@@ -11,6 +11,7 @@
       rel="stylesheet"
     />
     <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="css/font.css" />
     <link rel="stylesheet" href="css/exhibitors.css" />
   </head>
   <body>
@@ -29,7 +30,7 @@
     <nav class="navbar">
       <div class="container">
         <div class="nav-content">
-          <a id="site-name">HOME</a>
+          <a id="site-name" style="font-family: 'Xiaoyuan-Trackpad', sans-serif;color:white;text-shadow: 1px 1px black;"><b>TAIPEI ART BOOK FAIR</b></a>
           <ul class="nav-menu">
             <li class="language-switcher">
               <button id="language-toggle" class="language-btn">English</button>
@@ -64,10 +65,10 @@
         <div class="event-info-row">
           <p>11/21 - 11/23</p>
         </div>
-        <div class="event-info-row">
+                <div class="event-info-row">
           <p>華山1914文化創意產業園區 東二 ABCD棟 Huashan Creative Park</p>
         </div>
-      </div>
+      </div>  
     </div>
 
     <!-- start of main-content -->
@@ -81,24 +82,23 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
+            cursor: pointer;
           "
+          id="posterControls"
         >
           <span
             style="
-              font-family: 'IBM Plex Sans', sans-serif;
+              font-family: 'IBM Plex Sans JP', sans-serif !important;
               font-size: 1.5rem;
               text-align: left;
             "
           >
             ←
           </span>
-          <span
-            style="font-family: 'IBM Plex Mono', monospace; text-align: center"
-            >2025</span
-          >
+            <span>Visual by <a href="https://www.instagram.com/sidandgeri/" target="_blank">Sid&Geri</a></span>
           <span
             style="
-              font-family: 'IBM Plex Sans', sans-serif;
+              font-family: 'IBM Plex Sans JP', sans-serif !important; 
               font-size: 1.5rem;
               text-align: right;
             "
@@ -106,32 +106,64 @@
             →
           </span>
         </div>
-        <div
-          style="
-            width: 100%;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-          "
-        >
-          <span
-            style="font-family: 'IBM Plex Mono', monospace; text-align: left"
-          >
-            無限柔軟
-          </span>
-          <span
-            style="font-family: 'IBM Plex Mono', monospace; text-align: center"
-          >
-            <a href="https://www.instagram.com/sidandgeri/" target="_blank"
-              >Sid&Geri</a
-            ></span
-          >
+        
+        <!-- Open Call 進度資訊 - 隱藏狀態 -->
+        <div id="openCallInfo" style="
+          max-height: 0;
+          overflow: hidden;
+          transition: max-height 3s ease-in-out;
+          margin-top: 20px;
+          padding: 0 20px;
+          font-family: 'IBM Plex Sans JP', sans-serif;
+          line-height: 1.6;
+        ">
+          <div style="
+            background: rgba(255, 255, 255, 0.95);
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+          ">
+            <h3 style="margin-top: 0; color: #333;">Open Call 進度</h3>
+            <p><strong>申請時程</strong></p>
+            <ul style="list-style: none; padding-left: 0;">
+              <li>申請截止：6月15日（日）24:00</li>
+              <li>審核通知：6月30日（一）12:00</li>
+              <li>通過者須於 7月13日（日）24:00前付款</li>
+              <li>備取名單通知：7月16日（三）24:00</li>
+              <li>備取者須於 7月22日（二）24:00 前付款</li>
+            </ul>
+            
+            <hr style="border: none; border-bottom: 1px solid black; margin: 15px 0">
+            
+            <p><strong>地點／如何抵達</strong></p>
+            <p><strong>地點：</strong>華山1914文化創意產業園區 東二 ABCD棟 Huashan Creative Park</p>
+            <p><strong>如何抵達：</strong></p>
+            <ol>
+              <li>捷運：忠孝新生站 2 號出口，步行約 5 分鐘</li>
+              <li>公車：忠孝新生站，多條公車路線可達</li>
+              <li>自行開車：提供少量停車位，建議搭乘大眾運輸</li>
+            </ol>
 
-          <span
-            style="font-family: 'IBM Plex Mono', monospace; text-align: right"
-          >
-            SOFT POW
-          </span>
+            <hr style="border: none; border-bottom: 1px solid black; margin: 15px 0">
+
+            <p><strong>Q&A</strong></p>
+            <div style="margin-bottom: 15px;">
+              <p><strong>Q: 誰可以參加 Open Call？</strong></p>
+              <p>A: 本次徵件向所有藝術家、設計師與跨領域創作者開放，不限國籍。</p>
+            </div>
+            <div style="margin-bottom: 15px;">
+              <p><strong>Q: 我可以提交幾件作品？</strong></p>
+              <p>A: 每位申請者最多可提交 2 件作品。</p>
+            </div>
+            <div style="margin-bottom: 15px;">
+              <p><strong>Q: 如果我的作品需要特殊設備怎麼辦？</strong></p>
+              <p>A: 請在申請表中註明，我們將與場地協調可能的支援。</p>
+            </div>
+            <div style="margin-bottom: 15px;">
+              <p><strong>Q: 入選後會有展出費用補助嗎？</strong></p>
+              <p>A: 入選作品將獲得基本製作補助，細節將於錄取通知一併提供。</p>
+            </div>
+          </div>
         </div>
       </section>
       <!-- end of poster-section -->
@@ -152,7 +184,7 @@
           </div>
 
           <p class="calender-subscribe">Suscribe to TPABF's calender</p>
-          
+
           <!-- 左左右右 -->
           <div class="calender-nav-group">
             <button class="calender-nav-btn prev" id="prevBtn">←</button>
@@ -228,7 +260,7 @@
           <!-- Newsletter Subscribe 區塊 -->
           <div style="width: 100%; margin: 15px 0">
             <div style="text-align: center; margin-bottom: 15px">
-              <h3>NEWS</h4>
+              <h3>NEWSLETTER</h4>
               <p style="margin: 10px 0; font-size: 0.9rem; color: #666">
                 Sign up to receive news and updates about our events, new books
                 and processes.
@@ -366,6 +398,23 @@
 
       // 初始化按鈕文字
       updateLanguageButton();
+
+      // Open Call 資訊展開/收合功能
+      const posterControls = document.getElementById("posterControls");
+      const openCallInfo = document.getElementById("openCallInfo");
+      let isOpenCallExpanded = false;
+
+      posterControls.addEventListener("click", () => {
+        if (isOpenCallExpanded) {
+          // 收合
+          openCallInfo.style.maxHeight = "0";
+          isOpenCallExpanded = false;
+        } else {
+          // 展開
+          openCallInfo.style.maxHeight = "800px"; // 設定足夠的高度來顯示內容
+          isOpenCallExpanded = true;
+        }
+      });
 
       // 浮動Ticket按鈕動畫
       const floatingTicket = document.getElementById("floatingTicket");

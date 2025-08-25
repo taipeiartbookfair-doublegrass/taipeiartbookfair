@@ -82,8 +82,7 @@ h3 {
   font-size: 1.8rem;
   text-align: center;
   margin-bottom: 1rem;
-  letter-spacing: -0.05rem;
-  font-family: "Libre Franklin", sans-serif;
+  font-family: "Xiaoyuan-01", sans-serif;
   font-weight: 400;
   line-height: 1.1;
   text-transform: uppercase;
@@ -158,16 +157,17 @@ p {
 
 /* Event Info 區塊 */
 .event-info {
+  box-shadow: inset 0 0 10px rgb(255, 55, 0);
   font-size: 0.5rem;
   position: fixed;
   color: var(--primary);
-  background: aliceblue;
-  top: 50px; /* 緊接在導航欄下方 */
+  background: lightgoldenrodyellow;
+  top: 50px;
   left: 0;
   right: 0;
-  height: 20px; /* 更細長的高度 */
+  height: 20px;
   border-bottom: 1px solid var(--border);
-  z-index: 998; /* 低於導航欄但高於其他內容 */
+  z-index: 998;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -176,8 +176,9 @@ p {
 /* 第一個 event-info (Instagram/Facebook) */
 .event-info:first-of-type,
 .social-links {
-  background-color: rgb(17, 17, 17);
+  background-color: rgb(49, 35, 49);
   height: 16px; /* 更小的高度 */
+  box-shadow: none;
   top: 0; /* 在導航欄上方 */
 }
 
@@ -249,7 +250,7 @@ p {
   top: 16px; /* 在 Instagram/Facebook 行下方 */
   left: 0;
   right: 0;
-  background: var(--secondary);
+  background-image: url("wall1.png");
   border-bottom: 1px solid var(--border);
   z-index: 999;
   padding: 16px 8px; /* 減少padding讓導航欄更緊湊 */
@@ -515,6 +516,7 @@ p {
     rgba(174, 174, 174, 1) 97%,
     rgba(0, 0, 0, 1) 100%
   );
+  border-radius: 20px;
 }
 
 #Poster {
@@ -522,10 +524,15 @@ p {
 }
 
 #Poster img {
+  border-radius: 10px;
   max-width: 100%;
   width: 100%;
   height: auto;
   border: 1px solid var(--border);
+}
+#Poster img:hover {
+  transform: rotateY(190deg);
+  transition: transform 3s ease;
 }
 
 /* 滾動指示器 */
