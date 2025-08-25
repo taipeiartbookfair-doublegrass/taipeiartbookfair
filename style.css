@@ -85,6 +85,7 @@ h3 {
   font-family: "Xiaoyuan-01", sans-serif;
   font-weight: 400;
   line-height: 1.1;
+  color: forestgreen;
   text-transform: uppercase;
 }
 h4 {
@@ -282,7 +283,7 @@ p {
 
 .nav-menu a {
   text-decoration: none;
-  color: #ff8c42; /* 日落橘色 */
+  color: ghostwhite; /* 日落橘色 */
   font-weight: 400;
   transition: color 0.2s ease;
   font-size: 11px;
