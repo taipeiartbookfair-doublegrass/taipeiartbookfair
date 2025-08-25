@@ -32,7 +32,7 @@ body {
   color: var(--text);
   line-height: 1.4;
   overflow-x: hidden;
-  font-size: 12px;
+  font-size: 1.3rem;
   cursor: url("image/eye.png") 12 12, auto;
 }
 
@@ -120,7 +120,7 @@ p {
   color: var(--text);
   cursor: pointer;
   transition: color 0.2s ease;
-  font-size: 11px;
+  font-size: 1rem;
   font-weight: 400;
   font-family: "IBM Plex Mono", monospace;
   text-transform: uppercase;
@@ -159,14 +159,13 @@ p {
 /* Event Info 區塊 */
 .event-info {
   box-shadow: inset 0 0 10px rgb(255, 55, 0);
-  font-size: 0.5rem;
+  font-size: 1rem;
   position: fixed;
   color: var(--primary);
   background: lightgoldenrodyellow;
   top: 50px;
   left: 0;
   right: 0;
-  height: 20px;
   border-bottom: 1px solid var(--border);
   z-index: 998;
   display: flex;
@@ -175,12 +174,12 @@ p {
 }
 
 /* 第一個 event-info (Instagram/Facebook) */
-.event-info:first-of-type,
 .social-links {
   background-color: rgb(49, 35, 49);
-  height: 16px; /* 更小的高度 */
+  height: 20px; /* 更小的高度 */
   box-shadow: none;
   top: 0; /* 在導航欄上方 */
+  font-size: 0.8rem;
 }
 
 /* 社交連結靠右對齊 */
@@ -206,6 +205,30 @@ p {
   width: 100%;
   padding: 0 8px;
   gap: 40px;
+  height: 2rem;
+}
+
+/* Ticket 購票區塊 */
+.ticket-info {
+  position: absolute;
+  right: 0px;
+  height: 2.1rem;
+  top: 50%;
+  transform: translateY(-50%);
+  background: orangered;
+  padding: 0.2rem 4rem;
+  color: ghostwhite;
+  border: 1px solid var(--border);
+  line-height: 1.8rem;
+}
+
+.ticket-info p {
+  color: aliceblue;
+  margin: 0;
+  font-size: 1rem;
+  font-family: "IBM Plex Sans JP", sans-serif;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
 }
 
 .event-info-row {
@@ -227,20 +250,21 @@ p {
 .event-info-row:last-child {
   flex: 1;
   justify-content: flex-end;
+  margin-right: 18rem; /* 為右邊的 Ticket 區塊留出空間 */
 }
 
 .event-info-content p {
   margin: 0;
   color: var(--primary);
   font-family: "IBM Plex Mono", monospace;
-  font-size: 0.65rem;
+  font-size: 1rem;
   text-transform: uppercase;
   letter-spacing: 0.8px;
   line-height: 1.2;
 }
 
 .event-info-item p {
-  font-size: 9px;
+  font-size: 1rem;
   opacity: 0.75;
   font-weight: 300;
 }
@@ -251,18 +275,19 @@ p {
   top: 16px; /* 在 Instagram/Facebook 行下方 */
   left: 0;
   right: 0;
-  background-image: url("wall1.png");
+  background: url("wall1.png");
   border-bottom: 1px solid var(--border);
   z-index: 999;
   padding: 16px 8px; /* 減少padding讓導航欄更緊湊 */
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  height: 50px; /* 固定導航欄高度 */
+  height: 55px; /* 固定導航欄高度 */
 }
 
 .nav-content {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  font-size: 0.8rem;
 }
 
 .logo {
@@ -286,7 +311,7 @@ p {
   color: ghostwhite; /* 日落橘色 */
   font-weight: 400;
   transition: color 0.2s ease;
-  font-size: 11px;
+  font-size: 1rem;
   text-transform: uppercase;
   letter-spacing: 0.5px;
 }
@@ -566,6 +591,7 @@ p {
 }
 
 .footer-content {
+  font-size: 1.3rem;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -582,7 +608,7 @@ p {
 }
 
 .footer-text {
-  font-size: 10px;
+  font-size: 1.2rem;
   color: var(--text-light);
   font-family: "IBM Plex Mono", monospace;
   margin: 0;
@@ -592,7 +618,7 @@ p {
 .footer-link {
   color: var(--text-light);
   text-decoration: none;
-  font-size: 10px;
+  font-size: 1.2rem;
   font-family: "IBM Plex Mono", monospace;
   text-transform: uppercase;
   letter-spacing: 0.5px;
@@ -610,7 +636,7 @@ p {
   font-weight: 600;
   padding: 4px 16px;
   border-radius: 10px;
-  transition: all 0.2s ease;
+  transition: all 3s ease;
 }
 
 /* 動畫效果 */
