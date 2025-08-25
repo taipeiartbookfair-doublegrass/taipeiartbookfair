@@ -320,9 +320,69 @@ function renderTimelineMode() {
       const verticalPosition = index * 30; // 每個活動間隔30px
       eventBar.style.top = `${verticalPosition}px`;
 
+      // 解析描述欄位
+      const eventFields = parseDescription(event.description);
+      const eventType = eventFields.TYPE || "DEFAULT";
+
+      // 根據類型添加對應的樣式類別
+      eventBar.classList.add(`timeline-${eventType.toLowerCase()}`);
+
       // 創建活動內容
       const eventContent = document.createElement("div");
       eventContent.className = "timeline-event-content";
+
+      // 創建帶有顏色的點
+      const eventDot = document.createElement("span");
+      eventDot.className = "timeline-event-dot";
+
+      // 根據類型設置不同的顏色
+      let eventColor;
+      switch (eventType.toUpperCase()) {
+        case "TALK":
+          eventColor = "rgb(255, 0, 255)"; // 洋紅色
+          break;
+        case "WORKSHOP":
+          eventColor = "rgb(54, 162, 235)"; // 藍色
+          break;
+        case "PERFORMANCE":
+          eventColor = "rgb(255, 255, 0)"; // 黃色
+          break;
+        default:
+          eventColor = "rgb(0, 128, 0)"; // 綠色
+      }
+
+      eventDot.style.backgroundColor = eventColor;
+
+      // 根據活動持續時間調整點的樣式
+      if (duration === 1) {
+        // 單日活動：圓形點
+        eventDot.style.width = "6px";
+        eventDot.style.height = "6px";
+        eventDot.style.borderRadius = "50%";
+      } else {
+        // 跨天數活動：橢圓形點，寬度根據持續天數調整
+        const dotWidth = Math.max(6, duration * 3); // 每多一天增加3px寬度
+        eventDot.style.width = `${dotWidth}px`;
+        eventDot.style.height = "6px";
+        eventDot.style.borderRadius = "3px"; // 橢圓形
+      }
+
+      eventDot.style.position = "absolute";
+
+      // 調整點的位置，讓點的中心對準活動開始那天的中心
+      if (duration === 1) {
+        // 單日活動：點的中心對準日期點的中心
+        eventDot.style.left = "-0.8rem";
+      } else {
+        // 跨天數活動：點的左邊緣對準開始日期，但需要調整讓點的中心對準開始日期點的中心
+        const dotWidth = Math.max(6, duration * 3);
+        const offset = (dotWidth - 6) / 2; // 計算偏移量，讓點的中心對準開始日期點
+        eventDot.style.left = `calc(-0.8rem - ${offset}px)`;
+      }
+
+      eventDot.style.top = "50%";
+      eventDot.style.transform = "translateY(-50%)";
+      eventDot.style.zIndex = "3";
 
       const eventTitle = document.createElement("div");
       eventTitle.className = "timeline-event-title";
@@ -346,6 +406,7 @@ function renderTimelineMode() {
         eventTime.style.display = "none";
       }
 
+      eventContent.appendChild(eventDot);
       eventContent.appendChild(eventTitle);
       eventContent.appendChild(eventTime);
       eventBar.appendChild(eventContent);
@@ -412,41 +473,106 @@ function renderEvents(items) {
     return `${year}/${month}/${day}`;
   };
 
+  // 根據類型獲取對應的樣式類別
+  const getTypeClass = (type) => {
+    switch (type?.toUpperCase()) {
+      case "TALK":
+        return "event-type-talk";
+      case "WORKSHOP":
+        return "event-type-workshop";
+      case "PERFORMANCE":
+        return "event-type-performance";
+      default:
+        return "event-type-default";
+    }
+  };
+
   sortedItems.forEach((event) => {
     const startISO = event.start.dateTime;
     const endISO = event.end.dateTime;
     const startDate = new Date(startISO);
     const endDate = new Date(endISO);
-    const dateFull = formatDateToSlash(startDate); // 使用 YYYY/MM/DD 格式
+    const dateFull = formatDateToSlash(startDate);
     const startTime = formatTime24(startDate);
     const endTime = formatTime24(endDate);
 
+    // 解析描述欄位
+    const eventFields = parseDescription(event.description);
+    const eventType = eventFields.TYPE || "DEFAULT";
+    const eventImage = eventFields.IMAGE || "";
+    const eventDescription = eventFields.DESCRIPTION || "";
+    const eventSignup = eventFields.SIGNUP || "";
+
+    // 根據類型創建不同的 HTML 結構
     let imageHTML = "";
-    if (event.description) {
-      const match = event.description.match(
-        /https?:\/\/[^\s<>"']+\.(jpg|jpeg|png|gif)/i
-      );
-      if (match) {
-        const cleanUrl = match[0].replace(/["']/g, "").trim();
-        imageHTML = `<img src="${cleanUrl}" alt="活動圖片">`;
-      }
+    if (eventImage) {
+      // 清理圖片 URL
+      const cleanUrl = eventImage.replace(/["']/g, "").trim();
+      imageHTML = `<img src="${cleanUrl}" alt="活動圖片" class="event-image">`;
     }
 
-    // 一般活動：顯示為卡片項目
+    // 創建報名按鈕 HTML
+    let signupHTML = "";
+    if (eventSignup) {
+      signupHTML = `<a href="${eventSignup}" target="_blank" class="event-signup-btn">立即報名</a>`;
+    }
+
+    // 創建描述 HTML
+    let descriptionHTML = "";
+    if (eventDescription) {
+      descriptionHTML = `<div class="event-description">${eventDescription}</div>`;
+    }
+
+    // 根據類型創建不同的卡片樣式
     const timelineHTML = `
-      <div class="timeline-item">
+      <div class="timeline-item ${getTypeClass(eventType)}">
         <div class="event-header">
           <div class="event-date">${dateFull}</div>
           <div class="event-thumb">${imageHTML}</div>
           <div class="timeline-time">${startTime} - ${endTime}</div>
         </div>
         <div class="event-title">${event.summary || "（無標題）"}</div>
+        ${descriptionHTML}
+        ${signupHTML}
       </div>
     `;
 
     eventsTimeline.innerHTML += timelineHTML;
   });
 }
+
+// 解析描述中的欄位
+const parseDescription = (description) => {
+  if (!description) return {};
+
+  const fields = {};
+  const lines = description.split("\n");
+
+  lines.forEach((line) => {
+    const colonIndex = line.indexOf(":");
+    if (colonIndex > 0) {
+      const key = line.substring(0, colonIndex).trim();
+      const value = line.substring(colonIndex + 1).trim();
+      fields[key] = value;
+    }
+  });
+
+  return fields;
+};
+
+// 根據類型獲取對應的中文標籤
+const getTypeLabel = (type) => {
+  switch (type?.toUpperCase()) {
+    case "TALK":
+      return "講座";
+    case "WORKSHOP":
+      return "工作坊";
+    case "PERFORMANCE":
+      return "表演";
+    default:
+      return "活動";
+  }
+};
 
 // 獲取日曆數據
 fetch(url)

@@ -404,17 +404,7 @@
     transform: translateX(-1.5px); /* 平板端的微調 */
   }
 
-  .timeline-event-content::before {
-    left: -0.6rem;
-    width: 5px;
-    height: 5px;
-  }
-
-  /* 平板端的全天活動樣式 */
-  .timeline-event-bar.all-day .timeline-event-content::before {
-    height: 3px;
-    left: -0.6rem;
-  }
+  /* 移除 ::before 偽元素，改用 JavaScript 創建的點 */
 
   .timeline-event-title {
     font-size: 0.6rem;
@@ -467,17 +457,7 @@
     transform: translateX(-1px); /* 手機端的微調 */
   }
 
-  .timeline-event-content::before {
-    left: -0.5rem;
-    width: 4px;
-    height: 4px;
-  }
-
-  /* 手機端的全天活動樣式 */
-  .timeline-event-bar.all-day .timeline-event-content::before {
-    height: 2px;
-    left: -0.5rem;
-  }
+  /* 移除 ::before 偽元素，改用 JavaScript 創建的點 */
 
   .timeline-event-title {
     font-size: 0.5rem;
@@ -630,6 +610,7 @@
   position: relative;
   min-height: 200px;
   padding-left: 0.5rem;
+  background: aliceblue;
 }
 
 /* 活動長條樣式 - 甘特圖樣式 */
@@ -663,26 +644,7 @@
   position: relative;
 }
 
-.timeline-event-content::before {
-  content: "";
-  position: absolute;
-  left: -0.8rem;
-  top: 50%;
-  transform: translateY(-50%);
-  width: 6px;
-  height: 6px;
-  background: #000;
-  border-radius: 50%;
-  z-index: 3;
-}
-
-/* 全天活動的特殊樣式 */
-.timeline-event-bar.all-day .timeline-event-content::before {
-  width: 100%; /* 黑點拉長到整個活動寬度 */
-  height: 4px; /* 稍微降低高度，更像長條 */
-  border-radius: 2px; /* 圓角改為長條樣式 */
-  left: -0.8rem; /* 保持左邊距 */
-}
+/* 移除 ::before 偽元素，改用 JavaScript 創建的點 */
 
 .timeline-event-title {
   font-size: 0.7rem;
