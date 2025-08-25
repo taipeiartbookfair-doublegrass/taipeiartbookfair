@@ -554,15 +554,15 @@ p {
 }
 
 .calender-section {
-  width: 50vw;
+  width: 65vw;
   position: relative;
-  padding: 16px 0px;
+  padding: 16px 16px 0px 0px;
 }
 
 /* Poster Section */
 .poster-section {
   width: 35vw;
-  height: 79vh;
+  height: 80vh;
   position: relative;
   padding: 16px;
   background: linear-gradient(
