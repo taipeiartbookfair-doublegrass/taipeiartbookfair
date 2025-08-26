@@ -678,8 +678,7 @@ p {
   position: relative;
   padding: 8px 8px;
   text-align: center;
-  border-top: 1px solid var(--border);
-  background: var(--secondary);
+  background: saddlebrown;
   clear: both;
   width: 100%;
 }
@@ -710,7 +709,7 @@ p {
 }
 
 .footer-link {
-  color: var(--text-light);
+  color: orangered;
   text-decoration: none;
   font-size: 1.2rem;
   font-family: "IBM Plex Mono", monospace;
