@@ -9,7 +9,7 @@
  * 活動描述格式說明：
  * 在 Google Calendar 的活動描述中，請使用以下格式：
  *
- * SIGN UP: https://example.com/signup
+ * SIGNUP: https://example.com/signup
  * IMAGE: https://example.com/image.jpg
  * DESCRIPTION: 這是一個精彩的講座，將分享最新的藝術趨勢
  * TYPE: TALK
@@ -604,6 +604,14 @@ function renderEvents(items) {
     const eventDescription = eventFields.DESCRIPTION || "";
     const eventSignup = eventFields.SIGNUP || "";
 
+    // 調試日誌
+    console.log(`活動: "${event.summary}"`);
+    console.log(`原始描述:`, event.description);
+    console.log(`解析結果:`, eventFields);
+    console.log(
+      `TYPE: "${eventType}", IMAGE: "${eventImage}", DESCRIPTION: "${eventDescription}", SIGNUP: "${eventSignup}"`
+    );
+
     // 檢查是否有活動類型，如果沒有則跳過（不在卡片模式中顯示）
     if (!eventType) {
       console.log(`跳過活動 "${event.summary}"：沒有指定 TYPE`);
@@ -615,7 +623,7 @@ function renderEvents(items) {
     if (eventImage) {
       // 清理圖片 URL
       const cleanUrl = eventImage.replace(/["']/g, "").trim();
-      imageHTML = `<img src="${cleanUrl}" alt="活動圖片" class="event-image">`;
+      imageHTML = `<img src="${cleanUrl}" alt="TPABF" class="event-image">`;
     }
 
     // 創建報名按鈕 HTML
@@ -633,14 +641,20 @@ function renderEvents(items) {
     // 根據類型創建不同的卡片樣式
     const timelineHTML = `
       <div class="timeline-item ${getTypeClass(eventType)}">
-        <div class="event-header">
-          <div class="event-date">${dateFull}</div>
+        <div class="event-main-content">
           <div class="event-thumb">${imageHTML}</div>
-          <div class="timeline-time">${startTime} - ${endTime}</div>
+          <div class="event-title-section">
+            <div class="event-title">${event.summary || "（無標題）"}</div>
+            <div class="event-description-section">
+              ${descriptionHTML}
+            </div>
+          </div>
         </div>
-        <div class="event-title">${event.summary || "（無標題）"}</div>
-        ${descriptionHTML}
-        ${signupHTML}
+        <div class="event-footer">
+          <div class="event-date">${dateFull}</div>
+          <div class="event-time">${startTime} - ${endTime}</div>
+          ${signupHTML}
+        </div>
       </div>
     `;
 
@@ -654,20 +668,80 @@ function renderEvents(items) {
  * @returns {Object} 解析後的欄位物件
  */
 const parseDescription = (description) => {
-  if (!description) return {};
+  if (!description) {
+    console.log("parseDescription: 沒有描述內容");
+    return {};
+  }
+
+  console.log("parseDescription: 開始解析描述:", description);
+
+  // 清理 HTML 標籤並轉換為純文字
+  let cleanDescription = description
+    // 將 <br> 轉換為換行符
+    .replace(/<br\s*\/?>/gi, "\n")
+    // 移除所有 HTML 標籤，但保留內容
+    .replace(/<[^>]*>/g, "")
+    // 將 HTML 實體轉換回正常字符
+    .replace(/&nbsp;/g, " ")
+    .replace(/&amp;/g, "&")
+    .replace(/&lt;/g, "<")
+    .replace(/&gt;/g, ">")
+    .replace(/&quot;/g, '"')
+    // 清理多餘的空白，但保留換行符
+    .replace(/[ \t]+/g, " ") // 只清理空格和tab，保留換行符
+    .replace(/\n\s+/g, "\n") // 清理換行符後的空白
+    .replace(/\s+\n/g, "\n") // 清理換行符前的空白
+    .trim();
+
+  console.log("parseDescription: 清理後的描述:", cleanDescription);
 
   const fields = {};
-  const lines = description.split("\n");
+  const lines = cleanDescription.split("\n");
+  console.log("parseDescription: 分割後的行數:", lines.length, lines);
 
-  lines.forEach((line) => {
+  let currentKey = null;
+  let currentValue = "";
+
+  lines.forEach((line, index) => {
+    line = line.trim(); // 清理每行的空白
+    console.log(`parseDescription: 處理第${index + 1}行: "${line}"`);
+
     const colonIndex = line.indexOf(":");
     if (colonIndex > 0) {
-      const key = line.substring(0, colonIndex).trim();
-      const value = line.substring(colonIndex + 1).trim();
-      fields[key] = value;
+      // 如果前面有未完成的欄位，先儲存它
+      if (currentKey) {
+        fields[currentKey] = currentValue.trim();
+        console.log(
+          `parseDescription: 儲存多行欄位 "${currentKey}" = "${currentValue.trim()}"`
+        );
+      }
+
+      // 開始新的欄位
+      currentKey = line.substring(0, colonIndex).trim();
+      currentValue = line.substring(colonIndex + 1).trim();
+      console.log(
+        `parseDescription: 找到欄位 "${currentKey}" = "${currentValue}"`
+      );
+    } else if (currentKey && line) {
+      // 如果這行沒有冒號但有內容，且我們正在處理一個欄位，則將其加到當前值
+      currentValue += " " + line;
+      console.log(
+        `parseDescription: 繼續多行欄位 "${currentKey}"，新增內容: "${line}"`
+      );
+    } else {
+      console.log(`parseDescription: 第${index + 1}行沒有冒號或格式不正確`);
     }
   });
 
+  // 儲存最後一個欄位
+  if (currentKey) {
+    fields[currentKey] = currentValue.trim();
+    console.log(
+      `parseDescription: 儲存最後欄位 "${currentKey}" = "${currentValue.trim()}"`
+    );
+  }
+
+  console.log("parseDescription: 最終解析結果:", fields);
   return fields;
 };
 
