@@ -550,7 +550,6 @@
   display: flex;
   min-width: max-content;
   position: relative;
-  padding: 0 50vw; /* 讓內容從螢幕中心開始 */
 }
 
 .timeline-month {

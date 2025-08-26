@@ -497,14 +497,22 @@ function renderTimelineMode() {
   // 更新總滑動數量
   totalSlides = months.length;
 
-  // 自動滾動到當前時間（中心位置）
+  // 自動滾動到當前月份
   setTimeout(() => {
-    const centerPosition =
-      timelineScroll.scrollWidth / 2 - timelineScroll.clientWidth / 2;
-    timelineScroll.scrollTo({
-      left: centerPosition,
-      behavior: "smooth",
-    });
+    // 找到當前月份的元素（索引 6，因為是前後各6個月的中心）
+    const currentMonthIndex = 6;
+    const monthElements = document.querySelectorAll(".timeline-month");
+    if (monthElements[currentMonthIndex]) {
+      const currentMonthElement = monthElements[currentMonthIndex];
+      const scrollPosition =
+        currentMonthElement.offsetLeft -
+        timelineScroll.clientWidth / 2 +
+        currentMonthElement.offsetWidth / 2;
+      timelineScroll.scrollTo({
+        left: Math.max(0, scrollPosition), // 確保不會滾動到負值
+        behavior: "smooth",
+      });
+    }
   }, 100);
 }
 
