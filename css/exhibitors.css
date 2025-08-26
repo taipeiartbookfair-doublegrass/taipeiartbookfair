@@ -698,7 +698,7 @@
 /* 活動區域 - 甘特圖樣式 */
 .timeline-events-area {
   position: relative;
-  min-height: 200px;
+  min-height: 58vh;
   /* padding-left 改由 JavaScript 動態設定 */
   background: aliceblue;
 }
