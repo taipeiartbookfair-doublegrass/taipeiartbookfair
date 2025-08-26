@@ -376,7 +376,7 @@
 
   /* 時間軸模式響應式調整 */
   .timeline-month {
-    min-width: 250px;
+    min-width: 300px; /* 從 250px 增加到 300px，保持比例 */
   }
 
   .timeline-month-header {
@@ -433,7 +433,7 @@
 
   /* 更小螢幕的時間軸調整 */
   .timeline-month {
-    min-width: 200px;
+    min-width: 240px; /* 從 200px 增加到 240px，保持比例 */
   }
 
   .timeline-days {
@@ -554,8 +554,7 @@
 }
 
 .timeline-month {
-  min-width: 300px;
-
+  /* 移除固定寬度，改由 JavaScript 動態設定 */
   position: relative;
   border-right: 1px dashed darkgreen;
 }
@@ -581,20 +580,20 @@
   height: 20px;
   display: block; /* 改為 block，因為日期點現在是絕對定位 */
   font-family: "IBM Plex Mono", sans-serif;
-  width: 300px; /* 固定寬度，與月份容器一致 */
+  /* 移除固定寬度，改由 JavaScript 動態設定 */
 }
 
 .timeline-day {
   font-family: "IBM Plex Mono", sans-serif;
   flex: none; /* 移除 flex: 1，使用固定寬度 */
-  height: 10px;
+  height: 0.8rem;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 0.5rem;
+  font-size: 1rem;
   z-index: 1;
   letter-spacing: -1px;
-  width: 15px;
+  width: 1.2rem;
   position: absolute; /* 絕對定位 */
   top: 0; /* 垂直居中 */
 }
@@ -609,14 +608,14 @@
 .timeline-events-area {
   position: relative;
   min-height: 200px;
-  padding-left: 0.5rem;
+  /* padding-left 改由 JavaScript 動態設定 */
   background: aliceblue;
 }
 
 /* 活動長條樣式 - 甘特圖樣式 */
 .timeline-event-bar {
   position: absolute;
-  left: 0.5rem;
+  left: 0; /* 改為 0，因為活動區域已有 padding */
   height: 30px;
   z-index: 2;
   cursor: pointer;
