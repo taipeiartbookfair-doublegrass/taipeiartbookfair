@@ -554,14 +554,17 @@ p {
 }
 
 .calender-section {
-  width: 65vw;
+  width: 66vw;
+  max-width: 66vw; /* 確保不超出設定寬度 */
   position: relative;
   padding: 16px 16px 0px 0px;
+  overflow: hidden; /* 防止內容溢出影響其他區域 */
+  box-sizing: border-box; /* 確保padding包含在寬度內 */
 }
 
 /* Poster Section */
 .poster-section {
-  width: 35vw;
+  width: 34vw;
   height: 80vh;
   position: relative;
   padding: 16px;
