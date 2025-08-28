@@ -259,46 +259,122 @@
     <footer class="footer">
       <div class="footer-content">
         <div class="footer-left">
-          <div style="display: flex; align-items: center; gap: 10px">
-            <span
-              class="footer-text"
-              style="
-                font-family: 'Xiaoyuan-01', sans-serif;
-                color: lightgray;
-                font-size: 1.5rem;
-                vertical-align: middle;
-                transform: translateY(4px);
-              "
-              >NEWSLETTER</span
+          <!-- Mailchimp Newsletter Form -->
+          <div
+            id="mc_embed_signup"
+            style="display: flex; align-items: center; gap: 10px"
+          >
+            <form
+              action=""
+              method="post"
+              id="mc-embedded-subscribe-form"
+              name="mc-embedded-subscribe-form"
+              class="validate"
+              target="_blank"
+              style="display: flex; align-items: center; gap: 10px; margin: 0"
             >
-            <input
-              type="email"
-              placeholder="Enter your email"
-              style="
-                background: ghostwhite;
-                color: lightslategrey;
-                font-size: 1rem;
-                width: 400px;
-                outline: none;
-                font-family: inherit;
-                text-indent: 10px;
-                border-radius: 15px;
-                box-shadow: inset black 1px 1px 5px;
-              "
-            />
-            <button
-              type="submit"
-              style="
-                background: transparent;
-                color: lightgray;
-                font-size: 0.9rem;
-                border: none;
-                cursor: pointer;
-                white-space: nowrap;
-              "
-            >
-              SIGN UP
-            </button>
+              <span
+                class="footer-text"
+                style="
+                  font-family: 'Xiaoyuan-01', sans-serif;
+                  color: lightgray;
+                  font-size: 1.5rem;
+                  vertical-align: middle;
+                  transform: translateY(4px);
+                "
+                >NEWSLETTER</span
+              >
+
+              <div class="mc-field-group" style="position: relative">
+                <input
+                  type="email"
+                  value=""
+                  name="EMAIL"
+                  class="required email"
+                  id="mce-EMAIL"
+                  placeholder="Enter your email"
+                  required=""
+                  style="
+                    background: ghostwhite;
+                    color: lightslategrey;
+                    font-size: 1rem;
+                    width: 400px;
+                    height: 35px;
+                    outline: none;
+                    font-family: inherit;
+                    text-indent: 10px;
+                    border-radius: 15px;
+                    border: none;
+                    box-shadow: inset black 1px 1px 5px;
+                  "
+                />
+                <!-- Error/Success Messages -->
+                <div
+                  id="mce-responses"
+                  class="clear foot"
+                  style="
+                    position: absolute;
+                    top: 100%;
+                    left: 0;
+                    width: 100%;
+                    z-index: 1000;
+                  "
+                >
+                  <div
+                    class="response"
+                    id="mce-error-response"
+                    style="
+                      display: none;
+                      color: #e74c3c;
+                      font-size: 0.9rem;
+                      margin-top: 5px;
+                    "
+                  ></div>
+                  <div
+                    class="response"
+                    id="mce-success-response"
+                    style="
+                      display: none;
+                      color: #27ae60;
+                      font-size: 0.9rem;
+                      margin-top: 5px;
+                    "
+                  ></div>
+                </div>
+              </div>
+
+              <!-- Bot protection -->
+              <div style="position: absolute; left: -5000px" aria-hidden="true">
+                <input
+                  type="text"
+                  name="b_YOUR_BOT_FIELD_HERE"
+                  tabindex="-1"
+                  value=""
+                />
+              </div>
+
+              <div class="optionalParent">
+                <div class="clear foot">
+                  <input
+                    type="submit"
+                    value="SIGN UP"
+                    name="subscribe"
+                    id="mc-embedded-subscribe"
+                    class="button"
+                    style="
+                      background: transparent;
+                      color: lightgray;
+                      font-size: 0.9rem;
+                      border: none;
+                      cursor: pointer;
+                      white-space: nowrap;
+                      padding: 8px 16px;
+                      transition: color 0.3s ease;
+                    "
+                  />
+                </div>
+              </div>
+            </form>
           </div>
         </div>
         <div class="footer-right">
@@ -445,20 +521,68 @@
         console.log("Ticket button hidden"); // 調試用
       });
 
-      // 處理表單提交
-      const newsletterForm = document
-        .querySelector("input[type='email']")
-        .closest("div")
-        .querySelector("button");
-      if (newsletterForm) {
-        newsletterForm.addEventListener("click", (e) => {
-          e.preventDefault();
-          const email = document.querySelector("input[type='email']").value;
-          if (email) {
-            alert("感謝您的訂閱！我們會定期發送最新活動資訊給您。");
-            document.querySelector("input[type='email']").value = "";
+      // Mailchimp Newsletter Form Validation and Handling
+      (function ($) {
+        window.fnames = new Array();
+        window.ftypes = new Array();
+        fnames[0] = "EMAIL";
+        ftypes[0] = "email";
+      })(jQuery);
+
+      // Custom form submission handling for better UX
+      document
+        .getElementById("mc-embedded-subscribe-form")
+        .addEventListener("submit", function (e) {
+          const email = document.getElementById("mce-EMAIL").value;
+          const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+          if (!email) {
+            e.preventDefault();
+            showMessage("error", "請輸入您的電子郵件地址");
+            return false;
           }
+
+          if (!emailRegex.test(email)) {
+            e.preventDefault();
+            showMessage("error", "請輸入有效的電子郵件地址");
+            return false;
+          }
+
+          // Show loading state
+          const submitBtn = document.getElementById("mc-embedded-subscribe");
+          const originalText = submitBtn.value;
+          submitBtn.value = "SUBSCRIBING...";
+          submitBtn.disabled = true;
+
+          // Reset after 3 seconds regardless of outcome
+          setTimeout(() => {
+            submitBtn.value = originalText;
+            submitBtn.disabled = false;
+            document.getElementById("mce-EMAIL").value = "";
+            showMessage(
+              "success",
+              "感謝您的訂閱！我們會定期發送最新活動資訊給您。"
+            );
+          }, 3000);
         });
+
+      function showMessage(type, message) {
+        const errorDiv = document.getElementById("mce-error-response");
+        const successDiv = document.getElementById("mce-success-response");
+
+        // Hide both first
+        errorDiv.style.display = "none";
+        successDiv.style.display = "none";
+
+        if (type === "error") {
+          errorDiv.innerHTML = message;
+          errorDiv.style.display = "block";
+          setTimeout(() => (errorDiv.style.display = "none"), 5000);
+        } else {
+          successDiv.innerHTML = message;
+          successDiv.style.display = "block";
+          setTimeout(() => (successDiv.style.display = "none"), 5000);
+        }
       }
     </script>
     <script src="poster-flip.js"></script>
