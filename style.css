@@ -140,14 +140,7 @@ p {
 }
 
 /* 主要內容區域 - 確保在導航欄下方 */
-.main-content {
-  margin-top: 105px; /* Instagram/Facebook行(16px) + 導航欄(50px) + 第二個event-info(20px) + 間距(24px) */
-  position: relative;
-  z-index: 1;
-  display: flex; /* 讓三個section並排 */
-  align-items: flex-start; /* 從頂部對齊 */
-  gap: 16px; /* 三個section之間的間隔調整為16px */
-}
+/* 原本的 main-content 樣式現在由大富翁布局接管 */
 .second-content {
   position: relative;
   z-index: 1;
@@ -163,7 +156,7 @@ p {
   position: fixed;
   color: var(--primary);
   background: lightgoldenrodyellow;
-  top: 50px;
+  top: 4.4rem;
   left: 0;
   right: 0;
   border-bottom: 1px solid var(--border);
@@ -175,13 +168,14 @@ p {
 
 /* 第一個 event-info (Instagram/Facebook) */
 .social-links {
-  background-color: rgb(49, 35, 49);
-  height: 20px; /* 更小的高度 */
+  background-color: black;
+  height: 1rem;
   box-shadow: none;
-  top: 0; /* 在導航欄上方 */
+  top: 0;
   font-size: 0.8rem;
   position: fixed;
   width: 100vw;
+  left: 0px;
 }
 .social-links p {
   margin-left: 16px;
@@ -437,8 +431,48 @@ p {
 
 /* 響應式設計調整 */
 @media (max-width: 768px) {
+  /* 平板響應式 - 調整大富翁布局 */
+  .monopoly-board {
+    min-height: 100vh; /* 平板上保持延伸性 */
+    margin-top: 70px; /* 平板上的 margin */
+    grid-template-rows: 80px 1fr 80px; /* 適中的邊框尺寸 */
+    grid-template-columns: 80px 1fr 80px; /* 適中的邊框尺寸 */
+  }
+
+  .book-item {
+    font-size: 0.8rem;
+    min-height: 60px; /* 保持正方形但較小 */
+    padding: 4px;
+    aspect-ratio: 1;
+  }
+
+  .book-border-left .book-item,
+  .book-border-right .book-item {
+    min-width: 60px;
+    min-height: 60px;
+    aspect-ratio: 1;
+  }
+
+  .corner {
+    font-size: 0.8rem;
+  }
+
   .main-content {
     flex-direction: column; /* 在小螢幕上改為垂直排列 */
+    padding: 1rem; /* 適當的內邊距 */
+    gap: 1rem; /* 適當的間距 */
+    min-height: 60vh; /* 保持足夠高度 */
+  }
+
+  .poster-section,
+  .calender-section {
+    width: 100%;
+    min-height: 400px; /* 設定最小高度 */
+  }
+
+  .poster-container {
+    max-width: 350px; /* 平板上的海報尺寸 */
+    aspect-ratio: 3/4; /* 保持比例 */
   }
 
   .exhibitors-roller-section,
@@ -554,20 +588,162 @@ p {
 }
 
 .calender-section {
-  width: 66vw;
-  max-width: 66vw; /* 確保不超出設定寬度 */
+  width: 60%; /* 調整寬度 */
+  min-height: 600px; /* 設定最小高度 */
   position: relative;
-  padding: 16px 16px 0px 0px;
-  overflow: hidden; /* 防止內容溢出影響其他區域 */
+  padding: 1rem; /* 增加內邊距 */
+  overflow: visible; /* 允許內容自然延伸 */
   box-sizing: border-box; /* 確保padding包含在寬度內 */
+  display: flex;
+  flex-direction: column;
 }
 
-/* Poster Section */
-.poster-section {
-  width: 34vw;
-  height: 80vh;
+/* 大富翁式布局 */
+.monopoly-board {
+  width: 100vw;
+  min-height: 100vh; /* 改為最小高度，允許內容延伸 */
+  margin-top: 6.5rem; /* 精確計算：social(20) + navbar(71) = 91px */
   position: relative;
-  padding: 16px;
+  z-index: 1; /* 確保在 navbar 和 footer 下方 */
+  background: var(--bg);
+  display: grid;
+  grid-template-areas:
+    "top-left    book-top    top-right"
+    "book-left   main-area   book-right"
+    "bottom-left book-bottom bottom-right";
+  grid-template-rows: 120px 1fr 120px; /* 增加邊框高度，讓書籍格子更大 */
+  grid-template-columns: 120px 1fr 120px; /* 增加邊框寬度，讓書籍格子更大 */
+  box-sizing: border-box;
+  overflow: visible; /* 允許內容溢出 */
+}
+
+/* 書籍邊框樣式 */
+.book-border {
+  display: flex;
+  background: var(--primary);
+  border: 2px solid var(--border);
+}
+
+.book-border-top {
+  grid-area: book-top;
+  flex-direction: row;
+  border-bottom: 2px solid var(--border);
+}
+
+.book-border-bottom {
+  grid-area: book-bottom;
+  flex-direction: row;
+  border-top: 2px solid var(--border);
+}
+
+.book-border-left {
+  grid-area: book-left;
+  flex-direction: column;
+  border-right: 2px solid var(--border);
+}
+
+.book-border-right {
+  grid-area: book-right;
+  flex-direction: column;
+  border-left: 2px solid var(--border);
+}
+
+/* 書籍項目樣式 */
+.book-item {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--secondary);
+  border: 1px solid var(--border);
+  font-size: 1rem; /* 增大字體 */
+  font-weight: bold;
+  color: var(--primary);
+  cursor: pointer;
+  transition: all 0.3s ease;
+  writing-mode: horizontal-tb;
+  text-align: center;
+  padding: 8px; /* 增加 padding */
+  min-height: 80px; /* 增大最小高度，接近正方形 */
+  aspect-ratio: 1; /* 強制正方形比例 */
+}
+
+/* 左右邊框的書籍項目使用垂直文字 */
+.book-border-left .book-item,
+.book-border-right .book-item {
+  writing-mode: vertical-lr;
+  text-orientation: mixed;
+  min-width: 80px; /* 增大最小寬度 */
+  min-height: 80px; /* 增大最小高度 */
+  aspect-ratio: 1; /* 強制正方形比例 */
+}
+
+.book-item:hover {
+  background: var(--accent);
+  color: var(--secondary);
+  transform: scale(1.05);
+}
+
+/* 四個角落 */
+.corner {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--primary);
+  color: var(--secondary);
+  border: 2px solid var(--border);
+  font-weight: bold;
+  font-size: 1rem;
+  text-align: center;
+}
+
+.corner-top-left {
+  grid-area: top-left;
+  border-bottom: 2px solid var(--border);
+  border-right: 2px solid var(--border);
+}
+
+.corner-top-right {
+  grid-area: top-right;
+  border-bottom: 2px solid var(--border);
+  border-left: 2px solid var(--border);
+}
+
+.corner-bottom-left {
+  grid-area: bottom-left;
+  border-top: 2px solid var(--border);
+  border-right: 2px solid var(--border);
+}
+
+.corner-bottom-right {
+  grid-area: bottom-right;
+  border-top: 2px solid var(--border);
+  border-left: 2px solid var(--border);
+}
+
+/* 主要內容區域調整 */
+.main-content {
+  grid-area: main-area;
+  display: flex;
+  width: 100%;
+  min-height: 80vh; /* 設定最小高度，給內容更多空間 */
+  padding: 2rem; /* 增加內邊距，讓內容有更多呼吸空間 */
+  box-sizing: border-box;
+  background: var(--bg);
+  overflow: auto; /* 允許滾動 */
+  gap: 2rem; /* 增加 poster 和 calendar 之間的間距 */
+}
+
+/* Poster Section - 調整為新布局 */
+.poster-section {
+  width: 40%; /* 增加寬度 */
+  min-height: 600px; /* 設定最小高度 */
+  position: relative;
+  padding: 1rem; /* 增加內邊距 */
+  display: flex;
+  flex-direction: column;
+  justify-content: center; /* 垂直居中 */
+  align-items: center; /* 水平居中 */
   background: linear-gradient(
     90deg,
     rgba(0, 0, 0, 1) 0%,
@@ -592,9 +768,13 @@ p {
 .poster-container {
   perspective: 1000px;
   width: 100%;
-  height: auto;
+  max-width: 500px; /* 增加最大寬度 */
+  aspect-ratio: 3/4; /* 設定海報的標準長寬比 (寬:高 = 3:4) */
   cursor: pointer;
   position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .poster-container::after {
@@ -622,10 +802,12 @@ p {
 .poster-card {
   position: relative;
   width: 100%;
-  height: auto;
+  height: 100%;
   transform-style: preserve-3d;
   transition: transform 0.8s ease;
-  min-height: 300px; /* 確保有足夠的高度來容納內容 */
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .poster-card.flipped {
@@ -641,17 +823,22 @@ p {
   border-radius: 10px;
   top: 0;
   left: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .poster-back {
   transform: rotateY(180deg);
 }
 
-#Poster img {
+#Poster img,
+.poster {
   border-radius: 5px;
-  max-width: 100%;
   width: 100%;
-  height: auto;
+  height: 100%;
+  object-fit: cover; /* 確保圖片填滿容器且保持比例 */
+  object-position: center; /* 圖片居中顯示 */
   display: block;
 }
 
@@ -1013,5 +1200,480 @@ p {
   }
   100% {
     transform: translateX(-50%);
+  }
+}
+
+/* 手機響應式設計 - 大富翁布局 */
+@media (max-width: 480px) {
+  .monopoly-board {
+    min-height: 100vh; /* 手機上保持延伸性 */
+    margin-top: 50px; /* 手機上的 margin */
+    grid-template-rows: 60px 1fr 60px; /* 手機上的邊框尺寸 */
+    grid-template-columns: 60px 1fr 60px; /* 手機上的邊框尺寸 */
+  }
+
+  .book-item {
+    font-size: 0.6rem;
+    min-height: 40px; /* 手機上的正方形尺寸 */
+    padding: 2px;
+    aspect-ratio: 1;
+  }
+
+  .book-border-left .book-item,
+  .book-border-right .book-item {
+    min-width: 40px;
+    min-height: 40px;
+    aspect-ratio: 1;
+  }
+
+  .corner {
+    font-size: 0.6rem;
+  }
+
+  .main-content {
+    padding: 0.5rem; /* 手機上的內邊距 */
+    gap: 0.5rem; /* 手機上的間距 */
+    flex-direction: column;
+    min-height: 50vh; /* 保持足夠高度 */
+  }
+
+  .poster-section,
+  .calender-section {
+    width: 100%;
+    min-height: 300px; /* 手機上的最小高度 */
+    padding: 0.5rem;
+  }
+
+  .poster-container {
+    max-width: 280px; /* 手機上的海報尺寸 */
+    aspect-ratio: 3/4; /* 保持比例 */
+  }
+
+  /* 手機版特殊調整 */
+  .calender-section h3 {
+    font-size: 1.2rem;
+    margin-bottom: 0.5rem;
+  }
+}
+
+/* Ticket Page Styles */
+.ticket-page {
+  background: linear-gradient(
+    0deg,
+    orangered 0%,
+    rgb(207, 207, 207) 5%,
+    rgb(207, 207, 207) 95%,
+    orangered 100%
+  );
+}
+
+.ticket-hero {
+  position: absolute;
+  width: 97vw;
+  right: 0px;
+  height: 96vh;
+  background: olivedrab;
+  color: ghostwhite;
+  line-height: 2rem;
+  display: flex;
+  align-items: center;
+  position: relative;
+  margin: 16px;
+}
+
+.ticket-hero-circle-left {
+  position: absolute;
+  width: 35vw;
+  height: 35vw;
+  background: linear-gradient(
+    0deg,
+    orangered 0%,
+    rgb(207, 207, 207) 10%,
+    rgb(207, 207, 207) 90%,
+    orangered 100%
+  );
+  left: -20vw;
+  border-radius: 50%;
+  top: 53%;
+  transform: translateY(-50%);
+}
+
+.ticket-hero-content {
+  flex: 1;
+  text-align: center;
+  padding: 0.3rem 2rem;
+}
+
+.ticket-hero-title {
+  color: rgb(207, 207, 207);
+  font-size: 8rem;
+  font-family: "Inclusive sans", sans-serif;
+}
+
+.ticket-hero-circle-right {
+  position: absolute;
+  width: 35vw;
+  height: 35vw;
+  background: linear-gradient(
+    0deg,
+    orangered 0%,
+    rgb(207, 207, 207) 10%,
+    rgb(207, 207, 207) 90%,
+    orangered 100%
+  );
+  right: -20vw;
+  border-radius: 50%;
+  top: 53%;
+  transform: translateY(-50%);
+}
+
+.ticket-scroll-prompt {
+  position: absolute;
+  bottom: 2rem;
+  left: 50%;
+  transform: translateX(-50%);
+  text-align: center;
+  padding: 0.3rem 2rem;
+  font-size: 1.2rem;
+  color: rgb(207, 207, 207);
+  font-family: "Inclusive sans", sans-serif;
+  z-index: 10;
+}
+
+.ticket-main-container {
+  display: flex;
+  padding: 20px;
+  gap: 30px;
+  position: relative;
+}
+
+.ticket-nav {
+  width: 20vw;
+  position: absolute;
+  right: 0;
+  z-index: 100;
+}
+
+.ticket-nav-inner {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.ticket-nav-title {
+  font-size: 0.9rem;
+  color: #666;
+  font-family: "Inclusive sans", sans-serif;
+  margin-bottom: 10px;
+}
+
+.ticket-nav-link {
+  color: #333;
+  font-size: 0.9rem;
+  font-family: "Inclusive sans", sans-serif;
+  text-decoration: none;
+  padding: 5px 0;
+  border-bottom: 1px solid #ddd;
+  display: block;
+  transition: all 0.3s ease;
+}
+
+.ticket-nav-link:hover {
+  color: #666;
+}
+
+.ticket-content {
+  width: 75%;
+}
+
+.ticket-intro {
+  font-size: 1.2rem;
+  color: black;
+  font-family: "Inclusive sans", sans-serif;
+  margin-bottom: 30px;
+  line-height: 1.6;
+}
+
+.ticket-sections {
+  font-size: 1.2rem;
+  color: black;
+  font-family: "Inclusive sans", sans-serif;
+}
+
+.ticket-section {
+  padding: 20px 0;
+  scroll-margin-top: 100px;
+}
+
+.ticket-section-title {
+  font-family: "Inclusive sans", sans-serif !important;
+  margin: 0 0 15px 0;
+  font-size: 2rem;
+  color: #333;
+  font-weight: bold;
+  text-align: left;
+}
+
+.ticket-section-desc {
+  margin: 0 0 20px 0;
+  line-height: 1.6;
+  color: #555;
+}
+
+.ticket-sub-section {
+  padding: 15px 0;
+  margin-bottom: 20px;
+}
+
+.ticket-sub-layout {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 8px;
+}
+
+.ticket-sub-info h4 {
+  margin: 0 0 5px 0;
+  font-size: 1.4rem;
+  color: olivedrab;
+  font-weight: bold;
+}
+
+.ticket-sub-desc {
+  margin: 0 0 8px 0;
+  font-size: 0.95rem;
+  color: #555;
+  line-height: 1.4;
+}
+
+.ticket-sub-date {
+  margin: 0;
+  font-size: 0.9rem;
+  color: #666;
+}
+
+.ticket-sub-pricing {
+  text-align: right;
+  margin-left: 20px;
+}
+
+.ticket-price {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: olivedrab;
+}
+
+.ticket-quantity {
+  font-size: 0.9rem;
+  color: #666;
+}
+
+.ticket-btn {
+  display: inline-block;
+  background: olivedrab;
+  color: white;
+  padding: 8px 16px;
+  border-radius: 15px;
+  text-decoration: none;
+  font-weight: bold;
+  font-size: 0.9rem;
+  transition: all 0.3s ease;
+}
+
+.ticket-btn-large {
+  padding: 12px 24px;
+  border-radius: 25px;
+}
+
+.ticket-main-layout {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.ticket-main-price {
+  font-size: 1.8rem;
+  font-weight: bold;
+  color: olivedrab;
+}
+
+.ticket-deadline {
+  margin: 0;
+  font-size: 0.9rem;
+  color: #666;
+  text-align: right;
+}
+
+.ticket-divider {
+  border: 1px solid lightslategrey;
+}
+
+.ticket-spacing {
+  margin-bottom: 100px;
+}
+
+/* Language Switch Styles */
+.language-switch {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  z-index: 200;
+}
+
+.lang-btn {
+  background: rgba(255, 255, 255, 0.2);
+  border: 2px solid rgb(207, 207, 207);
+  color: rgb(207, 207, 207);
+  padding: 8px 16px;
+  border-radius: 20px;
+  cursor: pointer;
+  font-family: "Inclusive sans", sans-serif;
+  font-size: 0.9rem;
+  font-weight: bold;
+  transition: all 0.3s ease;
+  backdrop-filter: blur(10px);
+}
+
+.lang-btn:hover {
+  background: rgba(255, 255, 255, 0.3);
+  transform: scale(1.05);
+}
+
+.lang-btn:active {
+  transform: scale(0.95);
+}
+
+/* Mobile Responsive Styles for Ticket Page */
+@media (max-width: 768px) {
+  .ticket-hero {
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100vh;
+    width: 100vw;
+    right: 0;
+    margin: 0;
+    padding: 20px 0;
+  }
+
+  .ticket-hero-circle-left {
+    position: absolute;
+    top: -15vw;
+    left: 50%;
+    transform: translateX(-50%) translateY(-40%);
+    width: 60vw;
+    height: 60vw;
+  }
+
+  .ticket-hero-circle-right {
+    position: absolute;
+    bottom: -15vw;
+    left: 50%;
+    transform: translateX(-50%) translateY(80%);
+    width: 60vw;
+    height: 60vw;
+    right: auto;
+    background: linear-gradient(
+      0deg,
+      rgb(207, 207, 207) 0%,
+      rgb(207, 207, 207) 10%,
+      rgb(207, 207, 207) 90%,
+      orangered 100%
+    );
+  }
+
+  .ticket-hero-content {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem;
+    z-index: 10;
+  }
+
+  .ticket-hero-title {
+    font-size: 4rem;
+    writing-mode: vertical-rl;
+    text-orientation: mixed;
+    text-align: center;
+    line-height: 1.2;
+  }
+
+  .ticket-scroll-prompt {
+    bottom: 10px;
+    font-size: 1rem;
+    z-index: 15;
+    color: orangered;
+  }
+
+  .language-switch {
+    top: 40px;
+    right: 20px;
+    z-index: 20;
+  }
+
+  /* 手機版主要內容區域 */
+  .ticket-main-container {
+    flex-direction: column;
+    padding: 15px;
+    gap: 20px;
+  }
+
+  .ticket-nav {
+    width: 100%;
+    position: static;
+    order: 1;
+    margin-bottom: 20px;
+  }
+
+  .ticket-nav-inner {
+    flex-direction: colmn;
+    flex-wrap: wrap;
+    gap: 10px;
+    justify-content: center;
+  }
+
+  .ticket-nav-title {
+    width: 100%;
+    text-align: center;
+    margin-bottom: 15px;
+  }
+
+  .ticket-nav-link {
+    text-align: center;
+    padding: 8px 15px;
+    margin: 0;
+    border-bottom: 1px solid olive;
+    margin: 0;
+  }
+
+  .ticket-content {
+    width: 100%;
+    order: 2;
+  }
+
+  .ticket-intro {
+    font-size: 1rem;
+    margin-bottom: 20px;
+  }
+
+  .ticket-section-title {
+    font-size: 1.5rem;
+  }
+
+  .ticket-sub-layout {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .ticket-sub-pricing {
+    text-align: left;
+    margin-left: 0;
+  }
+
+  .ticket-main-layout {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 15px;
   }
 }

@@ -1,0 +1,638 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>票券</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=BioRhyme+Expanded:wght@200;300;400;700;800&family=IBM+Plex+Mono:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100;1,200;1,300;1,400;1,500;1,600;1,700&family=IBM+Plex+Sans+JP&family=IBM+Plex+Sans:ital,wght@0,100..700;1,100..700&family=IBM+Plex+Serif:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100;1,200;1,300;1,400;1,500;1,600;1,700&family=Libre+Franklin:ital,wght@0,100..900;1,100..900&family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="css/font.css" />
+    <link rel="stylesheet" href="css/exhibitors.css" />
+  </head>
+  <body class="ticket-page">
+    <div class="ticket-hero">
+      <div class="ticket-hero-circle-left"></div>
+      <div class="ticket-hero-content">
+        <p class="ticket-hero-title">Tickets | 購票</p>
+      </div>
+      <div class="ticket-hero-circle-right"></div>
+      <div class="ticket-scroll-prompt">
+        <span data-zh="↓<br />往下滑" data-en="↓<br />Scroll Down"
+          >↓<br />往下滑</span
+        >
+      </div>
+      <!-- 語言切換按鈕 -->
+      <div class="language-switch">
+        <button id="lang-btn" class="lang-btn">EN</button>
+      </div>
+    </div>
+
+    <!-- 主要內容區域 -->
+    <div class="ticket-main-container">
+      <!-- 右側浮動標籤導航 -->
+      <div class="ticket-nav">
+        <div class="ticket-nav-inner">
+          <div
+            class="ticket-nav-title"
+            data-zh="票種類型："
+            data-en="Ticket Types:"
+          >
+            票種類型：
+          </div>
+          <a
+            href="#general-ticket"
+            class="ticket-nav-link"
+            data-zh="一般票"
+            data-en="General Ticket"
+            >一般票</a
+          >
+          <a
+            href="#merchandise-ticket"
+            class="ticket-nav-link"
+            data-zh="周邊票組"
+            data-en="Merchandise Bundle"
+            >周邊票組</a
+          >
+          <a
+            href="#student-ticket"
+            class="ticket-nav-link"
+            data-zh="學生票"
+            data-en="Student  Ticket"
+            >學生團體票</a
+          >
+          <a
+            href="#discount-ticket"
+            class="ticket-nav-link"
+            data-zh="優待票"
+            data-en="Discount Ticket"
+            >優待票</a
+          >
+          <a
+            href="#onsite-ticket"
+            class="ticket-nav-link"
+            data-zh="現場票"
+            data-en="On-site Ticket"
+            >現場票</a
+          >
+        </div>
+      </div>
+
+      <!-- 左側：介紹文字 + 票券內容 -->
+      <div class="ticket-content">
+        <!-- 介紹文字 -->
+        <div
+          class="ticket-intro"
+          data-zh="歡迎來到台北藝術書展購票頁面。您可以在此找到書展的所有票種，展期為11月21-24日於華山文創園區舉辦。<b>請注意：</b>這些票券為台北藝術書展2025入場券。書展期間部分工作坊可能需要額外收費參與。"
+          data-en="Welcome to the Taipei Art Book Fair ticket shop. Here you can find all available ticket types for the Fair, taking place from November 21–24 at Huashan Creative Park. <b>Please note:</b> these tickets grant entry to the Taipei Art Book Fair 2025. Some workshops during the Fair may require an additional fee to participate."
+        >
+          歡迎來到台北藝術書展購票頁面。您可以在此找到書展的所有票種，展期為11月21-24日於華山文創園區舉辦。
+          <b>請注意：</b
+          >這些票券為台北藝術書展2025入場券。書展期間部分工作坊可能需要額外收費參與。
+        </div>
+
+        <!-- 票券內容區域 -->
+        <div class="ticket-sections">
+          <!-- 一般票 -->
+          <div id="general-ticket" class="ticket-section">
+            <h3
+              class="ticket-section-title"
+              data-zh="一般票"
+              data-en="General Ticket"
+            >
+              一般票
+            </h3>
+            <p
+              class="ticket-section-desc"
+              data-zh="標準入場票券，可參加台北藝術書展所有展覽活動。適合所有參觀者，享受完整的藝術書展體驗。提供多種購票時段和價格選擇。"
+              data-en="Standard admission tickets for all Taipei Art Book Fair exhibitions and activities. Suitable for all visitors to enjoy the complete art book fair experience. Multiple booking periods and price options available."
+            >
+              標準入場票券，可參加台北藝術書展所有展覽活動。適合所有參觀者，享受完整的藝術書展體驗。提供多種購票時段和價格選擇。
+            </p>
+
+            <!-- 早鳥票 -->
+            <div class="ticket-sub-section">
+              <div class="ticket-sub-layout">
+                <div class="ticket-sub-info">
+                  <h4 data-zh="早鳥票" data-en="Early Bird">早鳥票</h4>
+                  <p
+                    class="ticket-sub-desc"
+                    data-zh="最優惠的票價，數量有限，售完即止。適合提前規劃的參觀者。"
+                    data-en="Best price available, limited quantity, while supplies last. Perfect for advance planners."
+                  >
+                    最優惠的票價，數量有限，售完即止。適合提前規劃的參觀者。
+                  </p>
+                  <p
+                    class="ticket-sub-date"
+                    data-zh="開放日期：2025/09/01 - 2025/09/07"
+                    data-en="Available: 2025/09/01 - 2025/09/07"
+                  >
+                    開放日期：2025/09/01 - 2025/09/07
+                  </p>
+                </div>
+                <div class="ticket-sub-pricing">
+                  <div class="ticket-price">NT$ 300</div>
+                  <div
+                    class="ticket-quantity"
+                    data-zh="限量 100 張"
+                    data-en="Limited 100 tickets"
+                  >
+                    限量 100 張
+                  </div>
+                </div>
+              </div>
+              <a
+                id="early-bird-btn"
+                href="#"
+                class="ticket-btn"
+                data-zh="立即購票"
+                data-en="Buy Now"
+                >立即購票</a
+              >
+            </div>
+
+            <!-- 預售票 -->
+            <div class="ticket-sub-section">
+              <div class="ticket-sub-layout">
+                <div class="ticket-sub-info">
+                  <h4 data-zh="預售票" data-en="Presale Ticket">預售票</h4>
+                  <p
+                    class="ticket-sub-desc"
+                    data-zh="標準預售價格，提供充足數量。適合大部分參觀者的選擇。"
+                    data-en="Standard presale price with adequate quantity. Perfect choice for most visitors."
+                  >
+                    標準預售價格，提供充足數量。適合大部分參觀者的選擇。
+                  </p>
+                  <p
+                    class="ticket-sub-date"
+                    data-zh="開放日期：2025/09/08 -"
+                    data-en="Available: 2025/09/08 -"
+                  >
+                    開放日期：2025/09/08 -
+                  </p>
+                </div>
+                <div class="ticket-sub-pricing">
+                  <div class="ticket-price">NT$ 380</div>
+                  <div
+                    class="ticket-quantity"
+                    data-zh="限量 2000 張"
+                    data-en="Limited 2000 tickets"
+                  >
+                    限量 2000 張
+                  </div>
+                </div>
+              </div>
+              <a
+                id="presale-btn"
+                href="#"
+                class="ticket-btn"
+                data-zh="立即購票"
+                data-en="Buy Now"
+                >立即購票</a
+              >
+            </div>
+
+            <!-- 快速通關票 -->
+            <div class="ticket-sub-section">
+              <div class="ticket-sub-layout">
+                <div class="ticket-sub-info">
+                  <h4 data-zh="快速通關" data-en="Fast Pass">快速通關</h4>
+                  <p
+                    class="ticket-sub-desc"
+                    data-zh="享受優先入場服務，避免排隊等候。適合時間寶貴的參觀者。"
+                    data-en="Enjoy priority entry service and skip the queue. Perfect for time-conscious visitors."
+                  >
+                    享受優先入場服務，避免排隊等候。適合時間寶貴的參觀者。
+                  </p>
+                  <p
+                    class="ticket-sub-date"
+                    data-zh="開放日期：2025/11/21 - 2025/11/23"
+                    data-en="Available: 2025/11/21 - 2025/11/23"
+                  >
+                    開放日期：2025/11/21 - 2025/11/23
+                  </p>
+                </div>
+                <div class="ticket-sub-pricing">
+                  <div class="ticket-price">NT$ 499</div>
+                  <div
+                    class="ticket-quantity"
+                    data-zh="無限量"
+                    data-en="Unlimited"
+                  >
+                    無限量
+                  </div>
+                </div>
+              </div>
+              <a
+                id="fast-pass-btn"
+                href="#"
+                class="ticket-btn"
+                data-zh="立即購票"
+                data-en="Buy Now"
+                >立即購票</a
+              >
+            </div>
+          </div>
+
+          <hr class="ticket-divider" />
+
+          <!-- 周邊票組 -->
+          <div id="merchandise-ticket" class="ticket-section">
+            <h3
+              class="ticket-section-title"
+              data-zh="周邊票組"
+              data-en="Merchandise Bundle"
+            >
+              周邊票組
+            </h3>
+            <p
+              class="ticket-section-desc"
+              data-zh="包含限定周邊商品的特殊票券組合，讓您同時獲得入場券與精美紀念品。"
+              data-en="Special ticket bundles that include limited merchandise, giving you both entry tickets and exclusive souvenirs."
+            >
+              包含限定周邊商品的特殊票券組合，讓您同時獲得入場券與精美紀念品。
+            </p>
+
+            <!-- T恤預購款+票 -->
+            <div class="ticket-sub-section">
+              <div class="ticket-sub-layout">
+                <div class="ticket-sub-info">
+                  <h4
+                    data-zh="T恤預購款+票"
+                    data-en="T-shirt Pre-order + Ticket"
+                  >
+                    T恤預購款+票
+                  </h4>
+                  <p
+                    class="ticket-sub-desc"
+                    data-zh="包含入場票券與限定款T恤，數量有限，售完即止。"
+                    data-en="Includes entry ticket and limited edition T-shirt. Limited quantity, while supplies last."
+                  >
+                    包含入場票券與限定款T恤，數量有限，售完即止。
+                  </p>
+                  <p
+                    class="ticket-sub-date"
+                    data-zh="開放日期：待定"
+                    data-en="Available: TBD"
+                  >
+                    開放日期：待定
+                  </p>
+                </div>
+                <div class="ticket-sub-pricing">
+                  <div
+                    class="ticket-price"
+                    data-zh="NT$ 待定"
+                    data-en="NT$ TBD"
+                  >
+                    NT$ 待定
+                  </div>
+                  <div
+                    class="ticket-quantity"
+                    data-zh="限量 66 組"
+                    data-en="Limited 66 sets"
+                  >
+                    限量 66 組
+                  </div>
+                </div>
+              </div>
+              <a
+                id="tshirt-btn"
+                href="#"
+                class="ticket-btn"
+                data-zh="立即購票"
+                data-en="Buy Now"
+                >立即購票</a
+              >
+            </div>
+
+            <!-- 草率簿+票 -->
+            <div class="ticket-sub-section">
+              <div class="ticket-sub-layout">
+                <div class="ticket-sub-info">
+                  <h4 data-zh="草率簿+票" data-en="Notebook + Ticket">
+                    草率簿+票
+                  </h4>
+                  <p
+                    class="ticket-sub-desc"
+                    data-zh="包含入場票券與限定草率簿，無限量供應。"
+                    data-en="Includes entry ticket and limited notebook. Unlimited supply."
+                  >
+                    包含入場票券與限定草率簿，無限量供應。
+                  </p>
+                  <p
+                    class="ticket-sub-date"
+                    data-zh="開放日期：待定"
+                    data-en="Available: TBD"
+                  >
+                    開放日期：待定
+                  </p>
+                </div>
+                <div class="ticket-sub-pricing">
+                  <div
+                    class="ticket-price"
+                    data-zh="NT$ 待定"
+                    data-en="NT$ TBD"
+                  >
+                    NT$ 待定
+                  </div>
+                  <div
+                    class="ticket-quantity"
+                    data-zh="無限量"
+                    data-en="Unlimited"
+                  >
+                    無限量
+                  </div>
+                </div>
+              </div>
+              <a
+                id="notebook-btn"
+                href="#"
+                class="ticket-btn"
+                data-zh="立即購票"
+                data-en="Buy Now"
+                >立即購票</a
+              >
+            </div>
+          </div>
+
+          <hr class="ticket-divider" />
+
+          <!-- 學生票 -->
+          <div id="student-ticket" class="ticket-section">
+            <h3
+              class="ticket-section-title"
+              data-zh="學生團體票"
+              data-en="Student Group Ticket"
+            >
+              學生團體票
+            </h3>
+            <p class="ticket-section-desc" data-zh="10人⭡" data-en="10+ people">
+              10人⭡
+            </p>
+            <div class="ticket-sub-section">
+              <div class="ticket-sub-layout">
+                <div class="ticket-sub-info">
+                  <p
+                    class="ticket-sub-date"
+                    data-zh="售票期限：2025/09/08 -"
+                    data-en="Sale Period: 2025/09/08 -"
+                  >
+                    售票期限：2025/09/08 -
+                  </p>
+                </div>
+                <div class="ticket-sub-pricing">
+                  <div
+                    class="ticket-price"
+                    data-zh="NT$ 300/人"
+                    data-en="NT$ 300/person"
+                  >
+                    NT$ 300/人
+                  </div>
+                </div>
+              </div>
+              <a
+                id="student-btn"
+                href="#"
+                class="ticket-btn"
+                data-zh="立即購票"
+                data-en="Buy Now"
+                >立即購票</a
+              >
+            </div>
+          </div>
+
+          <hr class="ticket-divider" />
+
+          <!-- 優待票 -->
+          <div id="discount-ticket" class="ticket-section">
+            <h3
+              class="ticket-section-title"
+              data-zh="優待票"
+              data-en="Discount Ticket"
+            >
+              優待票
+            </h3>
+            <p
+              class="ticket-section-desc"
+              data-zh="適用於65歲以上長者、身心障礙者及其陪同者。入場時請出示相關證明文件，享受特殊優惠價格。體現社會關懷，讓更多人能夠參與藝術文化活動。"
+              data-en="For seniors 65+, people with disabilities and their companions. Please present relevant ID at entry for special discount price. Reflecting social care, enabling more people to participate in art and cultural activities."
+            >
+              適用於65歲以上長者、身心障礙者及其陪同者。入場時請出示相關證明文件，享受特殊優惠價格。體現社會關懷，讓更多人能夠參與藝術文化活動。
+            </p>
+            <div class="ticket-sub-section">
+              <div class="ticket-sub-layout">
+                <div class="ticket-sub-info">
+                  <p
+                    class="ticket-sub-date"
+                    data-zh="售票期限：2025/09/08 - (需出示相關證明)"
+                    data-en="Sale Period: 2025/09/08 - (ID required)"
+                  >
+                    售票期限：2025/09/08 - (需出示相關證明)
+                  </p>
+                </div>
+                <div class="ticket-sub-pricing">
+                  <div class="ticket-price">NT$ 250</div>
+                </div>
+              </div>
+              <a
+                id="discount-btn"
+                href="#"
+                class="ticket-btn"
+                data-zh="立即購票"
+                data-en="Buy Now"
+                >立即購票</a
+              >
+            </div>
+          </div>
+
+          <hr class="ticket-divider" />
+
+          <!-- 現場票 -->
+          <div id="onsite-ticket" class="ticket-section">
+            <h3
+              class="ticket-section-title"
+              data-zh="現場票"
+              data-en="On-site Ticket"
+            >
+              現場票
+            </h3>
+            <p
+              class="ticket-section-desc"
+              data-zh="活動當天現場購買的票券。適合臨時決定參觀的朋友，但可能需要排隊等候。"
+              data-en="Tickets purchased on-site on the day of the event. Perfect for last-minute visitors, but may require waiting in line."
+            >
+              活動當天現場購買的票券。適合臨時決定參觀的朋友，但可能需要排隊等候。
+            </p>
+            <p
+              class="ticket-deadline"
+              data-zh="活動當天現場販售。"
+              data-en="Available on-site on event day."
+            >
+              活動當天現場販售。
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="ticket-spacing"></div>
+    <br /><br /><br />
+
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        // 錨點跳轉功能
+        function initAnchorLinks() {
+          const links = document.querySelectorAll('a[href^="#"]');
+          links.forEach((link) => {
+            link.addEventListener("click", function (e) {
+              e.preventDefault();
+              const targetId = this.getAttribute("href").substring(1);
+              const targetElement = document.getElementById(targetId);
+
+              if (targetElement) {
+                const targetRect = targetElement.getBoundingClientRect();
+                const currentScroll = window.pageYOffset;
+                const targetPosition = currentScroll + targetRect.top - 100;
+
+                window.scrollTo({
+                  top: Math.max(0, targetPosition),
+                  behavior: "smooth",
+                });
+              }
+            });
+          });
+        }
+
+        // 售票按鈕狀態控制
+        function updateTicketButtons() {
+          const currentDate = new Date();
+
+          // 票種開放日期設定
+          const ticketDates = {
+            "early-bird": {
+              start: new Date("2025-09-01"),
+              end: new Date("2025-09-07"),
+            },
+            presale: {
+              start: new Date("2025-09-08"),
+              end: new Date("2025-11-20"),
+            },
+            "fast-pass": {
+              start: new Date("2025-11-21"),
+              end: new Date("2025-11-23"),
+            },
+            tshirt: { start: null, end: null }, // 待定
+            notebook: { start: null, end: null }, // 待定
+            student: {
+              start: new Date("2025-09-08"),
+              end: new Date("2025-11-20"),
+            },
+            discount: {
+              start: new Date("2025-09-08"),
+              end: new Date("2025-11-20"),
+            },
+          };
+
+          // 更新按鈕狀態的函數
+          function updateButton(buttonId, dateRange) {
+            const button = document.getElementById(buttonId);
+            if (!button) return;
+
+            const isAvailable =
+              dateRange.start &&
+              dateRange.end &&
+              currentDate >= dateRange.start &&
+              currentDate <= dateRange.end;
+
+            // 獲取當前語言
+            const currentLang =
+              document.getElementById("lang-btn").textContent === "中文"
+                ? "en"
+                : "zh";
+
+            if (isAvailable) {
+              // 開放狀態
+              button.style.background = "olivedrab";
+              button.style.color = "white";
+              button.style.cursor = "pointer";
+
+              // 根據語言設置按鈕文字
+              const buyText = currentLang === "zh" ? "立即購票" : "Buy Now";
+              button.textContent = buyText;
+
+              // 更新 data 屬性以便語言切換時使用
+              button.setAttribute("data-zh", "立即購票");
+              button.setAttribute("data-en", "Buy Now");
+
+              button.onclick = null;
+            } else {
+              // 未開放狀態
+              button.style.background = "#ccc";
+              button.style.color = "#666";
+              button.style.cursor = "not-allowed";
+
+              // 根據語言設置按鈕文字
+              const unavailableText =
+                currentLang === "zh" ? "未開放" : "Unavailable";
+              button.textContent = unavailableText;
+
+              // 更新 data 屬性以便語言切換時使用
+              button.setAttribute("data-zh", "未開放");
+              button.setAttribute("data-en", "Unavailable");
+
+              button.onclick = function (e) {
+                e.preventDefault();
+                return false;
+              };
+            }
+          }
+
+          // 更新各個按鈕
+          updateButton("early-bird-btn", ticketDates["early-bird"]);
+          updateButton("presale-btn", ticketDates["presale"]);
+          updateButton("fast-pass-btn", ticketDates["fast-pass"]);
+          updateButton("tshirt-btn", ticketDates["tshirt"]);
+          updateButton("notebook-btn", ticketDates["notebook"]);
+          updateButton("student-btn", ticketDates["student"]);
+          updateButton("discount-btn", ticketDates["discount"]);
+        }
+
+        // 語言切換功能
+        function initLanguageSwitch() {
+          let currentLang = "zh"; // 預設中文
+          const langBtn = document.getElementById("lang-btn");
+
+          function switchLanguage() {
+            currentLang = currentLang === "zh" ? "en" : "zh";
+
+            // 更新按鈕文字
+            langBtn.textContent = currentLang === "zh" ? "EN" : "中文";
+
+            // 更新所有有翻譯屬性的元素
+            const elementsWithTranslation =
+              document.querySelectorAll("[data-zh][data-en]");
+            elementsWithTranslation.forEach((element) => {
+              const text = element.getAttribute(`data-${currentLang}`);
+              if (text) {
+                element.innerHTML = text;
+              }
+            });
+
+            // 更新按鈕狀態（因為按鈕文字可能被語言切換影響）
+            updateTicketButtons();
+          }
+
+          langBtn.addEventListener("click", switchLanguage);
+        }
+
+        // 初始化功能
+        initAnchorLinks();
+        updateTicketButtons();
+        initLanguageSwitch();
+      });
+    </script>
+  </body>
+</html>

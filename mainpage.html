@@ -15,15 +15,16 @@
     <link rel="stylesheet" href="css/exhibitors.css" />
   </head>
   <body>
-    <div class="social-links">
-      <div style="display: flex; justify-content: flex-end; margin-right: 16px">
-        <p style="color: ghostwhite">INSTAGRAM</p>
-        <p style="color: ghostwhite">FACEBOOK</p>
-      </div>
-    </div>
-
     <!-- 導航欄 -->
     <nav class="navbar">
+      <div class="social-links">
+        <div
+          style="display: flex; justify-content: flex-end; margin-right: 16px"
+        >
+          <p style="color: ghostwhite">INSTAGRAM</p>
+          <p style="color: ghostwhite">FACEBOOK</p>
+        </div>
+      </div>
       <div class="container">
         <div class="nav-content">
           <a
@@ -85,21 +86,63 @@
       </div>
     </div>
 
-    <!-- start of main-content -->
-    <div class="main-content">
-      <!-- start of poster-section -->
-      <section class="poster-section" id="Poster">
-        <div class="poster-container" data-flipped="false">
-          <div class="poster-card">
-            <div class="poster-front">
-              <img class="poster" src="image/25TPABF_poster_RGB.png" />
-            </div>
-            <div class="poster-back">
-              <img class="poster" src="image/25TPABF_poster_RGB-2.png" />
+    <!-- start of monopoly-style layout -->
+    <div class="monopoly-board">
+      <!-- 四個角落 -->
+      <div class="corner corner-top-left"></div>
+      <div class="corner corner-top-right"></div>
+      <div class="corner corner-bottom-left"></div>
+      <div class="corner corner-bottom-right"></div>
+
+      <!-- 上方書籍邊框 -->
+      <div class="book-border book-border-top">
+        <div class="book-item">ZINE 01</div>
+        <div class="book-item">ZINE 02</div>
+        <div class="book-item">ZINE 03</div>
+        <div class="book-item">ZINE 04</div>
+        <div class="book-item">ZINE 05</div>
+        <div class="book-item">ZINE 06</div>
+        <div class="book-item">ZINE 07</div>
+        <div class="book-item">ZINE 08</div>
+      </div>
+
+      <!-- 左方書籍邊框 -->
+      <div class="book-border book-border-left">
+        <div class="book-item">ZINE 09</div>
+        <div class="book-item">ZINE 10</div>
+        <div class="book-item">ZINE 11</div>
+        <div class="book-item">ZINE 12</div>
+        <div class="book-item">ZINE 13</div>
+        <div class="book-item">ZINE 14</div>
+      </div>
+
+      <!-- 下方書籍邊框 -->
+      <div class="book-border book-border-bottom">
+        <div class="book-item">ZINE 21</div>
+        <div class="book-item">ZINE 22</div>
+        <div class="book-item">ZINE 23</div>
+        <div class="book-item">ZINE 24</div>
+        <div class="book-item">ZINE 25</div>
+        <div class="book-item">ZINE 26</div>
+        <div class="book-item">ZINE 27</div>
+        <div class="book-item">ZINE 28</div>
+      </div>
+
+      <!-- 中央主要內容區域 -->
+      <div class="main-content">
+        <!-- start of poster-section -->
+        <section class="poster-section" id="Poster">
+          <div class="poster-container" data-flipped="false">
+            <div class="poster-card">
+              <div class="poster-front">
+                <img class="poster" src="image/25TPABF_poster_RGB.png" />
+              </div>
+              <div class="poster-back">
+                <img class="poster" src="image/25TPABF_poster_RGB-2.png" />
+              </div>
             </div>
           </div>
-        </div>
-        <!-- <div
+          <!-- <div
           style="
             width: 100%;
             display: flex;
@@ -134,61 +177,70 @@
             →
           </span>
         </div> -->
-      </section>
-      <!-- end of poster-section -->
+        </section>
+        <!-- end of poster-section -->
 
-      <section class="calender-section" id="calender">
-        <h3>PROGRAMS</h3>
+        <section class="calender-section" id="calender">
+          <h3>PROGRAMS</h3>
 
-        <!-- 頂部控制區域：箭頭按鈕和訂閱文字 -->
-        <div class="calender-header">
-          <!-- 模式切換按鈕 -->
-          <div class="calender-mode-switch">
-            <button class="mode-btn active" data-mode="card" id="cardMode">
-              ＋＋
-            </button>
-            <button class="mode-btn" data-mode="timeline" id="timelineMode">
-              ｜｜
-            </button>
-          </div>
+          <!-- 頂部控制區域：箭頭按鈕和訂閱文字 -->
+          <div class="calender-header">
+            <!-- 模式切換按鈕 -->
+            <div class="calender-mode-switch">
+              <button class="mode-btn active" data-mode="card" id="cardMode">
+                ＋＋
+              </button>
+              <button class="mode-btn" data-mode="timeline" id="timelineMode">
+                ｜｜
+              </button>
+            </div>
 
-          <p class="calender-subscribe">Suscribe to TPABF's calender</p>
+            <p class="calender-subscribe">
+              <a
+                href="https://calendar.google.com/calendar/u/2?cid=OTA1MjdmNjdmYTQ2MmM4M2UxODRiMGM2MmRlZjEwZWJjOGIwMGNjOGM2N2E1YjgzYWYyYWZiOTBhMWJkYjI5M0Bncm91cC5jYWxlbmRhci5nb29nbGUuY29t"
+                >Suscribe to TPABF's calender</a
+              >
+            </p>
 
-          <!-- 左左右右 -->
-          <div class="calender-nav-group">
-            <button class="calender-nav-btn prev" id="prevBtn">←</button>
-            <button class="calender-nav-btn next" id="nextBtn">→</button>
-          </div>
-        </div>
-
-        <!-- 日曆內容區域 -->
-        <div class="calender-content">
-          <!-- 卡片模式容器 -->
-          <div class="calender-mode-container card-mode" id="cardModeContainer">
-            <!-- 日曆滑動容器 -->
-            <div class="calender-scroll-container" id="calenderScroll">
-              <div id="eventsTimeline" class="events-timeline">
-                <!-- 日曆事件將由 calender.js 動態生成 -->
-              </div>
+            <!-- 左左右右 -->
+            <div class="calender-nav-group">
+              <button class="calender-nav-btn prev" id="prevBtn">←</button>
+              <button class="calender-nav-btn next" id="nextBtn">→</button>
             </div>
           </div>
 
-          <!-- 時間軸模式容器 -->
-          <div
-            class="calender-mode-container timeline-mode hidden"
-            id="timelineModeContainer"
-          >
-            <div class="timeline-scroll-container" id="timelineScroll">
-              <div class="timeline-calendar" id="timelineCalendar">
-                <!-- 時間軸日曆將由 JavaScript 動態生成 -->
+          <!-- 日曆內容區域 -->
+          <div class="calender-content">
+            <!-- 卡片模式容器 -->
+            <div
+              class="calender-mode-container card-mode"
+              id="cardModeContainer"
+            >
+              <!-- 日曆滑動容器 -->
+              <div class="calender-scroll-container" id="calenderScroll">
+                <div id="eventsTimeline" class="events-timeline">
+                  <!-- 日曆事件將由 calender.js 動態生成 -->
+                </div>
+              </div>
+            </div>
+
+            <!-- 時間軸模式容器 -->
+            <div
+              class="calender-mode-container timeline-mode hidden"
+              id="timelineModeContainer"
+            >
+              <div class="timeline-scroll-container" id="timelineScroll">
+                <div class="timeline-calendar" id="timelineCalendar">
+                  <!-- 時間軸日曆將由 JavaScript 動態生成 -->
+                </div>
               </div>
             </div>
           </div>
-        </div>
-      </section>
+        </section>
+      </div>
+      <!-- end of main-content -->
     </div>
-
-    <!-- end of main-content -->
+    <!-- end of monopoly-board -->
 
     <!-- 浮動的Ticket按鈕 -->
     <div class="floating-ticket" id="floatingTicket" style="display: none">
