@@ -13,6 +13,429 @@
     <link rel="stylesheet" href="style.css" />
     <link rel="stylesheet" href="css/font.css" />
     <link rel="stylesheet" href="css/exhibitors.css" />
+    <style>
+      /* Ticket Page Styles */
+      .ticket-page {
+        background: linear-gradient(
+          0deg,
+          ghostwhite 0%,
+          #455e44 5%,
+          #455e44 90%,
+          ghostwhite 100%
+        );
+      }
+
+      .ticket-hero {
+        position: absolute;
+        width: 97vw;
+        right: 0px;
+        height: 96vh;
+        background: #781012;
+        color: ghostwhite;
+        line-height: 2rem;
+        display: flex;
+        align-items: center;
+        position: relative;
+        margin: 16px;
+      }
+
+      .ticket-hero-circle-left {
+        position: absolute;
+        width: 35vw;
+        height: 35vw;
+        background: linear-gradient(
+          0deg,
+          ghostwhite 0%,
+          #455e44 10%,
+          #455e44 90%,
+          ghostwhite 100%
+        );
+        left: -20vw;
+        border-radius: 50%;
+        top: 53%;
+        transform: translateY(-50%);
+      }
+
+      .ticket-hero-content {
+        flex: 1;
+        text-align: center;
+        padding: 0.3rem 2rem;
+      }
+
+      .ticket-hero-title {
+        color: yellowgreen;
+        font-size: 8rem;
+        font-family: "Inclusive sans", sans-serif;
+      }
+
+      .ticket-hero-circle-right {
+        position: absolute;
+        width: 35vw;
+        height: 35vw;
+        background: linear-gradient(
+          0deg,
+          ghostwhite 0%,
+          #455e44 10%,
+          #455e44 90%,
+          ghostwhite 100%
+        );
+        right: -20vw;
+        border-radius: 50%;
+        top: 53%;
+        transform: translateY(-50%);
+      }
+
+      .ticket-scroll-prompt {
+        position: absolute;
+        bottom: 2rem;
+        left: 50%;
+        transform: translateX(-50%);
+        text-align: center;
+        padding: 0.3rem 2rem;
+        font-size: 1.2rem;
+        color: #fbad17;
+        font-family: "Inclusive sans", sans-serif;
+        z-index: 10;
+      }
+
+      .ticket-main-container {
+        display: flex;
+        padding: 20px;
+        gap: 30px;
+        position: relative;
+      }
+
+      .ticket-nav {
+        width: 20vw;
+        position: absolute;
+        right: 0;
+        z-index: 100;
+      }
+
+      .ticket-nav-inner {
+        display: flex;
+        flex-direction: column;
+        gap: 0;
+      }
+
+      .ticket-nav-title {
+        font-size: 0.9rem;
+        color: ghostwhite;
+        font-family: "Inclusive sans", sans-serif;
+        margin-bottom: 10px;
+      }
+
+      .ticket-nav-link {
+        color: #fbad17;
+        font-size: 0.9rem;
+        font-family: "Inclusive sans", sans-serif;
+        text-decoration: none;
+        padding: 5px 0;
+        border-bottom: 1px solid #fbad17;
+        display: block;
+        transition: all 0.3s ease;
+      }
+
+      .ticket-nav-link:hover {
+        color: ghostwhite;
+      }
+
+      .ticket-content {
+        width: 75%;
+      }
+
+      .ticket-intro {
+        font-size: 1.2rem;
+        color: ghostwhite;
+        font-family: "Inclusive sans", sans-serif;
+        margin-bottom: 30px;
+        line-height: 1.6;
+      }
+
+      .ticket-sections {
+        font-size: 1.2rem;
+        color: ghostwhite;
+        font-family: "Inclusive sans", sans-serif;
+      }
+
+      .ticket-section {
+        padding: 20px 0;
+        scroll-margin-top: 100px;
+      }
+
+      .ticket-section-title {
+        font-family: "Inclusive sans", sans-serif !important;
+        margin: 0 0 15px 0;
+        font-size: 2rem;
+        color: #fbad17;
+        font-weight: bold;
+        text-align: left;
+      }
+
+      .ticket-section-desc {
+        margin: 0 0 20px 0;
+        line-height: 1.6;
+        color: ghostwhite;
+      }
+
+      .ticket-sub-section {
+        padding: 15px 0;
+        margin-bottom: 20px;
+      }
+
+      .ticket-sub-layout {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+        margin-bottom: 8px;
+      }
+
+      .ticket-sub-info h4 {
+        margin: 0 0 5px 0;
+        font-size: 1.4rem;
+        color: #fbad17;
+        font-weight: bold;
+      }
+
+      .ticket-sub-desc {
+        margin: 0 0 8px 0;
+        font-size: 0.95rem;
+        color: ghostwhite;
+        line-height: 1.4;
+      }
+
+      .ticket-sub-date {
+        margin: 0;
+        font-size: 0.9rem;
+        color: #00a650;
+      }
+
+      .ticket-sub-pricing {
+        text-align: right;
+        margin-left: 20px;
+      }
+
+      .ticket-price {
+        font-size: 1.5rem;
+        font-weight: bold;
+        color: #fbad17;
+      }
+
+      .ticket-quantity {
+        font-size: 0.9rem;
+        color: ghostwhite;
+      }
+
+      .ticket-btn {
+        display: inline-block;
+        background: #fbad17;
+        color: black;
+        padding: 8px 16px;
+        border-radius: 15px;
+        text-decoration: none;
+        font-weight: bold;
+        font-size: 0.9rem;
+        transition: all 0.3s ease;
+      }
+
+      .ticket-btn-large {
+        padding: 12px 24px;
+        border-radius: 25px;
+      }
+
+      .ticket-main-layout {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 10px;
+      }
+
+      .ticket-main-price {
+        font-size: 1.8rem;
+        font-weight: bold;
+        color: #fbad17;
+      }
+
+      .ticket-deadline {
+        margin: 0;
+        font-size: 0.9rem;
+        color: ghostwhite;
+        text-align: right;
+      }
+
+      .ticket-divider {
+        border: 1px solid lightslategrey;
+      }
+
+      .ticket-spacing {
+        margin-bottom: 100px;
+      }
+
+      /* Language Switch Styles */
+      .language-switch {
+        position: absolute;
+        top: 20px;
+        right: 20px;
+        z-index: 200;
+      }
+
+      .lang-btn {
+        background: rgba(255, 255, 255, 0.2);
+        border: 2px solid #fbad17;
+        color: #fbad17;
+        padding: 8px 16px;
+        border-radius: 20px;
+        cursor: pointer;
+        font-family: "Inclusive sans", sans-serif;
+        font-size: 0.9rem;
+        font-weight: bold;
+        transition: all 0.3s ease;
+        backdrop-filter: blur(10px);
+      }
+
+      .lang-btn:hover {
+        background: rgba(255, 255, 255, 0.3);
+        transform: scale(1.05);
+      }
+
+      .lang-btn:active {
+        transform: scale(0.95);
+      }
+
+      /* Mobile Responsive Styles for Ticket Page */
+      @media (max-width: 768px) {
+        .ticket-hero {
+          flex-direction: column;
+          justify-content: space-between;
+          height: 100vh;
+          width: 100vw;
+          right: 0;
+          margin: 0;
+          padding: 20px 0;
+        }
+
+        .ticket-hero-circle-left {
+          position: absolute;
+          top: -15vw;
+          left: 50%;
+          transform: translateX(-50%) translateY(-40%);
+          width: 60vw;
+          height: 60vw;
+        }
+
+        .ticket-hero-circle-right {
+          position: absolute;
+          bottom: -15vw;
+          left: 50%;
+          transform: translateX(-50%) translateY(80%);
+          width: 60vw;
+          height: 60vw;
+          right: auto;
+          background: linear-gradient(
+            0deg,
+            #455e44 0%,
+            #455e44 10%,
+            #455e44 90%,
+            ghostwhite 100%
+          );
+        }
+
+        .ticket-hero-content {
+          flex: 1;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          padding: 2rem;
+          z-index: 10;
+        }
+
+        .ticket-hero-title {
+          font-size: 4rem;
+          writing-mode: vertical-rl;
+          text-orientation: mixed;
+          text-align: center;
+          line-height: 1.2;
+        }
+
+        .ticket-scroll-prompt {
+          bottom: 10px;
+          font-size: 1rem;
+          z-index: 15;
+          color: #fbad17;
+        }
+
+        .language-switch {
+          top: 40px;
+          right: 20px;
+          z-index: 20;
+        }
+
+        /* 手機版主要內容區域 */
+        .ticket-main-container {
+          flex-direction: column;
+          padding: 15px;
+          gap: 20px;
+        }
+
+        .ticket-nav {
+          width: 100%;
+          position: static;
+          order: 1;
+          margin-bottom: 20px;
+        }
+
+        .ticket-nav-inner {
+          flex-direction: colmn;
+          flex-wrap: wrap;
+          gap: 10px;
+          justify-content: center;
+        }
+
+        .ticket-nav-title {
+          width: 100%;
+          text-align: center;
+          margin-bottom: 15px;
+        }
+
+        .ticket-nav-link {
+          text-align: center;
+          padding: 8px 15px;
+          margin: 0;
+          border-bottom: 1px solid #fbad17;
+          margin: 0;
+        }
+
+        .ticket-content {
+          width: 100%;
+          order: 2;
+        }
+
+        .ticket-intro {
+          font-size: 1rem;
+          margin-bottom: 20px;
+        }
+
+        .ticket-section-title {
+          font-size: 1.5rem;
+        }
+
+        .ticket-sub-layout {
+          flex-direction: column;
+          gap: 10px;
+        }
+
+        .ticket-sub-pricing {
+          text-align: left;
+          margin-left: 0;
+        }
+
+        .ticket-main-layout {
+          flex-direction: column;
+          align-items: flex-start;
+          gap: 15px;
+        }
+      }
+    </style>
   </head>
   <body class="ticket-page">
     <div class="ticket-hero">
@@ -108,10 +531,10 @@
             </h3>
             <p
               class="ticket-section-desc"
-              data-zh="標準入場票券，可參加台北藝術書展所有展覽活動。適合所有參觀者，享受完整的藝術書展體驗。提供多種購票時段和價格選擇。"
+              data-zh="標準入場票券，可參加台北藝術書展所有展覽活動。適合所有參觀者。"
               data-en="Standard admission tickets for all Taipei Art Book Fair exhibitions and activities. Suitable for all visitors to enjoy the complete art book fair experience. Multiple booking periods and price options available."
             >
-              標準入場票券，可參加台北藝術書展所有展覽活動。適合所有參觀者，享受完整的藝術書展體驗。提供多種購票時段和價格選擇。
+              標準入場票券，可參加台北藝術書展所有展覽活動。適合所有參觀者。
             </p>
 
             <!-- 早鳥票 -->
@@ -121,10 +544,10 @@
                   <h4 data-zh="早鳥票" data-en="Early Bird">早鳥票</h4>
                   <p
                     class="ticket-sub-desc"
-                    data-zh="最優惠的票價，數量有限，售完即止。適合提前規劃的參觀者。"
+                    data-zh="最優惠的票價，數量有限，售完即止。"
                     data-en="Best price available, limited quantity, while supplies last. Perfect for advance planners."
                   >
-                    最優惠的票價，數量有限，售完即止。適合提前規劃的參觀者。
+                    最優惠的票價，數量有限，售完即止。
                   </p>
                   <p
                     class="ticket-sub-date"
@@ -203,10 +626,10 @@
                   <h4 data-zh="快速通關" data-en="Fast Pass">快速通關</h4>
                   <p
                     class="ticket-sub-desc"
-                    data-zh="享受優先入場服務，避免排隊等候。適合時間寶貴的參觀者。"
+                    data-zh="享受優先入場服務，避免排隊等候。"
                     data-en="Enjoy priority entry service and skip the queue. Perfect for time-conscious visitors."
                   >
-                    享受優先入場服務，避免排隊等候。適合時間寶貴的參觀者。
+                    享受優先入場服務，避免排隊等候。
                   </p>
                   <p
                     class="ticket-sub-date"
@@ -417,10 +840,10 @@
             </h3>
             <p
               class="ticket-section-desc"
-              data-zh="適用於65歲以上長者、身心障礙者及其陪同者。入場時請出示相關證明文件，享受特殊優惠價格。體現社會關懷，讓更多人能夠參與藝術文化活動。"
-              data-en="For seniors 65+, people with disabilities and their companions. Please present relevant ID at entry for special discount price. Reflecting social care, enabling more people to participate in art and cultural activities."
+              data-zh="適用於65歲以上長者、身心障礙者及其陪同者。入場時請出示相關證明文件，享受特殊優惠價格。"
+              data-en="For seniors 65+, people with disabilities and their companions. Please present relevant ID at entry for special discount price."
             >
-              適用於65歲以上長者、身心障礙者及其陪同者。入場時請出示相關證明文件，享受特殊優惠價格。體現社會關懷，讓更多人能夠參與藝術文化活動。
+              適用於65歲以上長者、身心障礙者及其陪同者。入場時請出示相關證明文件，享受特殊優惠價格。
             </p>
             <div class="ticket-sub-section">
               <div class="ticket-sub-layout">
@@ -554,8 +977,8 @@
 
             if (isAvailable) {
               // 開放狀態
-              button.style.background = "olivedrab";
-              button.style.color = "white";
+              button.style.background = "#FBAD17";
+              button.style.color = "black";
               button.style.cursor = "pointer";
 
               // 根據語言設置按鈕文字
