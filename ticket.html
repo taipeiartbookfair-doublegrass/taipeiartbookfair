@@ -539,7 +539,7 @@
           <a
             href="#student-ticket"
             class="ticket-nav-link"
-            data-zh="學生票"
+            data-zh="學生團體票"
             data-en="Student  Ticket"
             >學生團體票</a
           >
@@ -1116,26 +1116,26 @@
           // 票種開放日期設定
           const ticketDates = {
             "early-bird": {
-              start: new Date("2025-09-01"),
-              end: new Date("2025-09-07"),
+              start: new Date("2025-09-01T00:00:00+08:00"), // 台灣時間 9月1日零點
+              end: new Date("2025-09-07T23:59:59+08:00"),
             },
             presale: {
-              start: new Date("2025-09-08"),
-              end: new Date("2025-11-20"),
+              start: new Date("2025-09-08T00:00:00+08:00"), // 台灣時間 9月8日零點
+              end: new Date("2025-11-20T23:59:59+08:00"),
             },
             "fast-pass": {
-              start: new Date("2025-11-21"),
-              end: new Date("2025-11-23"),
+              start: new Date("2025-11-21T00:00:00+08:00"), // 台灣時間 11月21日零點
+              end: new Date("2025-11-23T23:59:59+08:00"),
             },
             tshirt: { start: null, end: null }, // 待定
             notebook: { start: null, end: null }, // 待定
             student: {
-              start: new Date("2025-09-08"),
-              end: new Date("2025-11-20"),
+              start: new Date("2025-09-08T00:00:00+08:00"), // 台灣時間 9月8日零點
+              end: new Date("2025-11-23T23:59:59+08:00"),
             },
             discount: {
-              start: new Date("2025-09-08"),
-              end: new Date("2025-11-20"),
+              start: new Date("2025-09-08T00:00:00+08:00"), // 台灣時間 9月8日零點
+              end: new Date("2025-11-23T23:59:59+08:00"),
             },
           };
 
