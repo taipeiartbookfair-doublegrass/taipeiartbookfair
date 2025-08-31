@@ -265,11 +265,12 @@
             style="display: flex; align-items: center; gap: 10px"
           >
             <form
-              action="https://double-grass.us1.list-manage.com/subscribe/post-json?u=d8c7b3dc8532a4323466edd2d&amp;id=ca8c067b40&amp;c=?"
-              method="get"
+              action="https://double-grass.us1.list-manage.com/subscribe/post?u=d8c7b3dc8532a4323466edd2d&amp;id=ca8c067b40&amp;f_id=009678e2f0"
+              method="post"
               id="mc-embedded-subscribe-form"
               name="mc-embedded-subscribe-form"
               class="validate"
+              target="_blank"
               novalidate=""
               style="display: flex; align-items: center; gap: 10px; margin: 0"
             >
@@ -529,71 +530,44 @@
         ftypes[0] = "email";
       })(jQuery);
 
-      // AJAX form submission for Mailchimp
+      // Custom form submission handling for better UX
       document
         .getElementById("mc-embedded-subscribe-form")
         .addEventListener("submit", function (e) {
-          e.preventDefault(); // Prevent default form submission
-
           const email = document.getElementById("mce-EMAIL").value;
           const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
           if (!email) {
+            e.preventDefault();
             showMessage("error", "請輸入您的電子郵件地址");
             return false;
           }
 
           if (!emailRegex.test(email)) {
+            e.preventDefault();
             showMessage("error", "請輸入有效的電子郵件地址");
             return false;
           }
 
-          // Show loading state
+          // Show loading state and let the form submit naturally to Mailchimp
           const submitBtn = document.getElementById("mc-embedded-subscribe");
           const originalText = submitBtn.value;
           submitBtn.value = "SUBSCRIBING...";
           submitBtn.disabled = true;
 
-          // Use JSONP to submit to Mailchimp
-          const form = this;
-          const url = form.action.replace("/post?", "/post-json?") + "&c=?";
-          const data = new FormData(form);
-          const params = new URLSearchParams(data).toString();
-
-          // Create script element for JSONP
-          const script = document.createElement("script");
-          const callbackName = "mailchimpCallback" + Date.now();
-
-          window[callbackName] = function (data) {
-            // Clean up
-            document.head.removeChild(script);
-            delete window[callbackName];
-
-            // Reset button state
+          // Clear the form and show success message after a brief delay
+          setTimeout(() => {
             submitBtn.value = originalText;
             submitBtn.disabled = false;
+            document.getElementById("mce-EMAIL").value = "";
+            showMessage(
+              "success",
+              "感謝您的訂閱！請檢查您的電子郵件以確認訂閱。"
+            );
+          }, 2000);
 
-            if (data.result === "success") {
-              document.getElementById("mce-EMAIL").value = "";
-              showMessage(
-                "success",
-                "感謝您的訂閱！我們會定期發送最新活動資訊給您。"
-              );
-            } else {
-              let errorMessage = "訂閱時發生錯誤，請稍後再試。";
-              if (data.msg) {
-                if (data.msg.includes("already subscribed")) {
-                  errorMessage = "此電子郵件地址已經訂閱過了。";
-                } else if (data.msg.includes("invalid")) {
-                  errorMessage = "請輸入有效的電子郵件地址。";
-                }
-              }
-              showMessage("error", errorMessage);
-            }
-          };
-
-          script.src = url.replace("c=?", "c=" + callbackName) + "&" + params;
-          document.head.appendChild(script);
+          // Allow the form to submit naturally - don't prevent default
+          return true;
         });
 
       function showMessage(type, message) {
