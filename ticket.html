@@ -2,7 +2,10 @@
 <html lang="zh-TW">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
+    />
     <title>草率季票券 | Taipei Art Book Fair Tickets</title>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -15,6 +18,26 @@
     <link rel="stylesheet" href="css/font.css" />
     <link rel="stylesheet" href="css/exhibitors.css" />
     <style>
+      /* Prevent mobile browser zoom and text adjustment */
+      * {
+        -webkit-text-size-adjust: 100%;
+        -moz-text-size-adjust: 100%;
+        -ms-text-size-adjust: 100%;
+        text-size-adjust: 100%;
+      }
+
+      html {
+        overflow-x: hidden;
+        max-width: 100%;
+      }
+
+      body {
+        overflow-x: hidden;
+        max-width: 100vw;
+        margin: 0;
+        padding: 0;
+      }
+
       /* Ticket Page Styles */
       .ticket-page {
         background: linear-gradient(
@@ -312,6 +335,10 @@
         font-weight: bold;
         transition: all 0.3s ease;
         backdrop-filter: blur(10px);
+        touch-action: manipulation;
+        user-select: none;
+        -webkit-touch-callout: none;
+        -webkit-user-select: none;
       }
 
       .lang-btn:hover {
@@ -330,12 +357,12 @@
           max-width: 100%;
         }
         .ticket-hero-title {
-          font-size: 3rem;
-          line-height: 1.1;
-          letter-spacing: 0.1rem;
+          font-size: 2.5rem;
+          line-height: 1;
+          letter-spacing: 0.05rem;
           white-space: nowrap;
           width: auto;
-          max-width: 90%;
+          max-width: 95%;
         }
 
         .ticket-main-container {
@@ -545,7 +572,7 @@
       }
     </style>
   </head>
-  <body class="ticket-page" style="overflow-x: hidden; max-width: 100vw">
+  <body class="ticket-page">
     <div class="ticket-hero">
       <div class="ticket-hero-circle-left"></div>
       <div class="ticket-hero-content">
