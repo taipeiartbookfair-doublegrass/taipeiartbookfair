@@ -270,7 +270,7 @@
               id="mc-embedded-subscribe-form"
               name="mc-embedded-subscribe-form"
               class="validate"
-              target="_self"
+              target="_blank"
               novalidate=""
               style="display: flex; align-items: center; gap: 10px; margin: 0"
             >
@@ -549,22 +549,25 @@
             return false;
           }
 
-          // Show loading state
+          // Show loading state and let the form submit naturally to Mailchimp
           const submitBtn = document.getElementById("mc-embedded-subscribe");
           const originalText = submitBtn.value;
           submitBtn.value = "SUBSCRIBING...";
           submitBtn.disabled = true;
 
-          // Reset after 3 seconds regardless of outcome
+          // Clear the form and show success message after a brief delay
           setTimeout(() => {
             submitBtn.value = originalText;
             submitBtn.disabled = false;
             document.getElementById("mce-EMAIL").value = "";
             showMessage(
               "success",
-              "感謝您的訂閱！我們會定期發送最新活動資訊給您。"
+              "感謝您的訂閱！請檢查您的電子郵件以確認訂閱。"
             );
-          }, 3000);
+          }, 2000);
+
+          // Allow the form to submit naturally - don't prevent default
+          return true;
         });
 
       function showMessage(type, message) {
