@@ -714,11 +714,11 @@ document.addEventListener("DOMContentLoaded", async function () {
       ) {
         ticketlink.innerHTML = "Ticket Link";
         familyticketdesc.innerHTML =
-          "Each exhibitor will receive an early bird discount code before the event, allowing them to purchase up to 5 tickets at the special price of $350 each. A total of 800 early bird tickets are available.<br><br />During the event (Nov 21–23), companion tickets will be available for purchase online at the regular price of $400. Ticket holders can still enjoy priority entry without waiting in line.Please enter the following promo code at checkout:<br />";
+          "◆ Friends & Family Pre-sale Ticket ｜ Starts 9/8 ｜ NT$350 ｜ Limited to 800 tickets<br>◆ Friends & Family Fast Track Ticket ｜ 11/21 – 11/23 ｜ NT$400<br>(For detailed instructions, please refer to the ticketing website.)<br><br>Your exclusive discount code:<br>";
       } else {
         ticketlink.innerHTML = "購票連結";
         familyticketdesc.innerHTML =
-          "每位參展者可於活動前獲得早鳥優惠序號，每人限購5張，票價 $350，限量800張。11/21-23活動期間，親友票將以原價 $400 於線上開放購買，持票者仍可免排隊入場。請在付款時填入以下代碼：<br />";
+          "◆ 親友預售票｜9/8 起開賣｜NT$350｜限量 800 張 <br>◆ 親友快速通關票｜11/21 – 11/23｜NT$400｜無限量<br>(詳細使用說明請見售票網頁)<br><br>您的專屬優惠序號：<br>";
       }
     }
   }
@@ -767,11 +767,11 @@ document.addEventListener("DOMContentLoaded", async function () {
       ) {
         manualdownloadLink.innerHTML = "Download Manual";
         manualdesc.innerHTML =
-          "A complete <b>Exhibitor Manual</b> will be available for download before the event. It includes check-in procedures, setup and teardown schedule, booth layout references, on-site regulations, and the <b>Penalty Handbook</b>. Please read it thoroughly and follow all instructions.<br />";
+          "Please read it thoroughly and follow all instructions. It includes fair schedule, exhibitor regulations, and booth specifications, and the Venue Violation Handling and Penalty Manual. <br />";
       } else {
         manualdownloadLink.innerHTML = "下載手冊";
         manualdesc.innerHTML =
-          "展前將提供完整《攤主手冊》供您下載，內含報到流程、進撤場時間、攤位樣式參考、現場規範與《罰金手冊》等所有參展須知，請務必詳閱並依說明準備。<br /";
+          "請務必詳閱並依說明準備。內含展會流程、細節、注意事項與攤位樣式、現場規範與《場地違規處理與罰則手冊》等所有參展須知。<br /";
       }
     }
   }
@@ -1094,30 +1094,26 @@ document.addEventListener("DOMContentLoaded", async function () {
       container.textContent = "None";
       return;
     }
-    const codeArr = codes.split(",");
-    codeArr.forEach((code, idx) => {
-      const span = document.createElement("span");
-      span.textContent = code;
-      span.style.marginRight = "0.5em";
-      span.style.fontWeight = "bold";
-      container.appendChild(span);
 
-      const btn = document.createElement("button");
-      btn.className = "copy-btn";
-      btn.title = "Copy Discount Code";
-      btn.style.marginLeft = "5px";
-      btn.style.fontSize = "1em";
-      btn.textContent = "📋";
-      btn.onclick = () => {
-        navigator.clipboard.writeText(code);
-        btn.textContent = "✅";
-        setTimeout(() => (btn.textContent = "📋"), 1000);
-      };
-      container.appendChild(btn);
+    // 直接顯示折扣碼，不分割，不換行
+    const span = document.createElement("span");
+    span.textContent = codes;
+    span.style.marginRight = "0.5em";
+    span.style.fontWeight = "bold";
+    container.appendChild(span);
 
-      // 每個 code 換行
-      container.appendChild(document.createElement("br"));
-    });
+    const btn = document.createElement("button");
+    btn.className = "copy-btn";
+    btn.title = "Copy Discount Code";
+    btn.style.marginLeft = "5px";
+    btn.style.fontSize = "1em";
+    btn.textContent = "📋";
+    btn.onclick = () => {
+      navigator.clipboard.writeText(codes);
+      btn.textContent = "✅";
+      setTimeout(() => (btn.textContent = "📋"), 1000);
+    };
+    container.appendChild(btn);
   }
   setDiscountCodes(apiData["親友票"]);
 
