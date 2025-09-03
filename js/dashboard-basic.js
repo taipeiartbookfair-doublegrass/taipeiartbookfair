@@ -1095,25 +1095,41 @@ document.addEventListener("DOMContentLoaded", async function () {
       return;
     }
 
-    // 直接顯示折扣碼，不分割，不換行
-    const span = document.createElement("span");
-    span.textContent = codes;
-    span.style.marginRight = "0.5em";
-    span.style.fontWeight = "bold";
-    container.appendChild(span);
+    // 分割折扣碼（用逗號分隔），每個碼都有自己的複製按鈕
+    const codeList = codes
+      .split(",")
+      .map((code) => code.trim())
+      .filter((code) => code);
 
-    const btn = document.createElement("button");
-    btn.className = "copy-btn";
-    btn.title = "Copy Discount Code";
-    btn.style.marginLeft = "5px";
-    btn.style.fontSize = "1em";
-    btn.textContent = "📋";
-    btn.onclick = () => {
-      navigator.clipboard.writeText(codes);
-      btn.textContent = "✅";
-      setTimeout(() => (btn.textContent = "📋"), 1000);
-    };
-    container.appendChild(btn);
+    codeList.forEach((code, index) => {
+      // 建立折扣碼文字
+      const span = document.createElement("span");
+      span.textContent = code;
+      span.style.fontWeight = "bold";
+      container.appendChild(span);
+
+      // 建立複製按鈕
+      const btn = document.createElement("button");
+      btn.className = "copy-btn";
+      btn.title = "Copy Discount Code";
+      btn.style.marginLeft = "5px";
+      btn.style.fontSize = "1em";
+      btn.textContent = "📋";
+      btn.onclick = () => {
+        navigator.clipboard.writeText(code);
+        btn.textContent = "✅";
+        setTimeout(() => (btn.textContent = "📋"), 1000);
+      };
+      container.appendChild(btn);
+
+      // 如果不是最後一個，加上逗號和空格
+      if (index < codeList.length - 1) {
+        const comma = document.createElement("span");
+        comma.textContent = ", ";
+        comma.style.marginRight = "0.5em";
+        container.appendChild(comma);
+      }
+    });
   }
   setDiscountCodes(apiData["親友票"]);
 
