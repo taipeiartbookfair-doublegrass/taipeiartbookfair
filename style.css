@@ -16,11 +16,11 @@ a {
 
 :root {
   --primary: #000000;
-  --secondary: ghostwhite;
+  --secondary: rgb(208, 117, 5);
   --accent: #ff6b35;
   --text: #1a1a1a;
   --text-light: #666666;
-  --bg: ghostwhite;
+  --bg: rgb(5, 89, 208);
   --border: #000000;
   --shadow: rgba(0, 0, 0, 0.05);
 }
@@ -117,7 +117,7 @@ p {
   padding: 0;
   border: none;
   background: transparent;
-  color: var(--text);
+  color: plum;
   cursor: pointer;
   transition: color 0.2s ease;
   font-size: 1rem;
@@ -136,11 +136,10 @@ p {
 .container {
   max-width: 99vw;
   margin: 0 auto;
-  padding: 0 10px;
+  padding: 0 5px;
 }
 
 /* 主要內容區域 - 確保在導航欄下方 */
-/* 原本的 main-content 樣式現在由大富翁布局接管 */
 .second-content {
   position: relative;
   z-index: 1;
@@ -149,14 +148,14 @@ p {
   gap: 16px; /* 三個section之間的間隔調整為16px */
 }
 
-/* Event Info 區塊 */
+/* Event Info 區塊 - Sticky */
 .event-info {
   box-shadow: inset 0 0 10px rgb(255, 55, 0);
   font-size: 1rem;
-  position: fixed;
+  position: sticky;
   color: var(--primary);
   background: lightgoldenrodyellow;
-  top: 4.4rem;
+  top: 3.5rem; /* 在導航項目下方 */
   left: 0;
   right: 0;
   border-bottom: 1px solid var(--border);
@@ -166,17 +165,7 @@ p {
   justify-content: center;
 }
 
-/* 第一個 event-info (Instagram/Facebook) */
-.social-links {
-  background-color: black;
-  height: 1rem;
-  box-shadow: none;
-  top: 0;
-  font-size: 0.8rem;
-  position: fixed;
-  width: 100vw;
-  left: 0px;
-}
+/* 社交連結樣式 - 已移至上方統一定義 */
 .social-links p {
   margin-left: 16px;
   text-align: right;
@@ -294,29 +283,42 @@ p {
 
 .event-info-item p {
   font-size: 1rem;
-  opacity: 0.75;
   font-weight: 300;
 }
 
-/* 導航欄 */
-.navbar {
-  position: fixed;
-  top: 16px; /* 在 Instagram/Facebook 行下方 */
-  left: 0;
-  right: 0;
-  background: url("wall2.png");
-  border-bottom: 1px solid var(--border);
-  z-index: 999;
-  padding: 16px 8px; /* 減少padding讓導航欄更緊湊 */
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  height: 55px; /* 固定導航欄高度 */
+/* 社交連結 - 可滾動 */
+.social-links {
+  background-color: black;
+  height: 1rem;
+  position: relative;
+  width: 100vw;
+  font-size: 0.8rem;
 }
 
-.nav-content {
+/* 主標題區域 - 可滾動 */
+.main-title-section {
+  padding: 40px 0;
+  background: darkslategrey;
+}
+
+.main-title-area {
+  text-align: center;
+}
+
+/* 導航項目區域 - Sticky */
+.nav-items-area.sticky-nav {
+  position: sticky;
+  top: 0; /* 黏在頂部 */
+  background: darkslategrey;
+  border-bottom: 1px solid var(--border);
+  z-index: 999;
+  padding: 15px 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.nav-items-area {
   display: flex;
-  justify-content: space-between;
-  align-items: center;
-  font-size: 0.8rem;
+  justify-content: center;
 }
 
 .logo {
@@ -331,8 +333,14 @@ p {
 
 .nav-menu {
   display: flex;
-  gap: 25px;
+  justify-content: space-between; /* 均勻分佈 */
+  align-items: center;
+  width: 100%; /* 佔滿整個寬度 */
+  max-width: 800px; /* 設定最大寬度 */
+  gap: 20px;
   list-style: none;
+  padding: 0;
+  margin: 0;
 }
 
 .nav-menu a {
@@ -431,30 +439,45 @@ p {
 
 /* 響應式設計調整 */
 @media (max-width: 768px) {
-  /* 平板響應式 - 調整大富翁布局 */
+  /* 平板響應式 - 調整新結構 */
+  .main-title-section {
+    padding: 30px 0; /* 平板上縮小padding */
+  }
+
+  #site-name {
+    font-size: 3.5rem !important; /* 平板上稍微縮小標題 */
+    line-height: 3rem !important;
+  }
+
+  .nav-items-area.sticky-nav {
+    padding: 12px 8px; /* 平板上縮小padding */
+  }
+
+  .nav-menu {
+    max-width: 600px; /* 平板上縮小最大寬度 */
+    gap: 15px;
+  }
+
   .monopoly-board {
     min-height: 100vh; /* 平板上保持延伸性 */
-    margin-top: 70px; /* 平板上的 margin */
-    grid-template-rows: 80px 1fr 80px; /* 適中的邊框尺寸 */
-    grid-template-columns: 80px 1fr 80px; /* 適中的邊框尺寸 */
+    grid-template-rows: 1fr; /* 只有一行 */
+    grid-template-columns: 80px 1fr; /* 左邊框和主要內容區域 */
+  }
+
+  .event-info {
+    top: 3rem; /* 平板上調整sticky位置 */
   }
 
   .book-item {
     font-size: 0.8rem;
-    min-height: 60px; /* 保持正方形但較小 */
+    width: 100px; /* 平板版縮小 */
+    height: 150px; /* 平板版縮小 */
     padding: 4px;
-    aspect-ratio: 1;
   }
 
-  .book-border-left .book-item,
-  .book-border-right .book-item {
-    min-width: 60px;
-    min-height: 60px;
-    aspect-ratio: 1;
-  }
-
-  .corner {
-    font-size: 0.8rem;
+  .book-border-left .book-item {
+    width: 100px; /* 平板版縮小 */
+    height: 150px; /* 平板版縮小 */
   }
 
   .main-content {
@@ -465,9 +488,66 @@ p {
   }
 
   .poster-section,
-  .calender-section {
+  .calender-section.card-section {
     width: 100%;
     min-height: 400px; /* 設定最小高度 */
+  }
+
+  .middle-zine-container {
+    top: 120vh; /* 平板版在 image rotator 下方 */
+    gap: 8px;
+  }
+
+  .middle-zine-item {
+    width: 100px; /* 平板版縮小 */
+    height: 150px; /* 平板版縮小 */
+    font-size: 0.7rem;
+    padding: 3px;
+  }
+
+  .zine-container {
+    width: 100%; /* 在 calender-section 內部佔滿寬度 */
+  }
+
+  .right-zine-container {
+    margin-top: 0.5rem;
+  }
+
+  .right-zine-item {
+    width: 100px; /* 平板版縮小 */
+    height: 150px; /* 平板版縮小 */
+    font-size: 0.7rem;
+    padding: 3px;
+  }
+
+  .zine-item {
+    width: 100px; /* 平板版縮小 */
+    height: 150px; /* 平板版縮小 */
+    font-size: 0.7rem;
+    padding: 3px;
+  }
+
+  /* Agenda 標題行響應式 */
+  .agenda-header {
+    flex-direction: column;
+    gap: 1rem;
+    text-align: center;
+  }
+
+  /* Event Type 篩選器響應式 */
+  .event-filter {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.25rem;
+  }
+
+  /* 時間軸區域響應式 */
+  .timeline-section {
+    padding: 1.5rem 0;
+  }
+
+  .timeline-section .timeline-mode-container {
+    height: 300px; /* 平板上縮小高度 */
   }
 
   .poster-container {
@@ -587,32 +667,336 @@ p {
   border-color: var(--accent);
 }
 
-.calender-section {
-  width: 60%; /* 調整寬度 */
+/* 右側 Zine 區域樣式 - 在 poster 下方 */
+.right-zine-container {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  justify-content: center;
+  position: absolute;
+  top: 77vh;
+  right: 22px;
+}
+
+.right-zine-item {
+  flex: 0 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: plum;
+  font-size: 0.8rem;
+  font-weight: bold;
+  color: var(--primary);
+  cursor: pointer;
+  text-align: center;
+  padding: 4px;
+  width: 148px; /* 統一寬度 */
+  height: 210px; /* 統一高度 */
+}
+
+/* 中間 Zine 區域樣式 - 在 image rotator 下面 */
+.middle-zine-container {
+  position: absolute;
+  top: 136vh;
+  left: 27rem;
+  width: auto;
+  display: flex;
+  flex-direction: row;
+  gap: 8px; /* 與 program 上方 zine 相同間距 */
+  justify-content: center;
+  flex-wrap: wrap;
+  z-index: 10; /* 確保在其他元素上方 */
+}
+
+.middle-zine-item {
+  flex: 0 0 auto; /* 不伸縮，保持固定大小 */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: plum;
+  font-size: 0.8rem; /* 與 program 上方 zine 相同字體大小 */
+  font-weight: bold;
+  color: var(--primary);
+  cursor: pointer;
+  text-align: center;
+  padding: 4px; /* 與 program 上方 zine 相同 padding */
+  min-height: 50px; /* 與 program 上方 zine 相同高度 */
+  aspect-ratio: 1; /* 保持正方形比例，與 program 上方 zine 一致 */
+  width: 148px;
+  height: 210px;
+}
+
+/* Zine 容器樣式 - 在 PROGRAMS 區域內部 */
+.zine-container {
+  width: 100%; /* 佔滿 calender-section 的寬度 */
+  display: flex;
+  flex-direction: row; /* 水平排列兩個 zine */
+  gap: 8px; /* zine 之間的間距 */
+  margin-bottom: 1rem; /* 與 PROGRAMS 標題的間距 */
+}
+
+.zine-item {
+  flex: 0 0 auto; /* 不伸縮，保持固定大小 */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: plum;
+  font-size: 0.8rem; /* 縮小字體 */
+  font-weight: bold;
+  color: var(--primary);
+  cursor: pointer;
+  text-align: center;
+  padding: 4px; /* 縮小內邊距 */
+  width: 148px; /* 統一寬度 */
+  height: 210px; /* 統一高度 */
+}
+
+/* 條列模式區域 - 縮短寬度 */
+.calender-section.card-section {
+  width: 38%; /* 增加 20%：從 30% 到 36% */
   min-height: 600px; /* 設定最小高度 */
   position: relative;
-  padding: 1rem; /* 增加內邊距 */
   overflow: visible; /* 允許內容自然延伸 */
   box-sizing: border-box; /* 確保padding包含在寬度內 */
   display: flex;
   flex-direction: column;
 }
 
-/* 大富翁式布局 */
+/* Agenda 標題行樣式 */
+.agenda-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.5rem;
+  padding: 0 1rem;
+}
+
+.agenda-header h3 {
+  margin: 0;
+  font-size: 1.5rem;
+  color: var(--primary);
+}
+
+.agenda-controls {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.agenda-subscribe {
+  margin: 0;
+  font-size: 0.9rem;
+}
+
+.agenda-subscribe a {
+  color: var(--accent);
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.agenda-subscribe a:hover {
+  color: var(--primary);
+}
+
+/* 自定義 Scrollbar 樣式 */
+.calender-scroll-container::-webkit-scrollbar,
+.timeline-scroll-container::-webkit-scrollbar {
+  width: 1px;
+}
+
+.calender-scroll-container::-webkit-scrollbar-track,
+.timeline-scroll-container::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.calender-scroll-container::-webkit-scrollbar-thumb,
+.timeline-scroll-container::-webkit-scrollbar-thumb {
+  background-color: #aaa;
+  border-radius: 2px;
+  border: 1px solid transparent;
+  background-clip: padding-box;
+}
+
+.calender-scroll-container::-webkit-scrollbar-thumb:hover,
+.timeline-scroll-container::-webkit-scrollbar-thumb:hover {
+  background-color: darkolivegreen;
+}
+
+/* Firefox scrollbar */
+.calender-scroll-container,
+.timeline-scroll-container {
+  scrollbar-width: thin;
+  scrollbar-color: olive transparent;
+}
+
+/* Event Type 篩選器樣式 */
+.event-filter-header {
+  margin-bottom: 1rem;
+  padding: 0.5rem 0;
+}
+
+.event-filter {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.event-filter label {
+  font-size: 0.9rem;
+  color: var(--primary);
+  font-weight: 500;
+}
+
+.event-type-select {
+  background: var(--secondary);
+  border: 1px solid var(--border);
+  color: var(--primary);
+  padding: 0.5rem 0.75rem;
+  border-radius: 4px;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.event-type-select:hover,
+.event-type-select:focus {
+  border-color: var(--accent);
+  outline: none;
+}
+
+.event-type-select option {
+  background: var(--secondary);
+  color: var(--primary);
+}
+
+/* 時間軸模式區域 - 鋪滿下方 */
+.timeline-section {
+  width: 100vw;
+  background: var(--bg);
+  padding: 2rem 0;
+  border-top: 2px solid var(--border);
+  margin-top: 2rem;
+}
+
+.timeline-section h3 {
+  text-align: center;
+  margin-bottom: 2rem;
+  font-size: 2rem;
+  color: forestgreen;
+}
+
+/* 時間軸模式容器樣式 */
+.timeline-section .timeline-mode-container {
+  width: 100%;
+  height: 400px; /* 設定固定高度 */
+  overflow: hidden;
+  border: 1px solid var(--border);
+  background: var(--bg);
+  display: block !important; /* 強制顯示 */
+  position: relative; /* 為圖例提供定位參考 */
+}
+
+/* 確保時間軸區域的可見性 */
+.timeline-section {
+  display: block;
+  visibility: visible;
+}
+
+.timeline-section .timeline-scroll-container {
+  overflow-x: auto;
+  overflow-y: hidden;
+  scroll-behavior: smooth;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+  height: 100%;
+  width: 100%;
+}
+
+.timeline-section .timeline-scroll-container::-webkit-scrollbar {
+  display: none;
+}
+
+.timeline-section .timeline-calendar {
+  display: flex;
+}
+
+/* 時間軸圖例樣式 */
+.timeline-legend {
+  position: absolute;
+  bottom: 0px;
+  right: 0px;
+  font-family: "IBM Plex Mono", sans-serif;
+  font-size: 0.75rem;
+  background-color: gainsboro;
+  padding: 10px;
+  z-index: 10;
+}
+
+.timeline-legend h4 {
+  margin: 0 0 8px 0;
+  font-size: 0.7rem;
+  font-weight: 600;
+  color: #333;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.legend-items {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.legend-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.legend-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.legend-dot.talk {
+  background-color: rgb(255, 0, 255); /* 洋紅色 */
+}
+
+.legend-dot.workshop {
+  background-color: rgb(54, 162, 235); /* 藍色 */
+}
+
+.legend-dot.performance {
+  background-color: rgb(255, 255, 0); /* 黃色 */
+}
+
+.legend-dot.exhibition {
+  background-color: rgb(255, 165, 0); /* 橙色 */
+}
+
+.legend-dot.other {
+  background-color: rgb(0, 128, 0); /* 綠色 */
+}
+
+.legend-label {
+  color: #555;
+  font-size: 0.7rem;
+  font-weight: 500;
+}
+
+/* 大富翁式布局 - 只保留左邊邊框 */
 .monopoly-board {
   width: 100vw;
-  min-height: 100vh; /* 改為最小高度，允許內容延伸 */
-  margin-top: 6.5rem; /* 精確計算：social(20) + navbar(71) = 91px */
+  margin-top: 0; /* 移除固定margin，讓內容自然流動 */
   position: relative;
   z-index: 1; /* 確保在 navbar 和 footer 下方 */
-  background: var(--bg);
   display: grid;
-  grid-template-areas:
-    "top-left    book-top    top-right"
-    "book-left   main-area   book-right"
-    "bottom-left book-bottom bottom-right";
-  grid-template-rows: 120px 1fr 120px; /* 增加邊框高度，讓書籍格子更大 */
-  grid-template-columns: 120px 1fr 120px; /* 增加邊框寬度，讓書籍格子更大 */
+  grid-template-areas: "book-left   main-area";
+  grid-template-rows: 1fr; /* 只有一行 */
+  grid-template-columns: 11rem 1fr; /* 左邊框和主要內容區域 */
   box-sizing: border-box;
   overflow: visible; /* 允許內容溢出 */
 }
@@ -620,52 +1004,32 @@ p {
 /* 書籍邊框樣式 */
 .book-border {
   display: flex;
-  background: var(--primary);
-  border: 2px solid var(--border);
-}
-
-.book-border-top {
-  grid-area: book-top;
-  flex-direction: row;
-  border-bottom: 2px solid var(--border);
-}
-
-.book-border-bottom {
-  grid-area: book-bottom;
-  flex-direction: row;
-  border-top: 2px solid var(--border);
 }
 
 .book-border-left {
   grid-area: book-left;
   flex-direction: column;
-  border-right: 2px solid var(--border);
-}
-
-.book-border-right {
-  grid-area: book-right;
-  flex-direction: column;
-  border-left: 2px solid var(--border);
+  height: 710px; /* 與海報整體區域等高 */
+  padding: 120px 0px 16px 16px; /* 上面和左邊 padding */
+  box-sizing: border-box; /* 確保 padding 包含在總寬度內 */
 }
 
 /* 書籍項目樣式 */
 .book-item {
-  flex: 1;
+  flex: 0 0 auto; /* 不伸縮，保持固定大小 */
   display: flex;
   align-items: center;
   justify-content: center;
-  background: var(--secondary);
-  border: 1px solid var(--border);
   font-size: 1rem; /* 增大字體 */
-  font-weight: bold;
   color: var(--primary);
+  background-color: plum;
   cursor: pointer;
-  transition: all 0.3s ease;
   writing-mode: horizontal-tb;
   text-align: center;
   padding: 8px; /* 增加 padding */
-  min-height: 80px; /* 增大最小高度，接近正方形 */
-  aspect-ratio: 1; /* 強制正方形比例 */
+  width: 148px; /* 統一寬度 */
+  height: 210px; /* 統一高度 */
+  margin-bottom: 10px;
 }
 
 /* 左右邊框的書籍項目使用垂直文字 */
@@ -678,66 +1042,34 @@ p {
   aspect-ratio: 1; /* 強制正方形比例 */
 }
 
-.book-item:hover {
-  background: var(--accent);
-  color: var(--secondary);
-  transform: scale(1.05);
-}
-
-/* 四個角落 */
-.corner {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background: var(--primary);
-  color: var(--secondary);
-  border: 2px solid var(--border);
-  font-weight: bold;
-  font-size: 1rem;
-  text-align: center;
-}
-
-.corner-top-left {
-  grid-area: top-left;
-  border-bottom: 2px solid var(--border);
-  border-right: 2px solid var(--border);
-}
-
-.corner-top-right {
-  grid-area: top-right;
-  border-bottom: 2px solid var(--border);
-  border-left: 2px solid var(--border);
-}
-
-.corner-bottom-left {
-  grid-area: bottom-left;
-  border-top: 2px solid var(--border);
-  border-right: 2px solid var(--border);
-}
-
-.corner-bottom-right {
-  grid-area: bottom-right;
-  border-top: 2px solid var(--border);
-  border-left: 2px solid var(--border);
-}
-
 /* 主要內容區域調整 */
 .main-content {
   grid-area: main-area;
   display: flex;
   width: 100%;
-  min-height: 80vh; /* 設定最小高度，給內容更多空間 */
-  padding: 2rem; /* 增加內邊距，讓內容有更多呼吸空間 */
+  min-height: 80vh;
+  padding-top: 1rem;
   box-sizing: border-box;
-  background: var(--bg);
-  overflow: auto; /* 允許滾動 */
-  gap: 2rem; /* 增加 poster 和 calendar 之間的間距 */
+  overflow: auto;
+  gap: 2rem;
+  height: 165vh;
+}
+
+/* 海報整體區域 */
+.poster-area {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0; /* 海報和控制區域之間的間距由 poster-controls-wrapper 的 margin-top 控制 */
+  height: 102vh;
+  padding: 15px;
+  background-color: darkgreen;
 }
 
 /* Poster Section - 調整為新布局 */
 .poster-section {
-  width: 40%; /* 增加寬度 */
-  min-height: 600px; /* 設定最小高度 */
+  width: 500px;
+  height: 650px; /* 恢復原始高度，控制區域移到外面 */
   position: relative;
   padding: 1rem; /* 增加內邊距 */
   display: flex;
@@ -770,11 +1102,11 @@ p {
   width: 100%;
   max-width: 500px; /* 增加最大寬度 */
   aspect-ratio: 3/4; /* 設定海報的標準長寬比 (寬:高 = 3:4) */
-  cursor: pointer;
   position: relative;
   display: flex;
   align-items: center;
   justify-content: center;
+  cursor: pointer; /* 海報本身可點擊翻轉 */
 }
 
 .poster-container::after {
@@ -788,15 +1120,15 @@ p {
   padding: 2px 10px;
   font-size: 14px;
   font-family: "IBM Plex Sans JP", sans-serif;
-  opacity: 0;
-  transition: opacity 0.3s ease;
+  display: none;
+  transition: all 0.3s ease;
   pointer-events: none;
   z-index: 10;
   white-space: nowrap;
 }
 
 .poster-container:hover::after {
-  opacity: 1;
+  display: block;
 }
 
 .poster-card {
@@ -840,6 +1172,84 @@ p {
   object-fit: cover; /* 確保圖片填滿容器且保持比例 */
   object-position: center; /* 圖片居中顯示 */
   display: block;
+}
+
+/* 海報控制區域外層容器 */
+.poster-controls-wrapper {
+  width: 500px; /* 與海報區域同寬 */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 10px; /* 與海報區域的間距 */
+}
+
+/* 海報控制區域樣式 */
+.poster-controls {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 45px;
+  width: 100%;
+}
+
+.control-btn {
+  background: darkslategray;
+  border: none;
+  width: 180px;
+  height: 40px;
+  border-radius: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  font-size: 1.5rem;
+  color: white;
+  font-family: "IBM Plex Mono", monospace;
+}
+
+.control-btn:hover {
+  background: black;
+  color: white;
+}
+
+.control-center {
+  background: blue;
+  color: white;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: "IBM Plex Sans JP", sans-serif;
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.control-center:hover {
+  background: #8b4b8b;
+  color: white;
+  transform: scale(1.05);
+}
+
+.arrow-left,
+.arrow-right {
+  font-family: "IBM Plex Sans JP", sans-serif;
+  font-weight: bold;
+}
+
+/* 禁用狀態樣式 */
+.control-btn:disabled {
+  background: #666;
+  cursor: not-allowed;
+  transform: none !important;
+}
+
+.control-btn:disabled:hover {
+  background: transparent;
+  color: #333;
+  transform: none;
 }
 
 /* 滾動指示器 */
@@ -1155,79 +1565,169 @@ p {
 }
 
 /* Event Photos Section Styles */
-
-.event-photos-section h3 {
-  font-size: 2rem;
-  margin-bottom: 20px;
-  text-align: center;
+.rotata {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  min-height: 100vh; /* 至少要有視窗高度 */
+  /* height 將由 JavaScript 動態設置為文檔實際高度 */
+  pointer-events: none;
+  z-index: 1;
+  overflow: visible;
 }
 
-.event-photos-container {
+.poster-rotator {
   width: 100%;
+  height: 100%;
+  position: absolute;
   overflow: hidden;
   border: 1px solid black;
-  background: white;
-  margin-bottom: 20px;
+}
+.poster-rotator:hover .image-strip {
+  animation-play-state: paused;
 }
 
-.event-photos-strip {
+.rotata div:nth-child(1) {
+  top: 13vh;
+  left: 25%;
+  width: 18rem;
+  height: 4rem;
+}
+.rotata div:nth-child(2) {
+  top: 140vh;
+  left: 26.5rem;
+  width: 19rem;
+  height: 13rem;
+}
+.rotata div:nth-child(3) {
+  top: 4vh;
+  right: 3%;
+  width: 5rem;
+  height: 8rem;
+}
+.rotata div:nth-child(4) {
+  top: 43vh;
+  right: 16px;
+  width: 10rem;
+  height: 30rem;
+}
+.rotata div:nth-child(5) {
+  top: 36vh;
+  left: 16px;
+  width: 9.3rem;
+  height: 6rem;
+}
+.rotata div:nth-child(6) {
+  top: 140vh;
+  left: 16px;
+  width: 25rem;
+  height: 28rem;
+}
+
+.image-strip {
   display: flex;
   flex-shrink: 0;
   white-space: nowrap;
-  animation: slideEventPhotos 60s linear infinite;
+  animation: slide 120s linear infinite;
   will-change: transform;
   width: max-content;
-  height: 240px; /* 固定高度 */
+  height: 100% !important;
+  object-fit: cover;
+}
+@keyframes slide {
+  0% {
+    transform: translateX(0);
+  }
+  50% {
+    transform: translateX(-400%);
+  }
+  100% {
+    transform: translateX(0);
+  }
 }
 
-.event-photos-strip img {
-  height: 100%;
+.rotata div:nth-child(3) .image-strip img {
+  width: auto;
+  height: 100% !important;
+  object-fit: fill;
+  flex-shrink: 0;
+  display: block;
+  max-width: none;
+}
+
+.rotata div:nth-child(6) .image-strip img {
+  width: auto;
+  height: 100% !important;
+  object-fit: cover;
+  flex-shrink: 0;
+  display: block;
+  max-width: none;
+}
+
+.rotata div:nth-child(4) .image-strip img {
+  width: auto;
+  height: 100% !important;
+  object-fit: cover;
+  flex-shrink: 0;
+  display: block;
+  max-width: none;
+}
+
+.rotata div:nth-child(1) .image-strip img {
+  height: 100% !important;
   width: auto;
   object-fit: cover;
   flex-shrink: 0;
   display: block;
   max-width: none;
-  border-right: 1px solid #eee;
 }
 
-.event-photos-strip:hover {
-  animation-play-state: paused;
-}
-
-@keyframes slideEventPhotos {
-  0% {
-    transform: translateX(0);
-  }
-  100% {
-    transform: translateX(-50%);
-  }
-}
-
-/* 手機響應式設計 - 大富翁布局 */
+/* 手機響應式設計 - 新結構 */
 @media (max-width: 480px) {
+  .main-title-section {
+    padding: 20px 0; /* 手機上更小的padding */
+  }
+
+  #site-name {
+    font-size: 2.5rem !important; /* 手機上更小的標題 */
+    line-height: 2.2rem !important;
+  }
+
+  .nav-items-area.sticky-nav {
+    padding: 10px 8px; /* 手機上更小的padding */
+  }
+
+  .nav-menu {
+    flex-direction: column; /* 手機上改為垂直排列 */
+    gap: 8px;
+    max-width: 100%;
+  }
+
+  .nav-items-area {
+    width: 100%;
+  }
+
   .monopoly-board {
     min-height: 100vh; /* 手機上保持延伸性 */
-    margin-top: 50px; /* 手機上的 margin */
-    grid-template-rows: 60px 1fr 60px; /* 手機上的邊框尺寸 */
-    grid-template-columns: 60px 1fr 60px; /* 手機上的邊框尺寸 */
+    grid-template-rows: 1fr; /* 只有一行 */
+    grid-template-columns: 60px 1fr; /* 左邊框和主要內容區域 */
+  }
+
+  .event-info {
+    top: 2.5rem; /* 手機上調整sticky位置 */
   }
 
   .book-item {
     font-size: 0.6rem;
-    min-height: 40px; /* 手機上的正方形尺寸 */
+    width: 70px; /* 手機版進一步縮小 */
+    height: 100px; /* 手機版進一步縮小 */
     padding: 2px;
-    aspect-ratio: 1;
   }
 
-  .book-border-left .book-item,
-  .book-border-right .book-item {
-    min-width: 40px;
-    min-height: 40px;
-    aspect-ratio: 1;
-  }
-
-  .corner {
-    font-size: 0.6rem;
+  .book-border-left .book-item {
+    width: 70px; /* 手機版進一步縮小 */
+    height: 100px; /* 手機版進一步縮小 */
   }
 
   .main-content {
@@ -1238,10 +1738,85 @@ p {
   }
 
   .poster-section,
-  .calender-section {
+  .calender-section.card-section {
     width: 100%;
     min-height: 300px; /* 手機上的最小高度 */
     padding: 0.5rem;
+  }
+
+  .middle-zine-container {
+    top: 100vh; /* 手機版在 image rotator 下方 */
+    gap: 8px; /* 與 program 上方 zine 手機版相同 */
+    flex-wrap: wrap;
+  }
+
+  .middle-zine-item {
+    width: 70px; /* 手機版進一步縮小 */
+    height: 100px; /* 手機版進一步縮小 */
+    font-size: 0.5rem;
+    padding: 1px;
+  }
+
+  .zine-container {
+    width: 100%; /* 在 calender-section 內部佔滿寬度 */
+    padding: 0;
+  }
+
+  .right-zine-container {
+    margin-top: 0.5rem;
+    gap: 4px; /* 手機版縮小間距 */
+  }
+
+  .right-zine-item {
+    width: 70px; /* 手機版進一步縮小 */
+    height: 100px; /* 手機版進一步縮小 */
+    font-size: 0.5rem;
+    padding: 1px;
+  }
+
+  .zine-item {
+    width: 70px; /* 手機版進一步縮小 */
+    height: 100px; /* 手機版進一步縮小 */
+    font-size: 0.5rem;
+    padding: 1px;
+  }
+
+  /* 手機版 Agenda 標題行 */
+  .agenda-header h3 {
+    font-size: 1.2rem;
+  }
+
+  .agenda-subscribe {
+    font-size: 0.8rem;
+  }
+
+  .agenda-nav-btn {
+    padding: 0.4rem 0.6rem;
+    font-size: 0.9rem;
+  }
+
+  /* 手機版 Event Type 篩選器 */
+  .event-filter label {
+    font-size: 0.8rem;
+  }
+
+  .event-type-select {
+    font-size: 0.8rem;
+    padding: 0.4rem 0.6rem;
+  }
+
+  /* 手機版時間軸區域 */
+  .timeline-section {
+    padding: 1rem 0;
+  }
+
+  .timeline-section h3 {
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+  }
+
+  .timeline-section .timeline-mode-container {
+    height: 250px; /* 手機上更小的高度 */
   }
 
   .poster-container {

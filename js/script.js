@@ -41,7 +41,29 @@ function shuffle(array) {
 
 function createRotator() {
   const rotata = document.getElementById("rotata");
-  const totalPosters = 5;
+
+  // 設置 rotata 容器高度為整個文檔高度
+  function updateRotataHeight() {
+    const documentHeight = Math.max(
+      document.body.scrollHeight,
+      document.body.offsetHeight,
+      document.documentElement.clientHeight,
+      document.documentElement.scrollHeight,
+      document.documentElement.offsetHeight
+    );
+    rotata.style.height = documentHeight + "px";
+  }
+
+  // 初始設置高度
+  updateRotataHeight();
+
+  // 當視窗大小改變時重新計算
+  window.addEventListener("resize", updateRotataHeight);
+
+  // 當內容載入完成後重新計算（處理動態內容）
+  window.addEventListener("load", updateRotataHeight);
+
+  const totalPosters = 6;
   const imagesPerStrip = 5;
 
   // 分開 horizontal 和 vertical 的檔名
@@ -67,7 +89,7 @@ function createRotator() {
 
     // 第幾個 rotator 決定抓哪個資料夾
     let sourceImages, folder;
-    if (i === 0 || i === 1 || i === 4) {
+    if (i === 0 || i === 1 || i === 4 || i === 5) {
       sourceImages = shuffledHorizontal;
       folder = "horizental"; // 注意你的資料夾拼字
     } else {

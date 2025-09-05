@@ -13,52 +13,66 @@
     <link rel="stylesheet" href="style.css" />
     <link rel="stylesheet" href="css/font.css" />
     <link rel="stylesheet" href="css/exhibitors.css" />
+    <script src="js/homepage-zine.js"></script>
   </head>
   <body>
-    <!-- 導航欄 -->
-    <nav class="navbar">
-      <div class="social-links">
-        <div
-          style="display: flex; justify-content: flex-end; margin-right: 16px"
-        >
-          <p style="color: ghostwhite">INSTAGRAM</p>
-          <p style="color: ghostwhite">FACEBOOK</p>
-        </div>
+    <!-- 照片轉起來！Hot! -->
+    <div class="rotata" id="rotata">
+      <!-- automation!! -->
+    </div>
+
+    <!-- 社交連結 - 保持固定 -->
+    <div class="social-links">
+      <div style="display: flex; justify-content: flex-end; margin-right: 16px">
+        <p style="color: ghostwhite">INSTAGRAM</p>
+        <p style="color: ghostwhite">FACEBOOK</p>
       </div>
+    </div>
+
+    <!-- 主標題區域 - 可滾動 -->
+    <div class="main-title-section">
       <div class="container">
-        <div class="nav-content">
+        <div class="main-title-area">
           <a
             id="site-name"
             style="
               font-family: 'Xiaoyuan-Trackpad', sans-serif;
               color: lime;
-              text-shadow: 1px 1px black;
-              font-size: 2.9rem;
-              line-height: 1rem;
+              text-shadow: 2px 2px black;
+              font-size: 4.5rem;
+              line-height: 4rem;
+              text-decoration: none;
             "
             ><b>TAIPEI ART BOOK FAIR</b></a
           >
-          <ul class="nav-menu">
-            <li class="language-switcher">
-              <button id="language-toggle" class="language-btn">English</button>
-            </li>
-            <li>
-              <a
-                href="https://nmhw.taipeiartbookfair.com/"
-                target="_blank"
-                id="nav-shop"
-                >NMHW</a
-              >
-            </li>
-            <li><a href="#exhibitors" id="nav-exhibitors">ARCHIVE</a></li>
-            <li><a href="#about" id="nav-about">ABOUT</a></li>
-            <li>
-              <a href="#contact" class="footer-link exhibitor-login"
-                >EXHIBITOR LOGIN</a
-              >
-            </li>
-          </ul>
         </div>
+      </div>
+    </div>
+
+    <!-- 導航項目區域 - Sticky -->
+    <nav class="nav-items-area sticky-nav">
+      <div class="container">
+        <ul class="nav-menu">
+          <li class="language-switcher">
+            <button id="language-toggle" class="language-btn">English</button>
+          </li>
+          <li>
+            <a
+              href="https://nmhw.taipeiartbookfair.com/"
+              target="_blank"
+              id="nav-shop"
+              >NMHW</a
+            >
+          </li>
+          <li><a href="#exhibitors" id="nav-exhibitors">VACANVCIES</a></li>
+          <li><a href="#exhibitors" id="nav-exhibitors">ARCHIVE</a></li>
+          <li><a href="#about" id="nav-about">ABOUT</a></li>
+          <li>
+            <a href="#contact" class="footer-link exhibitor-login"
+              >EXHIBITOR LOGIN</a
+            >
+          </li>
+        </ul>
       </div>
     </nav>
 
@@ -87,159 +101,184 @@
 
     <!-- start of monopoly-style layout -->
     <div class="monopoly-board">
-      <!-- 四個角落 -->
-      <div class="corner corner-top-left"></div>
-      <div class="corner corner-top-right"></div>
-      <div class="corner corner-bottom-left"></div>
-      <div class="corner corner-bottom-right"></div>
-
-      <!-- 上方書籍邊框 -->
-      <div class="book-border book-border-top">
-        <div class="book-item">ZINE 01</div>
-        <div class="book-item">ZINE 02</div>
-        <div class="book-item">ZINE 03</div>
-        <div class="book-item">ZINE 04</div>
-        <div class="book-item">ZINE 05</div>
-        <div class="book-item">ZINE 06</div>
-        <div class="book-item">ZINE 07</div>
-        <div class="book-item">ZINE 08</div>
-      </div>
+      <!-- 四個角落 - 已移除 -->
 
       <!-- 左方書籍邊框 -->
       <div class="book-border book-border-left">
-        <div class="book-item">ZINE 09</div>
-        <div class="book-item">ZINE 10</div>
-        <div class="book-item">ZINE 11</div>
-        <div class="book-item">ZINE 12</div>
-        <div class="book-item">ZINE 13</div>
-        <div class="book-item">ZINE 14</div>
-      </div>
-
-      <!-- 下方書籍邊框 -->
-      <div class="book-border book-border-bottom">
-        <div class="book-item">ZINE 21</div>
-        <div class="book-item">ZINE 22</div>
-        <div class="book-item">ZINE 23</div>
-        <div class="book-item">ZINE 24</div>
-        <div class="book-item">ZINE 25</div>
-        <div class="book-item">ZINE 26</div>
-        <div class="book-item">ZINE 27</div>
-        <div class="book-item">ZINE 28</div>
+        <div class="book-item"></div>
+        <div class="book-item"></div>
+        <div class="book-item"></div>
       </div>
 
       <!-- 中央主要內容區域 -->
       <div class="main-content">
-        <!-- start of poster-section -->
-        <section class="poster-section" id="Poster">
-          <div class="poster-container" data-flipped="false">
-            <div class="poster-card">
-              <div class="poster-front">
-                <img class="poster" src="image/25TPABF_poster_RGB.png" />
-              </div>
-              <div class="poster-back">
-                <img class="poster" src="image/25TPABF_poster_RGB-2.png" />
+        <!-- 海報整體區域 -->
+        <div class="poster-area">
+          <h3>FEATURED EVENT</h3>
+          <!-- start of poster-section -->
+          <section class="poster-section" id="Poster">
+            <div class="poster-container" data-flipped="false">
+              <div class="poster-card">
+                <div class="poster-front">
+                  <img class="poster" src="image/25TPABF_poster_RGB.png" />
+                </div>
+                <div class="poster-back">
+                  <img class="poster" src="image/25TPABF_poster_RGB-2.png" />
+                </div>
               </div>
             </div>
-          </div>
-          <!-- <div
-          style="
-            width: 100%;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            cursor: pointer;
-          "
-          id="posterControls"
-        >
-          <span
-            style="
-              font-family: 'IBM Plex Sans JP', sans-serif !important;
-              font-size: 1.5rem;
-              text-align: left;
-            "
-          >
-            ←
-          </span>
-          <span
-            >Visual by
-            <a href="https://www.instagram.com/sidandgeri/" target="_blank"
-              >Sid&Geri</a
-            ></span
-          >
-          <span
-            style="
-              font-family: 'IBM Plex Sans JP', sans-serif !important;
-              font-size: 1.5rem;
-              text-align: right;
-            "
-          >
-            →
-          </span>
-        </div> -->
-        </section>
-        <!-- end of poster-section -->
+          </section>
 
-        <section class="calender-section" id="calender">
+          <!-- 海報控制區域 - 放在海報下方 -->
+          <div class="poster-controls-wrapper">
+            <div class="poster-controls">
+              <button class="control-btn prev-btn" id="prevPoster">
+                <span class="arrow-left">←</span>
+              </button>
+              <div class="control-center" id="flipIndicator">
+                <span class="click-text">Click</span>
+              </div>
+              <button class="control-btn next-btn" id="nextPoster">
+                <span class="arrow-right">→</span>
+              </button>
+            </div>
+          </div>
+          <!-- 右側 Zine 區域 - 在 poster 控制區下方 -->
+          <div class="right-zine-container">
+            <div class="right-zine-item"></div>
+            <div class="right-zine-item"></div>
+          </div>
+        </div>
+        <!-- end of poster-area -->
+
+        <!-- 中間 Zine 區域 - 在 poster 和 calender 之間 -->
+        <div class="middle-zine-container">
+          <div class="middle-zine-item"></div>
+          <div class="middle-zine-item"></div>
+          <div class="middle-zine-item"></div>
+          <div class="middle-zine-item"></div>
+          <div class="right-zine-item"></div>
+          <div class="middle-zine-item"></div>
+        </div>
+
+        <!-- 條列模式區域 - 縮短寬度 -->
+        <section class="calender-section card-section" id="calender">
+          <!-- Zine 區域 - 在 PROGRAMS 標題上方 -->
+          <div class="zine-container">
+            <div class="zine-item"></div>
+            <div class="zine-item"></div>
+            <div class="zine-item"></div>
+          </div>
+
           <h3>PROGRAMS</h3>
 
-          <!-- 頂部控制區域：箭頭按鈕和訂閱文字 -->
-          <div class="calender-header">
-            <!-- 模式切換按鈕 -->
-            <div class="calender-mode-switch">
-              <button class="mode-btn active" data-mode="card" id="cardMode">
-                ＋＋
-              </button>
-              <button class="mode-btn" data-mode="timeline" id="timelineMode">
-                ｜｜
-              </button>
-            </div>
-
-            <p class="calender-subscribe">
-              <a
-                href="https://calendar.google.com/calendar/u/2?cid=OTA1MjdmNjdmYTQ2MmM4M2UxODRiMGM2MmRlZjEwZWJjOGIwMGNjOGM2N2E1YjgzYWYyYWZiOTBhMWJkYjI5M0Bncm91cC5jYWxlbmRhci5nb29nbGUuY29t"
-                >Suscribe to TPABF's calender</a
-              >
-            </p>
-
-            <!-- 左左右右 -->
-            <div class="calender-nav-group">
-              <button class="calender-nav-btn prev" id="prevBtn">←</button>
-              <button class="calender-nav-btn next" id="nextBtn">→</button>
+          <!-- Event Type 篩選器 -->
+          <div class="event-filter-header">
+            <div class="event-filter">
+              <label for="eventTypeFilter">Event Type:</label>
+              <select id="eventTypeFilter" class="event-type-select">
+                <option value="all">All Events</option>
+                <option value="talk">Talk</option>
+                <option value="workshop">Workshop</option>
+                <option value="performance">Performance</option>
+                <option value="exhibition">Exhibition</option>
+              </select>
             </div>
           </div>
 
-          <!-- 日曆內容區域 -->
+          <!-- 卡片模式內容 -->
           <div class="calender-content">
-            <!-- 卡片模式容器 -->
+            <!-- 隱藏的卡片模式容器，為了兼容 JavaScript -->
             <div
               class="calender-mode-container card-mode"
               id="cardModeContainer"
             >
-              <!-- 日曆滑動容器 -->
               <div class="calender-scroll-container" id="calenderScroll">
                 <div id="eventsTimeline" class="events-timeline">
                   <!-- 日曆事件將由 calender.js 動態生成 -->
                 </div>
               </div>
             </div>
+          </div>
 
-            <!-- 時間軸模式容器 -->
-            <div
-              class="calender-mode-container timeline-mode hidden"
-              id="timelineModeContainer"
-            >
-              <div class="timeline-scroll-container" id="timelineScroll">
-                <div class="timeline-calendar" id="timelineCalendar">
-                  <!-- 時間軸日曆將由 JavaScript 動態生成 -->
-                </div>
-              </div>
-            </div>
+          <!-- 隱藏的模式切換按鈕，為了兼容 JavaScript -->
+          <div style="display: none">
+            <button id="cardMode" class="mode-btn active"></button>
+            <button id="timelineMode" class="mode-btn"></button>
           </div>
         </section>
       </div>
       <!-- end of main-content -->
     </div>
     <!-- end of monopoly-board -->
+
+    <!-- 時間軸模式區域 - 鋪滿下方 -->
+    <section class="timeline-section" id="timelineSection">
+      <div class="container">
+        <!-- Agenda 標題行 -->
+        <div class="agenda-header">
+          <h3>AGENDA</h3>
+          <div class="agenda-controls">
+            <p class="agenda-subscribe">
+              <a
+                href="https://calendar.google.com/calendar/u/2?cid=OTA1MjdmNjdmYTQ2MmM4M2UxODRiMGM2MmRlZjEwZWJjOGIwMGNjOGM2N2E1YjgzYWYyYWZiOTBhMWJkYjI5M0Bncm91cC5jYWxlbmRhci5nb29nbGUuY29t"
+                >Suscribe to TPABF's calender</a
+              >
+            </p>
+          </div>
+        </div>
+        <!-- 時間軸模式容器 - 確保ID正確且始終顯示 -->
+        <div
+          class="timeline-mode-container"
+          id="timelineModeContainer"
+          style="display: block"
+        >
+          <div class="timeline-scroll-container" id="timelineScroll">
+            <div class="timeline-calendar" id="timelineCalendar">
+              <!-- 時間軸日曆將由 JavaScript 動態生成 -->
+              <!-- 測試內容 - 如果看到這個說明容器是可見的 -->
+              <div
+                style="
+                  padding: 20px;
+                  text-align: center;
+                  color: #666;
+                  font-size: 14px;
+                "
+              >
+                LOADING...
+              </div>
+            </div>
+          </div>
+
+          <!-- 時間軸圖例 - 右下方 -->
+          <div class="timeline-legend">
+            <h4>Event Types</h4>
+            <div class="legend-items">
+              <div class="legend-item">
+                <span class="legend-dot talk"></span>
+                <span class="legend-label">Talk</span>
+              </div>
+              <div class="legend-item">
+                <span class="legend-dot workshop"></span>
+                <span class="legend-label">Workshop</span>
+              </div>
+              <div class="legend-item">
+                <span class="legend-dot performance"></span>
+                <span class="legend-label">Performance</span>
+              </div>
+              <div class="legend-item">
+                <span class="legend-dot exhibition"></span>
+                <span class="legend-label">Exhibition</span>
+              </div>
+              <div class="legend-item">
+                <span class="legend-dot other"></span>
+                <span class="legend-label">Other</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
 
     <!-- 浮動的Ticket按鈕 -->
     <div class="floating-ticket" id="floatingTicket" style="display: none">
@@ -593,5 +632,33 @@
     <script src="duolanguage.js"></script>
     <script src="js/exhibitors-list.js"></script>
     <script src="js/event-photos.js"></script>
+    <script src="js/homepage-zine.js"></script>
+
+    <!-- 初始化時間軸模式的腳本 -->
+    <script>
+      // 等待 DOM 和 calender.js 載入完成後執行
+      document.addEventListener("DOMContentLoaded", function () {
+        // 延遲執行，確保 calender.js 已經載入
+        setTimeout(function () {
+          console.log("強制顯示時間軸模式");
+
+          // 確保時間軸容器顯示
+          const timelineModeContainer = document.getElementById(
+            "timelineModeContainer"
+          );
+          if (timelineModeContainer) {
+            timelineModeContainer.style.display = "block";
+            timelineModeContainer.classList.remove("hidden");
+            console.log("時間軸容器已設置為顯示");
+
+            // 如果 renderTimelineMode 函數存在，調用它
+            if (typeof renderTimelineMode === "function") {
+              renderTimelineMode();
+              console.log("時間軸模式已渲染");
+            }
+          }
+        }, 1000); // 延遲1秒執行
+      });
+    </script>
   </body>
 </html>
