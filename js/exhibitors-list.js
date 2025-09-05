@@ -23,16 +23,16 @@ class ExhibitorsList {
       console.log("正在從試算表載入攤商數據...");
 
       // 構建請求參數
-      const requestBody = {
+      const params = new URLSearchParams({
         action: "get_accepted_booths",
-      };
+      }).toString();
 
       const response = await fetch(this.publishApiUrl, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify(requestBody),
+        body: params,
       });
 
       if (!response.ok) {

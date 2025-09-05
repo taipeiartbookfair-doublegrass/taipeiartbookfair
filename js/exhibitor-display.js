@@ -33,14 +33,20 @@ class ExhibitorDisplay {
       const controller = new AbortController();
       const timeoutId = setTimeout(() => controller.abort(), 5000); // 5秒 timeout
 
-      // 使用 GET 請求，與 Postman 測試一致
-      const response = await fetch(
-        `${this.apiUrl}?action=get_accepted_booths_by_page_and_page_size&page=1&pageSize=20`,
-        {
-          method: "GET",
-          signal: controller.signal,
-        }
-      );
+      const params = new URLSearchParams({
+        action: "get_accepted_booths_by_page_and_page_size",
+        page: 1,
+        pageSize: 20,
+      }).toString();
+
+      const response = await fetch(this.apiUrl, {
+        redirect: "follow",
+        method: "POST",
+        headers: {
+          "Content-Type": "text/plain;charset=utf-8",
+        },
+        body: params,
+      });
 
       clearTimeout(timeoutId);
 
