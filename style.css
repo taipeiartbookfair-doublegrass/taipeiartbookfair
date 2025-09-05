@@ -107,28 +107,27 @@ p {
 }
 
 /* 語言切換器 */
-/* .language-switcher {
-  display: flex;
-  align-items: center;
-} */
+.language-switcher {
+  position: absolute;
+  left: 0px;
+  top: 0%;
+  transform: translateY(-5%);
+}
 
 .language-btn {
   padding: 0;
   border: none;
-  background: transparent;
-  color: plum;
+  background: plum;
+  color: black;
   cursor: pointer;
-  transition: color 0.2s ease;
-  font-size: 1rem;
-  font-weight: 400;
-  font-family: "IBM Plex Mono", monospace;
+  font-size: 0.9rem;
+  font-family: "IBM Plex Sans JP", sans-serif;
   text-transform: uppercase;
   letter-spacing: 0.5px;
   text-decoration: none;
-}
-
-.language-btn:hover {
-  color: var(--accent);
+  padding-left: 16px;
+  padding-right: 16px;
+  line-height: 0.99rem;
 }
 
 /* 主容器 */
