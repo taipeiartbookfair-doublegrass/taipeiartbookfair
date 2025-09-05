@@ -3,8 +3,8 @@
  * ======================================
  *
  * 這個系統會從 Google Calendar 讀取活動資料，並支援兩種顯示模式：
- * 1. 卡片模式：顯示活動的詳細資訊
- * 2. 時間軸模式：以甘特圖方式顯示活動時間軸
+ * 1. 卡片模式：顯示從今天開始的即將到來的活動
+ * 2. 時間軸模式：以甘特圖方式顯示前後各6個月的所有活動
  *
  * 活動描述格式說明：
  * 在 Google Calendar 的活動描述中，請使用以下格式：
@@ -39,10 +39,23 @@ const calendarId =
   "90527f67fa462c83e184b0c62def10ebc8b00cc8c67a5b83af2afb90a1bdb293@group.calendar.google.com";
 const apiKey = "AIzaSyCOLToQuZFbB1mULxYrMyQVeTVGnhk8-U4";
 
-// Google Calendar API URL
-const url = `https://www.googleapis.com/calendar/v3/calendars/${encodeURIComponent(
+// 計算不同模式的時間範圍
+const now = new Date();
+
+// 卡片模式：從今天開始的即將到來的活動
+const upcomingUrl = `https://www.googleapis.com/calendar/v3/calendars/${encodeURIComponent(
   calendarId
-)}/events?key=${apiKey}&singleEvents=true&orderBy=startTime&timeMin=${new Date().toISOString()}`;
+)}/events?key=${apiKey}&singleEvents=true&orderBy=startTime&timeMin=${now.toISOString()}`;
+
+// 時間軸模式：前後六個月的所有活動
+const sixMonthsAgo = new Date(now.getFullYear(), now.getMonth() - 6, 1);
+const sixMonthsLater = new Date(now.getFullYear(), now.getMonth() + 6, 31);
+const timelineUrl = `https://www.googleapis.com/calendar/v3/calendars/${encodeURIComponent(
+  calendarId
+)}/events?key=${apiKey}&singleEvents=true&orderBy=startTime&timeMin=${sixMonthsAgo.toISOString()}&timeMax=${sixMonthsLater.toISOString()}`;
+
+// 預設使用卡片模式的 URL（保持向後兼容）
+const url = upcomingUrl;
 
 // DOM 元素引用
 const eventsTimeline = document.getElementById("eventsTimeline");
@@ -157,20 +170,24 @@ function scrollToSlide(index) {
   }
 }
 
-// 導航按鈕事件
-prevBtn.addEventListener("click", () => {
-  if (currentSlide > 0) {
-    currentSlide--;
-    scrollToSlide(currentSlide);
-  }
-});
+// 導航按鈕事件（如果按鈕存在的話）
+if (prevBtn) {
+  prevBtn.addEventListener("click", () => {
+    if (currentSlide > 0) {
+      currentSlide--;
+      scrollToSlide(currentSlide);
+    }
+  });
+}
 
-nextBtn.addEventListener("click", () => {
-  if (currentSlide < totalSlides - 1) {
-    currentSlide++;
-    scrollToSlide(currentSlide);
-  }
-});
+if (nextBtn) {
+  nextBtn.addEventListener("click", () => {
+    if (currentSlide < totalSlides - 1) {
+      currentSlide++;
+      scrollToSlide(currentSlide);
+    }
+  });
+}
 
 // 觸控滑動支援 - 根據當前模式選擇目標容器
 let startX = 0;
@@ -244,7 +261,36 @@ setupScrollListener(calenderScroll, 350 + 32);
  * 渲染時間軸模式 - 以甘特圖方式顯示活動
  */
 function renderTimelineMode() {
-  if (!calendarData || !timelineCalendar) return;
+  if (!timelineCalendar) return;
+
+  // 為時間軸模式獲取前後六個月的資料
+  fetchTimelineData();
+}
+
+/**
+ * 獲取時間軸模式專用的資料（前後六個月）
+ */
+function fetchTimelineData() {
+  console.log("正在獲取時間軸資料...");
+
+  fetch(timelineUrl)
+    .then((response) => response.json())
+    .then((data) => {
+      console.log("時間軸資料獲取成功:", data.items?.length || 0, "個活動");
+      renderTimelineWithData(data.items || []);
+    })
+    .catch((err) => {
+      console.error("獲取時間軸資料時出錯:", err);
+      timelineCalendar.innerHTML =
+        "<p style='text-align: center; padding: 20px;'>Oh No!! Its an error! Refresh the page!</p>";
+    });
+}
+
+/**
+ * 使用資料渲染時間軸
+ */
+function renderTimelineWithData(timelineData) {
+  if (!timelineCalendar) return;
 
   timelineCalendar.innerHTML = "";
 
@@ -321,6 +367,29 @@ function renderTimelineMode() {
 
       console.log(`日期點 ${day}: 位置 ${dayPosition}px, 間距 ${daySpacing}px`);
 
+      // 添加 hover 事件監聽器
+      dayElement.addEventListener("mouseenter", () => {
+        // 為該天的所有活動添加 hover 效果
+        const monthContainer = dayElement.closest(".timeline-month");
+        const eventsInThisDay = monthContainer.querySelectorAll(
+          `.timeline-event-bar[data-day="${day}"]`
+        );
+        eventsInThisDay.forEach((eventBar) => {
+          eventBar.classList.add("event-hovered");
+        });
+      });
+
+      dayElement.addEventListener("mouseleave", () => {
+        // 移除該天所有活動的 hover 效果
+        const monthContainer = dayElement.closest(".timeline-month");
+        const eventsInThisDay = monthContainer.querySelectorAll(
+          `.timeline-event-bar[data-day="${day}"]`
+        );
+        eventsInThisDay.forEach((eventBar) => {
+          eventBar.classList.remove("event-hovered");
+        });
+      });
+
       daysContainer.appendChild(dayElement);
     }
 
@@ -330,7 +399,7 @@ function renderTimelineMode() {
     eventsArea.style.paddingLeft = `${containerMargin / 2}px`; // 與日期容器同樣的左邊距
 
     // 查找該月份的活動
-    const monthEvents = calendarData.filter((event) => {
+    const monthEvents = timelineData.filter((event) => {
       const eventDate = new Date(event.start.dateTime || event.start.date);
       return eventDate.getFullYear() === year && eventDate.getMonth() === month;
     });
@@ -382,6 +451,37 @@ function renderTimelineMode() {
       // 設置長條位置和寬度（不需要額外調整，因為活動區域已有 padding）
       eventBar.style.left = `${startPosition}px`;
       eventBar.style.width = `${barWidth}px`;
+
+      // 添加隨機旋轉 ±15度
+      const randomRotation = (Math.random() - 0.5) * 25; // -12.5 到 +12.5 度
+      eventBar.style.transform = `translateX(-2px) rotate(${randomRotation}deg)`;
+      eventBar.style.transformOrigin = "center center";
+
+      // 添加 data-day 屬性，標記這個活動屬於哪一天
+      eventBar.setAttribute("data-day", startDay);
+
+      // 為活動本身添加 hover 事件監聽器
+      eventBar.addEventListener("mouseenter", () => {
+        // 為同一天的所有活動添加 hover 效果
+        const monthContainer = eventBar.closest(".timeline-month");
+        const eventsInThisDay = monthContainer.querySelectorAll(
+          `.timeline-event-bar[data-day="${startDay}"]`
+        );
+        eventsInThisDay.forEach((bar) => {
+          bar.classList.add("event-hovered");
+        });
+      });
+
+      eventBar.addEventListener("mouseleave", () => {
+        // 移除同一天所有活動的 hover 效果
+        const monthContainer = eventBar.closest(".timeline-month");
+        const eventsInThisDay = monthContainer.querySelectorAll(
+          `.timeline-event-bar[data-day="${startDay}"]`
+        );
+        eventsInThisDay.forEach((bar) => {
+          bar.classList.remove("event-hovered");
+        });
+      });
 
       console.log(
         `活動: ${event.summary}, 開始日: ${startDay}, 持續: ${duration}天, 位置: ${startPosition}px, 寬度: ${barWidth}px, 間距: ${daySpacing}px, 月份天數: ${actualDayCount}`
@@ -765,11 +865,41 @@ const getTypeLabel = (type) => {
   }
 };
 
+// Event Type 篩選器功能
+function filterEventsByType(events, eventType) {
+  if (eventType === "all") {
+    return events;
+  }
+
+  return events.filter((event) => {
+    const eventFields = parseDescription(event.description);
+    const type = eventFields.TYPE || "";
+    return type.toUpperCase() === eventType.toUpperCase();
+  });
+}
+
+// 設置 Event Type 篩選器
+function setupEventTypeFilter() {
+  const eventTypeFilter = document.getElementById("eventTypeFilter");
+  if (!eventTypeFilter) return;
+
+  eventTypeFilter.addEventListener("change", (e) => {
+    const selectedType = e.target.value;
+    console.log("篩選事件類型:", selectedType);
+
+    if (calendarData) {
+      const filteredEvents = filterEventsByType(calendarData, selectedType);
+      renderEvents(filteredEvents);
+    }
+  });
+}
+
 // 獲取日曆數據
 fetch(url)
   .then((res) => res.json())
   .then((data) => {
     calendarData = data.items;
     renderEvents(data.items);
+    setupEventTypeFilter(); // 設置篩選器
   })
   .catch((err) => console.error("抓取日曆時出錯", err));
