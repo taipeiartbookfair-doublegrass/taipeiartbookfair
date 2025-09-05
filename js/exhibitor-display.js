@@ -6,7 +6,7 @@ class ExhibitorDisplay {
     this.rotationInterval = null;
     this.isExpanded = false;
     this.apiUrl =
-      "https://script.google.com/macros/s/AKfycbxF5VwhrcUjTegd3e-j7Ar7-iD8I0rhvnZNgYmXMZrApQloiqJEhXvp9XzdC1vhntJ8Cw/exec";
+      "https://script.google.com/macros/s/AKfycbzD7XvMiMP2Yi_asnkdvU1rOhk2YcixUpMrYQ_bDHXbQIkG97E5knPC3SmkGKoe9mvh/exec";
 
     this.init();
   }
@@ -33,19 +33,14 @@ class ExhibitorDisplay {
       const controller = new AbortController();
       const timeoutId = setTimeout(() => controller.abort(), 5000); // 5秒 timeout
 
-      // 使用 POST 請求，與 exhibitors-list.js 保持一致
-      const requestBody = {
-        action: "get_accepted_booths",
-      };
-
-      const response = await fetch(this.apiUrl, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(requestBody),
-        signal: controller.signal,
-      });
+      // 使用 GET 請求，與 Postman 測試一致
+      const response = await fetch(
+        `${this.apiUrl}?action=get_accepted_booths_by_page_and_page_size&page=1&pageSize=20`,
+        {
+          method: "GET",
+          signal: controller.signal,
+        }
+      );
 
       clearTimeout(timeoutId);
 
@@ -59,33 +54,24 @@ class ExhibitorDisplay {
       console.log("data.data:", data.data);
       console.log("data.data.booths:", data.data?.booths);
 
-      // 根據你哥的 API 格式解析數據
+      // 簡化數據解析，只抓取需要的字段
       if (data.success && data.data && data.data.booths) {
-        this.exhibitorsData = data.data.booths
-          .filter(
-            (item) =>
-              item && (item["品牌"] || item.name || item.nameEn || item.id)
-          )
-          .map((item) => this.normalizeExhibitorData(item));
+        this.exhibitorsData = data.data.booths.map((item) => ({
+          id: item["報名編號"] || "",
+          name: item["品牌"] || "",
+          booth: item["攤商編號"] || "",
+          ig: item["IG帳號"] || "",
+          description: item["品牌簡介"] || "",
+          facebook: item["facebook"] || "",
+          instagram: item["instagram"] || "",
+          website: item["website"] || "",
+          region: item["region"] || "TW",
+          sourceSheet: item["_source_sheet"] || "",
+        }));
 
         console.log(`成功載入 ${this.exhibitorsData.length} 個攤商數據`);
       } else {
-        console.log("API 數據格式不符合預期，嘗試其他格式...");
-
-        // 嘗試其他可能的格式
-        if (data.success && data.data && Array.isArray(data.data)) {
-          this.exhibitorsData = data.data
-            .filter(
-              (item) =>
-                item && (item["品牌"] || item.name || item.nameEn || item.id)
-            )
-            .map((item) => this.normalizeExhibitorData(item));
-          console.log(
-            `成功載入 ${this.exhibitorsData.length} 個攤商數據（備用格式）`
-          );
-        } else {
-          throw new Error("API 數據格式不正確");
-        }
+        throw new Error("API 數據格式不正確");
       }
     } catch (error) {
       console.error("無法載入輪播攤商數據:", error);
@@ -124,20 +110,6 @@ class ExhibitorDisplay {
       if (name) name.textContent = "暫無攤商資料";
       if (region) region.textContent = "-";
     });
-  }
-
-  // 標準化攤商數據
-  normalizeExhibitorData(item) {
-    return {
-      id: item["報名編號"] || "",
-      name: item["品牌"] || "",
-      category: item["身份類別"] || "",
-      region: item.region || "",
-      applicationNumber: item["報名編號"] || "",
-      accepted: item["錄取"] || "",
-      paid: item["已匯款"] || false,
-      sourceSheet: item["_source_sheet"] || item.sourceSheet || "", // 記錄來源工作表
-    };
   }
 
   // 設置事件監聽器
