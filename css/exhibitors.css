@@ -201,6 +201,7 @@
   padding: 16px 0;
   height: 100%; /* 填滿父容器高度 */
   width: 100%;
+  background-color: lightcyan;
 }
 
 /* 隱藏 Webkit 瀏覽器的滾動條 */
