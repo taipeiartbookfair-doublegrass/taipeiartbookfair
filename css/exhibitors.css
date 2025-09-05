@@ -192,7 +192,7 @@
 /* 日曆滑動容器 */
 .calender-scroll-container {
   display: block; /* 改為block佈局 */
-  background-image: url(../safaririp.jpg);
+  background-image: url(../bgbg.jpg);
   overflow-x: hidden; /* 隱藏水平滾動 */
   overflow-y: auto; /* 允許垂直滾動 */
   scroll-behavior: smooth;
