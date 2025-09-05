@@ -14,6 +14,7 @@
     <link rel="stylesheet" href="css/font.css" />
     <link rel="stylesheet" href="css/exhibitors.css" />
     <script src="js/homepage-zine.js"></script>
+    <script src="js/exhibitors-list.js"></script>
   </head>
   <body>
     <!-- 照片轉起來！Hot! -->
@@ -77,15 +78,26 @@
     </nav>
 
     <div class="event-info">
-      <div class="event-info-content">
-        <div class="event-info-row">
-          <p>A-103</p>
+      <!-- 攤商資訊顯示區域 -->
+      <div class="exhibitor-info-content">
+        <!-- 展開按鈕 - 放在左邊 -->
+        <div class="exhibitor-expand-btn" id="exhibitorExpandBtn">
+          <span class="expand-text">攤商</span>
+          <span class="expand-arrow">↓</span>
         </div>
-        <div class="event-info-row">
-          <p>攤商名字</p>
-        </div>
-        <div class="event-info-row">
-          <p>GE</p>
+
+        <div class="exhibitor-display-container">
+          <div class="exhibitor-item-display">
+            <span class="exhibitor-booth-number"></span>
+            <span class="exhibitor-name"></span>
+            <span class="exhibitor-region"></span>
+          </div>
+          <span class="exhibitor-separator">｜</span>
+          <div class="exhibitor-item-display">
+            <span class="exhibitor-booth-number"></span>
+            <span class="exhibitor-name"></span>
+            <span class="exhibitor-region"></span>
+          </div>
         </div>
       </div>
 
@@ -97,6 +109,15 @@
         </div>
         <div class="ticket-right-notch"></div>
       </div>
+    </div>
+
+    <!-- 攤商名單展開區域 -->
+    <div class="exhibitor-full-list" id="exhibitorFullList">
+      <div class="exhibitor-list-header">
+        <h3>攤商名單 | EXHIBITORS</h3>
+        <button class="close-exhibitor-list" id="closeExhibitorList">×</button>
+      </div>
+      <div class="exhibitors-grid"></div>
     </div>
 
     <!-- start of monopoly-style layout -->
@@ -630,9 +651,9 @@
     <script src="poster-flip.js"></script>
     <script src="calender.js"></script>
     <script src="duolanguage.js"></script>
-    <script src="js/exhibitors-list.js"></script>
     <script src="js/event-photos.js"></script>
     <script src="js/homepage-zine.js"></script>
+    <script src="js/exhibitor-display.js"></script>
 
     <!-- 初始化時間軸模式的腳本 -->
     <script>

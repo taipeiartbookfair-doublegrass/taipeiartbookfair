@@ -1051,7 +1051,7 @@ p {
   padding-top: 1rem;
   box-sizing: border-box;
   overflow: auto;
-  gap: 2rem;
+  gap: 1.5rem;
   height: 165vh;
 }
 
@@ -1828,5 +1828,214 @@ p {
   .calender-section h3 {
     font-size: 1.2rem;
     margin-bottom: 0.5rem;
+  }
+}
+
+/* ===== 攤商顯示樣式 ===== */
+
+/* 攤商資訊顯示區域 - 保持原本的窄條樣式 */
+.exhibitor-info-content {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  width: 100%;
+}
+
+.exhibitor-display-container {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  flex: 1;
+  min-width: 0;
+}
+
+.exhibitor-item-display {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  flex: 1;
+  min-width: 0;
+}
+
+.exhibitor-booth-number {
+  font-size: 0.8rem;
+  font-weight: bold;
+  color: var(--primary);
+  font-family: "IBM Plex Mono", monospace;
+  flex-shrink: 0;
+}
+
+.exhibitor-name {
+  font-size: 0.8rem;
+  font-weight: 500;
+  color: var(--text);
+  flex: 1;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.exhibitor-region {
+  font-size: 0.7rem;
+  color: var(--text-light);
+  font-weight: 400;
+  flex-shrink: 0;
+}
+
+.exhibitor-separator {
+  font-size: 0.8rem;
+  color: var(--text-light);
+  font-weight: 300;
+  flex-shrink: 0;
+}
+
+/* 展開按鈕 - 小小的在左邊 */
+.exhibitor-expand-btn {
+  display: flex;
+  align-items: center;
+  gap: 0.3rem;
+  padding: 0.3rem 0.6rem;
+  background: var(--primary);
+  color: white;
+  border: none;
+  border-radius: 12px;
+  cursor: pointer;
+  font-size: 0.7rem;
+  font-weight: 400;
+  transition: all 0.2s ease;
+  user-select: none;
+}
+
+.exhibitor-expand-btn:hover {
+  background: var(--secondary);
+}
+
+.expand-arrow {
+  font-size: 0.6rem;
+  transition: transform 0.2s ease;
+}
+
+.exhibitor-expand-btn:hover .expand-arrow {
+  transform: translateY(1px);
+}
+
+/* 攤商名單展開區域 */
+.exhibitor-full-list {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.9);
+  z-index: 9999;
+  display: flex;
+  flex-direction: column;
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.3s ease;
+}
+
+.exhibitor-full-list.expanded {
+  opacity: 1;
+  visibility: visible;
+}
+
+.exhibitor-list-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 2rem;
+  background: var(--primary);
+  color: white;
+}
+
+.exhibitor-list-header h3 {
+  font-size: 2rem;
+  font-weight: bold;
+  margin: 0;
+}
+
+.close-exhibitor-list {
+  background: none;
+  border: none;
+  color: white;
+  font-size: 3rem;
+  cursor: pointer;
+  padding: 0;
+  width: 50px;
+  height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  transition: all 0.3s ease;
+}
+
+.close-exhibitor-list:hover {
+  background: rgba(255, 255, 255, 0.2);
+  transform: rotate(90deg);
+}
+
+/* 攤商網格容器 */
+.exhibitor-full-list .exhibitors-grid {
+  flex: 1;
+  overflow: hidden;
+  position: relative;
+  background: white;
+}
+
+/* 手機版攤商顯示樣式 */
+@media screen and (max-width: 768px) {
+  .exhibitor-info-content {
+    flex-direction: column;
+    gap: 0.5rem;
+    width: 100%;
+  }
+
+  .exhibitor-display-container {
+    gap: 0.5rem;
+    width: 100%;
+  }
+
+  .exhibitor-item-display {
+    gap: 0.3rem;
+    flex: 1;
+  }
+
+  .exhibitor-booth-number {
+    font-size: 0.7rem;
+  }
+
+  .exhibitor-name {
+    font-size: 0.7rem;
+    flex: 1;
+  }
+
+  .exhibitor-region {
+    font-size: 0.6rem;
+  }
+
+  .exhibitor-separator {
+    font-size: 0.7rem;
+  }
+
+  .exhibitor-expand-btn {
+    padding: 0.2rem 0.4rem;
+    font-size: 0.6rem;
+  }
+
+  .exhibitor-list-header {
+    padding: 1rem;
+  }
+
+  .exhibitor-list-header h3 {
+    font-size: 1.5rem;
+  }
+
+  .close-exhibitor-list {
+    font-size: 2rem;
+    width: 40px;
+    height: 40px;
   }
 }
