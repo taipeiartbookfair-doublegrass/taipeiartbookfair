@@ -81,10 +81,9 @@ h2 {
 h3 {
   font-size: 1.8rem;
   text-align: center;
-  margin-bottom: 1rem;
   font-family: "Xiaoyuan-01", sans-serif;
   font-weight: 400;
-  line-height: 1.1;
+  line-height: 1.8;
   color: forestgreen;
   text-transform: uppercase;
 }
@@ -795,24 +794,25 @@ p {
 }
 
 .agenda-subscribe a:hover {
-  color: var(--primary);
+  color: coral;
 }
 
 /* 自定義 Scrollbar 樣式 */
 .calender-scroll-container::-webkit-scrollbar,
 .timeline-scroll-container::-webkit-scrollbar {
-  width: 1px;
+  width: 8px;
 }
 
 .calender-scroll-container::-webkit-scrollbar-track,
 .timeline-scroll-container::-webkit-scrollbar-track {
-  background: transparent;
+  background: rgba(0, 0, 0, 0.1);
+  border-radius: 4px;
 }
 
 .calender-scroll-container::-webkit-scrollbar-thumb,
 .timeline-scroll-container::-webkit-scrollbar-thumb {
-  background-color: #aaa;
-  border-radius: 2px;
+  background-color: #666;
+  border-radius: 4px;
   border: 1px solid transparent;
   background-clip: padding-box;
 }
@@ -825,14 +825,16 @@ p {
 /* Firefox scrollbar */
 .calender-scroll-container,
 .timeline-scroll-container {
-  scrollbar-width: thin;
-  scrollbar-color: olive transparent;
+  scrollbar-width: auto;
+  scrollbar-color: #666 rgba(0, 0, 0, 0.1);
 }
 
 /* Event Type 篩選器樣式 */
 .event-filter-header {
-  margin-bottom: 1rem;
   padding: 0.5rem 0;
+  background-color: lightcyan;
+  border-bottom: 1px dashed var(--border);
+  text-indent: 2px;
 }
 
 .event-filter {
@@ -872,9 +874,8 @@ p {
 /* 時間軸模式區域 - 鋪滿下方 */
 .timeline-section {
   width: 100vw;
-  background: var(--bg);
+  background: olivedrab;
   padding: 2rem 0;
-  border-top: 2px solid var(--border);
   margin-top: 2rem;
 }
 
@@ -1597,7 +1598,7 @@ p {
 .rotata div:nth-child(2) {
   top: 140vh;
   left: 26.5rem;
-  width: 19rem;
+  width: 18rem;
   height: 13rem;
 }
 .rotata div:nth-child(3) {
