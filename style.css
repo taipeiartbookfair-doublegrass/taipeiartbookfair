@@ -788,13 +788,14 @@ p {
 }
 
 .agenda-subscribe a {
-  color: var(--accent);
+  color: coral;
   text-decoration: none;
-  transition: color 0.3s ease;
+  background-color: darkblue;
 }
 
 .agenda-subscribe a:hover {
-  color: coral;
+  color: orangered;
+  background-color: yellowgreen;
 }
 
 /* 自定義 Scrollbar 樣式 */

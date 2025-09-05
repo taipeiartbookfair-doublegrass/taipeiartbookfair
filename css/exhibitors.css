@@ -192,6 +192,7 @@
 /* 日曆滑動容器 */
 .calender-scroll-container {
   display: block; /* 改為block佈局 */
+  background-image: url(../safaririp.jpg);
   overflow-x: hidden; /* 隱藏水平滾動 */
   overflow-y: auto; /* 允許垂直滾動 */
   scroll-behavior: smooth;
@@ -201,7 +202,7 @@
   padding: 16px 0;
   height: 100%; /* 填滿父容器高度 */
   width: 100%;
-  background-color: lightcyan;
+  padding-top: 0px;
 }
 
 /* 隱藏 Webkit 瀏覽器的滾動條 */
@@ -216,6 +217,7 @@
   gap: 0; /* 移除間距，改用分隔線 */
   padding: 0;
   width: 100%; /* 佔滿寬度 */
+  background-color: lightcyan;
 }
 
 /* 日曆項目容器 */
@@ -588,7 +590,7 @@
 .calender-mode-container {
   width: 100%;
   max-width: 100%; /* 確保不超出父容器 */
-  height: 87vh; /* 設定固定高度，確保兩個模式一致 */
+  height: 88vh; /* 設定固定高度，確保兩個模式一致 */
   overflow: hidden; /* 防止內容溢出 */
 }
 
@@ -685,6 +687,7 @@
   z-index: 1;
   letter-spacing: -1px;
   width: 1.2rem;
+  background-color: gray;
   position: absolute; /* 絕對定位 */
   top: 0; /* 垂直居中 */
 }
@@ -698,9 +701,16 @@
 /* 活動區域 - 甘特圖樣式 */
 .timeline-events-area {
   position: relative;
-  min-height: 58vh;
+  min-height: 47vh;
   /* padding-left 改由 JavaScript 動態設定 */
-  background: aliceblue;
+  background: linear-gradient(
+    0.5turn,
+    aliceblue,
+    aliceblue,
+    aliceblue,
+    lavender,
+    rebeccapurple
+  );
 }
 
 /* 活動長條樣式 - 甘特圖樣式 */
@@ -709,6 +719,7 @@
   left: 0; /* 改為 0，因為活動區域已有 padding */
   height: 30px;
   z-index: 2;
+  cursor: pointer;
   min-width: 20px;
   display: flex;
   align-items: center;
@@ -716,13 +727,12 @@
   box-sizing: border-box;
   /* 微調位置，確保與日期點完美對準 */
   transform: translateX(-2px);
-  color: lightgrey !important;
 }
 
 /* 跨天數活動的特殊樣式 */
 .timeline-event-bar.multi-day {
-  background: #606060 !important; /* 較深的灰色 */
-  border-left: 3px solid #404040; /* 深灰色邊框 */
+  background: rgba(0, 0, 0, 0.05); /* 淡灰色背景 */
+  border-left: 3px solid #000; /* 左邊黑色邊框 */
 }
 
 /* 活動內容 */
