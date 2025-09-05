@@ -201,7 +201,7 @@
   -ms-overflow-style: none; /* IE/Edge 隱藏滾動條 */
   padding: 16px 0;
   height: 100%; /* 填滿父容器高度 */
-  width: 100%;
+  width: 458px;
   padding-top: 0px;
 }
 
