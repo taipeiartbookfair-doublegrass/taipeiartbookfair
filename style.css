@@ -79,13 +79,12 @@ h2 {
   font-size: 2rem;
 }
 h3 {
-  font-size: 2rem;
+  font-size: 1.8rem;
   text-align: center;
-  font-family: "Xiaoyuan-02", sans-serif;
+  font-family: "Xiaoyuan-01", sans-serif;
   font-weight: 400;
   line-height: 1.8;
   color: forestgreen;
-  text-shadow: 1px 1px 1px black;
   text-transform: uppercase;
 }
 h4 {
@@ -789,14 +788,13 @@ p {
 }
 
 .agenda-subscribe a {
-  color: coral;
+  color: var(--accent);
   text-decoration: none;
-  background-color: darkblue;
+  transition: color 0.3s ease;
 }
 
 .agenda-subscribe a:hover {
-  color: orangered;
-  background-color: yellowgreen;
+  color: coral;
 }
 
 /* 自定義 Scrollbar 樣式 */
@@ -1842,7 +1840,6 @@ p {
   align-items: center;
   gap: 1rem;
   width: 100%;
-  margin-right: 20px;
 }
 
 .exhibitor-display-container {
