@@ -41,6 +41,13 @@ function shuffle(array) {
 
 function createRotator() {
   const rotata = document.getElementById("rotata");
+
+  // 檢查元素是否存在
+  if (!rotata) {
+    console.warn("rotata 元素未找到，跳過 createRotator 函數");
+    return;
+  }
+
   const totalPosters = 6;
   const imagesPerStrip = 6;
 
@@ -104,6 +111,13 @@ function createRotator() {
 
 function createEventPhotos() {
   const eventPhotosStrip = document.getElementById("eventPhotosStrip");
+
+  // 檢查元素是否存在
+  if (!eventPhotosStrip) {
+    console.warn("eventPhotosStrip 元素未找到，跳過 createEventPhotos 函數");
+    return;
+  }
+
   const imagesPerStrip = 8; // 一次顯示8張圖片
 
   // 使用 horizontal 圖片作為 event photos
