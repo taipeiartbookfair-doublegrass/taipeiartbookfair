@@ -1,0 +1,1349 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
+    />
+    <title>草率季票券 | Taipei Art Book Fair Tickets</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=BioRhyme+Expanded:wght@200;300;400;700;800&family=IBM+Plex+Mono:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100;1,200;1,300;1,400;1,500;1,600;1,700&family=IBM+Plex+Sans+JP&family=IBM+Plex+Sans:ital,wght@0,100..700;1,100..700&family=IBM+Plex+Serif:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100;1,200;1,300;1,400;1,500;1,600;1,700&family=Libre+Franklin:ital,wght@0,100..900;1,100..900&family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="shortcut icon" href="image/icon-1.ico" />
+    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="css/font.css" />
+    <link rel="stylesheet" href="css/exhibitors.css" />
+    <style>
+      /* Prevent mobile browser zoom and text adjustment */
+      * {
+        -webkit-text-size-adjust: 100%;
+        -moz-text-size-adjust: 100%;
+        -ms-text-size-adjust: 100%;
+        text-size-adjust: 100%;
+      }
+
+      html {
+        overflow-x: hidden;
+        max-width: 100%;
+        scroll-behavior: smooth;
+      }
+
+      body {
+        overflow-x: hidden;
+        overflow-y: auto;
+        max-width: 100vw;
+        margin: 0;
+        padding: 0;
+      }
+
+      /* Ticket Page Styles */
+      .ticket-page {
+        background: linear-gradient(
+          0deg,
+          ghostwhite 0%,
+          #455e44 3%,
+          #455e44 97%,
+          ghostwhite 100%
+        );
+      }
+
+      .ticket-hero {
+        position: absolute;
+        width: 97vw;
+        right: 0px;
+        height: 96vh;
+        background: #781012;
+        color: ghostwhite;
+        line-height: 2rem;
+        display: flex;
+        align-items: center;
+        position: relative;
+        margin: 16px;
+      }
+
+      .ticket-hero-circle-left {
+        position: absolute;
+        width: 35vw;
+        height: 35vw;
+        background: linear-gradient(
+          0deg,
+          ghostwhite 0%,
+          #455e44 10%,
+          #455e44 90%,
+          ghostwhite 100%
+        );
+        left: -20vw;
+        border-radius: 50%;
+        top: 53%;
+        transform: translateY(-50%);
+      }
+
+      .ticket-hero-content {
+        flex: 1;
+        text-align: center;
+        padding: 0.3rem 2rem;
+      }
+
+      .ticket-hero-title {
+        color: yellowgreen;
+        font-size: 6rem;
+        text-shadow: 1px 1px #2d3f99;
+        font-family: "Inclusive sans", sans-serif;
+      }
+
+      .ticket-hero-circle-right {
+        position: absolute;
+        width: 35vw;
+        height: 35vw;
+        background: linear-gradient(
+          0deg,
+          ghostwhite 0%,
+          #455e44 10%,
+          #455e44 90%,
+          ghostwhite 100%
+        );
+        right: -20vw;
+        border-radius: 50%;
+        top: 53%;
+        transform: translateY(-50%);
+      }
+
+      .ticket-scroll-prompt {
+        position: absolute;
+        bottom: 2rem;
+        left: 50%;
+        transform: translateX(-50%);
+        text-align: center;
+        padding: 0.3rem 2rem;
+        font-size: 1.2rem;
+        color: #fbad17;
+        font-family: "Inclusive sans", sans-serif;
+        z-index: 10;
+      }
+
+      .ticket-main-container {
+        display: flex;
+        padding: 20px;
+        gap: 30px;
+        position: relative;
+      }
+
+      .ticket-nav {
+        width: 20vw;
+        position: absolute;
+        right: 0;
+        z-index: 100;
+      }
+
+      .ticket-nav-inner {
+        display: flex;
+        flex-direction: column;
+        gap: 0;
+      }
+
+      .ticket-nav-title {
+        font-size: 0.9rem;
+        color: #fbad17;
+        font-family: "Inclusive sans", sans-serif;
+        margin-bottom: 10px;
+      }
+
+      .ticket-nav-link {
+        color: #781012;
+        background-color: #7d90c9;
+        text-indent: 1px;
+        font-size: 0.9rem;
+        font-family: "Inclusive sans", sans-serif;
+        text-decoration: none;
+        padding: 5px 0;
+        border-bottom: 1px solid #fbad17;
+        display: block;
+        transition: all 0.3s ease;
+      }
+
+      .ticket-nav-link:hover {
+        color: ghostwhite;
+      }
+
+      .ticket-content {
+        width: 75%;
+      }
+
+      .ticket-intro {
+        font-size: 1.2rem;
+        color: yellowgreen;
+        font-family: "Inclusive sans", sans-serif;
+        margin-bottom: 100px;
+        line-height: 1.6;
+      }
+
+      .ticket-sections {
+        font-size: 1.2rem;
+        color: ghostwhite;
+        font-family: "Inclusive sans", sans-serif;
+      }
+
+      .ticket-section {
+        padding: 20px 0;
+        scroll-margin-top: 100px;
+        display: flex;
+        gap: 20px;
+        align-items: flex-start;
+      }
+
+      .ticket-section-image {
+        flex-shrink: 0;
+        width: 120px;
+        height: auto;
+        max-height: 400px;
+        object-fit: contain;
+      }
+
+      .ticket-section-content {
+        flex: 1;
+      }
+
+      .ticket-section-title {
+        font-family: "Inclusive sans", sans-serif !important;
+        margin: 0 0 15px 0;
+        font-size: 2rem;
+        color: #781012;
+        letter-spacing: 1.2rem;
+        background-color: #7d90c9;
+        font-weight: bold;
+        text-align: center;
+      }
+
+      .ticket-section-desc {
+        margin: 0 0 20px 0;
+        line-height: 1.6;
+        color: ghostwhite;
+      }
+
+      .ticket-sub-section {
+        padding: 15px 0;
+        margin-bottom: 20px;
+      }
+
+      .ticket-sub-layout {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+        margin-bottom: 8px;
+      }
+
+      .ticket-sub-info h4 {
+        margin: 0 0 5px 0;
+        font-size: 1.4rem;
+        color: #fbad17;
+        font-weight: bold;
+      }
+
+      .ticket-sub-desc {
+        margin: 0 0 8px 0;
+        font-size: 0.95rem;
+        color: ghostwhite;
+        line-height: 1.4;
+      }
+
+      .ticket-sub-date {
+        margin: 0;
+        font-size: 0.9rem;
+        color: #00a650;
+      }
+
+      .ticket-sub-pricing {
+        text-align: right;
+        margin-left: 20px;
+      }
+
+      .ticket-price {
+        font-size: 1.5rem;
+        font-weight: bold;
+        color: #fbad17;
+      }
+
+      .ticket-quantity {
+        font-size: 0.9rem;
+        color: ghostwhite;
+      }
+
+      .ticket-btn {
+        display: inline-block;
+        background: #fbad17;
+        color: black;
+        padding: 8px 16px;
+        border-radius: 15px;
+        text-decoration: none;
+        font-weight: bold;
+        font-size: 0.9rem;
+        transition: all 0.3s ease;
+      }
+
+      .ticket-btn-large {
+        padding: 12px 24px;
+        border-radius: 25px;
+      }
+
+      .ticket-main-layout {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 10px;
+      }
+
+      .ticket-main-price {
+        font-size: 1.8rem;
+        font-weight: bold;
+        color: #fbad17;
+      }
+
+      .ticket-deadline {
+        margin: 0;
+        font-size: 0.9rem;
+        color: ghostwhite;
+        text-align: right;
+      }
+
+      .ticket-divider {
+        border: 1px dotted #7d90c9;
+      }
+
+      .ticket-spacing {
+        margin-bottom: 100px;
+      }
+
+      /* Language Switch Styles */
+      .language-switch {
+        position: absolute;
+        top: 20px;
+        right: 20px;
+        z-index: 200;
+      }
+
+      .lang-btn {
+        background: rgba(255, 255, 255, 0.2);
+        border: 2px solid #fbad17;
+        color: #fbad17;
+        padding: 8px 16px;
+        border-radius: 20px;
+        cursor: pointer;
+        font-family: "Inclusive sans", sans-serif;
+        font-size: 0.9rem;
+        font-weight: bold;
+        transition: all 0.3s ease;
+        backdrop-filter: blur(10px);
+        touch-action: manipulation;
+        user-select: none;
+        -webkit-touch-callout: none;
+        -webkit-user-select: none;
+      }
+
+      .lang-btn:hover {
+        background: rgba(255, 255, 255, 0.3);
+        transform: scale(1.05);
+      }
+
+      .lang-btn:active {
+        transform: scale(0.95);
+      }
+
+      /* Tablet Responsive Styles for Ticket Page */
+      @media (max-width: 1024px) and (min-width: 769px) {
+        .ticket-hero {
+          overflow-x: hidden;
+          max-width: 100%;
+        }
+        .ticket-hero-title {
+          font-size: 2.5rem;
+          line-height: 1;
+          letter-spacing: 0.05rem;
+          white-space: nowrap;
+          width: auto;
+          max-width: 95%;
+        }
+
+        .ticket-main-container {
+          padding: 20px;
+          gap: 25px;
+        }
+
+        .ticket-nav {
+          width: 25vw;
+        }
+
+        .ticket-content {
+          width: 70%;
+        }
+
+        .ticket-intro {
+          font-size: 1.1rem;
+          line-height: 1.7;
+          margin-bottom: 60px;
+        }
+
+        .ticket-section-title {
+          font-size: 1.8rem;
+          letter-spacing: 0.8rem;
+          padding: 10px;
+        }
+
+        .ticket-sub-layout {
+          gap: 15px;
+        }
+
+        .ticket-sub-info h4 {
+          font-size: 1.3rem;
+        }
+
+        .ticket-sub-desc {
+          font-size: 1rem;
+          line-height: 1.5;
+        }
+
+        .ticket-price {
+          font-size: 1.4rem;
+        }
+
+        .ticket-btn {
+          font-size: 1rem;
+          padding: 10px 18px;
+        }
+
+        .ticket-section {
+          gap: 20px;
+        }
+
+        .ticket-section-image {
+          width: 100px;
+        }
+      }
+
+      /* Mobile Responsive Styles for Ticket Page */
+      @media (max-width: 768px) {
+        .ticket-hero {
+          position: static !important;
+          flex-direction: column;
+          justify-content: space-between;
+          min-height: 100vh;
+          width: 100% !important;
+          max-width: 100%;
+          right: auto;
+          margin: 0;
+          padding: 20px 0;
+          overflow-x: hidden;
+          overflow-y: visible;
+        }
+
+        .ticket-hero-circle-left {
+          position: absolute;
+          top: -15vw;
+          left: 50%;
+          transform: translateX(-50%) translateY(-40%);
+          width: 60vw;
+          height: 60vw;
+          max-width: 100vw;
+        }
+
+        .ticket-hero-circle-right {
+          position: absolute;
+          bottom: -15vw;
+          left: 50%;
+          transform: translateX(-50%) translateY(80%);
+          width: 60vw;
+          height: 60vw;
+          right: auto;
+          max-width: 100vw;
+          background: linear-gradient(
+            0deg,
+            #455e44 0%,
+            #455e44 10%,
+            #455e44 90%,
+            ghostwhite 100%
+          );
+        }
+
+        .ticket-hero-content {
+          flex: 1;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          padding: 2rem;
+          z-index: 10;
+        }
+
+        .ticket-hero-title {
+          font-size: 4rem;
+          writing-mode: vertical-rl;
+          text-orientation: mixed;
+          text-align: center;
+          line-height: 1.2;
+        }
+
+        .ticket-scroll-prompt {
+          bottom: 10px;
+          font-size: 1rem;
+          z-index: 15;
+          color: #fbad17;
+        }
+
+        .language-switch {
+          top: 40px;
+          right: 20px;
+          z-index: 20;
+        }
+
+        /* 手機版主要內容區域 */
+        .ticket-main-container {
+          flex-direction: column;
+          padding: 15px;
+          gap: 20px;
+        }
+
+        .ticket-nav {
+          width: 100%;
+          position: static;
+          order: 1;
+          margin-bottom: 20px;
+        }
+
+        .ticket-nav-inner {
+          flex-direction: colmn;
+          flex-wrap: wrap;
+          gap: 10px;
+          justify-content: center;
+        }
+
+        .ticket-nav-title {
+          width: 100%;
+          text-align: center;
+          margin-bottom: 15px;
+        }
+
+        .ticket-nav-link {
+          text-align: center;
+          padding: 8px 15px;
+          margin: 0;
+          border-bottom: 1px solid #fbad17;
+          margin: 0;
+        }
+
+        .ticket-content {
+          width: 100%;
+          order: 2;
+        }
+
+        .ticket-intro {
+          font-size: 1rem;
+          margin-bottom: 20px;
+        }
+
+        .ticket-section-title {
+          font-size: 1.5rem;
+        }
+
+        .ticket-sub-layout {
+          flex-direction: column;
+          gap: 10px;
+        }
+
+        .ticket-sub-pricing {
+          text-align: left;
+          margin-left: 0;
+        }
+
+        .ticket-main-layout {
+          flex-direction: column;
+          align-items: flex-start;
+          gap: 15px;
+        }
+
+        /* 手機版票券圖片調整 */
+        .ticket-section {
+          flex-direction: column;
+          gap: 15px;
+        }
+
+        .ticket-section-image {
+          width: 80px;
+          max-height: 200px;
+          align-self: center;
+        }
+      }
+    </style>
+  </head>
+  <body class="ticket-page">
+    <div class="ticket-hero">
+      <div class="ticket-hero-circle-left"></div>
+      <div class="ticket-hero-content">
+        <p
+          class="ticket-hero-title"
+          style="
+            z-index: 100;
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+          "
+          data-zh="購票"
+          data-en="Tickets"
+        >
+          購票
+        </p>
+        <img
+          src="image/tickets/Heand0007.png"
+          alt="票券"
+          class="ticket-hero-image"
+          style="
+            position: absolute;
+            top: -150px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 10;
+          "
+        />
+      </div>
+      <div class="ticket-hero-circle-right"></div>
+      <div class="ticket-scroll-prompt">
+        <span data-zh="↓<br />往下滑" data-en="↓<br />Scroll Down"
+          >↓<br />往下滑</span
+        >
+      </div>
+      <!-- 語言切換按鈕 -->
+      <div class="language-switch">
+        <button id="lang-btn" class="lang-btn">EN</button>
+      </div>
+    </div>
+
+    <!-- 主要內容區域 -->
+    <div class="ticket-main-container">
+      <!-- 右側浮動標籤導航 -->
+      <div class="ticket-nav">
+        <div class="ticket-nav-inner">
+          <div
+            class="ticket-nav-title"
+            data-zh="票種類型："
+            data-en="Ticket Types:"
+          >
+            票種類型：
+          </div>
+          <a
+            href="#general-ticket"
+            class="ticket-nav-link"
+            data-zh="一般票"
+            data-en="General Ticket"
+            >一般票</a
+          >
+          <!-- <a
+            href="#merchandise-ticket"
+            class="ticket-nav-link"
+            data-zh="周邊票組"
+            data-en="Merchandise Bundle"
+            >周邊票組</a
+          > -->
+          <a
+            href="#student-ticket"
+            class="ticket-nav-link"
+            data-zh="學生團體票"
+            data-en="Student  Ticket"
+            >學生團體票</a
+          >
+          <a
+            href="#discount-ticket"
+            class="ticket-nav-link"
+            data-zh="優待票"
+            data-en="Concession Ticket"
+            >優待票</a
+          >
+          <a
+            href="#onsite-ticket"
+            class="ticket-nav-link"
+            data-zh="現場票"
+            data-en="On-site Ticket"
+            >現場票</a
+          >
+        </div>
+      </div>
+
+      <!-- 左側：介紹文字 + 票券內容 -->
+      <div class="ticket-content">
+        <!-- 介紹文字 -->
+        <div
+          class="ticket-intro"
+          data-zh="歡迎來到草率季-台北藝術書展第9屆購票頁面。在此頁面，您可以找到所有票種與優惠資訊。所有票券皆限單人單日使用，且不記名。<br>**部分工作坊與現場活動需另行付費，敬請留意。<br><br>活動日期｜11/21（星期五） 13:00–21:00・11/22（星期六） 11:00–20:00・11/23（星期日） 11:00–18:00<br>地點｜華山1914文化創意產業園區 東2四連棟"
+          data-en="Welcome to the ticketing page of the 9th Taipei Art Book Fair. Here you will find all ticket types and discount information. All tickets are for single-person, single-day entry and are non-transferable.<br>**Some workshops and on-site programs may require additional fees.<br><br>Fair Dates｜Nov 21 (Fri.) 13:00–21:00・Nov 22 (Sat.) 11:00–20:00・Nov 23 (Sun.) 11:00–18:00<br>Venue｜Huashan 1914 Creative Park East 2 Building"
+        >
+          歡迎來到草率季-台北藝術書展第9屆購票頁面。在此頁面，您可以找到所有票種與優惠資訊。所有票券皆限單人單日使用，且不記名。<br />
+          **部分工作坊與現場活動需另行付費，敬請留意。<br /><br />
+          活動日期｜11/21（星期五） 13:00–21:00・11/22（星期六）
+          11:00–20:00・11/23（星期日） 11:00–18:00<br />
+          地點｜華山1914文化創意產業園區 東2四連棟
+        </div>
+
+        <!-- 票券內容區域 -->
+        <div class="ticket-sections">
+          <!-- 一般票 -->
+          <div id="general-ticket" class="ticket-section">
+            <img
+              src="image/tickets/general-ticket.png"
+              alt="一般票"
+              class="ticket-section-image"
+            />
+            <div class="ticket-section-content">
+              <h3
+                class="ticket-section-title"
+                data-zh="一般票"
+                data-en="General Admission"
+              >
+                一般票
+              </h3>
+              <p
+                class="ticket-section-desc"
+                data-zh="標準入場票券，可於同一日展期時間內多次進出場館，適合所有觀眾參與。"
+                data-en="Standard admission ticket. Allows multiple re-entries within the same day. Suitable for all visitors."
+              >
+                標準入場票券，可於同一日展期時間內多次進出場館，適合所有觀眾參與。
+              </p>
+
+              <!-- 早鳥票 -->
+              <div class="ticket-sub-section">
+                <div class="ticket-sub-layout">
+                  <div class="ticket-sub-info">
+                    <h4 data-zh="早鳥票" data-en="Early Bird">早鳥票</h4>
+                    <p class="ticket-sub-desc" data-zh="" data-en=""></p>
+                    <p
+                      class="ticket-sub-date"
+                      data-zh="販售日期：2025/09/01 - 2025/09/07"
+                      data-en="Sale Period: 2025/09/01 – 2025/09/07"
+                    >
+                      販售日期：2025/09/01 - 2025/09/07
+                    </p>
+                  </div>
+                  <div class="ticket-sub-pricing">
+                    <div
+                      class="ticket-price"
+                      data-zh="NT$ 300／人"
+                      data-en="NT$ 300 / person"
+                    >
+                      NT$ 300／人
+                    </div>
+                    <div
+                      class="ticket-quantity"
+                      data-zh="限量 100 張"
+                      data-en="Limited to 100 tickets"
+                    >
+                      Limited to 100 tickets
+                    </div>
+                  </div>
+                </div>
+                <a
+                  id="early-bird-btn"
+                  href="https://tour.ibon.com.tw/event/e2508000028lhmm"
+                  class="ticket-btn"
+                  data-zh="未開放"
+                  data-en="Status: Not Yet Available"
+                  >未開放</a
+                >
+              </div>
+
+              <!-- 預售票 -->
+              <div class="ticket-sub-section">
+                <div class="ticket-sub-layout">
+                  <div class="ticket-sub-info">
+                    <h4 data-zh="預售票" data-en="Pre-sale">預售票</h4>
+                    <p class="ticket-sub-desc" data-zh="" data-en=""></p>
+                    <p
+                      class="ticket-sub-date"
+                      data-zh="販售日期：2025/09/08 -2025/11/20"
+                      data-en="Sale Period: 2025/09/08 – 2025/11/20"
+                    >
+                      販售日期：2025/09/08 -2025/11/20
+                    </p>
+                  </div>
+                  <div class="ticket-sub-pricing">
+                    <div
+                      class="ticket-price"
+                      data-zh="NT$ 380／人"
+                      data-en="NT$ 380 / person"
+                    >
+                      NT$ 380／人
+                    </div>
+                    <div
+                      class="ticket-quantity"
+                      data-zh="限量 2000 張"
+                      data-en="Limited to 2,000 tickets"
+                    >
+                      Limited to 2,000 tickets
+                    </div>
+                  </div>
+                </div>
+                <a
+                  id="presale-btn"
+                  href="https://tour.ibon.com.tw/event/e2508000028lhmm"
+                  class="ticket-btn"
+                  data-zh="未開放"
+                  data-en="Status: Not Yet Available"
+                  >未開放</a
+                >
+              </div>
+
+              <!-- 快速通關票 -->
+              <div class="ticket-sub-section">
+                <div class="ticket-sub-layout">
+                  <div class="ticket-sub-info">
+                    <h4 data-zh="快速通關" data-en="Fast Pass">快速通關</h4>
+                    <p class="ticket-sub-desc" data-zh="" data-en=""></p>
+                    <p
+                      class="ticket-sub-date"
+                      data-zh="販售日期：2025/11/21 - 2025/11/23"
+                      data-en="Sale Period: 2025/11/21 – 2025/11/23"
+                    >
+                      販售日期：2025/11/21 - 2025/11/23
+                    </p>
+                  </div>
+                  <div class="ticket-sub-pricing">
+                    <div
+                      class="ticket-price"
+                      data-zh="NT$ 499／人"
+                      data-en="NT$ 499 / person"
+                    >
+                      NT$ 499／人
+                    </div>
+                    <div
+                      class="ticket-quantity"
+                      data-zh="無限量"
+                      data-en="Unlimited availability"
+                    >
+                      無限量
+                    </div>
+                  </div>
+                </div>
+                <a
+                  id="fast-pass-btn"
+                  href="https://tour.ibon.com.tw/event/e2508000028lhmm"
+                  class="ticket-btn"
+                  data-zh="未開放"
+                  data-en="Status: Not Yet Available"
+                  >未開放</a
+                >
+              </div>
+            </div>
+          </div>
+
+          <!-- <hr class="ticket-divider" /> -->
+
+          <!-- 周邊票組 -->
+          <!-- <div id="merchandise-ticket" class="ticket-section">
+            <h3
+              class="ticket-section-title"
+              data-zh="周邊票組"
+              data-en="Merchandise Bundle"
+            >
+              周邊票組
+            </h3>
+            <p
+              class="ticket-section-desc"
+              data-zh="包含限定周邊商品的特殊票券組合，讓您同時獲得入場券與精美紀念品。"
+              data-en="Special ticket bundles that include limited merchandise, giving you both entry tickets and exclusive souvenirs."
+            >
+              包含限定周邊商品的特殊票券組合，讓您同時獲得入場券與精美紀念品。
+            </p> -->
+
+          <!-- <div class="ticket-sub-section">
+              <div class="ticket-sub-layout">
+                <div class="ticket-sub-info">
+                  <h4
+                    data-zh="T恤預購款+票"
+                    data-en="T-shirt Pre-order + Ticket"
+                  >
+                    T恤預購款+票
+                  </h4>
+                  <p
+                    class="ticket-sub-desc"
+                    data-zh="包含入場票券與限定款T恤，數量有限，售完即止。"
+                    data-en="Includes entry ticket and limited edition T-shirt. Limited quantity, while supplies last."
+                  >
+                    包含入場票券與限定款T恤，數量有限，售完即止。
+                  </p>
+                  <p
+                    class="ticket-sub-date"
+                    data-zh="販售日期：待定"
+                    data-en="Available: TBD"
+                  >
+                    販售日期：待定
+                  </p>
+                </div>
+                <div class="ticket-sub-pricing">
+                  <div
+                    class="ticket-price"
+                    data-zh="NT$ 待定"
+                    data-en="NT$ TBD"
+                  >
+                    NT$ 待定
+                  </div>
+                  <div
+                    class="ticket-quantity"
+                    data-zh="限量 66 組"
+                    data-en="Limited 66 sets"
+                  >
+                    限量 66 組
+                  </div>
+                </div>
+              </div>
+              <a
+                id="tshirt-btn"
+                href="#"
+                class="ticket-btn"
+                data-zh="立即購票"
+                data-en="Buy Now"
+                >立即購票</a
+              >
+            </div> -->
+
+          <!-- 草率簿+票 -->
+          <!-- <div class="ticket-sub-section">
+              <div class="ticket-sub-layout">
+                <div class="ticket-sub-info">
+                  <h4 data-zh="草率簿+票" data-en="Notebook + Ticket">
+                    草率簿+票
+                  </h4>
+                  <p
+                    class="ticket-sub-desc"
+                    data-zh="包含入場票券與限定草率簿，無限量供應。"
+                    data-en="Includes entry ticket and limited notebook. Unlimited supply."
+                  >
+                    包含入場票券與限定草率簿，無限量供應。
+                  </p>
+                  <p
+                    class="ticket-sub-date"
+                    data-zh="販售日期：待定"
+                    data-en="Available: TBD"
+                  >
+                    販售日期：待定
+                  </p>
+                </div>
+                <div class="ticket-sub-pricing">
+                  <div
+                    class="ticket-price"
+                    data-zh="NT$ 待定"
+                    data-en="NT$ TBD"
+                  >
+                    NT$ 待定
+                  </div>
+                  <div
+                    class="ticket-quantity"
+                    data-zh="無限量"
+                    data-en="Unlimited"
+                  >
+                    無限量
+                  </div>
+                </div>
+              </div>
+              <a
+                id="notebook-btn"
+                href="#"
+                class="ticket-btn"
+                data-zh="立即購票"
+                data-en="Buy Now"
+                >立即購票</a
+              >
+            </div>
+          </div> -->
+
+          <hr class="ticket-divider" />
+
+          <!-- 學生票 -->
+          <div id="student-ticket" class="ticket-section">
+            <img
+              src="image/tickets/student-ticket.png"
+              alt="學生團體票"
+              class="ticket-section-image"
+            />
+            <div class="ticket-section-content">
+              <h3
+                class="ticket-section-title"
+                data-zh="學生團體票"
+                data-en="Student Group Ticket"
+              >
+                學生團體票
+              </h3>
+              <p
+                class="ticket-section-desc"
+                data-zh="10 人以上學生團體優惠票價，入場時需出示學生證或其他有效學生身分證明文件。"
+                data-en="Discounted admission for student groups of 10 or more. Valid student ID required upon entry."
+              >
+                10
+                人以上學生團體優惠票價，入場時需出示學生證或其他有效學生身分證明文件。
+              </p>
+              <div class="ticket-sub-section">
+                <div class="ticket-sub-layout">
+                  <div class="ticket-sub-info">
+                    <p
+                      class="ticket-sub-date"
+                      data-zh="售票期限：2025/09/08 - 2025/11/23"
+                      data-en="Sale Period: 2025/09/08 – 2025/11/23"
+                    >
+                      售票期限：2025/09/08 - 2025/11/23
+                    </p>
+                  </div>
+                  <div class="ticket-sub-pricing">
+                    <div
+                      class="ticket-price"
+                      data-zh="NT$ 300／人"
+                      data-en="NT$ 300 / person"
+                    >
+                      NT$ 300／人
+                    </div>
+                  </div>
+                </div>
+                <a
+                  id="student-btn"
+                  href="https://nmhw.taipeiartbookfair.com/products/%E5%AD%B8%E7%94%9F%E5%9C%98%E9%AB%94%E7%A5%A8"
+                  class="ticket-btn"
+                  data-zh="未開放"
+                  data-en="Status: Not Yet Available"
+                  >未開放</a
+                >
+              </div>
+            </div>
+          </div>
+
+          <hr class="ticket-divider" />
+
+          <!-- 優待票 -->
+          <div id="discount-ticket" class="ticket-section">
+            <img
+              src="image/tickets/discount-ticket.png"
+              alt="優待票"
+              class="ticket-section-image"
+            />
+            <div class="ticket-section-content">
+              <h3
+                class="ticket-section-title"
+                data-zh="優待票"
+                data-en="Concession Ticket"
+              >
+                優待票
+              </h3>
+              <p
+                class="ticket-section-desc"
+                data-zh="適用於 110 cm 以下幼童、65 歲以上長者、身心障礙者及其陪同者。入場時需出示相關證明文件。"
+                data-en="Available for children under 110 cm, seniors 65 and above, and persons with disabilities (plus one accompanying guest). Valid ID or certificate required upon entry."
+              >
+                適用於 110 cm 以下幼童、65
+                歲以上長者、身心障礙者及其陪同者。入場時需出示相關證明文件。
+              </p>
+              <div class="ticket-sub-section">
+                <div class="ticket-sub-layout">
+                  <div class="ticket-sub-info">
+                    <p
+                      class="ticket-sub-date"
+                      data-zh="售票期限：2025/09/08 - 2025/11/23"
+                      data-en="Sale Period: 2025/09/08 – 2025/11/23"
+                    >
+                      售票期限：2025/09/08 - 2025/11/23
+                    </p>
+                  </div>
+                  <div class="ticket-sub-pricing">
+                    <div
+                      class="ticket-price"
+                      data-zh="NT$ 250／人"
+                      data-en="NT$ 250 / person"
+                    >
+                      NT$ 250／人
+                    </div>
+                  </div>
+                </div>
+                <a
+                  id="discount-btn"
+                  href="https://tour.ibon.com.tw/event/e2508000028lhmm"
+                  class="ticket-btn"
+                  data-zh="未開放"
+                  data-en="Status: Not Yet Available"
+                  >未開放</a
+                >
+              </div>
+            </div>
+          </div>
+
+          <hr class="ticket-divider" />
+
+          <!-- 現場票 -->
+          <div id="onsite-ticket" class="ticket-section">
+            <img
+              src="image/tickets/onsite-ticket.png"
+              alt="現場票"
+              class="ticket-section-image"
+            />
+            <div class="ticket-section-content">
+              <h3
+                class="ticket-section-title"
+                data-zh="現場票"
+                data-en="On-site Ticket"
+              >
+                現場票
+              </h3>
+              <p
+                class="ticket-section-desc"
+                data-zh="活動當天現場購買的票券。適合臨時決定參觀的觀眾，惟需配合現場排隊購買入場。"
+                data-en="Tickets available for purchase at the venue during fair dates. Recommended for last-minute visitors; on-site queuing required."
+              >
+                活動當天現場購買的票券。適合臨時決定參觀的觀眾，惟需配合現場排隊購買入場。
+              </p>
+              <div class="ticket-sub-section">
+                <div class="ticket-sub-layout">
+                  <div class="ticket-sub-info">
+                    <p
+                      class="ticket-sub-date"
+                      data-zh="販售日期：2025/11/21 - 2025/11/23"
+                      data-en="Sale Period: 2025/11/21 – 2025/11/23"
+                    >
+                      販售日期：2025/11/21 - 2025/11/23
+                    </p>
+                  </div>
+                  <div class="ticket-sub-pricing">
+                    <div
+                      class="ticket-price"
+                      data-zh="NT$ 400／人"
+                      data-en="NT$ 400 / person"
+                    >
+                      NT$ 400／人
+                    </div>
+                    <div
+                      class="ticket-quantity"
+                      data-zh="無限量"
+                      data-en="Unlimited availability"
+                    >
+                      無限量
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <hr class="ticket-divider" />
+
+          <!-- 注意事項 -->
+          <div id="notice-section" class="ticket-section">
+            <div class="ticket-section-content">
+              <h3
+                class="ticket-section-title"
+                style="background-color: #781012; color: #7d90c9"
+                data-zh="注意事項"
+                data-en="Notice"
+              >
+                注意事項
+              </h3>
+              <div class="ticket-sub-section">
+                <ul
+                  style="
+                    color: #b3bbd3;
+                    line-height: 1.8;
+                    margin: 0;
+                    padding-left: 20px;
+                  "
+                >
+                  <li
+                    data-zh="憑票券至活動服務台蓋手章入場，手章可重複入場，限當日有效"
+                    data-en="Admission requires presenting your ticket at the service counter to receive a hand stamp. The hand stamp allows multiple entries but is only valid on the same day."
+                  >
+                    憑票券至活動服務台蓋手章入場，手章可重複入場，限當日有效
+                  </li>
+                  <li
+                    data-zh="展覽歡迎毛孩入場，毛家長自行注意安全及行為即可，落地需牽繩"
+                    data-en="Pets are welcome inside the venue. Owners are responsible for their pets' safety and behavior. Leashes are required when pets are on the ground."
+                  >
+                    展覽歡迎毛孩入場，毛家長自行注意安全及行為即可，落地需牽繩
+                  </li>
+                  <li
+                    data-zh="展區內禁止抽菸，如經勸導後無意改善，主辦單位有權要求違規者離場"
+                    data-en="Smoking is strictly prohibited in the exhibition area. Visitors who refuse to comply after being advised may be asked to leave by the organizer."
+                  >
+                    展區內禁止抽菸，如經勸導後無意改善，主辦單位有權要求違規者離場
+                  </li>
+                  <li
+                    data-zh="票券請自行妥善保管，發生遺失、燒毀、破損等情形，恕不退換補發"
+                    data-en="Please keep your ticket safe. Lost, damaged, or destroyed tickets will not be refunded or reissued."
+                  >
+                    票券請自行妥善保管，發生遺失、燒毀、破損等情形，恕不退換補發
+                  </li>
+                  <li
+                    data-zh="活動日如遇不可抗力因素，以致無法舉行展覽，主辦單位保留對活動更改之權利"
+                    data-en="In case of force majeure that prevents the exhibition from taking place, the organizer reserves the right to modify or cancel the event."
+                  >
+                    活動日如遇不可抗力因素，以致無法舉行展覽，主辦單位保留對活動更改之權利
+                  </li>
+                  <li
+                    data-zh="票券規定依現場及官方網站公告為主，上述事項若有未盡事宜，主辦單位保留更改之權利"
+                    data-en="Ticket regulations are subject to on-site announcements and updates on the official website. The organizer reserves the right to make changes without prior notice."
+                  >
+                    票券規定依現場及官方網站公告為主，上述事項若有未盡事宜，主辦單位保留更改之權利
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <br />
+
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        // 錨點跳轉功能
+        function initAnchorLinks() {
+          const links = document.querySelectorAll('a[href^="#"]');
+          links.forEach((link) => {
+            link.addEventListener("click", function (e) {
+              e.preventDefault();
+              const targetId = this.getAttribute("href").substring(1);
+              const targetElement = document.getElementById(targetId);
+
+              if (targetElement) {
+                const targetRect = targetElement.getBoundingClientRect();
+                const currentScroll = window.pageYOffset;
+                const targetPosition = currentScroll + targetRect.top - 100;
+
+                window.scrollTo({
+                  top: Math.max(0, targetPosition),
+                  behavior: "smooth",
+                });
+              }
+            });
+          });
+        }
+
+        // 售票按鈕狀態控制
+        function updateTicketButtons() {
+          const currentDate = new Date();
+
+          // 票種開放日期設定
+          const ticketDates = {
+            "early-bird": {
+              start: new Date("2025-09-01T00:00:00+08:00"), // 台灣時間 9月1日零點
+              end: new Date("2025-09-07T23:59:59+08:00"),
+            },
+            presale: {
+              start: new Date("2025-09-08T00:00:00+08:00"), // 台灣時間 9月8日零點
+              end: new Date("2025-11-20T23:59:59+08:00"),
+            },
+            "fast-pass": {
+              start: new Date("2025-11-21T00:00:00+08:00"), // 台灣時間 11月21日零點
+              end: new Date("2025-11-23T23:59:59+08:00"),
+            },
+            tshirt: { start: null, end: null }, // 待定
+            notebook: { start: null, end: null }, // 待定
+            student: {
+              start: new Date("2025-09-08T00:00:00+08:00"), // 台灣時間 9月8日零點
+              end: new Date("2025-11-23T23:59:59+08:00"),
+            },
+            discount: {
+              start: new Date("2025-09-08T00:00:00+08:00"), // 台灣時間 9月8日零點
+              end: new Date("2025-11-23T23:59:59+08:00"),
+            },
+          };
+
+          // 更新按鈕狀態的函數
+          function updateButton(buttonId, dateRange) {
+            const button = document.getElementById(buttonId);
+            if (!button) return;
+
+            const isAvailable =
+              dateRange.start &&
+              dateRange.end &&
+              currentDate >= dateRange.start &&
+              currentDate <= dateRange.end;
+
+            // 獲取當前語言
+            const currentLang =
+              document.getElementById("lang-btn").textContent === "中文"
+                ? "en"
+                : "zh";
+
+            if (isAvailable) {
+              // 開放狀態
+              button.style.background = "#FBAD17";
+              button.style.color = "black";
+              button.style.cursor = "pointer";
+
+              // 根據語言設置按鈕文字
+              const buyText = currentLang === "zh" ? "立即購票" : "Buy Now";
+              button.textContent = buyText;
+
+              // 更新 data 屬性以便語言切換時使用
+              button.setAttribute("data-zh", "立即購票");
+              button.setAttribute("data-en", "Buy Now");
+
+              button.onclick = null;
+            } else {
+              // 未開放狀態
+              button.style.background = "#ccc";
+              button.style.color = "#666";
+              button.style.cursor = "not-allowed";
+
+              // 根據語言設置按鈕文字
+              const unavailableText =
+                currentLang === "zh" ? "未開放" : "Unavailable";
+              button.textContent = unavailableText;
+
+              // 更新 data 屬性以便語言切換時使用
+              button.setAttribute("data-zh", "未開放");
+              button.setAttribute("data-en", "Unavailable");
+
+              button.onclick = function (e) {
+                e.preventDefault();
+                return false;
+              };
+            }
+          }
+
+          // 更新各個按鈕
+          updateButton("early-bird-btn", ticketDates["early-bird"]);
+          updateButton("presale-btn", ticketDates["presale"]);
+          updateButton("fast-pass-btn", ticketDates["fast-pass"]);
+          updateButton("tshirt-btn", ticketDates["tshirt"]);
+          updateButton("notebook-btn", ticketDates["notebook"]);
+          updateButton("student-btn", ticketDates["student"]);
+          updateButton("discount-btn", ticketDates["discount"]);
+        }
+
+        // 語言切換功能
+        function initLanguageSwitch() {
+          let currentLang = "zh"; // 預設中文
+          const langBtn = document.getElementById("lang-btn");
+
+          function switchLanguage() {
+            currentLang = currentLang === "zh" ? "en" : "zh";
+
+            // 更新按鈕文字
+            langBtn.textContent = currentLang === "zh" ? "EN" : "中文";
+
+            // 更新所有有翻譯屬性的元素
+            const elementsWithTranslation =
+              document.querySelectorAll("[data-zh][data-en]");
+            elementsWithTranslation.forEach((element) => {
+              const text = element.getAttribute(`data-${currentLang}`);
+              if (text) {
+                element.innerHTML = text;
+              }
+            });
+
+            // 更新按鈕狀態（因為按鈕文字可能被語言切換影響）
+            updateTicketButtons();
+          }
+
+          langBtn.addEventListener("click", switchLanguage);
+        }
+
+        // 初始化功能
+        initAnchorLinks();
+        updateTicketButtons();
+        initLanguageSwitch();
+      });
+    </script>
+  </body>
+</html>

@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      http-equiv="Content-Security-Policy"
+      content="default-src 'self'; 
+             script-src 'self' 'unsafe-inline' https://www.google.com https://www.gstatic.com https://code.jquery.com https://www.googletagmanager.com; 
+             style-src 'self' 'unsafe-inline'; 
+             connect-src https://www.google-analytics.com https://script.google.com https://script.googleusercontent.com/;
+             frame-src https://www.google.com;"
+    />
+
+    <title>Login - 草率季Taipei Art Book Fair</title>
+    <!-- <link rel="stylesheet" href="style.css" /> -->
+    <link rel="stylesheet" href="css/font.css" />
+    <link rel="shortcut icon" href="image/icon-1.ico" />
+
+    <!-- Google tag (gtag.js) -->
+    <script
+      async
+      src="https://www.googletagmanager.com/gtag/js?id=G-EPSXJPDH6L"
+    ></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+      gtag("js", new Date());
+
+      gtag("config", "G-EPSXJPDH6L");
+    </script>
+    <style>
+      body {
+        margin: 0;
+        padding: 0;
+        font-family: "Poppins", sans-serif;
+        /* background: whitesmoke; */
+        overflow: hidden;
+        position: relative;
+        background-color: #f2f2f2;
+      }
+
+      .login-wrapper {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        height: 70vh;
+        padding: 0 10px;
+      }
+
+      h2 {
+        font-size: 1rem;
+        font-weight: normal;
+        text-transform: uppercase;
+        margin-bottom: 10px;
+        padding-left: 10px;
+        padding-right: 10px;
+        color: black;
+        background-color: ghostwhite;
+        border: 1px solid black;
+        text-align: left;
+      }
+
+      .login-form {
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        max-width: 380px;
+        padding: 8px;
+        box-sizing: border-box;
+        border: 1px solid black;
+        background-color: ghostwhite;
+      }
+
+      .input-box {
+        display: flex;
+        flex-direction: column;
+        margin-bottom: 8px;
+        padding: 4px;
+        border: 1px solid #000;
+      }
+
+      .input-box label {
+        font-size: 12px;
+        color: black;
+        margin-bottom: 2px;
+      }
+
+      .input-box input {
+        padding: 6px;
+        font-size: 12px;
+        border: 1px solid #000;
+        /* background: linear-gradient(
+          100deg,
+          rgb(78, 78, 78) 0%,
+          rgba(255, 255, 255, 1) 2%,
+          rgba(222, 222, 222, 1) 10%,
+          rgba(255, 255, 255, 1) 21%,
+          rgba(255, 255, 255, 1) 38%,
+          rgba(227, 227, 227, 1) 70%,
+          rgba(237, 235, 235, 1) 79%,
+          rgba(255, 255, 255, 1) 82%,
+          rgba(174, 174, 174, 1) 99%,
+          rgb(61, 61, 61) 100%
+        ); */
+      }
+
+      .input-box input:focus {
+        background-color: olive;
+        outline: none;
+      }
+
+      .sub-actions {
+        display: flex;
+        justify-content: flex-end;
+        margin-top: 4px;
+        padding-right: 6px;
+      }
+
+      .fp {
+        text-decoration: underline;
+        font-size: 11px;
+        color: black;
+      }
+
+      .submit-box {
+        display: flex;
+        justify-content: center;
+        margin-top: 10px;
+      }
+
+      button {
+        padding: 8px;
+        background-color: black;
+        color: white;
+        border: none;
+        width: 100%;
+        text-align: center;
+        cursor: pointer;
+        letter-spacing: 1px;
+        font-size: 0.9rem;
+      }
+
+      button:hover {
+        color: palegreen;
+        background-color: olive;
+      }
+
+      .bgimg {
+        filter: saturate(500) hue-rotate(185deg) contrast(200%) brightness(90%)
+          sepia(25%);
+        position: fixed;
+        z-index: -50;
+        width: 100vw;
+        height: 100vh;
+        -webkit-user-drag: none;
+        top: 0;
+        left: 0;
+      }
+      .fp {
+        padding-left: 5px;
+        padding-right: 5px;
+        font-size: 0.8rem;
+        text-decoration: underline;
+        color: grey;
+        display: inline-block;
+        /* background: linear-gradient(
+          0deg,
+          rgb(78, 78, 78) 0%,
+          rgba(255, 255, 255, 1) 2%,
+          rgba(222, 222, 222, 1) 18%,
+          rgba(255, 255, 255, 1) 21%,
+          rgba(255, 255, 255, 1) 46%,
+          rgba(227, 227, 227, 1) 53%,
+          rgba(237, 235, 235, 1) 79%,
+          rgba(255, 255, 255, 1) 82%,
+          rgba(174, 174, 174, 1) 99%,
+          rgb(61, 61, 61) 100%
+        ); */
+        margin-bottom: 1rem;
+      }
+      .back {
+        font-size: 0.9rem;
+        font-family: "Inclusive Sans", sans-serif;
+        overflow: hidden;
+        color: black;
+        background-color: white;
+        white-space: nowrap;
+        position: fixed;
+        bottom: 0px;
+        left: 0px;
+        padding: 5px;
+        text-align: center;
+        font-weight: 500;
+        cursor: pointer;
+      }
+      ::selection {
+        color: palegreen;
+        background-color: olive;
+      }
+      #login-loading {
+        display: none;
+        width: 100%;
+        max-width: 380px;
+        text-align: left;
+        color: ghostwhite;
+        margin-top: 8px;
+        font-size: 1.2rem;
+        text-shadow: 2px 1px 0 blue, -0.5px -0.5px 0 blueviolet;
+      }
+    </style>
+  </head>
+  <body>
+    <img
+      draggable="false"
+      (dragstart)="false;"
+      class="bgimg"
+      id="sasa"
+      src="image/bgimg4.jpg"
+    />
+    <div class="login-wrapper">
+      <h2>Exhibitor Login | 攤主登入</h2>
+      <form action="/login" method="POST" class="login-form">
+        <div class="input-box">
+          <label for="email">Email</label>
+          <input type="text" name="Email" id="email" required />
+        </div>
+        <div class="input-box">
+          <label for="password">Password</label>
+          <input type="password" name="password" id="password" required />
+        </div>
+        <div class="sub-actions">
+          <a href="forgotpassword.html" class="fp"
+            >忘記密碼？Forgot Password?</a
+          >
+        </div>
+        <div class="submit-box">
+          <button type="submit">登入 Log In</button>
+        </div>
+      </form>
+      <div id="login-loading" style="cursor: pointer; position: relative">
+        資料讀取中 / Loading data...
+        <img
+          id="fetch-sticker"
+          src="image/meangirls-fetching.png"
+          alt="fetching"
+          style="
+            display: none;
+            position: absolute;
+            left: 0;
+            top: 1.8em;
+            width: 100px;
+            z-index: 10;
+            margin-top: 0;
+          "
+        />
+      </div>
+    </div>
+    <a href="index.html"><div class="back">回主頁 Back</div></a>
+    <script src="js/cookie.js"></script>
+    <script src="js/login.js"></script>
+    <script>
+      const loadingDiv = document.getElementById("login-loading");
+      const sticker = document.getElementById("fetch-sticker");
+
+      loadingDiv.addEventListener("click", function (e) {
+        sticker.style.display = "block";
+      });
+    </script>
+  </body>
+</html>

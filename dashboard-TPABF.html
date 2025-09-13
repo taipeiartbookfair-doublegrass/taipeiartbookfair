@@ -1,0 +1,2347 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      http-equiv="Content-Security-Policy"
+      content="default-src 'self'; 
+             script-src 'self' 'unsafe-inline' https://www.google.com https://www.gstatic.com https://code.jquery.com https://www.googletagmanager.com; 
+             style-src 'self' 'unsafe-inline'; 
+             connect-src https://www.google-analytics.com https://script.google.com https://script.googleusercontent.com/;
+             frame-src https://www.google.com;"
+    />
+    <title>Dashboard - 草率季Taipei Art Book Fair</title>
+    <link rel="stylesheet" href="css/dashboard.css" />
+    <link rel="stylesheet" href="css/font.css" />
+    <link rel="shortcut icon" href="image/icon-1.ico" />
+
+    <!-- Google tag (gtag.js) -->
+    <script
+      async
+      src="https://www.googletagmanager.com/gtag/js?id=G-EPSXJPDH6L"
+    ></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+      gtag("js", new Date());
+
+      gtag("config", "G-EPSXJPDH6L");
+    </script>
+    <script src="js/cookie.js"></script>
+    <script src="js/dashboard-basic.js"></script>
+    <script src="js/edit-profile.js"></script>
+  </head>
+  <body>
+    <!-- 草-草=草 -->
+    <div id="grass-mask" style="display: none">
+      <div id="grass-tip">
+        <span
+          style="transform: translate(-50%, -50%) rotate(-5deg) skewX(-9deg)"
+        >
+          手機版未開放<br
+        /></span>
+        Mobile version is currently under renovation<br /><br />
+        <span
+          style="transform: translate(-50%, -50%) rotate(2deg) skewX(-4deg)"
+        >
+          請改用桌機瀏覽<br />
+          Try using a desktop browser.</span
+        >
+      </div>
+      <canvas id="grass-canvas"></canvas>
+      <div
+        id="grass-cursor"
+        style="
+          display: none;
+          position: absolute;
+          z-index: 10;
+          font-size: 4em;
+          pointer-events: none;
+        "
+      >
+        🧹
+      </div>
+    </div>
+    <!-- fake loading -->
+    <div id="loading-mask" style="display: flex">
+      <div class="loading-grid"></div>
+      <div class="loading-percent" id="loading-percent">0%</div>
+    </div>
+    <table class="layout">
+      <tr>
+        <!-- Sidebar -->
+        <td class="sidebar">
+          <p style="background-color: olivedrab; color: ghostwhite">
+            <!-- 草率季<br />TPABF -->
+            <img
+              src="image/icon-1.ico"
+              alt="logo"
+              class="machine-rotate-logo"
+              style="width: 4.5vw; height: auto; transform: rotate(45deg)"
+            />
+          </p>
+          <a
+            id="sidebar-dashboard"
+            href="#"
+            style="text-decoration: none; color: black"
+            onclick="showDashboardSection(); setSidebarActive('dashboard'); return false;"
+          >
+            <p>
+              <mark>攤商管理<br />Dashboard</mark>
+            </p>
+          </a>
+          <hr class="sidebar-hr" />
+          <a
+            id="sidebar-contact"
+            href="#"
+            style="text-decoration: none; color: black"
+            onclick="showContactSection(); setSidebarActive('contact'); return false;"
+          >
+            <p>聯絡我們<br />Contact</p>
+          </a>
+          <hr class="sidebar-hr" />
+          <a
+            id="sidebar-faq"
+            href="#"
+            style="text-decoration: none; color: black"
+            onclick="showFAQSection(); setSidebarActive('faq'); return false;"
+          >
+            <p>常見問題<br />FAQ</p>
+          </a>
+          <hr class="sidebar-hr" />
+          <div class="sidebar-middle">
+            <p class="rotated-link">
+              草率季 Taipei Art Book Fair<br />
+              <a href="https://taipeiartbookfair.com/"
+                >https://taipeiartbookfair.com/</a
+              >
+            </p>
+          </div>
+          <!-- ...existing code... -->
+          <a
+            id="sidebar-account"
+            href="#"
+            style="text-decoration: none"
+            onclick="showAccountSection(); setSidebarActive('account'); return false;"
+          >
+            <p style="background-color: blueviolet; color: ghostwhite">
+              帳號管理<br />Profile
+            </p>
+          </a>
+          <!-- ...existing code... -->
+          <a
+            href="index.html"
+            style="text-decoration: none"
+            onclick="logoutAndRedirect(event);"
+          >
+            <p style="background-color: black; color: whitesmoke">
+              登出<br />Log out
+            </p>
+          </a>
+          <script>
+            function logoutAndRedirect(e) {
+              e.preventDefault();
+              // 刪除所有 cookie（可根據實際情況調整）
+              document.cookie.split(";").forEach(function (c) {
+                document.cookie = c
+                  .replace(/^ +/, "")
+                  .replace(
+                    /=.*/,
+                    "=;expires=" + new Date().toUTCString() + ";path=/"
+                  );
+              });
+              window.location.href = "index.html";
+            }
+          </script>
+        </td>
+
+        <!-- Middle Column -->
+        <td class="mid">
+          <div class="scroll-inner">
+            <table width="100%">
+              <tr>
+                <td colspan="1" style="position: relative; width: 55%">
+                  <span class="label">報名編號 Application Number</span><br />
+                  <span style="font-size: 3rem" id="application-number"
+                    >25-LB001</span
+                  >
+                </td>
+                <td style="width: 45%">
+                  <span class="label">錄取結果 Application Result</span><br />
+                  <div
+                    id="application-result-wrapper"
+                    style="vertical-align: middle; font-size: 2.7rem"
+                  >
+                    <span
+                      style="
+                        font-size: 2rem;
+                        font-weight: bold;
+                        padding: 0px 10px 0px 10px;
+                        line-height: 2rem;
+                      "
+                      id="application-result"
+                      >錄取</span
+                    >
+                  </div>
+                </td>
+              </tr>
+              <!-- 現場活動reminder -->
+              <tr id="live-event-schedule-row" style="display: none">
+                <td colspan="2" style="position: relative; width: 44vw">
+                  <span class="label"
+                    >現場活動場次資訊 Program Sessions Reminder</span
+                  ><br />
+                  <div
+                    style="margin-top: 0.5em; font-size: 1rem"
+                    id="live-event-schedule-desc"
+                  >
+                    我們將會在此列出你所報名現場提供的活動服務場次資訊，相關活動內容已寄到你的信箱，不要忘了提早15分鐘到相對應的區域報到喔。
+                  </div>
+                  <hr
+                    style="
+                      border-top: 1px dashed black;
+                      margin: 6px 0;
+                      border-bottom: none;
+                    "
+                  />
+                  <span
+                    style="font-size: 1rem"
+                    id="live-event-schedule-reminder"
+                  ></span>
+                </td>
+              </tr>
+              <tr>
+                <!-- 左邊：攤種區塊 -->
+                <td
+                  colspan="2"
+                  style="
+                    width: 25%;
+                    border-top: 0.5px solid pink;
+                    border-bottom: 0.5px solid pink;
+
+                    margin: 6px 0;
+                    border-left: 1px solid black;
+
+                    vertical-align: top;
+                  "
+                >
+                  <span class="label">攤種 Booth Type</span
+                  ><span
+                    class="booth-change"
+                    title="說明"
+                    id="booth-type-tooltip"
+                    style="display: none; z-index: 999"
+                    >?<span class="tooltip-text" id="tooltip-text"
+                      >您原先在表單中選擇的攤位類型，經由草率季工作團隊審核後，可能與我們對該類別的定義略有不符。不過，我們仍然非常欣賞您的創作與提案，並希望能與您在草率季中相遇。若您願意接受攤種類別的調整，我們將非常樂意為您保留參與資格。</span
+                    ></span
+                  ><br /><span
+                    style="font-size: 2rem; padding-top: 15px"
+                    id="booth-type"
+                    >One Regular Booth</span
+                  >
+                  <hr
+                    style="
+                      border-top: 1px dashed black;
+                      margin: 6px 0;
+                      border-bottom: none;
+                    "
+                  />
+                  <table style="width: 100%">
+                    <tr>
+                      <td
+                        style="
+                          vertical-align: top;
+                          padding-right: 2em;
+                          border: none;
+                          width: 50%;
+                        "
+                      >
+                        <span id="equipment-title">基礎設備：</span>
+                        <ul
+                          style="
+                            list-style-type: none;
+                            margin: 0;
+                            padding-left: 0em;
+                          "
+                        >
+                          <li id="equipment-table">
+                            – 桌面<small>(120×60cm)</small> ×1
+                          </li>
+                          <li id="equipment-chair">– 椅子 ×2</li>
+                          <li id="equipment-badge">– 工作證 ×2</li>
+                          <li id="equipment-book">
+                            – 草率簿 ×1<small> (含露出一面)</small>
+                          </li>
+                          <li
+                            id="extrapasstxt"
+                            style="display: none; color: orangered"
+                          >
+                            加購工作證 x1
+                          </li>
+                        </ul>
+                      </td>
+                      <td style="vertical-align: top; border: none; width: 50%">
+                        <span id="electricity-title">電源配置：</span>
+                        <ul
+                          style="
+                            margin: 0 0 1em 1.5em;
+                            padding: 0;
+                            list-style-type: disc;
+                            font-size: 1em;
+                          "
+                        >
+                          <li>供應一般電源110v</li>
+                          <li>不得使用大電器</li>
+                          <li>非每攤都有，需自備延長線與他人協調</li>
+                        </ul>
+                      </td>
+                    </tr>
+                  </table>
+                </td>
+              </tr>
+
+              <!-- 編輯按鈕 -->
+              <tr style="background-color: black; text-align: right">
+                <td colspan="2" style="padding: 2px 5px">
+                  <span
+                    style="
+                      text-align: right;
+                      font-size: 0.8rem;
+                      color: ghostwhite;
+                      cursor: pointer;
+                    "
+                    title="編輯"
+                    onclick="openEditPage();"
+                    >編輯 Edit</span
+                  >
+                </td>
+              </tr>
+              <tr>
+                <td colspan="2" style="position: relative">
+                  <span class="label">品牌名稱 Brand Name</span><br />
+                  <span style="font-size: 3rem" id="brand-name">品牌名稱</span>
+                </td>
+              </tr>
+
+              <tr>
+                <td colspan="2">
+                  <span class="label">品牌簡介 Bio</span><br />
+                  <div class="bio" id="bio">
+                    草率季」是臺灣大型藝術書刊的文化市集，也是臺灣首度串連各種理念的創作者、出版社、獨立書店、藝術家等的市集，展出各式畫冊、獨立刊物、藝術雜誌等特色刊物。臺灣目前正在形成在地文化底蘊的背景下，這份狂野與不確定性的特質，吸引了亞洲如韓國、日本等藝術創作者前來共襄盛舉，草率季漸漸成為臺灣與國際間出版連結的大型藝術書刊市集。從
+                    2016
+                    第一屆草率季開始，每年都規劃不同主題、廣邀國內外各領域藝文創作者，提供各個參展單位表達自我與理想的交流平台。
+                  </div>
+                </td>
+              </tr>
+              <tr>
+                <td colspan="2" style="padding: 0">
+                  <table style="width: 100%; table-layout: fixed">
+                    <tr>
+                      <td
+                        style="
+                          border-top: 0.5px solid pink;
+                          border-left: none;
+                          border-right: 1px solid black;
+                          border-bottom: none;
+                        "
+                      >
+                        <span class="label">國籍 Nationality</span><br /><span
+                          id="nationality"
+                          >TW</span
+                        >
+                      </td>
+                      <td
+                        style="
+                          border-top: 0.5px solid pink;
+                          border-left: none;
+                          border-right: none;
+                          border-bottom: none;
+                        "
+                      >
+                        <span class="label">主要創作據點 Based at</span
+                        ><br /><span id="baselocation"></span>
+                      </td>
+                    </tr>
+                  </table>
+                </td>
+              </tr>
+              <tr>
+                <td colspan="2">
+                  <span class="label">過往參與年份 Years Attended</span
+                  ><br /><span id="attendedYears"></span>
+                </td>
+              </tr>
+              <tr>
+                <td style="width: 50%" colspan="2">
+                  <span class="label">身份類別 Role</span><br /><span id="role"
+                    >t0 Organizer</span
+                  >
+                </td>
+              </tr>
+
+              <tr>
+                <td colspan="2">
+                  <span class="label">Website</span><br />
+                  <span id="website"></span>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <span class="label">Instagram</span><br />
+                  <span id="instagram"></span>
+                </td>
+                <td>
+                  <span class="label">Facebook</span><br />
+                  <span id="facebook"></span>
+                </td>
+              </tr>
+              <tr>
+                <td colspan="2">
+                  <span class="label">無限柔軟是 Soft POW is…...</span><br />
+                  <span id="yearlyanswer"></span>
+                </td>
+              </tr>
+              <tr
+                id="electricity-row"
+                style="background-color: #d3c4bc; display: none"
+              >
+                <td>
+                  <span class="label">電力需求 Electricity Requirement</span
+                  ><br />
+                  <span id="electricity-regulation">
+                    請務必詳列設備名稱與瓦數，於右上角<span
+                      style="
+                        background-color: black;
+                        color: ghostwhite;
+                        padding: 1px;
+                      "
+                      >編輯 Edit</span
+                    >做修改，範例如下：<br />
+                    微波爐：1100W<br />
+                    電扇：65W<br />
+                    熱水壺：1500W<br /><br />
+                    📌
+                    未事先申報之電器不得於現場使用，如於現場發現並屢勸不聽，將依《罰金手冊》規定處以罰款。<br />
+                    📌 如需使用 220V 電壓，將酌收費用
+                    NT$1000，並請於表單中註明。（
+                    為維護安全，請勿使用變壓器，主辦單位不提供電壓轉換服務）
+                  </span>
+                </td>
+                <td>
+                  <span id="electricity-answer"></span>
+                </td>
+              </tr>
+            </table>
+          </div>
+        </td>
+
+        <!-- 編輯品牌 -->
+        <td class="edit-page" id="edit-brand-page" style="display: none">
+          <span
+            style="
+              position: absolute;
+              top: 0.7rem;
+              right: 1.2rem;
+              font-size: 2rem;
+              color: black;
+              cursor: pointer;
+              z-index: 10;
+              transition: color 0.2s;
+            "
+            title="關閉"
+            onclick="
+            document.getElementById('edit-brand-page').style.display='none';
+            document.querySelector('.mid').style.display='table-cell';
+            document.querySelector('.right').style.display='table-cell';
+            document.querySelector('.account').style.display='none';
+            "
+            >&#10005;</span
+          >
+          <div class="scroll-inner">
+            <form class="edit-form">
+              <h2 style="font-size: 1.5rem">編輯品牌資料 Edit Brand Info</h2>
+              <table width="100%">
+                <tr>
+                  <td colspan="2">
+                    <span class="label">品牌名稱 Brand Name</span><br />
+                    <input
+                      type="text"
+                      name="brandName"
+                      value="品牌名稱"
+                      style="width: 95%"
+                      id="brandName-edit"
+                      maxlength="150"
+                      required
+                    />
+                  </td>
+                </tr>
+                <tr>
+                  <td colspan="2">
+                    <span class="label">品牌簡介 Bio</span><br />
+                    <textarea
+                      name="bio"
+                      rows="6"
+                      style="width: 95%"
+                      id="bio-edit"
+                      maxlength="1000"
+                    ></textarea>
+                  </td>
+                </tr>
+                <tr>
+                  <td colspan="2">
+                    <span class="label">身份類別 Role</span><br />
+                    <select id="role-edit">
+                      <option value="">請選擇身份類別</option>
+                      <option value="a0 Creator">a0 Creator 創作者</option>
+                      <option value="a1 Bookstore">a1 Bookstore 書店</option>
+                      <option value="a2 Publisher/Press">
+                        a2 Publisher/Press 出版商
+                      </option>
+                      <option value="a3 Printing/Paper">
+                        a3 Printing/Paper 印刷廠/紙廠
+                      </option>
+                      <option value="a4 Cultural Institution">
+                        a4 Cultural Institution 文化機構
+                      </option>
+                      <option value="a5 Select Shop">
+                        a5 Select Shop 選品店
+                      </option>
+                      <option value="a6 Group/Structure">
+                        a6 Group/Structure 團體
+                      </option>
+                    </select>
+                  </td>
+                </tr>
+                <tr>
+                  <td colspan="2">
+                    <span class="label">過往參與年份 Years Attended</span><br />
+                    <input
+                      type="text"
+                      name="attendedYears"
+                      style="width: 95%"
+                      id="attendedYears-edit"
+                      placeholder="請輸入過往參與年份，逗號分隔"
+                      value="2016, 2017, 2018, 2019, 2020, 2021, 2022, 2023"
+                    />
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <span class="label">國籍 Nationality</span><br />
+                    <select id="nationality-edit">
+                      <option>Please select your nationality</option>
+                      <option value="AF">Afghanistan (AF)</option>
+                      <option value="AL">Albania (AL)</option>
+                      <option value="DZ">Algeria (DZ)</option>
+                      <option value="AS">American Samoa (AS)</option>
+                      <option value="AD">Andorra (AD)</option>
+                      <option value="AO">Angola (AO)</option>
+                      <option value="AI">Anguilla (AI)</option>
+                      <option value="AQ">Antarctica (AQ)</option>
+                      <option value="AG">Antigua and Barbuda (AG)</option>
+                      <option value="AR">Argentina (AR)</option>
+                      <option value="AM">Armenia (AM)</option>
+                      <option value="AW">Aruba (AW)</option>
+                      <option value="AU">Australia (AU)</option>
+                      <option value="AT">Austria (AT)</option>
+                      <option value="AZ">Azerbaijan (AZ)</option>
+                      <option value="BS">Bahamas, The (BS)</option>
+                      <option value="BH">Bahrain (BH)</option>
+                      <option value="BD">Bangladesh (BD)</option>
+                      <option value="BB">Barbados (BB)</option>
+                      <option value="BY">Belarus (BY)</option>
+                      <option value="BE">Belgium (BE)</option>
+                      <option value="BZ">Belize (BZ)</option>
+                      <option value="BJ">Benin (BJ)</option>
+                      <option value="BM">Bermuda (BM)</option>
+                      <option value="BT">Bhutan (BT)</option>
+                      <option value="BO">Bolivia (BO)</option>
+                      <option value="BA">Bosnia and Herzegovina (BA)</option>
+                      <option value="BW">Botswana (BW)</option>
+                      <option value="BR">Brazil (BR)</option>
+                      <option value="IO">
+                        British Indian Ocean Territory (IO)
+                      </option>
+                      <option value="VG">British Virgin Islands (VG)</option>
+                      <option value="BN">Brunei (BN)</option>
+                      <option value="BG">Bulgaria (BG)</option>
+                      <option value="BF">Burkina Faso (BF)</option>
+                      <option value="MM">Burma (MM)</option>
+                      <option value="BI">Burundi (BI)</option>
+                      <option value="KH">Cambodia (KH)</option>
+                      <option value="CM">Cameroon (CM)</option>
+                      <option value="CA">Canada (CA)</option>
+                      <option value="CV">Cape Verde (CV)</option>
+                      <option value="KY">Cayman Islands (KY)</option>
+                      <option value="CF">Central African Republic (CF)</option>
+                      <option value="TD">Chad (TD)</option>
+                      <option value="CL">Chile (CL)</option>
+                      <option value="CN">China (CN)</option>
+                      <option value="CX">Christmas Island (CX)</option>
+                      <option value="CC">Cocos (Keeling) Islands (CC)</option>
+                      <option value="CO">Colombia (CO)</option>
+                      <option value="KM">Comoros (KM)</option>
+                      <option value="CD">
+                        Congo, Democratic Republic of the (CD)
+                      </option>
+                      <option value="CG">Congo, Republic of the (CG)</option>
+                      <option value="CK">Cook Islands (CK)</option>
+                      <option value="CR">Costa Rica (CR)</option>
+                      <option value="CI">Cote d'Ivoire (CI)</option>
+                      <option value="HR">Croatia (HR)</option>
+                      <option value="CU">Cuba (CU)</option>
+                      <option value="CY">Cyprus (CY)</option>
+                      <option value="CZ">Czech Republic (CZ)</option>
+                      <option value="DK">Denmark (DK)</option>
+                      <option value="DJ">Djibouti (DJ)</option>
+                      <option value="DM">Dominica (DM)</option>
+                      <option value="DO">Dominican Republic (DO)</option>
+                      <option value="EC">Ecuador (EC)</option>
+                      <option value="EG">Egypt (EG)</option>
+                      <option value="SV">El Salvador (SV)</option>
+                      <option value="GQ">Equatorial Guinea (GQ)</option>
+                      <option value="ER">Eritrea (ER)</option>
+                      <option value="EE">Estonia (EE)</option>
+                      <option value="ET">Ethiopia (ET)</option>
+                      <option value="FK">
+                        Falkland Islands (Islas Malvinas) (FK)
+                      </option>
+                      <option value="FO">Faroe Islands (FO)</option>
+                      <option value="FJ">Fiji (FJ)</option>
+                      <option value="FI">Finland (FI)</option>
+                      <option value="FR">France (FR)</option>
+                      <option value="GF">French Guiana (GF)</option>
+                      <option value="PF">French Polynesia (PF)</option>
+                      <option value="TF">
+                        French Southern and Antarctic Lands (TF)
+                      </option>
+                      <option value="GA">Gabon (GA)</option>
+                      <option value="GM">Gambia, The (GM)</option>
+                      <option value="GE">Georgia (GE)</option>
+                      <option value="DE">Germany (DE)</option>
+                      <option value="GH">Ghana (GH)</option>
+                      <option value="GI">Gibraltar (GI)</option>
+                      <option value="GR">Greece (GR)</option>
+                      <option value="GL">Greenland (GL)</option>
+                      <option value="GD">Grenada (GD)</option>
+                      <option value="GP">Guadeloupe (GP)</option>
+                      <option value="GU">Guam (GU)</option>
+                      <option value="GT">Guatemala (GT)</option>
+                      <option value="GG">Guernsey (GG)</option>
+                      <option value="GN">Guinea (GN)</option>
+                      <option value="GW">Guinea-Bissau (GW)</option>
+                      <option value="GY">Guyana (GY)</option>
+                      <option value="HT">Haiti (HT)</option>
+                      <option value="VA">Holy See (Vatican City) (VA)</option>
+                      <option value="HN">Honduras (HN)</option>
+                      <option value="HK">Hong Kong (HK)</option>
+                      <option value="HU">Hungary (HU)</option>
+                      <option value="IS">Iceland (IS)</option>
+                      <option value="IN">India (IN)</option>
+                      <option value="ID">Indonesia (ID)</option>
+                      <option value="IR">Iran (IR)</option>
+                      <option value="IQ">Iraq (IQ)</option>
+                      <option value="IE">Ireland (IE)</option>
+                      <option value="IM">Isle of Man (IM)</option>
+                      <option value="IL">Israel (IL)</option>
+                      <option value="IT">Italy (IT)</option>
+                      <option value="JM">Jamaica (JM)</option>
+                      <option value="JP">Japan (JP)</option>
+                      <option value="JE">Jersey (JE)</option>
+                      <option value="JO">Jordan (JO)</option>
+                      <option value="KZ">Kazakhstan (KZ)</option>
+                      <option value="KE">Kenya (KE)</option>
+                      <option value="KI">Kiribati (KI)</option>
+                      <option value="KP">Korea, North (KP)</option>
+                      <option value="KR">Korea, South (KR)</option>
+                      <option value="KW">Kuwait (KW)</option>
+                      <option value="KG">Kyrgyzstan (KG)</option>
+                      <option value="LA">Laos (LA)</option>
+                      <option value="LV">Latvia (LV)</option>
+                      <option value="LB">Lebanon (LB)</option>
+                      <option value="LS">Lesotho (LS)</option>
+                      <option value="LR">Liberia (LR)</option>
+                      <option value="LY">Libya (LY)</option>
+                      <option value="LI">Liechtenstein (LI)</option>
+                      <option value="LT">Lithuania (LT)</option>
+                      <option value="LU">Luxembourg (LU)</option>
+                      <option value="MO">Macau (MO)</option>
+                      <option value="MK">Macedonia (MK)</option>
+                      <option value="MG">Madagascar (MG)</option>
+                      <option value="MW">Malawi (MW)</option>
+                      <option value="MY">Malaysia (MY)</option>
+                      <option value="MV">Maldives (MV)</option>
+                      <option value="ML">Mali (ML)</option>
+                      <option value="MT">Malta (MT)</option>
+                      <option value="MH">Marshall Islands (MH)</option>
+                      <option value="MQ">Martinique (MQ)</option>
+                      <option value="MR">Mauritania (MR)</option>
+                      <option value="MU">Mauritius (MU)</option>
+                      <option value="YT">Mayotte (YT)</option>
+                      <option value="MX">Mexico (MX)</option>
+                      <option value="FM">
+                        Micronesia, Federated States of (FM)
+                      </option>
+                      <option value="MD">Moldova (MD)</option>
+                      <option value="MC">Monaco (MC)</option>
+                      <option value="MN">Mongolia (MN)</option>
+                      <option value="MA">Morocco (MA)</option>
+                      <option value="MZ">Mozambique (MZ)</option>
+                      <option value="NA">Namibia (NA)</option>
+                      <option value="NR">Nauru (NR)</option>
+                      <option value="NP">Nepal (NP)</option>
+                      <option value="NL">Netherlands (NL)</option>
+                      <option value="NC">New Caledonia (NC)</option>
+                      <option value="NZ">New Zealand (NZ)</option>
+                      <option value="NI">Nicaragua (NI)</option>
+                      <option value="NE">Niger (NE)</option>
+                      <option value="NG">Nigeria (NG)</option>
+                      <option value="NO">Norway (NO)</option>
+                      <option value="OM">Oman (OM)</option>
+                      <option value="PK">Pakistan (PK)</option>
+                      <option value="PW">Palau (PW)</option>
+                      <option value="PA">Panama (PA)</option>
+                      <option value="PG">Papua New Guinea (PG)</option>
+                      <option value="PY">Paraguay (PY)</option>
+                      <option value="PE">Peru (PE)</option>
+                      <option value="PH">Philippines (PH)</option>
+                      <option value="PL">Poland (PL)</option>
+                      <option value="PT">Portugal (PT)</option>
+                      <option value="PR">Puerto Rico (PR)</option>
+                      <option value="QA">Qatar (QA)</option>
+                      <option value="RE">Reunion (RE)</option>
+                      <option value="RO">Romania (RO)</option>
+                      <option value="RU">Russia (RU)</option>
+                      <option value="RW">Rwanda (RW)</option>
+                      <option value="SH">Saint Helena (SH)</option>
+                      <option value="KN">Saint Kitts and Nevis (KN)</option>
+                      <option value="LC">Saint Lucia (LC)</option>
+                      <option value="PM">Saint Pierre and Miquelon (PM)</option>
+                      <option value="VC">
+                        Saint Vincent and the Grenadines (VC)
+                      </option>
+                      <option value="WS">Samoa (WS)</option>
+                      <option value="SM">San Marino (SM)</option>
+                      <option value="ST">Sao Tome and Principe (ST)</option>
+                      <option value="SA">Saudi Arabia (SA)</option>
+                      <option value="SN">Senegal (SN)</option>
+                      <option value="RS">Serbia (RS)</option>
+                      <option value="SC">Seychelles (SC)</option>
+                      <option value="SL">Sierra Leone (SL)</option>
+                      <option value="SG">Singapore (SG)</option>
+                      <option value="SK">Slovakia (SK)</option>
+                      <option value="SI">Slovenia (SI)</option>
+                      <option value="SB">Solomon Islands (SB)</option>
+                      <option value="SO">Somalia (SO)</option>
+                      <option value="ZA">South Africa (ZA)</option>
+                      <option value="ES">Spain (ES)</option>
+                      <option value="LK">Sri Lanka (LK)</option>
+                      <option value="SD">Sudan (SD)</option>
+                      <option value="SR">Suriname (SR)</option>
+                      <option value="SZ">Swaziland (SZ)</option>
+                      <option value="SE">Sweden (SE)</option>
+                      <option value="CH">Switzerland (CH)</option>
+                      <option value="SY">Syria (SY)</option>
+                      <option value="TW">Taiwan (TW)</option>
+                      <option value="TJ">Tajikistan (TJ)</option>
+                      <option value="TZ">Tanzania (TZ)</option>
+                      <option value="TH">Thailand (TH)</option>
+                      <option value="TL">Timor-Leste (TL)</option>
+                      <option value="TG">Togo (TG)</option>
+                      <option value="TO">Tonga (TO)</option>
+                      <option value="TT">Trinidad and Tobago (TT)</option>
+                      <option value="TN">Tunisia (TN)</option>
+                      <option value="TR">Turkey (TR)</option>
+                      <option value="TM">Turkmenistan (TM)</option>
+                      <option value="TV">Tuvalu (TV)</option>
+                      <option value="UG">Uganda (UG)</option>
+                      <option value="UA">Ukraine (UA)</option>
+                      <option value="AE">United Arab Emirates (AE)</option>
+                      <option value="GB">United Kingdom (GB)</option>
+                      <option value="US">United States (US)</option>
+                      <option value="UY">Uruguay (UY)</option>
+                      <option value="UZ">Uzbekistan (UZ)</option>
+                      <option value="VU">Vanuatu (VU)</option>
+                      <option value="VE">Venezuela (VE)</option>
+                      <option value="VN">Vietnam (VN)</option>
+                      <option value="YE">Yemen (YE)</option>
+                      <option value="ZM">Zambia (ZM)</option>
+                      <option value="ZW">Zimbabwe (ZW)</option>
+                    </select>
+                  </td>
+                  <td>
+                    <span class="label">主要創作據點 Based at</span><br />
+                    <input
+                      type="text"
+                      name="baselocation"
+                      value="主要創作地點"
+                      style="width: 95%"
+                      id="baselocation-edit"
+                    />
+                  </td>
+                </tr>
+                <tr>
+                  <td colspan="2 ">
+                    <span class="label">Website</span><br />
+                    <input
+                      type="text"
+                      name="website"
+                      style="width: 95%"
+                      id="website-edit"
+                      placeholder="None"
+                      maxlength="150"
+                    />
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <span class="label">Instagram</span><br />
+                    <input
+                      type="text"
+                      name="instagram"
+                      style="width: 95%"
+                      id="instagram-edit"
+                      placeholder="None"
+                      maxlength="150"
+                    />
+                  </td>
+                  <td>
+                    <span class="label">Facebook</span><br />
+                    <input
+                      type="text"
+                      name="facebook"
+                      style="width: 95%"
+                      id="facebook-edit"
+                      placeholder="None"
+                      maxlength="150"
+                    />
+                  </td>
+                </tr>
+                <tr>
+                  <td colspan="2">
+                    <span class="label"
+                      >無限柔軟是 Soft POW is…..(50字內 Within 50 words）</span
+                    ><br />
+                    <textarea
+                      name="yearlyanswer"
+                      rows="3"
+                      style="width: 95%"
+                      id="yearlyanswer-edit"
+                      maxlength="50"
+                    ></textarea>
+                  </td>
+                </tr>
+                <tr id="edit-electricity-row">
+                  <td
+                    colspan="2"
+                    style="width: 100%; position: relative; border-top: 0px"
+                  >
+                    <span class="label">電力需求 Electricity Requirement</span
+                    ><br />
+                    <textarea
+                      name="electricity"
+                      rows="3"
+                      style="width: 95%"
+                      id="electricity-edit"
+                      placeholder="請詳列設備名稱與瓦數"
+                    ></textarea>
+                  </td>
+                </tr>
+              </table>
+
+              <p style="margin-top: 2rem; color: darkgray">
+                請再次確認資訊是否正確後進行修改。請注意，草率簿將於 8
+                月底開始排版，最終資料將以工作同仁所彙整的版本為準。
+              </p>
+
+              <div style="margin-top: 1rem">
+                <button
+                  type="submit"
+                  id="submit-edit-brand"
+                  style="
+                    padding: 0.3em 1.2em;
+                    background: #000;
+                    color: #fff;
+                    border: none;
+                    border-radius: 3px;
+                    cursor: pointer;
+                  "
+                >
+                  送出 Submit
+                </button>
+              </div>
+            </form>
+          </div>
+        </td>
+
+        <!-- Right Column -->
+        <td class="right">
+          <div class="scroll-inner">
+            <table style="width: 100%; table-layout: auto">
+              <!-- 攤商編號 -->
+              <tr
+                id="booth-number-row"
+                style="display: none; width: 100%; table-layout: auto"
+              >
+                <td colspan="3" style="padding: 0; border: none">
+                  <table style="width: 100%; table-layout: auto">
+                    <tr style="padding: 0; border: none">
+                      <td
+                        style="
+                          width: 40vw;
+                          border-right: 1px dashed black;
+                          border-bottom: 1px solid aliceblue;
+                        "
+                      >
+                        <span class="label">攤位編號 Booth Number</span><br />
+                        <div style="vertical-align: middle; font-size: 2.7rem">
+                          <span
+                            style="
+                              font-size: 2rem;
+                              color: black;
+                              line-height: 1.5rem;
+                            "
+                            id="Booth-number"
+                            >N/A
+                          </span>
+                          <span
+                            id="booth-number-desc"
+                            style="
+                              font-size: 1rem;
+                              color: darkgray;
+                              line-height: 1rem;
+                              display: block;
+                              margin-top: 0.5rem;
+                            "
+                            >攤位編號與攤位地圖將於報到當天（11/20）公布，屆時請留意公告。
+                          </span>
+                        </div>
+                      </td>
+                      <td
+                        style="
+                          border-bottom: 1px solid aliceblue;
+                          width: 15vw;
+
+                          border-top: 1px solid black;
+                          border-left: none;
+                          border-right: 1px solid black;
+                        "
+                      >
+                        <span class="label">攤位地圖 Booth Map</span><br /><span
+                          id="booth-map-desc"
+                          style="
+                            font-size: 1.5rem;
+                            color: black;
+                            line-height: 2rem;
+                          "
+                          >N/A</span
+                        >
+                      </td>
+                    </tr>
+                  </table>
+                </td>
+              </tr>
+
+              <!-- 資格勾勾區 -->
+              <tr id="registration-status-row" display="none;">
+                <td colspan="3" style="padding: 0; border: none">
+                  <table style="width: 100%; table-layout: auto">
+                    <tr style="padding: 0; border: none">
+                      <!-- 參展資格 -->
+                      <td style="width: 30%; border-right: 1px dashed black">
+                        <span class="label">參展資格 Exhibitor Status</span
+                        ><br />
+                        <div style="vertical-align: middle; font-size: 2.7rem">
+                          <span
+                            style="
+                              font-size: 2rem;
+                              color: black;
+                              line-height: 1.5rem;
+                            "
+                            id="registration-status"
+                            >未完成</span
+                          >
+                          <span
+                            style="
+                              font-size: 1rem;
+                              color: darkgray;
+                              line-height: 1rem;
+                              display: block;
+                            "
+                          >
+                          </span>
+                        </div>
+                      </td>
+                      <!-- 資格勾勾 -->
+                      <td style="width: 70%; border-left: none">
+                        <div style="vertical-align: middle">
+                          <span id="registration-status-desc"
+                            >請於<b> 7 月 15 日</b
+                            >前完成繳費與同意書上傳，否則將無法參展。經確認完成繳費動作＆同意書上傳，才算是取得最終參展資格，團隊將於7
+                            月 15 日核對後進行統一更新。</span
+                          >
+                          <label
+                            style="
+                              display: flex;
+                              align-items: center;
+                              font-size: 1rem;
+                            "
+                          >
+                            <input
+                              type="checkbox"
+                              id="check-payment"
+                              disabled
+                              style="margin-right: 0.5em"
+                            />
+                            參展費 Payment
+                          </label>
+                          <label
+                            style="
+                              display: flex;
+                              align-items: center;
+                              font-size: 1rem;
+                            "
+                          >
+                            <input
+                              type="checkbox"
+                              id="check-declaration"
+                              disabled
+                              style="margin-right: 0.5em"
+                            />
+                            同意書 Exhibitor Declaration
+                          </label>
+                        </div>
+                      </td>
+                    </tr>
+                  </table>
+                </td>
+              </tr>
+
+              <tr id="billing-info" style="display: block">
+                <td
+                  colspan="3"
+                  style="
+                    padding: 0;
+                    border-top: none;
+                    border-left: none;
+                    border-right: none;
+                    border-bottom: 1px solid black;
+                  "
+                >
+                  <table style="width: 100%; table-layout: auto">
+                    <tr
+                      id="agreement-row"
+                      style="
+                        width: 25%;
+                        border-top: 0.5px solid pink;
+                        border-bottom: 0.5px solid pink;
+
+                        margin: 6px 0;
+                        border-left: 1px solid black;
+
+                        vertical-align: top;
+                      "
+                    >
+                      <td
+                        style="padding: 0; border: none; width: 20%"
+                        id="agreement-section"
+                      >
+                        <table style="width: 100%">
+                          <tr>
+                            <td
+                              style="
+                                border-right: #fff 1px solid;
+                                background: #000;
+                                color: #fff;
+                                font-size: 0.75rem;
+                                padding: 2px 6px;
+                              "
+                            >
+                              參展同意書 Exhibitor Declaration
+                            </td>
+                          </tr>
+                          <tr>
+                            <td
+                              style="padding: 0.5em 0em 0em 0.5em; border: none"
+                            >
+                              <a
+                                href="https://drive.google.com/drive/folders/1sSZO1vXReBIxDEMiPNR_B0q-eQ711vJ2?usp=drive_link"
+                                target="_blank"
+                                id="declaration-download-link"
+                              >
+                                下載參展同意書
+                              </a>
+                              <br />
+                              <span
+                                style="
+                                  font-size: 0.8em;
+                                  line-height: 0.7rem;
+                                  color: #888;
+                                "
+                                id="declaration-desc"
+                              >
+                                請下載並簽署參展同意書，完成後請上傳。</span
+                              ><br />
+                              <input
+                                type="file"
+                                id="declaration-file"
+                                accept=".pdf,.jpg,.jpeg,.png"
+                                style="margin-bottom: 0.5em; max-width: 198px"
+                              />
+                              <button
+                                id="uploadBtnDeclaration"
+                                type="button"
+                                style="
+                                  padding: 0.3em 1.2em;
+                                  background: #000;
+                                  color: #fff;
+                                  border: none;
+                                  border-radius: 3px;
+                                  cursor: pointer;
+                                "
+                              >
+                                上傳 Upload</button
+                              ><br />
+                              <!-- <span
+                                id="declaration-upload-status"
+                                style="color: green"
+                              ></span> -->
+                            </td>
+                          </tr>
+                        </table>
+                      </td>
+                      <td
+                        colspan="2"
+                        style="
+                          width: 80%;
+                          padding: 0;
+                          border-top: 0.5px solid pink;
+                          border-left: 1px solid black;
+                          border-bottom: none;
+                          border-right: 1px solid black;
+                          vertical-align: top;
+                        "
+                      >
+                        <div id="billing-section">
+                          <table style="width: 100%">
+                            <tr>
+                              <td
+                                colspan="2"
+                                style="
+                                  border-left: none;
+                                  background: #000;
+                                  color: #fff;
+                                  font-size: 0.75rem;
+                                  padding: 2px 6px;
+                                "
+                              >
+                                付款方案 Payment Information
+                              </td>
+                            </tr>
+                            <tr>
+                              <td
+                                style="
+                                  border-top: 0.5px solid pink;
+                                  border-left: none;
+                                  border-bottom: 1px dashed black;
+                                  background-color: lemonchiffon;
+                                "
+                              >
+                                <span for-billing1-title
+                                  ><strong>方案一</strong>：基礎攤費</span
+                                >
+                                <hr
+                                  style="
+                                    border-top: 1px dashed black;
+                                    margin: 6px 0;
+                                    border-bottom: none;
+                                  "
+                                />
+                                <span
+                                  style="font-size: 2rem"
+                                  id="billing1-price"
+                                  >8,000 NTD</span
+                                >
+                                <br />
+                                <span for-billing1-desc>僅基礎方案</span>
+                                <div class="billing-note" id="billing-note1">
+                                  Payment Deadline: July 13
+                                </div>
+                                <div class="pay-button" id="pay1">付款 Pay</div>
+                              </td>
+                              <td
+                                style="
+                                  border-top: 0.5px solid pink;
+                                  border-left: none;
+                                  border-bottom: 1px dashed black;
+                                  border-right: none;
+                                  background-color: lemonchiffon;
+                                "
+                              >
+                                <span for-billing2-title
+                                  ><strong>方案二：</strong
+                                  >基礎攤費+工作證一張</span
+                                >
+                                <hr
+                                  style="
+                                    border-top: 1px dashed black;
+                                    margin: 6px 0;
+                                    border-bottom: none;
+                                  "
+                                />
+                                <span
+                                  style="font-size: 2rem"
+                                  id="billing2-price"
+                                  >13,000 NTD </span
+                                ><br />
+                                <span for-billing2-desc
+                                  >適合有輪班擺攤需求之攤主</span
+                                >
+                                <div class="billing-note" id="billing-note2">
+                                  Payment Deadline: July 13
+                                </div>
+                                <div class="pay-button" id="pay2">付款 Pay</div>
+                              </td>
+                            </tr>
+                          </table>
+                        </div>
+                        <div
+                          style="
+                            padding-left: 12px;
+                            border-top: none;
+                            margin: 6px 0;
+                          "
+                        >
+                          <span class="label">注意事項 Notice</span><br />
+                          <ul
+                            style="
+                              margin-top: 10px;
+                              margin-bottom: 5px;
+                              padding-left: 20px;
+                              font-size: 0.8rem;
+                            "
+                            id="billing-notice"
+                          >
+                            <li>
+                              請自行評估需求繳費，繳款後我們不再提供更改申請選項。
+                            </li>
+                            <li>
+                              每攤限加購 1
+                              張工作證，如需更多數量請買當日票入場。
+                            </li>
+                            <li>付款之後請自行留存發票。</li>
+                          </ul>
+                        </div>
+                      </td>
+                    </tr>
+                  </table>
+                </td>
+              </tr>
+              <tr id="negative-letter" style="display: none">
+                <td colspan="3">
+                  感謝您對本次徵件／申請活動的關注與投入。經過審慎評選，本屆草率季，我們收到了900多海內外具創意與潛力的申請作品／計畫。經評審團綜合討論後，遺憾地通知您，此次您所提交的申請未列入最終入選名單。<br />
+                  我們非常感謝您願意分享您的創作／計畫，也十分肯定您在其中展現出的努力與思考。誠摯地希望未來仍有機會與您合作或再次收到您的申請。也歡迎您參與草率季的其他活動，或是持續關注我們的網站與社群媒體，了解更多最新消息。<br />
+                  祝一切順利，創作茂盛。<br /><br />
+                  草率季 2025.06.30<br />
+                  <small>hooroo@double-grass.com</small><br />
+                  <hr
+                    style="margin: 1rem 0; border: none; border-top: 1px solid"
+                  />
+                  Thank you for your interest and participation in this year’s
+                  open call/application event. After a careful selection
+                  process, we received over 900 creative and promising
+                  submissions and proposals from both Taiwan and abroad for this
+                  year’s Taipei Art Book Fair. After comprehensive discussions
+                  by the jury, we regret to inform you that your application was
+                  not selected for the final list.<br /><br />
+
+                  We sincerely appreciate your willingness to share your work or
+                  project, and we highly value the effort and thought you have
+                  put into it. We hope to have the opportunity to collaborate
+                  with you or receive your application again in the future. You
+                  are also welcome to participate in other activities of the
+                  Taipei Art Book Fair, or stay tuned to our website and social
+                  media for the latest updates. <br /><br />
+
+                  Wishing you all the best and continued creative growth.<br /><br />
+                  Taipei Art Book Fair 2025.06.30<br />
+                  <small>hooroo@double-grass.com</small><br />
+                </td>
+              </tr>
+              <tr id="runnerup-letter" style="display: none">
+                <td colspan="3">
+                  感謝您對本次徵件／申請活動的關注與投入。<br /><br />
+                  經過審慎評選，本屆草率季，我們收到了900多封來自海內外具創意與潛力的申請作品／計畫。<br />
+                  經評審團綜合討論後，您的申請目前列為備取，我們將於<u>7/16日</u>公布備取錄取、繳費通知。<br />
+                  <br />
+                  我們非常感謝您願意分享您的創作／計畫，也十分肯定您在其中展現出的努力與思考。誠摯地希望未來仍有機會與您合作或再次收到您的申請。也歡迎您參與草率季的其他活動，或是持續關注我們的網站與社群媒體，了解更多最新消息。<br />
+                  <br />
+                  祝一切順利，創作茂盛。<br /><br />
+                  草率季 2025.06.30<br />
+                  <small>hooroo@double-grass.com</small>
+                  <hr
+                    style="margin: 1rem 0; border: none; border-top: 1px solid"
+                  />
+                  Thank you for your interest and participation in this year’s
+                  open call/application event.<br /><br />
+                  After a careful selection process, we received over 900
+                  creative and promising submissions and proposals from both
+                  Taiwan and abroad for this year’s Taipei Art Book Fair.<br />
+                  Following comprehensive discussions by the jury, your
+                  application is currently on the waiting list. We will announce
+                  the results for waitlisted participants and provide payment
+                  instructions on <u>July 16</u>.<br />
+                  <br />
+                  We sincerely appreciate your willingness to share your work or
+                  project, and we highly value the effort and thought you have
+                  put into it. We hope to have the opportunity to collaborate
+                  with you or receive your application again in the future. You
+                  are also welcome to participate in other activities of the
+                  Taipei Art Book Fair, or stay tuned to our website and social
+                  media for the latest updates.<br />
+                  <br />
+                  Wishing you all the best and continued creative growth.<br /><br />
+                  Taipei Art Book Fair 2025.06.30<br />
+                  <small>hooroo@double-grass.com</small>
+                </td>
+              </tr>
+              <!-- 中國簽證資料上傳 Visa Upload -->
+              <tr style="display: none" id="visaCN">
+                <td style="border-top: none; width: 55vw; border-right: none">
+                  <div id="visa-upload" style="background-color: mintcream">
+                    <span class="label">簽證申請 Visa Support</span><br />
+                    由於規定，目前中國地區人士來台需由在台單位協助申辦。
+                    <div
+                      id="visa-warning"
+                      style="color: #c00; font-size: 0.9em"
+                    >
+                      請務必於 <b>7月7日</b>前完成下列表單，以利安排申請流程。
+                    </div>
+                    <br />
+                    <a
+                      href="https://forms.gle/fP76GbEVv4F33Fvo6"
+                      target="_blank"
+                      >填寫表單</a
+                    >
+                  </div>
+                </td>
+              </tr>
+
+              <!-- 海外簽證資料連結-->
+              <tr style="display: none" id="overseasvisa">
+                <td style="border-top: none; width: 55vw">
+                  <div id="overseasvisa-desc">
+                    <span class="label">簽證申請 Visa Support</span><br />
+                    We provide a visa support package, including an official
+                    invitation letter and a brief introduction to TPABF. If you
+                    need any additional documents or information, feel free to
+                    contact us.
+                  </div>
+                  <a
+                    href="https://drive.google.com/drive/folders/1sN6Yl2VnHXzTWAwXyOrTQ_cMjrITii0p?usp=sharing"
+                    target="_blank"
+                    >Download Package</a
+                  >
+                </td>
+              </tr>
+
+              <!-- 素材下載 Download -->
+              <tr id="media-section" style="display: none">
+                <td
+                  colspan="1"
+                  style="border-top: none; width: 80%; border-right: none"
+                >
+                  <span class="label"
+                    >行銷素材下載＆上傳 ​Download & Upload Marketing
+                    Materials</span
+                  >
+                  <div id="material-download-annouce-time">
+                    <div id="material-download-desc" style="margin-top: 0.5em">
+                      <strong>視覺素材包：</strong><br />
+                      歡迎使用 2025 草率季主視覺素材，點此下載檔案。
+                    </div>
+                    <a
+                      id="media-zip-link"
+                      href="https://drive.google.com/drive/folders/18CIdZXZi0wD4fGmh_YGyc-4PYUavMHSn?usp=sharing"
+                      download
+                      >Download</a
+                    ><br /><br />
+                    <div id="material-upload-desc">
+                      <strong>社群宣傳圖檔上傳：</strong><br />
+                      請依照素材包內的說明製作，並將製作完成的<b>貼文、限時動態圖檔</b>打包為
+                      zip上傳。<br />
+                      ⚠️
+                      若未於期限內完成上傳，可能無法安排社群曝光，敬請留意;)<br />
+                    </div>
+                  </div>
+                </td>
+
+                <!-- 行銷素材上傳 -->
+                <td
+                  colspan="2"
+                  style="
+                    border-top: none;
+                    width: 20%;
+                    border-left: 1px dashed black;
+                  "
+                >
+                  <div id="material-upload-section">
+                    <div style="min-width: 198px" id="material-upload-btn">
+                      <input
+                        type="file"
+                        id="marketing-file"
+                        accept=".zip,.ZIP,.rar,.RAR,.7z,.7Z"
+                        style="max-width: 198px"
+                      /><br />
+                      <button
+                        style="
+                          padding: 0.3em 1.2em;
+                          background: #000;
+                          color: #fff;
+                          border: none;
+                          border-radius: 3px;
+                          cursor: pointer;
+                        "
+                        type="button"
+                        id="uploadBtnMarketing"
+                      >
+                        上傳 Upload</button
+                      ><br />
+                      <!-- <span
+                        id="marketing-upload-status"
+                        style="color: green"
+                      ></span> -->
+                    </div>
+                  </div>
+                  <div id="ddl-material-upload-section" class="ddl"></div>
+                </td>
+              </tr>
+
+              <!-- 寄件訊息 Foreigner Form -->
+              <tr style="display: none" id="foreign-shipping">
+                <td
+                  colspan="1"
+                  style="border-top: none; width: 80%; border-right: none"
+                >
+                  <span class="label">寄件服務 Shipping Service</span>
+                  <div id="foreigner-form" style="margin-top: 0.5rem">
+                    For those who would like to send their items in advance: To
+                    ensure your items arrive safely and on time, please complete
+                    the shipping service form first and follow its instructions.
+                    It is important that your package
+                    <u>arrives before</u> November 7, 2025 (Friday) at the
+                    designated address. <br /><br />
+                    Late or unregistered shipments will not be delivered to the
+                    venue.
+                  </div>
+                </td>
+                <!-- 寄件表格 -->
+                <td
+                  colspan="2"
+                  style="
+                    border-top: none;
+                    width: 20%;
+                    border-left: 1px dashed black;
+                  "
+                >
+                  <div id="foreign-shipping-form-section">
+                    <div style="min-width: 198px" id="foreign-shipping-form">
+                      <a
+                        href="https://forms.gle/hVu54wUfqqUMRxfG8"
+                        target="_blank"
+                        >Shipping Service Form</a
+                      >
+                    </div>
+                  </div>
+                  <div id="ddl-foreign-shipping-form-section" class="ddl"></div>
+                </td>
+              </tr>
+
+              <tr id="media-live-event-section" style="display: none">
+                <td colspan="1" style="border-top: none; border-right: none">
+                  <span class="label">現場活動徵集 Program Open Call</span>
+                  <div id="live-even-annouce-time">
+                    <div
+                      style="margin-top: 0.5em; font-size: 1rem"
+                      id="live-event-desc"
+                    >
+                      想與大家更近距離互動？我們開放以下形式的現場活動徵集：短講、表演、工作坊等。
+                    </div>
+                  </div>
+                </td>
+                <td
+                  colspan="1"
+                  style="
+                    border-top: none;
+                    width: 20%;
+                    border-left: 1px dashed black;
+                  "
+                >
+                  <div id="media-live-event-form-section">
+                    <div id="media-live-event-form" style="min-width: 198px">
+                      <a
+                        href="https://forms.gle/ckXiewW68i1VwKYt6"
+                        target="_blank"
+                        id="live-event-signup-link"
+                      >
+                        報名表單
+                      </a>
+                    </div>
+                  </div>
+                  <div id="ddl-media-live-event-form-section" class="ddl"></div>
+                </td>
+              </tr>
+
+              <tr id="catalog-section" style="display: none">
+                <td colspan="1" style="border-top: none; border-right: none">
+                  <span class="label"
+                    >草率簿露出上傳 TPABF Catalog Submission</span
+                  >
+                  <div id="catalog-accounce-time">
+                    <div
+                      style="margin-top: 0.5em; font-size: 1rem"
+                      id="catalog-desc"
+                    >
+                      每個參展單位可於本屆《草率簿 TPABF
+                      Catalog》中獲得一面頁面露出，逾期未繳交者將視同放棄刊登權益。<br /><br />
+                      📌 繳交內容如下：<br />
+                      <b>圖檔</b>：PDF 格式，完稿尺寸 120 × 195 mm，需包含 5 mm
+                      出血，色彩請設為黑白。<br />
+                      <b>文字資料</b>：請依左方參展資訊進行修改與補充。<br />
+                    </div>
+                    <br />
+                    <a
+                      href="https://drive.google.com/file/d/1zm8dL5ElUdGKYjGFjN5y4R3Ml5baaEKw/view?usp=drive_link"
+                      target="_blank"
+                      id="catalog-download-link"
+                    >
+                      點此公版下載
+                    </a>
+                  </div>
+                </td>
+                <td
+                  colspan="1"
+                  style="
+                    border-top: none;
+                    width: 20%;
+                    border-left: 1px dashed black;
+                  "
+                >
+                  <div id="catalog-upload-section">
+                    <div id="catalog-upload-btn" style="min-width: 198px">
+                      <input
+                        type="file"
+                        id="catalog-file"
+                        accept=".pdf"
+                        style="max-width: 198px"
+                      />
+                      <button
+                        style="
+                          padding: 0.3em 1.2em;
+                          background: #000;
+                          color: #fff;
+                          border: none;
+                          border-radius: 3px;
+                          cursor: pointer;
+                        "
+                        type="button"
+                        id="uploadBtnCatalog"
+                      >
+                        上傳 Upload</button
+                      ><br />
+                      <!-- <span
+                        id="catalog-upload-status"
+                        style="color: green"
+                      ></span> -->
+                    </div>
+                  </div>
+                  <div id="ddl-catalog-upload-section" class="ddl"></div>
+                </td>
+              </tr>
+
+              <!-- 親友票 Shopline -->
+              <tr style="display: none" id="familyticket">
+                <td colspan="2" style="border-top: none; width: 55vw">
+                  <span class="label">親友票 Family&Friends Tickets</span><br />
+                  <div id="familyticket-annouce-time">
+                    <div
+                      style="margin-top: 0.5em; font-size: 1rem"
+                      id="familyticket-desc"
+                    ></div>
+                    <span id="ticket-discountcode"></span>
+                    <br /><br />
+                    <a
+                      href="https://tour.ibon.com.tw/event/e2508000034ilw7"
+                      target="_blank"
+                      id="ticket-link"
+                      >購票連結</a
+                    >
+                  </div>
+                </td>
+              </tr>
+
+              <!-- 親友票 Shopline -->
+              <tr style="display: none" id="manual-boothappearance">
+                <td
+                  colspan="2"
+                  style="border-top: none; width: 55vw"
+                  id="manual-section"
+                >
+                  <span class="label">攤主手冊 Exhibitor Manual</span><br />
+
+                  <div
+                    style="margin-top: 0.5em; font-size: 1rem"
+                    id="manual-desc"
+                  >
+                    請務必詳閱並依說明準備。內含展會流程、細節、注意事項與攤位樣式、現場規範與《場地違規處理與罰則手冊》等所有參展須知。
+                  </div>
+                  <div id="manual-annouce-time">
+                    <a
+                      href="https://drive.google.com/drive/folders/1Hvz9sxlOw7NObvuF2k-wJbwn9YAaDonQ?usp=sharing"
+                      target="_blank"
+                      id="manual-link"
+                      >下載 Download</a
+                    >
+                  </div>
+                </td>
+              </tr>
+              <!-- <tr style="display: none" id="media-section-row6"></tr> -->
+
+              <tr style="display: block" id="open-call-schedule">
+                <td style="border-top: none; border-right: 1px solid black">
+                  <span class="label">徵件流程表 Open Call Schedule</span><br />
+                  <table style="width: 100%; margin-top: 10px">
+                    <tr>
+                      <td>
+                        <span class="rotated" id="schedule-announce"
+                          >徵件開始<br />Open Call Start</span
+                        >
+                      </td>
+                      <td>
+                        <span class="rotated" id="schedule-out"
+                          >徵件截止<br />Open Call End</span
+                        >
+                      </td>
+                      <td>
+                        <span class="rotated" id="schedule-result"
+                          >審核結果通知<br />Result Notification</span
+                        >
+                      </td>
+                      <td>
+                        <span class="rotated" id="schedule-payment"
+                          >通過者付款截止<br />Payment Deadline</span
+                        >
+                      </td>
+                    </tr>
+                    <tr>
+                      <td id="schedule-date-announce">2024/5/5（日）</td>
+                      <td id="schedule-date-out">2024/6/15（日）24:00</td>
+                      <td id="schedule-date-result">2024/6/30（一）12:00</td>
+                      <td id="schedule-date-payment">2024/7/13（日）24:00</td>
+                    </tr>
+                    <tr>
+                      <td>
+                        <span class="rotated" id="schedule-runnerup"
+                          >備取名單通知<br />Waitlisted Notification</span
+                        >
+                      </td>
+                      <td>
+                        <span class="rotated" id="schedule-runnerup-payment"
+                          >備取付款截止<br />Waitlisted Payment Deadline</span
+                        >
+                      </td>
+                      <td>
+                        <span class="rotated" id="schedule-list"
+                          >公布參展名單<br />Exhibitor List</span
+                        >
+                      </td>
+                      <td>
+                        <span class="rotated" id="schedule-booth"
+                          >攤位位置公布<br />Booth Location</span
+                        >
+                      </td>
+                    </tr>
+                    <tr>
+                      <td id="schedule-date-runnerup">2024/7/16（三）24:00</td>
+                      <td id="schedule-date-runnerup-payment">
+                        2024/7/22（二）24:00
+                      </td>
+                      <td id="schedule-date-list">2024/9月</td>
+                      <td id="schedule-date-booth">2024/11/20（四）</td>
+                    </tr>
+                  </table>
+                </td>
+              </tr>
+            </table>
+          </div>
+        </td>
+
+        <!-- 帳號資料 -->
+
+        <td class="account" id="account" style="display: none">
+          <h3 style="color: blue; margin-top: 15px">Profile</h3>
+          <br />
+          <div class="scroll-inner">
+            <table width="100%">
+              <tr
+                style="
+                  background-color: blue;
+                  text-align: right;
+                  border-color: blue;
+                "
+              >
+                <td colspan="2">
+                  <span
+                    <span
+                    style="
+                      text-align: right;
+                      font-size: 1rem;
+                      color: ghostwhite;
+                      cursor: pointer;
+                    "
+                    onclick="openAccountEditPage();"
+                    title="編輯"
+                    >編輯 Edit</span
+                  >
+                </td>
+              </tr>
+              <tr colspan="2" style="position: relative">
+                <!-- 左欄：代表人，一格佔 5 行 -->
+                <td rowspan="3">
+                  <span class="label">姓名 Name</span><br />
+                  <div
+                    style="
+                      vertical-align: middle;
+                      font-size: 3rem;
+                      line-height: 2rem;
+                    "
+                  >
+                    <span style="font-size: 2rem" id="contact-person"></span>
+                  </div>
+                </td>
+
+                <!-- 第一行右欄：Email -->
+                <td>
+                  <span class="label">聯絡信箱 Contact Email</span><br /><span
+                    id="email"
+                  ></span>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <span class="label">聯絡電話 Contact Phone</span><br /><span
+                    id="phone"
+                  ></span>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <span class="label">國籍 Nationality</span><br /><span
+                    id="nationality2"
+                  ></span>
+                </td>
+              </tr>
+            </table>
+          </div>
+        </td>
+        <td class="edit-page" id="edit-account-page" style="display: none">
+          <span
+            style="
+              position: absolute;
+              top: 0.7rem;
+              right: 1.2rem;
+              font-size: 2rem;
+              color: black;
+              cursor: pointer;
+              z-index: 10;
+              transition: color 0.2s;
+            "
+            title="關閉"
+            onclick="
+              document.getElementById('edit-account-page').style.display='none';
+              document.getElementById('account').style.display='table-cell';
+            "
+            >&#10005;</span
+          >
+          <div class="scroll-inner">
+            <form class="edit-form">
+              <h2 style="font-size: 1.5rem">編輯帳戶資料 Edit Profile</h2>
+              <table width="100%">
+                <tr>
+                  <td>
+                    <span class="label">代表人 Contact Person</span><br />
+                    <input
+                      type="text"
+                      name="contact-person"
+                      style="width: 95%"
+                      id="contact-person-edit"
+                      placeholder="代表人"
+                    />
+                  </td>
+                  <td>
+                    <span class="label">聯絡電話 Contact Phone</span><br />
+                    <input
+                      type="text"
+                      name="phone"
+                      value="聯絡電話"
+                      style="width: 95%"
+                      id="phone-edit"
+                    />
+                  </td>
+                </tr>
+
+                <tr>
+                  <td colspan="2">
+                    <span class="label">國籍 Nationality</span><br />
+                    <select id="nationality-edit2">
+                      <option>Please select your nationality</option>
+                      <option value="AF">Afghanistan (AF)</option>
+                      <option value="AL">Albania (AL)</option>
+                      <option value="DZ">Algeria (DZ)</option>
+                      <option value="AS">American Samoa (AS)</option>
+                      <option value="AD">Andorra (AD)</option>
+                      <option value="AO">Angola (AO)</option>
+                      <option value="AI">Anguilla (AI)</option>
+                      <option value="AQ">Antarctica (AQ)</option>
+                      <option value="AG">Antigua and Barbuda (AG)</option>
+                      <option value="AR">Argentina (AR)</option>
+                      <option value="AM">Armenia (AM)</option>
+                      <option value="AW">Aruba (AW)</option>
+                      <option value="AU">Australia (AU)</option>
+                      <option value="AT">Austria (AT)</option>
+                      <option value="AZ">Azerbaijan (AZ)</option>
+                      <option value="BS">Bahamas, The (BS)</option>
+                      <option value="BH">Bahrain (BH)</option>
+                      <option value="BD">Bangladesh (BD)</option>
+                      <option value="BB">Barbados (BB)</option>
+                      <option value="BY">Belarus (BY)</option>
+                      <option value="BE">Belgium (BE)</option>
+                      <option value="BZ">Belize (BZ)</option>
+                      <option value="BJ">Benin (BJ)</option>
+                      <option value="BM">Bermuda (BM)</option>
+                      <option value="BT">Bhutan (BT)</option>
+                      <option value="BO">Bolivia (BO)</option>
+                      <option value="BA">Bosnia and Herzegovina (BA)</option>
+                      <option value="BW">Botswana (BW)</option>
+                      <option value="BR">Brazil (BR)</option>
+                      <option value="IO">
+                        British Indian Ocean Territory (IO)
+                      </option>
+                      <option value="VG">British Virgin Islands (VG)</option>
+                      <option value="BN">Brunei (BN)</option>
+                      <option value="BG">Bulgaria (BG)</option>
+                      <option value="BF">Burkina Faso (BF)</option>
+                      <option value="MM">Burma (MM)</option>
+                      <option value="BI">Burundi (BI)</option>
+                      <option value="KH">Cambodia (KH)</option>
+                      <option value="CM">Cameroon (CM)</option>
+                      <option value="CA">Canada (CA)</option>
+                      <option value="CV">Cape Verde (CV)</option>
+                      <option value="KY">Cayman Islands (KY)</option>
+                      <option value="CF">Central African Republic (CF)</option>
+                      <option value="TD">Chad (TD)</option>
+                      <option value="CL">Chile (CL)</option>
+                      <option value="CN">China (CN)</option>
+                      <option value="CX">Christmas Island (CX)</option>
+                      <option value="CC">Cocos (Keeling) Islands (CC)</option>
+                      <option value="CO">Colombia (CO)</option>
+                      <option value="KM">Comoros (KM)</option>
+                      <option value="CD">
+                        Congo, Democratic Republic of the (CD)
+                      </option>
+                      <option value="CG">Congo, Republic of the (CG)</option>
+                      <option value="CK">Cook Islands (CK)</option>
+                      <option value="CR">Costa Rica (CR)</option>
+                      <option value="CI">Cote d'Ivoire (CI)</option>
+                      <option value="HR">Croatia (HR)</option>
+                      <option value="CU">Cuba (CU)</option>
+                      <option value="CY">Cyprus (CY)</option>
+                      <option value="CZ">Czech Republic (CZ)</option>
+                      <option value="DK">Denmark (DK)</option>
+                      <option value="DJ">Djibouti (DJ)</option>
+                      <option value="DM">Dominica (DM)</option>
+                      <option value="DO">Dominican Republic (DO)</option>
+                      <option value="EC">Ecuador (EC)</option>
+                      <option value="EG">Egypt (EG)</option>
+                      <option value="SV">El Salvador (SV)</option>
+                      <option value="GQ">Equatorial Guinea (GQ)</option>
+                      <option value="ER">Eritrea (ER)</option>
+                      <option value="EE">Estonia (EE)</option>
+                      <option value="ET">Ethiopia (ET)</option>
+                      <option value="FK">
+                        Falkland Islands (Islas Malvinas) (FK)
+                      </option>
+                      <option value="FO">Faroe Islands (FO)</option>
+                      <option value="FJ">Fiji (FJ)</option>
+                      <option value="FI">Finland (FI)</option>
+                      <option value="FR">France (FR)</option>
+                      <option value="GF">French Guiana (GF)</option>
+                      <option value="PF">French Polynesia (PF)</option>
+                      <option value="TF">
+                        French Southern and Antarctic Lands (TF)
+                      </option>
+                      <option value="GA">Gabon (GA)</option>
+                      <option value="GM">Gambia, The (GM)</option>
+                      <option value="GE">Georgia (GE)</option>
+                      <option value="DE">Germany (DE)</option>
+                      <option value="GH">Ghana (GH)</option>
+                      <option value="GI">Gibraltar (GI)</option>
+                      <option value="GR">Greece (GR)</option>
+                      <option value="GL">Greenland (GL)</option>
+                      <option value="GD">Grenada (GD)</option>
+                      <option value="GP">Guadeloupe (GP)</option>
+                      <option value="GU">Guam (GU)</option>
+                      <option value="GT">Guatemala (GT)</option>
+                      <option value="GG">Guernsey (GG)</option>
+                      <option value="GN">Guinea (GN)</option>
+                      <option value="GW">Guinea-Bissau (GW)</option>
+                      <option value="GY">Guyana (GY)</option>
+                      <option value="HT">Haiti (HT)</option>
+                      <option value="VA">Holy See (Vatican City) (VA)</option>
+                      <option value="HN">Honduras (HN)</option>
+                      <option value="HK">Hong Kong (HK)</option>
+                      <option value="HU">Hungary (HU)</option>
+                      <option value="IS">Iceland (IS)</option>
+                      <option value="IN">India (IN)</option>
+                      <option value="ID">Indonesia (ID)</option>
+                      <option value="IR">Iran (IR)</option>
+                      <option value="IQ">Iraq (IQ)</option>
+                      <option value="IE">Ireland (IE)</option>
+                      <option value="IM">Isle of Man (IM)</option>
+                      <option value="IL">Israel (IL)</option>
+                      <option value="IT">Italy (IT)</option>
+                      <option value="JM">Jamaica (JM)</option>
+                      <option value="JP">Japan (JP)</option>
+                      <option value="JE">Jersey (JE)</option>
+                      <option value="JO">Jordan (JO)</option>
+                      <option value="KZ">Kazakhstan (KZ)</option>
+                      <option value="KE">Kenya (KE)</option>
+                      <option value="KI">Kiribati (KI)</option>
+                      <option value="KP">Korea, North (KP)</option>
+                      <option value="KR">Korea, South (KR)</option>
+                      <option value="KW">Kuwait (KW)</option>
+                      <option value="KG">Kyrgyzstan (KG)</option>
+                      <option value="LA">Laos (LA)</option>
+                      <option value="LV">Latvia (LV)</option>
+                      <option value="LB">Lebanon (LB)</option>
+                      <option value="LS">Lesotho (LS)</option>
+                      <option value="LR">Liberia (LR)</option>
+                      <option value="LY">Libya (LY)</option>
+                      <option value="LI">Liechtenstein (LI)</option>
+                      <option value="LT">Lithuania (LT)</option>
+                      <option value="LU">Luxembourg (LU)</option>
+                      <option value="MO">Macau (MO)</option>
+                      <option value="MK">Macedonia (MK)</option>
+                      <option value="MG">Madagascar (MG)</option>
+                      <option value="MW">Malawi (MW)</option>
+                      <option value="MY">Malaysia (MY)</option>
+                      <option value="MV">Maldives (MV)</option>
+                      <option value="ML">Mali (ML)</option>
+                      <option value="MT">Malta (MT)</option>
+                      <option value="MH">Marshall Islands (MH)</option>
+                      <option value="MQ">Martinique (MQ)</option>
+                      <option value="MR">Mauritania (MR)</option>
+                      <option value="MU">Mauritius (MU)</option>
+                      <option value="YT">Mayotte (YT)</option>
+                      <option value="MX">Mexico (MX)</option>
+                      <option value="FM">
+                        Micronesia, Federated States of (FM)
+                      </option>
+                      <option value="MD">Moldova (MD)</option>
+                      <option value="MC">Monaco (MC)</option>
+                      <option value="MN">Mongolia (MN)</option>
+                      <option value="MA">Morocco (MA)</option>
+                      <option value="MZ">Mozambique (MZ)</option>
+                      <option value="NA">Namibia (NA)</option>
+                      <option value="NR">Nauru (NR)</option>
+                      <option value="NP">Nepal (NP)</option>
+                      <option value="NL">Netherlands (NL)</option>
+                      <option value="NC">New Caledonia (NC)</option>
+                      <option value="NZ">New Zealand (NZ)</option>
+                      <option value="NI">Nicaragua (NI)</option>
+                      <option value="NE">Niger (NE)</option>
+                      <option value="NG">Nigeria (NG)</option>
+                      <option value="NO">Norway (NO)</option>
+                      <option value="OM">Oman (OM)</option>
+                      <option value="PK">Pakistan (PK)</option>
+                      <option value="PW">Palau (PW)</option>
+                      <option value="PA">Panama (PA)</option>
+                      <option value="PG">Papua New Guinea (PG)</option>
+                      <option value="PY">Paraguay (PY)</option>
+                      <option value="PE">Peru (PE)</option>
+                      <option value="PH">Philippines (PH)</option>
+                      <option value="PL">Poland (PL)</option>
+                      <option value="PT">Portugal (PT)</option>
+                      <option value="PR">Puerto Rico (PR)</option>
+                      <option value="QA">Qatar (QA)</option>
+                      <option value="RE">Reunion (RE)</option>
+                      <option value="RO">Romania (RO)</option>
+                      <option value="RU">Russia (RU)</option>
+                      <option value="RW">Rwanda (RW)</option>
+                      <option value="SH">Saint Helena (SH)</option>
+                      <option value="KN">Saint Kitts and Nevis (KN)</option>
+                      <option value="LC">Saint Lucia (LC)</option>
+                      <option value="PM">Saint Pierre and Miquelon (PM)</option>
+                      <option value="VC">
+                        Saint Vincent and the Grenadines (VC)
+                      </option>
+                      <option value="WS">Samoa (WS)</option>
+                      <option value="SM">San Marino (SM)</option>
+                      <option value="ST">Sao Tome and Principe (ST)</option>
+                      <option value="SA">Saudi Arabia (SA)</option>
+                      <option value="SN">Senegal (SN)</option>
+                      <option value="RS">Serbia (RS)</option>
+                      <option value="SC">Seychelles (SC)</option>
+                      <option value="SL">Sierra Leone (SL)</option>
+                      <option value="SG">Singapore (SG)</option>
+                      <option value="SK">Slovakia (SK)</option>
+                      <option value="SI">Slovenia (SI)</option>
+                      <option value="SB">Solomon Islands (SB)</option>
+                      <option value="SO">Somalia (SO)</option>
+                      <option value="ZA">South Africa (ZA)</option>
+                      <option value="ES">Spain (ES)</option>
+                      <option value="LK">Sri Lanka (LK)</option>
+                      <option value="SD">Sudan (SD)</option>
+                      <option value="SR">Suriname (SR)</option>
+                      <option value="SZ">Swaziland (SZ)</option>
+                      <option value="SE">Sweden (SE)</option>
+                      <option value="CH">Switzerland (CH)</option>
+                      <option value="SY">Syria (SY)</option>
+                      <option value="TW">Taiwan (TW)</option>
+                      <option value="TJ">Tajikistan (TJ)</option>
+                      <option value="TZ">Tanzania (TZ)</option>
+                      <option value="TH">Thailand (TH)</option>
+                      <option value="TL">Timor-Leste (TL)</option>
+                      <option value="TG">Togo (TG)</option>
+                      <option value="TO">Tonga (TO)</option>
+                      <option value="TT">Trinidad and Tobago (TT)</option>
+                      <option value="TN">Tunisia (TN)</option>
+                      <option value="TR">Turkey (TR)</option>
+                      <option value="TM">Turkmenistan (TM)</option>
+                      <option value="TV">Tuvalu (TV)</option>
+                      <option value="UG">Uganda (UG)</option>
+                      <option value="UA">Ukraine (UA)</option>
+                      <option value="AE">United Arab Emirates (AE)</option>
+                      <option value="GB">United Kingdom (GB)</option>
+                      <option value="US">United States (US)</option>
+                      <option value="UY">Uruguay (UY)</option>
+                      <option value="UZ">Uzbekistan (UZ)</option>
+                      <option value="VU">Vanuatu (VU)</option>
+                      <option value="VE">Venezuela (VE)</option>
+                      <option value="VN">Vietnam (VN)</option>
+                      <option value="YE">Yemen (YE)</option>
+                      <option value="ZM">Zambia (ZM)</option>
+                      <option value="ZW">Zimbabwe (ZW)</option>
+                    </select>
+                  </td>
+                </tr>
+              </table>
+
+              <div style="margin-top: 1rem">
+                <button
+                  type="submit"
+                  id="submit-edit-account"
+                  style="
+                    padding: 0.3em 1.2em;
+                    background: #000;
+                    color: #fff;
+                    border: none;
+                    border-radius: 3px;
+                    cursor: pointer;
+                  "
+                >
+                  送出 Submit
+                </button>
+              </div>
+            </form>
+          </div>
+        </td>
+        <!-- 帳號完 -->
+
+        <td class="admin" id="contact-method" style="display: none">
+          <div class="scroll-inner">
+            <table width="100%">
+              <tr>
+                <td style="border: none">
+                  <h3>Contact Method</h3>
+                  <br />
+
+                  <br />
+                  <div
+                    style="
+                      font-size: 1rem;
+                      font-family: 'Inclusive Sans', sans-serif;
+                    "
+                  >
+                    如有任何問題，請依主題聯繫對應窗口，我們將盡快回覆您 If you
+                    have any questions, please contact the appropriate email
+                    below:
+                    <br /><br /><br />
+                    <div style="margin-left: 1em">
+                      📌 簽證相關 Visa Support<br />
+                      ✉️
+                      <a href="mailto:anm@double-grass.com"
+                        >anm@double-grass.com</a
+                      ><br /><br />
+                      📌 草率簿資料上傳 & 行銷素材 Catalog Submission &
+                      Marketing Materials<br />
+                      ✉️
+                      <a href="mailto:shao@double-grass.com"
+                        >shao@double-grass.com</a
+                      ><br /><br />
+                      📌 攤位配置與參展相關 Booth & Exhibitor Inquiries<br />
+                      ✉️
+                      <a href="mailto:xavia@double-grass.com"
+                        >xavia@double-grass.com</a
+                      ><br /><br />
+                      📌 寄件服務 Shipping Service<br />
+                      ✉️
+                      <a href="mailto:shakyfloor@double-grass.com"
+                        >shakyfloor@double-grass.com</a
+                      ><br /><br />
+                      📌 現場活動相關（講座／工作坊／表演）Program Proposals<br />
+                      ✉️
+                      <a href="mailto:shakyfloor@double-grass.com"
+                        >shakyfloor@double-grass.com</a
+                      ><br /><br />
+                      📌 帳務與收據 Invoice & Payment Questions<br />
+                      ✉️
+                      <a href="mailto:anm@double-grass.com"
+                        >anm@double-grass.com</a
+                      ><br />
+                    </div>
+                    <br /><br />
+                    <span><u>提醒 Reminder</u>:</span><br />
+                    來信請註明您的<i>報名編號</i>，以利我們快速為您查詢與回覆。
+                    <br />Please include your <i>application number</i> in all
+                    emails to help us respond efficiently.
+                  </div>
+                  <!-- 我484故意寫個圈圈叉叉在這裡讓你忘記你為什麼要聯絡窗口? 嗯對，是。
+                   Do i purposely write an XOXO here to distract you from your original purpose? yish:P -->
+                  <div id="tictactoe-container">
+                    <div
+                      id="tictactoe-board"
+                      style="
+                        display: grid;
+                        grid-template-columns: repeat(3, 1fr);
+                        position: relative;
+                      "
+                    >
+                      <button class="ttt-cell"></button>
+                      <button class="ttt-cell"></button>
+                      <button class="ttt-cell"></button>
+                      <button class="ttt-cell"></button>
+                      <button class="ttt-cell"></button>
+                      <button class="ttt-cell"></button>
+                      <button class="ttt-cell"></button>
+                      <button class="ttt-cell"></button>
+                      <button class="ttt-cell"></button>
+                      <button
+                        id="ttt-refresh"
+                        style="
+                          display: none;
+                          position: absolute;
+                          left: 50%;
+                          top: 50%;
+                          transform: translate(-50%, -50%);
+                          z-index: 10;
+                        "
+                      >
+                        refresh
+                      </button>
+                    </div>
+                    <div
+                      id="tictactoe-status"
+                      style="text-align: center; margin: 1em 0"
+                    ></div>
+                    <div style="text-align: center; margin: 1em 0">
+                      <button id="ttt-refresh" style="display: none">
+                        refresh
+                      </button>
+                    </div>
+                  </div>
+                </td>
+              </tr>
+            </table>
+          </div>
+        </td>
+        <td class="admin" id="faq" style="display: none">
+          <div>
+            <h3 style="z-index: 99">FAQ</h3>
+            <table class="faqtable" width="100%">
+              <tr>
+                <td class="faq-number-cell">
+                  <span class="faq-number">1</span>
+                </td>
+                <td class="QA-section" style="border-right: none">
+                  <span class="labelAQ">Q: 如何確認是否付款成功？</span><br />
+                  <span
+                    style="
+                      font-size: 1rem;
+                      font-family: 'Inclusive Sans', sans-serif;
+                    "
+                  >
+                    A:
+                    完成付款後，系統會自動寄出付款確認信至您填寫的信箱。團隊將於指定時間統一更新「攤商管理」頁面中的核帳狀態。
+                  </span>
+                </td>
+                <td class="QA-section">
+                  <span class="labelAQ en"
+                    >Q: How do I confirm if my payment was successful?</span
+                  ><br />
+                  <span class="faq-answer-en">
+                    A: After completing payment, a confirmation email will be
+                    sent to your registered email. The team will update the
+                    Exhibitor Status on the "Dashboard" at the specified time.
+                  </span>
+                </td>
+              </tr>
+              <!-- 2 -->
+              <tr>
+                <td class="faq-number-cell">
+                  <span class="faq-number">2</span>
+                </td>
+                <td class="QA-section" style="border-right: none">
+                  <span class="labelAQ">Q: 沒有收到付款確認信怎麼辦？</span
+                  ><br />
+                  <span
+                    style="
+                      font-size: 1rem;
+                      font-family: 'Inclusive Sans', sans-serif;
+                    "
+                  >
+                    A:
+                    請先確認垃圾郵件夾；如仍未收到，請截圖您的付款頁面或紀錄，並來信與我們聯繫。
+                  </span>
+                </td>
+                <td class="QA-section">
+                  <span class="labelAQ en"
+                    >Q: What if I didn't receive the payment confirmation
+                    email?</span
+                  ><br />
+                  <span class="faq-answer-en">
+                    A: Please check your spam folder first. If you still haven't
+                    received it, take a screenshot of your payment page or
+                    record and contact us.
+                  </span>
+                </td>
+              </tr>
+              <!-- 3 -->
+              <tr>
+                <td class="faq-number-cell">
+                  <span class="faq-number">3</span>
+                </td>
+                <td class="QA-section" style="border-right: none">
+                  <span class="labelAQ">Q: 我已付款，但錄取狀態沒有更新？</span
+                  ><br />
+                  <span
+                    style="
+                      font-size: 1rem;
+                      font-family: 'Inclusive Sans', sans-serif;
+                    "
+                  >
+                    A:
+                    請耐心等待，團隊會於公告時間統一更新核帳狀態。如有急件或疑問，請附上付款截圖來信詢問。
+                  </span>
+                </td>
+                <td class="QA-section">
+                  <span class="labelAQ en"
+                    >Q: I have paid, but my Exhibitor Status hasn't been
+                    updated?</span
+                  ><br />
+                  <span class="faq-answer-en">
+                    A: Please be patient. The TPABF team will update the
+                    Exhibitor Status at the announced time. For urgent cases or
+                    questions, please email us with your payment screenshot.
+                  </span>
+                </td>
+              </tr>
+              <!-- 4 -->
+              <tr>
+                <td class="faq-number-cell">
+                  <span class="faq-number">4</span>
+                </td>
+                <td class="QA-section" style="border-right: none">
+                  <span class="labelAQ"
+                    >Q: 已付款基礎攤位費，但想加購工作證？</span
+                  ><br />
+                  <span
+                    style="
+                      font-size: 1rem;
+                      font-family: 'Inclusive Sans', sans-serif;
+                    "
+                  >
+                    A:
+                    階段為唯一的加購申請與付款時段，付款完成後無法再更改選項，請務必於付款前確認。
+                  </span>
+                </td>
+                <td class="QA-section">
+                  <span class="labelAQ en"
+                    >Q: I have paid the basic fee, but want to add an extra
+                    pass?</span
+                  ><br />
+                  <span class="faq-answer-en">
+                    A: The current phase is the only period for add-on
+                    applications and payments. Once payment is completed,
+                    options cannot be changed. Please confirm before paying.
+                  </span>
+                </td>
+              </tr>
+              <!-- 5 -->
+              <tr>
+                <td class="faq-number-cell">
+                  <span class="faq-number">5</span>
+                </td>
+                <td class="QA-section" style="border-right: none">
+                  <span class="labelAQ">Q: 是否有開發票或收據？</span><br />
+                  <span
+                    style="
+                      font-size: 1rem;
+                      font-family: 'Inclusive Sans', sans-serif;
+                    "
+                  >
+                    A: 網站自動開立電子發票，請確認報名時所填Email。
+                  </span>
+                </td>
+                <td class="QA-section">
+                  <span class="labelAQ en"
+                    >Q: Will I receive an invoice or receipt?</span
+                  ><br />
+                  <span class="faq-answer-en">
+                    A: The website automatically issues an e-invoice. Please
+                    make sure your email is correct when registering.
+                  </span>
+                </td>
+              </tr>
+            </table>
+          </div>
+        </td>
+      </tr>
+    </table>
+
+    <!-- 手機版要大家拔點草 -->
+    <div id="grass-mask" style="display: none">
+      <div
+        id="grass-tip"
+        style="
+          text-align: center;
+          color: #222;
+          font-size: 1.2em;
+          font-weight: bold;
+          margin-top: 2em;
+        "
+      >
+        手機版還在整理中<br />Mobile version is under construction<br />
+        請移步至桌機做使用<br />Please use desktop version<br />
+      </div>
+      <canvas id="grass-canvas"></canvas>
+      <div id="grass-progress"></div>
+    </div>
+    <script src="js/dashboardupload/upload_dashboard.js"></script>
+    <script src="js/dashboard-body.js"></script>
+    <script src="js/oxox.js"></script>
+  </body>
+</html>

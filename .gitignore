@@ -1,0 +1,38 @@
+# macOS 
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# Windows 
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+
+# Linux 
+*~
+
+# IDE
+.vscode/
+.idea/
+*.sublime-workspace
+*.sublime-project
+*.swp
+
+# 
+.env
+.env.local
+.env.*.local
+
+# 
+*.log
+*.bak
+*.tmp
+*.cache
+
+# 
+dist/
+build/
+out/
+
+# GitHub Pages
+.gh-pages/

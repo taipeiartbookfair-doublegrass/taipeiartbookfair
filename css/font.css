@@ -1,0 +1,418 @@
+@font-face {
+  font-family: "Poppins";
+  src: url("../font/Poppins-Medium.woff2") format("woff2"),
+    url("../font/Poppins-Medium.woff") format("woff");
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Poppins";
+  src: url("../font/Poppins-MediumItalic.woff2") format("woff2"),
+    url("../font/Poppins-MediumItalic.woff") format("woff");
+  font-weight: 500;
+  font-style: italic;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Poppins";
+  src: url("../font/Poppins-SemiBold.woff2") format("woff2"),
+    url("../font/Poppins-SemiBold.woff") format("woff");
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Poppins";
+  src: url("../font/Poppins-Italic.woff2") format("woff2"),
+    url("../font/Poppins-Italic.woff") format("woff");
+  font-weight: normal;
+  font-style: italic;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Poppins";
+  src: url("../font/Poppins-Thin.woff2") format("woff2"),
+    url("../font/Poppins-Thin.woff") format("woff");
+  font-weight: 100;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Poppins";
+  src: url("../font/Poppins-SemiBoldItalic.woff2") format("woff2"),
+    url("../font/Poppins-SemiBoldItalic.woff") format("woff");
+  font-weight: 600;
+  font-style: italic;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Poppins";
+  src: url("../font/Poppins-LightItalic.woff2") format("woff2"),
+    url("../font/Poppins-LightItalic.woff") format("woff");
+  font-weight: 300;
+  font-style: italic;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Poppins";
+  src: url("../font/Poppins-Regular.woff2") format("woff2"),
+    url("../font/Poppins-Regular.woff") format("woff");
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Poppins";
+  src: url("../font/Poppins-ExtraLight.woff2") format("woff2"),
+    url("../font/Poppins-ExtraLight.woff") format("woff");
+  font-weight: 200;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Poppins";
+  src: url("../font/Poppins-ExtraLightItalic.woff2") format("woff2"),
+    url("../font/Poppins-ExtraLightItalic.woff") format("woff");
+  font-weight: 200;
+  font-style: italic;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Poppins";
+  src: url("../font/Poppins-BoldItalic.woff2") format("woff2"),
+    url("../font/Poppins-BoldItalic.woff") format("woff");
+  font-weight: bold;
+  font-style: italic;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Poppins";
+  src: url("../font/Poppins-Bold.woff2") format("woff2"),
+    url("../font/Poppins-Bold.woff") format("woff");
+  font-weight: bold;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Poppins";
+  src: url("../font/Poppins-ThinItalic.woff2") format("woff2"),
+    url("../font/Poppins-ThinItalic.woff") format("woff");
+  font-weight: 100;
+  font-style: italic;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Poppins";
+  src: url("../font/Poppins-Light.woff2") format("woff2"),
+    url("../font/Poppins-Light.woff") format("woff");
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Inclusive Sans";
+  src: url("../font/InclusiveSans-Regular.woff2") format("woff2"),
+    url("../font/InclusiveSans-Regular.woff") format("woff");
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "PicNic";
+  src: url("../font/PicNic.woff2") format("woff2"),
+    url("../font/PicNic.woff") format("woff");
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "fungal";
+  src: url("../font/Fungal-Grow0Thickness500.woff2") format("woff2"),
+    url("../font/Fungal-Grow0Thickness500.woff") format("woff");
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "fungal-grow";
+  src: url("../font/Fungal-Grow100Thickness500.woff2") format("woff2"),
+    url("../font/Fungal-Grow100Thickness500.woff") format("woff");
+  font-weight: bold;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "fungal-grow400";
+  src: url("../font/Fungal-Grow800Thickness500.woff2") format("woff2"),
+    url("../font/Fungal-Grow800Thickness500.woff") format("woff");
+  font-weight: 800;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* Fungal-Grow 字體系列 */
+@font-face {
+  font-family: "Fungal-Grow";
+  src: url("../font/Fungal-Grow0Thickness500.woff2") format("woff2"),
+    url("../font/Fungal-Grow0Thickness500.woff") format("woff");
+  font-weight: 0;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Fungal-Grow";
+  src: url("../font/Fungal-Grow100Thickness500.woff2") format("woff2"),
+    url("../font/Fungal-Grow100Thickness500.woff") format("woff");
+  font-weight: 100;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Fungal-Grow";
+  src: url("../font/Fungal-Grow200Thickness500.woff2") format("woff2"),
+    url("../font/Fungal-Grow200Thickness500.woff") format("woff");
+  font-weight: 200;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Fungal-Grow";
+  src: url("../font/Fungal-Grow300Thickness500.woff2") format("woff2"),
+    url("../font/Fungal-Grow300Thickness500.woff") format("woff");
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Fungal-Grow";
+  src: url("../font/Fungal-Grow400Thickness500.woff2") format("woff2"),
+    url("../font/Fungal-Grow400Thickness500.woff") format("woff");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Fungal-Grow";
+  src: url("../font/Fungal-Grow500Thickness500.woff2") format("woff2"),
+    url("../font/Fungal-Grow500Thickness500.woff") format("woff");
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Fungal-Grow";
+  src: url("../font/Fungal-Grow600Thickness500.woff2") format("woff2"),
+    url("../font/Fungal-Grow600Thickness500.woff") format("woff");
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Fungal-Grow";
+  src: url("../font/Fungal-Grow700Thickness500.woff2") format("woff2"),
+    url("../font/Fungal-Grow700Thickness500.woff") format("woff");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Fungal-Grow";
+  src: url("../font/Fungal-Grow800Thickness500.woff2") format("woff2"),
+    url("../font/Fungal-Grow800Thickness500.woff") format("woff");
+  font-weight: 800;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Fungal-Grow";
+  src: url("../font/Fungal-Grow900Thickness500.woff2") format("woff2"),
+    url("../font/Fungal-Grow900Thickness500.woff") format("woff");
+  font-weight: 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Fungal-Grow";
+  src: url("../font/Fungal-Grow1000Thickness500.woff2") format("woff2"),
+    url("../font/Fungal-Grow1000Thickness500.woff") format("woff");
+  font-weight: 1000;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* Fungal-Grow Thickness 1000 系列 */
+@font-face {
+  font-family: "Fungal-Grow-Thick";
+  src: url("../font/Fungal-Grow100Thickness1000.woff2") format("woff2"),
+    url("../font/Fungal-Grow100Thickness1000.woff") format("woff");
+  font-weight: 100;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Fungal-Grow-Thick";
+  src: url("../font/Fungal-Grow200Thickness1000.woff2") format("woff2"),
+    url("../font/Fungal-Grow200Thickness1000.woff") format("woff");
+  font-weight: 200;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Fungal-Grow-Thick";
+  src: url("../font/Fungal-Grow300Thickness1000.woff2") format("woff2"),
+    url("../font/Fungal-Grow300Thickness1000.woff") format("woff");
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Fungal-Grow-Thick";
+  src: url("../font/Fungal-Grow400Thickness1000.woff2") format("woff2"),
+    url("../font/Fungal-Grow400Thickness1000.woff") format("woff");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Fungal-Grow-Thick";
+  src: url("../font/Fungal-Grow500Thickness1000.woff2") format("woff2"),
+    url("../font/Fungal-Grow500Thickness1000.woff") format("woff");
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Fungal-Grow-Thick";
+  src: url("../font/Fungal-Grow600Thickness1000.woff2") format("woff2"),
+    url("../font/Fungal-Grow600Thickness1000.woff") format("woff");
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Fungal-Grow-Thick";
+  src: url("../font/Fungal-Grow700Thickness1000.woff2") format("woff2"),
+    url("../font/Fungal-Grow700Thickness1000.woff") format("woff");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Fungal-Grow-Thick";
+  src: url("../font/Fungal-Grow800Thickness1000.woff2") format("woff2"),
+    url("../font/Fungal-Grow800Thickness1000.woff") format("woff");
+  font-weight: 800;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Fungal-Grow-Thick";
+  src: url("../font/Fungal-Grow900Thickness1000.woff2") format("woff2"),
+    url("../font/Fungal-Grow900Thickness1000.woff") format("woff");
+  font-weight: 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Fungal-Grow-Thick";
+  src: url("../font/Fungal-Grow1000Thickness1000.woff2") format("woff2"),
+    url("../font/Fungal-Grow1000Thickness1000.woff") format("woff");
+  font-weight: 1000;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* PicNic 字體 */
+@font-face {
+  font-family: "PicNic";
+  src: url("../font/PicNic.woff2") format("woff2"),
+    url("../font/PicNic.woff") format("woff");
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* InclusiveSans 字體 */
+@font-face {
+  font-family: "InclusiveSans";
+  src: url("../font/InclusiveSans-Regular.woff2") format("woff2"),
+    url("../font/InclusiveSans-Regular.woff") format("woff");
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* Xiaoyuan 字體系列 */
+@font-face {
+  font-family: "Xiaoyuan-01";
+  src: url("../font/xiaoyuan_font/testtype-01.woff2") format("woff2"),
+    url("../font/xiaoyuan_font/testtype-01.woff") format("woff");
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Xiaoyuan-02";
+  src: url("../font/xiaoyuan_font/testtype-02.woff2") format("woff2"),
+    url("../font/xiaoyuan_font/testtype-02.woff") format("woff");
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Xiaoyuan-03";
+  src: url("../font/xiaoyuan_font/testtype-03.woff2") format("woff2"),
+    url("../font/xiaoyuan_font/testtype-03.woff") format("woff");
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Xiaoyuan-GDC";
+  src: url("../font/xiaoyuan_font/testtype-gdc.woff2") format("woff2"),
+    url("../font/xiaoyuan_font/testtype-gdc.woff") format("woff");
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Xiaoyuan-Sketchbook";
+  src: url("../font/xiaoyuan_font/testtype-sketchbook.woff2") format("woff2"),
+    url("../font/xiaoyuan_font/testtype-sketchbook.woff") format("woff");
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Xiaoyuan-Trackpad";
+  src: url("../font/xiaoyuan_font/testtype-trackpad.woff2") format("woff2"),
+    url("../font/xiaoyuan_font/testtype-trackpad.woff") format("woff");
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
