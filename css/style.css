@@ -634,7 +634,7 @@ p {
 }
 
 /* 手機版 */
-@media screen and (max-width: 600px) {
+@media screen and (max-width: 768px) {
   html {
     padding: 0;
     margin: 0;
@@ -649,24 +649,14 @@ p {
     overflow-x: hidden;
     position: relative;
     font-size: 1rem;
-    /* background: linear-gradient(
-      90deg,
-      rgba(0, 0, 0, 1) 0%,
-      rgba(255, 255, 255, 1) 7%,
-      rgba(222, 222, 222, 1) 18%,
-      rgba(255, 255, 255, 1) 21%,
-      rgba(255, 255, 255, 1) 46%,
-      rgba(227, 227, 227, 1) 53%,
-      rgba(237, 235, 235, 1) 79%,
-      rgba(255, 255, 255, 1) 82%,
-      rgba(174, 174, 174, 1) 97%,
-      rgba(0, 0, 0, 1) 100%
-    ); */
     background-color: rgb(255, 255, 255);
+    min-height: 100vh;
   }
 
   .login-btn {
     width: 50%;
+    font-size: 0.9rem;
+    padding: 0.8rem;
   }
 
   nav a:hover {
@@ -679,8 +669,8 @@ p {
   .tag-m {
     background-color: white;
     border: 1px solid black;
-    font-size: 1.3rem;
-    padding: 2px;
+    font-size: 1.1rem;
+    padding: 0.5rem;
     display: block;
     position: relative;
     width: fit-content;
@@ -689,12 +679,13 @@ p {
     left: 0.5rem;
     margin: 10px;
     transform: rotate(0turn);
+    border-radius: 4px;
   }
   .tag2-m {
     background-color: white;
     border: 1px solid black;
-    font-size: 1.3rem;
-    padding: 2px;
+    font-size: 1.1rem;
+    padding: 0.5rem;
     display: block;
     position: relative;
     width: fit-content;
@@ -703,6 +694,7 @@ p {
     left: 0.5rem;
     margin: 10px;
     transform: rotate(0turn);
+    border-radius: 4px;
   }
   .tag {
     display: none;
@@ -718,7 +710,8 @@ p {
     right: 0;
     display: flex;
     flex-direction: column; /* 上下排列 */
-    gap: 2rem;
+    gap: 1rem;
+    padding-bottom: 2rem;
   }
 
   nav a.vertical {
@@ -726,12 +719,13 @@ p {
     text-orientation: initial;
     position: relative;
     width: fit-content;
-    font-size: 2.5rem;
+    font-size: 1.8rem;
     display: flex;
     color: white;
     text-decoration: none;
     align-items: center;
     justify-content: center;
+    margin-bottom: 1rem;
   }
 
   .open-call-m,
@@ -744,46 +738,58 @@ p {
     font-weight: 400;
     text-decoration: none;
     text-align: left;
-    padding-left: 2rem;
-    padding-right: 2rem;
+    padding: 1rem 2rem;
+    margin: 0.5rem 0;
+    border-radius: 8px;
+    display: block;
+    width: fit-content;
   }
   .about {
     background-color: #e55e25;
-    transform: rotate(90deg);
-    margin-left: 50vw;
+    color: white;
+    transform: none;
+    margin-left: 0;
   }
   .open-call-m {
-    display: inline-block;
+    display: block;
     background-color: #000;
-    transform: rotate(65deg);
-    margin-left: 15vw;
+    color: white;
+    transform: none;
+    margin-left: 0;
   }
   .shop {
     background-color: #d8d8d8;
-    transform: rotate(-0.05turn);
+    color: black;
+    transform: none;
   }
   .fb {
-    transform: rotate(-0.01turn);
+    transform: none;
     background-color: #6b4ca5;
-    margin-top: 1vh;
+    color: white;
+    margin-top: 0;
   }
   .ig {
-    transform: rotate(-0.02turn);
+    transform: none;
     background-color: #6b4ca5;
+    color: white;
   }
   .email {
-    transform: rotate(0.01turn);
+    transform: none;
     background-color: #6b4ca5;
+    color: white;
   }
   .info {
     position: relative;
     left: 1.5rem;
     bottom: auto;
-    padding: 2px;
+    padding: 1rem;
     color: black;
-    width: 85%;
+    width: calc(100% - 3rem);
     top: 3rem;
-    margin-bottom: 14vh;
+    margin-bottom: 2rem;
+    background: white;
+    border: 1px solid black;
+    border-radius: 8px;
   }
 
   .open-call {
@@ -832,7 +838,7 @@ p {
 
   .banner-track {
     display: flex;
-    animation: scroll-loop 20s linear infinite;
+    animation: scroll-loop 30s linear infinite;
   }
 
   .banner-content {
@@ -853,7 +859,9 @@ p {
   .opencallframe {
     overflow-y: scroll;
     overflow-x: hidden;
-    padding: 0vh 4vw;
+    padding: 2vh 4vw;
+    width: 95vw;
+    height: 95vh;
   }
   .application-button {
     width: 100%;
@@ -894,8 +902,36 @@ p {
       transform: translateX(0);
     }
     100% {
-      transform: translateX(-50%);
+      transform: translateX(-100%);
     }
+  }
+}
+
+/* 超小螢幕手機版 */
+@media screen and (max-width: 480px) {
+  nav a.vertical {
+    font-size: 1.5rem;
+  }
+  
+  .open-call-m,
+  .about,
+  .shop,
+  .fb,
+  .ig,
+  .email {
+    font-size: 1.2rem;
+    padding: 0.8rem 1.5rem;
+  }
+  
+  .info {
+    font-size: 0.9rem;
+    padding: 0.8rem;
+  }
+  
+  .tag-m,
+  .tag2-m {
+    font-size: 1rem;
+    padding: 0.4rem;
   }
 }
 
