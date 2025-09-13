@@ -2,7 +2,7 @@
 function populateZineElements(booksArray) {
   // 直接抓取所有 zine 格子元素
   const zineElements = document.querySelectorAll(
-    ".book-item, .right-zine-item, .middle-zine-item, .zine-item"
+    ".book-item, .right-zine-item, .middle-zine-item, .zine-item, .timeline-zine-item"
   );
 
   // 預先設定所有元素的 hover 效果
@@ -189,5 +189,5 @@ async function getRandomImages(count = 14) {
 
 // 等待頁面載入完成後執行
 document.addEventListener("DOMContentLoaded", function () {
-  getRandomImages(14);
+  getRandomImages(22);
 });
