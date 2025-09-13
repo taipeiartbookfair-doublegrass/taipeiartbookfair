@@ -106,7 +106,7 @@ function populateZineElements(booksArray) {
 }
 
 async function getRandomImages(count = 14) {
-  const url = `https://script.google.com/macros/s/AKfycbyj44awQD8pFjY0eGsG5TuItJxduz_KG_uZ_8tHUo0S0XWsjzvxPt8rTVmk8PLNCssF/exec`;
+  const url = `https://script.google.com/macros/s/AKfycbyeDDI-trIyGuqQW81NQH6VEDATSbdmqCWG25ll-8kPP33zWzhS5EnTx1qDscb6Y4Py/exec`;
   try {
     // 預載入圖片以提升載入速度
     const preloadImages = (imageUrls) => {

@@ -89,15 +89,15 @@ class ExhibitorDisplay {
   // 顯示載入狀態
   showLoadingState() {
     const displays = document.querySelectorAll(".exhibitor-item-display");
-    if (displays.length !== 2) return;
+    if (displays.length !== 3) return;
 
     displays.forEach((display, index) => {
       const boothNumber = display.querySelector(".exhibitor-booth-number");
       const name = display.querySelector(".exhibitor-name");
       const region = display.querySelector(".exhibitor-region");
 
-      if (boothNumber) boothNumber.textContent = "載入中...";
-      if (name) name.textContent = "正在獲取攤商資料";
+      if (boothNumber) boothNumber.textContent = "";
+      if (name) name.textContent = "Loading exhibitor data...🏃‍♀️";
       if (region) region.textContent = "...";
     });
   }
@@ -105,15 +105,15 @@ class ExhibitorDisplay {
   // 顯示空狀態
   showEmptyState() {
     const displays = document.querySelectorAll(".exhibitor-item-display");
-    if (displays.length !== 2) return;
+    if (displays.length !== 3) return;
 
     displays.forEach((display, index) => {
       const boothNumber = display.querySelector(".exhibitor-booth-number");
       const name = display.querySelector(".exhibitor-name");
       const region = display.querySelector(".exhibitor-region");
 
-      if (boothNumber) boothNumber.textContent = "-";
-      if (name) name.textContent = "暫無攤商資料";
+      if (boothNumber) boothNumber.textContent = "";
+      if (name) name.textContent = "No exhibitor data available";
       if (region) region.textContent = "-";
     });
   }
@@ -173,19 +173,21 @@ class ExhibitorDisplay {
     if (this.exhibitorsData.length === 0) return;
 
     // 簡單的順序輪播
-    this.currentIndex = (this.currentIndex + 2) % this.exhibitorsData.length;
+    this.currentIndex = (this.currentIndex + 3) % this.exhibitorsData.length;
     this.updateDisplay();
   }
 
   // 更新顯示
   updateDisplay() {
     const displays = document.querySelectorAll(".exhibitor-item-display");
-    if (displays.length !== 2) return;
+    if (displays.length !== 3) return;
 
-    // 獲取當前要顯示的兩個攤商
+    // 獲取當前要顯示的三個攤商
     const exhibitor1 = this.exhibitorsData[this.currentIndex];
     const exhibitor2 =
       this.exhibitorsData[(this.currentIndex + 1) % this.exhibitorsData.length];
+    const exhibitor3 =
+      this.exhibitorsData[(this.currentIndex + 2) % this.exhibitorsData.length];
 
     // 更新第一個攤商
     if (exhibitor1) {
@@ -196,6 +198,11 @@ class ExhibitorDisplay {
     if (exhibitor2) {
       this.updateExhibitorDisplay(displays[1], exhibitor2);
     }
+
+    // 更新第三個攤商
+    if (exhibitor3) {
+      this.updateExhibitorDisplay(displays[2], exhibitor3);
+    }
   }
 
   // 更新攤商顯示
@@ -205,8 +212,7 @@ class ExhibitorDisplay {
     const region = display.querySelector(".exhibitor-region");
 
     if (boothNumber) {
-      boothNumber.textContent =
-        exhibitor.applicationNumber || exhibitor.id || "-";
+      boothNumber.textContent = "";
     }
     if (name) {
       name.textContent = exhibitor.name || "Unknown";

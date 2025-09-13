@@ -544,8 +544,27 @@ p {
     padding: 1.5rem 0;
   }
 
+  .timeline-section .container {
+    padding-left: 120px; /* 平板版減少左側空間 */
+  }
+
+  .agenda-header {
+    max-width: calc(100vw - 140px); /* 平板版調整寬度 */
+  }
+
+  .timeline-section .timeline-mode-container {
+    width: calc(100vw - 140px); /* 平板版調整寬度 */
+  }
+
   .timeline-section .timeline-mode-container {
     height: 300px; /* 平板上縮小高度 */
+  }
+
+  .timeline-zine-item {
+    width: 100px; /* 平板版縮小 */
+    height: 150px; /* 平板版縮小 */
+    font-size: 0.8rem;
+    padding: 4px;
   }
 
   .poster-container {
@@ -767,6 +786,8 @@ p {
   align-items: center;
   margin-bottom: 1.5rem;
   padding: 0 1rem;
+  flex: 1;
+  max-width: calc(100vw - 220px); /* 限制寬度，為左側zine留空間 */
 }
 
 .agenda-header h3 {
@@ -876,6 +897,44 @@ p {
   background: olivedrab;
   padding: 2rem 0;
   margin-top: 2rem;
+  position: relative;
+}
+
+.timeline-section .container {
+  display: flex;
+  align-items: flex-start;
+  gap: 2rem;
+  padding-left: 200px; /* 為左側zine留出空間 */
+}
+
+/* 時間軸左側 Zine 容器樣式 */
+.timeline-left-zine-container {
+  position: absolute;
+  left: 16px;
+  top: 50%;
+  transform: translateY(-50%);
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  z-index: 10;
+}
+
+.timeline-zine-item {
+  flex: 0 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: plum;
+  font-size: 1rem;
+  color: var(--primary);
+  cursor: pointer;
+  writing-mode: vertical-lr;
+  text-orientation: mixed;
+  text-align: center;
+  padding: 8px;
+  width: 148px;
+  height: 210px;
+  margin-bottom: 10px;
 }
 
 .timeline-section h3 {
@@ -887,7 +946,7 @@ p {
 
 /* 時間軸模式容器樣式 */
 .timeline-section .timeline-mode-container {
-  width: 100%;
+  width: calc(100vw - 220px); /* 限制寬度，為左側zine留空間 */
   height: 400px; /* 設定固定高度 */
   overflow: hidden;
   border: 1px solid var(--border);
@@ -1222,7 +1281,7 @@ p {
   align-items: center;
   justify-content: center;
   font-family: "IBM Plex Sans JP", sans-serif;
-  font-size: 12px;
+  font-size: 1.5rem;
   text-transform: uppercase;
   letter-spacing: 0.5px;
 }
@@ -1810,6 +1869,19 @@ p {
     padding: 1rem 0;
   }
 
+  .timeline-section .container {
+    padding-left: 80px; /* 手機版進一步減少左側空間 */
+    flex-direction: column;
+  }
+
+  .agenda-header {
+    max-width: calc(100vw - 100px); /* 手機版調整寬度 */
+  }
+
+  .timeline-section .timeline-mode-container {
+    width: calc(100vw - 100px); /* 手機版調整寬度 */
+  }
+
   .timeline-section h3 {
     font-size: 1.5rem;
     margin-bottom: 1rem;
@@ -1817,6 +1889,13 @@ p {
 
   .timeline-section .timeline-mode-container {
     height: 250px; /* 手機上更小的高度 */
+  }
+
+  .timeline-zine-item {
+    width: 70px; /* 手機版進一步縮小 */
+    height: 100px; /* 手機版進一步縮小 */
+    font-size: 0.6rem;
+    padding: 2px;
   }
 
   .poster-container {
@@ -1845,7 +1924,7 @@ p {
 .exhibitor-display-container {
   display: flex;
   align-items: center;
-  gap: 0.8rem;
+  gap: 0.6rem;
   flex: 1;
   min-width: 0;
 }
@@ -1853,7 +1932,7 @@ p {
 .exhibitor-item-display {
   display: flex;
   align-items: center;
-  gap: 0.5rem;
+  gap: 0.4rem;
   flex: 1;
   min-width: 0;
 }
@@ -1995,12 +2074,12 @@ p {
   }
 
   .exhibitor-display-container {
-    gap: 0.5rem;
+    gap: 0.4rem;
     width: 100%;
   }
 
   .exhibitor-item-display {
-    gap: 0.3rem;
+    gap: 0.25rem;
     flex: 1;
   }
 
