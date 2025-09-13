@@ -42,26 +42,7 @@ function shuffle(array) {
 function createRotator() {
   const rotata = document.getElementById("rotata");
 
-  // 設置 rotata 容器高度為整個文檔高度
-  function updateRotataHeight() {
-    const documentHeight = Math.max(
-      document.body.scrollHeight,
-      document.body.offsetHeight,
-      document.documentElement.clientHeight,
-      document.documentElement.scrollHeight,
-      document.documentElement.offsetHeight
-    );
-    rotata.style.height = documentHeight + "px";
-  }
-
-  // 初始設置高度
-  updateRotataHeight();
-
-  // 當視窗大小改變時重新計算
-  window.addEventListener("resize", updateRotataHeight);
-
-  // 當內容載入完成後重新計算（處理動態內容）
-  window.addEventListener("load", updateRotataHeight);
+  // 移除動態設置高度的程式碼，讓 CSS 控制高度
 
   const totalPosters = 6;
   const imagesPerStrip = 5;

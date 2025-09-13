@@ -275,6 +275,18 @@ nav a:hover {
   transform: rotate(0.3deg) translate(-1px, 3px); /* imperfection! */
 }
 
+.rotata {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh; /* 固定為視窗高度，不要動態改變 */
+  background: transparent;
+  pointer-events: none;
+  z-index: 1;
+  overflow: visible;
+}
+
 .poster-rotator {
   position: absolute;
   overflow: hidden;
