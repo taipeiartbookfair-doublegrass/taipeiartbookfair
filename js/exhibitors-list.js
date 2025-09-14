@@ -1,4 +1,3 @@
-// 攤商名單基本功能
 class ExhibitorsList {
   constructor() {
     this.exhibitorsData = [];

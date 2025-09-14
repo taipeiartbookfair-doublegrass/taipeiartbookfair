@@ -557,7 +557,8 @@ p {
   }
 
   .timeline-section .timeline-mode-container {
-    height: 300px; /* 平板上縮小高度 */
+    height: 40vh; /* 平板版調整為40vh */
+    margin-bottom: 120px; /* 平板版減少下方空間 */
   }
 
   .timeline-zine-item {
@@ -566,6 +567,15 @@ p {
     font-size: 0.8rem;
     padding: 4px;
   }
+  
+  /* 平板版下方 Zine 容器調整 */
+  .timeline-bottom-zine-container {
+    bottom: 10px;
+    left: 120px; /* 平板版從左側第3本zine的右側開始 */
+    right: 10px;
+    gap: 3px;
+  }
+  
 
   .poster-container {
     max-width: 350px; /* 平板上的海報尺寸 */
@@ -784,7 +794,6 @@ p {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 1.5rem;
   padding: 0 1rem;
   flex: 1;
   max-width: calc(100vw - 220px); /* 限制寬度，為左側zine留空間 */
@@ -903,7 +912,6 @@ p {
 .timeline-section .container {
   display: flex;
   align-items: flex-start;
-  gap: 2rem;
   padding-left: 200px; 
   flex-direction: column;
 }
@@ -964,21 +972,23 @@ p {
 
 .timeline-section h3 {
   text-align: center;
-  margin-bottom: 2rem;
   font-size: 2rem;
-  color: forestgreen;
+  color: green;
+  text-shadow: 2px 2px darkmagenta;
 }
 
 /* 時間軸模式容器樣式 */
 .timeline-section .timeline-mode-container {
   width: calc(100vw - 220px); /* 限制寬度，為左側zine留空間 */
-  height: 400px; /* 設定固定高度 */
+  height: 63vh; /* 設定為55vh高度 */
+  margin-bottom: 225px; /* 為下方水平zine留空間 */
   overflow: hidden;
   border: 1px solid var(--border);
   background: var(--bg);
   display: block !important; /* 強制顯示 */
   position: relative; /* 為圖例提供定位參考 */
 }
+
 
 /* 確保時間軸區域的可見性 */
 .timeline-section {
@@ -1708,6 +1718,18 @@ p {
   width: 25rem;
   height: 28rem;
 }
+.rotata div:nth-child(7) {
+  top: 279vh;
+  right: 16px;
+  width: 33rem;
+  height: 14rem;
+}
+.rotata div:nth-child(8) {
+  top: 293vh;
+  left: 12px;
+  width: 10rem;
+  height: 7rem;
+}
 
 .image-strip {
   display: flex;
@@ -1765,6 +1787,22 @@ p {
   flex-shrink: 0;
   display: block;
   max-width: none;
+}
+
+.rotata div:nth-child(7) .image-strip img {
+  width: auto;
+  height: 100% !important;
+  object-fit: cover;
+  flex-shrink: 0;
+  display: block;
+}
+
+.rotata div:nth-child(8) .image-strip img {
+  width: auto;
+  height: 100% !important;
+  object-fit: cover;
+  flex-shrink: 0;
+  display: block;
 }
 
 /* 手機響應式設計 - 新結構 */
@@ -1913,7 +1951,8 @@ p {
   }
 
   .timeline-section .timeline-mode-container {
-    height: 250px; /* 手機上更小的高度 */
+    height: 35vh; /* 手機版調整為35vh */
+    margin-bottom: 90px; /* 手機版進一步減少下方空間 */
   }
 
   .timeline-zine-item {
@@ -1922,6 +1961,15 @@ p {
     font-size: 0.6rem;
     padding: 2px;
   }
+  
+  /* 手機版下方 Zine 容器調整 */
+  .timeline-bottom-zine-container {
+    bottom: 8px;
+    left: 90px; /* 手機版從左側第3本zine的右側開始 */
+    right: 8px;
+    gap: 2px;
+  }
+  
 
   .poster-container {
     max-width: 280px; /* 手機上的海報尺寸 */

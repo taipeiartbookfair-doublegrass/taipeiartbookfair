@@ -690,6 +690,7 @@
   background-color: gray;
   position: absolute; /* 絕對定位 */
   top: 0; /* 垂直居中 */
+  border-radius: 50%;
 }
 
 .timeline-day.today {
@@ -701,7 +702,7 @@
 /* 活動區域 - 甘特圖樣式 */
 .timeline-events-area {
   position: relative;
-  min-height: 47vh;
+  min-height: 58vh;
   /* padding-left 改由 JavaScript 動態設定 */
   background: linear-gradient(
     0.5turn,
