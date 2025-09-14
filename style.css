@@ -904,18 +904,30 @@ p {
   display: flex;
   align-items: flex-start;
   gap: 2rem;
-  padding-left: 200px; /* 為左側zine留出空間 */
+  padding-left: 200px; 
+  flex-direction: column;
 }
 
-/* 時間軸左側 Zine 容器樣式 */
+/* L 型 Zine 布局容器樣式 */
 .timeline-left-zine-container {
   position: absolute;
   left: 16px;
-  top: 50%;
-  transform: translateY(-50%);
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: 5px;
+  z-index: 10;
+}
+
+/* 下方水平 Zine 容器樣式 */
+.timeline-bottom-zine-container {
+  position: absolute;
+  bottom: 16px;
+  left: 180px; /* 從左側第3本zine的右側開始，避免重疊 */
+  right: 16px;
+  display: flex;
+  flex-direction: row;
+  gap: 5px;
+  justify-content: flex-start;
   z-index: 10;
 }
 
@@ -928,13 +940,26 @@ p {
   font-size: 1rem;
   color: var(--primary);
   cursor: pointer;
-  writing-mode: vertical-lr;
-  text-orientation: mixed;
   text-align: center;
   padding: 8px;
+}
+
+/* 垂直 Zine 樣式 */
+.timeline-zine-vertical {
+  writing-mode: vertical-lr;
+  text-orientation: mixed;
   width: 148px;
   height: 210px;
   margin-bottom: 10px;
+}
+
+/* 水平 Zine 樣式 - 改為與垂直 zine 相同尺寸和排列 */
+.timeline-zine-horizontal {
+  writing-mode: vertical-lr;
+  text-orientation: mixed;
+  width: 148px;
+  height: 210px;
+  margin-right: 10px;
 }
 
 .timeline-section h3 {

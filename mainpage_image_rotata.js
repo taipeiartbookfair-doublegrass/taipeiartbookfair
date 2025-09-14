@@ -48,8 +48,8 @@ function createRotator() {
     return;
   }
 
-  const totalPosters = 6;
-  const imagesPerStrip = 6;
+  const totalPosters = 8;
+  const imagesPerStrip = 8;
 
   // 分開 horizontal 和 vertical 的檔名
   const horizontalImages = Array.from(
