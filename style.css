@@ -557,7 +557,7 @@ p {
   }
 
   .timeline-section .timeline-mode-container {
-    height: 300px; /* 平板上縮小高度 */
+    height: 301px; /* 平板上縮小高度 - 加長1px */
     margin-bottom: 120px; /* 平板版減少下方空間 */
   }
 
@@ -921,8 +921,6 @@ p {
 .timeline-left-zine-container {
   position: absolute;
   left: 16px;
-  top: 50%;
-  transform: translateY(-50%);
   display: flex;
   flex-direction: column;
   gap: 5px;
@@ -983,7 +981,7 @@ p {
 /* 時間軸模式容器樣式 */
 .timeline-section .timeline-mode-container {
   width: calc(100vw - 220px); /* 限制寬度，為左側zine留空間 */
-  height: 400px; /* 設定固定高度 */
+  height: 402px; /* 設定固定高度 - 加長2vh */
   margin-bottom: 250px; /* 為下方水平zine留空間 */
   overflow: hidden;
   border: 1px solid var(--border);
@@ -1721,9 +1719,9 @@ p {
   height: 28rem;
 }
 .rotata div:nth-child(7) {
-  top: 278vh;
+  top: 282vh;
   right: 16px;
-  width: 23rem;
+  width: 33rem;
   height: 14rem;
 }
 .rotata div:nth-child(8) {
@@ -1953,7 +1951,7 @@ p {
   }
 
   .timeline-section .timeline-mode-container {
-    height: 250px; /* 手機上更小的高度 */
+    height: 251px; /* 手機上更小的高度 - 加長1px */
     margin-bottom: 90px; /* 手機版進一步減少下方空間 */
   }
 
