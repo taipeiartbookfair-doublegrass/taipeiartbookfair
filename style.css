@@ -1720,6 +1720,18 @@ p {
   width: 25rem;
   height: 28rem;
 }
+.rotata div:nth-child(7) {
+  top: 278vh;
+  right: 16px;
+  width: 23rem;
+  height: 14rem;
+}
+.rotata div:nth-child(8) {
+  top: 293vh;
+  left: 12px;
+  width: 10rem;
+  height: 8rem;
+}
 
 .image-strip {
   display: flex;
@@ -1777,6 +1789,22 @@ p {
   flex-shrink: 0;
   display: block;
   max-width: none;
+}
+
+.rotata div:nth-child(7) .image-strip img {
+  width: auto;
+  height: 100% !important;
+  object-fit: cover;
+  flex-shrink: 0;
+  display: block;
+}
+
+.rotata div:nth-child(8) .image-strip img {
+  width: auto;
+  height: 100% !important;
+  object-fit: cover;
+  flex-shrink: 0;
+  display: block;
 }
 
 /* 手機響應式設計 - 新結構 */
