@@ -558,6 +558,7 @@ p {
 
   .timeline-section .timeline-mode-container {
     height: 300px; /* 平板上縮小高度 */
+    margin-bottom: 120px; /* 平板版減少下方空間 */
   }
 
   .timeline-zine-item {
@@ -565,6 +566,14 @@ p {
     height: 150px; /* 平板版縮小 */
     font-size: 0.8rem;
     padding: 4px;
+  }
+  
+  /* 平板版下方 Zine 容器調整 */
+  .timeline-bottom-zine-container {
+    bottom: 10px;
+    left: 120px; /* 平板版從左側第3本zine的右側開始 */
+    right: 10px;
+    gap: 3px;
   }
 
   .poster-container {
@@ -912,6 +921,8 @@ p {
 .timeline-left-zine-container {
   position: absolute;
   left: 16px;
+  top: 50%;
+  transform: translateY(-50%);
   display: flex;
   flex-direction: column;
   gap: 5px;
@@ -973,6 +984,7 @@ p {
 .timeline-section .timeline-mode-container {
   width: calc(100vw - 220px); /* 限制寬度，為左側zine留空間 */
   height: 400px; /* 設定固定高度 */
+  margin-bottom: 250px; /* 為下方水平zine留空間 */
   overflow: hidden;
   border: 1px solid var(--border);
   background: var(--bg);
@@ -1914,6 +1926,7 @@ p {
 
   .timeline-section .timeline-mode-container {
     height: 250px; /* 手機上更小的高度 */
+    margin-bottom: 90px; /* 手機版進一步減少下方空間 */
   }
 
   .timeline-zine-item {
@@ -1921,6 +1934,14 @@ p {
     height: 100px; /* 手機版進一步縮小 */
     font-size: 0.6rem;
     padding: 2px;
+  }
+  
+  /* 手機版下方 Zine 容器調整 */
+  .timeline-bottom-zine-container {
+    bottom: 8px;
+    left: 90px; /* 手機版從左側第3本zine的右側開始 */
+    right: 8px;
+    gap: 2px;
   }
 
   .poster-container {
