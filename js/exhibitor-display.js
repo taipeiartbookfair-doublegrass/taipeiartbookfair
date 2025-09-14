@@ -63,14 +63,25 @@ class ExhibitorDisplay {
       // 簡化數據解析，只抓取需要的字段
       if (data.success && data.data && data.data.booths) {
         this.exhibitorsData = data.data.booths.map((item) => ({
+          // 品牌名稱
+          brand: item["品牌"] || item.brand || "",
+          // 攤商編號（正確的欄位）
+          boothNumber: item["攤商編號"] || item.boothNumber || "",
+          // 品牌簡介
+          brandDescription: item["品牌簡介"] || item.brandDescription || "",
+          // Facebook 連結
+          facebook: item["facebook"] || item.facebook || "",
+          // Instagram 連結
+          instagram: item["instagram"] || item.instagram || "",
+          // Website 連結
+          website: item["website"] || item.website || "",
+          // 國籍
+          nationality: item["國籍"] || item.nationality || item["region"] || "TW",
+          // 保留舊欄位以備用
           id: item["報名編號"] || "",
           name: item["品牌"] || "",
           booth: item["攤商編號"] || "",
-          ig: item["IG帳號"] || "",
           description: item["品牌簡介"] || "",
-          facebook: item["facebook"] || "",
-          instagram: item["instagram"] || "",
-          website: item["website"] || "",
           region: item["region"] || "TW",
           sourceSheet: item["_source_sheet"] || "",
         }));
@@ -120,24 +131,68 @@ class ExhibitorDisplay {
 
   // 設置事件監聽器
   setupEventListeners() {
-    const expandBtn = document.getElementById("exhibitorExpandBtn");
-    const closeBtn = document.getElementById("closeExhibitorList");
+    const expandBtnOuter = document.getElementById("exhibitorExpandBtnOuter");
+    const expandBtnInner = document.getElementById("exhibitorExpandBtn");
     const fullList = document.getElementById("exhibitorFullList");
 
-    if (expandBtn) {
-      expandBtn.addEventListener("click", () => this.expandFullList());
+    if (expandBtnOuter) {
+      expandBtnOuter.addEventListener("click", () => this.toggleFullList());
     }
 
-    if (closeBtn) {
-      closeBtn.addEventListener("click", () => this.closeFullList());
+    if (expandBtnInner) {
+      expandBtnInner.addEventListener("click", () => this.toggleFullList());
     }
 
     if (fullList) {
       fullList.addEventListener("click", (e) => {
         if (e.target === fullList) {
-          this.closeFullList();
+          this.toggleFullList();
         }
       });
+    }
+  }
+
+  // 切換完整名單顯示
+  toggleFullList() {
+    const eventInfo = document.querySelector(".event-info");
+    const fullList = document.getElementById("exhibitorFullList");
+    const expandBtnOuter = document.getElementById("exhibitorExpandBtnOuter");
+    const expandBtnInner = document.getElementById("exhibitorExpandBtn");
+    
+    if (eventInfo && fullList) {
+      const isExpanded = eventInfo.classList.contains("expanded");
+      
+      if (isExpanded) {
+        // 關閉
+        eventInfo.classList.remove("expanded");
+        fullList.classList.remove("expanded");
+        
+        // 更新兩個按鈕的箭頭
+        if (expandBtnOuter) {
+          const arrowOuter = expandBtnOuter.querySelector(".expand-arrow");
+          if (arrowOuter) arrowOuter.textContent = "↓";
+        }
+        if (expandBtnInner) {
+          const arrowInner = expandBtnInner.querySelector(".expand-arrow");
+          if (arrowInner) arrowInner.textContent = "↓";
+        }
+      } else {
+        // 展開
+        eventInfo.classList.add("expanded");
+        fullList.classList.add("expanded");
+        
+        // 更新兩個按鈕的箭頭
+        if (expandBtnOuter) {
+          const arrowOuter = expandBtnOuter.querySelector(".expand-arrow");
+          if (arrowOuter) arrowOuter.textContent = "↑";
+        }
+        if (expandBtnInner) {
+          const arrowInner = expandBtnInner.querySelector(".expand-arrow");
+          if (arrowInner) arrowInner.textContent = "↑";
+        }
+        
+        this.initFullList();
+      }
     }
   }
 
@@ -281,53 +336,243 @@ class ExhibitorDisplay {
 
     grid.innerHTML = "";
 
-    // 創建攤商列表容器
-    const flowContainer = document.createElement("div");
-    flowContainer.className = "exhibitors-flow-container";
+    // 創建左欄和右欄
+    const leftColumn = document.createElement("div");
+    leftColumn.className = "exhibitor-column-left";
+    
+    const rightColumn = document.createElement("div");
+    rightColumn.className = "exhibitor-column-right";
 
-    // 重複攤商數據來避免空白，確保滑動時有連續的內容
-    const repeatedData = [...this.exhibitorsData, ...this.exhibitorsData];
-
-    // 添加攤商項目
-    repeatedData.forEach((exhibitor, index) => {
-      const item = this.createExhibitorItem(exhibitor, index);
-      flowContainer.appendChild(item);
+    // 將攤商分配到兩欄
+    this.exhibitorsData.forEach((exhibitor, index) => {
+      const card = this.createExhibitorCard(exhibitor, index);
+      
+      if (index % 2 === 0) {
+        // 偶數索引放到左欄
+        leftColumn.appendChild(card);
+      } else {
+        // 奇數索引放到右欄
+        rightColumn.appendChild(card);
+      }
     });
 
-    grid.appendChild(flowContainer);
+    grid.appendChild(leftColumn);
+    grid.appendChild(rightColumn);
+
+    // 初始化排序按鈕
+    this.initSortButtons();
   }
 
-  // 創建攤商條列項目
-  createExhibitorItem(exhibitor, index) {
-    const item = document.createElement("div");
-    item.className = "exhibitor-item";
+  // 初始化排序按鈕
+  initSortButtons() {
+    const sortButtons = document.querySelectorAll(".sort-button");
+    
+    sortButtons.forEach(button => {
+      button.addEventListener("click", () => {
+        // 移除所有按鈕的 active 狀態
+        sortButtons.forEach(btn => btn.classList.remove("active"));
+        
+        // 添加當前按鈕的 active 狀態
+        button.classList.add("active");
+        
+        // 應用排序
+        const sortType = button.getAttribute("data-sort");
+        this.applySorting(sortType);
+      });
+    });
 
-    // 根據報名編號判斷攤位類型
-    const applicationNumber = exhibitor.applicationNumber || "";
+  }
 
-    if (applicationNumber.includes("LB")) {
-      item.classList.add("book-booth");
-    } else if (applicationNumber.includes("LM")) {
-      item.classList.add("creative-booth");
-    } else if (applicationNumber.includes("LI")) {
-      item.classList.add("installation-booth");
-    } else if (applicationNumber.includes("LF")) {
-      item.classList.add("food-booth");
-    } else if (
-      applicationNumber.includes("IT") ||
-      applicationNumber.includes("IC")
-    ) {
-      item.classList.add("international-booth");
+  // 應用排序
+  applySorting(sortType) {
+    let sortedData = [...this.exhibitorsData];
+
+    switch (sortType) {
+      case "country":
+        // 按國籍排序（字母順序）
+        sortedData.sort((a, b) => {
+          const countryA = a.nationality || "ZZZ"; // 空值排最後
+          const countryB = b.nationality || "ZZZ";
+          return countryA.localeCompare(countryB);
+        });
+        break;
+        
+      case "zone":
+        // 按攤位分區排序（字母順序）
+        sortedData.sort((a, b) => {
+          const zoneA = (a.boothNumber || "").charAt(0) || "ZZZ";
+          const zoneB = (b.boothNumber || "").charAt(0) || "ZZZ";
+          return zoneA.localeCompare(zoneB);
+        });
+        break;
+        
+      case "name":
+        // 按名字排序（字母順序）
+        sortedData.sort((a, b) => {
+          const nameA = a.brand || a.name || "ZZZ";
+          const nameB = b.brand || b.name || "ZZZ";
+          return nameA.localeCompare(nameB);
+        });
+        break;
     }
 
-    item.innerHTML = `
-      <span class="exhibitor-name">${exhibitor.name || "Unknown"}</span>
-      <span class="exhibitor-booth">${
-        applicationNumber || exhibitor.id || "-"
-      }</span>
-    `;
+    // 重新渲染
+    this.renderSortedExhibitors(sortedData);
+  }
 
-    return item;
+  // 渲染排序後的攤商
+  renderSortedExhibitors(sortedData) {
+    const grid = document.querySelector(".exhibitors-grid");
+    if (!grid) return;
+
+    grid.innerHTML = "";
+
+    // 創建左欄和右欄
+    const leftColumn = document.createElement("div");
+    leftColumn.className = "exhibitor-column-left";
+    
+    const rightColumn = document.createElement("div");
+    rightColumn.className = "exhibitor-column-right";
+
+    // 將排序後的攤商分配到兩欄
+    sortedData.forEach((exhibitor, index) => {
+      const card = this.createExhibitorCard(exhibitor, index);
+      
+      if (index % 2 === 0) {
+        // 偶數索引放到左欄
+        leftColumn.appendChild(card);
+      } else {
+        // 奇數索引放到右欄
+        rightColumn.appendChild(card);
+      }
+    });
+
+    grid.appendChild(leftColumn);
+    grid.appendChild(rightColumn);
+  }
+
+  // 創建攤商卡片
+  createExhibitorCard(exhibitor, index) {
+    const card = document.createElement("div");
+    card.className = "exhibitor-card";
+
+    // 使用新的資料欄位
+    const brandName = exhibitor.brand || exhibitor.name || "Unknown";
+    const boothNumber = exhibitor.boothNumber || "-";
+    const nationality = exhibitor.nationality || "TW";
+    const brandDescription = exhibitor.brandDescription || exhibitor.description || "暫無簡介";
+
+    // 基本資訊區域（橫向佈局）
+    const basicInfo = document.createElement("div");
+    basicInfo.className = "exhibitor-basic-info";
+    
+    // 攤商編號
+    const boothDisplay = document.createElement("div");
+    boothDisplay.className = "exhibitor-booth-display";
+    boothDisplay.textContent = boothNumber;
+
+    // 品牌名稱（可點擊）
+    const brandDisplay = document.createElement("div");
+    brandDisplay.className = "exhibitor-brand-display";
+    brandDisplay.textContent = brandName;
+
+    // 國籍
+    const nationalityDisplay = document.createElement("div");
+    nationalityDisplay.className = "exhibitor-nationality-display";
+    nationalityDisplay.textContent = nationality;
+
+    basicInfo.appendChild(boothDisplay);
+    basicInfo.appendChild(brandDisplay);
+    basicInfo.appendChild(nationalityDisplay);
+
+    // 創建詳細資訊下拉區域
+    const details = document.createElement("div");
+    details.className = "exhibitor-details";
+
+    const detailsContent = document.createElement("div");
+    detailsContent.className = "exhibitor-details-content";
+
+    // 品牌簡介
+    const description = document.createElement("div");
+    description.className = "exhibitor-description";
+    description.textContent = brandDescription;
+
+    // 攤商照片（只在展開時顯示）
+    const photo = document.createElement("div");
+    photo.className = "exhibitor-photo";
+    const photoImg = document.createElement("img");
+    photoImg.src = exhibitor.image || "image/horizental/hori1.jpg";
+    photoImg.alt = brandName;
+    photoImg.onerror = function() {
+      this.src = "image/horizental/hori1.jpg";
+    };
+    photo.appendChild(photoImg);
+
+    detailsContent.appendChild(description);
+    detailsContent.appendChild(photo);
+
+    // 社交連結區域（縮小版本）
+    const socialLinks = document.createElement("div");
+    socialLinks.className = "exhibitor-social-links";
+
+    // Facebook 連結
+    if (exhibitor.facebook) {
+      const facebookLink = document.createElement("a");
+      facebookLink.href = exhibitor.facebook;
+      facebookLink.target = "_blank";
+      facebookLink.className = "exhibitor-social-link facebook";
+      facebookLink.textContent = "FB";
+      socialLinks.appendChild(facebookLink);
+    }
+
+    // Instagram 連結
+    if (exhibitor.instagram) {
+      const instagramLink = document.createElement("a");
+      instagramLink.href = exhibitor.instagram;
+      instagramLink.target = "_blank";
+      instagramLink.className = "exhibitor-social-link instagram";
+      instagramLink.textContent = "IG";
+      socialLinks.appendChild(instagramLink);
+    }
+
+    // Website 連結
+    if (exhibitor.website) {
+      const websiteLink = document.createElement("a");
+      websiteLink.href = exhibitor.website;
+      websiteLink.target = "_blank";
+      websiteLink.className = "exhibitor-social-link website";
+      websiteLink.textContent = "WEB";
+      socialLinks.appendChild(websiteLink);
+    }
+
+    details.appendChild(detailsContent);
+    details.appendChild(socialLinks);
+
+    // 組裝卡片
+    card.appendChild(basicInfo);
+    card.appendChild(details);
+
+    // 添加點擊事件來展開/收合詳細資訊
+    card.addEventListener("click", (e) => {
+      e.stopPropagation();
+      const isExpanded = details.classList.contains("expanded");
+      
+      // 關閉其他已展開的卡片
+      document.querySelectorAll(".exhibitor-details.expanded").forEach(detail => {
+        if (detail !== details) {
+          detail.classList.remove("expanded");
+        }
+      });
+
+      // 切換當前卡片的展開狀態
+      if (isExpanded) {
+        details.classList.remove("expanded");
+      } else {
+        details.classList.add("expanded");
+      }
+    });
+
+    return card;
   }
 }
 
