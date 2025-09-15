@@ -6,30 +6,30 @@
 }
 
 ::selection {
-  color: palegreen;
-  background-color: olive;
+  color: white;
+  background-color: black;
 }
 
 a {
-  color: purple;
+  color: black;
 }
 
 :root {
   --primary: #000000;
-  --secondary: rgb(208, 117, 5);
-  --accent: #ff6b35;
-  --text: #1a1a1a;
-  --text-light: #666666;
-  --bg: rgb(5, 89, 208);
+  --secondary: #000000;
+  --accent: #000000;
+  --text: #000000;
+  --text-light: #333333;
+  --bg: #ffffff;
   --border: #000000;
-  --shadow: rgba(0, 0, 0, 0.05);
+  --shadow: rgba(0, 0, 0, 0.1);
 }
 
 body {
   font-family: "IBM Plex Sans JP", "IBM Plex Sans", "IBM Plex Mono",
     -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-  background: var(--bg);
-  color: var(--text);
+  background: white;
+  color: black;
   line-height: 1.4;
   overflow-x: hidden;
   font-size: 1.3rem;
@@ -81,10 +81,10 @@ h2 {
 h3 {
   font-size: 2rem;
   text-align: center;
-  font-family: "Xiaoyuan-02", sans-serif;
+  font-family: "IBM Plex Mono", monospace;
   font-weight: 400;
   line-height: 1.8;
-  color: forestgreen;
+  color: black;
   text-transform: uppercase;
 }
 h4 {
@@ -116,8 +116,8 @@ p {
 
 .language-btn {
   padding: 0;
-  border: none;
-  background: plum;
+  border: 1px solid black;
+  background: white;
   color: black;
   cursor: pointer;
   font-size: 0.9rem;
@@ -148,11 +148,12 @@ p {
 
 /* Event Info 區塊 - Sticky */
 .event-info {
-  box-shadow: inset 0 0 10px rgb(255, 55, 0);
+  box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.1);
   font-size: 1rem;
   position: sticky;
   color: var(--primary);
-  background: lightgoldenrodyellow;
+  background: white;
+  border: 1px solid var(--border);
   top: 3.5rem; /* 在導航項目下方 */
   left: 0;
   right: 0;
@@ -234,8 +235,9 @@ p {
   width: 15rem;
   right: 0px;
   height: 2.1rem;
-  background: orangered;
-  color: ghostwhite;
+  background: white;
+  color: black;
+  border: 1px solid black;
   line-height: 2rem;
   display: flex;
   align-items: center;
@@ -253,8 +255,8 @@ p {
   position: absolute;
   width: 1rem;
   height: 1rem;
-  background: lightgoldenrodyellow;
-
+  background: white;
+  border: 1px solid black;
   border-radius: 50%;
   top: 53%;
   transform: translateY(-50%);
@@ -269,9 +271,9 @@ p {
 }
 
 .ticket-info p {
-  color: aliceblue;
+  color: black;
   margin: 0;
-  font-weight: 600;
+  font-weight: 400;
   width: 12rem;
   font-size: 1rem;
   font-family: "IBM Plex Sans JP", sans-serif;
@@ -318,7 +320,8 @@ p {
 
 /* 社交連結 - 可滾動 */
 .social-links {
-  background-color: black;
+  background-color: white;
+  border: 1px solid black;
   height: 1rem;
   position: relative;
   width: 100vw;
@@ -328,7 +331,8 @@ p {
 /* 主標題區域 - 可滾動 */
 .main-title-section {
   padding: 40px 0;
-  background: darkslategrey;
+  background: white;
+  border: 1px solid black;
 }
 
 .main-title-area {
@@ -339,7 +343,8 @@ p {
 .nav-items-area.sticky-nav {
   position: sticky;
   top: 0; /* 黏在頂部 */
-  background: darkslategrey;
+  background: white;
+  border: 1px solid var(--border);
   border-bottom: 1px solid var(--border);
   z-index: 999;
   padding: 15px 8px;
@@ -354,8 +359,8 @@ p {
 .logo {
   font-family: "IBM Plex Mono", monospace;
   font-size: 14px;
-  font-weight: 600;
-  color: #ff8c42; /* 日落橘色 */
+  font-weight: 400;
+  color: black;
   text-decoration: none;
   border: 1px solid var(--border);
   padding: 6px 10px;
@@ -375,7 +380,7 @@ p {
 
 .nav-menu a {
   text-decoration: none;
-  color: ghostwhite; /* 日落橘色 */
+  color: black;
   font-weight: 400;
   transition: color 0.2s ease;
   font-size: 1rem;
@@ -384,22 +389,23 @@ p {
 }
 
 .nav-menu a:hover {
-  color: var(--accent);
+  color: #666666;
 }
 
 /* TICKET 按鈕樣式 */
 .ticket-button a {
-  background: forestgreen; /* 綠色 */
-  color: var(--primary) !important;
+  background: white;
+  color: black !important;
+  border: 1px solid black;
   padding: 8px 16px;
-  font-weight: 600;
+  font-weight: 400;
   transition: all 0.2s ease;
 }
 
 .ticket-button a:hover {
-  background: var(--primary);
-  color: #dda0dd !important;
-  border-color: #dda0dd;
+  background: black;
+  color: white !important;
+  border-color: black;
 }
 
 /* Exhibitors Roller Section */
@@ -742,9 +748,10 @@ p {
   display: flex;
   align-items: center;
   justify-content: center;
-  background: plum;
+  background: white;
+  border: 1px solid black;
   font-size: 0.8rem;
-  font-weight: bold;
+  font-weight: 400;
   color: var(--primary);
   cursor: pointer;
   text-align: center;
@@ -772,9 +779,10 @@ p {
   display: flex;
   align-items: center;
   justify-content: center;
-  background: plum;
+  background: white;
+  border: 1px solid black;
   font-size: 0.8rem; /* 與 program 上方 zine 相同字體大小 */
-  font-weight: bold;
+  font-weight: 400;
   color: var(--primary);
   cursor: pointer;
   text-align: center;
@@ -799,9 +807,10 @@ p {
   display: flex;
   align-items: center;
   justify-content: center;
-  background: plum;
+  background: white;
+  border: 1px solid black;
   font-size: 0.8rem; /* 縮小字體 */
-  font-weight: bold;
+  font-weight: 400;
   color: var(--primary);
   cursor: pointer;
   text-align: center;
@@ -835,6 +844,7 @@ p {
   margin: 0;
   font-size: 1.5rem;
   color: var(--primary);
+  font-family: "IBM Plex Mono", monospace;
 }
 
 .agenda-controls {
@@ -893,7 +903,8 @@ p {
 /* Event Type 篩選器樣式 */
 .event-filter-header {
   padding: 0.5rem 0;
-  background-color: lightcyan;
+  background-color: white;
+  border: 1px solid var(--border);
   border-bottom: 1px dashed var(--border);
   text-indent: 2px;
 }
@@ -911,7 +922,7 @@ p {
 }
 
 .event-type-select {
-  background: var(--secondary);
+  background: white;
   border: 1px solid var(--border);
   color: var(--primary);
   padding: 0.5rem 0.75rem;
@@ -928,14 +939,15 @@ p {
 }
 
 .event-type-select option {
-  background: var(--secondary);
+  background: white;
   color: var(--primary);
 }
 
 /* 時間軸模式區域 - 鋪滿下方 */
 .timeline-section {
   width: 100vw;
-  background: olivedrab;
+  background: white;
+  border: 1px solid black;
   padding: 2rem 0;
   margin-top: 2rem;
   position: relative;
@@ -976,7 +988,8 @@ p {
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: plum;
+  background-color: white;
+  border: 1px solid black;
   font-size: 1rem;
   color: var(--primary);
   cursor: pointer;
@@ -1005,8 +1018,9 @@ p {
 .timeline-section h3 {
   text-align: center;
   font-size: 2rem;
-  color: green;
-  text-shadow: 2px 2px darkmagenta;
+  color: black;
+  text-shadow: none;
+  font-family: "IBM Plex Mono", monospace;
 }
 
 /* 時間軸模式容器樣式 */
@@ -1054,7 +1068,8 @@ p {
   right: 0px;
   font-family: "IBM Plex Mono", sans-serif;
   font-size: 0.75rem;
-  background-color: gainsboro;
+  background-color: white;
+  border: 1px solid black;
   padding: 10px;
   z-index: 10;
 }
@@ -1062,8 +1077,8 @@ p {
 .timeline-legend h4 {
   margin: 0 0 8px 0;
   font-size: 0.7rem;
-  font-weight: 600;
-  color: #333;
+  font-weight: 400;
+  color: black;
   text-transform: uppercase;
   letter-spacing: 0.5px;
 }
@@ -1108,9 +1123,9 @@ p {
 }
 
 .legend-label {
-  color: #555;
+  color: black;
   font-size: 0.7rem;
-  font-weight: 500;
+  font-weight: 400;
 }
 
 /* 大富翁式布局 - 只保留左邊邊框 */
@@ -1148,7 +1163,8 @@ p {
   justify-content: center;
   font-size: 1rem; /* 增大字體 */
   color: var(--primary);
-  background-color: plum;
+  background-color: white;
+  border: 1px solid black;
   cursor: pointer;
   writing-mode: horizontal-tb;
   text-align: center;
@@ -1189,7 +1205,8 @@ p {
   gap: 0; /* 海報和控制區域之間的間距由 poster-controls-wrapper 的 margin-top 控制 */
   height: 102vh;
   padding: 15px;
-  background-color: darkgreen;
+  background-color: white;
+  border: 1px solid black;
 }
 
 /* Poster Section - 調整為新布局 */
@@ -1202,19 +1219,7 @@ p {
   flex-direction: column;
   justify-content: center; /* 垂直居中 */
   align-items: center; /* 水平居中 */
-  background: linear-gradient(
-    90deg,
-    rgba(0, 0, 0, 1) 0%,
-    rgba(255, 255, 255, 1) 7%,
-    rgba(222, 222, 222, 1) 18%,
-    rgba(255, 255, 255, 1) 21%,
-    rgba(255, 255, 255, 1) 46%,
-    rgba(227, 227, 227, 1) 53%,
-    rgba(237, 235, 235, 1) 79%,
-    rgba(255, 255, 255, 1) 82%,
-    rgba(174, 174, 174, 1) 97%,
-    rgba(0, 0, 0, 1) 100%
-  );
+  background: black;
   border-radius: 20px;
 }
 
@@ -1319,8 +1324,8 @@ p {
 }
 
 .control-btn {
-  background: darkslategray;
-  border: none;
+  background: white;
+  border: 1px solid black;
   width: 180px;
   height: 40px;
   border-radius: 0;
@@ -1329,7 +1334,7 @@ p {
   justify-content: center;
   cursor: pointer;
   font-size: 1.5rem;
-  color: white;
+  color: black;
   font-family: "IBM Plex Mono", monospace;
 }
 
@@ -1339,8 +1344,9 @@ p {
 }
 
 .control-center {
-  background: blue;
-  color: white;
+  background: white;
+  color: black;
+  border: 1px solid black;
   width: 50px;
   height: 50px;
   border-radius: 50%;
@@ -1354,7 +1360,7 @@ p {
 }
 
 .control-center:hover {
-  background: #8b4b8b;
+  background: black;
   color: white;
   transform: scale(1.05);
 }
@@ -1362,7 +1368,7 @@ p {
 .arrow-left,
 .arrow-right {
   font-family: "IBM Plex Sans JP", sans-serif;
-  font-weight: bold;
+  font-weight: 400;
 }
 
 /* 禁用狀態樣式 */
@@ -1401,7 +1407,8 @@ p {
   position: relative;
   padding: 8px 8px;
   text-align: center;
-  background: saddlebrown;
+  background: white;
+  border: 1px solid black;
   clear: both;
   width: 100%;
 }
@@ -1432,7 +1439,7 @@ p {
 }
 
 .footer-link {
-  color: orangered;
+  color: black;
   text-decoration: none;
   font-size: 1.2rem;
   font-family: "IBM Plex Mono", monospace;
@@ -1442,14 +1449,15 @@ p {
 }
 
 .footer-link:hover {
-  color: var(--primary);
+  color: #666666;
 }
 
 /* EXHIBITOR LOGIN 特殊樣式 */
 .exhibitor-login {
-  background: forestgreen;
-  color: ghostwhite !important;
-  font-weight: 600;
+  background: white;
+  color: black !important;
+  border: 1px solid black;
+  font-weight: 400;
   padding: 4px 16px;
   border-radius: 10px;
   transition: all 3s ease;
@@ -1476,8 +1484,8 @@ p {
   position: fixed;
   bottom: 60px;
   right: 20px;
-  background: var(--primary);
-  color: var(--secondary);
+  background: white;
+  color: black;
   border: 1px solid var(--border);
   padding: 8px 12px;
   cursor: pointer;
@@ -1490,8 +1498,8 @@ p {
 }
 
 .newsletter-trigger:hover {
-  background: var(--secondary);
-  color: var(--primary);
+  background: black;
+  color: white;
 }
 
 /* Newsletter 彈出視窗 */
@@ -1500,8 +1508,8 @@ p {
   bottom: 20px;
   right: 20px;
   width: 500px;
-  background: var(--primary);
-  border: 1px solid var(--secondary);
+  background: white;
+  border: 1px solid black;
   z-index: 996;
   display: block;
   font-family: "IBM Plex Mono", monospace;
@@ -1517,6 +1525,7 @@ p {
   margin: 0;
   text-transform: uppercase;
   letter-spacing: 0.5px;
+  color: black;
 }
 
 /* 響應式設計 */
@@ -1584,6 +1593,7 @@ p {
 .newsletter-left h3 {
   margin: 0;
   white-space: nowrap;
+  font-family: "IBM Plex Mono", monospace;
 }
 
 .newsletter-right {
@@ -1622,33 +1632,34 @@ p {
   position: fixed;
   width: 15rem;
   height: 3rem;
-  background: plum;
+  background: white;
+  border: 1px solid black;
   border-radius: 60px 50px;
   display: flex;
   align-items: center;
   justify-content: center;
   cursor: pointer;
   z-index: 1000;
-  box-shadow: 0 8px 32px rgba(221, 160, 221, 0.3),
-    0 4px 16px rgba(221, 160, 221, 0.2),
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1),
+    0 4px 16px rgba(0, 0, 0, 0.1),
     inset 0 2px 4px rgba(255, 255, 255, 0.1);
   transition: all 0.3s ease;
   user-select: none;
-  font-family: "Libre Franklin", sans-serif;
+  font-family: "IBM Plex Sans JP", sans-serif;
   font-size: 2rem;
   text-transform: uppercase;
   animation: pulse 8s ease-in-out infinite;
 }
 
 .floating-ticket span {
-  color: white;
-  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+  color: black;
+  text-shadow: none;
 }
 
 .floating-ticket:hover {
   transform: scale(1.05);
-  box-shadow: 0 12px 40px rgba(221, 160, 221, 0.4),
-    0 6px 20px rgba(221, 160, 221, 0.3),
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.2),
+    0 6px 20px rgba(0, 0, 0, 0.2),
     inset 0 2px 4px rgba(255, 255, 255, 0.2);
   animation: none;
 }
@@ -1679,13 +1690,13 @@ p {
 @keyframes pulse {
   0%,
   100% {
-    box-shadow: 0 8px 32px rgba(221, 160, 221, 0.3),
-      0 4px 16px rgba(221, 160, 221, 0.2),
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1),
+      0 4px 16px rgba(0, 0, 0, 0.1),
       inset 0 2px 4px rgba(255, 255, 255, 0.1);
   }
   50% {
-    box-shadow: 0 12px 40px rgba(221, 160, 221, 0.4),
-      0 6px 20px rgba(221, 160, 221, 0.3),
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.2),
+      0 6px 20px rgba(0, 0, 0, 0.2),
       inset 0 2px 4px rgba(255, 255, 255, 0.2);
   }
 }
@@ -1938,6 +1949,7 @@ p {
   /* 手機版 Agenda 標題行 */
   .agenda-header h3 {
     font-size: 1.2rem;
+    font-family: "IBM Plex Mono", monospace;
   }
 
   .agenda-subscribe {
@@ -1980,6 +1992,7 @@ p {
   .timeline-section h3 {
     font-size: 1.5rem;
     margin-bottom: 1rem;
+    font-family: "IBM Plex Mono", monospace;
   }
 
   .timeline-section .timeline-mode-container {
@@ -2012,6 +2025,7 @@ p {
   .calender-section h3 {
     font-size: 1.2rem;
     margin-bottom: 0.5rem;
+    font-family: "IBM Plex Mono", monospace;
   }
 }
 
