@@ -10,11 +10,27 @@
       href="https://fonts.googleapis.com/css2?family=BioRhyme+Expanded:wght@200;300;400;700;800&family=IBM+Plex+Mono:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100;1,200;1,300;1,400;1,500;1,600;1,700&family=IBM+Plex+Sans+JP&family=IBM+Plex+Sans:ital,wght@0,100..700;1,100..700&family=IBM+Plex+Serif:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100;1,200;1,300;1,400;1,500;1,600;1,700&family=Libre+Franklin:ital,wght@0,100..900;1,100..900&family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap"
       rel="stylesheet"
     />
+    <link rel="shortcut icon" href="image/icon-1.ico" />
+
     <link rel="stylesheet" href="css/mainpage.css" />
     <link rel="stylesheet" href="css/font.css" />
     <link rel="stylesheet" href="css/exhibitors.css" />
     <script src="js/homepage-zine.js"></script>
     <script src="js/exhibitors-list.js"></script>
+     <!-- Google tag (gtag.js) -->
+     <script
+     async
+     src="https://www.googletagmanager.com/gtag/js?id=G-EPSXJPDH6L"
+   ></script>
+   <script>
+     window.dataLayer = window.dataLayer || [];
+     function gtag() {
+       dataLayer.push(arguments);
+     }
+     gtag("js", new Date());
+
+     gtag("config", "G-EPSXJPDH6L");
+   </script>
   </head>
   <body>
     <!-- 照片轉起來！Hot! -->
@@ -82,7 +98,7 @@
       <!-- 攤商資訊顯示區域 -->
       <div class="exhibitor-info-content">
         <!-- 展開按鈕 - 放在左邊 -->
-        <div class="exhibitor-expand-btn" id="exhibitorExpandBtn">
+        <div class="exhibitor-expand-btn" id="exhibitorExpandBtnOuter">
           <span class="expand-text">攤商</span>
           <span class="expand-arrow">↓</span>
         </div>
@@ -110,27 +126,40 @@
 
       <!-- Ticket 購票區塊 -->
       <div class="ticket-info">
-        <div class="ticket-left-notch"></div>
         <div class="ticket-content">
           <p>參與草率季＆購票頁面</p>
         </div>
-        <div class="ticket-right-notch"></div>
       </div>
-    </div>
 
-    <!-- 攤商名單展開區域 -->
-    <div class="exhibitor-full-list" id="exhibitorFullList">
-      <div class="exhibitor-list-header">
-        <h3>攤商名單 | EXHIBITORS</h3>
-        <button class="close-exhibitor-list" id="closeExhibitorList">×</button>
+      <!-- 攤商名單展開區域 -->
+      <div class="exhibitor-full-list" id="exhibitorFullList">
+        <!-- 頂部控制區域 -->
+        <div class="exhibitor-top-controls">
+          <div class="exhibitor-expand-btn" id="exhibitorExpandBtn">
+            <span class="expand-text">攤商</span>
+            <span class="expand-arrow">↓</span>
+          </div>
+          
+          <!-- 排序按鈕 -->
+          <div class="exhibitor-sort-buttons">
+            <button class="sort-button active" data-sort="country">COUNTRY</button>
+            <button class="sort-button" data-sort="zone">ZONE</button>
+            <button class="sort-button" data-sort="name">NAME</button>
+          </div>
+          
+          <div class="ticket-info">
+            <div class="ticket-content">
+              <p>參與草率季＆購票頁面</p>
+            </div>
+          </div>
+        </div>
+        
+        <div class="exhibitors-grid"></div>
       </div>
-      <div class="exhibitors-grid"></div>
     </div>
 
     <!-- start of monopoly-style layout -->
     <div class="monopoly-board">
-      <!-- 四個角落 - 已移除 -->
-
       <!-- 左方書籍邊框 -->
       <div class="book-border book-border-left">
         <div class="book-item"></div>

@@ -1,93 +1,6 @@
-.exhibitors-grid {
-  width: 100%;
-  height: 450px; /* 精確計算：15個攤商 × 30px = 450px，與海報區域等高 */
-  overflow: hidden;
-  position: relative;
-}
+/* 舊的滾動動畫樣式已移除，現在使用靜態佈局 */
 
-/* 攤商流動容器 */
-.exhibitors-flow-container {
-  width: 100%;
-  animation: exhibitorsFlow 45s linear infinite; /* 調整動畫時間，讓滑動更流暢 */
-}
-
-/* 攤商流動動畫 */
-@keyframes exhibitorsFlow {
-  0% {
-    transform: translateY(0);
-  }
-  100% {
-    transform: translateY(-100%);
-  }
-}
-
-/* 攤商列表容器 */
-.exhibitors-flow-container {
-  width: 100%;
-}
-
-/* 攤商條列項目 */
-.exhibitor-item {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  height: 30px;
-  width: 100%;
-  padding: 0 1rem;
-  margin: 0;
-  border-bottom: 1px solid black;
-  font-size: 0.9rem;
-  font-weight: 400;
-  transition: background-color 0.2s ease;
-  position: relative;
-}
-
-/* 攤位類型指示點 */
-.exhibitor-item::before {
-  content: "";
-  position: absolute;
-  left: 0.5rem;
-  top: 50%;
-  transform: translateY(-50%);
-  width: 8px;
-  height: 8px;
-  border-radius: 50%;
-  background-color: #666; /* 預設顏色 */
-}
-
-/* 攤商名稱左邊間距 */
-.exhibitor-name {
-  margin-left: 3px;
-}
-
-/* 不同攤位類型的顏色 */
-.exhibitor-item.book-booth::before {
-  background-color: #392100; /* 藍色 - 書攤 */
-}
-
-.exhibitor-item.creative-booth::before {
-  background-color: #083154; /* 紅色 - 創作商品攤 */
-}
-
-.exhibitor-item.installation-booth::before {
-  background-color: #000000; /* 橙色 - 裝置攤 */
-}
-
-.exhibitor-item.food-booth::before {
-  background-color: #063500; /* 綠色 - 食物酒水攤 */
-}
-
-.exhibitor-item.international-booth::before {
-  background-color: #50006f; /* 紫色 - 國際攤位 */
-}
-
-.exhibitor-item:hover {
-  background-color: #f8f9fa;
-}
-
-.exhibitor-item:last-child {
-  border-bottom: none;
-}
+/* 舊的攤商條列項目樣式已移除，現在使用新的卡片佈局 */
 
 /* 讀取中訊息 */
 .loading-message {
@@ -101,40 +14,9 @@
   font-size: 1rem;
 }
 
-/* 攤商名稱（左側） */
-.exhibitor-name {
-  flex: 1;
-  text-align: left;
-  color: #333;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
+/* 舊的攤商名稱和攤位樣式已移除，現在使用新的卡片佈局 */
 
-/* 攤位編號（右側） */
-.exhibitor-booth {
-  text-align: right;
-  color: black;
-  margin-left: 1rem;
-  min-width: 60px;
-}
-
-/* 響應式設計 */
-@media (max-width: 768px) {
-  .exhibitors-grid {
-    max-width: 100%;
-    padding: 0 0.5rem;
-  }
-
-  .exhibitor-item {
-    padding: 0 0.5rem;
-    font-size: 0.8rem;
-  }
-
-  .exhibitor-booth {
-    min-width: 50px;
-  }
-}
+/* 響應式設計已移至 mainpage.css 中的新卡片佈局 */
 
 .calender-content {
   max-width: 1200px;

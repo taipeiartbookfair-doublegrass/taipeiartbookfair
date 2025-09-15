@@ -161,6 +161,38 @@ p {
   display: flex;
   align-items: center;
   justify-content: center;
+  transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.event-info.expanded {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 100vh;
+  z-index: 10000;
+  flex-direction: column;
+  align-items: stretch;
+}
+
+.event-info.expanded .exhibitor-display-container {
+  display: none;
+}
+
+.event-info.expanded .exhibitor-info-content {
+  display: none;
+}
+
+.event-info.expanded > .ticket-info {
+  display: none;
+}
+
+.exhibitor-full-list .ticket-info {
+  display: flex !important;
+  position: relative !important;
+  width: auto !important;
+  right: auto !important;
+  height: auto !important;
 }
 
 /* 社交連結樣式 - 已移至上方統一定義 */
@@ -2075,67 +2107,243 @@ p {
 
 /* 攤商名單展開區域 */
 .exhibitor-full-list {
-  position: fixed;
+  position: absolute;
   top: 0;
   left: 0;
-  right: 0;
-  bottom: 0;
-  background: rgba(0, 0, 0, 0.9);
+  width: 100%;
+  height: 100%;
+  background: transparent;
   z-index: 9999;
   display: flex;
   flex-direction: column;
   opacity: 0;
   visibility: hidden;
-  transition: all 0.3s ease;
+  transform: translateY(-20px);
+  transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
 }
 
 .exhibitor-full-list.expanded {
   opacity: 1;
   visibility: visible;
+  transform: translateY(0);
 }
 
-.exhibitor-list-header {
+/* 頂部控制區域 */
+.exhibitor-top-controls {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 2rem;
+  padding: 1rem 2rem;
+  gap: 1rem;
+}
+
+/* 排序按鈕區域 */
+.exhibitor-sort-buttons {
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+}
+
+.sort-button {
+  padding: 0.4rem 0.8rem;
+  border: 1px solid #dee2e6;
+  border-radius: 4px;
+  background: white;
+  color: #495057;
+  font-size: 0.8rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-transform: uppercase;
+  letter-spacing: 0.3px;
+}
+
+.sort-button:hover {
+  border-color: var(--primary);
+  color: var(--primary);
+}
+
+.sort-button.active {
   background: var(--primary);
   color: white;
+  border-color: var(--primary);
 }
 
-.exhibitor-list-header h3 {
-  font-size: 2rem;
-  font-weight: bold;
-  margin: 0;
-}
-
-.close-exhibitor-list {
-  background: none;
-  border: none;
-  color: white;
-  font-size: 3rem;
-  cursor: pointer;
-  padding: 0;
-  width: 50px;
-  height: 50px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border-radius: 50%;
-  transition: all 0.3s ease;
-}
-
-.close-exhibitor-list:hover {
-  background: rgba(255, 255, 255, 0.2);
-  transform: rotate(90deg);
-}
-
-/* 攤商網格容器 */
+/* 攤商名單展開區域的網格容器 */
 .exhibitor-full-list .exhibitors-grid {
   flex: 1;
-  overflow: hidden;
+  overflow-y: auto;
   position: relative;
-  background: white;
+  background: rgba(255, 255, 255, 0.1);
+  padding: 2rem;
+  margin: 0;
+  display: flex;
+  gap: 0;
+}
+
+/* 左欄區域 */
+.exhibitor-column-left {
+  flex: 1;
+  padding-right: 0.5rem;
+}
+
+/* 右欄區域 */
+.exhibitor-column-right {
+  flex: 1;
+  padding-left: 0.5rem;
+}
+
+/* 攤商項目容器 - 簡單條列式 */
+.exhibitor-card {
+  padding: 1rem;
+  border-bottom: 1px solid #eee;
+  transition: background-color 0.2s ease;
+  position: relative;
+  box-sizing: border-box;
+}
+
+.exhibitor-card {
+  cursor: pointer;
+}
+
+.exhibitor-card:hover {
+  background-color: #f8f9fa;
+}
+
+/* 攤商基本資訊 - 橫向佈局 */
+.exhibitor-basic-info {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  flex: 1;
+}
+
+/* 攤商編號 */
+.exhibitor-booth-display {
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: #666;
+  font-family: "IBM Plex Mono", monospace;
+  min-width: 80px;
+}
+
+/* 品牌名稱（可點擊） */
+.exhibitor-brand-display {
+  font-size: 1rem;
+  font-weight: 600;
+  color: #333;
+  cursor: pointer;
+  transition: color 0.2s ease;
+  flex: 1;
+}
+
+.exhibitor-brand-display:hover {
+  color: #007bff;
+}
+
+/* 國籍 */
+.exhibitor-nationality-display {
+  font-size: 0.8rem;
+  color: #888;
+  font-style: italic;
+  min-width: 60px;
+}
+
+/* 攤商詳細資訊下拉區域 */
+.exhibitor-details {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.3s ease;
+  background: #f8f9fa;
+  margin: 0.5rem -1rem 0 -1rem;
+  padding: 0 1rem;
+}
+
+.exhibitor-details.expanded {
+  max-height: 300px;
+  padding: 1rem;
+}
+
+.exhibitor-details-content {
+  display: flex;
+  gap: 1rem;
+  align-items: flex-start;
+  margin-bottom: 0.5rem;
+}
+
+/* 攤商介紹文字 */
+.exhibitor-description {
+  flex: 1;
+  font-size: 0.85rem;
+  line-height: 1.5;
+  color: #555;
+}
+
+/* 攤商照片 - 只在展開時顯示 */
+.exhibitor-photo {
+  flex-shrink: 0;
+  width: 60px;
+  height: 60px;
+  border-radius: 4px;
+  overflow: hidden;
+  background: #e9ecef;
+}
+
+.exhibitor-photo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* 攤商社交連結 - 縮小版本 */
+.exhibitor-social-links {
+  display: flex;
+  gap: 0.5rem;
+  margin-top: 0.5rem;
+  padding-top: 0.5rem;
+  border-top: 1px solid #dee2e6;
+}
+
+.exhibitor-social-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+  padding: 0.25rem 0.5rem;
+  background: #007bff;
+  color: white;
+  text-decoration: none;
+  border-radius: 12px;
+  font-size: 0.7rem;
+  transition: background-color 0.2s ease;
+}
+
+.exhibitor-social-link:hover {
+  background: #0056b3;
+  color: white;
+}
+
+.exhibitor-social-link.facebook {
+  background: #1877f2;
+}
+
+.exhibitor-social-link.facebook:hover {
+  background: #166fe5;
+}
+
+.exhibitor-social-link.instagram {
+  background: #e4405f;
+}
+
+.exhibitor-social-link.instagram:hover {
+  background: #c13584;
+}
+
+.exhibitor-social-link.website {
+  background: #28a745;
+}
+
+.exhibitor-social-link.website:hover {
+  background: #1e7e34;
 }
 
 /* 手機版攤商顯示樣式 */
@@ -2178,17 +2386,82 @@ p {
     font-size: 0.6rem;
   }
 
-  .exhibitor-list-header {
+  .exhibitor-top-controls {
+    padding: 0.8rem 1rem;
+    flex-direction: column;
+    gap: 0.8rem;
+  }
+
+  .exhibitor-sort-buttons {
+    gap: 0.3rem;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .sort-button {
+    padding: 0.3rem 0.6rem;
+    font-size: 0.7rem;
+  }
+
+  .exhibitor-full-list .exhibitors-grid {
     padding: 1rem;
   }
 
-  .exhibitor-list-header h3 {
-    font-size: 1.5rem;
+  /* 攤商名單展開區域手機版樣式 */
+  .exhibitor-full-list .exhibitors-grid {
+    padding: 0.5rem;
   }
 
-  .close-exhibitor-list {
-    font-size: 2rem;
-    width: 40px;
-    height: 40px;
+  .exhibitor-full-list .exhibitors-grid {
+    flex-direction: column; /* 手機版改為垂直排列 */
+  }
+
+  .exhibitor-column-left,
+  .exhibitor-column-right {
+    padding: 0; /* 手機版移除左右間距 */
+  }
+
+  .exhibitor-card {
+    padding: 0.75rem;
+  }
+
+  .exhibitor-basic-info {
+    gap: 0.5rem;
+  }
+
+  .exhibitor-brand-display {
+    font-size: 0.9rem;
+  }
+
+  .exhibitor-booth-display {
+    font-size: 0.8rem;
+  }
+
+  .exhibitor-nationality-display {
+    font-size: 0.7rem;
+  }
+
+  .exhibitor-photo {
+    width: 50px;
+    height: 50px;
+  }
+
+  .exhibitor-details-content {
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .exhibitor-description {
+    font-size: 0.8rem;
+  }
+
+  .exhibitor-social-links {
+    flex-wrap: wrap;
+    gap: 0.25rem;
+  }
+
+  .exhibitor-social-link {
+    font-size: 0.6rem;
+    padding: 0.2rem 0.4rem;
   }
 }
