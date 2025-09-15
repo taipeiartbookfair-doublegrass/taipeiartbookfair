@@ -1,0 +1,1215 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
+    />
+    <title>購票參觀 | Taipei Art Book Fair Visit</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=BioRhyme+Expanded:wght@200;300;400;700;800&family=IBM+Plex+Mono:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100;1,200;1,300;1,400;1,500;1,600;1,700&family=IBM+Plex+Sans+JP&family=IBM+Plex+Sans:ital,wght@0,100..700;1,100..700&family=IBM+Plex+Serif:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100;1,200;1,300;1,400;1,500;1,600;1,700&family=Libre+Franklin:ital,wght@0,100..900;1,100..900&family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="shortcut icon" href="image/icon-1.ico" />
+    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="css/font.css" />
+    <style>
+      /* CSS Variables - 統一配色系統 */
+      :root {
+        /* 主要配色 */
+        --bg-primary: #000000;
+        --bg-secondary: #781012;
+        --bg-tertiary: rgba(69, 94, 68, 0.95);
+        --bg-quaternary: rgba(120, 16, 18, 0.95);
+        --bg-card: rgba(255, 255, 255, 0.95);
+        
+        /* 文字配色 */
+        --text-primary: ghostwhite;
+        --text-secondary: #455e44;
+        --text-accent: #fbad17;
+        --text-highlight: yellowgreen;
+        --text-info: #7d90c9;
+        
+        /* 邊框和陰影 */
+        --border-primary: rgba(251, 173, 23, 0.3);
+        --border-secondary: #fbad17;
+        --shadow-primary: rgba(0, 0, 0, 0.1);
+        --shadow-secondary: rgba(0, 0, 0, 0.15);
+        
+        /* 間距 */
+        --spacing-xs: 5px;
+        --spacing-sm: 10px;
+        --spacing-md: 15px;
+        --spacing-lg: 20px;
+        --spacing-xl: 30px;
+        --spacing-xxl: 40px;
+        
+        /* 字體大小 */
+        --font-xs: 0.8rem;
+        --font-sm: 0.9rem;
+        --font-md: 1rem;
+        --font-lg: 1.2rem;
+        --font-xl: 1.5rem;
+        --font-xxl: 2rem;
+        --font-hero: 3rem;
+      }
+
+      /* Reset & Base Styles */
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        -webkit-text-size-adjust: 100%;
+        -moz-text-size-adjust: 100%;
+        -ms-text-size-adjust: 100%;
+        text-size-adjust: 100%;
+      }
+
+      html {
+        overflow-x: hidden;
+        max-width: 100%;
+        scroll-behavior: smooth;
+      }
+
+      body {
+        overflow-x: hidden;
+        overflow-y: auto;
+        max-width: 100vw;
+        margin: 0;
+        padding: 0;
+        background: var(--bg-primary);
+        font-family: "IBM Plex Sans JP", "IBM Plex Sans", "IBM Plex Mono", "Inclusive sans", sans-serif;
+        line-height: 1.4;
+        font-size: var(--font-md);
+      }
+
+      /* 頂部導航 */
+      .top-nav {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        z-index: 200;
+        font-family: "IBM Plex Sans", sans-serif;
+      }
+
+      .nav-row {
+        display: flex;
+        height: 50px;
+      }
+
+      /* 第一排：白色背景，黑色文字 */
+      .nav-row-1 {
+        background: white;
+        justify-content: space-between;
+        align-items: center;
+        padding: 0 var(--spacing-lg);
+        border-bottom: 1px solid black;
+        gap: var(--spacing-lg);
+      }
+
+      .nav-row-1 .nav-item {
+        color: black;
+        font-size: var(--font-sm);
+        font-weight: bold;
+        text-transform: uppercase;
+        letter-spacing: 0.1em;
+      }
+
+      .nav-row-1 .nav-item a {
+        color: inherit;
+        text-decoration: none;
+      }
+
+      .nav-row-1 .lang-btn {
+        background: transparent;
+        border: 2px solid black;
+        color: black;
+        padding: var(--spacing-xs) var(--spacing-sm);
+        font-size: var(--font-sm);
+        font-weight: bold;
+        cursor: pointer;
+        transition: all 0.3s ease;
+      }
+
+      .nav-row-1 .lang-btn:hover {
+        background: black;
+        color: white;
+      }
+
+      /* 第二排：棋盤配色 */
+      .nav-row-2 {
+        background: var(--bg-primary);
+      }
+
+      .nav-row-2 .nav-item {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: var(--text-primary);
+        font-size: var(--font-sm);
+        font-weight: bold;
+        text-transform: uppercase;
+        letter-spacing: 0.1em;
+        height: 100%;
+        border-right: 1px solid var(--border-secondary);
+      }
+
+      /* 調整各區域寬度以匹配實際區塊 */
+      .nav-basic {
+        width: 600px; /* 對應左側面板寬度 */
+        background: var(--bg-secondary);
+        color: var(--text-primary);
+      }
+
+      .nav-tickets {
+        flex: 1; /* 對應中間彈性區域 */
+        background: var(--bg-primary);
+        color: var(--text-primary);
+      }
+
+      .nav-faq {
+        width: 400px; /* 增加FAQ區域寬度 */
+        background: var(--bg-secondary);
+        color: var(--text-primary);
+      }
+
+      .nav-row-2 .nav-item:last-child {
+        border-right: none;
+      }
+
+
+      /* 三欄滾動佈局 */
+      .visit-container {
+        display: flex;
+        height: 100vh;
+        overflow: hidden;
+        margin-top: 100px; /* 為兩排頂部導航留出空間 */
+      }
+
+      /* 左側固定資訊欄 */
+      .left-panel {
+        width: 600px;
+        background: var(--bg-secondary);
+        color: var(--text-primary);
+        padding: var(--spacing-xl);
+        position: fixed;
+        left: 0;
+        top: 100px; /* 從導航下方開始 */
+        height: calc(100vh - 100px); /* 減去導航高度 */
+        overflow-y: auto;
+        border-right: 2px solid var(--border-secondary);
+        z-index: 100;
+      }
+
+      /* 中間滾動票券欄 */
+      .center-panel {
+        flex: 1;
+        margin-left: 600px;
+        margin-right: 400px; /* 調整為新的右側面板寬度 */
+        padding: var(--spacing-xl);
+        overflow-y: auto;
+        background: var(--bg-primary);
+      }
+
+      /* 右側FAQ欄 */
+      .right-panel {
+        width: 400px; /* 增加寬度以匹配導航 */
+        background: var(--bg-quaternary);
+        color: var(--text-primary);
+        padding: var(--spacing-xl);
+        position: fixed;
+        right: 0;
+        top: 100px; /* 從導航下方開始 */
+        height: calc(100vh - 100px); /* 減去導航高度 */
+        overflow-y: auto;
+        border-left: 2px solid var(--border-secondary);
+        z-index: 100;
+      }
+
+      /* 海報區域 */
+      .poster-section {
+        margin-bottom: var(--spacing-xl);
+        text-align: center;
+      }
+
+      .poster-image {
+        width: 100%;
+        max-width: 100%;
+        height: auto;
+        border: 2px solid var(--border-secondary);
+        transition: transform 0.3s ease;
+      }
+
+      .poster-image:hover {
+        transform: scale(1.02);
+      }
+
+      /* 左側面板標題 */
+      .panel-title {
+        font-size: var(--font-xl);
+        color: var(--text-accent);
+        margin-bottom: var(--spacing-lg);
+        text-align: center;
+        font-family: "IBM Plex Sans", sans-serif;
+        text-transform: uppercase;
+        letter-spacing: 0.1em;
+        border-bottom: 2px solid var(--border-secondary);
+        padding-bottom: var(--spacing-md);
+      }
+
+      /* 基本資訊區塊 */
+      .info-section {
+        margin-bottom: var(--spacing-xl);
+      }
+
+      .info-section h3 {
+        color: var(--text-highlight);
+        font-size: var(--font-lg);
+        margin-bottom: var(--spacing-md);
+        font-family: "IBM Plex Sans", sans-serif;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+      }
+
+      .info-section p {
+        color: var(--text-primary);
+        font-size: var(--font-sm);
+        line-height: 1.6;
+        margin-bottom: var(--spacing-sm);
+      }
+
+      .welcome-section::before {
+        content: '';
+        position: absolute;
+        top: -50%;
+        left: -50%;
+        width: 200%;
+        height: 200%;
+        background: radial-gradient(circle, rgba(251, 173, 23, 0.1) 0%, transparent 70%);
+        animation: rotate 20s linear infinite;
+      }
+
+      @keyframes rotate {
+        0% { transform: rotate(0deg); }
+        100% { transform: rotate(360deg); }
+      }
+
+      .welcome-title {
+        font-size: var(--font-hero);
+        color: var(--text-accent);
+        margin-bottom: var(--spacing-lg);
+        text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        position: relative;
+        z-index: 2;
+        font-family: "IBM Plex Sans", sans-serif;
+        text-transform: uppercase;
+        letter-spacing: 0.1em;
+      }
+
+      .welcome-subtitle {
+        font-size: var(--font-lg);
+        color: var(--text-highlight);
+        margin-bottom: var(--spacing-xl);
+        position: relative;
+        z-index: 2;
+        font-family: "IBM Plex Sans", sans-serif;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+      }
+
+      .welcome-desc {
+        font-size: var(--font-md);
+        line-height: 1.6;
+        max-width: 800px;
+        margin: 0 auto;
+        position: relative;
+        z-index: 2;
+        color: var(--text-primary);
+      }
+
+      /* 中間票券區塊 */
+      .tickets-grid {
+        display: flex;
+        flex-direction: column;
+        gap: var(--spacing-lg);
+        margin-bottom: var(--spacing-xl);
+      }
+
+      /* 票種區塊 */
+      .ticket-block {
+        background: var(--bg-card);
+        padding: var(--spacing-xl);
+        box-shadow: 0 8px 32px var(--shadow-primary);
+        backdrop-filter: blur(10px);
+        border: 2px solid var(--border-primary);
+        transition: all 0.3s ease;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        min-height: 400px;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .ticket-image {
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        width: 60px;
+        height: auto;
+        opacity: 0.8;
+        z-index: 1;
+      }
+
+      /* 一般票子項目樣式 */
+      .ticket-sub-section {
+        margin-bottom: var(--spacing-md);
+        padding: var(--spacing-sm);
+        background: rgba(125, 144, 201, 0.1);
+        flex-shrink: 0;
+        border-radius: 0;
+      }
+
+      .ticket-sub-layout {
+        display: flex;
+        flex-direction: column;
+        margin-bottom: 8px;
+      }
+
+      .ticket-sub-info h4 {
+        margin: 0 0 5px 0;
+        font-size: 1rem;
+        color: #781012;
+        font-weight: bold;
+      }
+
+      .ticket-sub-date {
+        margin: 0 0 8px 0;
+        font-size: 0.8rem;
+        color: #455e44;
+      }
+
+      .ticket-sub-pricing {
+        margin-top: 8px;
+        display: flex;
+        flex-direction: column;
+        gap: 5px;
+      }
+
+      .ticket-quantity {
+        font-size: 0.8rem;
+        color: #455e44;
+      }
+
+      /* 一般票子項目的票價樣式 */
+      .ticket-sub-section .ticket-price {
+        font-size: 1.1rem;
+        color: #781012;
+        font-weight: bold;
+        margin: 0;
+      }
+
+      /* 一般票 - 特殊樣式 */
+      .general-ticket {
+        min-height: 500px;
+        overflow-y: auto;
+      }
+
+      .ticket-block:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 12px 40px rgba(0, 0, 0, 0.15);
+        border-color: #fbad17;
+      }
+
+      .ticket-block-title {
+        font-size: var(--font-xl);
+        color: var(--bg-secondary);
+        margin-bottom: var(--spacing-md);
+        text-align: center;
+        font-weight: bold;
+        font-family: "IBM Plex Sans", sans-serif;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+      }
+
+      .ticket-block-desc {
+        color: var(--text-secondary);
+        margin-bottom: var(--spacing-lg);
+        line-height: 1.5;
+        font-size: var(--font-md);
+        flex-grow: 1;
+      }
+
+      .ticket-price {
+        font-size: var(--font-xxl);
+        color: var(--text-accent);
+        font-weight: bold;
+        text-align: center;
+        margin-bottom: var(--spacing-md);
+        font-family: "IBM Plex Sans", sans-serif;
+      }
+
+      .ticket-details {
+        background: rgba(125, 144, 201, 0.1);
+        padding: var(--spacing-md);
+        margin-bottom: var(--spacing-lg);
+      }
+
+      .ticket-detail-item {
+        margin-bottom: var(--spacing-sm);
+        font-size: var(--font-sm);
+        color: var(--text-secondary);
+      }
+
+      .ticket-btn {
+        display: block;
+        width: 100%;
+        background: var(--text-accent);
+        color: var(--bg-primary);
+        padding: var(--spacing-md);
+        text-decoration: none;
+        font-weight: bold;
+        text-align: center;
+        transition: all 0.3s ease;
+        border: none;
+        cursor: pointer;
+        font-size: var(--font-sm);
+        font-family: "IBM Plex Sans", sans-serif;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+      }
+
+      .ticket-btn:hover {
+        background: #e09d15;
+        transform: scale(1.05);
+      }
+
+      .ticket-btn:disabled {
+        background: #ccc;
+        color: #666;
+        cursor: not-allowed;
+        transform: none;
+      }
+
+      /* FAQ 條列式選單 */
+      .faq-section {
+        margin-bottom: var(--spacing-lg);
+      }
+
+      .faq-item {
+        margin-bottom: var(--spacing-sm);
+        cursor: pointer;
+        transition: all 0.3s ease;
+      }
+
+      .faq-item:hover {
+        background: rgba(255, 255, 255, 0.05);
+      }
+
+      .faq-question {
+        padding: var(--spacing-sm) 0;
+        font-weight: bold;
+        color: var(--text-accent);
+        font-size: var(--font-sm);
+        font-family: "IBM Plex Sans", sans-serif;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+      }
+
+      .faq-question::after {
+        content: '+';
+        font-size: var(--font-md);
+        transition: transform 0.3s ease;
+        color: var(--text-highlight);
+      }
+
+      .faq-item.active .faq-question::after {
+        transform: rotate(45deg);
+      }
+
+      .faq-answer {
+        display: none;
+        padding: var(--spacing-sm) 0 var(--spacing-md);
+        font-size: var(--font-xs);
+        line-height: 1.5;
+        color: var(--text-primary);
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+      }
+
+      .faq-item.active .faq-answer {
+        display: block;
+      }
+
+      .notice-title {
+        font-size: var(--font-xxl);
+        color: var(--text-info);
+        margin-bottom: var(--spacing-lg);
+        text-align: center;
+        font-weight: bold;
+        font-family: "IBM Plex Sans", sans-serif;
+        text-transform: uppercase;
+        letter-spacing: 0.1em;
+      }
+
+      .faq-list {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+        flex-grow: 1;
+        overflow-y: auto;
+      }
+
+      .faq-item {
+        margin-bottom: 15px;
+        padding: 10px;
+        background: rgba(255, 255, 255, 0.1);
+        border-radius: 0;
+      }
+
+      .faq-question {
+        font-weight: bold;
+        color: var(--text-accent);
+        margin-bottom: var(--spacing-xs);
+        font-size: var(--font-sm);
+        font-family: "IBM Plex Sans", sans-serif;
+      }
+
+      .faq-answer {
+        font-size: var(--font-xs);
+        line-height: 1.4;
+        color: var(--text-primary);
+      }
+
+      /* Google Maps 嵌入 */
+      .map-container {
+        margin-top: var(--spacing-md);
+        border: 2px solid var(--border-secondary);
+        overflow: hidden;
+      }
+
+      .map-container iframe {
+        width: 100%;
+        height: 200px;
+        border: none;
+      }
+
+      .access-title {
+        font-size: var(--font-xxl);
+        color: var(--text-accent);
+        margin-bottom: var(--spacing-lg);
+        text-align: center;
+        font-weight: bold;
+        font-family: "IBM Plex Sans", sans-serif;
+        text-transform: uppercase;
+        letter-spacing: 0.1em;
+      }
+
+      .access-content {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: var(--spacing-lg);
+        flex-grow: 1;
+        overflow-y: auto;
+      }
+
+      .access-info h3 {
+        color: var(--text-highlight);
+        margin-bottom: var(--spacing-md);
+        font-size: var(--font-lg);
+        font-family: "IBM Plex Sans", sans-serif;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+      }
+
+      .access-info p {
+        line-height: 1.6;
+        margin-bottom: var(--spacing-sm);
+        font-size: var(--font-sm);
+        color: var(--text-primary);
+      }
+
+      .access-info a {
+        color: var(--text-accent);
+        text-decoration: none;
+        font-weight: bold;
+        transition: color 0.3s ease;
+      }
+
+      .access-info a:hover {
+        color: var(--text-highlight);
+        text-decoration: underline;
+      }
+
+
+      .lang-btn:active {
+        transform: scale(0.95);
+      }
+
+      /* 響應式設計 */
+      @media (max-width: 1200px) {
+        .left-panel {
+          width: 500px;
+        }
+        
+        .center-panel {
+          margin-left: 500px;
+        }
+      }
+
+      @media (max-width: 1024px) {
+        .left-panel {
+          width: 400px;
+        }
+        
+        .center-panel {
+          margin-left: 400px;
+        }
+        
+        .right-panel {
+          width: 250px;
+        }
+      }
+
+      @media (max-width: 768px) {
+        .nav-row {
+          height: 40px;
+        }
+
+        .nav-row-1 {
+          padding: 0 var(--spacing-md);
+        }
+
+        .nav-row-1 .nav-item {
+          font-size: var(--font-xs);
+        }
+
+        .nav-row-2 .nav-item {
+          font-size: var(--font-xs);
+        }
+
+        .visit-container {
+          flex-direction: column;
+          height: auto;
+          margin-top: 80px; /* 調整手機版的頂部間距 */
+        }
+
+        .left-panel {
+          position: relative;
+          width: 100%;
+          height: auto;
+          border: none;
+          border-bottom: 2px solid var(--border-secondary);
+          top: auto; /* 重置top位置 */
+        }
+
+        .center-panel {
+          position: relative;
+          width: 100%;
+          margin-left: 0;
+          margin-right: 0;
+          height: auto;
+        }
+
+        .right-panel {
+          position: relative;
+          width: 100%;
+          height: auto;
+          border: none;
+          border-top: 2px solid var(--border-secondary);
+          top: auto; /* 重置top位置 */
+        }
+
+        .nav-basic {
+          width: auto;
+          flex: 1;
+        }
+
+        .nav-faq {
+          width: auto;
+          flex: 1;
+        }
+
+        .panel-title {
+          font-size: var(--font-lg);
+        }
+
+        .ticket-block {
+          padding: var(--spacing-lg);
+          min-height: 300px;
+        }
+
+        .ticket-image {
+          width: 50px;
+        }
+
+        .poster-image {
+          max-width: 300px;
+        }
+      }
+
+    </style>
+  </head>
+  <body>
+    <!-- 頂部導航 -->
+    <div class="top-nav">
+      <!-- 第一排：回首頁和語言切換 -->
+      <div class="nav-row nav-row-1">
+        <div class="nav-item nav-home">
+          <a href="mainpage.html" data-zh="回首頁" data-en="HOME">HOME</a>
+        </div>
+        <div class="nav-item nav-lang">
+          <button id="lang-btn" class="lang-btn">EN</button>
+        </div>
+      </div>
+      
+      <!-- 第二排：區域標題 -->
+      <div class="nav-row nav-row-2">
+        <div class="nav-item nav-basic" data-zh="基本資訊" data-en="BASIC INFO">BASIC INFO</div>
+        <div class="nav-item nav-tickets" data-zh="票券" data-en="TICKETS">TICKETS</div>
+        <div class="nav-item nav-faq" data-zh="常見問題" data-en="FAQ">FAQ</div>
+      </div>
+    </div>
+
+    <div class="visit-container">
+      <!-- 左側固定資訊欄 -->
+      <div class="left-panel">
+        <!-- 海報圖片 -->
+        <div class="poster-section">
+          <img 
+            src="25TPABF_poster_RGB.png" 
+            alt="台北藝術書展海報" 
+            class="poster-image"
+            data-zh="台北藝術書展海報" 
+            data-en="Taipei Art Book Fair Poster"
+          />
+        </div>
+        
+        <h2 class="panel-title" data-zh="基本資訊" data-en="Information">
+          基本資訊
+        </h2>
+        
+        <div class="info-section">
+          <h3 data-zh="活動資訊" data-en="Event Info">活動資訊</h3>
+          <p data-zh="台北藝術書展第9屆" data-en="9th Taipei Art Book Fair">台北藝術書展第9屆</p>
+          <p data-zh="2025年11月21日 - 11月23日" data-en="November 21-23, 2025">2025年11月21日 - 11月23日</p>
+          <p data-zh="華山1914文化創意產業園區 東2四連棟" data-en="Huashan1914 Creative Park East 2 Building">華山1914文化創意產業園區 東2四連棟</p>
+        </div>
+
+        <div class="info-section">
+          <h3 data-zh="交通資訊" data-en="Getting Here">交通資訊</h3>
+          <p data-zh="華山文創園區東2館｜100台北市中正區八德路一段1號" data-en="Huashan1914 Creative Park | E2 Silian Building ABCD">華山文創園區東2館｜100台北市中正區八德路一段1號</p>
+          
+          <div class="map-container">
+            <iframe 
+              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3614.8!2d121.529!3d25.043!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3442a9c8b8b8b8b8%3A0x8b8b8b8b8b8b8b8b!2z6Ie65YyX5biC5Lit5aSu5Yy65Y2X5pys5a6J5Yy65Y2X5pys5a6J5Yy65Y2X5pys5a6J!5e0!3m2!1szh-TW!2stw!4v1234567890"
+              allowfullscreen="" 
+              loading="lazy" 
+              referrerpolicy="no-referrer-when-downgrade">
+            </iframe>
+          </div>
+          
+          <h4 data-zh="自行開車" data-en="By Car">自行開車</h4>
+          <p data-zh="國道1號－圓山交流道下－建國高架道路－忠孝東路出口下－忠孝東路三段至二段" data-en="Sun Yat-sen Freeway - Yuanshan Interchange - Jianguo Expressway - Zhongxiao East Road Exit - Zhongxiao East Road">國道1號－圓山交流道下－建國高架道路－忠孝東路出口下－忠孝東路三段至二段</p>
+          <p><a href="https://maps.app.goo.gl/nSoNsZuY2akwD2jZA" target="_blank" data-zh="華山停車場" data-en="Parking Lot">華山停車場</a></p>
+          <p data-zh="汽車平日每小時40元、假日每小時60元" data-en="Parking fee is NT$ 40/hr on weekdays, and NT$60/hr on holidays for cars.">汽車平日每小時40元、假日每小時60元</p>
+          <p data-zh="機車每小時25元" data-en="NT$25/hr for motorcycles.">機車每小時25元</p>
+          
+          <h4 data-zh="公車" data-en="By Bus">公車</h4>
+          <p data-zh="華山公園站（市民大道一）、華山公園（市民）｜669" data-en="Huasha Park (Civic Boulevard)｜699">華山公園站（市民大道一）、華山公園（市民）｜669</p>
+          <p data-zh="台北科技大學站（八德路）｜205、257、276" data-en="National Taipei University of Technology (Bade Road)｜205, 257, 276">台北科技大學站（八德路）｜205、257、276</p>
+          <p data-zh="忠孝國小站｜202、202區、212夜間公車、212直行忠孝東路、212經南港路、262、262區、299、600、605、605新台五線、忠孝幹線" data-en="Zhongxiao Elementary School｜202, 202 Section, 212, 232, 232 Vice, 269, 299, 600, 605, 605 Vice, 605 (Xintai 5th Route), Zhongxiao New Main Line">忠孝國小站｜202、202區、212夜間公車、212直行忠孝東路、212經南港路、262、262區、299、600、605、605新台五線、忠孝幹線</p>
+          <p data-zh="華山文創園區｜202、202區、205、212、257、262、262區、276、299、600、605、忠孝幹線、1813D經中山區、1813E大武崙、1815、1815A、1815D、1815E、台北市觀光巴士紅線(往善導寺)" data-en="Huashan 1914 Creative Park (Zhongxiao E. Road)｜247, 205, 212, 220, 232, 232 Vice, 257, 262, 276, Taipei Double-Decker Sightseeing Bus">華山文創園區｜202、202區、205、212、257、262、262區、276、299、600、605、忠孝幹線、1813D經中山區、1813E大武崙、1815、1815A、1815D、1815E、台北市觀光巴士紅線(往善導寺)</p>
+          
+          <h4 data-zh="捷運" data-en="By MRT">捷運</h4>
+          <p data-zh="板南線、新蘆線 忠孝新生站｜1號出口步行約3分鐘" data-en="Blue Line / Orange Line | Zhongxiao Xinsheng Station : Exit 1, walk for approximately 3 minutes">板南線、新蘆線 忠孝新生站｜1號出口步行約3分鐘</p>
+          
+          <h4 data-zh="YouBike" data-en="YouBike">YouBike</h4>
+          <p data-zh="鄰近站點｜YouBike微笑單車 2.0：華山文創園區" data-en="Station｜YouBike 2.0：Huashan1914 Creative Park">鄰近站點｜YouBike微笑單車 2.0：華山文創園區</p>
+        </div>
+      </div>
+
+      <!-- 中間滾動票券欄 -->
+      <div class="center-panel">
+        <div class="tickets-grid">
+
+      <!-- 一般票 -->
+      <div class="ticket-block general-ticket">
+        <img src="image/tickets/general-ticket.png" alt="一般票" class="ticket-image" />
+        <h2 class="ticket-block-title" data-zh="一般票" data-en="General Ticket">
+          一般票
+        </h2>
+        <p class="ticket-block-desc" data-zh="標準入場票券，可於同一日展期時間內多次進出場館，適合所有觀眾參與。" data-en="Standard admission ticket. Allows multiple re-entries within the same day. Suitable for all visitors.">
+          標準入場票券，可於同一日展期時間內多次進出場館，適合所有觀眾參與。
+        </p>
+        
+        <!-- 早鳥票 -->
+        <div class="ticket-sub-section">
+          <div class="ticket-sub-layout">
+            <div class="ticket-sub-info">
+              <h4 data-zh="早鳥票" data-en="Early Bird">早鳥票</h4>
+              <p class="ticket-sub-date" data-zh="販售日期：2025/09/01 - 2025/09/07" data-en="Sale Period: 2025/09/01 – 2025/09/07">
+                販售日期：2025/09/01 - 2025/09/07
+              </p>
+            </div>
+            <div class="ticket-sub-pricing">
+              <div class="ticket-price" data-zh="NT$ 300／人" data-en="NT$ 300 / person">
+                NT$ 300／人
+              </div>
+              <div class="ticket-quantity" data-zh="限量 100 張" data-en="Limited to 100 tickets">
+                限量 100 張
+              </div>
+            </div>
+          </div>
+          <button id="early-bird-btn" class="ticket-btn" data-zh="未開放" data-en="Not Yet Available">
+            未開放
+          </button>
+        </div>
+
+        <!-- 預售票 -->
+        <div class="ticket-sub-section">
+          <div class="ticket-sub-layout">
+            <div class="ticket-sub-info">
+              <h4 data-zh="預售票" data-en="Pre-sale">預售票</h4>
+              <p class="ticket-sub-date" data-zh="販售日期：2025/09/08 - 2025/11/20" data-en="Sale Period: 2025/09/08 – 2025/11/20">
+                販售日期：2025/09/08 - 2025/11/20
+              </p>
+            </div>
+            <div class="ticket-sub-pricing">
+              <div class="ticket-price" data-zh="NT$ 380／人" data-en="NT$ 380 / person">
+                NT$ 380／人
+              </div>
+              <div class="ticket-quantity" data-zh="限量 2000 張" data-en="Limited to 2,000 tickets">
+                限量 2000 張
+              </div>
+            </div>
+          </div>
+          <button id="presale-btn" class="ticket-btn" data-zh="未開放" data-en="Not Yet Available">
+            未開放
+          </button>
+        </div>
+
+        <!-- 快速通關票 -->
+        <div class="ticket-sub-section">
+          <div class="ticket-sub-layout">
+            <div class="ticket-sub-info">
+              <h4 data-zh="快速通關" data-en="Fast Pass">快速通關</h4>
+              <p class="ticket-sub-date" data-zh="販售日期：2025/11/21 - 2025/11/23" data-en="Sale Period: 2025/11/21 – 2025/11/23">
+                販售日期：2025/11/21 - 2025/11/23
+              </p>
+            </div>
+            <div class="ticket-sub-pricing">
+              <div class="ticket-price" data-zh="NT$ 499／人" data-en="NT$ 499 / person">
+                NT$ 499／人
+              </div>
+              <div class="ticket-quantity" data-zh="無限量" data-en="Unlimited availability">
+                無限量
+              </div>
+            </div>
+          </div>
+          <button id="fast-pass-btn" class="ticket-btn" data-zh="未開放" data-en="Not Yet Available">
+            未開放
+          </button>
+        </div>
+      </div>
+
+      <!-- 優待票 -->
+      <div class="ticket-block discount-ticket">
+        <img src="image/tickets/discount-ticket.png" alt="優待票" class="ticket-image" />
+        <h2 class="ticket-block-title" data-zh="優待票" data-en="Concession Ticket">
+          優待票
+        </h2>
+        <p class="ticket-block-desc" data-zh="適用於 110 cm 以下幼童、65 歲以上長者、身心障礙者及其陪同者。入場時需出示相關證明文件。" data-en="Available for children under 110 cm, seniors 65 and above, and persons with disabilities (plus one accompanying guest). Valid ID or certificate required upon entry.">
+          適用於 110 cm 以下幼童、65 歲以上長者、身心障礙者及其陪同者。入場時需出示相關證明文件。
+        </p>
+        <div class="ticket-price" data-zh="NT$ 250／人" data-en="NT$ 250 / person">
+          NT$ 250／人
+        </div>
+        <div class="ticket-details">
+          <div class="ticket-detail-item" data-zh="售票期限：2025/09/08 - 2025/11/23" data-en="Sale Period: 2025/09/08 – 2025/11/23">
+            售票期限：2025/09/08 - 2025/11/23
+          </div>
+        </div>
+        <button id="discount-btn" class="ticket-btn" data-zh="未開放" data-en="Not Yet Available">
+          未開放
+        </button>
+      </div>
+
+      <!-- 學生團體票 -->
+      <div class="ticket-block student-ticket">
+        <img src="image/tickets/student-ticket.png" alt="學生團體票" class="ticket-image" />
+        <h2 class="ticket-block-title" data-zh="學生團體票" data-en="Student Group Ticket">
+          學生團體票
+        </h2>
+        <p class="ticket-block-desc" data-zh="10 人以上學生團體優惠票價，入場時需出示學生證或其他有效學生身分證明文件。" data-en="Discounted admission for student groups of 10 or more. Valid student ID required upon entry.">
+          10 人以上學生團體優惠票價，入場時需出示學生證或其他有效學生身分證明文件。
+        </p>
+        <div class="ticket-price" data-zh="NT$ 300／人" data-en="NT$ 300 / person">
+          NT$ 300／人
+        </div>
+        <div class="ticket-details">
+          <div class="ticket-detail-item" data-zh="售票期限：2025/09/08 - 2025/11/23" data-en="Sale Period: 2025/09/08 – 2025/11/23">
+            售票期限：2025/09/08 - 2025/11/23
+          </div>
+        </div>
+        <button id="student-btn" class="ticket-btn" data-zh="未開放" data-en="Not Yet Available">
+          未開放
+        </button>
+      </div>
+
+      <!-- 現場票 -->
+      <div class="ticket-block onsite-ticket">
+        <img src="image/tickets/onsite-ticket.png" alt="現場票" class="ticket-image" />
+        <h2 class="ticket-block-title" data-zh="現場票" data-en="On-site Ticket">
+          現場票
+        </h2>
+        <p class="ticket-block-desc" data-zh="活動當天現場購買的票券。適合臨時決定參觀的觀眾，惟需配合現場排隊購買入場。" data-en="Tickets available for purchase at the venue during fair dates. Recommended for last-minute visitors; on-site queuing required.">
+          活動當天現場購買的票券。適合臨時決定參觀的觀眾，惟需配合現場排隊購買入場。
+        </p>
+        <div class="ticket-price" data-zh="NT$ 400／人" data-en="NT$ 400 / person">
+          NT$ 400／人
+        </div>
+        <div class="ticket-details">
+          <div class="ticket-detail-item" data-zh="販售日期：2025/11/21 - 2025/11/23" data-en="Sale Period: 2025/11/21 – 2025/11/23">
+            販售日期：2025/11/21 - 2025/11/23
+          </div>
+          <div class="ticket-detail-item" data-zh="無限量" data-en="Unlimited availability">
+            無限量
+          </div>
+        </div>
+        <button id="onsite-btn" class="ticket-btn" data-zh="未開放" data-en="Not Yet Available">
+          未開放
+        </button>
+      </div>
+        </div>
+      </div>
+
+      <!-- 右側FAQ欄 -->
+      <div class="right-panel">
+        <h2 class="panel-title" data-zh="FAQ" data-en="FAQ">
+          FAQ
+        </h2>
+        
+        <div class="faq-section">
+          <div class="faq-item">
+            <div class="faq-question" data-zh="Q：請問票券可以轉讓嗎？" data-en="Q: Can tickets be transferred?">Q：請問票券可以轉讓嗎？</div>
+            <div class="faq-answer" data-zh="A：可以，票券不記名。注意使用優待票須出示相關證明。" data-en="A: Yes, tickets are non-transferable. Note that concession tickets require valid ID.">A：可以，票券不記名。注意使用優待票須出示相關證明。</div>
+          </div>
+          
+          <div class="faq-item">
+            <div class="faq-question" data-zh="Q：小朋友需要購票嗎？" data-en="Q: Do children need tickets?">Q：小朋友需要購票嗎？</div>
+            <div class="faq-answer" data-zh="A：是，優待票為250元，供12歲以下孩童使用。" data-en="A: Yes, concession tickets are NT$250 for children under 12.">A：是，優待票為250元，供12歲以下孩童使用。</div>
+          </div>
+          
+          <div class="faq-item">
+            <div class="faq-question" data-zh="Q：已購預售票是否能退票？" data-en="Q: Can pre-sale tickets be refunded?">Q：已購預售票是否能退票？</div>
+            <div class="faq-answer" data-zh="A：現場無退票服務，但可轉讓他人使用。" data-en="A: No refunds on-site, but tickets can be transferred to others.">A：現場無退票服務，但可轉讓他人使用。</div>
+          </div>
+          
+          <div class="faq-item">
+            <div class="faq-question" data-zh="Q：現場是否可以刷卡或使用電子支付？" data-en="Q: Can I pay by card or electronic payment on-site?">Q：現場是否可以刷卡或使用電子支付？</div>
+            <div class="faq-answer" data-zh="A：每個攤位支付方式不同，建議攜帶現金及行動支付App備用。" data-en="A: Payment methods vary by booth. We recommend bringing cash and mobile payment apps as backup.">A：每個攤位支付方式不同，建議攜帶現金及行動支付App備用。</div>
+          </div>
+          
+          <div class="faq-item">
+            <div class="faq-question" data-zh="Q：現場購票是否可以使用文化幣？" data-en="Q: Can I use cultural vouchers for on-site ticket purchases?">Q：現場購票是否可以使用文化幣？</div>
+            <div class="faq-answer" data-zh="A：目前票券未提供文化幣支付，欲使用可參考 ibon 快速通關票種。" data-en="A: Cultural vouchers are not currently accepted for tickets. Please refer to ibon fast pass tickets for alternatives.">A：目前票券未提供文化幣支付，欲使用可參考 ibon 快速通關票種。</div>
+          </div>
+          
+          <div class="faq-item">
+            <div class="faq-question" data-zh="Q：票種是否可以重複使用？" data-en="Q: Can tickets be reused?">Q：票種是否可以重複使用？</div>
+            <div class="faq-answer" data-zh="A：活動票種皆為單日票，不同日進場請各別購票。" data-en="A: All event tickets are single-day passes. Separate tickets are required for different days.">A：活動票種皆為單日票，不同日進場請各別購票。</div>
+          </div>
+          
+          <div class="faq-item">
+            <div class="faq-question" data-zh="Q：現場提供的票種？" data-en="Q: What tickets are available on-site?">Q：現場提供的票種？</div>
+            <div class="faq-answer" data-zh="A：活動現場僅售現場票（NT＄400）。" data-en="A: Only on-site tickets (NT$400) are sold at the event.">A：活動現場僅售現場票（NT＄400）。</div>
+          </div>
+          
+          <div class="faq-item">
+            <div class="faq-question" data-zh="Q：是否可以先購買現場票後隔日進場？" data-en="Q: Can I buy on-site tickets in advance for the next day?">Q：是否可以先購買現場票後隔日進場？</div>
+            <div class="faq-answer" data-zh="A：現場票售出當下蓋章入場，不提供隔日使用。" data-en="A: On-site tickets are stamped for immediate entry and cannot be used the next day.">A：現場票售出當下蓋章入場，不提供隔日使用。</div>
+          </div>
+          
+          <div class="faq-item">
+            <div class="faq-question" data-zh="Q：是否可以先替不在場友人購買現場票？" data-en="Q: Can I buy on-site tickets for absent friends?">Q：是否可以先替不在場友人購買現場票？</div>
+            <div class="faq-answer" data-zh="A：現場票售出當下蓋章入場，需使用者本人到場方可購買使用。" data-en="A: On-site tickets require the user to be present for purchase and immediate entry.">A：現場票售出當下蓋章入場，需使用者本人到場方可購買使用。</div>
+          </div>
+          
+          <div class="faq-item">
+            <div class="faq-question" data-zh="Q：購票是否提供發票？" data-en="Q: Are receipts provided for ticket purchases?">Q：購票是否提供發票？</div>
+            <div class="faq-answer" data-zh="A：本活動為免稅活動，如需開立發票請於活動時間至購票處詢問。" data-en="A: This is a tax-exempt event. For receipts, please inquire at the ticket office during the event.">A：本活動為免稅活動，如需開立發票請於活動時間至購票處詢問。</div>
+          </div>
+          
+          <div class="faq-item">
+            <div class="faq-question" data-zh="Q：發票可以打統編嗎？" data-en="Q: Can receipts include tax ID numbers?">Q：發票可以打統編嗎？</div>
+            <div class="faq-answer" data-zh="A：可以，請於活動時間至現場購票處詢問工作人員。" data-en="A: Yes, please inquire with staff at the on-site ticket office during the event.">A：可以，請於活動時間至現場購票處詢問工作人員。</div>
+          </div>
+          
+          <div class="faq-item">
+            <div class="faq-question" data-zh="Q：票券遺失怎麼辦？" data-en="Q: What if I lose my ticket?">Q：票券遺失怎麼辦？</div>
+            <div class="faq-answer" data-zh="A：票券請自行妥善保管，發生遺失、燒毀、破損等情形，恕不退換補發。" data-en="A: Please keep your tickets safe. No replacements will be issued for lost, burned, or damaged tickets.">A：票券請自行妥善保管，發生遺失、燒毀、破損等情形，恕不退換補發。</div>
+          </div>
+        </div>
+      </div>
+
+
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        // 售票按鈕狀態控制
+        function updateTicketButtons() {
+          const currentDate = new Date();
+
+          // 票種開放日期設定
+          const ticketDates = {
+            "early-bird": {
+              start: new Date("2025-09-01T00:00:00+08:00"),
+              end: new Date("2025-09-07T23:59:59+08:00"),
+            },
+            presale: {
+              start: new Date("2025-09-08T00:00:00+08:00"),
+              end: new Date("2025-11-20T23:59:59+08:00"),
+            },
+            "fast-pass": {
+              start: new Date("2025-11-21T00:00:00+08:00"),
+              end: new Date("2025-11-23T23:59:59+08:00"),
+            },
+            discount: {
+              start: new Date("2025-09-08T00:00:00+08:00"),
+              end: new Date("2025-11-23T23:59:59+08:00"),
+            },
+            onsite: {
+              start: new Date("2025-11-21T00:00:00+08:00"),
+              end: new Date("2025-11-23T23:59:59+08:00"),
+            },
+            student: {
+              start: new Date("2025-09-08T00:00:00+08:00"),
+              end: new Date("2025-11-23T23:59:59+08:00"),
+            },
+          };
+
+          // 更新按鈕狀態的函數
+          function updateButton(buttonId, dateRange) {
+            const button = document.getElementById(buttonId);
+            if (!button) return;
+
+            const isAvailable =
+              dateRange.start &&
+              dateRange.end &&
+              currentDate >= dateRange.start &&
+              currentDate <= dateRange.end;
+
+            // 獲取當前語言
+            const currentLang =
+              document.getElementById("lang-btn").textContent === "中文"
+                ? "en"
+                : "zh";
+
+            if (isAvailable) {
+              // 開放狀態
+              button.style.background = "#FBAD17";
+              button.style.color = "black";
+              button.style.cursor = "pointer";
+              button.disabled = false;
+
+              // 根據語言設置按鈕文字
+              const buyText = currentLang === "zh" ? "立即購票" : "Buy Now";
+              button.textContent = buyText;
+
+              // 更新 data 屬性以便語言切換時使用
+              button.setAttribute("data-zh", "立即購票");
+              button.setAttribute("data-en", "Buy Now");
+
+              // 設置購票連結
+              button.onclick = function() {
+                window.open("https://tour.ibon.com.tw/event/e2508000028lhmm", "_blank");
+              };
+            } else {
+              // 未開放狀態
+              button.style.background = "#ccc";
+              button.style.color = "#666";
+              button.style.cursor = "not-allowed";
+              button.disabled = true;
+
+              // 根據語言設置按鈕文字
+              const unavailableText =
+                currentLang === "zh" ? "未開放" : "Not Yet Available";
+              button.textContent = unavailableText;
+
+              // 更新 data 屬性以便語言切換時使用
+              button.setAttribute("data-zh", "未開放");
+              button.setAttribute("data-en", "Not Yet Available");
+
+              button.onclick = null;
+            }
+          }
+
+          // 更新各個按鈕
+          updateButton("early-bird-btn", ticketDates["early-bird"]);
+          updateButton("presale-btn", ticketDates.presale);
+          updateButton("fast-pass-btn", ticketDates["fast-pass"]);
+          updateButton("discount-btn", ticketDates.discount);
+          updateButton("onsite-btn", ticketDates.onsite);
+          updateButton("student-btn", ticketDates.student);
+        }
+
+        // 語言切換功能
+        function initLanguageSwitch() {
+          let currentLang = "zh"; // 預設中文
+          const langBtn = document.getElementById("lang-btn");
+
+          function switchLanguage() {
+            currentLang = currentLang === "zh" ? "en" : "zh";
+
+            // 更新按鈕文字
+            langBtn.textContent = currentLang === "zh" ? "EN" : "中文";
+
+            // 更新所有有翻譯屬性的元素
+            const elementsWithTranslation =
+              document.querySelectorAll("[data-zh][data-en]");
+            elementsWithTranslation.forEach((element) => {
+              const text = element.getAttribute(`data-${currentLang}`);
+              if (text) {
+                element.innerHTML = text;
+              }
+            });
+
+            // 更新按鈕狀態（因為按鈕文字可能被語言切換影響）
+            updateTicketButtons();
+          }
+
+          langBtn.addEventListener("click", switchLanguage);
+        }
+
+        // FAQ 點擊功能
+        function initFAQ() {
+          const faqItems = document.querySelectorAll('.faq-item');
+          
+          faqItems.forEach(item => {
+            item.addEventListener('click', function() {
+              // 關閉其他已開啟的FAQ
+              faqItems.forEach(otherItem => {
+                if (otherItem !== item) {
+                  otherItem.classList.remove('active');
+                }
+              });
+              
+              // 切換當前FAQ的狀態
+              item.classList.toggle('active');
+            });
+          });
+        }
+
+        // 初始化功能
+        updateTicketButtons();
+        initLanguageSwitch();
+        initFAQ();
+      });
+    </script>
+  </body>
+</html>
