@@ -1176,6 +1176,7 @@ p {
   width: 148px; /* 統一寬度 */
   height: 210px; /* 統一高度 */
   margin-bottom: 10px;
+  filter: grayscale(100%);  
 }
 
 /* 左右邊框的書籍項目使用垂直文字 */
