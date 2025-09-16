@@ -758,7 +758,6 @@ p {
   padding: 4px;
   width: 148px; /* 統一寬度 */
   height: 210px; /* 統一高度 */
-  filter: grayscale(100%);
 }
 
 /* 中間 Zine 區域樣式 - 在 image rotator 下面 */
@@ -792,7 +791,6 @@ p {
   aspect-ratio: 1; /* 保持正方形比例，與 program 上方 zine 一致 */
   width: 148px;
   height: 210px;
-  filter: grayscale(100%);
 }
 
 /* Zine 容器樣式 - 在 PROGRAMS 區域內部 */
@@ -819,7 +817,6 @@ p {
   padding: 4px; /* 縮小內邊距 */
   width: 148px; /* 統一寬度 */
   height: 210px; /* 統一高度 */
-  filter: grayscale(100%);
 }
 
 /* 條列模式區域 - 縮短寬度 */
@@ -998,7 +995,6 @@ p {
   cursor: pointer;
   text-align: center;
   padding: 8px;
-  filter: grayscale(100%);
 }
 
 /* 垂直 Zine 樣式 */
@@ -1176,7 +1172,6 @@ p {
   width: 148px; /* 統一寬度 */
   height: 210px; /* 統一高度 */
   margin-bottom: 10px;
-  filter: grayscale(100%);  
 }
 
 /* 左右邊框的書籍項目使用垂直文字 */
@@ -1224,7 +1219,19 @@ p {
   flex-direction: column;
   justify-content: center; /* 垂直居中 */
   align-items: center; /* 水平居中 */
-  background: black;
+  background: linear-gradient(
+    90deg,
+    rgba(0, 0, 0, 1) 0%,
+    rgba(255, 255, 255, 1) 7%,
+    rgba(222, 222, 222, 1) 18%,
+    rgba(255, 255, 255, 1) 21%,
+    rgba(255, 255, 255, 1) 46%,
+    rgba(227, 227, 227, 1) 53%,
+    rgba(237, 235, 235, 1) 79%,
+    rgba(255, 255, 255, 1) 82%,
+    rgba(174, 174, 174, 1) 97%,
+    rgba(0, 0, 0, 1) 100%
+  );
   border-radius: 20px;
 }
 
@@ -1925,7 +1932,6 @@ p {
     height: 100px; /* 手機版進一步縮小 */
     font-size: 0.5rem;
     padding: 1px;
-    filter: grayscale(100%);
   }
 
   .zine-container {
@@ -1943,7 +1949,6 @@ p {
     height: 100px; /* 手機版進一步縮小 */
     font-size: 0.5rem;
     padding: 1px;
-    filter: grayscale(100%);
   }
 
   .zine-item {
@@ -1951,7 +1956,6 @@ p {
     height: 100px; /* 手機版進一步縮小 */
     font-size: 0.5rem;
     padding: 1px;
-    filter: grayscale(100%);
   }
 
   /* 手機版 Agenda 標題行 */
@@ -2013,7 +2017,6 @@ p {
     height: 100px; /* 手機版進一步縮小 */
     font-size: 0.6rem;
     padding: 2px;
-    filter: grayscale(100%);
   }
   
   /* 手機版下方 Zine 容器調整 */
