@@ -39,8 +39,9 @@ body {
   overflow-x: hidden;
   font-size: 1.3rem;
   cursor: url("image/eye.png") 12 12, auto;
-  filter:grayscale(100%);
 }
+
+
 
 
 /* 為可點擊元素設定不同的游標 */
@@ -80,15 +81,15 @@ h6 {
 }
 
 h1 {
-  font-size: 2.8rem;
+  font-size: 2.2rem;
 }
 h2 {
-  font-size: 2rem;
+  font-size: 1.6rem;
 }
 h3 {
-  font-size: 2rem;
+  font-size: 1.6rem;
   text-align: center;
-  font-family: "IBM Plex Mono", monospace;
+  font-family: "IBM Plex Sans", sans-serif;
   font-weight: 400;
   line-height: 1.8;
   color: var(--secondary-color);
@@ -328,6 +329,81 @@ p {
   font-weight: 300;
 }
 
+/* 右上角控制區域 - 簡潔設計 */
+.top-controls {
+  position: fixed;
+  top: 0;
+  right: 0;
+  width: 100%;
+  z-index: 1000;
+  background-color: var(--main-color);
+  border: 1px solid var(--main-color);
+  height: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 0;
+}
+
+.language-btn {
+  background: var(--main-color);
+  border: none;
+  color: var(--secondary-color);
+  font-size: 0.8rem;
+  cursor: pointer;
+  padding: 0 12px;
+  font-family: inherit;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  white-space: nowrap;
+  float:left;
+}
+
+.exhibitor-login-btn {
+  background: var(--secondary-color);
+  color: var(--main-color);
+  text-decoration: none;
+  font-size: 0.8rem;
+  padding: 0 12px;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  white-space: nowrap;
+  float:right;
+}
+
+/* 頁腳社交連結 - 西洋棋盤設計 */
+.social-link {
+  text-decoration: none;
+  font-size: 1.3rem;
+  padding: 4px 8px;
+  display: flex;
+  align-items: center;
+  flex: 1;
+  justify-content: center;
+  text-align: center;
+}
+
+.social-link:nth-child(1) {
+  background: var(--main-color);
+  color: var(--secondary-color);
+}
+
+.social-link:nth-child(2) {
+  background: var(--secondary-color);
+  color: var(--main-color);
+}
+
+.footer-link {
+  flex: 1;
+  text-align: center;
+  background: var(--main-color);
+  color: var(--secondary-color);
+  padding: 4px 8px;
+  text-decoration: none;
+}
+
 /* 社交連結 - 可滾動 */
 .social-links {
   background-color: var(--secondary-color);
@@ -340,13 +416,25 @@ p {
 
 /* 主標題區域 - 可滾動 */
 .main-title-section {
-  padding: 40px 0;
+  padding-top: 25px;
   background: var(--secondary-color);
-  border: 1px solid var(--main-color);
+}
+
+/* Logo 樣式 */
+.site-logo {
+  height: 9rem;
+  width: auto;
+  max-width: 100%;
+  transition: all 0.3s ease;
+}
+
+.site-logo:hover {
+  transform: scale(1.05);
 }
 
 .main-title-area {
   text-align: center;
+  margin-top: 10px;
 }
 
 /* 導航項目區域 - Sticky */
@@ -354,10 +442,9 @@ p {
   position: sticky;
   top: 0; /* 黏在頂部 */
   background: var(--secondary-color);
-  border: 1px solid var(--main-color);
   border-bottom: 1px solid var(--main-color);
   z-index: 999;
-  padding: 15px 8px;
+  padding-bottom: 15px;
   box-shadow: 0 2px 4px rgba(147, 112, 219, 0.1);
 }
 
@@ -391,11 +478,12 @@ p {
 .nav-menu a {
   text-decoration: none;
   color: var(--main-color);
-  font-weight: 400;
+  font-weight: 600;
   transition: color 0.2s ease;
-  font-size: 1rem;
+  font-size: 3rem;
   text-transform: uppercase;
   letter-spacing: 0.5px;
+  font-family: Inclusive sans;
 }
 
 .nav-menu a:hover {
@@ -405,9 +493,8 @@ p {
 
 /* TICKET 按鈕樣式 */
 .ticket-button a {
-  background: var(--secondary-color);
+  background: orangered;
   color: var(--main-color) !important;
-  border: 1px solid var(--main-color);
   padding: 8px 16px;
   font-weight: 400;
   transition: all 0.2s ease;
@@ -488,12 +575,11 @@ p {
 @media (max-width: 768px) {
   /* 平板響應式 - 調整新結構 */
   .main-title-section {
-    padding: 30px 0; /* 平板上縮小padding */
+    padding: 15px 0; /* 平板上縮小padding */
   }
 
-  #site-name {
-    font-size: 3.5rem !important; /* 平板上稍微縮小標題 */
-    line-height: 3rem !important;
+  .site-logo {
+    height: 7.5rem; /* 平板上稍微縮小logo */
   }
 
   .nav-items-area.sticky-nav {
@@ -527,6 +613,12 @@ p {
     height: 150px; /* 平板版縮小 */
   }
 
+  .zine-wall-title {
+    font-size: 1rem;
+    padding: 0.4rem 0.8rem;
+    margin-bottom: 0.8rem;
+  }
+
   .main-content {
     flex-direction: column; /* 在小螢幕上改為垂直排列 */
     padding: 1rem; /* 適當的內邊距 */
@@ -538,6 +630,10 @@ p {
   .calender-section.card-section {
     width: 100%;
     min-height: 400px; /* 設定最小高度 */
+  }
+
+  .book-border-left {
+    height: 400px; /* 平板版與PROGRAMS區域等高 */
   }
 
   .middle-zine-container {
@@ -853,7 +949,7 @@ p {
 
 .agenda-header h3 {
   margin: 0;
-  font-size: 1.5rem;
+  font-size: 1.2rem;
   color: var(--secondary-color);
   background: var(--main-color);
   font-family: "IBM Plex Mono", monospace;
@@ -1031,7 +1127,7 @@ p {
 
 .timeline-section h3 {
   text-align: center;
-  font-size: 2rem;
+  font-size: 1.6rem;
   color: var(--secondary-color);
   background: var(--main-color);
   text-shadow: none;
@@ -1150,7 +1246,7 @@ p {
   width: 100vw;
   margin-top: 0; /* 移除固定margin，讓內容自然流動 */
   position: relative;
-  z-index: 1; /* 確保在 navbar 和 footer 下方 */
+  z-index: 15; /* 提高z-index確保在rotata上方 */
   display: grid;
   grid-template-areas: "book-left   main-area";
   grid-template-rows: 1fr; /* 只有一行 */
@@ -1167,9 +1263,24 @@ p {
 .book-border-left {
   grid-area: book-left;
   flex-direction: column;
-  height: 710px; /* 與海報整體區域等高 */
-  padding: 120px 0px 16px 16px; /* 上面和左邊 padding */
+  height: 600px; /* 與PROGRAMS區域等高 */
+  padding: 20px 0px 16px 16px; /* 減少上面padding，往上移動 */
   box-sizing: border-box; /* 確保 padding 包含在總寬度內 */
+}
+
+/* Zine wall 標題樣式 */
+.zine-wall-title {
+  text-align: center;
+  font-size: 1.2rem;
+  color: var(--main-color);
+  background-color: transparent;
+  text-shadow: none;
+  border:none;
+  text-align:left;
+  margin-bottom: 1rem;
+  font-family: "IBM Plex Mono", monospace;
+  text-transform: uppercase;
+  padding:1px;
 }
 
 /* 書籍項目樣式 */
@@ -1201,10 +1312,17 @@ p {
   aspect-ratio: 1; /* 強制正方形比例 */
 }
 
-/* 主要內容區域調整 */
+/* 上層內容包裝器 - 海報和PROGRAMS水平排列 */
+.top-content-wrapper {
+  display: flex;
+  gap: 1.5rem;
+  align-items: flex-start;
+  width: 100%;
+}
 .main-content {
   grid-area: main-area;
   display: flex;
+  flex-direction: column; /* 改為垂直排列 */
   width: 100%;
   min-height: 80vh;
   padding-top: 1rem;
@@ -1220,10 +1338,46 @@ p {
   flex-direction: column;
   align-items: center;
   gap: 0; /* 海報和控制區域之間的間距由 poster-controls-wrapper 的 margin-top 控制 */
-  height: 102vh;
+  height: 98vh;
   padding: 15px;
   background-color: var(--secondary-color);
-  border: 1px solid var(--main-color);
+  border: 1px dashed var(--main-color);
+}
+
+/* 按鈕容器 - 左右並排 */
+.poster-buttons-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  padding: 0 1rem;
+}
+
+/* 購票按鈕樣式 */
+.ticket-button-container {
+  flex: 1;
+  margin-right: 1rem;
+}
+
+.ticket-button {
+  display: inline-block;
+  background-color: rebeccapurple;
+  color: var(--secondary-color);
+  text-decoration: none;
+  padding: 1rem 2rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  border-radius: 20px;
+}
+
+.ticket-button:hover {
+  background-color: var(--secondary-color);
+  color: var(--main-color);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
 }
 
 /* Poster Section - 調整為新布局 */
@@ -1334,58 +1488,35 @@ p {
   display: block;
 }
 
-/* 海報控制區域外層容器 */
-.poster-controls-wrapper {
-  width: 500px; /* 與海報區域同寬 */
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin-top: 10px; /* 與海報區域的間距 */
+/* 翻轉按鈕容器 - 在按鈕區域右側 */
+.flip-button-container {
+  flex-shrink: 0;
 }
 
-/* 海報控制區域樣式 */
-.poster-controls {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 45px;
-  width: 100%;
-}
-
-.control-btn {
-  background: var(--secondary-color);
-  border: 1px solid var(--main-color);
-  width: 180px;
-  height: 40px;
-  border-radius: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  font-size: 1.5rem;
-  color: var(--main-color);
-  font-family: "IBM Plex Mono", monospace;
-}
-
-.control-btn:hover {
-  background: var(--main-color);
-  color: var(--secondary-color);
-}
-
-.control-center {
-  background: var(--secondary-color);
-  color: var(--main-color);
-  border: 1px solid var(--main-color);
-  width: 50px;
-  height: 50px;
+/* 翻轉按鈕樣式 */
+.flip-button {
+  background: #0955cc;
+  border: none;
+  width: 60px;
+  height: 60px;
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-family: "IBM Plex Sans JP", sans-serif;
+  cursor: pointer;
+  font-size: 0.9rem;
+  color: var(--main-color);
+  font-family: "IBM Plex Mono", monospace;
+  font-weight: 600;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+}
+
+.flip-text {
+  /* writing-mode: vertical-rl; */
+  text-orientation: mixed;
   font-size: 1.5rem;
-  text-transform: uppercase;
-  letter-spacing: 0.5px;
+  vertical-align: bottom;
 }
 
 .control-center:hover {
@@ -1434,7 +1565,6 @@ p {
 /* 頁腳 */
 .footer {
   position: relative;
-  padding: 8px 8px;
   text-align: center;
   background: var(--secondary-color);
   border: 1px solid var(--main-color);
@@ -1447,15 +1577,18 @@ p {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  width: 100%;
 }
 
 .footer-left {
+  flex: 1;
   text-align: left;
 }
 
 .footer-right {
+  flex: 1;
   display: flex;
-  gap: 20px;
+  justify-content: space-evenly;
   align-items: center;
 }
 
@@ -1467,18 +1600,7 @@ p {
   padding: 0;
 }
 
-.footer-link {
-  color: var(--main-color);
-  text-decoration: none;
-  font-size: 1.2rem;
-  font-family: "IBM Plex Mono", monospace;
-  text-transform: uppercase;
-  letter-spacing: 0.5px;
-  transition: color 0.2s ease;
-}
-
 .footer-link:hover {
-  color: var(--main-color);
   opacity: 0.7;
 }
 
@@ -1520,7 +1642,7 @@ p {
   padding: 8px 12px;
   cursor: pointer;
   z-index: 997;
-  font-family: "IBM Plex Mono", monospace;
+  font-family: "IBM Plex Sans", sans-serif;
   font-size: 9px;
   text-transform: uppercase;
   letter-spacing: 0.5px;
@@ -1530,23 +1652,6 @@ p {
 .newsletter-trigger:hover {
   background: var(--main-color);
   color: var(--secondary-color);
-}
-
-/* Newsletter 彈出視窗 */
-.newsletter-popup {
-  position: fixed;
-  bottom: 20px;
-  right: 20px;
-  width: 500px;
-  background: var(--secondary-color);
-  border: 1px solid var(--main-color);
-  z-index: 996;
-  display: block;
-  font-family: "IBM Plex Mono", monospace;
-}
-
-.newsletter-popup.hidden {
-  display: none;
 }
 
 .year-title {
@@ -1735,6 +1840,169 @@ p {
   }
 }
 
+/* Newsletter Section Styles */
+.newsletter-section {
+  padding: 1.7rem;
+  width: 38%;
+  margin-top: .2rem;
+  margin-left: auto;
+  margin-right: 12rem;
+  border: 1px solid black;
+}
+
+.newsletter-section h3 {
+  font-size: 1.8rem;
+  color: var(--main-color);
+  text-shadow: none;
+  padding: 0px;
+  background: var(--secondary-color);
+  font-family: "IBM Plex Sans", monospace;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  display: inline-block;
+  width: 100%;
+  border: none;
+  box-sizing: border-box;
+  text-align: left;
+  margin-bottom:1rem;
+}
+
+.newsletter-content {
+  display: flex;
+  gap: 1rem;
+  align-items: left;
+  justify-content: left;
+}
+
+.newsletter-form {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+}
+
+.form-group {
+  display: flex;
+}
+
+.form-group input {
+  padding: 0.8rem 1rem;
+  border: 1px solid var(--main-color);
+  font-family: "IBM Plex Sans", sans-serif;
+  font-size: 0.9rem;
+  background: var(--secondary-color);
+  color: var(--main-color);
+  transition: all 0.3s ease;
+  width: 250px;
+}
+
+.form-group input:focus {
+  outline: none;
+  border-color: var(--main-color);
+  box-shadow: 0 0 0 3px rgba(0, 0, 0, 0.1);
+}
+
+.form-group input::placeholder {
+  color: rgba(0, 0, 0, 0.5);
+  font-style: italic;
+}
+
+.newsletter-submit-btn {
+  background: var(--main-color);
+  color: var(--secondary-color);
+  border: 2px solid var(--main-color);
+  padding: 0.8rem 1.5rem;
+  font-family: "IBM Plex Sans", sans-serif;
+  font-size: 0.9rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.newsletter-submit-btn:hover {
+  background: var(--secondary-color);
+  color: var(--main-color);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.newsletter-message {
+  margin-top: 1rem;
+  padding: 0.8rem 1rem;
+  border-radius: 4px;
+  font-family: "IBM Plex Sans", sans-serif;
+  font-size: 0.9rem;
+  font-weight: 600;
+}
+
+.newsletter-message.success {
+  background: rgba(0, 255, 0, 0.1);
+  color: green;
+  border: 1px solid green;
+}
+
+.newsletter-message.error {
+  background: rgba(255, 0, 0, 0.1);
+  color: red;
+  border: 1px solid red;
+}
+
+
+/* Newsletter 響應式設計 */
+@media (max-width: 768px) {
+  .newsletter-content {
+    flex-direction: column;
+    gap: 1rem;
+  }
+  
+  .newsletter-form {
+    flex-direction: column;
+    gap: 1rem;
+  }
+  
+  .form-group input {
+    width: 100%;
+    max-width: 300px;
+  }
+  
+  .newsletter-section {
+    padding: 1.5rem;
+    margin: 1.5rem 0;
+  }
+  
+  .newsletter-section h3 {
+    font-size: 1.4rem;
+    padding: 0.6rem 1rem;
+    margin-bottom: 1.5rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .newsletter-section {
+    padding: 1rem;
+    margin: 1rem 0;
+  }
+  
+  .newsletter-section h3 {
+    font-size: 1.2rem;
+    padding: 0.5rem 0.8rem;
+    margin-bottom: 1rem;
+  }
+  
+  .form-group input {
+    padding: 0.6rem 0.8rem;
+    font-size: 0.8rem;
+    width: 100%;
+    max-width: 250px;
+  }
+  
+  .newsletter-submit-btn {
+    padding: 0.6rem 1rem;
+    font-size: 0.8rem;
+  }
+}
+
 /* Event Photos Section Styles */
 .rotata {
   position: absolute;
@@ -1743,8 +2011,8 @@ p {
   width: 100vw;
   min-height: 100vh; /* 至少要有視窗高度 */
   /* height 將由 JavaScript 動態設置為文檔實際高度 */
-  pointer-events: none;
-  z-index: 1;
+  pointer-events: auto;
+  z-index: 10; /* 提高z-index確保可見 */
   overflow: visible;
 }
 
@@ -1759,53 +2027,29 @@ p {
   animation-play-state: paused;
 }
 
+
 .rotata div:nth-child(1) {
-  top: 13vh;
-  left: 25%;
-  width: 18rem;
-  height: 4rem;
-}
-.rotata div:nth-child(2) {
-  top: 140vh;
-  left: 26.5rem;
-  width: 18rem;
-  height: 13rem;
-}
-.rotata div:nth-child(3) {
-  top: 4vh;
-  right: 3%;
-  width: 5rem;
-  height: 8rem;
-}
-.rotata div:nth-child(4) {
-  top: 36vh;
+  position: absolute;
+  top: 20vh;
   right: 16px;
   width: 10rem;
   height: 35rem;
 }
-.rotata div:nth-child(5) {
-  top: 36vh;
-  left: 16px;
-  width: 9.3rem;
-  height: 6rem;
-}
-.rotata div:nth-child(6) {
-  top: 140vh;
+
+.rotata div:nth-child(2) {
+  position: absolute;
+ top: 126vh;
   left: 16px;
   width: 25rem;
-  height: 28rem;
+  height: 26rem;
 }
-.rotata div:nth-child(7) {
-  top: 279vh;
-  right: 16px;
-  width: 33rem;
-  height: 14rem;
-}
-.rotata div:nth-child(8) {
-  top: 293vh;
-  left: 12px;
-  width: 10rem;
-  height: 7rem;
+
+.rotata div:nth-child(3) {
+  position: absolute;
+  top: 126vh;
+  left: 26.5rem;
+  width: 18rem;
+  height: 12rem;
 }
 
 .image-strip {
@@ -1816,8 +2060,31 @@ p {
   will-change: transform;
   width: max-content;
   height: 100% !important;
-  object-fit: cover;
+  align-items: flex-start;
+  position: relative;
+  top: 0;
+  left: 0;
 }
+
+/* 為每個輪播區域創建獨立的 image-strip 樣式 */
+.rotata div:nth-child(1) .image-strip {
+  position: relative;
+  top: 0;
+  left: 0;
+}
+
+.rotata div:nth-child(2) .image-strip {
+  position: relative;
+  top: 0;
+  left: 0;
+}
+
+.rotata div:nth-child(3) .image-strip {
+  position: relative;
+  top: 0;
+  left: 0;
+}
+
 @keyframes slide {
   0% {
     transform: translateX(0);
@@ -1830,236 +2097,515 @@ p {
   }
 }
 
+.rotata div:nth-child(1) .image-strip img {
+  width:auto;
+  height: 100%;
+  object-fit: cover;
+  flex-shrink: 0;
+  display: block;
+}
+
+.rotata div:nth-child(2) .image-strip img {
+  width: auto;
+  height: 100%;
+  object-fit: cover;
+  flex-shrink: 0;
+  display: block;
+}
+
 .rotata div:nth-child(3) .image-strip img {
   width: auto;
-  height: 100% !important;
-  object-fit: fill;
-  flex-shrink: 0;
-  display: block;
-  max-width: none;
-}
-
-.rotata div:nth-child(6) .image-strip img {
-  width: auto;
-  height: 100% !important;
-  object-fit: cover;
-  flex-shrink: 0;
-  display: block;
-  max-width: none;
-}
-
-.rotata div:nth-child(4) .image-strip img {
-  width: auto;
-  height: 100% !important;
-  object-fit: cover;
-  flex-shrink: 0;
-  display: block;
-  max-width: none;
-}
-
-.rotata div:nth-child(1) .image-strip img {
-  height: 100% !important;
-  width: auto;
-  object-fit: cover;
-  flex-shrink: 0;
-  display: block;
-  max-width: none;
-}
-
-.rotata div:nth-child(7) .image-strip img {
-  width: auto;
-  height: 100% !important;
+  height: 100%;
   object-fit: cover;
   flex-shrink: 0;
   display: block;
 }
 
-.rotata div:nth-child(8) .image-strip img {
-  width: auto;
-  height: 100% !important;
-  object-fit: cover;
-  flex-shrink: 0;
-  display: block;
-}
 
-/* 手機響應式設計 - 新結構 */
-@media (max-width: 480px) {
-  .main-title-section {
-    padding: 20px 0; /* 手機上更小的padding */
+
+/* 大螢幕響應式設計 - 保持比例並添加灰色邊框 */
+@media (min-width: 1400px) {
+  body {
+    background-color: #f0f0f0; /* 灰色背景 */
   }
 
-  #site-name {
-    font-size: 2.5rem !important; /* 手機上更小的標題 */
-    line-height: 2.2rem !important;
+  .monopoly-board {
+    max-width: 1375px; /* 保持1375px的寬度 */
+    margin: 0 auto;
+    background-color: var(--secondary-color);
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+  }
+
+  /* Image rotata 在大螢幕上的調整 - 使用百分比定位 */
+  .rotata div:nth-child(1) {
+    right: 1%; /* 使用百分比而不是固定值 */
+  }
+
+  .rotata div:nth-child(2) {
+    left: 1%; /* 使用百分比而不是固定值 */
+  }
+
+  .rotata div:nth-child(3) {
+    left: 20%; /* 使用百分比而不是固定值 */
+  }
+}
+
+/* 超大螢幕響應式設計 - 保持比例 */
+@media (min-width: 1920px) {
+  .monopoly-board {
+    max-width: 1375px; /* 保持1375px的寬度 */
+  }
+}
+
+/* 平板響應式設計 */
+@media (max-width: 768px) and (min-width: 481px) {
+  .main-title-section {
+    padding: 15px 0;
+  }
+
+  .site-logo {
+    height: 7rem;
   }
 
   .nav-items-area.sticky-nav {
-    padding: 10px 8px; /* 手機上更小的padding */
+    padding: 12px 10px;
+  }
+
+  .top-controls {
+    height: 1.8rem;
+    padding: 0 12px;
+  }
+
+  .language-btn,
+  .exhibitor-login-btn {
+    font-size: 0.75rem;
+  }
+
+  .monopoly-board {
+    grid-template-columns: 80px 1fr;
+  }
+
+  .book-item {
+    width: 80px;
+    height: 120px;
+    font-size: 0.7rem;
+  }
+
+  .book-border-left .book-item {
+    width: 80px;
+    height: 120px;
+  }
+
+  .zine-wall-title {
+    font-size: 1rem;
+    padding: 0.4rem 0.8rem;
+  }
+
+  .main-content {
+    padding: 0.8rem;
+    gap: 0.8rem;
+  }
+
+  .poster-area {
+    width: 100%;
+    padding: 0.8rem;
+  }
+
+  .poster-buttons-container {
+    gap: 1.5rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .ticket-button {
+    padding: 1rem 1.5rem;
+    font-size: 1rem;
+  }
+
+  .flip-button {
+    width: 55px;
+    height: 55px;
+    font-size: 0.85rem;
+  }
+
+  .poster-section {
+    width: 100%;
+    height: 500px;
+    padding: 0.8rem;
+  }
+
+  .book-border-left {
+    height: 400px;
+  }
+
+  .middle-zine-container {
+    top: 100vh;
+    gap: 10px;
+  }
+
+  .middle-zine-item {
+    width: 80px;
+    height: 120px;
+    font-size: 0.6rem;
+  }
+
+  .right-zine-item {
+    width: 80px;
+    height: 120px;
+    font-size: 0.6rem;
+  }
+
+  .zine-item {
+    width: 80px;
+    height: 120px;
+    font-size: 0.6rem;
+  }
+
+  .timeline-zine-item {
+    width: 80px;
+    height: 120px;
+    font-size: 0.7rem;
+  }
+}
+
+/* 手機響應式設計 - 重新排列結構 */
+@media (max-width: 480px) {
+  /* 手機版基本設定 */
+  .main-title-section {
+    padding: 10px 0;
+  }
+
+  .site-logo {
+    height: 6rem;
+  }
+
+  .nav-items-area.sticky-nav {
+    padding: 10px 8px;
+    position: sticky;
+    top: 0;
+    z-index: 999;
   }
 
   .nav-menu {
-    flex-direction: column; /* 手機上改為垂直排列 */
+    flex-direction: column;
     gap: 8px;
     max-width: 100%;
   }
 
-  .nav-items-area {
+  /* 手機版右上角控制區域 */
+  .top-controls {
+    top: 0;
+    right: 0;
     width: 100%;
+    height: 1.5rem;
+    padding: 0 8px;
+    gap: 0;
   }
 
+  .language-btn,
+  .exhibitor-login-btn {
+    font-size: 0.7rem;
+  }
+
+  /* 手機版完全重新排列佈局 */
   .monopoly-board {
-    min-height: 100vh; /* 手機上保持延伸性 */
-    grid-template-rows: 1fr; /* 只有一行 */
-    grid-template-columns: 60px 1fr; /* 左邊框和主要內容區域 */
-  }
-
-  .event-info {
-    top: 2.5rem; /* 手機上調整sticky位置 */
-  }
-
-  .book-item {
-    font-size: 0.6rem;
-    width: 70px; /* 手機版進一步縮小 */
-    height: 100px; /* 手機版進一步縮小 */
-    padding: 2px;
-  }
-
-  .book-border-left .book-item {
-    width: 70px; /* 手機版進一步縮小 */
-    height: 100px; /* 手機版進一步縮小 */
-  }
-
-  .main-content {
-    padding: 0.5rem; /* 手機上的內邊距 */
-    gap: 0.5rem; /* 手機上的間距 */
+    display: flex;
     flex-direction: column;
-    min-height: 50vh; /* 保持足夠高度 */
+    min-height: 100vh;
+    grid-template-areas: none;
+    grid-template-rows: none;
+    grid-template-columns: none;
   }
 
-  .poster-section,
-  .calender-section.card-section {
+  /* 隱藏左側書籍邊框 */
+  .book-border-left {
+    display: none;
+  }
+
+  /* 手機版主要內容區域 - 垂直排列 */
+  .main-content {
+    display: flex;
+    flex-direction: column;
     width: 100%;
-    min-height: 300px; /* 手機上的最小高度 */
     padding: 0.5rem;
+    gap: 1rem;
+    order: 1;
   }
 
-  .middle-zine-container {
-    top: 100vh; /* 手機版在 image rotator 下方 */
-    gap: 8px; /* 與 program 上方 zine 手機版相同 */
-    flex-wrap: wrap;
+  /* 1. 海報區域 - 第一個顯示 */
+  .poster-area {
+    width: 100%;
+    padding: 0.5rem;
+    order: 1;
   }
 
-  .middle-zine-item {
-    width: 70px; /* 手機版進一步縮小 */
-    height: 100px; /* 手機版進一步縮小 */
-    font-size: 0.5rem;
-    padding: 1px;
-  }
-
-  .zine-container {
-    width: 100%; /* 在 calender-section 內部佔滿寬度 */
+  .poster-buttons-container {
+    flex-direction: column;
+    gap: 1rem;
+    margin-bottom: 1rem;
     padding: 0;
   }
 
-  .right-zine-container {
-    margin-top: 0.5rem;
-    gap: 4px; /* 手機版縮小間距 */
+  .ticket-button-container {
+    margin-right: 0;
+    width: 100%;
   }
 
-  .right-zine-item {
-    width: 70px; /* 手機版進一步縮小 */
-    height: 100px; /* 手機版進一步縮小 */
-    font-size: 0.5rem;
-    padding: 1px;
-  }
-
-  .zine-item {
-    width: 70px; /* 手機版進一步縮小 */
-    height: 100px; /* 手機版進一步縮小 */
-    font-size: 0.5rem;
-    padding: 1px;
-  }
-
-  /* 手機版 Agenda 標題行 */
-  .agenda-header h3 {
-    font-size: 1.2rem;
-    font-family: "IBM Plex Mono", monospace;
-  }
-
-  .agenda-subscribe {
-    font-size: 0.8rem;
-  }
-
-  .agenda-nav-btn {
-    padding: 0.4rem 0.6rem;
+  .ticket-button {
+    width: 100%;
+    padding: 0.8rem 1rem;
     font-size: 0.9rem;
   }
 
-  /* 手機版 Event Type 篩選器 */
-  .event-filter label {
+  .flip-button-container {
+    align-self: center;
+  }
+
+  .flip-button {
+    width: 50px;
+    height: 50px;
     font-size: 0.8rem;
   }
 
-  .event-type-select {
-    font-size: 0.8rem;
-    padding: 0.4rem 0.6rem;
+  .poster-section {
+    width: 100%;
+    height: 400px;
+    padding: 0.5rem;
   }
-
-  /* 手機版時間軸區域 */
-  .timeline-section {
-    padding: 1rem 0;
-  }
-
-  .timeline-section .container {
-    padding-left: 80px; /* 手機版進一步減少左側空間 */
-    flex-direction: column;
-  }
-
-  .agenda-header {
-    max-width: calc(100vw - 100px); /* 手機版調整寬度 */
-  }
-
-  .timeline-section .timeline-mode-container {
-    width: calc(100vw - 100px); /* 手機版調整寬度 */
-  }
-
-  .timeline-section h3 {
-    font-size: 1.5rem;
-    margin-bottom: 1rem;
-    font-family: "IBM Plex Mono", monospace;
-  }
-
-  .timeline-section .timeline-mode-container {
-    height: 35vh; /* 手機版調整為35vh */
-    margin-bottom: 90px; /* 手機版進一步減少下方空間 */
-  }
-
-  .timeline-zine-item {
-    width: 70px; /* 手機版進一步縮小 */
-    height: 100px; /* 手機版進一步縮小 */
-    font-size: 0.6rem;
-    padding: 2px;
-  }
-  
-  /* 手機版下方 Zine 容器調整 */
-  .timeline-bottom-zine-container {
-    bottom: 8px;
-    left: 90px; /* 手機版從左側第3本zine的右側開始 */
-    right: 8px;
-    gap: 2px;
-  }
-  
 
   .poster-container {
-    max-width: 280px; /* 手機上的海報尺寸 */
-    aspect-ratio: 3/4; /* 保持比例 */
+    max-width: 100%;
+    aspect-ratio: 3/4;
   }
 
-  /* 手機版特殊調整 */
+  /* 隱藏右側zine區域 */
+  .right-zine-container {
+    display: none;
+  }
+
+  /* 2. Upcoming Events 區域 - 第二個顯示 */
+  .calender-section.card-section {
+    width: 100%;
+    min-height: 300px;
+    padding: 0.5rem;
+    order: 2;
+  }
+
   .calender-section h3 {
-    font-size: 1.2rem;
+    font-size: 1rem;
     margin-bottom: 0.5rem;
     font-family: "IBM Plex Mono", monospace;
+  }
+
+  /* 3. Zine 橫排區域 - 第三個顯示，只顯示中間的zine */
+  .middle-zine-container {
+    position: relative;
+    top: auto;
+    left: auto;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    gap: 8px;
+    justify-content: center;
+    flex-wrap: wrap;
+    order: 3;
+    margin: 1rem 0;
+  }
+
+  .middle-zine-item {
+    width: 70px;
+    height: 100px;
+    font-size: 0.5rem;
+    padding: 1px;
+  }
+
+  /* 隱藏其他zine區域 */
+  .zine-container {
+    display: none;
+  }
+
+  /* 4. 圖片輪播 - 只顯示一個 */
+  .rotata {
+    position: relative;
+    top: auto;
+    left: auto;
+    width: 100%;
+    height: auto;
+    min-height: auto;
+    order: 4;
+    margin: 1rem 0;
+  }
+
+  /* 只顯示第一個輪播區域 */
+  .rotata div:nth-child(1) {
+    position: relative;
+    top: auto;
+    right: auto;
+    width: 100%;
+    height: 200px;
+    margin: 0 auto;
+  }
+
+  /* 隱藏其他輪播區域 */
+  .rotata div:nth-child(2),
+  .rotata div:nth-child(3) {
+    display: none;
+  }
+
+  /* 5. Newsletter 區域 - 第五個顯示 */
+  .newsletter-section {
+    width: 100%;
+    padding: 1rem;
+    margin: 1rem 0;
+    order: 5;
+  }
+
+  .newsletter-section h3 {
+    font-size: 1.2rem;
+    padding: 0.5rem 0.8rem;
+    margin-bottom: 1rem;
+  }
+
+  .newsletter-content {
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .newsletter-form {
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .form-group input {
+    width: 100%;
+    max-width: 300px;
+    padding: 0.6rem 0.8rem;
+    font-size: 0.8rem;
+  }
+
+  .newsletter-submit-btn {
+    padding: 0.6rem 1rem;
+    font-size: 0.8rem;
+  }
+
+  /* 6. Banner 區域 - 第六個顯示 */
+  .banner {
+    font-size: 0.9rem;
+    padding: 8px 0;
+    order: 6;
+    margin: 1rem 0;
+  }
+
+  .dot {
+    width: 8px;
+    height: 8px;
+    margin: 3px 6px 0px 6px;
+  }
+
+  /* 7. Socials and Credits - 最後顯示 */
+  .footer {
+    order: 7;
+    margin-top: 1rem;
+  }
+
+  .footer-content {
+    font-size: 1rem;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .footer-right {
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  .social-link,
+  .footer-link {
+    font-size: 0.9rem;
+    padding: 6px 12px;
+    min-height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  /* 隱藏不需要的元素 */
+  .event-info {
+    display: none;
+  }
+
+  .timeline-section {
+    display: none;
+  }
+
+  .floating-ticket {
+    display: none;
+  }
+}
+
+/* ===== 滾動橫幅樣式 ===== */
+.banner {
+  font-family: "Inclusive Sans", sans-serif;
+  width: 100%;
+  overflow: hidden;
+  background-color: transparent;
+  white-space: nowrap;
+  position: relative; /* 改為相對定位，在正常文檔流中 */
+  color: var(--main-color);
+  font-size: 1.2rem; /* 增大字體 */
+  padding: 10px 0; /* 增加上下間距 */
+  margin-bottom: 0; /* 與頁腳緊貼 */
+  border-top: 1px solid var(--main-color); /* 添加上方分割線 */
+}
+
+.banner-track {
+  display: flex;
+  animation: scroll-loop 360s linear infinite;
+}
+
+.banner-content {
+  display: flex;
+  white-space: nowrap;
+}
+
+.dot {
+  display: inline-block;
+  width: 12px;
+  height: 12px;
+  background-color: plum;
+  border-radius: 50%;
+  margin: 5px 8px 0px 8px;
+}
+
+@keyframes scroll-loop {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-700%);
+  }
+}
+
+/* 響應式設計 - 滾動橫幅 */
+@media (max-width: 768px) {
+  .banner {
+    font-family: "Inclusive Sans", sans-serif;
+    white-space: nowrap;
+    position: relative; /* 改為相對定位 */
+    width: 100%;
+    background-color: transparent;
+    color: var(--main-color);
+    font-size: 1rem; /* 手機版稍微小一點 */
+    padding: 8px 0;
+  }
+
+  .banner-track {
+    display: flex;
+    animation: scroll-loop 20s linear infinite;
+  }
+
+  .banner-content {
+    display: flex;
+    white-space: nowrap;
   }
 }
 

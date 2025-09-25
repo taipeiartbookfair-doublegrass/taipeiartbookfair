@@ -48,8 +48,10 @@ function createRotator() {
     return;
   }
 
-  const totalPosters = 8;
-  const imagesPerStrip = 8;
+  console.log("rotata 元素找到，開始創建 rotator");
+
+  const totalPosters = 3;
+  const imagesPerStrip = 3;
 
   // 分開 horizontal 和 vertical 的檔名
   const horizontalImages = Array.from(
@@ -74,7 +76,7 @@ function createRotator() {
 
     // 第幾個 rotator 決定抓哪個資料夾
     let sourceImages, folder;
-    if (i === 0 || i === 1 || i === 4 || i === 5 || i === 6) {
+    if (i === 1 || i === 2) {
       sourceImages = shuffledHorizontal;
       folder = "horizental"; // 注意你的資料夾拼字
     } else {
@@ -97,6 +99,7 @@ function createRotator() {
     for (const src of selectedImages) {
       const img = document.createElement("img");
       img.src = `image/${folder}/${src}`;
+      console.log(`添加圖片: ${img.src}`);
       imageStrip.appendChild(img);
     }
     imageStrip.innerHTML += imageStrip.innerHTML;
@@ -170,9 +173,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // Increment to move to the next image position
     current++;
-    if (
-      current === rotataDivs[0].querySelector(".image-strip").children.length
-    ) {
+    // Use a fixed number instead of depending on the first rotator
+    if (current === 3) {
       current = 0; // Reset to 0 to start again seamlessly
     }
   }

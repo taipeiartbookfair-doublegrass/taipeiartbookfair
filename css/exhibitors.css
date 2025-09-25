@@ -74,7 +74,9 @@
 /* 日曆滑動容器 */
 .calender-scroll-container {
   display: block; /* 改為block佈局 */
-  background-image: url(../bgbg.jpg);
+  background-image: url(../image/web-event.png);
+  background-repeat: no-repeat;
+  background-size: 100% auto;
   overflow-x: hidden; /* 隱藏水平滾動 */
   overflow-y: auto; /* 允許垂直滾動 */
   scroll-behavior: smooth;
@@ -99,7 +101,7 @@
   gap: 0; /* 移除間距，改用分隔線 */
   padding: 0;
   width: 100%; /* 佔滿寬度 */
-  background-color: lightcyan;
+  background-color: var(--secondary-color);
 }
 
 /* 日曆項目容器 */

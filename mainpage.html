@@ -15,7 +15,6 @@
     <link rel="stylesheet" href="css/mainpage.css" />
     <link rel="stylesheet" href="css/font.css" />
     <link rel="stylesheet" href="css/exhibitors.css" />
-    <script src="js/homepage-zine.js"></script>
     <script src="js/exhibitors-list.js"></script>
      <!-- Google tag (gtag.js) -->
      <script
@@ -38,15 +37,11 @@
       <!-- automation!! -->
     </div>
 
-    <!-- 社交連結 - 保持固定 -->
-    <div class="social-links">
-      <div style="display: flex; justify-content: flex-end; margin-right: 16px">
-        <li class="language-switcher">
-          <button id="language-toggle" class="language-btn">English</button>
-        </li>
-        <!-- <p style="color: ghostwhite">FAQ</p> -->
-        <p style="color: MediumVioletRed">INSTAGRAM</p>
-        <p style="color: MediumVioletRed">FACEBOOK</p>
+    <!-- 右上角控制區域 -->
+    <div class="top-controls">
+      <div class="top-controls-content">
+        <button id="language-toggle" class="language-btn">English</button>
+        <a href="#contact" class="exhibitor-login-btn">EXHIBITOR LOGIN</a>
       </div>
     </div>
 
@@ -56,20 +51,27 @@
         <div class="main-title-area">
           <a
             id="site-name"
+            href="#"
             style="
-              font-family: 'IBM Plex Sans JP', sans-serif;
-              color:  var(--main-color);
-              text-shadow: none;
-              font-size: 4.5rem;
-              line-height: 4rem;
               text-decoration: none;
-              font-weight: 400;
+              display: block;
             "
-            >TAIPEI ART BOOK FAIR</a
           >
+            <img 
+              src="image/logo.svg" 
+              alt="TAIPEI ART BOOK FAIR" 
+              class="site-logo"
+              style="
+                height: 2rem;
+                width: auto;
+                max-width: 100%;
+              "
+            />
+          </a>
         </div>
       </div>
     </div>
+    
     <!-- 導航項目區域 - Sticky -->
     <nav class="nav-items-area sticky-nav">
       <div class="container">
@@ -85,83 +87,18 @@
           <!-- <li><a href="#exhibitors" id="nav-exhibitors">ZINE WALL</a></li>
           <li><a href="#exhibitors" id="nav-exhibitors">ARCHIVE</a></li> -->
           <li><a href="#about" id="nav-about">ABOUT</a></li>
-          <li>
-            <a href="#contact" class="footer-link exhibitor-login"
-              >EXHIBITOR LOGIN</a
-            >
-          </li>
         </ul>
       </div>
     </nav>
 
-    <div class="event-info">
-      <!-- 攤商資訊顯示區域 -->
-      <div class="exhibitor-info-content">
-        <!-- 展開按鈕 - 放在左邊 -->
-        <div class="exhibitor-expand-btn" id="exhibitorExpandBtnOuter">
-          <span class="expand-text">攤商</span>
-          <span class="expand-arrow">↓</span>
-        </div>
-
-        <div class="exhibitor-display-container">
-          <div class="exhibitor-item-display">
-            <span class="exhibitor-booth-number"></span>
-            <span class="exhibitor-name"></span>
-            <span class="exhibitor-region"></span>
-          </div>
-          <span class="exhibitor-separator">｜</span>
-          <div class="exhibitor-item-display">
-            <span class="exhibitor-booth-number"></span>
-            <span class="exhibitor-name"></span>
-            <span class="exhibitor-region"></span>
-          </div>
-          <span class="exhibitor-separator">｜</span>
-          <div class="exhibitor-item-display">
-            <span class="exhibitor-booth-number"></span>
-            <span class="exhibitor-name"></span>
-            <span class="exhibitor-region"></span>
-          </div>
-        </div>
-      </div>
-
-      <!-- Ticket 購票區塊 -->
-      <div class="ticket-info">
-        <div class="ticket-content">
-          <p>參與草率季＆購票頁面</p>
-        </div>
-      </div>
-
-      <!-- 攤商名單展開區域 -->
-      <div class="exhibitor-full-list" id="exhibitorFullList">
-        <!-- 頂部控制區域 -->
-        <div class="exhibitor-top-controls">
-          <div class="exhibitor-expand-btn" id="exhibitorExpandBtn">
-            <span class="expand-text">攤商</span>
-            <span class="expand-arrow">↓</span>
-          </div>
-          
-          <!-- 排序按鈕 -->
-          <div class="exhibitor-sort-buttons">
-            <button class="sort-button active" data-sort="country">COUNTRY</button>
-            <button class="sort-button" data-sort="zone">ZONE</button>
-            <button class="sort-button" data-sort="name">NAME</button>
-          </div>
-          
-          <div class="ticket-info">
-            <div class="ticket-content">
-              <p>參與草率季＆購票頁面</p>
-            </div>
-          </div>
-        </div>
-        
-        <div class="exhibitors-grid"></div>
-      </div>
-    </div>
 
     <!-- start of monopoly-style layout -->
     <div class="monopoly-board">
       <!-- 左方書籍邊框 -->
       <div class="book-border book-border-left">
+        <h3 class="zine-wall-title">
+          ZINE WALL:
+        </h3>
         <div class="book-item"></div>
         <div class="book-item"></div>
         <div class="book-item"></div>
@@ -169,11 +106,24 @@
 
       <!-- 中央主要內容區域 -->
       <div class="main-content">
-        <!-- 海報整體區域 -->
-        <div class="poster-area">
-          <h3 style="transform: rotate(2deg);">
-            FEATURED EVENT
-          </h3>
+        <!-- 上層內容區域 - 海報和PROGRAMS水平排列 -->
+        <div class="top-content-wrapper">
+          <!-- 海報整體區域 -->
+          <div class="poster-area">
+          <!-- 按鈕區域 - 左右並排 -->
+          <div class="poster-buttons-container">
+            <div class="ticket-button-container">
+              <a href="https://www.taipeiartbookfair.com/2025/ticket" target="_blank" class="ticket-button">
+                VISIT&TICKETS
+              </a>
+            </div>
+            <div class="flip-button-container">
+              <button class="flip-button" id="flipIndicator">
+                <span class="flip-text">👆</span>
+              </button>
+            </div>
+          </div>
+          
           <!-- start of poster-section -->
           <section class="poster-section" id="Poster">
             <div class="poster-container" data-flipped="false">
@@ -187,21 +137,6 @@
               </div>
             </div>
           </section>
-
-          <!-- 海報控制區域 - 放在海報下方 -->
-          <div class="poster-controls-wrapper">
-            <div class="poster-controls">
-              <button class="control-btn prev-btn" id="prevPoster">
-                <span class="arrow-left">←</span>
-              </button>
-              <div class="control-center" id="flipIndicator">
-                <span class="click-text">👆</span>
-              </div>
-              <button class="control-btn next-btn" id="nextPoster">
-                <span class="arrow-right">→</span>
-              </button>
-            </div>
-          </div>
           <!-- 右側 Zine 區域 - 在 poster 控制區下方 -->
           <div class="right-zine-container">
             <div class="right-zine-item"></div>
@@ -222,15 +157,8 @@
 
         <!-- 條列模式區域 - 縮短寬度 -->
         <section class="calender-section card-section" id="calender">
-          <!-- Zine 區域 - 在 PROGRAMS 標題上方 -->
-          <div class="zine-container">
-            <div class="zine-item"></div>
-            <div class="zine-item"></div>
-            <div class="zine-item"></div>
-          </div>
-
-          <h3 style="transform: rotate(-3deg);">
-            PROGRAMS
+          <h3>
+            Upcoming Events
           </h3>
 
           <!-- Event Type 篩選器 -->
@@ -268,96 +196,39 @@
             <button id="timelineMode" class="mode-btn"></button>
           </div>
         </section>
+        </div>
+        <!-- end of top-content-wrapper -->
+
+        <!-- Newsletter Sign Up 區域 - 在PROGRAMS下方 -->
+        <section class="newsletter-section" id="newsletter">
+          <h3>NEWSLETTER</h3>
+          
+          <div class="newsletter-content">
+            <form class="newsletter-form" id="newsletterForm">
+              <div class="form-group">
+                <input 
+                  type="email" 
+                  id="newsletter-email" 
+                  name="email" 
+                  placeholder="your@email.com"
+                  required
+                >
+              </div>
+              <button type="submit" class="newsletter-submit-btn">
+                SUBSCRIBE
+              </button>
+            </form>
+            
+            <div class="newsletter-message" id="newsletterMessage" style="display: none;">
+              <!-- 成功/錯誤訊息將在這裡顯示 -->
+            </div>
+          </div>
+        </section>
       </div>
       <!-- end of main-content -->
     </div>
     <!-- end of monopoly-board -->
 
-    <!-- 時間軸模式區域 - 鋪滿下方 -->
-    <section class="timeline-section" id="timelineSection">
-      <div class="container">
-        <!-- L 型 Zine 區域 - 包圍時間軸 -->
-        <!-- 左側垂直 Zine 區域 -->
-        <div class="timeline-left-zine-container">
-          <div class="timeline-zine-item timeline-zine-vertical"></div>
-          <div class="timeline-zine-item timeline-zine-vertical"></div>
-          <div class="timeline-zine-item timeline-zine-vertical"></div>
-        </div>
-        
-        <!-- 下方水平 Zine 區域 -->
-        <div class="timeline-bottom-zine-container">
-          <div class="timeline-zine-item timeline-zine-horizontal"></div>
-          <div class="timeline-zine-item timeline-zine-horizontal"></div>
-          <div class="timeline-zine-item timeline-zine-horizontal"></div>
-          <div class="timeline-zine-item timeline-zine-horizontal"></div>
-        </div>
-
-        <!-- Agenda 標題行 -->
-        <div class="agenda-header">
-          <h3 style="transform: rotate(1deg);">
-            The Grand Agenda of TAIPEI ART BOOK FAIR
-          </h3>
-          <div class="agenda-controls">
-            <p class="agenda-subscribe">
-              <a
-                href="https://calendar.google.com/calendar/u/2?cid=OTA1MjdmNjdmYTQ2MmM4M2UxODRiMGM2MmRlZjEwZWJjOGIwMGNjOGM2N2E1YjgzYWYyYWZiOTBhMWJkYjI5M0Bncm91cC5jYWxlbmRhci5nb29nbGUuY29t"
-                >Suscribe to TPABF's calender</a
-              >
-            </p>
-          </div>
-        </div>
-        <!-- 時間軸模式容器 - 確保ID正確且始終顯示 -->
-        <div
-          class="timeline-mode-container"
-          id="timelineModeContainer"
-          style="display: block"
-        >
-          <div class="timeline-scroll-container" id="timelineScroll">
-            <div class="timeline-calendar" id="timelineCalendar">
-              <!-- 時間軸日曆將由 JavaScript 動態生成 -->
-              <!-- 測試內容 - 如果看到這個說明容器是可見的 -->
-              <div
-                style="
-                  padding: 20px;
-                  text-align: center;
-                  color: #666;
-                  font-size: 14px;
-                "
-              >
-                LOADING...
-              </div>
-            </div>
-          </div>
-
-          <!-- 時間軸圖例 - 右下方 -->
-          <div class="timeline-legend">
-            <h4>Event Types</h4>
-            <div class="legend-items">
-              <div class="legend-item">
-                <span class="legend-dot talk"></span>
-                <span class="legend-label">Talk</span>
-              </div>
-              <div class="legend-item">
-                <span class="legend-dot workshop"></span>
-                <span class="legend-label">Workshop</span>
-              </div>
-              <div class="legend-item">
-                <span class="legend-dot performance"></span>
-                <span class="legend-label">Performance</span>
-              </div>
-              <div class="legend-item">
-                <span class="legend-dot exhibition"></span>
-                <span class="legend-label">Exhibition</span>
-              </div>
-              <div class="legend-item">
-                <span class="legend-dot other"></span>
-                <span class="legend-label">Other</span>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
 
     <!-- 浮動的Ticket按鈕 -->
     <div class="floating-ticket" id="floatingTicket" style="display: none">
@@ -373,129 +244,72 @@
       >
     </div>
 
+    <!-- 滾動橫幅 -->
+    <div class="banner">
+      <div class="banner-track">
+        <div class="banner-content">
+          <span class="dot"></span> 2025 草率季 TPABF
+          徵件結果已公布，請有報名的單位登入攤商系統查詢。 
+          <span class="dot"></span> The selection results for the 2025 TPABF are
+          now available. Please log in to the exhibitor system to check your
+          application status. 
+          <span class="dot" style="background-color: blueviolet"></span>
+          請持續關注我們的社群平台，掌握最新活動消息。Follow us on social media
+          for the latest updates.
+          <span class="dot"></span> 2025 草率季 TPABF
+          徵件結果已公布，請有報名的單位登入攤商系統查詢。 
+          <span class="dot"></span> The selection results for the 2025 TPABF are
+          now available. Please log in to the exhibitor system to check your
+          application status. 
+          <span class="dot" style="background-color: blueviolet"></span>
+          請持續關注我們的社群平台，掌握最新活動消息。Follow us on social media
+          for the latest updates.
+        </div>
+        <div class="banner-content">
+          <span class="dot"></span> 2025 草率季 TPABF
+          徵件結果已公布，請有報名的單位登入攤商系統查詢。 
+          <span class="dot"></span> The selection results for the 2025 TPABF are
+          now available. Please log in to the exhibitor system to check your
+          application status. 
+          <span class="dot" style="background-color: blueviolet"></span>
+          請持續關注我們的社群平台，掌握最新活動消息。Follow us on social media
+          for the latest updates.
+          <span class="dot"></span> 2025 草率季 TPABF
+          徵件結果已公布，請有報名的單位登入攤商系統查詢。 
+          <span class="dot"></span> The selection results for the 2025 TPABF are
+          now available. Please log in to the exhibitor system to check your
+          application status. 
+          <span class="dot" style="background-color: blueviolet"></span>
+          請持續關注我們的社群平台，掌握最新活動消息。Follow us on social media
+          for the latest updates.
+          <span class="dot"></span> 2025 草率季 TPABF
+          徵件結果已公布，請有報名的單位登入攤商系統查詢。 
+          <span class="dot"></span> The selection results for the 2025 TPABF are
+          now available. Please log in to the exhibitor system to check your
+          application status. 
+          <span class="dot" style="background-color: blueviolet"></span>
+          請持續關注我們的社群平台，掌握最新活動消息。Follow us on social media
+          for the latest updates.
+          <span class="dot"></span> 2025 草率季 TPABF
+          徵件結果已公布，請有報名的單位登入攤商系統查詢。 
+          <span class="dot"></span> The selection results for the 2025 TPABF are
+          now available. Please log in to the exhibitor system to check your
+          application status. 
+          <span class="dot" style="background-color: blueviolet"></span>
+          請持續關注我們的社群平台，掌握最新活動消息。Follow us on social media
+          for the latest updates.
+        </div>
+      </div>
+    </div>
+
     <!-- 頁腳 -->
     <footer class="footer">
       <div class="footer-content">
-        <div class="footer-left">
-          <!-- Mailchimp Newsletter Form -->
-          <div
-            id="mc_embed_signup"
-            style="display: flex; align-items: center; gap: 10px"
-          >
-            <form
-              action="https://double-grass.us1.list-manage.com/subscribe/post?u=d8c7b3dc8532a4323466edd2d&amp;id=ca8c067b40&amp;f_id=009678e2f0"
-              method="post"
-              id="mc-embedded-subscribe-form"
-              name="mc-embedded-subscribe-form"
-              class="validate"
-              novalidate=""
-              style="display: flex; align-items: center; gap: 10px; margin: 0"
-            >
-              <span
-                class="footer-text"
-                style="
-                  font-family: 'IBM Plex Sans JP', sans-serif;
-                  color: MediumVioletRed;
-                  font-size: 1.5rem;
-                  vertical-align: middle;
-                  transform: translateY(4px);
-                "
-                >NEWSLETTER</span
-              >
-
-              <div class="mc-field-group" style="position: relative">
-                <input
-                  type="email"
-                  value=""
-                  name="EMAIL"
-                  class="required email"
-                  id="mce-EMAIL"
-                  placeholder="Enter your email"
-                  required=""
-                  style="
-                    background: HoneyDew;
-                    color: MediumVioletRed;
-                    font-size: 1rem;
-                    width: 400px;
-                    height: 35px;
-                    outline: none;
-                    font-family: inherit;
-                    text-indent: 10px;
-                    border-radius: 15px;
-                    border: 1px solid MediumVioletRed;
-                    box-shadow: none;
-                  "
-                />
-                <!-- Error/Success Messages -->
-                <div
-                  id="mce-responses"
-                  class="clear foot"
-                  style="
-                    position: absolute;
-                    top: 100%;
-                    left: 0;
-                    width: 100%;
-                    z-index: 1000;
-                  "
-                >
-                  <div
-                    class="response"
-                    id="mce-error-response"
-                    style="
-                      display: none;
-                      color: #e74c3c;
-                      font-size: 0.9rem;
-                      margin-top: 5px;
-                    "
-                  ></div>
-                  <div
-                    class="response"
-                    id="mce-success-response"
-                    style="
-                      display: none;
-                      color: #27ae60;
-                      font-size: 0.9rem;
-                      margin-top: 5px;
-                    "
-                  ></div>
-                </div>
-              </div>
-
-              <!-- Bot protection -->
-              <div style="position: absolute; left: -5000px" aria-hidden="true">
-                <input
-                  type="text"
-                  name="b_d8c7b3dc8532a4323466edd2d_ca8c067b40"
-                  tabindex="-1"
-                  value=""
-                />
-              </div>
-
-              <div class="optionalParent">
-                <div class="clear foot">
-                  <input
-                    type="submit"
-                    value="SIGN UP"
-                    name="subscribe"
-                    id="mc-embedded-subscribe"
-                    class="button"
-                    style="
-                      background: HoneyDew;
-                      color: MediumVioletRed;
-                      font-size: 0.9rem;
-                      border: 1px solid MediumVioletRed;
-                      cursor: pointer;
-                      white-space: nowrap;
-                      padding: 8px 16px;
-                      transition: color 0.3s ease;
-                    "
-                  />
-                </div>
-              </div>
-            </form>
-          </div>
-        </div>
+        <!-- <div class="footer-left">
+        </div> -->
         <div class="footer-right">
+          <a href="#" class="social-link">FACEBOOK</a>
+          <a href="#" class="social-link">INSTAGRAM</a>
           <a href="#contact" class="footer-link">CREDITS</a>
         </div>
       </div>
@@ -550,102 +364,7 @@
       // 初始化按鈕文字
       updateLanguageButton();
 
-      // Open Call 資訊展開/收合功能
-      const posterControls = document.getElementById("posterControls");
-      const openCallInfo = document.getElementById("openCallInfo");
-      let isOpenCallExpanded = false;
-
-      posterControls.addEventListener("click", () => {
-        if (isOpenCallExpanded) {
-          // 收合
-          openCallInfo.style.maxHeight = "0";
-          isOpenCallExpanded = false;
-        } else {
-          // 展開
-          openCallInfo.style.maxHeight = "800px"; // 設定足夠的高度來顯示內容
-          isOpenCallExpanded = true;
-        }
-      });
-
-      // 浮動Ticket按鈕動畫
-      const floatingTicket = document.getElementById("floatingTicket");
-      let ticketX = Math.random() * (window.innerWidth - 240); // 15rem = 240px
-      let ticketY = Math.random() * (window.innerHeight - 48); // 3rem = 48px
-      let ticketSpeedX = (Math.random() - 0.5) * 1.5 + 0.8; // 0.8-2.3 或 -0.8 到 -2.3
-      let ticketSpeedY = (Math.random() - 0.5) * 1.5 + 0.8; // 0.8-2.3 或 -0.8 到 -2.3
-      let isAnimating = true; // 控制動畫狀態
-      let isHovered = false; // 控制hover狀態
-
-      function animateTicket() {
-        if (!isAnimating || isHovered) return; // 如果動畫被停止或正在hover，直接返回
-
-        // 更新位置
-        ticketX += ticketSpeedX;
-        ticketY += ticketSpeedY;
-
-        // 邊界碰撞檢測 - 更精確的邊界計算
-        if (ticketX <= 0 || ticketX >= window.innerWidth - 120) {
-          ticketSpeedX = -ticketSpeedX;
-          // 添加一點隨機性，讓碰撞後的運動更自然
-          ticketSpeedY += (Math.random() - 0.5) * 0.5;
-        }
-        if (ticketY <= 0 || ticketY >= window.innerHeight - 60) {
-          ticketSpeedY = -ticketSpeedY;
-          // 添加一點隨機性，讓碰撞後的運動更自然
-          ticketSpeedX += (Math.random() - 0.5) * 0.5;
-        }
-
-        // 限制速度範圍，避免過快或過慢
-        ticketSpeedX = Math.max(-3, Math.min(3, ticketSpeedX));
-        ticketSpeedY = Math.max(-3, Math.min(3, ticketSpeedY));
-
-        // 確保按鈕不會超出螢幕邊界
-        ticketX = Math.max(0, Math.min(ticketX, window.innerWidth - 120));
-        ticketY = Math.max(0, Math.min(ticketY, window.innerHeight - 60));
-
-        // 應用位置
-        floatingTicket.style.left = ticketX + "px";
-        floatingTicket.style.top = ticketY + "px";
-      }
-
-      // 每100毫秒更新一次位置，減少動畫頻率
-      const animationInterval = setInterval(animateTicket, 100);
-
-      // Hover 事件處理
-      floatingTicket.addEventListener("mouseenter", () => {
-        isHovered = true;
-        console.log("Ticket hovered - animation paused");
-      });
-
-      floatingTicket.addEventListener("mouseleave", () => {
-        isHovered = false;
-        console.log("Ticket unhovered - animation resumed");
-      });
-
-      // Hide按鈕功能 - 改進版本
-      const hideTicketBtn = document.getElementById("hideTicketBtn");
-      hideTicketBtn.addEventListener("click", (e) => {
-        e.preventDefault(); // 防止默認行為
-        e.stopPropagation(); // 防止觸發ticket按鈕的點擊事件
-        e.stopImmediatePropagation(); // 防止其他事件監聽器
-
-        // 停止動畫
-        isAnimating = false;
-        clearInterval(animationInterval);
-
-        // 隱藏按鈕
-        floatingTicket.style.display = "none";
-
-        console.log("Ticket button hidden"); // 調試用
-      });
-
-      // Mailchimp Newsletter Form Validation and Handling
-      (function ($) {
-        window.fnames = new Array();
-        window.ftypes = new Array();
-        fnames[0] = "EMAIL";
-        ftypes[0] = "email";
-      })(jQuery);
+      
 
       // Custom form submission handling for better UX
       document
@@ -709,36 +428,48 @@
     <script src="js/poster-flip.js"></script>
     <script src="js/calender.js"></script>
     <script src="js/duolanguage.js"></script>
-    <script src="mainpage_image_rotata.js"></script>
+    <script src="js/mainpage_image_rotata.js"></script>
     <script src="js/homepage-zine.js"></script>
     <script src="js/exhibitor-display.js"></script>
-
-    <!-- 初始化時間軸模式的腳本 -->
+    
+    <!-- Newsletter JavaScript -->
     <script>
-      // 等待 DOM 和 calender.js 載入完成後執行
-      document.addEventListener("DOMContentLoaded", function () {
-        // 延遲執行，確保 calender.js 已經載入
-        setTimeout(function () {
-          console.log("強制顯示時間軸模式");
-
-          // 確保時間軸容器顯示
-          const timelineModeContainer = document.getElementById(
-            "timelineModeContainer"
-          );
-          if (timelineModeContainer) {
-            timelineModeContainer.style.display = "block";
-            timelineModeContainer.classList.remove("hidden");
-            console.log("時間軸容器已設置為顯示");
-
-            // 如果 renderTimelineMode 函數存在，調用它
-            if (typeof renderTimelineMode === "function") {
-              renderTimelineMode();
-              console.log("時間軸模式已渲染");
+      document.addEventListener('DOMContentLoaded', function() {
+        const newsletterForm = document.getElementById('newsletterForm');
+        const messageDiv = document.getElementById('newsletterMessage');
+        
+        if (newsletterForm) {
+          newsletterForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const email = document.getElementById('newsletter-email').value;
+            
+            // 簡單的email驗證
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (!emailRegex.test(email)) {
+              showNewsletterMessage('error', 'Please enter a valid email address.');
+              return;
             }
-          }
-        }, 1000); // 延遲1秒執行
+            
+            // 模擬提交（這裡可以連接到實際的newsletter服務）
+            showNewsletterMessage('success', 'Thank you for subscribing! You will receive updates about Taipei Art Book Fair.');
+            
+            // 清空表單
+            newsletterForm.reset();
+          });
+        }
+        
+        function showNewsletterMessage(type, message) {
+          messageDiv.className = `newsletter-message ${type}`;
+          messageDiv.textContent = message;
+          messageDiv.style.display = 'block';
+          
+          // 3秒後隱藏訊息
+          setTimeout(() => {
+            messageDiv.style.display = 'none';
+          }, 3000);
+        }
       });
     </script>
-    <script src="js/homepage-zine.js"></script>
   </body>
 </html>
