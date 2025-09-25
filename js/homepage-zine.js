@@ -5,9 +5,15 @@ function populateZineElements(booksArray) {
     ".book-item, .right-zine-item, .middle-zine-item, .zine-item, .timeline-zine-item"
   );
 
-  // 預先設定所有元素的 hover 效果
+  // 預先設定所有元素的 hover 效果並清除舊的事件監聽器
   zineElements.forEach((element) => {
     element.style.transition = "all 0.2s ease";
+    
+    // 清除舊的事件監聽器（通過設置標記來避免重複綁定）
+    if (element.hasAttribute('data-hover-bound')) {
+      return; // 已經綁定過，跳過
+    }
+    element.setAttribute('data-hover-bound', 'true');
   });
 
   // 為每個 zine 格子填入對應的書籍資料
@@ -41,27 +47,31 @@ function populateZineElements(booksArray) {
           img.onerror = function () {
             console.error(`圖片載入失敗: ${imageUrl}`);
             // 如果圖片載入失敗，設定 plum 背景
-            zineElement.style.backgroundColor = "plum";
+            zineElement.style.backgroundColor = "transparent";
             zineElement.style.color = "white";
             zineElement.style.textShadow = "1px 1px 2px rgba(0,0,0,0.5)";
           };
           img.src = imageUrl;
         } else {
           console.log(`Zine ${index + 1} 沒有有效的圖片 URL`);
-          zineElement.style.backgroundColor = "plum";
+          zineElement.style.backgroundColor = "transparent";
           zineElement.style.color = "white";
           zineElement.style.textShadow = "1px 1px 2px rgba(0,0,0,0.5)";
         }
       } else {
         console.log(`Zine ${index + 1} 沒有照片欄位`);
-        zineElement.style.backgroundColor = "plum";
+        zineElement.style.backgroundColor = "transparent";
         zineElement.style.color = "white";
         zineElement.style.textShadow = "1px 1px 2px rgba(0,0,0,0.5)";
       }
 
       // 添加 hover 效果，顯示標題
-      const title = item["品名"] || "未知標題";
+      // 優先順序：商品名稱(英) > 商品名稱(中) > 品名 > 未知標題
+      const title = item["商品名稱(英)"] || item["商品名稱(中)"] || item["品名"] || "未知標題";
+      console.log(`為第 ${index + 1} 個 zine 綁定 hover 事件，標題: ${title}`);
+      
       zineElement.addEventListener("mouseenter", function () {
+        console.log(`Hover 事件觸發 - 第 ${index + 1} 個 zine`);
         this.style.color = "black";
         this.style.textShadow = "none";
         this.style.fontSize = "0.8rem";
@@ -84,29 +94,39 @@ function populateZineElements(booksArray) {
   // 為沒有書籍資料的格子設定 plum 背景
   for (let i = booksArray.length; i < zineElements.length; i++) {
     const zineElement = zineElements[i];
-    zineElement.style.backgroundColor = "plum";
+    zineElement.style.backgroundColor = "plum"; // 修正：應該是 plum 不是 transparent
     zineElement.style.color = "white";
     zineElement.style.textShadow = "1px 1px 2px rgba(0,0,0,0.5)";
+    zineElement.textContent = ""; // 確保空格子沒有文字內容
 
-    // 為空格子也添加 hover 效果
+    // 為空格子也添加 hover 效果 - 使用統一的邏輯
     zineElement.addEventListener("mouseenter", function () {
       this.style.color = "black";
       this.style.textShadow = "none";
+      this.style.fontSize = "0.8rem";
       this.style.writingMode = "horizontal-tb";
       this.style.textOrientation = "mixed";
       this.style.transform = `rotate(${(Math.random() - 0.5) * 10}deg)`;
-      this.innerHTML = `<div style="background-color: plum; width: 100%; padding: 4px 0; border-radius: 2px; text-align: center;">${this.textContent}</div>`;
+      this.style.backgroundColor = "transparent";
+      this.innerHTML = `<div style="background-color: plum; width: 100%; padding: 4px 0; text-align: center; margin: 1px;">空位</div>`;
     });
 
     zineElement.addEventListener("mouseleave", function () {
+      this.style.backgroundColor = "plum";
       this.style.color = "white";
       this.style.textShadow = "1px 1px 2px rgba(0,0,0,0.5)";
+      this.textContent = "";
     });
   }
 }
 
-async function getRandomImages(count = 14) {
+async function getRandomImages(count = 11, retryCount = 0, maxRetries = 3) {
   const url = `https://script.google.com/macros/s/AKfycbyeDDI-trIyGuqQW81NQH6VEDATSbdmqCWG25ll-8kPP33zWzhS5EnTx1qDscb6Y4Py/exec`;
+  
+  // 增加請求數量以確保有足夠的有照片資料
+  const requestCount = Math.max(count * 2, 20); // 至少請求20筆，或count的2倍
+  console.log(`正在請求 ${requestCount} 本書籍資料，期望獲得 ${count} 筆有照片的資料... (嘗試 ${retryCount + 1}/${maxRetries + 1})`);
+  
   try {
     // 預載入圖片以提升載入速度
     const preloadImages = (imageUrls) => {
@@ -116,20 +136,31 @@ async function getRandomImages(count = 14) {
       });
     };
 
-    const res = await fetch(url, {
+    // 設定超時時間 (25秒)
+    const timeout = 25000;
+    const timeoutPromise = new Promise((_, reject) =>
+      setTimeout(() => reject(new Error('API 請求超時 (25秒)')), timeout)
+    );
+
+    const fetchPromise = fetch(url, {
       method: "POST",
       mode: "cors",
       headers: {
         "Content-Type": "application/x-www-form-urlencoded",
       },
-      body: `action=get_random_info&randomCount=${count}`,
+      body: `action=get_random_info&randomCount=${requestCount}`,
     });
+
+    // 使用 Promise.race 來處理超時
+    const res = await Promise.race([fetchPromise, timeoutPromise]);
+    console.log(`API 回應狀態: ${res.status}`);
 
     if (!res.ok) {
       throw new Error(`HTTP error! status: ${res.status}`);
     }
 
     const response = await res.json();
+    console.log("API 回應:", response);
 
     // 檢查是否回傳的是預設訊息（表示 doGet 沒有處理 action 參數）
     if (
@@ -165,12 +196,35 @@ async function getRandomImages(count = 14) {
     }
 
     // 確保 data 是陣列格式
-    const booksArray = Array.isArray(data) ? data : [data];
+    const allBooksArray = Array.isArray(data) ? data : [data];
+    
+    // 過濾出有照片的資料
+    const booksWithPhotos = allBooksArray.filter((item) => {
+      if (!item["照片"]) return false;
+      
+      // 檢查照片欄位是否有有效內容
+      const photoUrls = item["照片"].split("\n").map(url => url.trim()).filter(url => url);
+      return photoUrls.length > 0;
+    });
+    
+    console.log(`原始資料: ${allBooksArray.length} 筆，有照片的資料: ${booksWithPhotos.length} 筆`);
+    
+    // 如果沒有足夠的有照片資料，嘗試再次請求
+    if (booksWithPhotos.length < count && retryCount < maxRetries) {
+      console.log(`有照片的資料不足 (${booksWithPhotos.length}/${count})，將重試...`);
+      setTimeout(() => {
+        getRandomImages(count, retryCount + 1, maxRetries);
+      }, (retryCount + 1) * 2000);
+      return;
+    }
+    
+    // 只取需要的數量
+    const booksArray = booksWithPhotos.slice(0, count);
+    console.log(`最終使用 ${booksArray.length} 筆有照片的資料`);
 
     // 非阻塞預載入圖片
     setTimeout(() => {
       const imageUrls = booksArray
-        .filter((item) => item["照片"])
         .map((item) => item["照片"].split("\n")[0].trim())
         .filter((url) => url);
 
@@ -180,14 +234,29 @@ async function getRandomImages(count = 14) {
     }, 0);
 
     // 填充 zine 元素
+    console.log("準備填充 zine 元素，書籍資料:", booksArray);
     populateZineElements(booksArray);
+    
+    // 如果成功獲取資料，重置重試計數
+    console.log(`成功獲取 ${booksArray.length} 筆資料`);
+    
   } catch (error) {
-    // 如果 API 呼叫失敗，設定所有格子為 plum 背景
-    populateZineElements([]);
+    console.error("API 調用失敗:", error);
+    
+    // 重試機制
+    if (retryCount < maxRetries) {
+      console.log(`將在 ${(retryCount + 1) * 2} 秒後重試...`);
+      setTimeout(() => {
+        getRandomImages(count, retryCount + 1, maxRetries);
+      }, (retryCount + 1) * 2000); // 指數退避：2秒、4秒、6秒
+    } else {
+      console.log("達到最大重試次數，使用空陣列填充 zine 元素");
+      populateZineElements([]);
+    }
   }
 }
 
 // 等待頁面載入完成後執行
 document.addEventListener("DOMContentLoaded", function () {
-  getRandomImages(22);
+  getRandomImages(11);
 });

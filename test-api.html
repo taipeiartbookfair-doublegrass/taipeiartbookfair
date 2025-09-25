@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>API 測試</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            background: #f5f5f5;
+        }
+        .test-container {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            margin-bottom: 20px;
+        }
+        .test-button {
+            background: #007bff;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 4px;
+            cursor: pointer;
+            margin: 5px;
+        }
+        .test-button:hover {
+            background: #0056b3;
+        }
+        .result {
+            background: #f8f9fa;
+            border: 1px solid #dee2e6;
+            border-radius: 4px;
+            padding: 15px;
+            margin-top: 10px;
+            white-space: pre-wrap;
+            font-family: monospace;
+            max-height: 400px;
+            overflow-y: auto;
+        }
+        .error {
+            background: #f8d7da;
+            border-color: #f5c6cb;
+            color: #721c24;
+        }
+        .success {
+            background: #d4edda;
+            border-color: #c3e6cb;
+            color: #155724;
+        }
+        .loading {
+            background: #d1ecf1;
+            border-color: #bee5eb;
+            color: #0c5460;
+        }
+    </style>
+</head>
+<body>
+    <h1>Zine API 測試工具</h1>
+    
+    <div class="test-container">
+        <h2>API 連接測試</h2>
+        <button class="test-button" onclick="testBasicConnection()">測試基本連接</button>
+        <button class="test-button" onclick="testWithTimeout()">測試超時處理</button>
+        <button class="test-button" onclick="testMultipleRequests()">測試多次請求</button>
+        <button class="test-button" onclick="clearResults()">清除結果</button>
+        <div id="results"></div>
+    </div>
+
+    <script>
+        const API_URL = 'https://script.google.com/macros/s/AKfycbyeDDI-trIyGuqQW81NQH6VEDATSbdmqCWG25ll-8kPP33zWzhS5EnTx1qDscb6Y4Py/exec';
+        
+        function log(message, type = 'info') {
+            const resultsDiv = document.getElementById('results');
+            const timestamp = new Date().toLocaleTimeString();
+            const logEntry = document.createElement('div');
+            logEntry.className = `result ${type}`;
+            logEntry.textContent = `[${timestamp}] ${message}`;
+            resultsDiv.appendChild(logEntry);
+            resultsDiv.scrollTop = resultsDiv.scrollHeight;
+        }
+
+        function clearResults() {
+            document.getElementById('results').innerHTML = '';
+        }
+
+        async function testBasicConnection() {
+            log('開始測試基本API連接...', 'loading');
+            
+            try {
+                const startTime = Date.now();
+                
+                const response = await fetch(API_URL, {
+                    method: "POST",
+                    mode: "cors",
+                    headers: {
+                        "Content-Type": "application/x-www-form-urlencoded",
+                    },
+                    body: `action=get_random_info&randomCount=5`,
+                });
+                
+                const endTime = Date.now();
+                const responseTime = endTime - startTime;
+                
+                log(`API 響應時間: ${responseTime}ms`, 'info');
+                log(`HTTP 狀態碼: ${response.status}`, response.ok ? 'success' : 'error');
+                
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+                
+                const data = await response.json();
+                log(`API 響應數據: ${JSON.stringify(data, null, 2)}`, 'success');
+                
+                // 分析響應數據
+                if (data.success && data.data) {
+                    if (Array.isArray(data.data)) {
+                        log(`成功獲取 ${data.data.length} 筆資料`, 'success');
+                    } else if (data.data.records) {
+                        log(`成功獲取 ${data.data.records.length} 筆資料 (records)`, 'success');
+                    } else {
+                        log(`資料格式: ${Object.keys(data.data).join(', ')}`, 'info');
+                    }
+                } else if (Array.isArray(data)) {
+                    log(`成功獲取 ${data.length} 筆資料 (直接陣列)`, 'success');
+                } else {
+                    log(`未知的資料格式`, 'error');
+                }
+                
+            } catch (error) {
+                log(`API 連接失敗: ${error.message}`, 'error');
+            }
+        }
+
+        async function testWithTimeout() {
+            log('開始測試超時處理...', 'loading');
+            
+            const timeout = 15000; // 15秒超時
+            
+            try {
+                const timeoutPromise = new Promise((_, reject) =>
+                    setTimeout(() => reject(new Error('請求超時 (15秒)')), timeout)
+                );
+                
+                const fetchPromise = fetch(API_URL, {
+                    method: "POST",
+                    mode: "cors",
+                    headers: {
+                        "Content-Type": "application/x-www-form-urlencoded",
+                    },
+                    body: `action=get_random_info&randomCount=11`,
+                });
+                
+                const startTime = Date.now();
+                const response = await Promise.race([fetchPromise, timeoutPromise]);
+                const endTime = Date.now();
+                
+                log(`帶超時控制的響應時間: ${endTime - startTime}ms`, 'success');
+                
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+                
+                const data = await response.json();
+                log(`超時測試成功，獲取資料: ${JSON.stringify(data, null, 2)}`, 'success');
+                
+            } catch (error) {
+                log(`超時測試失敗: ${error.message}`, 'error');
+            }
+        }
+
+        async function testMultipleRequests() {
+            log('開始測試多次請求...', 'loading');
+            
+            const requests = [5, 10, 15, 20];
+            
+            for (const count of requests) {
+                try {
+                    log(`測試請求 ${count} 筆資料...`, 'loading');
+                    
+                    const startTime = Date.now();
+                    const response = await fetch(API_URL, {
+                        method: "POST",
+                        mode: "cors",
+                        headers: {
+                            "Content-Type": "application/x-www-form-urlencoded",
+                        },
+                        body: `action=get_random_info&randomCount=${count}`,
+                    });
+                    
+                    const endTime = Date.now();
+                    const responseTime = endTime - startTime;
+                    
+                    if (!response.ok) {
+                        throw new Error(`HTTP error! status: ${response.status}`);
+                    }
+                    
+                    const data = await response.json();
+                    
+                    // 計算實際獲取的資料數量
+                    let actualCount = 0;
+                    if (data.success && data.data) {
+                        if (Array.isArray(data.data)) {
+                            actualCount = data.data.length;
+                        } else if (data.data.records) {
+                            actualCount = data.data.records.length;
+                        }
+                    } else if (Array.isArray(data)) {
+                        actualCount = data.length;
+                    }
+                    
+                    log(`請求 ${count} 筆 → 實際獲取 ${actualCount} 筆，耗時 ${responseTime}ms`, 
+                        actualCount === count ? 'success' : 'error');
+                    
+                    // 等待一秒再進行下一次請求
+                    await new Promise(resolve => setTimeout(resolve, 1000));
+                    
+                } catch (error) {
+                    log(`請求 ${count} 筆資料失敗: ${error.message}`, 'error');
+                }
+            }
+        }
+
+        // 頁面載入時自動測試
+        window.addEventListener('load', () => {
+            log('API 測試工具已載入', 'success');
+            log('點擊按鈕開始測試...', 'info');
+        });
+    </script>
+</body>
+</html>
