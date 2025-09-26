@@ -83,7 +83,6 @@
   -webkit-overflow-scrolling: touch; /* iOS 流暢滾動 */
   scrollbar-width: none; /* Firefox 隱藏滾動條 */
   -ms-overflow-style: none; /* IE/Edge 隱藏滾動條 */
-  padding: 16px 0;
   height: 100%; /* 填滿父容器高度 */
   width: 458px;
   padding-top: 0px;
@@ -153,7 +152,7 @@
 
 /* 底部時間區域 */
 .event-footer {
-  font-family: "IBM Plex Mono", sans-serif;
+  font-family: "Inclusive Sans", sans-serif;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -184,7 +183,7 @@
 /* 舊版時間樣式 - 保留但不使用 */
 .timeline-time {
   writing-mode: sideways-rl;
-  font-family: "IBM Plex Sans", sans-serif;
+  font-family: "Inclusive Sans", sans-serif;
   color: #000;
   font-size: 0.8rem;
   text-align: right;
@@ -474,7 +473,7 @@
 .calender-mode-container {
   width: 100%;
   max-width: 100%; /* 確保不超出父容器 */
-  height: 88vh; /* 設定固定高度，確保兩個模式一致 */
+  height: 64vh; /* 設定固定高度，確保兩個模式一致 */
   overflow: hidden; /* 防止內容溢出 */
 }
 
@@ -548,7 +547,7 @@
   text-transform: uppercase;
   letter-spacing: 0.1rem;
   border-bottom: 1px solid #000000;
-  font-family: "IBM Plex Mono", sans-serif;
+  font-family: "Inclusive Sans", sans-serif;
   background: radial-gradient(circle, ghostwhite, yellow);
 }
 
@@ -556,12 +555,12 @@
   position: relative;
   height: 20px;
   display: block; /* 改為 block，因為日期點現在是絕對定位 */
-  font-family: "IBM Plex Mono", sans-serif;
+  font-family: "Inclusive Sans", sans-serif;
   /* 移除固定寬度，改由 JavaScript 動態設定 */
 }
 
 .timeline-day {
-  font-family: "IBM Plex Mono", sans-serif;
+  font-family: "Inclusive Sans", sans-serif;
   flex: none; /* 移除 flex: 1，使用固定寬度 */
   height: 0.8rem;
   display: flex;
