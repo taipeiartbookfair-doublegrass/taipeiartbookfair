@@ -624,7 +624,7 @@ function renderEvents(items) {
   if (!eventsTimeline) return;
 
   if (!items || items.length === 0) {
-    eventsTimeline.innerHTML = "<p>沒有即將到來的活動 No upcoming events</p>";
+    eventsTimeline.innerHTML = "";
     return;
   }
 
