@@ -875,11 +875,20 @@ p {
   left: 26.5rem;
   width: auto;
   display: flex;
-  flex-direction: row;
+  flex-direction: row !important; /* 強制橫排 */
   gap: 8px; /* 與 program 上方 zine 相同間距 */
   justify-content: center;
   flex-wrap: wrap;
   z-index: 10; /* 確保在其他元素上方 */
+}
+
+/* 桌面版 Zine 項目容器 - 直接橫排 */
+.middle-zine-items-wrapper {
+  display: flex;
+  flex-direction: row;
+  gap: 8px;
+  justify-content: center;
+  flex-wrap: wrap;
 }
 
 .middle-zine-item {
@@ -925,6 +934,11 @@ p {
   padding: 4px; /* 縮小內邊距 */
   width: 148px; /* 統一寬度 */
   height: 210px; /* 統一高度 */
+}
+
+/* 活動圖片輪播區域 - 桌面版隱藏 */
+.event-gallery-section {
+  display: none;
 }
 
 /* 條列模式區域 - 縮短寬度 */
@@ -1369,8 +1383,7 @@ p {
   text-transform: uppercase;
   letter-spacing: 1px;
   transition: all 0.3s ease;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-  border-radius: 40px;
+  border:1px solid var(--main-color);
 }
 
 .ticket-button:hover {
@@ -1667,10 +1680,6 @@ p {
 @media (max-width: 768px) {
   body {
     padding-bottom: 35px;
-  }
-
-  .nav-menu {
-    display: none;
   }
 
   .hero {
@@ -2098,6 +2107,44 @@ p {
   }
 }
 
+/* 手機版專用動畫 - 平滑回彈效果 */
+@keyframes slide-mobile {
+  0% {
+    transform: translateX(0);
+  }
+  25% {
+    transform: translateX(-25%);
+  }
+  50% {
+    transform: translateX(-50%);
+  }
+  75% {
+    transform: translateX(-75%);
+  }
+  100% {
+    transform: translateX(-100%);
+  }
+}
+
+/* 第二個輪播的反向動畫 */
+@keyframes slide-mobile-reverse {
+  0% {
+    transform: translateX(-100%);
+  }
+  25% {
+    transform: translateX(-75%);
+  }
+  50% {
+    transform: translateX(-50%);
+  }
+  75% {
+    transform: translateX(-25%);
+  }
+  100% {
+    transform: translateX(0);
+  }
+}
+
 .rotata div:nth-child(1) .image-strip img {
   width:auto;
   height: 100%;
@@ -2268,11 +2315,12 @@ p {
   }
 }
 
-/* 手機響應式設計 - 重新排列結構 */
+/* 手機響應式設計 - 垂直堆疊排列 */
 @media (max-width: 480px) {
   /* 手機版基本設定 */
   .main-title-section {
-    padding: 10px 0;
+    padding-bottom: 5px;
+    padding-top: 50px;
   }
 
   .site-logo {
@@ -2287,9 +2335,15 @@ p {
   }
 
   .nav-menu {
-    flex-direction: column;
+    flex-direction: row;
     gap: 8px;
     max-width: 100%;
+    justify-content: center;
+  }
+
+  .nav-menu a {
+    font-size: 1.5rem;
+    padding: 8px 12px;
   }
 
   /* 手機版右上角控制區域 */
@@ -2300,6 +2354,7 @@ p {
     height: 1.5rem;
     padding: 0 8px;
     gap: 0;
+    position:absolute;
   }
 
   .language-btn,
@@ -2307,7 +2362,7 @@ p {
     font-size: 0.7rem;
   }
 
-  /* 手機版完全重新排列佈局 */
+  /* 手機版完全重新排列佈局 - 垂直堆疊 */
   .monopoly-board {
     display: flex;
     flex-direction: column;
@@ -2315,6 +2370,23 @@ p {
     grid-template-areas: none;
     grid-template-rows: none;
     grid-template-columns: none;
+    gap: 1rem;
+  }
+
+  /* 手機版主要內容區域改為垂直排列 */
+  .main-content {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    align-items: stretch;
+  }
+
+  /* 手機版上層內容包裝器改為垂直排列 */
+  .top-content-wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    align-items: stretch;
   }
 
   /* 隱藏左側書籍邊框 */
@@ -2322,21 +2394,79 @@ p {
     display: none;
   }
 
-  /* 手機版主要內容區域 - 垂直排列 */
+  /* 手機版主要內容區域 - 垂直堆疊 */
   .main-content {
     display: flex;
     flex-direction: column;
     width: 100%;
     padding: 0.5rem;
-    gap: 1rem;
+    gap: 1.5rem;
     order: 1;
   }
 
-  /* 1. 海報區域 - 第一個顯示 */
+  /* 1. 海報區域 - 垂直堆疊第一個 */
   .poster-area {
+    width: 100%;
+    padding: 1rem;
+    order: 1;
+    margin-bottom: 1rem;
+  }
+
+  /* 手機版海報區域 */
+  .poster-section {
     width: 100%;
     padding: 0.5rem;
     order: 1;
+    height:auto;
+  }
+
+  /* 手機版中間 Zine 區域 */
+  .middle-zine-container {
+    position: relative;
+    top: auto;
+    left: auto;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    justify-content: center;
+    align-items: center;
+    order: 2;
+    margin: 1rem 0;
+    padding: 0 1rem;
+  }
+
+  /* 手機版 Zine 項目容器 - 橫排 */
+  .middle-zine-items-wrapper {
+    display: flex;
+    flex-direction: row;
+    gap: 8px;
+    justify-content: center;
+    flex-wrap: wrap;
+    width: 100%;
+  }
+
+  /* 手機版 Store Highlight 標題 */
+  .middle-zine-container::before {
+    content: "STORE HIGHLIGHT:";
+    font-family: "Inclusive Sans", sans-serif;
+    font-size: 1rem;
+    font-weight: 400;
+    color: var(--main-color);
+    text-transform: uppercase;
+    text-align: center;
+    margin-bottom: 0.5rem;
+    width: 100%;
+  }
+
+  /* 手機版 Zine 項目容器 */
+  .middle-zine-items-wrapper {
+    display: flex;
+    flex-direction: row;
+    gap: 8px;
+    justify-content: center;
+    flex-wrap: wrap;
+    width: 100%;
   }
 
   .poster-buttons-container {
@@ -2369,7 +2499,7 @@ p {
 
   .poster-section {
     width: 100%;
-    min-height: 400px; /* 改為最小高度，允許內容自然延伸 */
+    min-height: 400px;
     padding: 0.5rem;
   }
 
@@ -2383,12 +2513,23 @@ p {
     display: none;
   }
 
-  /* 2. Upcoming Events 區域 - 第二個顯示 */
+  /* 2. Upcoming Events 區域 - 垂直堆疊第三個 */
   .calender-section.card-section {
     width: 100%;
-    min-height: 300px;
+    max-height: 500px; 
     padding: 0.5rem;
-    order: 2;
+    order: 3; /* 調整為第3個，在活動圖片輪播下面 */
+    margin-bottom: 1rem;
+    box-sizing: border-box;
+  }
+
+  /* 手機版其他區域 */
+  .exhibitors-roller-section,
+  .multifunction-section,
+  .workshop-section {
+    width: 100%;
+    order: 3;
+    margin-bottom: 1rem;
   }
 
   .calender-section h3 {
@@ -2397,20 +2538,216 @@ p {
     font-family: "Inclusive Sans", sans-serif;
   }
 
-  /* 3. Zine 橫排區域 - 第三個顯示，只顯示中間的zine */
-  .middle-zine-container {
-    position: relative;
-    top: auto;
-    left: auto;
-    width: 100%;
-    display: flex;
-    flex-direction: row;
-    gap: 8px;
-    justify-content: center;
-    flex-wrap: wrap;
-    order: 3;
-    margin: 1rem 0;
+  /* 手機版 Event Filter 樣式 */
+  .event-filter-header {
+    padding: 0.3rem 0.5rem;
+    margin: 0.5rem 0;
   }
+
+  .event-filter {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0.3rem;
+  }
+
+  .event-filter label {
+    font-size: 0.8rem;
+  }
+
+  .event-type-select {
+    padding: 0.4rem 0.6rem;
+    font-size: 0.8rem;
+    width: 100%;
+  }
+
+  /* 手機版 Calender Content 樣式 */
+  .calender-content {
+    width: 100%;
+    padding: 0;
+    margin: 0;
+  }
+
+  .calender-scroll-container {
+    width: 100%;
+    max-height: none; /* 移除最大高度限制 */
+    height: auto; /* 讓高度自動調整 */
+  }
+
+  /* 手機版 Events Timeline 樣式 - 垂直堆疊 */
+  .events-timeline {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem; /* 減少間距 */
+    padding: 0.3rem; /* 減少內邊距 */
+  }
+
+  /* 手機版 Event Card 樣式 - 垂直堆疊 */
+  .event-card {
+    display: flex;
+    flex-direction: column;
+    background: var(--secondary-color);
+    border: 1px solid var(--main-color);
+    border-radius: 8px;
+    padding: 0.8rem;
+    margin-bottom: 0.5rem;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    width: 100%;
+  }
+
+  .event-card-header {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .event-date {
+    font-size: 0.7rem;
+    font-weight: 600;
+    color: var(--secondary-color);
+    background: var(--main-color);
+    padding: 0.2rem 0.4rem;
+    border-radius: 4px;
+    min-width: 60px;
+    text-align: center;
+    align-self: flex-start;
+  }
+
+  .event-type {
+    font-size: 0.6rem;
+    font-weight: 500;
+    color: var(--main-color);
+    background: var(--secondary-color);
+    border: 1px solid var(--main-color);
+    padding: 0.2rem 0.4rem;
+    border-radius: 4px;
+    text-transform: uppercase;
+    align-self: flex-start;
+  }
+
+  .event-title {
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: var(--main-color);
+    margin-bottom: 0.3rem;
+    line-height: 1.3;
+  }
+
+  .event-description {
+    font-size: 0.8rem;
+    color: #666;
+    line-height: 1.4;
+    margin-bottom: 0.5rem;
+  }
+
+  .event-details {
+    display: flex;
+    flex-direction: column;
+    gap: 0.3rem;
+    font-size: 0.7rem;
+    color: #888;
+  }
+
+  .event-time,
+  .event-location {
+    display: flex;
+    align-items: center;
+    gap: 0.3rem;
+  }
+
+  /* 手機版 Event Image 樣式 - 縮小圖片 */
+  .event-image {
+    width: 100%;
+    max-width: 150px;
+    height: 80px;
+    object-fit: cover;
+    border-radius: 4px;
+    margin: 0.5rem 0;
+    align-self: center;
+  }
+
+  /* 手機版活動圖片輪播區域 */
+  .event-gallery-section {
+    display: block !important; /* 覆蓋桌面版的 display: none */
+    width: 100%;
+    order: 2; /* 調整為第2個，在 store highlight 下面 */
+  }
+
+  /* 第二個活動圖片輪播區域 */
+  .event-gallery-section-2 {
+    display: block !important; /* 覆蓋桌面版的 display: none */
+    width: 100%;
+    order: 4; /* 第4個，在 upcoming events 下面 */
+  }
+
+  .event-gallery-divider {
+    border: none;
+    border-top: 1px dashed var(--main-color);
+    margin: 1rem 0;
+    width: 100%;
+  }
+
+  .event-gallery-container {
+    width: 100%;
+    overflow: hidden;
+    border: 1px solid var(--main-color);
+    border-radius: 8px;
+  }
+
+  .event-gallery-slider {
+    width: 100%;
+    overflow: hidden;
+    position: relative;
+  }
+
+  /* 手機版 image-strip 樣式 - 與桌面版一致 */
+  .event-gallery-section .image-strip {
+    display: flex;
+    flex-shrink: 0;
+    white-space: nowrap;
+    animation: slide-mobile 60s linear infinite; /* 手機版較慢的速度 */
+    will-change: transform;
+    width: max-content;
+    height: 200px !important; /* 從 150px 增加到 200px */
+    align-items: flex-start;
+    position: relative;
+    top: 0;
+    left: 0;
+  }
+
+  .event-gallery-section .image-strip img {
+    width: auto;
+    height: 100%;
+    object-fit: cover;
+    flex-shrink: 0;
+    display: block;
+    border-right: 1px solid var(--main-color);
+  }
+
+  /* 第二個活動圖片輪播的樣式 */
+  .event-gallery-section-2 .image-strip {
+    display: flex;
+    flex-shrink: 0;
+    white-space: nowrap;
+    animation: slide-mobile-reverse 60s linear infinite; /* 反向動畫 */
+    will-change: transform;
+    width: max-content;
+    height: 200px !important;
+    align-items: flex-start;
+    position: relative;
+    top: 0;
+    left: 0;
+  }
+
+  .event-gallery-section-2 .image-strip img {
+    width: auto;
+    height: 100%;
+    object-fit: cover;
+    flex-shrink: 0;
+    display: block;
+    border-right: 1px solid var(--main-color);
+  }
+
 
   .middle-zine-item {
     width: 70px;
@@ -2424,16 +2761,18 @@ p {
     display: none;
   }
 
-  /* 4. 圖片輪播 - 只顯示一個 */
+  /* 4. 圖片輪播 - 垂直堆疊第四個 */
   .rotata {
     position: relative;
     top: auto;
+    display: none;
     left: auto;
     width: 100%;
     height: auto;
     min-height: auto;
     order: 4;
     margin: 1rem 0;
+    padding: 0 1rem;
   }
 
   /* 只顯示第一個輪播區域 */
@@ -2452,11 +2791,11 @@ p {
     display: none;
   }
 
-  /* 5. Newsletter 區域 - 第五個顯示 */
+  /* 5. Newsletter 區域 - 垂直堆疊第五個 */
   .newsletter-section {
     width: 100%;
     padding: 1rem;
-    margin: 1rem 0;
+    margin: 0;
     order: 5;
   }
 
@@ -2488,7 +2827,7 @@ p {
     font-size: 0.8rem;
   }
 
-  /* 6. Banner 區域 - 第六個顯示 */
+  /* 6. Banner 區域 - 垂直堆疊第六個 */
   .banner {
     font-size: 0.9rem;
     padding: 8px 0;
@@ -2502,20 +2841,20 @@ p {
     margin: 3px 6px 0px 6px;
   }
 
-  /* 7. Socials and Credits - 最後顯示 */
+  /* 7. Socials and Credits - 垂直堆疊最後一個 */
   .footer {
     order: 7;
-    margin-top: 1rem;
+    position:absolute;
   }
 
   .footer-content {
     font-size: 1rem;
-    flex-direction: column;
+    flex-direction: row;
     gap: 8px;
   }
 
   .footer-right {
-    flex-direction: column;
+    flex-direction: row;
     gap: 4px;
   }
 

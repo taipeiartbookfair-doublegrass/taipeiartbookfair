@@ -314,11 +314,8 @@
 
   .calender-scroll-container {
     padding: 1rem 0;
-  }
-
-  .timeline-item {
-    width: 100%;
-    padding: 1rem;
+    width:100%;
+    max-height:500px;
   }
 
   .timeline-time {
@@ -333,7 +330,8 @@
 
   .event-thumb {
     width: 100%;
-    max-width: 200px;
+    max-width: 80px;
+    max-height: 80px;
   }
 
   .event-thumb img {
@@ -394,7 +392,7 @@
 @media (max-width: 480px) {
   .timeline-item {
     width: 100%;
-    padding: 1rem;
+    padding: 15px 0px;
   }
 
   .event-title {
