@@ -16,7 +16,18 @@
     <link rel="stylesheet" href="css/font.css" />
     <link rel="stylesheet" href="css/exhibitors.css" />
     <script src="js/exhibitors-list.js"></script>
-     <!-- Google tag (gtag.js) -->
+
+     <!-- Store Modal -->
+    <div id="storeModal" class="store-modal">
+      <div class="store-modal-content">
+        <span class="store-modal-close">&times;</span>
+        <div class="store-modal-body">
+          <img src="image/somethingopen-rafael-rozendaal.png" alt="NMHW" class="store-modal-image">
+        </div>
+      </div>
+    </div>
+
+    <!-- Google tag (gtag.js) -->
      <script
      async
      src="https://www.googletagmanager.com/gtag/js?id=G-EPSXJPDH6L"
@@ -37,7 +48,9 @@
       <!-- automation!! -->
     </div>
 
-    <!-- 右上角控制區域 -->
+    <!-- 主要內容容器 -->
+    <div class="main-container">
+      <!-- 右上角控制區域 -->
     <div class="top-controls">
       <div class="top-controls-content">
         <button id="language-toggle" class="language-btn">English</button>
@@ -62,7 +75,7 @@
               alt="TAIPEI ART BOOK FAIR" 
               class="site-logo"
               style="
-                height: 2rem;
+                height: 1.5rem;
                 width: auto;
                 max-width: 100%;
               "
@@ -81,7 +94,7 @@
               href="https://nmhw.taipeiartbookfair.com/"
               target="_blank"
               id="nav-shop"
-              >NMHW</a
+              >STORE</a
             >
           </li>
           <!-- <li><a href="#exhibitors" id="nav-exhibitors">ZINE WALL</a></li>
@@ -114,7 +127,7 @@
           <div class="poster-buttons-container">
             <div class="ticket-button-container">
               <a href="https://www.taipeiartbookfair.com/2025/ticket" target="_blank" class="ticket-button">
-                VISIT&TICKETS
+                票券＆參觀 VISIT&TICKETS
               </a>
             </div>
             <div class="flip-button-container">
@@ -531,5 +544,76 @@
         }
       });
     </script>
+
+    <!-- Store Modal JavaScript -->
+    <script>
+      // Wait for DOM to be loaded
+      document.addEventListener('DOMContentLoaded', function() {
+        const modal = document.getElementById('storeModal');
+        const closeBtn = document.querySelector('.store-modal-close');
+        const modalContent = document.querySelector('.store-modal-content');
+        const storeButton = document.querySelector('.store-modal-image');
+        
+        // Show modal immediately when page loads
+        modal.style.display = 'block';
+        
+        // Store URL
+        const storeUrl = 'https://nmhw.taipeiartbookfair.com';
+        
+        // Close modal function
+        function closeModal() {
+          modal.style.display = 'none';
+        }
+        
+        // Close button click
+        closeBtn.addEventListener('click', function(e) {
+          e.stopPropagation(); // Prevent triggering modal click
+          closeModal();
+        });
+        
+        // Close modal when clicking outside
+        modal.addEventListener('click', function(e) {
+          if (e.target === modal) {
+            closeModal();
+          }
+        });
+        
+        // Open store when clicking modal content or store button
+        function openStore() {
+          const newWindow = window.open(storeUrl, '_blank', 'noopener,noreferrer');
+          if (!newWindow) {
+            // If popup blocked, show alert instead of redirecting
+            alert('請允許彈出視窗以開啟商店頁面，或手動前往: ' + storeUrl);
+          }
+        }
+        
+        // Modal content click (area around close button)
+        modalContent.addEventListener('click', function(e) {
+          // Don't trigger if clicking close button
+          if (!e.target.classList.contains('store-modal-close')) {
+            e.preventDefault();
+            e.stopPropagation();
+            openStore();
+          }
+        });
+        
+        // Store button click
+        storeButton.addEventListener('click', function(e) {
+          e.preventDefault();
+          e.stopPropagation();
+          openStore();
+        });
+        
+        // ESC key to close
+        document.addEventListener('keydown', function(e) {
+          if (e.key === 'Escape' && modal.style.display === 'block') {
+            closeModal();
+          }
+        });
+      });
+    </script>
+
+    <!-- 關閉主要內容容器 -->
+    </div>
   </body>
 </html>

@@ -1,3 +1,17 @@
+// 將英文書名轉換為商店 URL 的函數
+function generateShopUrl(englishTitle) {
+  if (!englishTitle) return null;
+  
+  // 將書名轉換為小寫，替換空格和特殊字符為連字符
+  const urlSlug = englishTitle
+    .toLowerCase()
+    .replace(/[^a-z0-9\s]/g, '') // 移除特殊字符
+    .replace(/\s+/g, '-') // 將空格替換為連字符
+    .trim();
+  
+  return `https://nmhw.taipeiartbookfair.com/products/${urlSlug}`;
+}
+
 // 填充 zine 元素的共用函數
 function populateZineElements(booksArray) {
   // 直接抓取所有 zine 格子元素
@@ -68,7 +82,28 @@ function populateZineElements(booksArray) {
       // 添加 hover 效果，顯示標題
       // 優先順序：商品名稱(英) > 商品名稱(中) > 品名 > 未知標題
       const title = item["商品名稱(英)"] || item["商品名稱(中)"] || item["品名"] || "未知標題";
+      const englishTitle = item["商品名稱(英)"];
+      const shopUrl = generateShopUrl(englishTitle);
+      
       console.log(`為第 ${index + 1} 個 zine 綁定 hover 事件，標題: ${title}`);
+      console.log(`商店連結: ${shopUrl}`);
+      
+      // 添加點擊事件，跳轉到商店頁面
+      zineElement.addEventListener("click", function (e) {
+        e.preventDefault();
+        e.stopPropagation();
+        if (shopUrl) {
+          console.log(`點擊 zine，跳轉到: ${shopUrl}`);
+          // 確保在新分頁開啟
+          const newWindow = window.open(shopUrl, '_blank', 'noopener,noreferrer');
+          if (!newWindow) {
+            // 如果彈出視窗被阻擋，嘗試直接跳轉
+            window.location.href = shopUrl;
+          }
+        } else {
+          console.log('沒有可用的商店連結');
+        }
+      });
       
       zineElement.addEventListener("mouseenter", function () {
         console.log(`Hover 事件觸發 - 第 ${index + 1} 個 zine`);
@@ -79,6 +114,7 @@ function populateZineElements(booksArray) {
         this.style.textOrientation = "mixed";
         this.style.transform = `rotate(${(Math.random() - 0.5) * 10}deg)`;
         this.style.backgroundColor = "transparent";
+        this.style.cursor = shopUrl ? "pointer" : "default";
         this.innerHTML = `<div style="background-color: plum; width: 100%; padding: 4px 0; text-align: center;margin:1px;">${title}</div>`;
       });
 
@@ -86,6 +122,7 @@ function populateZineElements(booksArray) {
         this.style.backgroundColor = "";
         this.style.color = "transparent";
         this.style.textShadow = "none";
+        this.style.cursor = shopUrl ? "pointer" : "default";
         this.textContent = "";
       });
     }
@@ -108,6 +145,7 @@ function populateZineElements(booksArray) {
       this.style.textOrientation = "mixed";
       this.style.transform = `rotate(${(Math.random() - 0.5) * 10}deg)`;
       this.style.backgroundColor = "transparent";
+      this.style.cursor = "default";
       this.innerHTML = `<div style="background-color: plum; width: 100%; padding: 4px 0; text-align: center; margin: 1px;">空位</div>`;
     });
 
@@ -115,6 +153,7 @@ function populateZineElements(booksArray) {
       this.style.backgroundColor = "plum";
       this.style.color = "white";
       this.style.textShadow = "1px 1px 2px rgba(0,0,0,0.5)";
+      this.style.cursor = "default";
       this.textContent = "";
     });
   }

@@ -1,3 +1,82 @@
+/* Store Modal Styles */
+.store-modal {
+  display: none;
+  position: fixed;
+  z-index: 10000;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  animation: fadeIn 0.3s ease-in-out;
+}
+
+.store-modal-content {
+  background-color: var(--secondary-color);
+  margin: 10vh auto;
+  padding: 0;
+  border: 2px solid black;
+  width: 80vw;
+  height: 80vh;
+  position: relative;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+  cursor: pointer;
+  transition: transform 0.2s ease;
+}
+
+.store-modal-content:hover {
+  transform: scale(1.02);
+}
+
+.store-modal-close {
+  color: var(--accent-sky-blue);
+  float: right;
+  font-size: 8rem;
+  cursor: pointer;
+  position: absolute;
+  top: 0px;
+  right: -1.5rem;
+  z-index: 10001;
+  font-family: "IBM PLEX SANS", sans-serif;
+  line-height: 4rem;
+}
+
+.store-modal-body {
+  padding: 0;
+  height: calc(100% - 80px);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  overflow: hidden;
+}
+
+.store-modal-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .store-modal-content {
+    width: 90vw;
+    height: 85vh;
+  }
+  
+}
+
 /* Reset & Base Styles */
 * {
   margin: 0;
@@ -6,18 +85,25 @@
 }
 
 ::selection {
-  color: var(--secondary-color);
-  background-color: var(--main-color);
+  color: var(--accent-gold);
+  background-color: var(--accent-sky-blue);
 }
 
 a {
   color: var(--main-color);
+  transition: color 0.3s ease;
 }
 
 :root {
   /* Main Colors */
   --main-color:black;
   --secondary-color: lightgrey;
+  
+  /* Accent Colors from the artwork */
+  --accent-sky-blue: #87CEEB;
+  --accent-warm-brown: #8B4513;
+  --accent-orange: #D2691E;
+  --accent-gold: #DAA520;
   
   /* Legacy variables for compatibility */
   --primary:black;
@@ -77,6 +163,15 @@ h6 {
   font-weight: 400;
   line-height: 1.1;
   text-transform: uppercase;
+}
+
+h1 {
+  color: var(--main-color);
+  text-shadow: 2px 2px 0 var(--accent-sky-blue);
+}
+
+h2 {
+  color: var(--main-color);
 }
 
 h1 {
@@ -360,8 +455,8 @@ p {
 }
 
 .exhibitor-login-btn {
-  background: olivedrab;
-  color: var(--main-color);
+  background: var(--accent-warm-brown);
+  color: var(--secondary-color);
   text-decoration: none;
   font-size: 0.8rem;
   padding: 0 12px;
@@ -429,6 +524,7 @@ p {
 
 .site-logo:hover {
   transform: scale(1.05);
+  filter: drop-shadow(2px 2px 8px var(--accent-warm-brown));
 }
 
 .main-title-area {
@@ -480,21 +576,24 @@ p {
   color: var(--main-color);
   font-weight: 600;
   transition: color 0.2s ease;
-  font-size: 3rem;
+  font-size: 3.5rem;
   background-color: white;
   text-transform: uppercase;
   letter-spacing: 0.5px;
   font-family: "Inclusive Sans", sans-serif;
+  border: 1px solid black;
 }
 
 .nav-menu a:hover {
   color: var(--main-color);
   opacity: 0.7;
+  border-color: var(--accent-sky-blue);
+  box-shadow: 0 0 10px var(--accent-sky-blue);
 }
 
 /* TICKET 按鈕樣式 */
 .ticket-button a {
-  background: orangered;
+  background: var(--accent-orange);
   color: var(--main-color) !important;
   padding: 8px 16px;
   font-weight: 400;
@@ -1296,6 +1395,7 @@ p {
   font-family: "Inclusive Sans", sans-serif;
   text-transform: uppercase;
   padding:1px;
+  line-height: 1rem;
 }
 
 /* 書籍項目樣式 */
@@ -1375,22 +1475,24 @@ p {
 
 .ticket-button {
   display: inline-block;
-  background-color: orangered;
+  background-color: brown;
   color: var(--secondary-color);
   text-decoration: none;
-  padding: 1rem 2rem;
+  padding: 0rem 1rem;
   font-weight: 600;
   text-transform: uppercase;
   letter-spacing: 1px;
   transition: all 0.3s ease;
-  border:1px solid var(--main-color);
+  border: 1px solid var(--main-color);
+  border-radius: 50px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3),
+              inset 0 3px 12px rgba(240, 232, 232, 0.5), 
+              inset 0 -3px 12px rgba(0, 0, 0, 0.3),
+              inset 0 0 20px rgba(255, 255, 255, 0.1);
 }
 
 .ticket-button:hover {
-  background-color: var(--secondary-color);
-  color: var(--main-color);
-  transform: translateY(-2px);
-  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+  transform:scale(1.1);
 }
 
 /* Poster Section - 調整為新布局 */
@@ -2174,33 +2276,61 @@ p {
 /* 大螢幕響應式設計 - 保持比例並添加灰色邊框 */
 @media (min-width: 1400px) {
   body {
-    background-color: #f0f0f0; /* 灰色背景 */
+    background-color: black; /* 灰色背景 */
   }
 
-  .monopoly-board {
-    max-width: 1375px; /* 保持1375px的寬度 */
+  /* 整體容器 - 限制最大寬度並居中 */
+  .main-container {
+    max-width: 1375px;
     margin: 0 auto;
-    background-color: transparent; /* 改為透明，讓 rotata 顯示 */
+    background-color: var(--secondary-color);
     box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
   }
 
-  /* Image rotata 在大螢幕上的調整 - 保持與monopoly-board相對位置 */
+  /* 導航和標題區的縮放 */
+  .top-controls,
+  .social-links {
+    transform: scale(0.85);
+    transform-origin: top center;
+  }
+
+  /* Event info sticker adjustments */
+  .event-info {
+    transform: scale(0.85);
+  }
+
+  .monopoly-board {
+    max-width: none; /* 移除個別限制，讓它使用父容器的限制 */
+    background-color: transparent; /* 改為透明，讓 rotata 顯示 */
+  }
+
+  /* Image rotata position adjustments for reduced scale */
   .rotata div:nth-child(1) {
-    right: calc(50% - 687.5px + 16px); /* 相對於monopoly-board中心位置 */
+    right: calc(50% - 687.5px + 16px); /* 相對於新容器中心位置 */
   }
 
   .rotata div:nth-child(2) {
-    left: calc(50% - 687.5px + 16px); /* 相對於monopoly-board中心位置 */
+    left: calc(50% - 687.5px + 16px); /* 相檔案於新容器中心位置 */
   }
 
   .rotata div:nth-child(3) {
-    left: calc(50% - 687.5px + 26.5rem); /* 相對於monopoly-board中心位置 */
+    left: calc(50% - 687.5px + 26.5rem); /* 相對於新容器中心位置 */
   }
 }
 
-/* 超大螢幕響應式設計 - 保持比例 */
+/* 超大螢幕響應式設計 - 進一步縮放 */
 @media (min-width: 1920px) {
-  .monopoly-board {
+  /* 更大的縮放比例 */
+  .top-controls,
+  .main-title-section,
+  .nav-items-area,
+  .social-links,
+  .event-info {
+    transform: scale(0.75);
+    transform-origin: top center;
+  }
+
+  .main-container {
     max-width: 1375px; /* 保持1375px的寬度 */
   }
 }
@@ -3399,3 +3529,4 @@ p {
     padding: 0.2rem 0.4rem;
   }
 }
+
