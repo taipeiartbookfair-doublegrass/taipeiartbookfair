@@ -275,8 +275,8 @@
   justify-content: center;
   align-items: center;
   overflow: hidden;
-  background: firebrick;
-  color: firebrick;
+  background: black;
+  color: black;
 }
 
 .event-thumb img {
