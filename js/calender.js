@@ -711,6 +711,11 @@ function renderEvents(items) {
     console.log(
       `TYPE: "${eventType}", IMAGE: "${eventImage}", DESCRIPTION: "${eventDescription}", SIGNUP: "${eventSignup}"`
     );
+    
+    // 額外檢查 SIGNUP 狀況
+    if (!eventSignup && eventFields["SIGN UP"]) {
+      console.log(`⚠️  偵測到 SIGN UP 格式，已自動對應到 SIGNUP: ${eventFields["SIGN UP"]}`);
+    }
 
     // 檢查是否有活動類型，如果沒有則跳過（不在卡片模式中顯示）
     if (!eventType) {
@@ -730,6 +735,9 @@ function renderEvents(items) {
     let signupHTML = "";
     if (eventSignup) {
       signupHTML = `<a href="${eventSignup}" target="_blank" class="event-signup-btn">立即報名</a>`;
+      console.log(`✅ 生成報名按鈕 HTML:`, signupHTML);
+    } else {
+      console.log(`❌ 沒有 SIGNUP 連結，跳過報名按鈕生成`);
     }
 
     // 創建描述 HTML
@@ -839,6 +847,12 @@ const parseDescription = (description) => {
     console.log(
       `parseDescription: 儲存最後欄位 "${currentKey}" = "${currentValue.trim()}"`
     );
+  }
+
+  // 處理特殊格式：將 "SIGN UP" 對應到 "SIGNUP"
+  if (fields["SIGN UP"]) {
+    fields["SIGNUP"] = fields["SIGN UP"];
+    console.log("parseDescription: 將 'SIGN UP' 對應到 'SIGNUP':", fields["SIGNUP"]);
   }
 
   console.log("parseDescription: 最終解析結果:", fields);
