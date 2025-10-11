@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&display=swap');
+
 /* Store Modal Styles */
 .store-modal {
   display: none;
@@ -2710,18 +2712,187 @@ p {
     padding: 0.3rem; /* 減少內邊距 */
   }
 
-  /* 手機版 Event Card 樣式 - 垂直堆疊 */
+/* 桌面版 Event Card 樣式 - 簡潔列表樣式 */
+.event-card {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  background: transparent;
+  border: none;
+  border-bottom: 1px dashed var(--main-color);
+  border-radius: 0;
+  padding: 1rem 0;
+  margin-bottom: 0;
+  box-shadow: none;
+  width: 100%;
+  max-width: none;
+  gap: 1rem;
+}
+
+.event-card:last-child {
+  border-bottom: none;
+}
+
+.event-card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 1rem;
+}
+
+.event-date {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--secondary-color);
+  background: var(--main-color);
+  padding: 0.5rem 0.8rem;
+  border-radius: 4px;
+  min-width: 80px;
+  text-align: center;
+}
+
+.event-type {
+  font-size: 0.8rem;
+  font-weight: 500;
+  color: var(--main-color);
+  background: var(--secondary-color);
+  border: 1px solid var(--main-color);
+  padding: 0.3rem 0.6rem;
+  border-radius: 4px;
+  text-transform: uppercase;
+}
+
+.event-title {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: var(--main-color);
+  margin-bottom: 0.5rem;
+  line-height: 1.3;
+  text-transform: uppercase;
+}
+
+.event-description {
+  font-size: 0.9rem;
+  color: var(--main-color);
+  line-height: 1.5;
+  margin-bottom: 0.8rem;
+}
+
+ .event-footer {
+   display: flex;
+   flex-direction: row;
+   justify-content: space-between;
+   align-items: center;
+   gap: 1rem;
+   font-size: 0.9rem;
+   color: var(--main-color);
+   margin-top: auto;
+ }
+ 
+ .event-date,
+ .event-time,
+ .event-location {
+   display: flex;
+   align-items: center;
+   gap: 0.5rem;
+   font-size: 0.9rem;
+   color: var(--main-color);
+   flex: 1;
+   text-align: center;
+ }
+ 
+ .event-empty {
+   flex: 1;
+ }
+
+.event-card .event-image {
+  width: 150px !important;
+  height: 80px !important;
+  object-fit: cover !important;
+  border-radius: 0;
+  flex-shrink: 0;
+  background-color: #000;
+}
+
+.event-content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+  min-height: 100%;
+  justify-content: space-between;
+}
+
+ .signup-button {
+   display: inline-block;
+   padding: 8px 16px;
+   background-color: #000;
+   color: #fff;
+   text-decoration: none;
+   border-radius: 4px;
+   font-size: 0.9rem;
+   text-transform: uppercase;
+   font-weight: bold;
+   margin-top: 0;
+   transition: background-color 0.3s ease;
+   flex: 1;
+   text-align: center;
+ }
+ 
+ .signup-button:hover {
+   background-color: #333;
+ }
+
+/* 手機版 Event Card 樣式 - 垂直堆疊 */
+@media (max-width: 768px) {
   .event-card {
     display: flex;
     flex-direction: column;
-    background: var(--secondary-color);
-    border: 1px solid var(--main-color);
-    border-radius: 8px;
-    padding: 0.8rem;
-    margin-bottom: 0.5rem;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    background: transparent;
+    border: none;
+    border-bottom: 1px dashed var(--main-color);
+    border-radius: 0;
+    padding: 1rem 0;
+    margin-bottom: 0;
+    box-shadow: none;
     width: 100%;
+    gap: 1rem;
   }
+
+  .event-card:last-child {
+    border-bottom: none;
+  }
+
+  .event-card .event-image {
+    width: 100% !important;
+    height: 120px !important;
+    object-fit: cover !important;
+    border-radius: 0;
+    align-self: center;
+  }
+
+  .event-content {
+    gap: 0.5rem;
+    min-height: 100%;
+    justify-content: space-between;
+  }
+
+   .event-footer {
+     flex-direction: column;
+     align-items: flex-start;
+     gap: 0.5rem;
+   }
+   
+   .event-date,
+   .event-time,
+   .event-location {
+     text-align: left;
+   }
+   
+   .signup-button {
+     width: 100%;
+     margin-top: 0.5rem;
+   }
 
   .event-card-header {
     display: flex;
@@ -2794,6 +2965,7 @@ p {
     margin: 0.5rem 0;
     align-self: center;
   }
+}
 
   /* 手機版活動圖片輪播區域 */
   .event-gallery-section {

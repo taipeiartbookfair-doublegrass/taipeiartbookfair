@@ -159,12 +159,12 @@ function populateZineElements(booksArray) {
   }
 }
 
-async function getRandomImages(count = 11, retryCount = 0, maxRetries = 3) {
-  const url = `https://script.google.com/macros/s/AKfycbyeDDI-trIyGuqQW81NQH6VEDATSbdmqCWG25ll-8kPP33zWzhS5EnTx1qDscb6Y4Py/exec`;
+async function getNMHWInfo(count = 11, retryCount = 0, maxRetries = 3) {
+  const url = `https://script.google.com/macros/s/AKfycbxAnoFX7ahuNKl3kLB4-ByIhapOU_JirQTvuSb05ITbVGz2YXDdLz1cWW2zUHxjnlQ/exec`;
   
-  // 增加請求數量以確保有足夠的有照片資料
-  const requestCount = Math.max(count * 2, 20); // 至少請求20筆，或count的2倍
-  console.log(`正在請求 ${requestCount} 本書籍資料，期望獲得 ${count} 筆有照片的資料... (嘗試 ${retryCount + 1}/${maxRetries + 1})`);
+  // 請求指定數量的資料
+  const requestCount = count;
+  console.log(`正在請求 ${requestCount} 本書籍資料... (嘗試 ${retryCount + 1}/${maxRetries + 1})`);
   
   try {
     // 預載入圖片以提升載入速度
@@ -200,30 +200,42 @@ async function getRandomImages(count = 11, retryCount = 0, maxRetries = 3) {
 
     const response = await res.json();
     console.log("API 回應:", response);
+    console.log("API 回應類型:", typeof response);
+    console.log("API 回應是否為陣列:", Array.isArray(response));
 
     // 檢查是否回傳的是預設訊息（表示 doGet 沒有處理 action 參數）
     if (
       response.message === "Hello from taipeiartbookfair!" &&
-      Object.keys(response.data).length === 0
+      response.data && Object.keys(response.data).length === 0
     ) {
+      console.log("API 回傳預設訊息，沒有資料");
       populateZineElements([]);
       return;
     }
 
     // 檢查回應格式，根據你哥的 API 結構處理
     let data = response;
+    console.log("處理前的 data:", data);
+    
     if (response.success && response.data) {
       // 如果 data 有 records 屬性，使用 records
       if (response.data.records) {
         data = response.data.records;
+        console.log("使用 response.data.records");
       } else {
         data = response.data;
+        console.log("使用 response.data");
       }
     } else if (Array.isArray(response)) {
       data = response;
+      console.log("直接使用 response 陣列");
     } else {
+      console.log("無法識別的回應格式，回傳空陣列");
+      populateZineElements([]);
       return;
     }
+    
+    console.log("處理後的 data:", data);
 
     // 如果 data 是空物件或空陣列，使用空陣列
     if (
@@ -237,33 +249,25 @@ async function getRandomImages(count = 11, retryCount = 0, maxRetries = 3) {
     // 確保 data 是陣列格式
     const allBooksArray = Array.isArray(data) ? data : [data];
     
-    // 過濾出有照片的資料
-    const booksWithPhotos = allBooksArray.filter((item) => {
-      if (!item["照片"]) return false;
-      
-      // 檢查照片欄位是否有有效內容
-      const photoUrls = item["照片"].split("\n").map(url => url.trim()).filter(url => url);
-      return photoUrls.length > 0;
-    });
+    console.log(`獲取到 ${allBooksArray.length} 筆資料`);
     
-    console.log(`原始資料: ${allBooksArray.length} 筆，有照片的資料: ${booksWithPhotos.length} 筆`);
-    
-    // 如果沒有足夠的有照片資料，嘗試再次請求
-    if (booksWithPhotos.length < count && retryCount < maxRetries) {
-      console.log(`有照片的資料不足 (${booksWithPhotos.length}/${count})，將重試...`);
+    // 如果沒有足夠的資料，嘗試再次請求
+    if (allBooksArray.length < count && retryCount < maxRetries) {
+      console.log(`資料不足 (${allBooksArray.length}/${count})，將重試...`);
       setTimeout(() => {
-        getRandomImages(count, retryCount + 1, maxRetries);
+        getNMHWInfo(count, retryCount + 1, maxRetries);
       }, (retryCount + 1) * 2000);
       return;
     }
     
     // 只取需要的數量
-    const booksArray = booksWithPhotos.slice(0, count);
-    console.log(`最終使用 ${booksArray.length} 筆有照片的資料`);
+    const booksArray = allBooksArray.slice(0, count);
+    console.log(`最終使用 ${booksArray.length} 筆資料`);
 
     // 非阻塞預載入圖片
     setTimeout(() => {
       const imageUrls = booksArray
+        .filter((item) => item["照片"]) // 只處理有照片的項目
         .map((item) => item["照片"].split("\n")[0].trim())
         .filter((url) => url);
 
@@ -286,7 +290,7 @@ async function getRandomImages(count = 11, retryCount = 0, maxRetries = 3) {
     if (retryCount < maxRetries) {
       console.log(`將在 ${(retryCount + 1) * 2} 秒後重試...`);
       setTimeout(() => {
-        getRandomImages(count, retryCount + 1, maxRetries);
+        getNMHWInfo(count, retryCount + 1, maxRetries);
       }, (retryCount + 1) * 2000); // 指數退避：2秒、4秒、6秒
     } else {
       console.log("達到最大重試次數，使用空陣列填充 zine 元素");
@@ -297,5 +301,5 @@ async function getRandomImages(count = 11, retryCount = 0, maxRetries = 3) {
 
 // 等待頁面載入完成後執行
 document.addEventListener("DOMContentLoaded", function () {
-  getRandomImages(11);
+  getNMHWInfo(11);
 });

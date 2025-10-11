@@ -1,9 +1,7 @@
-// 攤商顯示和輪播功能
+// 攤商顯示功能
 class ExhibitorDisplay {
   constructor() {
     this.exhibitorsData = [];
-    this.currentIndex = 0;
-    this.rotationInterval = null;
     this.isExpanded = false;
     this.apiUrl =
       "https://script.google.com/macros/s/AKfycbzD7XvMiMP2Yi_asnkdvU1rOhk2YcixUpMrYQ_bDHXbQIkG97E5knPC3SmkGKoe9mvh/exec";
@@ -16,7 +14,7 @@ class ExhibitorDisplay {
       this.setupEventListeners();
       this.showLoadingState();
       await this.loadExhibitorsData();
-      this.startRotation();
+      this.showAllExhibitors();
     } catch (error) {
       console.error("攤商顯示初始化失敗:", error);
       this.exhibitorsData = [];
@@ -24,19 +22,17 @@ class ExhibitorDisplay {
     }
   }
 
-  // 從 API 載入攤商數據（簡化版，專門用於輪播顯示）
+  // 從 API 載入所有攤商數據
   async loadExhibitorsData() {
     try {
-      console.log("正在載入輪播攤商數據...");
+      console.log("正在載入所有攤商數據...");
 
       // 使用更短的 timeout，快速失敗
       const controller = new AbortController();
-      const timeoutId = setTimeout(() => controller.abort(), 5000); // 5秒 timeout
+      const timeoutId = setTimeout(() => controller.abort(), 10000); // 10秒 timeout
 
       const params = new URLSearchParams({
-        action: "get_accepted_booths_by_page_and_page_size",
-        page: 1,
-        pageSize: 20,
+        action: "get_all_booths",
       }).toString();
 
       const response = await fetch(this.apiUrl, {
@@ -58,17 +54,24 @@ class ExhibitorDisplay {
       console.log("API 響應:", data);
       console.log("data.success:", data.success);
       console.log("data.data:", data.data);
-      console.log("data.data.booths:", data.data?.booths);
 
-      // 簡化數據解析，只抓取需要的字段
-      if (data.success && data.data && data.data.booths) {
-        this.exhibitorsData = data.data.booths.map((item) => ({
+      // 解析新的 API 數據格式
+      if (data.success && data.data) {
+        // 假設新 API 直接返回攤商陣列或包含 booths 欄位
+        let booths = data.data;
+        if (data.data.booths && Array.isArray(data.data.booths)) {
+          booths = data.data.booths;
+        } else if (!Array.isArray(data.data)) {
+          throw new Error("API 數據格式不正確");
+        }
+
+        this.exhibitorsData = booths.map((item) => ({
           // 品牌名稱
-          brand: item["品牌"] || item.brand || "",
-          // 攤商編號（正確的欄位）
-          boothNumber: item["攤商編號"] || item.boothNumber || "",
+          brand: item["品牌"] || item.brand || item.name || "",
+          // 攤商編號
+          boothNumber: item["攤商編號"] || item.boothNumber || item.booth || "",
           // 品牌簡介
-          brandDescription: item["品牌簡介"] || item.brandDescription || "",
+          brandDescription: item["品牌簡介"] || item.brandDescription || item.description || "",
           // Facebook 連結
           facebook: item["facebook"] || item.facebook || "",
           // Instagram 連結
@@ -76,13 +79,13 @@ class ExhibitorDisplay {
           // Website 連結
           website: item["website"] || item.website || "",
           // 國籍
-          nationality: item["國籍"] || item.nationality || item["region"] || "TW",
+          nationality: item["國籍"] || item.nationality || item.region || "TW",
           // 保留舊欄位以備用
-          id: item["報名編號"] || "",
-          name: item["品牌"] || "",
-          booth: item["攤商編號"] || "",
-          description: item["品牌簡介"] || "",
-          region: item["region"] || "TW",
+          id: item["報名編號"] || item.id || "",
+          name: item["品牌"] || item.name || "",
+          booth: item["攤商編號"] || item.booth || "",
+          description: item["品牌簡介"] || item.description || "",
+          region: item["國籍"] || item.region || "TW",
           sourceSheet: item["_source_sheet"] || "",
         }));
 
@@ -91,42 +94,38 @@ class ExhibitorDisplay {
         throw new Error("API 數據格式不正確");
       }
     } catch (error) {
-      console.error("無法載入輪播攤商數據:", error);
+      console.error("無法載入攤商數據:", error);
       this.exhibitorsData = [];
-      this.showLoadingState();
+      this.showEmptyState();
     }
   }
 
   // 顯示載入狀態
   showLoadingState() {
-    const displays = document.querySelectorAll(".exhibitor-item-display");
-    if (displays.length !== 3) return;
+    const container = document.getElementById("exhibitorDisplayContainer");
+    if (!container) return;
 
-    displays.forEach((display, index) => {
-      const boothNumber = display.querySelector(".exhibitor-booth-number");
-      const name = display.querySelector(".exhibitor-name");
-      const region = display.querySelector(".exhibitor-region");
-
-      if (boothNumber) boothNumber.textContent = "";
-      if (name) name.textContent = "Loading exhibitor data...🏃‍♀️";
-      if (region) region.textContent = "...";
-    });
+    container.innerHTML = `
+      <div class="exhibitor-item-display">
+        <span class="exhibitor-booth-number"></span>
+        <span class="exhibitor-name">Loading exhibitor data...🏃‍♀️</span>
+        <span class="exhibitor-region">...</span>
+      </div>
+    `;
   }
 
   // 顯示空狀態
   showEmptyState() {
-    const displays = document.querySelectorAll(".exhibitor-item-display");
-    if (displays.length !== 3) return;
+    const container = document.getElementById("exhibitorDisplayContainer");
+    if (!container) return;
 
-    displays.forEach((display, index) => {
-      const boothNumber = display.querySelector(".exhibitor-booth-number");
-      const name = display.querySelector(".exhibitor-name");
-      const region = display.querySelector(".exhibitor-region");
-
-      if (boothNumber) boothNumber.textContent = "";
-      if (name) name.textContent = "No exhibitor data available";
-      if (region) region.textContent = "-";
-    });
+    container.innerHTML = `
+      <div class="exhibitor-item-display">
+        <span class="exhibitor-booth-number"></span>
+        <span class="exhibitor-name">No exhibitor data available</span>
+        <span class="exhibitor-region">-</span>
+      </div>
+    `;
   }
 
   // 設置事件監聽器
@@ -196,88 +195,29 @@ class ExhibitorDisplay {
     }
   }
 
-  // 開始輪播
-  startRotation() {
-    if (this.exhibitorsData.length === 0) {
-      console.log("沒有攤商數據，不啟動輪播");
-      return;
-    }
 
-    // 從第一個攤商開始
-    this.currentIndex = 0;
+  // 顯示所有攤商（網格佈局）
+  showAllExhibitors() {
+    const container = document.getElementById("exhibitorDisplayContainer");
+    if (!container) return;
 
-    // 立即顯示第一組數據
-    this.updateDisplay();
+    // 清空容器
+    container.innerHTML = "";
 
-    // 設置輪播間隔（每3秒切換一次）
-    this.rotationInterval = setInterval(() => {
-      this.nextExhibitors();
-    }, 3000);
+    // 創建網格容器
+    const gridContainer = document.createElement("div");
+    gridContainer.className = "exhibitors-grid-main";
+    
+    // 顯示所有攤商
+    this.exhibitorsData.forEach((exhibitor, index) => {
+      const card = this.createExhibitorCard(exhibitor, index);
+      gridContainer.appendChild(card);
+    });
+
+    container.appendChild(gridContainer);
   }
 
-  // 停止輪播
-  stopRotation() {
-    if (this.rotationInterval) {
-      clearInterval(this.rotationInterval);
-      this.rotationInterval = null;
-    }
-  }
 
-  // 切換到下一組攤商
-  nextExhibitors() {
-    if (this.exhibitorsData.length === 0) return;
-
-    // 簡單的順序輪播
-    this.currentIndex = (this.currentIndex + 3) % this.exhibitorsData.length;
-    this.updateDisplay();
-  }
-
-  // 更新顯示
-  updateDisplay() {
-    const displays = document.querySelectorAll(".exhibitor-item-display");
-    if (displays.length !== 3) return;
-
-    // 獲取當前要顯示的三個攤商
-    const exhibitor1 = this.exhibitorsData[this.currentIndex];
-    const exhibitor2 =
-      this.exhibitorsData[(this.currentIndex + 1) % this.exhibitorsData.length];
-    const exhibitor3 =
-      this.exhibitorsData[(this.currentIndex + 2) % this.exhibitorsData.length];
-
-    // 更新第一個攤商
-    if (exhibitor1) {
-      this.updateExhibitorDisplay(displays[0], exhibitor1);
-    }
-
-    // 更新第二個攤商
-    if (exhibitor2) {
-      this.updateExhibitorDisplay(displays[1], exhibitor2);
-    }
-
-    // 更新第三個攤商
-    if (exhibitor3) {
-      this.updateExhibitorDisplay(displays[2], exhibitor3);
-    }
-  }
-
-  // 更新攤商顯示
-  updateExhibitorDisplay(display, exhibitor) {
-    const boothNumber = display.querySelector(".exhibitor-booth-number");
-    const name = display.querySelector(".exhibitor-name");
-    const region = display.querySelector(".exhibitor-region");
-
-    if (boothNumber) {
-      boothNumber.textContent = "";
-    }
-    if (name) {
-      name.textContent = exhibitor.name || "Unknown";
-    }
-    if (region) {
-      // 顯示國籍/地區
-      const regionText = this.getRegionDisplayText(exhibitor.region);
-      region.textContent = regionText;
-    }
-  }
 
   // 獲取國籍顯示文字
   getRegionDisplayText(region) {
@@ -325,8 +265,8 @@ class ExhibitorDisplay {
       document.body.style.overflow = "";
     }
 
-    // 重新開始輪播（也會隨機選擇起始位置）
-    this.startRotation();
+    // 重新顯示靜態攤商列表
+    this.showAllExhibitors();
   }
 
   // 初始化完整名單
@@ -454,7 +394,7 @@ class ExhibitorDisplay {
   // 創建攤商卡片
   createExhibitorCard(exhibitor, index) {
     const card = document.createElement("div");
-    card.className = "exhibitor-card";
+    card.className = "exhibitor-card-main";
 
     // 使用新的資料欄位
     const brandName = exhibitor.brand || exhibitor.name || "Unknown";
@@ -462,28 +402,32 @@ class ExhibitorDisplay {
     const nationality = exhibitor.nationality || "TW";
     const brandDescription = exhibitor.brandDescription || exhibitor.description || "暫無簡介";
 
-    // 基本資訊區域（橫向佈局）
+    // 基本資訊區域（顯示名稱、國籍、攤位編號）
     const basicInfo = document.createElement("div");
     basicInfo.className = "exhibitor-basic-info";
     
-    // 攤商編號
-    const boothDisplay = document.createElement("div");
-    boothDisplay.className = "exhibitor-booth-display";
-    boothDisplay.textContent = boothNumber;
-
     // 品牌名稱（可點擊）
     const brandDisplay = document.createElement("div");
     brandDisplay.className = "exhibitor-brand-display";
     brandDisplay.textContent = brandName;
 
-    // 國籍
-    const nationalityDisplay = document.createElement("div");
+    // 攤商編號和國籍（一行顯示）
+    const metaInfo = document.createElement("div");
+    metaInfo.className = "exhibitor-meta-info";
+    
+    const boothDisplay = document.createElement("span");
+    boothDisplay.className = "exhibitor-booth-display";
+    boothDisplay.textContent = boothNumber;
+
+    const nationalityDisplay = document.createElement("span");
     nationalityDisplay.className = "exhibitor-nationality-display";
     nationalityDisplay.textContent = nationality;
 
-    basicInfo.appendChild(boothDisplay);
+    metaInfo.appendChild(boothDisplay);
+    metaInfo.appendChild(nationalityDisplay);
+
     basicInfo.appendChild(brandDisplay);
-    basicInfo.appendChild(nationalityDisplay);
+    basicInfo.appendChild(metaInfo);
 
     // 創建詳細資訊下拉區域
     const details = document.createElement("div");
@@ -497,21 +441,9 @@ class ExhibitorDisplay {
     description.className = "exhibitor-description";
     description.textContent = brandDescription;
 
-    // 攤商照片（只在展開時顯示）
-    const photo = document.createElement("div");
-    photo.className = "exhibitor-photo";
-    const photoImg = document.createElement("img");
-    photoImg.src = exhibitor.image || "image/horizental/hori1.jpg";
-    photoImg.alt = brandName;
-    photoImg.onerror = function() {
-      this.src = "image/horizental/hori1.jpg";
-    };
-    photo.appendChild(photoImg);
-
     detailsContent.appendChild(description);
-    detailsContent.appendChild(photo);
 
-    // 社交連結區域（縮小版本）
+    // 社交連結區域
     const socialLinks = document.createElement("div");
     socialLinks.className = "exhibitor-social-links";
 
@@ -521,7 +453,7 @@ class ExhibitorDisplay {
       facebookLink.href = exhibitor.facebook;
       facebookLink.target = "_blank";
       facebookLink.className = "exhibitor-social-link facebook";
-      facebookLink.textContent = "FB";
+      facebookLink.textContent = "Facebook";
       socialLinks.appendChild(facebookLink);
     }
 
@@ -531,7 +463,7 @@ class ExhibitorDisplay {
       instagramLink.href = exhibitor.instagram;
       instagramLink.target = "_blank";
       instagramLink.className = "exhibitor-social-link instagram";
-      instagramLink.textContent = "IG";
+      instagramLink.textContent = "Instagram";
       socialLinks.appendChild(instagramLink);
     }
 
@@ -541,7 +473,7 @@ class ExhibitorDisplay {
       websiteLink.href = exhibitor.website;
       websiteLink.target = "_blank";
       websiteLink.className = "exhibitor-social-link website";
-      websiteLink.textContent = "WEB";
+      websiteLink.textContent = "Website";
       socialLinks.appendChild(websiteLink);
     }
 
