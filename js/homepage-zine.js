@@ -19,8 +19,9 @@ function populateZineElements(booksArray) {
     ".book-item, .right-zine-item, .middle-zine-item, .zine-item, .timeline-zine-item"
   );
 
-  // 預先設定所有元素的 hover 效果並清除舊的事件監聽器
+  // 先隱藏所有 zine 元素
   zineElements.forEach((element) => {
+    element.style.display = "none";
     element.style.transition = "all 0.2s ease";
     
     // 清除舊的事件監聽器（通過設置標記來避免重複綁定）
@@ -34,6 +35,9 @@ function populateZineElements(booksArray) {
   booksArray.forEach((item, index) => {
     if (index < zineElements.length) {
       const zineElement = zineElements[index];
+      
+      // 顯示這個 zine 元素
+      zineElement.style.display = "block";
 
       // 設定 data-record 屬性，包含書籍的所有資料
       zineElement.setAttribute("data-record", JSON.stringify(item));
@@ -60,29 +64,29 @@ function populateZineElements(booksArray) {
           };
           img.onerror = function () {
             console.error(`圖片載入失敗: ${imageUrl}`);
-            // 如果圖片載入失敗，設定 plum 背景
-            zineElement.style.backgroundColor = "transparent";
+            // 如果圖片載入失敗，設定 black 背景
+            zineElement.style.backgroundColor = "black";
             zineElement.style.color = "white";
             zineElement.style.textShadow = "1px 1px 2px rgba(0,0,0,0.5)";
           };
           img.src = imageUrl;
         } else {
           console.log(`Zine ${index + 1} 沒有有效的圖片 URL`);
-          zineElement.style.backgroundColor = "transparent";
+          zineElement.style.backgroundColor = "black";
           zineElement.style.color = "white";
           zineElement.style.textShadow = "1px 1px 2px rgba(0,0,0,0.5)";
         }
       } else {
         console.log(`Zine ${index + 1} 沒有照片欄位`);
-        zineElement.style.backgroundColor = "transparent";
+        zineElement.style.backgroundColor = "black";
         zineElement.style.color = "white";
         zineElement.style.textShadow = "1px 1px 2px rgba(0,0,0,0.5)";
       }
 
       // 添加 hover 效果，顯示標題
       // 優先順序：商品名稱(英) > 商品名稱(中) > 品名 > 未知標題
-      const title = item["商品名稱(英)"] || item["商品名稱(中)"] || item["品名"] || "未知標題";
-      const englishTitle = item["商品名稱(英)"];
+      const title = item["商品名稱(英)"] || item["商品名稱(中)"] || item["品名"] || item["書名"] || "未知標題";
+      const englishTitle = item["商品名稱(英)"] || item["書名"];
       const shopUrl = generateShopUrl(englishTitle);
       
       console.log(`為第 ${index + 1} 個 zine 綁定 hover 事件，標題: ${title}`);
@@ -107,7 +111,7 @@ function populateZineElements(booksArray) {
       
       zineElement.addEventListener("mouseenter", function () {
         console.log(`Hover 事件觸發 - 第 ${index + 1} 個 zine`);
-        this.style.color = "black";
+        this.style.color = "white";
         this.style.textShadow = "none";
         this.style.fontSize = "0.8rem";
         this.style.writingMode = "horizontal-tb";
@@ -115,12 +119,12 @@ function populateZineElements(booksArray) {
         this.style.transform = `rotate(${(Math.random() - 0.5) * 10}deg)`;
         this.style.backgroundColor = "transparent";
         this.style.cursor = shopUrl ? "pointer" : "default";
-        this.innerHTML = `<div style="background-color: plum; width: 100%; padding: 4px 0; text-align: center;margin:1px;">${title}</div>`;
+        this.innerHTML = `<div style="background-color: BLACK; color: white; width: 100%; padding: 4px 0; text-align: center;margin:1px;">${title}</div>`;
       });
 
       zineElement.addEventListener("mouseleave", function () {
         this.style.backgroundColor = "";
-        this.style.color = "transparent";
+        this.style.color = "white";
         this.style.textShadow = "none";
         this.style.cursor = shopUrl ? "pointer" : "default";
         this.textContent = "";
@@ -128,17 +132,16 @@ function populateZineElements(booksArray) {
     }
   });
 
-  // 為沒有書籍資料的格子設定 plum 背景
   for (let i = booksArray.length; i < zineElements.length; i++) {
     const zineElement = zineElements[i];
-    zineElement.style.backgroundColor = "plum"; // 修正：應該是 plum 不是 transparent
+    zineElement.style.backgroundColor = "transparent"; 
     zineElement.style.color = "white";
     zineElement.style.textShadow = "1px 1px 2px rgba(0,0,0,0.5)";
     zineElement.textContent = ""; // 確保空格子沒有文字內容
 
     // 為空格子也添加 hover 效果 - 使用統一的邏輯
     zineElement.addEventListener("mouseenter", function () {
-      this.style.color = "black";
+      this.style.color = "smokewhite";
       this.style.textShadow = "none";
       this.style.fontSize = "0.8rem";
       this.style.writingMode = "horizontal-tb";
@@ -146,12 +149,12 @@ function populateZineElements(booksArray) {
       this.style.transform = `rotate(${(Math.random() - 0.5) * 10}deg)`;
       this.style.backgroundColor = "transparent";
       this.style.cursor = "default";
-      this.innerHTML = `<div style="background-color: plum; width: 100%; padding: 4px 0; text-align: center; margin: 1px;">空位</div>`;
+      this.innerHTML = `<div style="background-color: black; color:smokewhite; width: 100%; padding: 4px 0; text-align: center; margin: 1px;"></div>`;
     });
 
     zineElement.addEventListener("mouseleave", function () {
-      this.style.backgroundColor = "plum";
-      this.style.color = "white";
+      this.style.backgroundColor = "black";
+      this.style.color = "smokewhite";
       this.style.textShadow = "1px 1px 2px rgba(0,0,0,0.5)";
       this.style.cursor = "default";
       this.textContent = "";
@@ -159,7 +162,7 @@ function populateZineElements(booksArray) {
   }
 }
 
-async function getNMHWInfo(count = 11, retryCount = 0, maxRetries = 3) {
+async function getNMHWInfo(count = 100, retryCount = 0, maxRetries = 3) {
   const url = `https://script.google.com/macros/s/AKfycbxAnoFX7ahuNKl3kLB4-ByIhapOU_JirQTvuSb05ITbVGz2YXDdLz1cWW2zUHxjnlQ/exec`;
   
   // 請求指定數量的資料
@@ -230,38 +233,46 @@ async function getNMHWInfo(count = 11, retryCount = 0, maxRetries = 3) {
       data = response;
       console.log("直接使用 response 陣列");
     } else {
-      console.log("無法識別的回應格式，回傳空陣列");
+      console.log("無法識別的回應格式");
       populateZineElements([]);
       return;
     }
     
     console.log("處理後的 data:", data);
 
-    // 如果 data 是空物件或空陣列，使用空陣列
+    // 如果 data 是空物件或空陣列，使用示例資料
     if (
       !data ||
       (Array.isArray(data) && data.length === 0) ||
       (typeof data === "object" && Object.keys(data).length === 0)
     ) {
-      data = [];
+      console.log("資料為空");
+      populateZineElements([]);
+      return;
     }
 
     // 確保 data 是陣列格式
     const allBooksArray = Array.isArray(data) ? data : [data];
     
+    // 篩選有圖片的項目
+    const booksWithPhotos = allBooksArray.filter(book => {
+      return book["照片"] && book["照片"].trim() !== "";
+    });
+    
     console.log(`獲取到 ${allBooksArray.length} 筆資料`);
+    console.log(`篩選後有圖片的資料: ${booksWithPhotos.length} 筆`);
     
     // 如果沒有足夠的資料，嘗試再次請求
-    if (allBooksArray.length < count && retryCount < maxRetries) {
-      console.log(`資料不足 (${allBooksArray.length}/${count})，將重試...`);
+    if (booksWithPhotos.length < 5 && retryCount < maxRetries) {
+      console.log(`有圖片的資料不足 (${booksWithPhotos.length}筆)，將重試...`);
       setTimeout(() => {
         getNMHWInfo(count, retryCount + 1, maxRetries);
       }, (retryCount + 1) * 2000);
       return;
     }
     
-    // 只取需要的數量
-    const booksArray = allBooksArray.slice(0, count);
+    // 使用所有有圖片的資料，不限制數量
+    const booksArray = booksWithPhotos;
     console.log(`最終使用 ${booksArray.length} 筆資料`);
 
     // 非阻塞預載入圖片
@@ -293,7 +304,7 @@ async function getNMHWInfo(count = 11, retryCount = 0, maxRetries = 3) {
         getNMHWInfo(count, retryCount + 1, maxRetries);
       }, (retryCount + 1) * 2000); // 指數退避：2秒、4秒、6秒
     } else {
-      console.log("達到最大重試次數，使用空陣列填充 zine 元素");
+      console.log("達到最大重試次數，API 無法使用");
       populateZineElements([]);
     }
   }
@@ -301,5 +312,5 @@ async function getNMHWInfo(count = 11, retryCount = 0, maxRetries = 3) {
 
 // 等待頁面載入完成後執行
 document.addEventListener("DOMContentLoaded", function () {
-  getNMHWInfo(11);
+  getNMHWInfo(100);
 });
