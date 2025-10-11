@@ -2322,7 +2322,9 @@ p {
 /* 大螢幕響應式設計 - 保持比例並添加灰色邊框 */
 @media (min-width: 1400px) {
   body {
-    background-color: black; /* 灰色背景 */
+    background: 
+    linear-gradient(to bottom, darkolivegreen, transparent), 
+    url(https://grainy-gradients.vercel.app/noise.svg);
   }
 
   /* 整體容器 - 限制最大寬度並居中 */
