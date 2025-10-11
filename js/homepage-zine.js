@@ -1,6 +1,6 @@
 // 將英文書名轉換為商店 URL 的函數
 function generateShopUrl(englishTitle) {
-  if (!englishTitle) return null;
+  if (!englishTitle || englishTitle.trim() === '') return null;
   
   // 將書名轉換為小寫，替換空格和特殊字符為連字符
   const urlSlug = englishTitle
@@ -9,6 +9,10 @@ function generateShopUrl(englishTitle) {
     .replace(/\s+/g, '-') // 將空格替換為連字符
     .trim();
   
+  // 如果處理後的字串為空，返回 null
+  if (urlSlug === '') return null;
+  
+  // 嘗試不同的URL結構
   return `https://nmhw.taipeiartbookfair.com/products/${urlSlug}`;
 }
 
@@ -86,11 +90,14 @@ function populateZineElements(booksArray) {
       // 添加 hover 效果，顯示標題
       // 優先順序：商品名稱(英) > 商品名稱(中) > 品名 > 未知標題
       const title = item["商品名稱(英)"] || item["商品名稱(中)"] || item["品名"] || item["書名"] || "未知標題";
-      const englishTitle = item["商品名稱(英)"] || item["書名"];
+      // 嘗試多個可能的英文書名欄位
+      const englishTitle = item["商品名稱(英)"] || item["書名"] || item["品名"] || item["商品名稱(中)"];
       const shopUrl = generateShopUrl(englishTitle);
       
       console.log(`為第 ${index + 1} 個 zine 綁定 hover 事件，標題: ${title}`);
+      console.log(`英文書名: ${englishTitle}`);
       console.log(`商店連結: ${shopUrl}`);
+      console.log(`完整資料:`, item);
       
       // 添加點擊事件，跳轉到商店頁面
       zineElement.addEventListener("click", function (e) {
@@ -98,14 +105,21 @@ function populateZineElements(booksArray) {
         e.stopPropagation();
         if (shopUrl) {
           console.log(`點擊 zine，跳轉到: ${shopUrl}`);
-          // 確保在新分頁開啟
+          // 絕對在新分頁開啟，不允許當前頁面跳轉
           const newWindow = window.open(shopUrl, '_blank', 'noopener,noreferrer');
           if (!newWindow) {
-            // 如果彈出視窗被阻擋，嘗試直接跳轉
-            window.location.href = shopUrl;
+            // 如果彈出視窗被阻擋，顯示提示訊息而不是跳轉當前頁面
+            alert('請允許彈出視窗以開啟商店頁面，或手動前往: ' + shopUrl);
           }
         } else {
-          console.log('沒有可用的商店連結');
+          console.log('沒有可用的商店連結，跳轉到主商店頁面');
+          // 如果沒有特定商品連結，跳轉到主商店頁面
+          const mainStoreUrl = 'https://nmhw.taipeiartbookfair.com';
+          const newWindow = window.open(mainStoreUrl, '_blank', 'noopener,noreferrer');
+          if (!newWindow) {
+            // 如果彈出視窗被阻擋，顯示提示訊息而不是跳轉當前頁面
+            alert('請允許彈出視窗以開啟商店頁面，或手動前往: ' + mainStoreUrl);
+          }
         }
       });
       
@@ -163,7 +177,7 @@ function populateZineElements(booksArray) {
 }
 
 async function getNMHWInfo(count = 100, retryCount = 0, maxRetries = 3) {
-  const url = `https://script.google.com/macros/s/AKfycbxAnoFX7ahuNKl3kLB4-ByIhapOU_JirQTvuSb05ITbVGz2YXDdLz1cWW2zUHxjnlQ/exec`;
+  const url = `https://script.google.com/macros/s/AKfycbzSMjKyOh--yUfioAhICP-rFGawWL1rW61NEr1SkYiOhC1vwCHJZ1s-rd2aXiwuWKy_/exec`;
   
   // 請求指定數量的資料
   const requestCount = count;
