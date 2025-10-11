@@ -403,7 +403,7 @@ function renderTimelineWithData(timelineData) {
         <div style="font-size: 0.9rem; line-height: 1.4; color: #666;">
           ${eventFields.DESCRIPTION || event.description || "暫無詳細描述"}
         </div>
-        ${eventFields.SIGNUP ? `<div style="margin-top: 15px;"><a href="${eventFields.SIGNUP}" target="_blank" style="display: inline-block; padding: 8px 16px; background: #000; color: #fff; text-decoration: none; border-radius: 4px; font-size: 0.9rem;">報名參加</a></div>` : ''}
+        ${eventFields.SIGNUP ? `<div style="margin-top: 15px;"><a href="${eventFields.SIGNUP}" target="_blank" style="display: inline-block; padding: 8px 16px; background: #000; color: #fff; text-decoration: none; border-radius: 4px; font-size: 0.9rem;">SIGN UP</a></div>` : ''}
       `;
     };
 
@@ -527,17 +527,38 @@ function renderEvents(items) {
     const eventTimeInfo = document.createElement("div");
     eventTimeInfo.className = "event-time-info";
     
+    // 報名按鈕區域 - 放在最前面
+    if (eventFields.SIGNUP) {
+      const signupContainer = document.createElement("div");
+      signupContainer.className = "signup-container";
+      
+      const signupButton = document.createElement("a");
+      signupButton.href = eventFields.SIGNUP;
+      signupButton.target = "_blank";
+      signupButton.textContent = "SIGN UP";
+      signupButton.className = "signup-button";
+      signupContainer.appendChild(signupButton);
+      
+      eventTimeInfo.appendChild(signupContainer);
+    }
+    
+    // 時間資訊容器
+    const timeInfoContainer = document.createElement("div");
+    timeInfoContainer.className = "time-info-container";
+    
     // 日期
     const eventDate = document.createElement("div");
     eventDate.className = "event-date";
     eventDate.textContent = dateStr;
-    eventTimeInfo.appendChild(eventDate);
+    timeInfoContainer.appendChild(eventDate);
     
     // 時間
     const eventTime = document.createElement("div");
     eventTime.className = "event-time";
     eventTime.textContent = timeStr;
-    eventTimeInfo.appendChild(eventTime);
+    timeInfoContainer.appendChild(eventTime);
+    
+    eventTimeInfo.appendChild(timeInfoContainer);
     
     eventContent.appendChild(eventTimeInfo);
 
@@ -555,20 +576,6 @@ function renderEvents(items) {
       eventContent.appendChild(eventDescription);
     }
 
-    // 報名按鈕區域 - 保持在底部
-    if (eventFields.SIGNUP) {
-      const signupContainer = document.createElement("div");
-      signupContainer.className = "signup-container";
-      
-      const signupButton = document.createElement("a");
-      signupButton.href = eventFields.SIGNUP;
-      signupButton.target = "_blank";
-      signupButton.textContent = "報名參加";
-      signupButton.className = "signup-button";
-      signupContainer.appendChild(signupButton);
-      
-      eventContent.appendChild(signupContainer);
-    }
     eventCard.appendChild(eventContent);
     eventsTimeline.appendChild(eventCard);
   });
