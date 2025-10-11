@@ -557,7 +557,7 @@ p {
   background-repeat: repeat;
   background-size: 350px 180px;
   background-position: 0 0;
-  border-bottom: 1px solid var(--main-color);
+  border-bottom: 2px solid var(--main-color);
   z-index: 999;
   padding-bottom: 5px;
   padding-top:15px;
