@@ -183,21 +183,21 @@ margin-right: 20px;
 
 /* 事件日期 */
 .event-date {
-  font-size: 1.2rem;
+  font-size: 1.1rem;
   color: black;
-  padding: 0.ㄉrem 0;
   flex: 1;
   text-align: left;
+  text-decoration: underline;
 }
 
 /* 事件時間 */
 .event-time {
-  font-size: 1.2rem;
+  font-size: 1.1rem;
   color: black;
-  padding: 0.2rem 0;
   flex: 1;
-  text-align: center;
+  text-align: left;
   border-bottom: 1px dotted black;
+  text-decoration: underline;
 }
 
 /* 空白區域 - 保持三等份布局 */
@@ -232,7 +232,7 @@ margin-right: 20px;
   font-family: "Alice", serif;
     font-weight: 400;
   font-style: normal;
-  font-size: 1.8rem;
+  font-size: 1.3rem;
   color: black;
   line-height: 1.3;
   word-wrap: break-word; /* 允許長單詞換行 */
@@ -254,6 +254,7 @@ margin-right: 20px;
   text-decoration: none;
   flex: 1;
   text-align: center;
+  float:right;
 }
 
 /* 描述區塊 */
