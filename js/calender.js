@@ -488,24 +488,6 @@ function renderEvents(items) {
     const eventContent = document.createElement("div");
     eventContent.className = "event-content";
 
-    // 活動標題
-    const eventTitle = document.createElement("div");
-    eventTitle.className = "event-title";
-    eventTitle.textContent = item.summary || "未命名活動";
-    eventContent.appendChild(eventTitle);
-
-    // 活動描述
-    if (eventFields.DESCRIPTION) {
-      const eventDescription = document.createElement("p");
-      eventDescription.className = "event-description";
-      eventDescription.textContent = eventFields.DESCRIPTION;
-      eventContent.appendChild(eventDescription);
-    }
-
-    // 底部區域 - 三等份排列：日期、時間、報名按鈕
-    const eventFooter = document.createElement("div");
-    eventFooter.className = "event-footer";
-
     // 活動時間 - 轉換為台灣時間，24小時制，不顯示秒數
     const startTime = new Date(item.start.dateTime || item.start.date);
     const endTime = new Date(item.end.dateTime || item.end.date);
@@ -541,34 +523,52 @@ function renderEvents(items) {
     
     const timeStr = `${startTimeStr} - ${endTimeStr}`;
     
+    // 時間資訊區域 - 放在標題上面
+    const eventTimeInfo = document.createElement("div");
+    eventTimeInfo.className = "event-time-info";
+    
     // 日期
     const eventDate = document.createElement("div");
     eventDate.className = "event-date";
     eventDate.textContent = dateStr;
-    eventFooter.appendChild(eventDate);
+    eventTimeInfo.appendChild(eventDate);
     
     // 時間
     const eventTime = document.createElement("div");
     eventTime.className = "event-time";
     eventTime.textContent = timeStr;
-    eventFooter.appendChild(eventTime);
+    eventTimeInfo.appendChild(eventTime);
+    
+    eventContent.appendChild(eventTimeInfo);
 
-    // 報名按鈕
+    // 活動標題
+    const eventTitle = document.createElement("div");
+    eventTitle.className = "event-title";
+    eventTitle.textContent = item.summary || "未命名活動";
+    eventContent.appendChild(eventTitle);
+
+    // 活動描述
+    if (eventFields.DESCRIPTION) {
+      const eventDescription = document.createElement("p");
+      eventDescription.className = "event-description";
+      eventDescription.textContent = eventFields.DESCRIPTION;
+      eventContent.appendChild(eventDescription);
+    }
+
+    // 報名按鈕區域 - 保持在底部
     if (eventFields.SIGNUP) {
+      const signupContainer = document.createElement("div");
+      signupContainer.className = "signup-container";
+      
       const signupButton = document.createElement("a");
       signupButton.href = eventFields.SIGNUP;
       signupButton.target = "_blank";
       signupButton.textContent = "報名參加";
       signupButton.className = "signup-button";
-      eventFooter.appendChild(signupButton);
-    } else {
-      // 如果沒有報名連結，添加空白區域保持三等份
-      const emptyDiv = document.createElement("div");
-      emptyDiv.className = "event-empty";
-      eventFooter.appendChild(emptyDiv);
+      signupContainer.appendChild(signupButton);
+      
+      eventContent.appendChild(signupContainer);
     }
-
-    eventContent.appendChild(eventFooter);
     eventCard.appendChild(eventContent);
     eventsTimeline.appendChild(eventCard);
   });
