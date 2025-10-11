@@ -1,46 +1,51 @@
 @import url('https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&display=swap');
 
-/* Store Modal Styles */
+/* Store Modal Styles - 右下角小方形 */
 .store-modal {
   display: none;
   position: fixed;
   z-index: 10000;
-  left: 0;
-  top: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(0, 0, 0, 0.5);
+  bottom: 20px;
+  right: 20px;
+  width: 200px;
+  height: 200px;
   animation: fadeIn 0.3s ease-in-out;
 }
 
 .store-modal-content {
   background-color: var(--secondary-color);
-  margin: 10vh auto;
   padding: 0;
   border: 2px solid black;
-  width: 80vw;
-  height: 80vh;
+  width: 100%;
+  height: 100%;
   position: relative;
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
   cursor: pointer;
   transition: transform 0.2s ease;
+  border-radius: 8px;
 }
 
 .store-modal-content:hover {
-  transform: scale(1.02);
+  transform: scale(1.05);
 }
 
 .store-modal-close {
   color: var(--accent-sky-blue);
-  float: right;
-  font-size: 8rem;
+  font-size: 1.5rem;
   cursor: pointer;
   position: absolute;
-  top: 0px;
-  right: -1.5rem;
+  top: 5px;
+  right: 8px;
   z-index: 10001;
   font-family: "IBM PLEX SANS", sans-serif;
-  line-height: 4rem;
+  line-height: 1;
+  background: rgba(255, 255, 255, 0.8);
+  border-radius: 50%;
+  width: 25px;
+  height: 25px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .store-modal-body {
@@ -52,6 +57,7 @@
   align-items: center;
   text-align: center;
   overflow: hidden;
+  border-radius: 6px;
 }
 
 .store-modal-image {
@@ -59,6 +65,7 @@
   height: 100%;
   object-fit: cover;
   object-position: center;
+  border-radius: 6px;
 }
 
 @keyframes fadeIn {
@@ -72,11 +79,18 @@
 
 /* Responsive adjustments */
 @media (max-width: 768px) {
-  .store-modal-content {
-    width: 90vw;
-    height: 85vh;
+  .store-modal {
+    bottom: 15px;
+    right: 15px;
+    width: 150px;
+    height: 150px;
   }
   
+  .store-modal-close {
+    font-size: 1.2rem;
+    width: 20px;
+    height: 20px;
+  }
 }
 
 /* Reset & Base Styles */
@@ -539,6 +553,10 @@ p {
   position: sticky;
   top: 0; /* 黏在頂部 */
   background: var(--secondary-color);
+  background-image: url('../image/logo.svg');
+  background-repeat: repeat;
+  background-size: 350px 180px;
+  background-position: 0 0;
   border-bottom: 1px solid var(--main-color);
   z-index: 999;
   padding-bottom: 5px;
@@ -567,7 +585,7 @@ p {
   align-items: center;
   width: 100%; /* 佔滿整個寬度 */
   max-width: 800px; /* 設定最大寬度 */
-  gap: 20px;
+  gap: 30px;
   list-style: none;
   padding: 0;
   margin: 0;
@@ -577,13 +595,13 @@ p {
   text-decoration: none;
   color: var(--main-color);
   font-weight: 600;
-  transition: color 0.2s ease;
-  font-size: 3.5rem;
-  background-color: white;
+  font-size: 4rem;
+  background-color: yellow;
   text-transform: uppercase;
-  letter-spacing: 0.5px;
   font-family: "Inclusive Sans", sans-serif;
   border: 1px solid black;
+  border-radius: 50%;
+  box-shadow: 0 2px 2px var(--main-color);
 }
 
 .nav-menu a:hover {
@@ -948,7 +966,7 @@ p {
   gap: 8px;
   justify-content: center;
   position: absolute;
-  top: 550px;
+  top: 560px;
   right: 22px;
 }
 
@@ -972,7 +990,7 @@ p {
 /* 中間 Zine 區域樣式 - 在 image rotator 下面 */
 .middle-zine-container {
   position: absolute;
-  top: 1000px;
+  top: 1080px;
   left: 26.5rem;
   width: auto;
   display: flex;
@@ -1045,7 +1063,7 @@ p {
 /* 條列模式區域 - 縮短寬度 */
 .calender-section.card-section {
   width: 38%; /* 增加 20%：從 30% 到 36% */
-  min-height: 600px; /* 設定最小高度 */
+  min-height: 830px; /* 設定最小高度 */
   position: relative;
   overflow: visible; /* 允許內容自然延伸 */
   box-sizing: border-box; /* 確保padding包含在寬度內 */
@@ -1393,7 +1411,6 @@ p {
   text-shadow: none;
   border:none;
   text-align:left;
-  margin-bottom: 1rem;
   font-family: "Inclusive Sans", sans-serif;
   text-transform: uppercase;
   padding:1px;
@@ -1432,7 +1449,7 @@ p {
 /* 上層內容包裝器 - 海報和PROGRAMS水平排列 */
 .top-content-wrapper {
   display: flex;
-  gap: 1.5rem;
+  gap: 1rem;
   align-items: flex-start;
   width: 100%;
 }
@@ -1445,7 +1462,7 @@ p {
   padding-top: 1rem;
   box-sizing: border-box;
   overflow: auto;
-  gap: 1.5rem;
+  gap: 1rem;
   height: auto;
 }
 
@@ -1457,7 +1474,7 @@ p {
   gap: 0; /* 海報和控制區域之間的間距由 poster-controls-wrapper 的 margin-top 控制 */
   padding: 15px;
   background-color: var(--secondary-color);
-  border: 1px dashed var(--main-color);
+  border: 4px solid var(--main-color);
 }
 
 /* 按鈕容器 - 左右並排 */
@@ -1467,6 +1484,31 @@ p {
   align-items: center;
   width: 100%;
   padding: 0 1rem;
+}
+
+/* 按鈕功能說明文字 */
+.button-explanation {
+  width: 100%;
+  padding: 0.5rem 1rem;
+  text-align: center;
+}
+
+/* 商店功能說明文字 */
+.store-explanation {
+  color: #999999;
+  font-size: 0.7rem;
+  font-family: "IBM PLEX SANS", sans-serif;
+  text-align: left;
+  width: 150px;
+  margin-bottom: 1rem;
+}
+
+.explanation-text {
+  color: #999999;
+  font-size: 0.7rem;
+  font-family: "IBM PLEX SANS", sans-serif;
+  text-align: left;
+  width: 450px;
 }
 
 /* 購票按鈕樣式 */
@@ -1612,9 +1654,9 @@ p {
 
 /* 翻轉按鈕樣式 */
 .flip-button {
-  background: transparent;
-  width: 60px;
-  height: 60px;
+  background: gray;
+  width: 50px;
+  height: auto;
   border-radius: 50%;
   display: flex;
   align-items: center;
@@ -1625,7 +1667,7 @@ p {
   font-family: "Inclusive Sans", sans-serif;
   font-weight: 600;
   transition: all 0.3s ease;
-  border: 2px dotted black;
+  border: 1px dashed black;
 }
 
 .flip-text {
@@ -1832,6 +1874,13 @@ p {
   margin-bottom: 270px;
 }
 
+/* Newsletter 功能說明文字 */
+.newsletter-explanation {
+  width: 100%;
+  text-align: center;
+  margin-bottom: .5rem;
+}
+
 .newsletter-container {
   display: flex;
   gap: 30px;
@@ -1955,7 +2004,7 @@ p {
 
 /* Newsletter Section Styles */
 .newsletter-section {
-  padding: 1.7rem;
+  padding: 1rem;
   width: 38%;
   margin-top: .2rem;
   margin-left: auto;
@@ -1971,13 +2020,12 @@ p {
   background: var(--secondary-color);
   font-family: "Inclusive Sans", sans-serif;
   text-transform: uppercase;
-  letter-spacing: 2px;
   display: inline-block;
   width: 100%;
   border: none;
   box-sizing: border-box;
   text-align: left;
-  margin-bottom:1rem;
+  line-height: 1rem;
 }
 
 .newsletter-content {
@@ -2004,7 +2052,6 @@ p {
   font-size: 0.9rem;
   background: var(--secondary-color);
   color: var(--main-color);
-  transition: all 0.3s ease;
   width: 250px;
 }
 
@@ -2028,9 +2075,7 @@ p {
   font-size: 0.9rem;
   font-weight: 600;
   text-transform: uppercase;
-  letter-spacing: 1px;
   cursor: pointer;
-  transition: all 0.3s ease;
 }
 
 .newsletter-submit-btn:hover {
@@ -2143,7 +2188,7 @@ p {
 
 .rotata div:nth-child(1) {
   position: absolute;
-  top: 180px;
+  top: 128px;
   right: 16px;
   width: 10rem;
   height: 33rem;
@@ -2154,7 +2199,7 @@ p {
  top: 950px;
   left: 16px;
   width: 25rem;
-  height: 26rem;
+  height: 29rem;
 }
 
 .rotata div:nth-child(3) {
@@ -2162,7 +2207,7 @@ p {
   top: 950px;
   left: 26.5rem;
   width: 18rem;
-  height: 12rem;
+  height: 14rem;
 }
 
 .image-strip {
@@ -2291,7 +2336,7 @@ p {
   /* 導航和標題區的縮放 */
   .top-controls,
   .social-links {
-    transform: scale(0.85);
+    transform: scale(0.837);
     transform-origin: top center;
   }
 
@@ -2348,6 +2393,7 @@ p {
 
   .nav-items-area.sticky-nav {
     padding: 12px 10px;
+    background-size: 40px auto; /* 手機版較小的 LOGO */
   }
 
   .top-controls {
@@ -2531,7 +2577,7 @@ p {
     flex-direction: column;
     width: 100%;
     padding: 0.5rem;
-    gap: 1.5rem;
+    gap: 1rem;
     order: 1;
   }
 
@@ -2620,6 +2666,22 @@ p {
 
   .flip-button-container {
     align-self: center;
+  }
+
+  /* 手機版按鈕說明文字 */
+  .button-explanation {
+    padding: 0.3rem 0.5rem;
+  }
+
+  /* 手機版商店說明文字 */
+  .store-explanation {
+    padding: 0.3rem 0.5rem;
+  }
+
+  .explanation-text {
+    font-size: 0.8rem;
+    text-align: center;
+    line-height: 1.3;
   }
 
   .flip-button {
@@ -2821,6 +2883,24 @@ p {
   gap: 0.3rem;
   min-height: 100%;
   justify-content: space-between;
+}
+
+/* 時間資訊區域 - 在標題上面 */
+.event-time-info {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+  font-size: 1.1rem;
+  color: var(--main-color);
+  margin-bottom: 0.8rem;
+}
+
+/* 報名按鈕容器 - 保持在底部 */
+.signup-container {
+  margin-top: auto;
+  text-align: right;
 }
 
  .signup-button {
@@ -3104,6 +3184,12 @@ p {
     font-size: 1.2rem;
     padding: 0.5rem 0.8rem;
     margin-bottom: 1rem;
+  }
+
+  /* 手機版 Newsletter 說明文字 */
+  .newsletter-explanation {
+    padding: 0.3rem 0.5rem;
+    margin-bottom: 0.5rem;
   }
 
   .newsletter-content {

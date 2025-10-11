@@ -1,5 +1,4 @@
-/* 舊的滾動動畫樣式已移除，現在使用靜態佈局 */
-
+@import url('https://fonts.googleapis.com/css2?family=Alice&family=Instrument+Serif:ital@0;1&display=swap');
 /* 舊的攤商條列項目樣式已移除，現在使用新的卡片佈局 */
 
 /* 讀取中訊息 */
@@ -169,6 +168,7 @@ margin-right: 20px;
 
 .event-card {
   margin-top: 20px;
+  border-bottom: 3px dotted var(--main-color);
 }
 
 .event-card:first-child {
@@ -183,20 +183,21 @@ margin-right: 20px;
 
 /* 事件日期 */
 .event-date {
-  font-size: 0.8rem;
+  font-size: 1.2rem;
   color: black;
-  padding: 0.5rem 0;
+  padding: 0.ㄉrem 0;
   flex: 1;
   text-align: left;
 }
 
 /* 事件時間 */
 .event-time {
-  font-size: 0.8rem;
+  font-size: 1.2rem;
   color: black;
-  padding: 0.5rem 0;
+  padding: 0.2rem 0;
   flex: 1;
   text-align: center;
+  border-bottom: 1px dotted black;
 }
 
 /* 空白區域 - 保持三等份布局 */
@@ -228,8 +229,8 @@ margin-right: 20px;
 
 /* 事件標題 */
 .event-title {
-  font-family: "Instrument Serif", serif;
-  font-weight: 400;
+  font-family: "Alice", serif;
+    font-weight: 400;
   font-style: normal;
   font-size: 1.8rem;
   color: black;
@@ -242,6 +243,7 @@ margin-right: 20px;
   text-transform: uppercase;
   margin: 0;
   margin-bottom: 15px;
+  background-color: whitesmoke;
 }
 
 .signup-button{
@@ -668,7 +670,7 @@ margin-right: 20px;
 .calender-mode-container {
   width: 100%;
   max-width: 100%; /* 確保不超出父容器 */
-  height: 64vh; /* 設定固定高度，確保兩個模式一致 */
+  height: 70vh; /* 設定固定高度，確保兩個模式一致 */
   overflow: hidden; /* 防止內容溢出 */
 }
 
