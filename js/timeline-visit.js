@@ -117,18 +117,51 @@ function fetchTimelineData() {
   console.log("API URL:", timelineUrl);
   console.log("時間範圍:", eventStartDate.toISOString(), "到", eventEndDate.toISOString());
 
-  fetch(timelineUrl)
-    .then((response) => response.json())
+  // 添加CORS模式和錯誤處理
+  fetch(timelineUrl, {
+    method: 'GET',
+    mode: 'cors',
+    headers: {
+      'Accept': 'application/json',
+    }
+  })
+    .then((response) => {
+      console.log("API響應狀態:", response.status, response.statusText);
+      console.log("響應頭:", response.headers);
+      
+      if (!response.ok) {
+        throw new Error(`HTTP ${response.status}: ${response.statusText}`);
+      }
+      return response.json();
+    })
     .then((data) => {
       console.log("時間軸資料獲取成功:", data.items?.length || 0, "個活動");
       console.log("所有活動:", data.items);
-      renderTimelineWithData(data.items || []);
+      
+      if (data.items && data.items.length > 0) {
+        renderTimelineWithData(data.items);
+      } else {
+        console.log("沒有找到活動數據");
+        if (timelineCalendar) {
+          timelineCalendar.innerHTML = `
+            <div style="text-align: center; padding: 20px; background: #f0f0f0; border: 2px solid #000;">
+              <h3>時間軸</h3>
+              <p>目前沒有活動安排</p>
+              <p>請稍後再查看</p>
+            </div>
+          `;
+        }
+      }
     })
     .catch((err) => {
       console.error("獲取時間軸資料時出錯:", err);
       if (timelineCalendar) {
-        timelineCalendar.innerHTML =
-          "<p style='text-align: center; padding: 20px;'>Oh No!! Its an error! Refresh the page!</p>";
+        timelineCalendar.innerHTML = `
+          <div style="text-align: center; padding: 20px; background: #f0f0f0; border: 2px solid #ff0000;">
+            <h3>時間軸載入錯誤</h3>
+            <button onclick="location.reload()" style="padding: 10px 20px; background: #000; color: #fff; border: none; cursor: pointer;">重新載入</button>
+          </div>
+        `;
       }
     });
 }
@@ -145,7 +178,7 @@ function renderTimelineWithData(timelineData) {
   const startHour = 9; // 9:00開始
   const endHour = 22; // 22:00結束
   const hoursInDay = endHour - startHour; // 13小時
-  const timelineHeight = hoursInDay * 40; // 520px（更緊湊）
+  const timelineHeight = hoursInDay * 60; // 780px（增加間距讓內容更清楚）
 
   // 只顯示 2025/11/21-2025/11/23 這三天
   const eventDays = [
@@ -159,23 +192,36 @@ function renderTimelineWithData(timelineData) {
   mainContainer.className = "timeline-main-container";
   mainContainer.style.display = "flex";
   mainContainer.style.height = `${timelineHeight + 100}px`; // 更緊湊的高度
+  mainContainer.style.width = "100%"; // 使用全寬度
 
   // 創建時間軸區域（縱軸是時間，橫軸是日期）
   const timelineArea = document.createElement("div");
   timelineArea.className = "timeline-area";
   timelineArea.style.height = `${timelineHeight + 100}px`; // 更緊湊的高度
-  timelineArea.style.width = `${200 + (eventDays.length * 400) + 200}px`; // 調整總寬度以容納新的對齊方式
-  timelineArea.style.flex = "1";
+  // 設置時間軸區域為響應式
+  timelineArea.style.flex = "1"; // 佔用剩餘空間
+  timelineArea.style.minWidth = "400px"; // 最小寬度
+  
+  // 計算可用寬度，確保不超出容器
+  const availableWidth = timelineArea.offsetWidth || 1200; // 預設1200px如果無法獲取
+  const dayWidth = Math.floor((availableWidth - 60) / eventDays.length); // 減少邊距，更緊湊的布局
+  
+  // 將可用寬度存儲到全局變量，供事件定位使用
+  window.timelineAvailableWidth = availableWidth;
+  window.timelineDayWidth = dayWidth;
 
   // 創建預覽容器
   const previewContainer = document.createElement("div");
   previewContainer.className = "timeline-right-container";
-  previewContainer.style.width = "300px";
+  previewContainer.style.width = "25%"; // 使用百分比寬度
+  previewContainer.style.minWidth = "200px"; // 最小寬度
   previewContainer.style.height = `${timelineHeight + 100}px`; // 更緊湊的高度
   previewContainer.style.padding = "var(--spacing-md)";
   previewContainer.style.background = "var(--bg-primary)";
   previewContainer.style.borderLeft = "2px solid var(--border-light)";
   previewContainer.style.overflowY = "auto";
+  previewContainer.style.flexShrink = "1"; // 允許縮小
+  previewContainer.style.position = "relative"; // 確保可見
 
   // 預覽區域的默認內容
   previewContainer.innerHTML = `
@@ -187,9 +233,9 @@ function renderTimelineWithData(timelineData) {
   // 創建時間標記（縱軸時間）- 固定位置，24小時
   const timelineStartY = 100; // 上邊距
   
-  // 繪製時間格線（縱軸）- 從9:00到22:00，每小時40px（更緊湊）
+  // 繪製時間格線（縱軸）- 從9:00到22:00，每小時60px（增加間距）
   for (let hour = startHour; hour < endHour; hour++) {
-    const yPosition = timelineStartY + ((hour - startHour) * 40);
+    const yPosition = timelineStartY + ((hour - startHour) * 60);
     
     const timeLine = document.createElement("div");
     timeLine.className = "timeline-time-line";
@@ -204,17 +250,43 @@ function renderTimelineWithData(timelineData) {
     timelineArea.appendChild(timeLabel);
   }
 
-  // 創建日期標記（橫軸日期）- 統一對齊基準
+  // 創建日期區域分隔線
+  eventDays.forEach(({ year, month, day }, dayIndex) => {
+    const columnStartX = 30 + (dayIndex * dayWidth);
+    
+    // 左邊界線（除了第一個區域）
+    if (dayIndex > 0) {
+      const leftBorder = document.createElement("div");
+      leftBorder.className = "timeline-zone-border";
+      leftBorder.style.left = `${columnStartX}px`;
+      leftBorder.style.top = `${timelineStartY}px`;
+      leftBorder.style.height = `${timelineHeight}px`;
+      timelineArea.appendChild(leftBorder);
+    }
+    
+    // 右邊界線（最後一個區域）
+    if (dayIndex === eventDays.length - 1) {
+      const rightBorder = document.createElement("div");
+      rightBorder.className = "timeline-zone-border";
+      rightBorder.style.left = `${columnStartX + dayWidth}px`;
+      rightBorder.style.top = `${timelineStartY}px`;
+      rightBorder.style.height = `${timelineHeight}px`;
+      timelineArea.appendChild(rightBorder);
+    }
+  });
+
+  // 創建日期標記（橫軸日期）- 分離的日期區域
   const dateColumns = [];
   eventDays.forEach(({ year, month, day }, dayIndex) => {
-    // 統一的對齊基準：每個日期列的中心位置
-    const columnCenterX = 200 + (dayIndex * 400); // 日期列中心位置
+    // 每個日期區域的中心位置，確保分離
+    const columnStartX = 30 + (dayIndex * dayWidth); // 減少左邊距，更緊湊
+    const columnCenterX = columnStartX + (dayWidth / 2); // 區域中心
     
     const dateColumn = document.createElement("div");
     dateColumn.className = "timeline-date-column";
-    dateColumn.style.left = `${columnCenterX - 50}px`; // 日期標記左對齊
+    dateColumn.style.left = `${columnStartX}px`; // 日期標記在區域起始位置
+    dateColumn.style.width = `${dayWidth}px`; // 設置區域寬度
     dateColumn.style.textAlign = "center";
-    dateColumn.style.width = "100px";
     
     const date = new Date(year, month, day);
     // 確保星期日能正確顯示
@@ -241,13 +313,102 @@ function renderTimelineWithData(timelineData) {
     dateColumns.push({ column: dateColumn, line: dateLine, day, centerX: columnCenterX });
   });
 
-  // 渲染所有活動
+  // 創建事件類型篩選按鈕
+  const filterContainer = document.createElement("div");
+  filterContainer.className = "timeline-filter-container";
+  filterContainer.style.position = "absolute";
+  filterContainer.style.top = "30px"; 
+  filterContainer.style.left = "0";
+  filterContainer.style.right = "0";
+  filterContainer.style.height = "auto";
+  filterContainer.style.display = "flex";
+  filterContainer.style.justifyContent = "space-between";
+  filterContainer.style.gap = "0";
+  filterContainer.style.zIndex = "10";
+  filterContainer.style.padding = "15px 0";
+  
+  // 事件類型按鈕
+  const eventTypes = [
+    { key: "all", label: "All", color: "black" },
+    { key: "talk", label: "Talk", color: "orangered" },
+    { key: "workshop", label: "Workshop", color: "blue" },
+    { key: "performance", label: "Performance", color: "rebeccapurple" }
+  ];
+  
+  eventTypes.forEach(eventType => {
+    const button = document.createElement("button");
+    button.className = "timeline-filter-btn";
+    button.textContent = eventType.label;
+    
+    button.style.padding = "6px 0";
+    button.style.border = "none";
+    button.style.borderRadius = "0";
+    button.style.backgroundColor = eventType.color;
+    button.style.color = "#fff";
+    button.style.fontSize = "12px";
+    button.style.fontWeight = "500";
+    button.style.cursor = "pointer";
+    button.style.transition = "all 0.2s ease";
+    button.style.flex = "1";
+    button.style.height = "32px";
+    button.style.display = "flex";
+    button.style.alignItems = "center";
+    button.style.justifyContent = "center";
+    button.dataset.filter = eventType.key;
+    
+    // 默認選中"All"
+    if (eventType.key === "all") {
+      button.style.backgroundColor = "#333";
+      button.style.color = "#fff";
+    }
+    
+    // 點擊事件
+    button.addEventListener("click", () => {
+      // 重置所有按鈕樣式
+      filterContainer.querySelectorAll(".timeline-filter-btn").forEach(btn => {
+        const btnType = btn.dataset.filter;
+        const btnColor = btnType === "all" ? "black" : 
+                          btnType === "talk" ? "orangered" :
+                          btnType === "workshop" ? "blue" :
+                          btnType === "performance" ? "rebeccapurple" :
+                          "black";
+        btn.style.backgroundColor = btnColor;
+        btn.style.color = "ghostwhite";
+      });
+      
+      // 設置當前按鈕為選中狀態
+      button.style.backgroundColor = eventType.color;
+      button.style.color = "#fff";
+      
+      // 篩選事件
+      filterEventsByType(eventType.key);
+    });
+    filterContainer.appendChild(button);
+  });
+  timelineArea.appendChild(filterContainer);
+  
+  // 存儲所有事件元素用於篩選
+  const allEventElements = [];
+  
+  // 篩選事件函數
+  const filterEventsByType = (filterType) => {
+    allEventElements.forEach(eventElement => {
+      const eventType = eventElement.dataset.eventType || "default";
+      
+      if (filterType === "all" || eventType === filterType) {
+        eventElement.style.display = "block";
+      } else {
+        eventElement.style.display = "none";
+      }
+    });
+  };
+  
+  const eventsByDay = {};
   timelineData.forEach((event) => {
     const eventDate = new Date(event.start.dateTime || event.start.date);
     
     // 轉換為台灣時間進行日期比較
-    const taiwanEventStr = eventDate.toLocaleString("sv-SE", {timeZone: "Asia/Taipei"});
-    const taiwanEventDate = new Date(taiwanEventStr);
+    const taiwanEventDate = eventDate;
     
     console.log("活動原始時間:", eventDate);
     console.log("活動台灣時間:", taiwanEventDate);
@@ -273,105 +434,302 @@ function renderTimelineWithData(timelineData) {
     console.log("活動解析結果:", eventFields);
     const eventType = eventFields.TYPE || "DEFAULT";
 
-    // 根據類型設置不同的 CSS 類別
+    // 根據類型設置不同的文字顏色（與篩選按鈕顏色一致）
     switch (eventType.toUpperCase()) {
       case "TALK":
-        eventBar.classList.add("talk");
+        eventBar.style.color = "orangered";
         break;
       case "WORKSHOP":
-        eventBar.classList.add("workshop");
+        eventBar.style.color = "blue";
         break;
       case "PERFORMANCE":
-        eventBar.classList.add("performance");
-        break;
-      case "EXHIBITION":
-        eventBar.classList.add("exhibition");
+        eventBar.style.color = "rebeccapurple";
         break;
       default:
-        eventBar.classList.add("default");
+        eventBar.style.color = "black";
     }
+    
+    // 設置事件類型數據屬性用於篩選
+    eventBar.dataset.eventType = eventType.toLowerCase();
+    
+    // 添加到篩選數組
+    allEventElements.push(eventBar);
 
-    // 計算活動的開始和結束時間 - 轉換為台灣時間
+    // 計算活動的開始和結束時間 - 確保使用GMT+8台灣時間
     const eventStartTime = new Date(event.start.dateTime || event.start.date);
     const eventEndTime = new Date(event.end.dateTime || event.end.date);
     
-    // 使用 toLocaleString 轉換為台灣時間，然後重新解析
-    const taiwanStartStr = eventStartTime.toLocaleString("sv-SE", {timeZone: "Asia/Taipei"});
-    const taiwanEndStr = eventEndTime.toLocaleString("sv-SE", {timeZone: "Asia/Taipei"});
+    // 直接使用台灣時區的時間
+    const startHour = eventStartTime.toLocaleString("en-US", {timeZone: "Asia/Taipei", hour: "2-digit", hour12: false});
+    const startMinute = eventStartTime.toLocaleString("en-US", {timeZone: "Asia/Taipei", minute: "2-digit"});
+    const endHour = eventEndTime.toLocaleString("en-US", {timeZone: "Asia/Taipei", hour: "2-digit", hour12: false});
+    const endMinute = eventEndTime.toLocaleString("en-US", {timeZone: "Asia/Taipei", minute: "2-digit"});
     
-    const taiwanStartTime = new Date(taiwanStartStr);
-    const taiwanEndTime = new Date(taiwanEndStr);
+    const startHourNum = parseInt(startHour);
+    const startMinuteNum = parseInt(startMinute);
+    const endHourNum = parseInt(endHour);
+    const endMinuteNum = parseInt(endMinute);
+
+    // 計算活動長條位置 - 精確到分鐘
+    const timelineStartHour = 9; // 時間軸開始時間
+    let startTimeY = timelineStartY + ((startHourNum - timelineStartHour) * 60) + (startMinuteNum * 1); // 每分鐘1px，每小時60px
+    const barHeight = 30; // 固定高度
+
+    // 將活動添加到對應的日期
+    if (!eventsByDay[dayIndex]) {
+      eventsByDay[dayIndex] = [];
+    }
     
-    const startHour = taiwanStartTime.getHours();
-    const startMinute = taiwanStartTime.getMinutes();
-    const endHour = taiwanEndTime.getHours();
-    const endMinute = taiwanEndTime.getMinutes();
+    eventsByDay[dayIndex].push({
+      event,
+      eventBar,
+      eventFields,
+      dayIndex,
+      startTimeY,
+      barHeight,
+      taiwanEventDate,
+      startHourNum,
+      startMinuteNum,
+      endHourNum,
+      endMinuteNum
+    });
+  });
 
-    // 固定計算活動長條位置 - 基於9:00-22:00，使用更緊湊的間距
-    const startTimeY = timelineStartY + ((startHour - 9) * 40) + (startMinute * 0.67); // 每分鐘0.67px
-    const endTimeY = timelineStartY + ((endHour - 9) * 40) + (endMinute * 0.67);
-    const barHeight = Math.max(endTimeY - startTimeY, 20); // 最小高度20px
-
-    // 固定日期位置（橫軸），對齊到日期列中心
-    const columnCenterX = 200 + (dayIndex * 400); // 與日期標記使用相同的中心位置
-    const barWidth = 300; // 活動長條寬度
-
-    eventBar.style.width = `${barWidth}px`;
-    eventBar.style.height = `${barHeight}px`;
-    eventBar.style.left = `${columnCenterX - barWidth/2}px`; // 活動長條居中對齊
-    eventBar.style.top = `${startTimeY}px`;
-
-    // 創建活動內容
-    const eventContent = document.createElement("div");
-    eventContent.className = "timeline-event-content";
-    eventContent.textContent = event.summary || "未命名活動";
-
-    eventBar.appendChild(eventContent);
-
-    // 添加點擊事件 - 顯示活動預覽
-    const showEventPreview = () => {
-      console.log("顯示活動預覽:", event.summary);
-      console.log("活動描述:", event.description);
-      console.log("解析後的欄位:", eventFields);
+  // 渲染每個日期的活動，使用改進的防重疊定位系統
+  Object.keys(eventsByDay).forEach(dayKey => {
+    const eventsInDay = eventsByDay[dayKey];
+    const dayIndex = parseInt(dayKey);
+    
+    // 按時間排序
+    eventsInDay.sort((a, b) => a.startTimeY - b.startTimeY);
+    
+    // 分離的日期區域定位系統
+    const columnStartX = 30 + (dayIndex * dayWidth); // 區域起始位置
+    const columnCenterX = columnStartX + (dayWidth / 2); // 區域中心
+    
+    // 追蹤已放置的活動位置
+    const placedEvents = [];
+    
+    // 為每個活動計算最佳位置
+    eventsInDay.forEach((eventData, index) => {
+      let { event, eventBar, eventFields, startTimeY, barHeight, taiwanEventDate, startHourNum, startMinuteNum, endHourNum, endMinuteNum } = eventData;
       
-      const eventTime = new Date(event.start.dateTime || event.start.date);
-      // 轉換為台灣時間
-      const taiwanEventStr = eventTime.toLocaleString("sv-SE", {timeZone: "Asia/Taipei"});
-      const taiwanEventTime = new Date(taiwanEventStr);
-      const timeStr = taiwanEventTime.toLocaleTimeString("zh-TW", { 
-        hour: "2-digit", 
-        minute: "2-digit",
-        timeZone: "Asia/Taipei"
+      // 創建活動內容以獲取實際寬度
+      const eventContent = document.createElement("div");
+      eventContent.className = "timeline-event-content";
+      
+      // 格式化時間顯示
+      const startTimeStr = `${startHourNum.toString().padStart(2, '0')}:${startMinuteNum.toString().padStart(2, '0')}`;
+      const endTimeStr = `${endHourNum.toString().padStart(2, '0')}:${endMinuteNum.toString().padStart(2, '0')}`;
+      
+      // 創建標題（活動名稱）- 統一字體大小，使用省略號
+      const eventTitle = document.createElement("div");
+      const titleText = event.summary || "未命名活動";
+      
+      // 統一字體大小，不再根據長度調整
+      const fontSize = "14px";
+      const maxWidth = "200px";
+      
+      eventTitle.style.fontSize = fontSize;
+      eventTitle.style.fontWeight = "bold";
+      eventTitle.style.marginBottom = "2px";
+      eventTitle.style.maxWidth = maxWidth;
+      eventTitle.style.textOverflow = "ellipsis";
+      eventTitle.style.whiteSpace = "nowrap";
+      eventTitle.textContent = titleText;
+      
+      // 創建時間信息（小灰字）
+      const eventTime = document.createElement("div");
+      eventTime.style.fontSize = "12px";
+      eventTime.style.color = "#666";
+      eventTime.style.opacity = "0.8";
+      eventTime.textContent = `${startTimeStr} - ${endTimeStr}`;
+      
+      eventContent.appendChild(eventTitle);
+      eventContent.appendChild(eventTime);
+      eventBar.appendChild(eventContent);
+      
+      // 先添加到DOM以測量寬度
+      timelineArea.appendChild(eventBar);
+      
+      // 獲取實際寬度
+      const actualWidth = eventBar.offsetWidth;
+      
+      // 使用不同寬度創建zigzag效果，但限制最大寬度
+      const widthVariations = [0.8, 1.0, 1.2, 0.9, 1.1]; // 不同的寬度倍數
+      const widthIndex = index % widthVariations.length;
+      let adjustedWidth = actualWidth * widthVariations[widthIndex];
+      
+      // 限制最大寬度，防止過長的標題造成問題
+      let maxAllowedWidth = 225; // 預設最大允許寬度
+      
+      // 根據標題長度動態調整最大寬度
+      if (titleText.length > 30) {
+        maxAllowedWidth = 160; // 超長標題限制更嚴格
+      } else if (titleText.length > 20) {
+        maxAllowedWidth = 200; // 長標題適中限制
+      } else if (titleText.length > 15) {
+        maxAllowedWidth = 220; // 中等標題較寬限制
+      }
+      
+      // 確保寬度不超過區域寬度
+      const availableZoneWidth = dayWidth - 20; // 區域可用寬度，減少邊距
+      maxAllowedWidth = Math.min(maxAllowedWidth, availableZoneWidth);
+      
+      if (adjustedWidth > maxAllowedWidth) {
+        adjustedWidth = maxAllowedWidth;
+      }
+      
+      // 設置調整後的寬度
+      eventBar.style.width = `${adjustedWidth}px`;
+      
+      // 定義嚴格的區域邊界
+      const strictZoneLeft = columnStartX + 10;
+      const strictZoneRight = columnStartX + dayWidth - 10;
+      const zoneWidth = strictZoneRight - strictZoneLeft;
+      
+      // 簡化的定位算法 - 先嘗試水平排列，不行就垂直偏移
+      let bestPosition = strictZoneLeft;
+      
+      // 檢查是否有精確時間重疊的活動（檢查相同時間的事件）
+      const sameTimeEvents = placedEvents.filter(placedEvent => {
+        // 檢查是否在相同的時間位置（允許5px的誤差）
+        return Math.abs(placedEvent.top - startTimeY) <= 5;
       });
       
-      previewContainer.innerHTML = `
-        <div style="text-align: center;">
-          ${eventFields.IMAGE ? `<img src="${eventFields.IMAGE}" style="width: 100%; max-width: 200px; height: auto; border-radius: 8px; margin-bottom: 15px;" alt="活動圖片" onerror="this.style.display='none'; console.log('時間軸圖片載入失敗:', '${eventFields.IMAGE}');" onload="console.log('時間軸圖片載入成功:', '${eventFields.IMAGE}');">` : ''}
-        </div>
-        <div style="font-size: 1.5rem; font-weight: bold; margin-bottom: 10px; text-transform: uppercase;">
-          ${taiwanEventDate.toLocaleDateString("zh-TW", { 
-            month: "long", 
-            day: "numeric",
-            weekday: "short",
-            timeZone: "Asia/Taipei"
-          })}
-        </div>
-        <div style="font-size: 1.2rem; font-weight: bold; margin-bottom: 10px;">
-          ${timeStr}
-        </div>
-        <div style="font-size: 1.1rem; font-weight: bold; margin-bottom: 15px; text-transform: uppercase;">
-          ${event.summary || "未命名活動"}
-        </div>
-        <div style="font-size: 0.9rem; line-height: 1.4; color: #666;">
-          ${eventFields.DESCRIPTION || event.description || "暫無詳細描述"}
-        </div>
-        ${eventFields.SIGNUP ? `<div style="margin-top: 15px;"><a href="${eventFields.SIGNUP}" target="_blank" style="display: inline-block; padding: 8px 16px; background: #000; color: #fff; text-decoration: none; border-radius: 4px; font-size: 0.9rem;">報名參加</a></div>` : ''}
-      `;
-    };
+      // 計算當前事件應該的索引（基於已放置的同時間事件數量）
+      const currentEventIndex = sameTimeEvents.length;
+      
+      console.log(`Event "${titleText}": sameTimeEvents found=${sameTimeEvents.length}, currentEventIndex=${currentEventIndex}, originalTop=${startTimeY}`);
+      console.log(`Event "${titleText}": placedEvents count=${placedEvents.length}, placedEvents:`, placedEvents.map(p => ({top: p.top, left: p.left})));
+      
+      // 強制處理第三個事件
+      if (currentEventIndex >= 2) {
+        let horizontalOffset, verticalOffset;
+        
+        // 特殊處理第三個事件：TOP-15, left+100
+        if (currentEventIndex === 2) {
+          horizontalOffset = 100;
+          verticalOffset = -15; // 向上移動15px
+          console.log(`Event "${titleText}": SPECIAL CASE - Third event, TOP-15, left+100`);
+        } else {
+          // 其他事件使用正常偏移
+          horizontalOffset = currentEventIndex * 100; 
+          verticalOffset = currentEventIndex * 15; 
+        }
+        
+        // 計算新位置
+        const newTop = startTimeY + verticalOffset;
+        const newLeft = strictZoneLeft + horizontalOffset;
+        
+        console.log(`Event "${titleText}": APPLYING OFFSET - horizontalOffset=${horizontalOffset}, verticalOffset=${verticalOffset}, newTop=${newTop}, newLeft=${newLeft}`);
+        
+        // 強制應用偏移，不檢查邊界
+        startTimeY = newTop;
+        bestPosition = newLeft;
+        
+      } else if (currentEventIndex > 0) {
+        // 處理第二個事件
+        const horizontalOffset = currentEventIndex * 100; 
+        const verticalOffset = currentEventIndex * 15; 
+        
+        const newTop = startTimeY + verticalOffset;
+        const newLeft = strictZoneLeft + horizontalOffset;
+        
+        console.log(`Event "${titleText}": Second event offset - horizontalOffset=${horizontalOffset}, verticalOffset=${verticalOffset}`);
+        
+        startTimeY = newTop;
+        bestPosition = newLeft;
+      } else {
+        console.log(`Event "${titleText}": NO OFFSET APPLIED - first event or no same time events found`);
+      }
+      
+      // 如果還是沒找到位置，使用預設居中
+      if (!bestPosition) {
+        bestPosition = columnCenterX - adjustedWidth/2;
+      }
+      
+      // 最終邊界檢查 - 使用嚴格邊界
+      if (bestPosition < strictZoneLeft) {
+        bestPosition = strictZoneLeft;
+      } else if (bestPosition + adjustedWidth > strictZoneRight) {
+        bestPosition = strictZoneRight - adjustedWidth;
+      }
+      
+      // 調試：確認事件在區域內
+      console.log(`Day ${dayIndex + 1} Event "${titleText}": time=${startHourNum}:${startMinuteNum.toString().padStart(2, '0')}, top=${startTimeY}, position=${bestPosition}, width=${adjustedWidth}, sameTimeEvents=${sameTimeEvents.length}, zone=[${strictZoneLeft}, ${strictZoneRight}]`);
 
-    eventBar.addEventListener("click", showEventPreview);
+      // 設置最終位置
+      eventBar.style.height = `${barHeight}px`;
+      eventBar.style.left = `${bestPosition}px`;
+      eventBar.style.top = `${startTimeY}px`;
+      
+      // 記錄已放置的活動
+      const placedEventData = {
+        left: bestPosition,
+        top: startTimeY,
+        width: adjustedWidth,
+        height: barHeight
+      };
+      placedEvents.push(placedEventData);
+      
+      console.log(`Event "${titleText}": ADDED TO placedEvents - top=${startTimeY}, left=${bestPosition}, total placedEvents=${placedEvents.length}`);
 
-    timelineArea.appendChild(eventBar);
+      // 添加點擊事件 - 顯示活動預覽
+      const showEventPreview = () => {
+        console.log("顯示活動預覽:", event.summary);
+        console.log("活動描述:", event.description);
+        console.log("解析後的欄位:", eventFields);
+        
+        const eventTime = new Date(event.start.dateTime || event.start.date);
+        const eventEndTime = new Date(event.end.dateTime || event.end.date);
+        
+        // 格式化開始和結束時間
+        const startTimeStr = eventTime.toLocaleTimeString("zh-TW", { 
+          hour: "2-digit", 
+          minute: "2-digit",
+          timeZone: "Asia/Taipei"
+        });
+        
+        const endTimeStr = eventEndTime.toLocaleTimeString("zh-TW", { 
+          hour: "2-digit", 
+          minute: "2-digit",
+          timeZone: "Asia/Taipei"
+        });
+        
+        const timeStr = `${startTimeStr} - ${endTimeStr}`;
+        
+        console.log("預覽時間顯示:", timeStr, "開始時間:", eventTime, "結束時間:", eventEndTime);
+        
+        previewContainer.innerHTML = `
+          <div style="text-align: center;">
+            ${eventFields.IMAGE ? `<img src="${eventFields.IMAGE}" style="width: 100%; height: auto; border:1.5px solid black;margin-bottom: 15px;" alt="活動圖片" onerror="this.style.display='none'; console.log('時間軸圖片載入失敗:', '${eventFields.IMAGE}');" onload="console.log('時間軸圖片載入成功:', '${eventFields.IMAGE}');">` : ''}
+          </div>
+          <div style="font-size: 1.5rem; font-weight: bold; margin-bottom: 10px; text-transform: uppercase;">
+            ${taiwanEventDate.toLocaleDateString("zh-TW", { 
+              month: "long", 
+              day: "numeric",
+              weekday: "short",
+              timeZone: "Asia/Taipei"
+            })}
+          </div>
+          <div style="font-size: 1.2rem; font-weight: bold; margin-bottom: 10px;">
+            ${timeStr}
+          </div>
+          <div style="font-size: 1.1rem; font-weight: bold; margin-bottom: 15px; text-transform: uppercase;">
+            ${event.summary || "未命名活動"}
+          </div>
+          <div style="font-size: 0.9rem; line-height: 1.4; color: #666;">
+            ${eventFields.DESCRIPTION || event.description || "暫無詳細描述"}
+          </div>
+          ${eventFields.SIGNUP ? `<div style="margin-top: 15px;"><a href="${eventFields.SIGNUP}" target="_blank" style="display: inline-block; padding: 8px 16px; background: #000; color: #fff; text-decoration: none; font-size: 0.9rem;">報名參加</a></div>` : ''}
+        `;
+      };
+
+      eventBar.addEventListener("click", showEventPreview);
+
+      timelineArea.appendChild(eventBar);
+    });
   });
 
   mainContainer.appendChild(timelineArea);
