@@ -2806,12 +2806,10 @@ p {
   font-size: 0.9rem;
   font-weight: 600;
   color: var(--secondary-color);
-  background: var(--main-color);
   padding: 0.5rem 0.8rem;
   border-radius: 0;
   min-width: 80px;
   text-align: center;
-  border-bottom: 1px solid var(--main-color);
 }
 
 .event-time {
@@ -3036,7 +3034,6 @@ p {
     font-size: 0.7rem;
     font-weight: 600;
     color: var(--secondary-color);
-    background: var(--main-color);
     padding: 0.2rem 0.4rem;
     border-radius: 4px;
     min-width: 60px;
@@ -3649,6 +3646,7 @@ p {
   font-size: 0.85rem;
   line-height: 1.5;
   color: #555;
+  font-family: "Alice", serif; /* 使用Alice字體 */
 }
 
 /* 攤商照片 - 只在展開時顯示 */
@@ -3825,6 +3823,7 @@ p {
 
   .exhibitor-description {
     font-size: 0.8rem;
+    font-family: "Alice", serif; /* 使用Alice字體 */
   }
 
   .exhibitor-social-links {
