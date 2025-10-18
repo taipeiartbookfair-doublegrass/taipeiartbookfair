@@ -1184,7 +1184,7 @@ body {
   color: var(--text-primary);
   line-height: 1.4;
   margin-bottom: var(--spacing-sm);
-  font-family: "Shippori Mincho B1", serif; /* 使用Shippori Mincho B1字體 */
+  font-family: "Alice", serif; /* 使用Alice字體 */
 }
 
 .exhibitor-social-links {
