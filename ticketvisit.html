@@ -14,1161 +14,8 @@
       rel="stylesheet"
     />
     <link rel="shortcut icon" href="image/icon-1.ico" />
-    <link rel="stylesheet" href="css/style.css" />
     <link rel="stylesheet" href="css/font.css" />
-    <style>
-      /* CSS Variables - 參考 25av.eu 實驗性設計風格 */
-      :root {
-        /* 主要配色 - 極簡實驗風格 */
-        --bg-primary: #ffffff;
-        --bg-secondary: #f5f5f5;
-        --bg-dark: #000000;
-        --bg-accent: #000000;
-        
-        /* 文字配色 */
-        --text-primary: #000000;
-        --text-secondary: #666666;
-        --text-light: #ffffff;
-        --text-accent: #000000;
-        
-        /* 邊框和陰影 */
-        --border-light: #000000;
-        --border-dark: #000000;
-        --shadow-light: rgba(0, 0, 0, 0.1);
-        --shadow-medium: rgba(0, 0, 0, 0.2);
-        
-        /* 間距 - 極緊湊 */
-        --spacing-xs: 4px;
-        --spacing-sm: 8px;
-        --spacing-md: 12px;
-        --spacing-lg: 16px;
-        --spacing-xl: 24px;
-        --spacing-xxl: 32px;
-        
-        /* 字體大小 - 大標題 */
-        --font-xs: 0.7rem;
-        --font-sm: 0.8rem;
-        --font-md: 0.9rem;
-        --font-lg: 1rem;
-        --font-xl: 1.2rem;
-        --font-xxl: 1.5rem;
-        --font-hero: 4rem;
-        --font-section: 6rem;
-      }
-
-      /* Reset & Base Styles */
-      * {
-        margin: 0;
-        padding: 0;
-        box-sizing: border-box;
-      }
-
-      /* 確保滾動正常工作 */
-      html, body {
-        height: auto !important;
-        overflow-x: hidden;
-        overflow-y: auto;
-      }
-
-      html {
-        scroll-behavior: smooth;
-        overflow-x: hidden;
-        overflow-y: auto;
-      }
-
-      body {
-        background: lightgrey;
-        font-family: "Inclusive Sans", sans-serif;
-        line-height: 1.2;
-        font-size: var(--font-md);
-        color: var(--text-primary);
-        margin: 0;
-        padding: 0;
-        overflow-x: hidden;
-        overflow-y: auto;
-        min-height: 100vh;
-        height: auto;
-      }
-
-      /* 頂部導航 - 25av.eu 風格 */
-      .top-navigation {
-        position: static;
-        width: 100vw;
-        background: transparent;
-        padding: var(--spacing-sm);
-        border-bottom: 2px solid var(--border-light);
-      }
-
-      .nav-container {
-        display: flex;
-        flex-direction: column;
-        background: var(--bg-primary);
-        border: 2px solid var(--border-light);
-        width: 100%;
-      }
-
-      .nav-logo {
-        font-size: var(--font-md);
-        font-weight: bold;
-        color: var(--text-primary);
-        text-decoration: none;
-        text-transform: uppercase;
-        letter-spacing: 0.1em;
-      }
-
-      .nav-menu {
-        display: flex;
-        flex-direction: column;
-        list-style: none;
-        margin: 0;
-        padding: 0;
-        width: 100%;
-      }
-
-      .nav-item {
-        font-size: var(--font-sm);
-        color: var(--text-primary);
-        text-decoration: none;
-        text-transform: uppercase;
-        letter-spacing: 0.05em;
-        font-weight: bold;
-        transition: all 0.2s ease;
-        padding: var(--spacing-sm) var(--spacing-md);
-        border-bottom: 1px solid var(--border-light);
-        display: block;
-        width: 100%;
-        box-sizing: border-box;
-        text-align: center;
-      }
-
-      .nav-item:hover {
-        background: var(--bg-dark);
-        color: var(--text-light);
-      }
-
-      .nav-item:last-child {
-        border-bottom: none;
-      }
-
-      .nav-lang {
-        font-size: var(--font-sm);
-        color: var(--text-primary);
-        background: none;
-        border: 2px solid var(--border-light);
-        padding: var(--spacing-sm) var(--spacing-md);
-        cursor: pointer;
-        font-weight: bold;
-        text-transform: uppercase;
-        transition: all 0.2s ease;
-        width: 100%;
-        box-sizing: border-box;
-        border-top: none;
-        text-align: center;
-      }
-
-      .nav-lang:hover {
-        background: var(--bg-dark);
-        color: var(--text-light);
-      }
-
-      .nav-back-btn {
-        font-size: var(--font-sm);
-        color: var(--text-primary);
-        text-decoration: none;
-        text-transform: uppercase;
-        letter-spacing: 0.05em;
-        font-weight: bold;
-        transition: all 0.2s ease;
-        padding: var(--spacing-sm) var(--spacing-md);
-        border-bottom: 1px solid var(--border-light);
-        display: block;
-        width: 100%;
-        box-sizing: border-box;
-        background: var(--bg-dark);
-        color: var(--text-light);
-        text-align: center;
-      }
-
-      .nav-back-btn:hover {
-        background: var(--text-light);
-        color: var(--bg-dark);
-      }
-
-      /* 主視覺區域 - 左右分佈佈局 */
-      .hero-section {
-        margin-top: var(--spacing-sm);
-        padding: var(--spacing-sm) var(--spacing-sm) var(--spacing-lg);
-        border-bottom: 2px solid var(--border-light);
-      }
-
-      .hero-container {
-        display: flex;
-        align-items: center;
-        gap: var(--spacing-lg);
-        max-width: 1200px;
-        margin: 0 auto;
-        padding: 0 var(--spacing-sm);
-      }
-
-      .hero-left {
-        flex: 0 0 auto;
-        text-align: left;
-      }
-
-      .hero-right {
-        flex: 1;
-        text-align: left;
-        padding-left: var(--spacing-md);
-      }
-
-      .hero-poster {
-        max-width: 300px;
-        width: 100%;
-        height: auto;
-        margin-bottom: var(--spacing-md);
-        border: 2px solid var(--border-light);
-      }
-
-      .hero-title {
-        font-size: var(--font-section);
-        font-weight: bold;
-        color: var(--text-primary);
-        margin-bottom: var(--spacing-xs);
-        text-transform: uppercase;
-        letter-spacing: 0.05em;
-        line-height: 0.9;
-      }
-
-      .hero-subtitle {
-        font-size: var(--font-lg);
-        color: var(--text-primary);
-        margin-bottom: var(--spacing-xs);
-        text-transform: uppercase;
-        letter-spacing: 0.1em;
-      }
-
-      .hero-description {
-        font-size: var(--font-md);
-        color: var(--text-primary);
-        line-height: 1.6;
-        margin-bottom: var(--spacing-md);
-        font-weight: 400;
-        letter-spacing: 0.01em;
-      }
-
-      .hero-description-title {
-        font-size: var(--font-lg);
-        color: var(--text-primary);
-        font-weight: bold;
-        margin-bottom: var(--spacing-sm);
-        text-transform: uppercase;
-        letter-spacing: 0.05em;
-      }
-
-      /* 三欄布局 - 緊湊設計 */
-      .three-column-section {
-        padding: var(--spacing-sm);
-        background: var(--bg-primary);
-        border-bottom: 2px solid var(--border-light);
-      }
-
-      .three-column-container {
-        display: grid;
-        grid-template-columns: 1fr 2fr 1fr;
-        gap: var(--spacing-sm);
-      }
-
-      .column {
-        background: var(--bg-secondary);
-        padding: var(--spacing-md);
-        border: 2px solid var(--border-light);
-      }
-
-      .column-title {
-        font-size: var(--font-hero);
-        font-weight: bold;
-        color: var(--text-primary);
-        margin-bottom: var(--spacing-md);
-        text-align: left;
-        text-transform: uppercase;
-        letter-spacing: 0.05em;
-        line-height: 0.9;
-      }
-
-      /* Access 區域 */
-      .access-info {
-        margin-bottom: var(--spacing-sm);
-      }
-
-      .access-info h3 {
-        font-size: var(--font-md);
-        color: var(--text-primary);
-        margin-bottom: var(--spacing-xs);
-        text-transform: uppercase;
-        font-weight: bold;
-        letter-spacing: 0.05em;
-      }
-
-      .access-info p {
-        font-size: var(--font-sm);
-        color: var(--text-primary);
-        margin-bottom: var(--spacing-xs);
-        line-height: 1.3;
-      }
-
-      .map-container {
-        margin-top: var(--spacing-sm);
-        border: 2px solid var(--border-light);
-      }
-
-      .map-container iframe {
-        width: 100%;
-        height: 150px;
-        border: none;
-      }
-
-      /* 票券區域 */
-      .tickets-grid {
-        display: flex;
-        flex-direction: column;
-        gap: var(--spacing-sm);
-      }
-
-      .ticket-card {
-        background: var(--bg-primary);
-        padding: var(--spacing-sm);
-        border: 2px solid var(--border-light);
-        transition: all 0.2s ease;
-      }
-
-      .ticket-card:hover {
-        background: var(--bg-dark);
-        color: var(--text-light);
-      }
-
-      .ticket-title {
-        font-size: var(--font-md);
-        font-weight: bold;
-        color: var(--text-primary);
-        margin-bottom: var(--spacing-xs);
-        text-transform: uppercase;
-        letter-spacing: 0.05em;
-      }
-
-      .ticket-price {
-        font-size: var(--font-lg);
-        font-weight: bold;
-        color: var(--text-primary);
-        margin-bottom: var(--spacing-xs);
-      }
-
-      .ticket-period {
-        font-size: var(--font-sm);
-        color: var(--text-secondary);
-        margin-bottom: var(--spacing-xs);
-        font-weight: 500;
-      }
-
-      .ticket-limit {
-        font-size: var(--font-sm);
-        color: var(--text-secondary);
-        margin-bottom: var(--spacing-xs);
-        font-weight: 500;
-      }
-
-      .ticket-status {
-        font-size: var(--font-sm);
-        color: var(--text-accent);
-        margin-bottom: var(--spacing-sm);
-        font-weight: bold;
-        text-transform: uppercase;
-      }
-
-      .ticket-desc {
-        font-size: var(--font-xs);
-        color: var(--text-primary);
-        margin-bottom: var(--spacing-sm);
-        line-height: 1.3;
-      }
-
-      .ticket-btn {
-        width: 100%;
-        background: var(--bg-dark);
-        color: var(--text-light);
-        border: 2px solid var(--border-light);
-        padding: var(--spacing-xs) var(--spacing-sm);
-        font-size: var(--font-xs);
-        font-weight: bold;
-        cursor: pointer;
-        text-transform: uppercase;
-        letter-spacing: 0.05em;
-        transition: all 0.2s ease;
-      }
-
-      .ticket-btn:hover {
-        background: var(--text-light);
-        color: var(--bg-dark);
-      }
-
-      .ticket-btn:disabled {
-        background: var(--bg-secondary);
-        color: var(--text-secondary);
-        cursor: not-allowed;
-      }
-
-      /* FAQ 區域 */
-      .faq-item {
-        margin-bottom: var(--spacing-sm);
-        border-bottom: 2px solid var(--border-light);
-        padding-bottom: var(--spacing-xs);
-      }
-
-      .faq-question {
-        font-size: var(--font-sm);
-        font-weight: bold;
-        color: var(--text-primary);
-        margin-bottom: var(--spacing-xs);
-        cursor: pointer;
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        text-transform: uppercase;
-        letter-spacing: 0.05em;
-      }
-
-      .faq-question::after {
-        content: '+';
-        font-size: var(--font-md);
-        transition: transform 0.2s ease;
-        font-weight: bold;
-      }
-
-      .faq-item.active .faq-question::after {
-        transform: rotate(45deg);
-      }
-
-      .faq-answer {
-        display: none;
-        font-size: var(--font-xs);
-        color: var(--text-primary);
-        line-height: 1.3;
-        margin-top: var(--spacing-xs);
-      }
-
-      .faq-item.active .faq-answer {
-        display: block;
-      }
-
-      /* Timeline 區域 */
-      .timeline-section {
-        padding: var(--spacing-sm);
-        background: var(--bg-primary);
-        border-bottom: 2px solid var(--border-light);
-        width: 100%;
-        position: relative;
-      }
-
-      .timeline-container {
-        padding: 0;
-        width: 100%;
-      }
-
-      .timeline-title {
-        font-size: var(--font-hero);
-        font-weight: bold;
-        color: var(--text-primary);
-        text-align: left;
-        margin-bottom: var(--spacing-md);
-        text-transform: uppercase;
-        letter-spacing: 0.05em;
-        line-height: 0.9;
-      }
-
-      .timeline-content {
-        background: var(--bg-secondary);
-        padding: var(--spacing-sm);
-        border: 2px solid var(--border-light);
-        min-height: 300px;
-        position: relative;
-      }
-
-      /* Timeline 特定樣式 - 簡化版本 */
-      .timeline-mode-container {
-        width: 100%;
-        overflow: hidden;
-        border: 2px solid var(--border-light);
-        background: var(--bg-secondary);
-        position: relative;
-        margin-bottom: var(--spacing-lg);
-      }
-
-      .timeline-scroll-container {
-        overflow-x: auto;
-        overflow-y: hidden;
-        scroll-behavior: smooth;
-        -webkit-overflow-scrolling: touch;
-        scrollbar-width: none;
-        height: 100%;
-        width: 100%;
-        position: relative;
-      }
-
-      .timeline-scroll-container::-webkit-scrollbar {
-        display: none;
-      }
-
-      .timeline-calendar {
-        display: flex;
-        height: 100%;
-        min-width: 1600px; /* 調整最小寬度以容納新的對齊方式 */
-      }
-
-      /* 時間軸主容器樣式 */
-      .timeline-main-container {
-        display: flex;
-        height: 100%;
-        width: 100%;
-      }
-
-      /* 時間軸左側容器 */
-      .timeline-left-container {
-        flex: 1;
-        position: relative;
-        background: var(--bg-secondary);
-        overflow-x: auto;
-        overflow-y: hidden;
-      }
-
-      /* 時間軸右側預覽容器 */
-      .timeline-right-container {
-        flex: 0 0 450px;
-        padding: var(--spacing-md);
-        background: var(--bg-primary);
-        border-left: 2px solid var(--border-light);
-        overflow-y: auto;
-      }
-
-      /* 時間軸區域樣式 */
-      .timeline-area {
-        position: relative;
-        width: 100%;
-        height: 100%;
-        background: var(--bg-secondary);
-        min-width: 1000px; /* 確保有足夠的寬度來產生滑動 */
-      }
-
-      /* 時間格線樣式 */
-      .timeline-time-line {
-        position: absolute;
-        left: 0;
-        right: 0;
-        height: 1px;
-        background: var(--border-light);
-        z-index: 1;
-      }
-
-      .timeline-time-label {
-        position: absolute;
-        left: var(--spacing-sm);
-        font-size: var(--font-xs);
-        color: var(--text-primary);
-        font-weight: bold;
-        transform: translateY(-50%);
-        z-index: 2;
-        background-color:whitesmoke;
-      }
-
-      /* 日期標記樣式 */
-      .timeline-date-column {
-        position: absolute;
-        top: var(--spacing-sm);
-        font-size: var(--font-sm);
-        font-weight: bold;
-        color: var(--text-primary);
-        text-align: center;
-        z-index: 2;
-      }
-
-      .timeline-date-line {
-        position: absolute;
-        width: 2px;
-        background: var(--border-light);
-        z-index: 1;
-      }
-
-      /* 活動長條樣式 */
-      .timeline-event-bar {
-        position: absolute;
-        background: var(--bg-dark);
-        border: 1px solid var(--border-light);
-       cursor: pointer;
-        transition: all 0.2s ease;
-        z-index: 3;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        min-height: 20px;
-      }
-
-      .timeline-event-bar:hover {
-        box-shadow: 0 4px 8px var(--shadow-medium);
-        z-index: +100;
-      }
-
-      .timeline-event-bar.talk {
-        background: #e74c3c;
-      }
-
-      .timeline-event-bar.workshop {
-        background: #3498db;
-      }
-
-      .timeline-event-bar.performance {
-        background: #9b59b6;
-      }
-
-      .timeline-event-bar.exhibition {
-        background: #f39c12;
-      }
-
-      .timeline-event-bar.default {
-        background: #95a5a6;
-      }
-
-      .timeline-event-content {
-        font-size: var(--font-xs);
-        color: var(--text-light);
-        font-weight: bold;
-        text-align: center;
-        padding: var(--spacing-xs);
-        line-height: 1.2;
-        overflow: hidden;
-        text-overflow: ellipsis;
-        white-space: nowrap;
-      }
-
-      /* Agenda 標題行樣式 */
-      .agenda-header {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        padding: 0 var(--spacing-sm);
-        margin-bottom: var(--spacing-sm);
-      }
-
-      .agenda-controls {
-        display: flex;
-        align-items: center;
-        gap: var(--spacing-sm);
-      }
-
-      .agenda-subscribe {
-        margin: 0;
-        font-size: var(--font-sm);
-      }
-
-      .agenda-subscribe a {
-        color: var(--text-primary);
-        text-decoration: none;
-        font-weight: bold;
-        text-transform: uppercase;
-        letter-spacing: 0.05em;
-      }
-
-      .agenda-subscribe a:hover {
-        color: var(--text-secondary);
-      }
-
-      /* Timeline 圖例樣式 */
-      .timeline-legend {
-        position: absolute;
-          bottom: 10px;
-          right: 460px;
-          font-family: "Inclusive Sans", sans-serif;
-          font-size: 0.75rem;
-          background: lightgray;
-          padding: 10px;
-          border: 1px solid var(--border-light);
-          z-index: 10;
-      }
-
-      .timeline-legend h4 {
-        margin: 0 0 8px 0;
-        font-size: 0.7rem;
-        font-weight: 400;
-        color: var(--text-primary);
-        text-transform: uppercase;
-      }
-
-      .legend-items {
-        display: flex;
-        flex-direction: column;
-        gap: 4px;
-      }
-
-      .legend-item {
-        display: flex;
-        align-items: center;
-        gap: 6px;
-      }
-
-      .legend-dot {
-        width: 8px;
-        height: 8px;
-        border-radius: 50%;
-        flex-shrink: 0;
-      }
-
-      .legend-dot.talk { background-color: #e74c3c; }
-      .legend-dot.workshop { background-color: #3498db; }
-      .legend-dot.performance { background-color: #9b59b6; }
-      .legend-dot.exhibition { background-color: #f39c12; }
-      .legend-dot.other { background-color: #95a5a6; }
-
-      .legend-label {
-        font-size: 0.6rem;
-        color: var(--text-primary);
-      }
-
-      /* Exhibitor 區域 */
-      .exhibitor-section {
-        padding: var(--spacing-sm);
-        background: var(--bg-primary);
-        border-bottom: 2px solid var(--border-light);
-        width: 100%;
-      }
-
-      .exhibitor-container {
-        padding: 0;
-        width: 100%;
-        overflow-x: hidden;
-        box-sizing: border-box;
-      }
-
-      /* 篩選器樣式 */
-      .exhibitor-filters {
-        display: flex;
-        justify-content: center;
-        margin-bottom: var(--spacing-lg);
-        padding: var(--spacing-md);
-        background: var(--bg-secondary);
-        border: 2px solid var(--border-light);
-      }
-
-      .filter-buttons {
-        display: flex;
-        gap: var(--spacing-sm);
-        flex-wrap: wrap;
-        justify-content: center;
-      }
-
-      .filter-btn {
-        padding: var(--spacing-sm) var(--spacing-md);
-        background: var(--bg-primary);
-        color: var(--text-primary);
-        border: 2px solid var(--border-light);
-        font-size: var(--font-sm);
-        font-family: "Inclusive Sans", sans-serif;
-        cursor: pointer;
-        transition: all 0.2s ease;
-        text-transform: uppercase;
-        font-weight: bold;
-        letter-spacing: 0.05em;
-      }
-
-      .filter-btn:hover {
-        background: var(--bg-dark);
-        color: var(--text-light);
-      }
-
-      .filter-btn.active {
-        background: var(--bg-dark);
-        color: var(--text-light);
-        border-color: var(--text-accent);
-      }
-
-      /* 洲標題和分隔線樣式 */
-      .continent-title {
-        font-size: var(--font-xl);
-        font-weight: bold;
-        color: var(--text-primary);
-        text-align: center;
-        margin: var(--spacing-lg) 0 var(--spacing-sm) 0;
-        text-transform: uppercase;
-        letter-spacing: 0.1em;
-        grid-column: 1 / -1; /* 跨越整個網格 */
-      }
-
-      .continent-separator {
-        width: 100%;
-        height: 2px;
-        background: var(--border-light);
-        margin: var(--spacing-sm) 0 var(--spacing-md) 0;
-        grid-column: 1 / -1; /* 跨越整個網格 */
-      }
-
-      .exhibitor-title {
-        font-size: var(--font-hero);
-        font-weight: bold;
-        color: var(--text-primary);
-        text-align: left;
-        margin-bottom: var(--spacing-md);
-        text-transform: uppercase;
-        letter-spacing: 0.05em;
-        line-height: 0.9;
-      }
-
-      .exhibitor-grid {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-        gap: var(--spacing-sm);
-      }
-
-      .exhibitor-card {
-        background: var(--bg-secondary);
-        padding: var(--spacing-sm);
-        border: 2px solid var(--border-light);
-        text-align: left;
-        transition: all 0.2s ease;
-      }
-
-      .exhibitor-card:hover {
-        background: var(--bg-dark);
-        color: var(--text-light);
-      }
-
-      .exhibitor-name {
-        font-size: var(--font-md);
-        font-weight: bold;
-        color: var(--text-primary);
-        margin-bottom: var(--spacing-xs);
-        text-transform: uppercase;
-        letter-spacing: 0.05em;
-      }
-
-      .exhibitor-desc {
-        font-size: var(--font-xs);
-        color: var(--text-primary);
-        line-height: 1.3;
-      }
-
-      /* 攤商顯示相關樣式 */
-      .exhibitor-info-content {
-        margin-bottom: var(--spacing-sm);
-        border: 2px solid var(--border-light);
-        padding: var(--spacing-sm);
-        background: var(--bg-secondary);
-      }
-
-      .exhibitor-expand-btn {
-        display: flex;
-        align-items: center;
-        gap: var(--spacing-xs);
-        cursor: pointer;
-        font-size: var(--font-sm);
-        font-weight: bold;
-        text-transform: uppercase;
-        letter-spacing: 0.05em;
-        margin-bottom: var(--spacing-sm);
-      }
-
-      .exhibitor-display-container {
-        display: block;
-      }
-
-       /* 主要攤商網格佈局 - 八欄（桌面）/ 兩欄（手機） */
-       .exhibitors-grid-main {
-         display: grid;
-         grid-template-columns: repeat(8, 1fr);
-         gap: var(--spacing-sm);
-         margin-bottom: var(--spacing-sm);
-         width: 100%;
-         box-sizing: border-box;
-         overflow-x: hidden;
-       }
-
-      /* 攤商卡片樣式 */
-      .exhibitor-card-main {
-        background: var(--bg-primary);
-        border: 2px solid var(--border-light);
-        padding: var(--spacing-sm);
-        cursor: pointer;
-        transition: all 0.2s ease;
-        position: relative;
-        width: 100%;
-        box-sizing: border-box;
-        overflow: hidden;
-      }
-
-      .exhibitor-card-main:hover {
-        background: var(--bg-dark);
-        color: var(--text-light);
-      }
-
-      .exhibitor-basic-info {
-        margin-bottom: var(--spacing-xs);
-      }
-
-      .exhibitor-brand-display {
-        font-size: var(--font-md);
-        font-weight: bold;
-        color: var(--text-primary);
-        margin-bottom: var(--spacing-xs);
-        text-transform: uppercase;
-        letter-spacing: 0.05em;
-        line-height: 1.2;
-      }
-
-      .exhibitor-meta-info {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        font-size: var(--font-xs);
-      }
-
-      .exhibitor-booth-display {
-        font-weight: bold;
-        color: var(--text-primary);
-      }
-
-      .exhibitor-nationality-display {
-        color: var(--text-secondary);
-        font-weight: bold;
-      }
-
-      /* 詳細資訊區域 */
-      .exhibitor-details {
-        max-height: 0;
-        overflow: hidden;
-        transition: max-height 0.3s ease;
-      }
-
-      .exhibitor-details.expanded {
-        max-height: 200px;
-      }
-
-      .exhibitor-details-content {
-        padding-top: var(--spacing-sm);
-        border-top: 1px solid var(--border-light);
-        margin-top: var(--spacing-xs);
-      }
-
-      .exhibitor-description {
-        font-size: var(--font-xs);
-        color: var(--text-primary);
-        line-height: 1.4;
-        margin-bottom: var(--spacing-sm);
-      }
-
-      .exhibitor-social-links {
-        display: flex;
-        gap: var(--spacing-xs);
-        flex-wrap: wrap;
-      }
-
-      .exhibitor-social-link {
-        background: var(--bg-secondary);
-        border: 1px solid var(--border-light);
-        padding: var(--spacing-xs) var(--spacing-sm);
-        font-size: var(--font-xs);
-        text-decoration: none;
-        color: var(--text-primary);
-        transition: all 0.2s ease;
-        text-transform: uppercase;
-        letter-spacing: 0.05em;
-      }
-
-      .exhibitor-social-link:hover {
-        background: var(--bg-dark);
-        color: var(--text-light);
-      }
-
-      .exhibitor-social-link.facebook:hover {
-        background: #1877f2;
-        color: white;
-      }
-
-      .exhibitor-social-link.instagram:hover {
-        background: #e4405f;
-        color: white;
-      }
-
-      .exhibitor-social-link.website:hover {
-        background: var(--bg-dark);
-        color: var(--text-light);
-      }
-
-      .exhibitor-full-list {
-        display: none;
-        border: 2px solid var(--border-light);
-        padding: var(--spacing-sm);
-        background: var(--bg-secondary);
-      }
-
-      .exhibitor-full-list.expanded {
-        display: block;
-      }
-
-      .exhibitor-top-controls {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        margin-bottom: var(--spacing-sm);
-        flex-wrap: wrap;
-        gap: var(--spacing-sm);
-      }
-
-      .exhibitor-sort-buttons {
-        display: flex;
-        gap: var(--spacing-xs);
-      }
-
-      .sort-button {
-        background: var(--bg-primary);
-        border: 2px solid var(--border-light);
-        padding: var(--spacing-xs) var(--spacing-sm);
-        font-size: var(--font-xs);
-        font-weight: bold;
-        text-transform: uppercase;
-        cursor: pointer;
-        transition: all 0.2s ease;
-      }
-
-      .sort-button:hover,
-      .sort-button.active {
-        background: var(--bg-dark);
-        color: var(--text-light);
-      }
-
-      .exhibitors-grid {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-        gap: var(--spacing-sm);
-      }
-
-      /* Credit/Team 區域 */
-      .credit-section {
-        padding: var(--spacing-sm);
-        background: var(--bg-dark);
-        color: var(--text-light);
-      }
-
-      .credit-container {
-        padding: 0;
-        text-align: left;
-      }
-
-      .credit-title {
-        font-size: var(--font-hero);
-        font-weight: bold;
-        margin-bottom: var(--spacing-md);
-        text-transform: uppercase;
-        letter-spacing: 0.05em;
-        line-height: 0.9;
-      }
-
-      .credit-content {
-        font-size: var(--font-sm);
-        line-height: 1.4;
-      }
-
-      /* 響應式設計 */
-      @media (max-width: 768px) {
-        .three-column-container {
-          grid-template-columns: 1fr;
-          gap: var(--spacing-xs);
-        }
-
-        /* 手機版導航調整 */
-        .nav-container {
-          flex-direction: row;
-          flex-wrap: wrap;
-        }
-
-        .nav-back-btn {
-          flex: 1;
-          min-width: 100px;
-        }
-
-        .nav-menu {
-          flex-direction: row;
-          flex-wrap: wrap;
-          width: auto;
-        }
-
-        .nav-item {
-          flex: 1;
-          min-width: 80px;
-          text-align: center;
-          border-bottom: none;
-          border-right: 1px solid var(--border-light);
-        }
-
-        .nav-item:last-child {
-          border-right: none;
-        }
-
-        .nav-lang {
-          width: auto;
-          min-width: 60px;
-        }
-
-        .hero-container {
-          flex-direction: column;
-          text-align: center;
-          gap: var(--spacing-md);
-        }
-
-        .hero-left {
-          text-align: center;
-        }
-
-        .hero-right {
-          text-align: left;
-          padding-left: 0;
-        }
-
-        .hero-poster {
-          max-width: 250px;
-        }
-
-        /* 手機版篩選器 */
-        .exhibitor-filters {
-          padding: var(--spacing-sm);
-        }
-
-        .filter-buttons {
-          flex-direction: column;
-          gap: var(--spacing-xs);
-        }
-
-        .filter-btn {
-          width: 100%;
-          text-align: center;
-        }
-
-        /* 手機版攤商網格改為兩欄 */
-        .exhibitors-grid-main {
-          grid-template-columns: repeat(2, 1fr);
-        }
-
-        .exhibitor-grid {
-          grid-template-columns: 1fr;
-        }
-
-        .column-title {
-          font-size: var(--font-xl);
-        }
-
-        .timeline-title,
-        .exhibitor-title,
-        .credit-title {
-          font-size: var(--font-xl);
-        }
-      }
-
-
-    </style>
+    <link rel="stylesheet" href="css/ticketvisit.css">
   </head>
   <body>
     <!-- 頂部導航 -->
@@ -1190,6 +37,7 @@
     <section class="hero-section">
       <div class="hero-container">
         <div class="hero-left">
+          <div class="hero-poster-section">
           <img 
             src="25TPABF_poster_RGB.png" 
             alt="台北藝術書展海報" 
@@ -1205,7 +53,6 @@
           </p>
         </div>
         
-        <div class="hero-right">
           <div class="hero-description">
             <p data-zh="今天早上你叫我「軟軟」，於是我寫了一首小詩。" data-en="This morning you whispered "wobbly bobbly" in my ear and a little poem was born.">
               今天早上你叫我「軟軟」，於是我寫了一首小詩。
@@ -1224,22 +71,18 @@
             </p>
           </div>
         </div>
-      </div>
-    </section>
-
-    <!-- 三欄布局：Access | Tickets | FAQ -->
-    <section class="three-column-section" id="tickets">
-      <div class="three-column-container">
-        <!-- 左欄：Access -->
-        <div class="column" id="access">
-          <h2 class="column-title" data-zh="交通資訊" data-en="Access">交通資訊</h2>
+        
+        <!-- 交通資訊獨立區域 -->
+        <div class="hero-traffic">
+          <div class="access-info-section" id="access">
+            <h2 class="access-section-title" data-zh="交通資訊" data-en="Access">交通資訊</h2>
           
           <div class="access-info">
             <h3 data-zh="活動地點" data-en="Venue">活動地點</h3>
-            <p data-zh="華山1914文化創意產業園區 東2四連棟" data-en="Huashan1914 Creative Park East 2 Building">
-              華山1914文化創意產業園區 東2四連棟
+              <p data-zh="華山文創園區東2館" data-en="Huashan1914 Creative Park | E2 Silian Building ABCD">
+                華山文創園區東2館
             </p>
-            <p data-zh="100台北市中正區八德路一段1號" data-en="No. 1, Section 1, Bade Road, Zhongzheng District, Taipei">
+              <p data-zh="100台北市中正區八德路一段1號" data-en="100 Taipei City Zhongzheng District Bade Road Section 1 No. 1">
               100台北市中正區八德路一段1號
             </p>
         </div>
@@ -1266,21 +109,41 @@
             <p data-zh="台北科技大學站（八德路）｜205、257、276" data-en="National Taipei University of Technology (Bade Road)｜205, 257, 276">
               台北科技大學站（八德路）｜205、257、276
             </p>
+              <p data-zh="忠孝國小站｜202、202區、212夜間公車、212直行忠孝東路、212經南港路、262、262區、299、600、605、605新台五線、忠孝幹線" data-en="Zhongxiao Elementary School｜202, 202 Section, 212, 232, 232 Vice, 269, 299, 600, 605, 605 Vice, 605 (Xintai 5th Route), Zhongxiao New Main Line">
+                忠孝國小站｜202、202區、212夜間公車、212直行忠孝東路、212經南港路、262、262區、299、600、605、605新台五線、忠孝幹線
+              </p>
+              <p data-zh="華山文創園區｜202、202區、205、212、257、262、262區、276、299、600、605、忠孝幹線、1813D經中山區、1813E大武崙、1815、1815A、1815D、1815E、台北市觀光巴士紅線(往善導寺)" data-en="Huashan 1914 Creative Park (Zhongxiao E. Road)｜247, 205, 212, 220, 232, 232 Vice, 257, 262, 276, Taipei Double-Decker Sightseeing Bus">
+                華山文創園區｜202、202區、205、212、257、262、262區、276、299、600、605、忠孝幹線、1813D經中山區、1813E大武崙、1815、1815A、1815D、1815E、台北市觀光巴士紅線(往善導寺)
+            </p>
             
             <h3 data-zh="自行開車" data-en="By Car">自行開車</h3>
-            <p data-zh="國道1號－圓山交流道下－建國高架道路－忠孝東路出口下" data-en="Sun Yat-sen Freeway - Yuanshan Interchange - Jianguo Expressway - Zhongxiao East Road Exit">
-              國道1號－圓山交流道下－建國高架道路－忠孝東路出口下
+              <p data-zh="國道1號－圓山交流道下－建國高架道路－忠孝東路出口下－忠孝東路三段至二段" data-en="Sun Yat-sen Freeway - Yuanshan Interchange - Jianguo Expressway - Zhongxiao East Road Exit - Zhongxiao East Road">
+                國道1號－圓山交流道下－建國高架道路－忠孝東路出口下－忠孝東路三段至二段
             </p>
             <p><a href="https://maps.app.goo.gl/nSoNsZuY2akwD2jZA" target="_blank" data-zh="華山停車場" data-en="Parking Lot">華山停車場</a></p>
+              <p data-zh="汽車平日每小時40元、假日每小時60元<br>機車每小時25元" data-en="Parking fee is NT$ 40/hr on weekdays, and NT$60/hr on holidays for cars.<br>NT$25/hr for motorcycles.">
+                汽車平日每小時40元、假日每小時60元<br>機車每小時25元
+              </p>
+              
+              <h3 data-zh="YouBike" data-en="YouBike">YouBike</h3>
+              <p data-zh="鄰近站點｜YouBike微笑單車 2.0：華山文創園區" data-en="Station｜YouBike 2.0：Huashan1914 Creative Park">
+                鄰近站點｜YouBike微笑單車 2.0：華山文創園區
+              </p>
         </div>
       </div>
+        </div>
+      </div>
+    </section>
 
-        <!-- 中欄：Tickets -->
-        <div class="column">
+    <!-- 兩欄布局：Tickets | FAQ -->
+    <section class="two-column-section" id="tickets">
+      <div class="two-column-container">
+        <!-- 左欄：Tickets (佔2/3) -->
+        <div class="column tickets-column">
           <h2 class="column-title" data-zh="票券資訊" data-en="Ticket Information">票券資訊</h2>
           
           <div class="tickets-grid">
-            <!-- 早鳥票 -->
+            <!-- 第一行：早鳥票 + 預售票 -->
             <div class="ticket-card">
               <h3 class="ticket-title" data-zh="早鳥票" data-en="Early Bird">早鳥票</h3>
               <div class="ticket-price" data-zh="NT$ 300／人" data-en="NT$ 300 / person">NT$ 300／人</div>
@@ -1290,7 +153,6 @@
               <a href="https://tour.ibon.com.tw/event/e2508000028lhmm" class="ticket-btn" target="_blank" data-zh="立即購票" data-en="Buy Now">立即購票</a>
             </div>
 
-            <!-- 預售票 -->
             <div class="ticket-card">
               <h3 class="ticket-title" data-zh="預售票" data-en="Pre-sale">預售票</h3>
               <div class="ticket-price" data-zh="NT$ 380／人" data-en="NT$ 380 / person">NT$ 380／人</div>
@@ -1300,7 +162,7 @@
               <a href="https://tour.ibon.com.tw/event/e2508000028lhmm" class="ticket-btn" target="_blank" data-zh="立即購票" data-en="Buy Now">立即購票</a>
             </div>
 
-            <!-- 快速通關票 -->
+            <!-- 第二行：快速通關票 + 學生團體票 -->
             <div class="ticket-card">
               <h3 class="ticket-title" data-zh="快速通關票" data-en="Fast Pass">快速通關票</h3>
               <div class="ticket-price" data-zh="NT$ 499／人" data-en="NT$ 499 / person">NT$ 499／人</div>
@@ -1310,7 +172,6 @@
               <a href="https://tour.ibon.com.tw/event/e2508000028lhmm" class="ticket-btn" target="_blank" data-zh="立即購票" data-en="Buy Now">立即購票</a>
             </div>
 
-            <!-- 學生團體票 -->
             <div class="ticket-card">
               <h3 class="ticket-title" data-zh="學生團體票" data-en="Student Group Ticket">學生團體票</h3>
               <div class="ticket-price" data-zh="NT$ 300／人" data-en="NT$ 300 / person">NT$ 300／人</div>
@@ -1322,7 +183,7 @@
               <a href="https://nmhw.taipeiartbookfair.com/products/%E5%AD%B8%E7%94%9F%E5%9C%98%E9%AB%94%E7%A5%A8" class="ticket-btn" target="_blank" data-zh="立即購票" data-en="Buy Now">立即購票</a>
             </div>
 
-            <!-- 優待票 -->
+            <!-- 第三行：優待票 + 現場票 -->
             <div class="ticket-card">
               <h3 class="ticket-title" data-zh="優待票" data-en="Concession Ticket">優待票</h3>
               <div class="ticket-price" data-zh="NT$ 250／人" data-en="NT$ 250 / person">NT$ 250／人</div>
@@ -1334,7 +195,6 @@
               <a href="https://tour.ibon.com.tw/event/e2508000028lhmm" class="ticket-btn" target="_blank" data-zh="立即購票" data-en="Buy Now">立即購票</a>
             </div>
 
-            <!-- 現場票 -->
             <div class="ticket-card">
               <h3 class="ticket-title" data-zh="現場票" data-en="On-site Ticket">現場票</h3>
               <div class="ticket-price" data-zh="NT$ 400／人" data-en="NT$ 400 / person">NT$ 400／人</div>
@@ -1468,17 +328,21 @@
       <div class="timeline-container">
         <h2 class="timeline-title" data-zh="活動時程" data-en="Event Timeline">活動時程</h2>
         
+        <!-- Subscribe to Calendar - 直接放在標題下方 -->
+        <div class="timeline-subscribe">
+          <p class="agenda-subscribe">
+            <a
+              href="https://calendar.google.com/calendar/u/2?cid=OTA1MjdmNjdmYTQ2MmM4M2UxODRiMGM2MmRlZjEwZWJjOGIwMGNjOGM2N2E1YjgzYWYyYWZiOTBhMWJkYjI5M0Bncm91cC5jYWxlbmRhci5nb29nbGUuY29t"
+              >Suscribe to TPABF's calendar</a
+            >
+          </p>
+        </div>
+        
         <!-- Agenda 標題行 -->
         <div class="agenda-header">
           <div class="agenda-controls">
-            <p class="agenda-subscribe">
-              <a
-                href="https://calendar.google.com/calendar/u/2?cid=OTA1MjdmNjdmYTQ2MmM4M2UxODRiMGM2MmRlZjEwZWJjOGIwMGNjOGM2N2E1YjgzYWYyYWZiOTBhMWJkYjI5M0Bncm91cC5jYWxlbmRhci5nb29nbGUuY29t"
-                >Suscribe to TPABF's calendar</a
-              >
-            </p>
-        </div>
           </div>
+        </div>
         
         <!-- 時間軸模式容器 - 確保ID正確且始終顯示 -->
         <div
@@ -1490,30 +354,7 @@
             <div class="timeline-calendar" id="timelineCalendar">
               <!-- 時間軸日曆將由 JavaScript 動態生成 -->
             </div>
-      </div>
-
-          <!-- 時間軸圖例 - 右下方 -->
-          <div class="timeline-legend">
-            <h4>Event Types</h4>
-            <div class="legend-items">
-              <div class="legend-item">
-                <span class="legend-dot talk"></span>
-                <span class="legend-label">Talk</span>
-        </div>
-              <div class="legend-item">
-                <span class="legend-dot workshop"></span>
-                <span class="legend-label">Workshop</span>
-          </div>
-              <div class="legend-item">
-                <span class="legend-dot performance"></span>
-                <span class="legend-label">Performance</span>
-          </div>
-              <div class="legend-item">
-                <span class="legend-dot other"></span>
-                <span class="legend-label">Other</span>
-      </div>
-        </div>
-      </div>
+      </div>          
           </div>
           </div>
     </section>
@@ -1521,10 +362,38 @@
     <!-- Exhibitor 區域 -->
     <section class="exhibitor-section" id="exhibitors">
       <div class="exhibitor-container">
-        <h2 class="exhibitor-title" data-zh="參展商" data-en="Exhibitors">參展商</h2>
+        <h2 class="exhibitor-title" data-zh="參展商" data-en="Exhibitors">攤商列表</h2>
         
-        <!-- 篩選器控制面板 -->
-        <div class="exhibitor-filters">
+        <!-- 搜尋和篩選控制面板 -->
+        <div class="exhibitor-search-panel">
+          <!-- 搜尋輸入框 -->
+          <div class="search-section">
+            <div class="search-input-container">
+              <input 
+                type="text" 
+                id="exhibitor-search-input" 
+                class="search-input" 
+                placeholder="搜尋品牌名稱、簡介..." 
+                data-zh="搜尋品牌名稱、簡介..." 
+                data-en="Search brand name, description..."
+              />
+              <button id="search-clear-btn" class="search-clear-btn" title="清空搜尋">×</button>
+            </div>
+          </div>
+          
+          <!-- 排序按鈕組 -->
+          <div class="filter-section">
+            <ul id="sort_button" class="sort_button" data-sort="atoz">
+              <li data-label="atoz" class="sort-btn active" data-zh="A-Z" data-en="A-Z">A-Z</li>
+              <li data-label="zone" class="sort-btn" data-zh="ZONE" data-en="ZONE">ZONE</li>
+              <li data-label="country" class="sort-btn" data-zh="COUNTRY" data-en="COUNTRY">COUNTRY</li>
+              <li data-label="length" class="sort-btn" data-zh="字數" data-en="LENGTH">LENGTH</li>
+            </ul>
+          </div>
+        </div>
+        
+        <!-- 原有的篩選器控制面板（保留作為備用） -->
+        <div class="exhibitor-filters" style="display: none;">
           <div class="filter-buttons">
             <button id="sort-name-btn" class="filter-btn active" data-zh="品牌名稱 A-Z" data-en="Brand Name A-Z">品牌名稱 A-Z</button>
             <button id="sort-country-btn" class="filter-btn" data-zh="國籍" data-en="Country">國籍</button>
@@ -1566,7 +435,7 @@
     </section>
 
     <!-- Credit/Team 區域 -->
-    <section class="credit-section">
+    <!-- <section class="credit-section">
       <div class="credit-container">
         <h2 class="credit-title" data-zh="製作團隊" data-en="Credits">製作團隊</h2>
         <div class="credit-content">
@@ -1589,7 +458,7 @@
             Contributors: Marieke Peeters, Thijs Bronts, Anne Schoemaker, Cheyenne Pattiwael, Dari de Bruijn, Koen Kievits 
           </div>
         </div>
-    </section>
+    </section> -->
 
     <script>
       document.addEventListener("DOMContentLoaded", function () {
@@ -1695,39 +564,53 @@
             const statusElement = targetCard.querySelector('.ticket-status');
             if (!statusElement) return;
 
-            const isAvailable = dateRange.start && dateRange.end && 
-                               currentDate >= dateRange.start && 
-                               currentDate <= dateRange.end;
-
-            if (isAvailable) {
-              statusElement.textContent = '開放中';
-              statusElement.style.color = '#00a650';
+            // 現場票特殊處理：始終顯示為"現場購買"
+            if (ticketType === 'onsite') {
+              statusElement.textContent = '現場購買';
+              statusElement.style.color = '#FBAD17';
               statusElement.style.fontWeight = 'bold';
               
-              // 更新按鈕文字為「立即購票」
+              // 現場票不需要按鈕，保持原有狀態
               const button = targetCard.querySelector('.ticket-btn');
               if (button) {
-                button.textContent = '立即購票';
-                button.style.background = '#FBAD17';
-                button.style.color = 'black';
-                button.style.cursor = 'pointer';
+                button.style.display = 'none'; // 隱藏按鈕
               }
             } else {
-              statusElement.textContent = '未開放';
-              statusElement.style.color = '#666';
-              statusElement.style.fontWeight = 'normal';
-              
-              // 更新按鈕文字為「未開放」
-              const button = targetCard.querySelector('.ticket-btn');
-              if (button) {
-                button.textContent = '未開放';
-                button.style.background = '#ccc';
-                button.style.color = '#666';
-                button.style.cursor = 'not-allowed';
-                button.onclick = function(e) {
-                  e.preventDefault();
-                  return false;
-                };
+              // 其他票種的正常邏輯
+              const isAvailable = dateRange.start && dateRange.end && 
+                                 currentDate >= dateRange.start && 
+                                 currentDate <= dateRange.end;
+
+              if (isAvailable) {
+                statusElement.textContent = '開放中';
+                statusElement.style.color = '#00a650';
+                statusElement.style.fontWeight = 'bold';
+                
+                // 更新按鈕文字為「立即購票」
+                const button = targetCard.querySelector('.ticket-btn');
+                if (button) {
+                  button.textContent = '立即購票';
+                  button.style.background = '#FBAD17';
+                  button.style.color = 'black';
+                  button.style.cursor = 'pointer';
+                }
+              } else {
+                statusElement.textContent = '未開放';
+                statusElement.style.color = '#666';
+                statusElement.style.fontWeight = 'normal';
+                
+                // 更新按鈕文字為「未開放」
+                const button = targetCard.querySelector('.ticket-btn');
+                if (button) {
+                  button.textContent = '未開放';
+                  button.style.background = '#ccc';
+                  button.style.color = '#666';
+                  button.style.cursor = 'not-allowed';
+                  button.onclick = function(e) {
+                    e.preventDefault();
+                    return false;
+                  };
+                }
               }
             }
           }
@@ -1800,6 +683,12 @@
 
             // 初始化篩選器功能
             initExhibitorFilters();
+            
+            // 初始化新的搜尋系統
+            initExhibitorSearch();
+            
+            // 初始化焦點效果
+            initExhibitorFocusEffect();
           }, 1500); // 延遲1.5秒執行，確保所有 JS 文件都已載入
         }
 
@@ -1833,6 +722,204 @@
 
           // 預設排序為品牌名稱 A-Z
           sortExhibitorsByName();
+        }
+
+        // 新的搜尋系統功能
+        function initExhibitorSearch() {
+          const searchInput = document.getElementById('exhibitor-search-input');
+          const searchClearBtn = document.getElementById('search-clear-btn');
+          const sortButtons = document.querySelectorAll('.sort-btn');
+
+          // 搜尋輸入框事件
+          if (searchInput) {
+            searchInput.addEventListener('input', function() {
+              performSearch();
+            });
+          }
+
+          // 清空搜尋按鈕
+          if (searchClearBtn) {
+            searchClearBtn.addEventListener('click', function() {
+              searchInput.value = '';
+              performSearch();
+            });
+          }
+
+          // 排序按鈕事件
+          sortButtons.forEach(button => {
+            button.addEventListener('click', function() {
+              // 移除所有按鈕的active類
+              sortButtons.forEach(btn => btn.classList.remove('active'));
+              // 添加當前按鈕的active類
+              this.classList.add('active');
+              
+              // 執行排序
+              const sortType = this.getAttribute('data-label');
+              performSort(sortType);
+            });
+          });
+
+          // 執行搜尋
+          function performSearch() {
+            const searchTerm = searchInput.value.toLowerCase().trim();
+
+            // 獲取所有攤商卡片
+            const exhibitorCards = document.querySelectorAll('.exhibitor-card-main');
+            let visibleCount = 0;
+
+            exhibitorCards.forEach(card => {
+              const brandName = card.querySelector('.exhibitor-brand-display')?.textContent.toLowerCase() || '';
+              const description = card.querySelector('.exhibitor-description')?.textContent.toLowerCase() || '';
+
+              // 搜尋條件檢查
+              let matchesSearch = true;
+
+              // 文字搜尋
+              if (searchTerm) {
+                matchesSearch = brandName.includes(searchTerm) || 
+                               description.includes(searchTerm);
+              }
+
+              // 顯示或隱藏卡片
+              if (matchesSearch) {
+                card.style.display = 'block';
+                visibleCount++;
+              } else {
+                card.style.display = 'none';
+              }
+            });
+
+            // 更新搜尋統計
+            updateSearchStats(visibleCount, exhibitorCards.length);
+          }
+
+          // 執行排序
+          function performSort(sortType) {
+            const container = document.getElementById('exhibitorDisplayContainer');
+            if (!container) return;
+
+            const gridContainer = container.querySelector('.exhibitors-grid-main');
+            if (!gridContainer) return;
+
+            const cards = Array.from(document.querySelectorAll('.exhibitor-card-main'));
+            
+            switch (sortType) {
+              case 'atoz':
+                // A-Z 排序（按品牌名稱）
+                cards.sort((a, b) => {
+                  const nameA = a.querySelector('.exhibitor-brand-display')?.textContent.trim() || '';
+                  const nameB = b.querySelector('.exhibitor-brand-display')?.textContent.trim() || '';
+                  return nameA.localeCompare(nameB, 'zh-TW', { numeric: true });
+                });
+                break;
+                
+              case 'zone':
+                // ZONE 排序（按攤位編號）
+                cards.sort((a, b) => {
+                  const numberA = a.querySelector('.exhibitor-booth-display')?.textContent.trim() || '';
+                  const numberB = b.querySelector('.exhibitor-booth-display')?.textContent.trim() || '';
+                  
+                  // 提取數字部分進行排序
+                  const numA = parseInt(numberA.match(/\d+/)?.[0] || '0');
+                  const numB = parseInt(numberB.match(/\d+/)?.[0] || '0');
+                  
+                  if (numA !== numB) {
+                    return numA - numB;
+                  }
+                  
+                  // 如果數字相同，按完整編號排序
+                  return numberA.localeCompare(numberB);
+                });
+                break;
+                
+              case 'country':
+                // COUNTRY 排序（按國籍A-Z排序）
+                cards.sort((a, b) => {
+                  const countryA = a.querySelector('.exhibitor-nationality-display')?.textContent.trim() || '';
+                  const countryB = b.querySelector('.exhibitor-nationality-display')?.textContent.trim() || '';
+                  
+                  // 按國家名稱A-Z排序
+                  return countryA.localeCompare(countryB, 'zh-TW', { numeric: true });
+                });
+                break;
+                
+              case 'length':
+                // 字數排序（按品牌名稱字數）
+                cards.sort((a, b) => {
+                  const nameA = a.querySelector('.exhibitor-brand-display')?.textContent.trim() || '';
+                  const nameB = b.querySelector('.exhibitor-brand-display')?.textContent.trim() || '';
+                  
+                  // 按字數排序（短到長）
+                  const lengthA = nameA.length;
+                  const lengthB = nameB.length;
+                  
+                  if (lengthA !== lengthB) {
+                    return lengthA - lengthB;
+                  }
+                  
+                  // 如果字數相同，按A-Z排序
+                  return nameA.localeCompare(nameB, 'zh-TW', { numeric: true });
+                });
+                break;
+            }
+
+            // 重新排列卡片
+            cards.forEach(card => gridContainer.appendChild(card));
+            
+            // 執行搜尋以更新統計
+            performSearch();
+          }
+
+          // 更新搜尋統計 - 已移除顯示總數功能
+          function updateSearchStats(visibleCount, totalCount) {
+            // 功能已移除
+          }
+        }
+
+        // 初始化參展商焦點效果
+        function initExhibitorFocusEffect() {
+          // 使用定時器確保在外部JS載入後執行
+          setTimeout(function() {
+            // 監聽所有詳細資訊的展開/收合
+            const observer = new MutationObserver(function(mutations) {
+              mutations.forEach(function(mutation) {
+                if (mutation.type === 'attributes' && mutation.attributeName === 'class') {
+                  const target = mutation.target;
+                  if (target.classList.contains('exhibitor-details')) {
+                    const card = target.closest('.exhibitor-card-main');
+                    const allCards = document.querySelectorAll('.exhibitor-card-main');
+                    
+                    if (target.classList.contains('expanded')) {
+                      // 詳細資訊展開時，給其他卡片添加焦點效果
+                      console.log('攤商展開，添加反白效果');
+                      console.log('找到的卡片數量:', allCards.length);
+                      allCards.forEach(c => {
+                        if (c !== card) {
+                          c.classList.add('focused-out');
+                          console.log('添加 focused-out 類別到卡片:', c);
+                        }
+                      });
+                    } else {
+                      // 詳細資訊收合時，移除所有焦點效果
+                      console.log('攤商收合，移除反白效果');
+                      allCards.forEach(c => {
+                        c.classList.remove('focused-out');
+                        console.log('移除 focused-out 類別從卡片:', c);
+                      });
+                    }
+                  }
+                }
+              });
+            });
+            
+            // 開始觀察所有詳細資訊元素
+            const detailsElements = document.querySelectorAll('.exhibitor-details');
+            detailsElements.forEach(element => {
+              observer.observe(element, { attributes: true });
+            });
+            
+            console.log('參展商焦點效果已初始化，監聽', detailsElements.length, '個詳細資訊元素');
+          }, 2000); // 延遲2秒執行，確保外部JS已載入
         }
 
         // 設置活動按鈕
@@ -2031,6 +1118,58 @@
         initExhibitors();
         updateTicketStatus(); // 更新票券狀態
       });
+      
+      // 攤商動態寬度展開效果
+      setTimeout(() => {
+        console.log('初始化攤商動態寬度展開效果');
+        
+        document.addEventListener('click', function(e) {
+          console.log('點擊事件:', e.target);
+          
+          const card = e.target.closest('.exhibitor-card-main');
+          if (!card) return;
+          
+          console.log('點擊了攤商卡片');
+          
+          const detailsElement = card.querySelector('.exhibitor-details');
+          if (!detailsElement) return;
+          
+          console.log('找到詳細資訊元素');
+          
+          // 檢查是否已經展開
+          const isExpanded = card.classList.contains('expanded-wide');
+          
+          if (isExpanded) {
+            // 如果已經展開，則收合
+            console.log('收合攤商卡片');
+            card.classList.remove('expanded-wide', 'long-content');
+            detailsElement.classList.remove('expanded');
+          } else {
+            // 展開攤商卡片
+            console.log('展開攤商卡片');
+            
+            // 計算 description 的長度來決定佔據多少寬度
+            const descriptionElement = card.querySelector('.exhibitor-description');
+            const contentText = descriptionElement ? descriptionElement.textContent || '' : '';
+            const contentLength = contentText.length;
+            
+            console.log('Description 內容:', contentText);
+            console.log('Description 長度:', contentLength);
+            
+            // 添加展開類別
+            card.classList.add('expanded-wide');
+            detailsElement.classList.add('expanded');
+            
+            // 如果 description 很長，佔據 3 列寬度
+            if (contentLength > 100) {
+              card.classList.add('long-content');
+              console.log('Description 較長，佔據 3 列寬度');
+            } else {
+              console.log('Description 一般，佔據 2 列寬度');
+            }
+          }
+        });
+      }, 3000);
     </script>
     
     <!-- 載入相關的 JavaScript 文件 -->
