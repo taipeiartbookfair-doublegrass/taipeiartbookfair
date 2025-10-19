@@ -285,6 +285,7 @@ body {
   background: darkgray !important;
   padding: var(--spacing-md);
   border: 2px solid var(--border-light);
+  border-radius: 20px;
 }
 
 /* 交通資訊區域樣式 */
@@ -331,11 +332,11 @@ body {
 
 .access-info h3 {
   font-size: var(--font-sm);
-  color: var(--text-primary);
+  color: ghostwhite;
   margin-bottom: var(--spacing-xs);
   text-transform: uppercase;
   font-weight: bold;
-  letter-spacing: 0.05em;
+  background-color: rgb(50,50,50);
 }
 
 .access-info p {
@@ -375,7 +376,7 @@ body {
 
 .ticket-card:hover {
   color: var(--text-light);
-  border-radius: 10px;
+  border-radius: 20px;
   box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.1);
   transition: all 0.2s ease;
 }
@@ -471,6 +472,10 @@ body {
   align-items: center;
   text-transform: uppercase;
   letter-spacing: 0.05em;
+}
+.faq-question:hover {
+  background-color: rgb(50,50,50);
+  color: ghostwhite;
 }
 
 .faq-question::after {
@@ -641,6 +646,7 @@ body {
   text-align: center;
   z-index: 2;
   background: var(--bg-primary);
+  text-transform: uppercase;
 }
 
 .timeline-date-line {
@@ -856,21 +862,14 @@ body {
   width: 24px;
   height: 24px;
   border: none;
-  background: var(--bg-dark);
-  color: var(--text-light);
-  font-size: var(--font-lg);
+  color: black;
+  font-size: 2rem;
   font-weight: bold;
   cursor: pointer;
-  border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
-  transition: all 0.2s ease;
-}
-
-.search-clear-btn:hover {
-  background: var(--text-light);
-  color: var(--bg-dark);
+  background-color: transparent;
 }
 
 .search-stats {
@@ -1083,7 +1082,7 @@ body {
   margin-bottom: var(--spacing-sm);
   border: 2px solid var(--border-light);
   padding: var(--spacing-sm);
-  background: var(--bg-secondary);
+  background: rgb(100,100,100);
 }
 
 .exhibitor-expand-btn {
@@ -1105,7 +1104,7 @@ body {
  /* 主要攤商網格佈局 - 八欄（桌面）/ 兩欄（手機） */
  .exhibitors-grid-main {
    display: grid;
-   grid-template-columns: repeat(6, 1fr);
+   grid-template-columns: repeat(5, 1fr);
    gap: var(--spacing-sm);
    margin-bottom: var(--spacing-sm);
    width: 100%;
@@ -1127,7 +1126,7 @@ body {
 }
 
 .exhibitor-card-main:hover {
-  background:darkgrey;
+  background:YELLOW;
   color: var(--text-light);
 }
 
@@ -1180,11 +1179,11 @@ body {
 }
 
 .exhibitor-description {
-  font-size: var(--font-sm);
+  font-size: 1.1rem;
   color: var(--text-primary);
-  line-height: 1.4;
+  line-height: 1.7;
   margin-bottom: var(--spacing-sm);
-  font-family: "Alice", serif; /* 使用Alice字體 */
+  font-family: "Alice", serif;
 }
 
 .exhibitor-social-links {
@@ -1498,4 +1497,390 @@ body {
   .credit-title {
     font-size: var(--font-xl);
   }
+}
+
+/* 從 HTML 內聯樣式移動過來的樣式 */
+
+/* Timeline 容器顯示樣式 */
+.timeline-mode-container {
+  display: block;
+}
+
+/* 參展商篩選器隱藏樣式 */
+.exhibitor-filters {
+  display: none;
+}
+
+/* 票券狀態樣式 */
+.ticket-status.available {
+  color: #00a650;
+  font-weight: bold;
+}
+
+.ticket-status.unavailable {
+  color: #666;
+  font-weight: normal;
+}
+
+.ticket-status.onsite {
+  color: #FBAD17;
+  font-weight: bold;
+}
+
+/* 票券按鈕樣式 */
+.ticket-btn.available {
+  background: #FBAD17;
+  color: black;
+  cursor: pointer;
+}
+
+.ticket-btn.unavailable {
+  background: #ccc;
+  color: #666;
+  cursor: not-allowed;
+}
+
+.ticket-btn.hidden {
+  display: none;
+}
+
+/* 參展商卡片顯示/隱藏樣式 */
+.exhibitor-card-main.visible {
+  display: block;
+}
+
+.exhibitor-card-main.hidden {
+  display: none;
+}
+
+/* 從 timeline-visit.js 移動過來的樣式 */
+
+/* Timeline 主容器樣式 */
+.timeline-main-container {
+  display: flex;
+  width: 100%;
+}
+
+.timeline-main-container.dynamic-height {
+  height: auto;
+}
+
+/* Timeline 區域樣式 */
+.timeline-area.dynamic-height {
+  height: auto;
+  flex: 1;
+  min-width: 400px;
+}
+
+/* Timeline 右側預覽容器樣式 */
+.timeline-right-container.dynamic {
+  width: 25%;
+  min-width: 200px;
+  padding: var(--spacing-md);
+  background: lightgray;
+  border-left: 1px dashed var(--border-light);
+  overflow-y: auto;
+  flex-shrink: 1;
+  position: relative;
+}
+
+.timeline-right-container.dynamic-height {
+  height: auto;
+}
+
+/* Timeline 時間線樣式 */
+.timeline-time-line.dynamic {
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: 1px;
+  border-top: 1px dashed var(--border-light);
+  background: none;
+  z-index: 1;
+}
+
+/* Timeline 時間標籤樣式 */
+.timeline-time-label.dynamic {
+  position: absolute;
+  left: var(--spacing-sm);
+  font-size: var(--font-xs);
+  color: var(--text-primary);
+  font-weight: bold;
+  transform: translateY(-50%);
+  z-index: 2;
+  background-color: whitesmoke;
+}
+
+/* Timeline 區域邊界樣式 */
+.timeline-zone-border.dynamic {
+  position: absolute;
+  width: 1px;
+  background: var(--border-light);
+  z-index: 1;
+}
+
+/* Timeline 日期列樣式 */
+.timeline-date-column.dynamic {
+  position: absolute;
+  top: var(--spacing-sm);
+  font-size: var(--font-sm);
+  font-weight: bold;
+  color: var(--text-primary);
+  text-align: center;
+  z-index: 2;
+  background: var(--bg-primary);
+}
+
+/* Timeline 日期線樣式 */
+.timeline-date-line.dynamic {
+  position: absolute;
+  width: 1px;
+  background: var(--border-light);
+  z-index: 1;
+}
+
+/* Timeline 篩選容器樣式 */
+.timeline-filter-container {
+  position: absolute;
+  top: 30px;
+  left: 0;
+  right: 0;
+  height: auto;
+  display: flex;
+  justify-content: space-between;
+  gap: 0;
+  z-index: 10;
+  padding: 15px 0;
+}
+
+/* Timeline 篩選按鈕樣式 */
+.timeline-filter-btn {
+  padding: 6px 0;
+  border: none;
+  border-radius: 0;
+  color: #fff;
+  font-size: 12px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  flex: 1;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.timeline-filter-btn.all {
+  background-color: #333;
+}
+
+.timeline-filter-btn.talk {
+  background-color: orangered;
+}
+
+.timeline-filter-btn.workshop {
+  background-color: blue;
+}
+
+.timeline-filter-btn.performance {
+  background-color: rebeccapurple;
+}
+
+.timeline-filter-btn.exhibition {
+  background-color: black;
+}
+
+/* Timeline 事件條樣式 */
+.timeline-event-bar.dynamic {
+  position: absolute;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  z-index: 3;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 30px;
+  font-size: var(--font-sm);
+  font-weight: bold;
+  text-align: center;
+  padding: 0;
+  box-sizing: border-box;
+  box-shadow: none;
+  width: auto;
+  min-width: fit-content;
+}
+
+.timeline-event-bar.talk {
+  color: orangered;
+}
+
+.timeline-event-bar.workshop {
+  color: blue;
+}
+
+.timeline-event-bar.performance {
+  color: rebeccapurple;
+}
+
+.timeline-event-bar.exhibition {
+  color: black;
+}
+
+.timeline-event-bar.default {
+  color: black;
+}
+
+/* Timeline 事件標題樣式 */
+.timeline-event-title {
+  font-weight: bold;
+  margin-bottom: 2px;
+  max-width: 200px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.timeline-event-title.small {
+  font-size: 10px;
+}
+
+.timeline-event-title.medium {
+  font-size: 12px;
+}
+
+.timeline-event-title.large {
+  font-size: 14px;
+}
+
+/* Timeline 事件時間樣式 */
+.timeline-event-time {
+  font-size: 12px;
+  color: #666;
+  opacity: 0.8;
+}
+
+/* Timeline 事件顯示/隱藏樣式 */
+.timeline-event-bar.visible {
+  display: block;
+}
+
+.timeline-event-bar.hidden {
+  display: none;
+}
+
+/* Timeline 預覽容器內容樣式 */
+.timeline-preview-content {
+  text-align: center;
+}
+
+.timeline-preview-image {
+  width: 100%;
+  height: auto;
+  border: 1.5px solid black;
+  margin-bottom: 15px;
+}
+
+.timeline-preview-title {
+  font-size: 1.5rem;
+  font-weight: bold;
+  margin-bottom: 10px;
+  text-transform: uppercase;
+}
+
+.timeline-preview-default {
+  text-align: center;
+  color: #666;
+  font-size: 1rem;
+}
+
+/* Timeline 容器顯示樣式 */
+.timeline-mode-container.visible {
+  display: block;
+}
+
+/* Timeline 預覽內容詳細樣式 */
+.timeline-preview-type-tag {
+  font-size: 1rem;
+  font-weight: bold;
+  margin-bottom: 8px;
+  text-transform: uppercase;
+  color: var(--text-primary);
+}
+
+.timeline-preview-type-tag.talk {
+  color: orangered;
+}
+
+.timeline-preview-type-tag.workshop {
+  color: blue;
+}
+
+.timeline-preview-type-tag.performance {
+  color: rebeccapurple;
+}
+
+.timeline-preview-type-tag.exhibition {
+  color: black;
+}
+
+.timeline-preview-type-tag.default {
+  color: black;
+}
+
+.timeline-preview-date-time {
+  font-size: 1.2rem;
+  font-weight: bold;
+  margin-bottom: 10px;
+  text-transform: uppercase;
+}
+
+.timeline-preview-event-title {
+  font-family: "Alice", serif;
+  font-size: 1.5rem;
+  margin-bottom: 15px;
+  text-transform: uppercase;
+  background-color: ghostwhite;
+}
+
+.timeline-preview-description {
+  font-size: 0.9rem;
+  line-height: 1.4;
+  color: #666;
+}
+
+.timeline-preview-signup {
+  margin-top: 15px;
+}
+
+.timeline-preview-signup-btn {
+  display: inline-block;
+  padding: 8px 16px;
+  background: #000;
+  color: #fff;
+  text-decoration: none;
+  font-size: 0.9rem;
+}
+
+/* Timeline 錯誤和空狀態樣式 */
+.timeline-empty-state {
+  text-align: center;
+  padding: 20px;
+  background: #f0f0f0;
+  border: 2px solid #000;
+}
+
+.timeline-error-state {
+  text-align: center;
+  padding: 20px;
+  background: #f0f0f0;
+  border: 2px solid #ff0000;
+}
+
+.timeline-reload-btn {
+  padding: 10px 20px;
+  background: #000;
+  color: #fff;
+  border: none;
+  cursor: pointer;
 }

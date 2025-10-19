@@ -144,7 +144,7 @@ function fetchTimelineData() {
         console.log("沒有找到活動數據");
         if (timelineCalendar) {
           timelineCalendar.innerHTML = `
-            <div style="text-align: center; padding: 20px; background: #f0f0f0; border: 2px solid #000;">
+            <div class="timeline-empty-state">
               <h3>時間軸</h3>
               <p>目前沒有活動安排</p>
               <p>請稍後再查看</p>
@@ -157,9 +157,9 @@ function fetchTimelineData() {
       console.error("獲取時間軸資料時出錯:", err);
       if (timelineCalendar) {
         timelineCalendar.innerHTML = `
-          <div style="text-align: center; padding: 20px; background: #f0f0f0; border: 2px solid #ff0000;">
+          <div class="timeline-error-state">
             <h3>時間軸載入錯誤</h3>
-            <button onclick="location.reload()" style="padding: 10px 20px; background: #000; color: #fff; border: none; cursor: pointer;">重新載入</button>
+            <button onclick="location.reload()" class="timeline-reload-btn">重新載入</button>
           </div>
         `;
       }
@@ -189,18 +189,13 @@ function renderTimelineWithData(timelineData) {
 
   // 創建主容器 - 包含時間軸和預覽區
   const mainContainer = document.createElement("div");
-  mainContainer.className = "timeline-main-container";
-  mainContainer.style.display = "flex";
-  mainContainer.style.height = `${timelineHeight + 100}px`; // 更緊湊的高度
-  mainContainer.style.width = "100%"; // 使用全寬度
+  mainContainer.className = "timeline-main-container dynamic-height";
+  mainContainer.style.height = `${timelineHeight + 100}px`; // 保留動態高度設定
 
   // 創建時間軸區域（縱軸是時間，橫軸是日期）
   const timelineArea = document.createElement("div");
-  timelineArea.className = "timeline-area";
-  timelineArea.style.height = `${timelineHeight + 100}px`; // 更緊湊的高度
-  // 設置時間軸區域為響應式
-  timelineArea.style.flex = "1"; // 佔用剩餘空間
-  timelineArea.style.minWidth = "400px"; // 最小寬度
+  timelineArea.className = "timeline-area dynamic-height";
+  timelineArea.style.height = `${timelineHeight + 100}px`; // 保留動態高度設定
   
   // 計算可用寬度，確保不超出容器
   const availableWidth = timelineArea.offsetWidth || 1200; // 預設1200px如果無法獲取
@@ -212,21 +207,13 @@ function renderTimelineWithData(timelineData) {
 
   // 創建預覽容器
   const previewContainer = document.createElement("div");
-  previewContainer.className = "timeline-right-container";
-  previewContainer.style.width = "25%"; // 使用百分比寬度
-  previewContainer.style.minWidth = "200px"; // 最小寬度
-  previewContainer.style.height = `${timelineHeight + 100}px`; // 更緊湊的高度
-  previewContainer.style.padding = "var(--spacing-md)";
-  previewContainer.style.background = "var(--bg-primary)";
-  previewContainer.style.borderLeft = "2px solid var(--border-light)";
-  previewContainer.style.overflowY = "auto";
-  previewContainer.style.flexShrink = "1"; // 允許縮小
-  previewContainer.style.position = "relative"; // 確保可見
+  previewContainer.className = "timeline-right-container dynamic dynamic-height";
+  previewContainer.style.height = `${timelineHeight + 100}px`; // 保留動態高度設定
 
   // 預覽區域的默認內容
   previewContainer.innerHTML = `
-    <div style="text-align: center; color: #666; font-size: 1rem;">
-      <p>點擊左側活動查看詳情</p>
+    <div class="timeline-preview-default">
+      <p data-zh="點擊左側活動查看詳情" data-en="Click on the left events to view details">點擊左側活動查看詳情</p>
     </div>
   `;
 
@@ -238,11 +225,11 @@ function renderTimelineWithData(timelineData) {
     const yPosition = timelineStartY + ((hour - startHour) * 60);
     
     const timeLine = document.createElement("div");
-    timeLine.className = "timeline-time-line";
+    timeLine.className = "timeline-time-line dynamic";
     timeLine.style.top = `${yPosition}px`;
 
     const timeLabel = document.createElement("div");
-    timeLabel.className = "timeline-time-label";
+    timeLabel.className = "timeline-time-label dynamic";
     timeLabel.style.top = `${yPosition}px`;
     timeLabel.textContent = `${hour.toString().padStart(2, '0')}:00`;
 
@@ -257,7 +244,7 @@ function renderTimelineWithData(timelineData) {
     // 左邊界線（除了第一個區域）
     if (dayIndex > 0) {
       const leftBorder = document.createElement("div");
-      leftBorder.className = "timeline-zone-border";
+      leftBorder.className = "timeline-zone-border dynamic";
       leftBorder.style.left = `${columnStartX}px`;
       leftBorder.style.top = `${timelineStartY}px`;
       leftBorder.style.height = `${timelineHeight}px`;
@@ -267,7 +254,7 @@ function renderTimelineWithData(timelineData) {
     // 右邊界線（最後一個區域）
     if (dayIndex === eventDays.length - 1) {
       const rightBorder = document.createElement("div");
-      rightBorder.className = "timeline-zone-border";
+      rightBorder.className = "timeline-zone-border dynamic";
       rightBorder.style.left = `${columnStartX + dayWidth}px`;
       rightBorder.style.top = `${timelineStartY}px`;
       rightBorder.style.height = `${timelineHeight}px`;
@@ -283,19 +270,18 @@ function renderTimelineWithData(timelineData) {
     const columnCenterX = columnStartX + (dayWidth / 2); // 區域中心
     
     const dateColumn = document.createElement("div");
-    dateColumn.className = "timeline-date-column";
+    dateColumn.className = "timeline-date-column dynamic";
     dateColumn.style.left = `${columnStartX}px`; // 日期標記在區域起始位置
     dateColumn.style.width = `${dayWidth}px`; // 設置區域寬度
-    dateColumn.style.textAlign = "center";
     
     const date = new Date(year, month, day);
-    // 確保星期日能正確顯示
-    const weekday = date.toLocaleDateString("zh-TW", { 
+    // 使用英文格式顯示日期
+    const weekday = date.toLocaleDateString("en-US", { 
       weekday: "short",
       timeZone: "Asia/Taipei"
     });
-    const monthDay = date.toLocaleDateString("zh-TW", { 
-      month: "long", 
+    const monthDay = date.toLocaleDateString("en-US", { 
+      month: "numeric", 
       day: "numeric",
       timeZone: "Asia/Taipei"
     });
@@ -303,7 +289,7 @@ function renderTimelineWithData(timelineData) {
 
     // 創建日期分隔線（垂直線）- 對齊到日期列中心
     const dateLine = document.createElement("div");
-    dateLine.className = "timeline-date-line";
+    dateLine.className = "timeline-date-line dynamic";
     dateLine.style.left = `${columnCenterX}px`; // 分隔線在日期列中心
     dateLine.style.top = `${timelineStartY}px`;
     dateLine.style.height = `${timelineHeight}px`;
@@ -316,44 +302,19 @@ function renderTimelineWithData(timelineData) {
   // 創建事件類型篩選按鈕
   const filterContainer = document.createElement("div");
   filterContainer.className = "timeline-filter-container";
-  filterContainer.style.position = "absolute";
-  filterContainer.style.top = "30px"; 
-  filterContainer.style.left = "0";
-  filterContainer.style.right = "0";
-  filterContainer.style.height = "auto";
-  filterContainer.style.display = "flex";
-  filterContainer.style.justifyContent = "space-between";
-  filterContainer.style.gap = "0";
-  filterContainer.style.zIndex = "10";
-  filterContainer.style.padding = "15px 0";
   
   // 事件類型按鈕
   const eventTypes = [
-    { key: "all", label: "All", color: "black" },
-    { key: "talk", label: "Talk", color: "orangered" },
-    { key: "workshop", label: "Workshop", color: "blue" },
-    { key: "performance", label: "Performance", color: "rebeccapurple" }
+    { key: "all", label: "ALL", color: "black" },
+    { key: "talk", label: "TALK", color: "orangered" },
+    { key: "workshop", label: "WORKSHOP", color: "blue" },
+    { key: "performance", label: "PERFORMANCE", color: "rebeccapurple" }
   ];
   
   eventTypes.forEach(eventType => {
     const button = document.createElement("button");
-    button.className = "timeline-filter-btn";
+    button.className = `timeline-filter-btn ${eventType.key}`;
     button.textContent = eventType.label;
-    
-    button.style.padding = "6px 0";
-    button.style.border = "none";
-    button.style.borderRadius = "0";
-    button.style.backgroundColor = eventType.color;
-    button.style.color = "#fff";
-    button.style.fontSize = "12px";
-    button.style.fontWeight = "500";
-    button.style.cursor = "pointer";
-    button.style.transition = "all 0.2s ease";
-    button.style.flex = "1";
-    button.style.height = "32px";
-    button.style.display = "flex";
-    button.style.alignItems = "center";
-    button.style.justifyContent = "center";
     button.dataset.filter = eventType.key;
     
     // 默認選中"All"
@@ -367,18 +328,11 @@ function renderTimelineWithData(timelineData) {
       // 重置所有按鈕樣式
       filterContainer.querySelectorAll(".timeline-filter-btn").forEach(btn => {
         const btnType = btn.dataset.filter;
-        const btnColor = btnType === "all" ? "black" : 
-                          btnType === "talk" ? "orangered" :
-                          btnType === "workshop" ? "blue" :
-                          btnType === "performance" ? "rebeccapurple" :
-                          "black";
-        btn.style.backgroundColor = btnColor;
-        btn.style.color = "ghostwhite";
+        btn.className = `timeline-filter-btn ${btnType}`;
       });
       
       // 設置當前按鈕為選中狀態
-      button.style.backgroundColor = eventType.color;
-      button.style.color = "#fff";
+      button.className = `timeline-filter-btn ${eventType.key}`;
       
       // 篩選事件
       filterEventsByType(eventType.key);
@@ -396,9 +350,9 @@ function renderTimelineWithData(timelineData) {
       const eventType = eventElement.dataset.eventType || "default";
       
       if (filterType === "all" || eventType === filterType) {
-        eventElement.style.display = "block";
+        eventElement.className = "timeline-event-bar visible";
       } else {
-        eventElement.style.display = "none";
+        eventElement.className = "timeline-event-bar hidden";
       }
     });
   };
@@ -437,16 +391,16 @@ function renderTimelineWithData(timelineData) {
     // 根據類型設置不同的文字顏色（與篩選按鈕顏色一致）
     switch (eventType.toUpperCase()) {
       case "TALK":
-        eventBar.style.color = "orangered";
+        eventBar.className = "timeline-event-bar dynamic talk";
         break;
       case "WORKSHOP":
-        eventBar.style.color = "blue";
+        eventBar.className = "timeline-event-bar dynamic workshop";
         break;
       case "PERFORMANCE":
-        eventBar.style.color = "rebeccapurple";
+        eventBar.className = "timeline-event-bar dynamic performance";
         break;
       default:
-        eventBar.style.color = "black";
+        eventBar.className = "timeline-event-bar dynamic default";
     }
     
     // 設置事件類型數據屬性用於篩選
@@ -530,19 +484,13 @@ function renderTimelineWithData(timelineData) {
       const fontSize = "14px";
       const maxWidth = "200px";
       
-      eventTitle.style.fontSize = fontSize;
-      eventTitle.style.fontWeight = "bold";
-      eventTitle.style.marginBottom = "2px";
-      eventTitle.style.maxWidth = maxWidth;
-      eventTitle.style.textOverflow = "ellipsis";
-      eventTitle.style.whiteSpace = "nowrap";
+      eventTitle.className = `timeline-event-title ${fontSize === "10px" ? "small" : fontSize === "12px" ? "medium" : "large"}`;
+      eventTitle.style.maxWidth = maxWidth; // 保留動態寬度設定
       eventTitle.textContent = titleText;
       
       // 創建時間信息（小灰字）
       const eventTime = document.createElement("div");
-      eventTime.style.fontSize = "12px";
-      eventTime.style.color = "#666";
-      eventTime.style.opacity = "0.8";
+      eventTime.className = "timeline-event-time";
       eventTime.textContent = `${startTimeStr} - ${endTimeStr}`;
       
       eventContent.appendChild(eventTitle);
@@ -684,45 +632,55 @@ function renderTimelineWithData(timelineData) {
         const eventTime = new Date(event.start.dateTime || event.start.date);
         const eventEndTime = new Date(event.end.dateTime || event.end.date);
         
-        // 格式化開始和結束時間
-        const startTimeStr = eventTime.toLocaleTimeString("zh-TW", { 
+        // 格式化開始和結束時間 - 使用24小時制
+        const startTimeStr = eventTime.toLocaleTimeString("en-US", { 
           hour: "2-digit", 
           minute: "2-digit",
+          hour12: false,
           timeZone: "Asia/Taipei"
         });
         
-        const endTimeStr = eventEndTime.toLocaleTimeString("zh-TW", { 
+        const endTimeStr = eventEndTime.toLocaleTimeString("en-US", { 
           hour: "2-digit", 
           minute: "2-digit",
+          hour12: false,
+          timeZone: "Asia/Taipei"
+        });
+        
+        // 格式化日期 - 使用英文格式
+        const dateStr = taiwanEventDate.toLocaleDateString("en-US", { 
+          weekday: "short",
+          month: "numeric", 
+          day: "numeric",
           timeZone: "Asia/Taipei"
         });
         
         const timeStr = `${startTimeStr} - ${endTimeStr}`;
+        const dateTimeStr = `${dateStr} | ${timeStr}`;
+        
+        // 獲取活動類型標籤 - 重新解析事件類型
+        const currentEventType = eventFields.TYPE || "DEFAULT";
+        const eventTypeTag = `#${currentEventType.toUpperCase()}`;
         
         console.log("預覽時間顯示:", timeStr, "開始時間:", eventTime, "結束時間:", eventEndTime);
         
         previewContainer.innerHTML = `
-          <div style="text-align: center;">
-            ${eventFields.IMAGE ? `<img src="${eventFields.IMAGE}" style="width: 100%; height: auto; border:1.5px solid black;margin-bottom: 15px;" alt="活動圖片" onerror="this.style.display='none'; console.log('時間軸圖片載入失敗:', '${eventFields.IMAGE}');" onload="console.log('時間軸圖片載入成功:', '${eventFields.IMAGE}');">` : ''}
+          <div class="timeline-preview-content">
+            ${eventFields.IMAGE ? `<img src="${eventFields.IMAGE}" class="timeline-preview-image" alt="活動圖片" onerror="this.style.display='none'; console.log('時間軸圖片載入失敗:', '${eventFields.IMAGE}');" onload="console.log('時間軸圖片載入成功:', '${eventFields.IMAGE}');">` : ''}
           </div>
-          <div style="font-size: 1.5rem; font-weight: bold; margin-bottom: 10px; text-transform: uppercase;">
-            ${taiwanEventDate.toLocaleDateString("zh-TW", { 
-              month: "long", 
-              day: "numeric",
-              weekday: "short",
-              timeZone: "Asia/Taipei"
-            })}
+          <div class="timeline-preview-type-tag ${currentEventType.toLowerCase()}">
+            ${eventTypeTag}
           </div>
-          <div style="font-size: 1.2rem; font-weight: bold; margin-bottom: 10px;">
-            ${timeStr}
+          <div class="timeline-preview-date-time">
+            ${dateTimeStr}
           </div>
-          <div style="font-size: 1.1rem; font-weight: bold; margin-bottom: 15px; text-transform: uppercase;">
+          <div class="timeline-preview-event-title">
             ${event.summary || "未命名活動"}
           </div>
-          <div style="font-size: 0.9rem; line-height: 1.4; color: #666;">
+          <div class="timeline-preview-description">
             ${eventFields.DESCRIPTION || event.description || "暫無詳細描述"}
           </div>
-          ${eventFields.SIGNUP ? `<div style="margin-top: 15px;"><a href="${eventFields.SIGNUP}" target="_blank" style="display: inline-block; padding: 8px 16px; background: #000; color: #fff; text-decoration: none; font-size: 0.9rem;">報名參加</a></div>` : ''}
+          ${eventFields.SIGNUP ? `<div class="timeline-preview-signup"><a href="${eventFields.SIGNUP}" target="_blank" class="timeline-preview-signup-btn">報名參加</a></div>` : ''}
         `;
       };
 
@@ -761,8 +719,7 @@ document.addEventListener("DOMContentLoaded", function () {
     // 確保時間軸容器顯示
     const timelineModeContainer = document.getElementById("timelineModeContainer");
     if (timelineModeContainer) {
-      timelineModeContainer.style.display = "block";
-      timelineModeContainer.classList.remove("hidden");
+      timelineModeContainer.className = "timeline-mode-container visible";
       console.log("時間軸容器已設置為顯示");
       
       // 渲染時間軸模式
