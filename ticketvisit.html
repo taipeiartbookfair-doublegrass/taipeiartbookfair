@@ -27,7 +27,7 @@
           <li><a href="#access" class="nav-item" data-zh="交通資訊" data-en="Access">交通資訊</a></li>
           <li><a href="#tickets" class="nav-item" data-zh="票券資訊" data-en="Tickets">票券資訊</a></li>
           <li><a href="#timeline" class="nav-item" data-zh="活動時程" data-en="Timeline">活動時程</a></li>
-          <li><a href="#exhibitors" class="nav-item" data-zh="參展商" data-en="Exhibitors">參展商</a></li>
+          <li><a href="#exhibitors" class="nav-item" data-zh="攤商列表" data-en="Exhibitors">攤商列表</a></li>
         </ul>
         <button id="lang-btn" class="nav-lang">EN</button>
       </div>
@@ -188,8 +188,8 @@
               <h3 class="ticket-title" data-zh="優待票" data-en="Concession Ticket">優待票</h3>
               <div class="ticket-price" data-zh="NT$ 250／人" data-en="NT$ 250 / person">NT$ 250／人</div>
               <div class="ticket-period" data-zh="售票期限：2025/09/08 - 2025/11/23" data-en="Sale Period: 2025/09/08 – 2025/11/23">售票期限：2025/09/08 - 2025/11/23</div>
-              <p class="ticket-desc" data-zh="適用於 110 cm 以下幼童、65 歲以上長者、身心障礙者及其陪同者。入場時需出示相關證明文件。" data-en="Available for children under 110 cm, seniors 65 and above, and persons with disabilities (plus one accompanying guest). Valid ID or certificate required upon entry.">
-                適用於 110 cm 以下幼童、65 歲以上長者、身心障礙者及其陪同者。入場時需出示相關證明文件。
+              <p class="ticket-desc" data-zh="適用於 110 cm 以下幼童、65 歲以上長者、身心障礙者及其陪同者。需出示證明文件。" data-en="Available for children under 110 cm, seniors 65+, and persons with disabilities (plus one accompanying guest). Valid ID required.">
+                適用於 110 cm 以下幼童、65 歲以上長者、身心障礙者及其陪同者。需出示證明文件。
               </p>
               <div class="ticket-status" data-zh="未開放" data-en="Not Yet Available">未開放</div>
               <a href="https://tour.ibon.com.tw/event/e2508000028lhmm" class="ticket-btn" target="_blank" data-zh="立即購票" data-en="Buy Now">立即購票</a>
@@ -348,7 +348,6 @@
         <div
           class="timeline-mode-container"
           id="timelineModeContainer"
-          style="display: block"
         >
           <div class="timeline-scroll-container" id="timelineScroll">
             <div class="timeline-calendar" id="timelineCalendar">
@@ -373,9 +372,9 @@
                 type="text" 
                 id="exhibitor-search-input" 
                 class="search-input" 
-                placeholder="搜尋品牌名稱、簡介..." 
-                data-zh="搜尋品牌名稱、簡介..." 
-                data-en="Search brand name, description..."
+                placeholder="SEARCH..." 
+                data-zh="SEARCH..." 
+                data-en="SEARCH..."
               />
               <button id="search-clear-btn" class="search-clear-btn" title="清空搜尋">×</button>
             </div>
@@ -393,7 +392,7 @@
         </div>
         
         <!-- 原有的篩選器控制面板（保留作為備用） -->
-        <div class="exhibitor-filters" style="display: none;">
+        <div class="exhibitor-filters">
           <div class="filter-buttons">
             <button id="sort-name-btn" class="filter-btn active" data-zh="品牌名稱 A-Z" data-en="Brand Name A-Z">品牌名稱 A-Z</button>
             <button id="sort-country-btn" class="filter-btn" data-zh="國籍" data-en="Country">國籍</button>
@@ -567,13 +566,12 @@
             // 現場票特殊處理：始終顯示為"現場購買"
             if (ticketType === 'onsite') {
               statusElement.textContent = '現場購買';
-              statusElement.style.color = '#FBAD17';
-              statusElement.style.fontWeight = 'bold';
+              statusElement.className = 'ticket-status onsite';
               
               // 現場票不需要按鈕，保持原有狀態
               const button = targetCard.querySelector('.ticket-btn');
               if (button) {
-                button.style.display = 'none'; // 隱藏按鈕
+                button.className = 'ticket-btn hidden'; // 隱藏按鈕
               }
             } else {
               // 其他票種的正常邏輯
@@ -583,29 +581,23 @@
 
               if (isAvailable) {
                 statusElement.textContent = '開放中';
-                statusElement.style.color = '#00a650';
-                statusElement.style.fontWeight = 'bold';
+                statusElement.className = 'ticket-status available';
                 
                 // 更新按鈕文字為「立即購票」
                 const button = targetCard.querySelector('.ticket-btn');
                 if (button) {
                   button.textContent = '立即購票';
-                  button.style.background = '#FBAD17';
-                  button.style.color = 'black';
-                  button.style.cursor = 'pointer';
+                  button.className = 'ticket-btn available';
                 }
               } else {
                 statusElement.textContent = '未開放';
-                statusElement.style.color = '#666';
-                statusElement.style.fontWeight = 'normal';
+                statusElement.className = 'ticket-status unavailable';
                 
                 // 更新按鈕文字為「未開放」
                 const button = targetCard.querySelector('.ticket-btn');
                 if (button) {
                   button.textContent = '未開放';
-                  button.style.background = '#ccc';
-                  button.style.color = '#666';
-                  button.style.cursor = 'not-allowed';
+                  button.className = 'ticket-btn unavailable';
                   button.onclick = function(e) {
                     e.preventDefault();
                     return false;
@@ -782,10 +774,10 @@
 
               // 顯示或隱藏卡片
               if (matchesSearch) {
-                card.style.display = 'block';
+                card.className = 'exhibitor-card-main visible';
                 visibleCount++;
               } else {
-                card.style.display = 'none';
+                card.className = 'exhibitor-card-main hidden';
               }
             });
 
