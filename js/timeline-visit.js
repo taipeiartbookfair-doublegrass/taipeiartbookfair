@@ -350,9 +350,9 @@ function renderTimelineWithData(timelineData) {
       const eventType = eventElement.dataset.eventType || "default";
       
       if (filterType === "all" || eventType === filterType) {
-        eventElement.className = "timeline-event-bar visible";
+        eventElement.className = `timeline-event-bar dynamic ${eventType} visible`;
       } else {
-        eventElement.className = "timeline-event-bar hidden";
+        eventElement.className = `timeline-event-bar dynamic ${eventType} hidden`;
       }
     });
   };
