@@ -3947,6 +3947,7 @@ p {
   .about-quote {
     font-size: 1.2rem;
     margin-bottom: 1.5rem;
+    letter-spacing: 1rem;
   }
   
   .about-description {
