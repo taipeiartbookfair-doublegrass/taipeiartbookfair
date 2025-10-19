@@ -1126,7 +1126,7 @@ body {
 }
 
 .exhibitor-card-main:hover {
-  background:darkgrey;
+  background:YELLOW;
   color: var(--text-light);
 }
 
