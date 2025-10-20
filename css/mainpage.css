@@ -1473,8 +1473,8 @@ p {
   align-items: center;
   gap: 0;
   padding: 15px;
-  background-color: #5a445e;
-  border: 2px solid var(--main-color);
+  background-color: darkgray;
+  border: 1.5px solid var(--main-color);
 }
 
 /* 按鈕容器 - 左右並排 */
@@ -1528,7 +1528,7 @@ p {
   letter-spacing: 1px;
   transition: all 0.3s ease;
   border: 1px solid var(--main-color);
-  border-radius: 50px;
+  border-radius: 3px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3),
               inset 0 3px 12px rgba(240, 232, 232, 0.5), 
               inset 0 -3px 12px rgba(0, 0, 0, 0.3),
@@ -1788,6 +1788,8 @@ p {
 .fade-in {
   animation: fadeInUp 0.5s ease forwards;
 }
+#newspaper { margin-bottom: 24px; }
+#zine-row { margin-top: 24px; } /* 保險，擇一即可 */
 
 /* Newsletter 觸發按鈕 */
 .newsletter-trigger {
