@@ -2713,9 +2713,9 @@ p {
   .calender-section.card-section {
     width: 100%;
     max-height: 500px; 
-    padding: 0.5rem;
+    padding: 0rem;
     order: 3; /* 調整為第3個，在活動圖片輪播下面 */
-    margin-bottom: 1rem;
+    margin-bottom: 0rem;
     box-sizing: border-box;
   }
 
