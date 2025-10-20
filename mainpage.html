@@ -128,7 +128,7 @@
           
           <!-- 按鈕功能說明文字 -->
           <div class="button-explanation">
-            <div class="explanation-text">     
+            <div class="explanation-text" style="color:rgb(60,60,60)">     
               左側的按鈕可供您購買票券，並同時了解展覽的開放時間地點、票價資訊、參展名單、完整節目表、展覽常見問及參觀須知；右側的按鈕則能讓您翻轉海報，查看背面的快速資訊。
               The button on the left allows you to purchase tickets and learn more about visiting information, including opening hours, ticket prices, and visitor guidelines. The button on the right lets you flip the poster to view the back side, revealing additional details.
             </div>
@@ -498,6 +498,33 @@
     <script src="js/mainpage_image_rotata.js"></script>
     <script src="js/homepage-zine.js"></script>
     
+    <script>
+      (function() {
+        const hero = document.querySelector('.hero-section');
+        const newspaper = document.querySelector('#newspaper');
+        const zineRow = document.querySelector('#zine-row'); // 如果需要保險間距，可加上
+      
+        function layoutHeroToNewspaper(gap = 16) {
+          if (!hero || !newspaper) return;
+          const heroTop = hero.offsetTop;
+          const newspaperTop = newspaper.offsetTop;
+          const height = Math.max(0, newspaperTop - heroTop - gap);
+          hero.style.height = height + 'px';
+        }
+      
+        let rafId;
+        function onResize() {
+          cancelAnimationFrame(rafId);
+          rafId = requestAnimationFrame(() => layoutHeroToNewspaper(16));
+        }
+      
+        window.addEventListener('load', onResize);
+        window.addEventListener('resize', onResize);
+        // 若有 webfont/圖片載入影響排版，再多觸發一次
+        document.fonts && document.fonts.ready.then(onResize);
+      })();
+      </script>
+      
     <!-- Newsletter JavaScript -->
     <script>
       document.addEventListener('DOMContentLoaded', function() {

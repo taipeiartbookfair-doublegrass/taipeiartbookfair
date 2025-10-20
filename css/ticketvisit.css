@@ -594,6 +594,11 @@ body {
   background: var(--bg-primary);
   border-left: 2px solid var(--border-light);
   overflow-y: auto;
+  /* 讓右側預覽固定在視窗右側，左側可獨立滾動 */
+  position: sticky;
+  top: 0;
+  align-self: flex-start;
+  z-index: 5;
 }
 
 /* 時間軸區域樣式 */
@@ -720,6 +725,12 @@ body {
   overflow: hidden; /* 防止內容溢出 */
   text-shadow: 1px 1px 0 white, -1px -1px 0 white, 1px -1px 0 white, -1px 1px 0 white; /* 白色文字輪廓 */
 }
+
+.timeline-event-content:hover{
+  border:1.5px solid blueviolet;
+}
+
+
 
 /* Agenda 標題行樣式 */
 .agenda-header {
