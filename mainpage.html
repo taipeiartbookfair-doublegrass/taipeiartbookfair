@@ -375,12 +375,32 @@
         <!-- <div class="footer-left">
         </div> -->
         <div class="footer-right">
-          <a href="#" class="social-link">FACEBOOK</a>
-          <a href="#" class="social-link">INSTAGRAM</a>
-          <a href="#contact" class="footer-link">CREDITS</a>
+          <a href="https://www.facebook.com/taipeiartbookfair/" class="social-link">FACEBOOK</a>
+          <a href="https://www.instagram.com/taipeiartbookfair/" class="social-link">INSTAGRAM</a>
+          <a href="#" id="footerCredits" class="footer-link">CREDITS</a>
         </div>
       </div>
     </footer>
+
+    <!-- Credit Drop-up -->
+    <div class="credit-dropup-container" aria-live="polite">
+      <div class="credit-panel" id="creditPanel" role="dialog" aria-modal="false" aria-labelledby="creditTitle">
+        <h3 id="creditTitle">CREDITS · COLOPHON</h3>
+        <p>
+          This site is coded with love and a bit of roughness. Built with vanilla HTML/CSS/JS, no heavy frameworks.
+        </p>
+        <p><strong>Open-source fonts in use</strong>:</p>
+        <ul>
+          <li>Inclusive Sans (Google Fonts)</li>
+          <li>BioRhyme Expanded (Google Fonts)</li>
+          <li>Libre Franklin (Google Fonts)</li>
+          <li>Montserrat (Google Fonts)</li>
+        </ul>
+        <p>
+          Images, zine mockups and timeline UI are custom-built for Taipei Art Book Fair. Code is intentionally modular with styles centralized for easier maintenance.
+        </p>
+      </div>
+    </div>
 
     <script>
       // Newsletter 彈出視窗功能
@@ -499,6 +519,28 @@
     <script src="js/homepage-zine.js"></script>
     
     <script>
+      // Credit drop-up toggle using existing footer CREDITS link
+      (function(){
+        const trigger = document.getElementById('footerCredits');
+        const panel = document.getElementById('creditPanel');
+        if (!trigger || !panel) return;
+        trigger.addEventListener('click', function(e){
+          e.preventDefault();
+          const isOpen = panel.classList.toggle('open');
+          trigger.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+          trigger.setAttribute('aria-controls', 'creditPanel');
+        });
+        // click outside to close
+        document.addEventListener('click', function(e){
+          if (!panel.contains(e.target) && e.target !== trigger) {
+            panel.classList.remove('open');
+            trigger.setAttribute('aria-expanded', 'false');
+          }
+        });
+      })();
+    </script>
+
+    <script>
       (function() {
         const hero = document.querySelector('.hero-section');
         const newspaper = document.querySelector('#newspaper');
@@ -524,7 +566,7 @@
         document.fonts && document.fonts.ready.then(onResize);
       })();
       </script>
-      
+
     <!-- Newsletter JavaScript -->
     <script>
       document.addEventListener('DOMContentLoaded', function() {
