@@ -490,8 +490,13 @@ margin-right: 20px;
 
 /* 響應式設計 */
 @media (max-width: 768px) {
+  .calender-mode-container{
+    height:auto !important;
+  }
   .calender-content {
     padding: 0 1rem;
+    border-left: 1px solid black;
+    border-right: 1px solid black;
   }
 
   .calender-header {
@@ -516,7 +521,6 @@ margin-right: 20px;
   .calender-scroll-container {
     padding: 1rem 0;
     width:100%;
-    max-height:500px;
   }
 
   .timeline-time {

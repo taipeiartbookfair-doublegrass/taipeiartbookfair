@@ -2505,7 +2505,7 @@ p {
   }
 
   .nav-items-area.sticky-nav {
-    padding: 10px 8px;
+    padding: 40px 8px;
     position: sticky;
     top: 0;
     z-index: 999;
