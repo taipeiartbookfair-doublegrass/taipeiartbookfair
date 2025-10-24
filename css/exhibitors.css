@@ -413,7 +413,7 @@ margin-right: 20px;
 
 .timeline-date-column {
   position: absolute;
-  top: 20px;
+  bottom: 20px;
   width: 200px;
   font-size: 16px;
   font-weight: bold;
@@ -796,7 +796,7 @@ margin-right: 20px;
     aliceblue,
     aliceblue,
     lavender,
-    rebeccapurple
+    blueviolet
   );
 }
 
