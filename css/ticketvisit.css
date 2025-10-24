@@ -17,6 +17,17 @@
   --border-dark: #000000;
   --shadow-light: rgba(0, 0, 0, 0.1);
   --shadow-medium: rgba(0, 0, 0, 0.2);
+
+  /* highlightcolors */
+  --color-one: yellowgreen;
+  --color-two: yellow;
+  --color-three: cyan;
+  --color-four: orangered;
+  --color-five: magenta;
+  --color-six: pink;
+  --color-seven: rgb(52, 77, 203);
+  --color-eight: forestgreen;
+
   
   /* 間距 - 極緊湊 */
   --spacing-xs: 4px;
@@ -182,7 +193,7 @@ body {
 }
 
 .hero-container {
-  display: grid;
+  display: flex;
   grid-template-columns: 1fr 0.5fr;
   gap: var(--spacing-lg);
   max-width: 100vw;
@@ -218,6 +229,9 @@ body {
 .hero-description {
   text-align: left;
   padding-left: var(--spacing-sm);
+  width: 100%;
+  max-width: 100%;
+  grid-column: 1 / -1;
 }
 
 .hero-traffic {
@@ -225,7 +239,7 @@ body {
 }
 
 .hero-poster {
-  max-width: 400px;
+  max-width:1000px;
   width: 100%;
   height: auto;
   margin-bottom: var(--spacing-md);
@@ -282,10 +296,61 @@ body {
 }
 
 .tickets-column {
-  background: darkgray !important;
+  background: url("../image/horizental/hori9.jpg") !important;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
   padding: var(--spacing-md);
   border: 2px solid var(--border-light);
   border-radius: 20px;
+}
+
+/* 展覽資訊區域樣式 - 統一字體大小 */
+.exhibition-info-section {
+  margin-top: 0;
+  padding: var(--spacing-md);
+  background: yellowgreen;
+  height: fit-content;
+}
+
+.exhibition-title {
+  font-size: var(--font-md);
+  color: var(--text-primary);
+  text-align: left;
+}
+
+.exhibition-subtitle {
+  font-size: var(--font-md);
+  margin-bottom: var(--spacing-md);
+  font-style: italic;
+  text-align: left;
+}
+
+.exhibition-details {
+  display: block;
+}
+
+.detail-item-title {
+  font-size: var(--font-sm);
+    background-color: darkgrey;
+  font-weight: bold;
+  color: black;
+}
+
+.detail-item p {
+  font-size: var(--font-md);
+  margin-bottom: var(--spacing-xs);
+}
+
+.time-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.time-list li {
+  font-size: var(--font-md);
+  margin-bottom: 2px;
 }
 
 /* 交通資訊區域樣式 */
@@ -310,6 +375,7 @@ body {
 
 .column {
   background: var(--bg-secondary);
+  background-size: cover;
   padding: var(--spacing-md);
   border: 2px solid var(--border-light);
 }
@@ -317,12 +383,12 @@ body {
 .column-title {
   font-size: var(--font-hero);
   font-weight: bold;
-  color: var(--text-primary);
+  color: ghostwhite;
   margin-bottom: var(--spacing-md);
   text-align: left;
   text-transform: uppercase;
-  letter-spacing: 0.05em;
   line-height: 0.9;
+  background-color: blue;
 }
 
 /* Access 區域 */
@@ -518,12 +584,13 @@ body {
 .timeline-title {
   font-size: var(--font-hero);
   font-weight: bold;
-  color: white; /* 設為白色文字 */
+  color: black; /* 設為白色文字 */
   text-align: center; /* 置中對齊 */
   margin-bottom: var(--spacing-sm); /* 減少底部間距 */
   text-transform: uppercase;
   letter-spacing: 0.05em;
   line-height: 0.9;
+  background-color:yellow;
   padding-top: 10px;
 }
 
@@ -644,7 +711,7 @@ body {
 /* 日期標記樣式 */
 .timeline-date-column {
   position: absolute;
-  top: var(--spacing-sm);
+  bottom: var(--spacing-sm);
   font-size: var(--font-sm);
   font-weight: bold;
   color: var(--text-primary);
@@ -750,6 +817,7 @@ body {
 .agenda-subscribe {
   margin: 0;
   font-size: var(--font-sm);
+  background-color:#000;
 }
 
 .agenda-subscribe a {
@@ -1031,10 +1099,11 @@ body {
   font-size: var(--font-hero);
   font-weight: bold;
   color: var(--text-primary);
-  text-align: left;
+  text-align: center;
   margin-bottom: var(--spacing-md);
   text-transform: uppercase;
   letter-spacing: 0.05em;
+  background-color: yellow;
 }
 
 .exhibitor-grid {
@@ -1072,9 +1141,8 @@ body {
 
 /* 確保 focused-out 狀態下的 hover 效果被覆蓋 */
 .exhibitor-card-main.focused-out:hover {
-  background: var(--bg-dark) !important;
-  color: var(--text-light) !important;
   opacity: 0.3 !important;
+  border:3px solid rebeccapurple;
 }
 
 .exhibitor-name {
@@ -1141,8 +1209,8 @@ body {
 }
 
 .exhibitor-card-main:hover {
-  background:YELLOW;
   color: var(--text-light);
+  border:1px solid blueviolet;
 }
 
 .exhibitor-basic-info {
@@ -1324,6 +1392,8 @@ body {
   .exhibitor-card-main.expanded-wide.long-content {
     grid-column: span 2; /* 手機版長內容也佔滿整行 */
   }
+  
+  /* 展覽資訊手機版樣式 - 統一字體大小 */
 }
 
 @media (max-width: 480px) {
@@ -1363,6 +1433,8 @@ body {
   line-height: 1.4;
 }
 
+
+
 /* 響應式設計 */
 @media (max-width: 768px) {
   .two-column-container {
@@ -1395,6 +1467,7 @@ body {
           order: 2;
           text-align: center;
           padding-left: 0;
+          grid-column: 1 / -1;
         }
 
   .access-info-section {
@@ -1638,13 +1711,13 @@ body {
 /* Timeline 日期列樣式 */
 .timeline-date-column.dynamic {
   position: absolute;
-  top: var(--spacing-sm);
-  font-size: var(--font-sm);
-  font-weight: bold;
+  bottom: var(--spacing-sm);
+  font-size: 1.2rem;
   color: var(--text-primary);
   text-align: center;
   z-index: 2;
   background: var(--bg-primary);
+  text-shadow: 2px 2px aqua;
 }
 
 /* Timeline 日期線樣式 */
@@ -1658,7 +1731,6 @@ body {
 /* Timeline 篩選容器樣式 */
 .timeline-filter-container {
   position: absolute;
-  top: 30px;
   left: 0;
   right: 0;
   height: auto;
@@ -1703,7 +1775,7 @@ body {
 }
 
 .timeline-filter-btn.performance {
-  background-color: rebeccapurple;
+  background-color: blueviolet;
 }
 
 .timeline-filter-btn.exhibition {
@@ -1741,7 +1813,7 @@ body {
 }
 
 .timeline-event-bar.performance {
-  color: rebeccapurple;
+  color: blueviolet;
 }
 
 .timeline-event-bar.exhibition {
@@ -1837,7 +1909,7 @@ body {
 }
 
 .timeline-preview-type-tag.performance {
-  color: rebeccapurple;
+  color: blueviolet;
 }
 
 .timeline-preview-type-tag.exhibition {

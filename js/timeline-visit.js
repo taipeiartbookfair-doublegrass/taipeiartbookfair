@@ -308,7 +308,7 @@ function renderTimelineWithData(timelineData) {
     { key: "all", label: "ALL", color: "black" },
     { key: "talk", label: "TALK", color: "orangered" },
     { key: "workshop", label: "WORKSHOP", color: "blue" },
-    { key: "performance", label: "PERFORMANCE", color: "rebeccapurple" }
+    { key: "performance", label: "PERFORMANCE", color: "violet" }
   ];
   
   eventTypes.forEach(eventType => {

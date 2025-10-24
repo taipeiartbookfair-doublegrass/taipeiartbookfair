@@ -2684,7 +2684,7 @@ p {
     font-size: 0.8rem;
     text-align: center;
     line-height: 1.3;
-    display:none;
+    width: 100%;
   }
 
   .flip-button {
@@ -3057,7 +3057,7 @@ p {
   }
 
   .event-title {
-    font-size: 10rem;
+    font-size: 0.9rem;
     font-weight: 600;
     color: var(--main-color);
     margin-bottom: 0.3rem;
