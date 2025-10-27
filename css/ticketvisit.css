@@ -1411,7 +1411,14 @@ background-color:cyan;
   .exhibitor-card-main.expanded-wide.long-content {
     grid-column: span 2; /* 手機版長內容也佔滿整行 */
   }
+
+  .hero-traffic {
+    display: block;
+  }
   
+  .hero-poster-section iframe {
+    transform: rotate(90deg);
+  }
   /* 展覽資訊手機版樣式 - 統一字體大小 */
 }
 
