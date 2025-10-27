@@ -210,12 +210,80 @@ function renderTimelineWithData(timelineData) {
   previewContainer.className = "timeline-right-container dynamic dynamic-height";
   previewContainer.style.height = `${timelineHeight + 100}px`; // 保留動態高度設定
 
-  // 預覽區域的默認內容
-  previewContainer.innerHTML = `
-    <div class="timeline-preview-default">
-      <p data-zh="點擊左側活動查看詳情" data-en="Click on the left events to view details">點擊左側活動查看詳情</p>
-    </div>
-  `;
+  // 預覽區域的默認內容 - 顯示提示並預載隨機 workshop
+  const workshopEvents = timelineData.filter(event => {
+    const fields = parseDescription(event.description);
+    return fields.TYPE && fields.TYPE.toUpperCase() === 'WORKSHOP';
+  });
+  
+  // 隨機選擇一個 workshop，如果有的話
+  const randomWorkshop = workshopEvents.length > 0 
+    ? workshopEvents[Math.floor(Math.random() * workshopEvents.length)]
+    : null;
+
+  if (randomWorkshop) {
+    const fields = parseDescription(randomWorkshop.description);
+    const startTime = new Date(randomWorkshop.start.dateTime || randomWorkshop.start.date);
+    const endTime = new Date(randomWorkshop.end.dateTime || randomWorkshop.end.date);
+    
+    const taiwanStartStr = startTime.toLocaleString("sv-SE", {timeZone: "Asia/Taipei"});
+    const taiwanEndStr = endTime.toLocaleString("sv-SE", {timeZone: "Asia/Taipei"});
+    const taiwanStartTime = new Date(taiwanStartStr);
+    const taiwanEndTime = new Date(taiwanEndStr);
+    
+    const startTimeStr = taiwanStartTime.toLocaleTimeString("en-US", { 
+      hour: "2-digit",
+      minute: "2-digit",
+      hour12: false,
+      timeZone: "Asia/Taipei"
+    });
+    const endTimeStr = taiwanEndTime.toLocaleTimeString("en-US", { 
+      hour: "2-digit",
+      minute: "2-digit",
+      hour12: false,
+      timeZone: "Asia/Taipei"
+    });
+    
+    const dateStr = taiwanStartTime.toLocaleDateString("en-US", { 
+      weekday: "short",
+      month: "numeric", 
+      day: "numeric",
+      timeZone: "Asia/Taipei"
+    });
+    
+    const timeStr = `${startTimeStr} - ${endTimeStr}`;
+    const dateTimeStr = `${dateStr} | ${timeStr}`;
+    const eventTypeTag = `#WORKSHOP`;
+    
+    previewContainer.innerHTML = `
+      <div class="timeline-preview-default">
+        <p data-zh="點擊左側活動查看詳情" data-en="Click on the left events to view details">點擊左側活動查看詳情</p>
+      </div>
+      <div class="timeline-preview-content">
+        ${fields.IMAGE ? `<img src="${fields.IMAGE}" class="timeline-preview-image" alt="活動圖片" onerror="this.style.display='none';">` : ''}
+      </div>
+      <div class="timeline-preview-type-tag workshop">
+        ${eventTypeTag}
+      </div>
+      <div class="timeline-preview-date-time">
+        ${dateTimeStr}
+      </div>
+      <div class="timeline-preview-event-title">
+        ${randomWorkshop.summary || "未命名活動"}
+      </div>
+      <div class="timeline-preview-description">
+        ${fields.DESCRIPTION || randomWorkshop.description || "暫無詳細描述"}
+      </div>
+      ${fields.SIGNUP ? `<div class="timeline-preview-signup"><a href="${fields.SIGNUP}" target="_blank" class="timeline-preview-signup-btn">SIGN UP</a></div>` : ''}
+    `;
+  } else {
+    // 如果沒有 workshop，只顯示提示
+    previewContainer.innerHTML = `
+      <div class="timeline-preview-default">
+        <p data-zh="點擊左側活動查看詳情" data-en="Click on the left events to view details">點擊左側活動查看詳情</p>
+      </div>
+    `;
+  }
 
   // 創建時間標記（縱軸時間）- 固定位置，24小時
   const timelineStartY = 100; // 上邊距

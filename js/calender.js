@@ -568,11 +568,42 @@ function renderEvents(items) {
     eventTitle.textContent = item.summary || "未命名活動";
     eventContent.appendChild(eventTitle);
 
-    // 活動描述
-    if (eventFields.DESCRIPTION) {
+    // 活動描述和類型標籤
+    if (eventFields.DESCRIPTION || eventFields.TYPE) {
       const eventDescription = document.createElement("p");
       eventDescription.className = "event-description";
-      eventDescription.textContent = eventFields.DESCRIPTION;
+      
+      if (eventFields.DESCRIPTION) {
+        eventDescription.textContent = eventFields.DESCRIPTION;
+      }
+      
+      // 活動類型標籤 - 添加到同一個段落中
+      if (eventFields.TYPE) {
+        const eventTypeTag = document.createElement("span");
+        eventTypeTag.className = "event-type-tag";
+        eventTypeTag.textContent = ` #${eventFields.TYPE.toLowerCase()}`;
+        
+        // 根據類型設置顏色
+        switch (eventFields.TYPE.toUpperCase()) {
+          case "TALK":
+            eventTypeTag.style.color = "#FF4500"; // orangered
+            break;
+          case "WORKSHOP":
+            eventTypeTag.style.color = "#0066CC"; // blue
+            break;
+          case "PERFORMANCE":
+            eventTypeTag.style.color = "#FFD700"; // yellow
+            break;
+          case "EXHIBITION":
+            eventTypeTag.style.color = "#000000"; // black
+            break;
+          default:
+            eventTypeTag.style.color = "#666"; // gray
+        }
+        
+        eventDescription.appendChild(eventTypeTag);
+      }
+      
       eventContent.appendChild(eventDescription);
     }
 

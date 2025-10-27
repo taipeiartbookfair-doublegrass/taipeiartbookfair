@@ -24,10 +24,10 @@
         <a href="mainpage.html" class="nav-back-btn" data-zh="← 返回" data-en="← Back">← 返回</a>
         
         <ul class="nav-menu">
-          <li><a href="#access" class="nav-item" data-zh="交通資訊" data-en="Access">交通資訊</a></li>
-          <li><a href="#tickets" class="nav-item" data-zh="票券資訊" data-en="Tickets">票券資訊</a></li>
-          <li><a href="#timeline" class="nav-item" data-zh="活動時程" data-en="Timeline">活動時程</a></li>
-          <li><a href="#exhibitors" class="nav-item" data-zh="攤商列表" data-en="Exhibitors">攤商列表</a></li>
+          <li><a href="#access" class="nav-item">Access</a></li>
+          <li><a href="#tickets" class="nav-item">Tickets</a></li>
+          <li><a href="#timeline" class="nav-item">Programs</a></li>
+          <li><a href="#exhibitors" class="nav-item">Exhibitors</a></li>
         </ul>
         <button id="lang-btn" class="nav-lang">EN</button>
       </div>
@@ -36,87 +36,83 @@
     <!-- 主視覺區域 -->
     <section class="hero-section">
       <div class="hero-container">
-        <div class="hero-left">
-          <div class="hero-poster-section">
-          <img 
-            src="25TPABF_poster_RGB.png" 
-            alt="台北藝術書展海報" 
-            class="hero-poster"
-            data-zh="台北藝術書展海報" 
-            data-en="Taipei Art Book Fair Poster"
-          />
+        <!-- 影片區域 - 單獨佔滿整行 -->
+        <div class="hero-poster-section">
+         <iframe 
+           src="https://player.vimeo.com/video/1130257764?background=1&autoplay=1&loop=1&muted=1" 
+           width="100%" 
+           height="100%" 
+           frameborder="0" 
+           allow="autoplay; fullscreen; picture-in-picture" 
+           allowfullscreen>
+          </iframe>
         </div>
-        
-          
-        </div>
-        <div class="hero-description">
-          <p data-zh="今天早上你叫我「軟軟」，於是我寫了一首小詩。" data-en="This morning you whispered "wobbly bobbly" in my ear and a little poem was born.">
-            今天早上你叫我「軟軟」，於是我寫了一首小詩。
-          </p>
-          
-          <p data-zh="軟軟是身體的投誠，<br>是陶土記得手指的樣子，<br>原子鬆開手，<br>一扇風雨中敞開的小門，<br>pow pow 不止。" data-en="Softness is the body's surrender,<br>the way clay remembers every touch,<br>atoms loosening their grip,<br>a small door left open in the storm,<br>pow pow non stop.">
-            軟軟是身體的投誠，<br>是陶土記得手指的樣子，<br>原子鬆開手，<br>一扇風雨中敞開的小門，<br>pow pow 不止。
-          </p>
-          
-          <p data-zh="或是" data-en="or">
-            或是
-          </p>
-          
-          <p data-zh="軟軟是一片戰場上的香蕉皮，<br>小指頭抹過你的硬漢臉，<br>彩虹滲漏，<br>pow pow，不止。" data-en="a banana peel on the battlefield,<br>pinky wiggle through your harden face,<br>the rainbow leaks,<br>pow pow, can't stop.">
-            軟軟是一片戰場上的香蕉皮，<br>小指頭抹過你的硬漢臉，<br>彩虹滲漏，<br>pow pow，不止。
-          </p>
-        </div>
-        <!-- 交通資訊獨立區域 -->
-        <div class="hero-traffic">
+      </div>
+    </section>
+
+    <!-- 交通資訊區域 - 獨立的 section -->
+    <section class="hero-traffic">
           <!-- 展覽資訊區域 -->
           <div class="exhibition-info-section">
             <h2 class="exhibition-title" data-zh="2025 草率季 Taipei Art Book Fair" data-en="2025 Taipei Art Book Fair">2025 草率季 Taipei Art Book Fair</h2>
             <p class="exhibition-subtitle" data-zh="- Soft POW 無限柔軟 -" data-en="- Soft POW 無限柔軟 -">- Soft POW 無限柔軟 -</p>
-            
-            <div class="exhibition-details">
-              <div class="detail-item">
-                <h3 class="detail-item-title" data-zh="時間 Time" data-en="Time">時間 Time</h3>
-                <ul class="time-list">
-                  <li data-zh="11/21(Fri.) 13-21" data-en="11/21(Fri.) 13-21">11/21(Fri.) 13-21</li>
-                  <li data-zh="11/22(Sat.) 11-20" data-en="11/22(Sat.) 11-20">11/22(Sat.) 11-20</li>
-                  <li data-zh="11/23(Sun.) 11-18" data-en="11/23(Sun.) 11-18">11/23(Sun.) 11-18</li>
-                </ul>
-              </div>
-              
-              <div class="detail-item">
-                <h3 class="detail-item-title" data-zh="地址 Address" data-en="Address">地址 Address</h3>
-                <p data-zh="華山1914文化創意產業園區 東二 ABCD棟 Huashan Creative Park" data-en="Huashan1914 Creative Park East 2 ABCD Building">華山1914文化創意產業園區 東二 ABCD棟 <br>Huashan Creative Park</p>
-              </div>
-              
-              <div class="detail-item">
-                <h3 class="detail-item-title" data-zh="重要資訊 Info Log" data-en="Important Info">重要資訊 Info Log</h3>
-              </div>
-              <div id="info-log" style="white-space: pre-wrap">🚧 讀取中…</div>
+            <p class="exhibition-poem" data-zh='<mark>今天早上你叫我「軟軟」，於是我寫了一首小詩。<br><br>軟軟是身體的投誠，<br>是陶土記得手指的樣子，<br>原子鬆開手，<br>一扇風雨中敞開的小門，<br>pow pow 不止。<br><br>或是<br><br>軟軟是一片戰場上的香蕉皮，<br>小指頭抹過你的硬漢臉，<br>彩虹滲漏，<br>pow pow，不止。</mark>' data-en='<mark>This morning you whispered "wobbly bobbly" in my ear and a little poem was born.<br><br>Softness is the body&#39;s surrender,<br>the way clay remembers every touch,<br>atoms loosening their grip,<br>a small door left open in the storm,<br>pow pow non stop.<br><br>or<br><br>a banana peel on the battlefield,<br>pinky wiggle through your harden face,<br>the rainbow leaks,<br>pow pow, can&#39;t stop.</mark>' style="font-size:.9rem; margin-bottom:10px;">
+              <mark>今天早上你叫我「軟軟」，於是我寫了一首小詩。
+              <br><br>  
+              軟軟是身體的投誠，
+              <br>
+              是陶土記得手指的樣子，
+              <br>
+              原子鬆開手，
+              <br>
+              一扇風雨中敞開的小門，
+              <br>
+              pow pow 不止。
+              <br><br> 
+              或是
+              <br><br> 
+              軟軟是一片戰場上的香蕉皮，
+              <br>
+              小指頭抹過你的硬漢臉，
+              <br>
+              彩虹滲漏，
+              <br>
+              pow pow，不止。</mark>
+              </p>         
+          </div>
+
+          <div class="exhibition-details">
+            <div class="detail-item">
+              <h3 class="detail-item-title">時間 Time</h3>
+              <ul class="time-list">
+                <li>11/21(Fri.) 13-21</li>
+                <li>11/22(Sat.) 11-20</li>
+                <li>11/23(Sun.) 11-18</li>
+              </ul>
             </div>
+            
+            <div class="detail-item">
+              <h3 class="detail-item-title">活動地點 Location</h3>
+              <p><a href="https://www.huashan1914.com" target="_blank">華山1914文化創意產業園區 東二 ABCD棟 <br>Huashan Creative Park</a></p>
+              <div class="map-container">
+                <iframe 
+                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3614.8!2d121.529!3d25.043!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3442a9c8b8b8b8b8%3A0x8b8b8b8b8b8b8b8b!2z6Ie65YyX5biC5Lit5aSu5Yy65Y2X5pys5a6J5Yy65Y2X5pys5a6J5Yy65Y2X5pys5a6J!5e0!3m2!1szh-TW!2stw!4v1234567890"
+                  allowfullscreen="" 
+                  loading="lazy" 
+                  referrerpolicy="no-referrer-when-downgrade">
+                </iframe>
+              </div>
+            </div>
+            
+            <div class="detail-item">
+              <h3 class="detail-item-title">重要資訊 Info Log</h3>
+            </div>
+            <div id="info-log" style="background-color:white;border-left:1px solid black;border-right:1px solid black;border-bottom:1px solid black;border-top:none;">🚧 讀取中…</div>
           </div>
           
           <div class="access-info-section" id="access">
             
-            <h2 class="access-section-title" data-zh="交通資訊" data-en="Access">交通資訊</h2>
-          
-          <div class="access-info">
-            <h3 data-zh="活動地點" data-en="Venue">活動地點</h3>
-              <p data-zh="華山文創園區東2館" data-en="Huashan1914 Creative Park | E2 Silian Building ABCD">
-                華山文創園區東2館
-            </p>
-              <p data-zh="100台北市中正區八德路一段1號" data-en="100 Taipei City Zhongzheng District Bade Road Section 1 No. 1">
-              100台北市中正區八德路一段1號
-            </p>
-        </div>
-          
-          <div class="map-container">
-            <iframe 
-              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3614.8!2d121.529!3d25.043!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3442a9c8b8b8b8b8%3A0x8b8b8b8b8b8b8b8b!2z6Ie65YyX5biC5Lit5aSu5Yy65Y2X5pys5a6J5Yy65Y2X5pys5a6J5Yy65Y2X5pys5a6J!5e0!3m2!1szh-TW!2stw!4v1234567890"
-              allowfullscreen="" 
-              loading="lazy" 
-              referrerpolicy="no-referrer-when-downgrade">
-            </iframe>
-          </div>
+            <h2 class="access-section-title">Access</h2>
           
           <div class="access-info">
             <h3 data-zh="捷運" data-en="MRT">捷運</h3>
@@ -153,8 +149,6 @@
               </p>
         </div>
       </div>
-        </div>
-      </div>
     </section>
 
     <!-- 兩欄布局：Tickets | FAQ -->
@@ -162,7 +156,7 @@
       <div class="two-column-container">
         <!-- 左欄：Tickets (佔2/3) -->
         <div class="column tickets-column">
-          <h2 class="column-title" data-zh="票券資訊" data-en="Ticket Information">票券資訊</h2>
+          <h2 class="column-title">Ticket Information</h2>
           
           <div class="tickets-grid">
             <!-- 第一行：早鳥票 + 預售票 -->
@@ -232,7 +226,7 @@
 
         <!-- 右欄：FAQ -->
         <div class="column">
-          <h2 class="column-title" data-zh="常見問題" data-en="FAQ">常見問題</h2>
+          <h2 class="column-title">FAQ</h2>
           
           <div class="faq-item">
             <div class="faq-question" data-zh="Q：請問票券可以轉讓嗎？" data-en="Q: Can tickets be transferred?">
@@ -348,7 +342,7 @@
     <!-- Timeline 區域 -->
     <section class="timeline-section" id="timeline">
       <div class="timeline-container">
-        <h2 class="timeline-title" data-zh="活動時程" data-en="Event Timeline">活動時程</h2>
+        <h2 class="timeline-title">Programs</h2>
         
         <!-- Subscribe to Calendar - 直接放在標題下方 -->
         <div class="timeline-subscribe">
@@ -383,7 +377,7 @@
     <!-- Exhibitor 區域 -->
     <section class="exhibitor-section" id="exhibitors">
       <div class="exhibitor-container">
-        <h2 class="exhibitor-title" data-zh="參展商" data-en="Exhibitors">攤商列表</h2>
+        <h2 class="exhibitor-title">Exhibitors</h2>
         
         <!-- 搜尋和篩選控制面板 -->
         <div class="exhibitor-search-panel">
