@@ -1509,7 +1509,7 @@ p {
   font-size: 0.7rem;
   font-family: "IBM PLEX SANS", sans-serif;
   text-align: left;
-  width: 450px;
+  width: 425px;
 }
 
 /* 購票按鈕樣式 */
@@ -2107,29 +2107,6 @@ p {
   background: rgba(255, 0, 0, 0.1);
   color: red;
   border: 1px solid red;
-}
-
-/* Mailchimp response messages */
-#mce-error-response,
-#mce-success-response {
-  margin-top: 1rem;
-  padding: 0.8rem 1rem;
-  border-radius: 4px;
-  font-family: "Inclusive Sans", sans-serif;
-  font-size: 0.9rem;
-  font-weight: 600;
-}
-
-#mce-error-response {
-  background: rgba(255, 0, 0, 0.1);
-  color: red;
-  border: 1px solid red;
-}
-
-#mce-success-response {
-  background: rgba(0, 255, 0, 0.1);
-  color: green;
-  border: 1px solid green;
 }
 
 

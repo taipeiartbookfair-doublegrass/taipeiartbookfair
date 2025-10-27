@@ -297,7 +297,7 @@
           <div class="newsletter-content">
             <div id="mc_embed_signup">
               <form action="https://taipeiartbookfair.us1.list-manage.com/subscribe/post?u=d8c7b3dc8532a4323466edd2d&amp;id=ca8c067b40&amp;f_id=009678e2f0" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate newsletter-form" target="_self" novalidate="">
-                <div id="mc_embed_signup_scroll">
+                <div id="mc_embed_signup_scroll" style="display:flex;">
                   <div class="indicates-required" style="display: none;"><span class="asterisk">*</span> indicates required</div>
                   <div class="form-group">
                     <label for="mce-EMAIL" style="display: none;">Email Address <span class="asterisk">*</span></label>
@@ -311,7 +311,7 @@
                       placeholder="your@email.com"
                     >
                   </div>
-                  <div id="mce-responses" class="clear foot">
+                  <div id="mce-responses" class="clear foot" style="display: none;">
                     <div class="response" id="mce-error-response" style="display: none;"></div>
                     <div class="response" id="mce-success-response" style="display: none;"></div>
                   </div>
@@ -485,15 +485,9 @@
             const emailValue = email.value;
             const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
-            if (!emailValue) {
+            // Simple validation
+            if (!emailValue || !emailRegex.test(emailValue)) {
               e.preventDefault();
-              showMessage("error", "請輸入您的電子郵件地址");
-              return false;
-            }
-
-            if (!emailRegex.test(emailValue)) {
-              e.preventDefault();
-              showMessage("error", "請輸入有效的電子郵件地址");
               return false;
             }
 
@@ -504,42 +498,17 @@
               submitBtn.value = "SUBSCRIBING...";
               submitBtn.disabled = true;
 
-              // Clear the form and show success message after a brief delay
+              // Reset form after submission
               setTimeout(() => {
                 submitBtn.value = originalText;
                 submitBtn.disabled = false;
                 email.value = "";
-                showMessage(
-                  "success",
-                  "感謝您的訂閱！請檢查您的電子郵件以確認訂閱。"
-                );
               }, 2000);
             }
 
             // Allow the form to submit naturally to Mailchimp
             return true;
           });
-
-          function showMessage(type, message) {
-            const errorDiv = document.getElementById("mce-error-response");
-            const successDiv = document.getElementById("mce-success-response");
-
-            if (!errorDiv || !successDiv) return;
-
-            // Hide both first
-            errorDiv.style.display = "none";
-            successDiv.style.display = "none";
-
-            if (type === "error") {
-              errorDiv.innerHTML = message;
-              errorDiv.style.display = "block";
-              setTimeout(() => (errorDiv.style.display = "none"), 5000);
-            } else {
-              successDiv.innerHTML = message;
-              successDiv.style.display = "block";
-              setTimeout(() => (successDiv.style.display = "none"), 5000);
-            }
-          }
         }
       });
     </script>
