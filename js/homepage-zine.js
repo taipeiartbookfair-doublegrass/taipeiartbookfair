@@ -88,11 +88,27 @@ function populateZineElements(booksArray) {
       }
 
       // 添加 hover 效果，顯示標題
-      // 優先順序：商品名稱(英) > 商品名稱(中) > 品名 > 未知標題
-      const title = item["商品名稱(英)"] || item["商品名稱(中)"] || item["品名"] || item["書名"] || "未知標題";
+      // 優先順序：商品名稱(英) > 商品名稱(中) > 品名 > 書名 > 任一欄位
+      let title = item["商品名稱(英)"] || item["商品名稱(中)"] || item["品名"] || item["書名"] || "未知標題";
+      
+      // 如果仍然沒有標題，嘗試從所有欄位中找第一個有值的
+      if (title === "未知標題") {
+        for (const key in item) {
+          if (item[key] && typeof item[key] === "string" && item[key].trim() !== "") {
+            title = item[key];
+            console.log(`使用後備標題: ${key} = ${title}`);
+            break;
+          }
+        }
+      }
+      
       // 嘗試多個可能的英文書名欄位
       const englishTitle = item["商品名稱(英)"] || item["書名"] || item["品名"] || item["商品名稱(中)"];
       const shopUrl = generateShopUrl(englishTitle);
+      
+      // 將最終標題和商店URL存儲在元素的 data 屬性中
+      zineElement.setAttribute("data-title", title);
+      zineElement.setAttribute("data-shop-url", shopUrl || "");
       
       console.log(`為第 ${index + 1} 個 zine 綁定 hover 事件，標題: ${title}`);
       console.log(`英文書名: ${englishTitle}`);
@@ -103,13 +119,14 @@ function populateZineElements(booksArray) {
       zineElement.addEventListener("click", function (e) {
         e.preventDefault();
         e.stopPropagation();
-        if (shopUrl) {
-          console.log(`點擊 zine，跳轉到: ${shopUrl}`);
+        const elementShopUrl = this.getAttribute("data-shop-url");
+        if (elementShopUrl) {
+          console.log(`點擊 zine，跳轉到: ${elementShopUrl}`);
           // 絕對在新分頁開啟，不允許當前頁面跳轉
-          const newWindow = window.open(shopUrl, '_blank', 'noopener,noreferrer');
+          const newWindow = window.open(elementShopUrl, '_blank', 'noopener,noreferrer');
           if (!newWindow) {
             // 如果彈出視窗被阻擋，顯示提示訊息而不是跳轉當前頁面
-            alert('請允許彈出視窗以開啟商店頁面，或手動前往: ' + shopUrl);
+            alert('請允許彈出視窗以開啟商店頁面，或手動前往: ' + elementShopUrl);
           }
         } else {
           console.log('沒有可用的商店連結，跳轉到主商店頁面');
@@ -124,6 +141,8 @@ function populateZineElements(booksArray) {
       });
       
       zineElement.addEventListener("mouseenter", function () {
+        const displayTitle = this.getAttribute("data-title") || "未知標題";
+        const elementShopUrl = this.getAttribute("data-shop-url");
         console.log(`Hover 事件觸發 - 第 ${index + 1} 個 zine`);
         this.style.color = "white";
         this.style.textShadow = "none";
@@ -132,15 +151,16 @@ function populateZineElements(booksArray) {
         this.style.textOrientation = "mixed";
         this.style.transform = `rotate(${(Math.random() - 0.5) * 10}deg)`;
         this.style.backgroundColor = "transparent";
-        this.style.cursor = shopUrl ? "pointer" : "default";
-        this.innerHTML = `<div style="background-color: BLACK; color: white; width: 100%; padding: 4px 0; text-align: center;margin:1px;">${title}</div>`;
+        this.style.cursor = elementShopUrl ? "pointer" : "default";
+        this.innerHTML = `<div style="background-color: BLACK; color: white; width: 100%; padding: 4px 0; text-align: center;margin:1px;">${displayTitle}</div>`;
       });
 
       zineElement.addEventListener("mouseleave", function () {
+        const elementShopUrl = this.getAttribute("data-shop-url");
         this.style.backgroundColor = "";
         this.style.color = "white";
         this.style.textShadow = "none";
-        this.style.cursor = shopUrl ? "pointer" : "default";
+        this.style.cursor = elementShopUrl ? "pointer" : "default";
         this.textContent = "";
       });
     }
@@ -192,10 +212,10 @@ async function getNMHWInfo(count = 100, retryCount = 0, maxRetries = 3) {
       });
     };
 
-    // 設定超時時間 (25秒)
-    const timeout = 25000;
+    // 設定超時時間 (30秒)
+    const timeout = 30000;
     const timeoutPromise = new Promise((_, reject) =>
-      setTimeout(() => reject(new Error('API 請求超時 (25秒)')), timeout)
+      setTimeout(() => reject(new Error('API 請求超時 (30秒)')), timeout)
     );
 
     const fetchPromise = fetch(url, {
@@ -219,6 +239,9 @@ async function getNMHWInfo(count = 100, retryCount = 0, maxRetries = 3) {
     console.log("API 回應:", response);
     console.log("API 回應類型:", typeof response);
     console.log("API 回應是否為陣列:", Array.isArray(response));
+    
+    // 增加緩衝時間，讓資料完整載入
+    await new Promise(resolve => setTimeout(resolve, 500));
 
     // 檢查是否回傳的是預設訊息（表示 doGet 沒有處理 action 參數）
     if (
@@ -281,7 +304,7 @@ async function getNMHWInfo(count = 100, retryCount = 0, maxRetries = 3) {
       console.log(`有圖片的資料不足 (${booksWithPhotos.length}筆)，將重試...`);
       setTimeout(() => {
         getNMHWInfo(count, retryCount + 1, maxRetries);
-      }, (retryCount + 1) * 2000);
+      }, (retryCount + 1) * 3000);
       return;
     }
     
@@ -313,10 +336,11 @@ async function getNMHWInfo(count = 100, retryCount = 0, maxRetries = 3) {
     
     // 重試機制
     if (retryCount < maxRetries) {
-      console.log(`將在 ${(retryCount + 1) * 2} 秒後重試...`);
+      const retryDelay = (retryCount + 1) * 3000;
+      console.log(`將在 ${retryDelay / 1000} 秒後重試...`);
       setTimeout(() => {
         getNMHWInfo(count, retryCount + 1, maxRetries);
-      }, (retryCount + 1) * 2000); // 指數退避：2秒、4秒、6秒
+      }, retryDelay); // 指數退避：3秒、6秒、9秒
     } else {
       console.log("達到最大重試次數，API 無法使用");
       populateZineElements([]);
