@@ -24,14 +24,21 @@
         <a href="mainpage.html" class="nav-back-btn" data-zh="← 返回" data-en="← Back">← 返回</a>
         
         <ul class="nav-menu">
-          <li><a href="#access" class="nav-item">Access</a></li>
-          <li><a href="#tickets" class="nav-item">Tickets</a></li>
-          <li><a href="#timeline" class="nav-item">Programs</a></li>
-          <li><a href="#exhibitors" class="nav-item">Exhibitors</a></li>
+          <li><a href="#general-info" class="nav-item">GENERAL INFO</a></li>
+          <li><a href="#access" class="nav-item">ASSESS</a></li>
+          <li><a href="#tickets" class="nav-item">TICKETS</a></li>
+          <li><a href="#timeline" class="nav-item">PROGRAMS</a></li>
+          <li><a href="#exhibitors" class="nav-item">EXHIBITORS</a></li>
+          <button id="lang-btn" class="nav-lang">EN</button>
         </ul>
-        <button id="lang-btn" class="nav-lang">EN</button>
       </div>
     </nav>
+    
+    <!-- 回到頂部按鈕 -->
+    <button id="backToTop" class="back-to-top-btn">
+      ↑
+    </button>
+    
 
     <!-- 主視覺區域 -->
     <section class="hero-section">
@@ -51,7 +58,7 @@
     </section>
 
     <!-- 交通資訊區域 - 獨立的 section -->
-    <section class="hero-traffic">
+    <section class="hero-traffic" id="general-info">
           <!-- 展覽資訊區域 -->
           <div class="exhibition-info-section">
             <h2 class="exhibition-title" data-zh="2025 草率季 Taipei Art Book Fair" data-en="2025 Taipei Art Book Fair">2025 草率季 Taipei Art Book Fair</h2>
@@ -353,6 +360,10 @@
             >
           </p>
         </div>
+
+        <div class="timeline-instructions" data-zh="操作說明：1) 點擊下方時間軸上的活動項目查看詳細資訊。2) 活動詳情會顯示在右側預覽區，請向右滑動或點擊活動後會自動滾動至預覽區。3) 使用上方的活動類型按鈕（ALL、TALK、WORKSHOP、PERFORMANCE）可快速篩選特定類型的活動。" data-en="Instructions: 1) Click on any event item in the timeline below to view detailed information. 2) Event details will appear in the preview area on the right. Swipe right or the container will automatically scroll to the preview area after clicking an event. 3) Use the event type filter buttons at the top (ALL, TALK, WORKSHOP, PERFORMANCE) to quickly filter events by type.">
+          操作說明：1) 點擊下方時間軸上的活動項目查看詳細資訊。2) 活動詳情會顯示在右側預覽區，請向右滑動或點擊活動後會自動滾動至預覽區。3) 使用上方的活動類型按鈕（ALL、TALK、WORKSHOP、PERFORMANCE）可快速篩選特定類型的活動。
+        </div>
         
         <!-- Agenda 標題行 -->
         <div class="agenda-header">
@@ -453,25 +464,7 @@
     <!-- <section class="credit-section">
       <div class="credit-container">
         <h2 class="credit-title" data-zh="製作團隊" data-en="Credits">製作團隊</h2>
-        <div class="credit-content">
-          <p data-zh="本網站由台北藝術書展團隊製作，感謝所有參與的藝術家、設計師和志工們的貢獻。" data-en="This website is created by the Taipei Art Book Fair team. Special thanks to all participating artists, designers, and volunteers for their contributions.">
-            Supervisory Board<br>
-            Chairperson: Maarten van Gageldonk<br>
-            Treasurer: Vincent Zhong Xin<br>
-            Secretary: Jhen Chen<br>
-            <br>
-            Team<br>
-            Co-Founder / Director: Yuchen Li - yuchen@asianmovienight.com<br>
-            Co-Founder / Finance: Kleopatra Vorria - kleopatra@asianmovienight.com<br>
-            <br>
-            Program Producer / Public Relations: Minhong Yu - minhong@asianmovienight.com<br>
-            Coördinator: Akvile Slegeryte - aqua@asianmovienight.com<br>
-            Communication: Areum Hwang - areum@asianmovienight.com<br>
-            Website Design: Zhizhong Keene<br>
-            Graphic Design: Areum Hwang, Silvian Blom, Zhizhong Keene<br>
-            Intern: Maya Mariang - maya@asianmovienight.com<br>
-            Contributors: Marieke Peeters, Thijs Bronts, Anne Schoemaker, Cheyenne Pattiwael, Dari de Bruijn, Koen Kievits 
-          </div>
+       
         </div>
     </section> -->
 
@@ -1291,5 +1284,39 @@
     <script src="js/timeline-visit.js"></script>
     <script src="js/exhibitors-list.js"></script>
     <script src="js/exhibitor-display.js"></script>
+    
+    
+    <script>
+      // 回到頂部按鈕功能
+      document.addEventListener('DOMContentLoaded', function() {
+        const backToTopBtn = document.getElementById('backToTop');
+        
+        // 顯示/隱藏按鈕（當頁面向下滾動超過 300px 時顯示）
+        function toggleBackToTop() {
+          if (window.pageYOffset > 300) {
+            backToTopBtn.style.display = 'flex';
+          } else {
+            backToTopBtn.style.display = 'none';
+          }
+        }
+        
+        // 平滑滾動到頂部
+        function scrollToTop() {
+          window.scrollTo({
+            top: 0,
+            behavior: 'smooth'
+          });
+        }
+        
+        // 監聽滾動事件
+        window.addEventListener('scroll', toggleBackToTop);
+        
+        // 點擊按鈕滾動到頂部
+        backToTopBtn.addEventListener('click', scrollToTop);
+        
+        // 初始化隱藏按鈕
+        backToTopBtn.style.display = 'none';
+      });
+    </script>
   </body>
 </html>

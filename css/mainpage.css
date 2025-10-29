@@ -2493,10 +2493,14 @@ p {
     height: 120px;
     font-size: 0.7rem;
   }
+  .about-section{
+    padding-bottom: 0px;
+  }
 }
 
 /* 手機響應式設計 - 垂直堆疊排列 */
 @media (max-width: 480px) {
+
   /* 手機版基本設定 */
   .main-title-section {
     padding-bottom: 5px;
@@ -2534,7 +2538,7 @@ p {
     height: 1.5rem;
     padding: 0 8px;
     gap: 0;
-    position:absolute;
+    position: fixed;
   }
 
   .language-btn,
@@ -2669,11 +2673,13 @@ p {
 
   .flip-button-container {
     align-self: center;
+    display: none;
   }
 
   /* 手機版按鈕說明文字 */
   .button-explanation {
     padding: 0.3rem 0.5rem;
+    display: none;
   }
 
   /* 手機版商店說明文字 */
@@ -3250,6 +3256,7 @@ p {
   .newsletter-explanation {
     padding: 0.3rem 0.5rem;
     margin-bottom: 0.5rem;
+    display:none;
   }
 
   .newsletter-content {
