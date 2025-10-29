@@ -260,7 +260,7 @@ function renderTimelineWithData(timelineData) {
         <p data-zh="點擊左側活動查看詳情" data-en="Click on the left events to view details">點擊左側活動查看詳情</p>
       </div>
       <div class="timeline-preview-content">
-        ${fields.IMAGE ? `<img src="${fields.IMAGE}" class="timeline-preview-image" alt="活動圖片" onerror="this.style.display='none';">` : ''}
+        ${fields.IMAGE ? `<img src="image/programIMG/${fields.IMAGE}" class="timeline-preview-image" alt="活動圖片" onerror="this.style.display='none';">` : ''}
       </div>
       <div class="timeline-preview-type-tag workshop">
         ${eventTypeTag}
@@ -734,7 +734,7 @@ function renderTimelineWithData(timelineData) {
         
         previewContainer.innerHTML = `
           <div class="timeline-preview-content">
-            ${eventFields.IMAGE ? `<img src="${eventFields.IMAGE}" class="timeline-preview-image" alt="活動圖片" onerror="this.style.display='none'; console.log('時間軸圖片載入失敗:', '${eventFields.IMAGE}');" onload="console.log('時間軸圖片載入成功:', '${eventFields.IMAGE}');">` : ''}
+            ${eventFields.IMAGE ? `<img src="image/programIMG/${eventFields.IMAGE}" class="timeline-preview-image" alt="活動圖片" onerror="this.style.display='none'; console.log('時間軸圖片載入失敗:', 'image/programIMG/${eventFields.IMAGE}');" onload="console.log('時間軸圖片載入成功:', 'image/programIMG/${eventFields.IMAGE}');">` : ''}
           </div>
           <div class="timeline-preview-type-tag ${currentEventType.toLowerCase()}">
             ${eventTypeTag}
@@ -750,6 +750,22 @@ function renderTimelineWithData(timelineData) {
           </div>
           ${eventFields.SIGNUP ? `<div class="timeline-preview-signup"><a href="${eventFields.SIGNUP}" target="_blank" class="timeline-preview-signup-btn">報名參加</a></div>` : ''}
         `;
+        
+        // 手機版：自動滾動到最右邊以顯示預覽區
+        const scrollContainer = document.getElementById("timelineScroll");
+        if (scrollContainer) {
+          // 檢查是否為手機版（寬度小於768px）
+          const isMobile = window.innerWidth <= 768;
+          if (isMobile) {
+            // 滾動到最右邊（預覽區）
+            setTimeout(() => {
+              scrollContainer.scrollTo({
+                left: scrollContainer.scrollWidth - scrollContainer.clientWidth,
+                behavior: 'smooth'
+              });
+            }, 100); // 稍微延遲確保內容已更新
+          }
+        }
       };
 
       eventBar.addEventListener("click", showEventPreview);

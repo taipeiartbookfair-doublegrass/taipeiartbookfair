@@ -384,7 +384,7 @@ function renderTimelineWithData(timelineData) {
       
       previewContainer.innerHTML = `
         <div style="text-align: center;">
-          ${eventFields.IMAGE ? `<img src="${eventFields.IMAGE}" style="width: 100%; max-width: 200px; height: auto; border-radius: 8px; margin-bottom: 15px;" alt="活動圖片" onerror="this.style.display='none'; console.log('時間軸圖片載入失敗:', '${eventFields.IMAGE}');" onload="console.log('時間軸圖片載入成功:', '${eventFields.IMAGE}');">` : ''}
+          ${eventFields.IMAGE ? `<img src="image/programIMG/${eventFields.IMAGE}" style="width: 100%; max-width: 200px; height: auto; border-radius: 8px; margin-bottom: 15px;" alt="活動圖片" onerror="this.style.display='none'; console.log('時間軸圖片載入失敗:', 'image/programIMG/${eventFields.IMAGE}');" onload="console.log('時間軸圖片載入成功:', 'image/programIMG/${eventFields.IMAGE}');">` : ''}
         </div>
         <div style="font-size: 1.5rem; font-weight: bold; margin-bottom: 10px; text-transform: uppercase;">
           ${eventDate.toLocaleDateString("zh-TW", { 
@@ -468,17 +468,18 @@ function renderEvents(items) {
     if (eventFields.IMAGE) {
       const eventImage = document.createElement("img");
       eventImage.className = "event-image";
-      eventImage.src = eventFields.IMAGE;
+      // 從本地資料夾載入圖片
+      eventImage.src = `image/programIMG/${eventFields.IMAGE}`;
       
       // 添加圖片載入錯誤處理
       eventImage.onerror = function() {
-        console.log("圖片載入失敗:", eventFields.IMAGE);
+        console.log("圖片載入失敗:", `image/programIMG/${eventFields.IMAGE}`);
         this.style.display = "none";
       };
       
       // 添加圖片載入成功處理
       eventImage.onload = function() {
-        console.log("圖片載入成功:", eventFields.IMAGE);
+        console.log("圖片載入成功:", `image/programIMG/${eventFields.IMAGE}`);
       };
       
       eventCard.appendChild(eventImage);

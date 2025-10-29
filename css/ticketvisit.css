@@ -1306,6 +1306,10 @@ background-color:cyan;
   letter-spacing: 0.05em;
 }
 
+.timeline-instructions {
+display:none;
+}
+
 .exhibitor-social-link:hover {
   background: var(--bg-dark);
   color: var(--text-light);
@@ -1463,6 +1467,9 @@ background-color:cyan;
 
 /* 響應式設計 */
 @media (max-width: 768px) {
+  .timeline-instructions {
+    display: block;
+  }
   .two-column-container {
     grid-template-columns: 1fr;
     gap: var(--spacing-xs);
@@ -1564,10 +1571,17 @@ background-color:cyan;
     min-width: 60px;
   }
 
+  .hero-section {
+    padding-left: 0;
+    padding-right: 0;
+  }
+
   .hero-container {
     flex-direction: column;
     text-align: center;
     gap: var(--spacing-md);
+    padding-left: 0;
+    padding-right: 0;
   }
 
   .hero-left {
@@ -1583,11 +1597,30 @@ background-color:cyan;
     max-width: 250px;
   }
   
-  .hero-poster-section iframe {
-    width: 100% !important;
+  .hero-poster-section {
+    width: 100%;
     max-width: 100%;
-    height: auto !important;
-    aspect-ratio: 16 / 9;
+    margin-left: 0;
+    margin-right: 0;
+    padding: 0;
+    min-height: calc(100vw * 16 / 9); /* 容納旋轉後的 iframe 高度 */
+    overflow: visible;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .hero-poster-section iframe {
+    transform: rotate(90deg);
+    /* 旋轉後，原本的 height 變成可見的寬度，原本的 width 變成可見的高度 */
+    /* 要讓旋轉後的寬度填滿容器，需要讓原本的 height = 100vw */
+    height: 100vw !important;
+    /* 旋轉後的高度（原本的 width），保持 16:9 比例，所以 width = height * (16/9) */
+    width: calc(100vw * 16 / 9) !important;
+    max-width: none !important;
+    aspect-ratio: none !important;
+    border-radius: 0;
+    transform-origin: center center;
   }
 
   /* 手機版篩選器 */
@@ -2013,4 +2046,50 @@ background-color:cyan;
   color: #fff;
   border: none;
   cursor: pointer;
+}
+
+/* 回到頂部按鈕 */
+.back-to-top-btn {
+  position: fixed;
+  bottom: 30px;
+  right: 30px;
+  width: 35px;
+  height: 55px;
+  background: orchid;
+  border:none;
+  color: white;
+  border-radius: 50%;
+  font-size: 2rem;
+  font-weight: bold;
+  cursor: pointer;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 12px rgba(255, 107, 53, 0.3);
+  font-family: "Inclusive Sans", sans-serif;
+  padding: 0;
+  line-height: 1;
+}
+
+/* 手機版回到頂部按鈕樣式 */
+@media (max-width: 768px) {
+  .back-to-top-btn {
+    bottom: 20px;
+    right: 20px;
+    width: 30px;
+    height: 45px;
+    font-size: 1.8rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .back-to-top-btn {
+    bottom: 15px;
+    right: 15px;
+    width: 35px;
+    height: 50px;
+    font-size: 1.5rem;
+  }
 }
