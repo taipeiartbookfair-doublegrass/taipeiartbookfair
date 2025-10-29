@@ -656,23 +656,6 @@
           updateTicketStatusLanguage(currentLang);
         }
 
-        // 票券按鈕功能
-        function initTicketButtons() {
-          const ticketButtons = document.querySelectorAll('.ticket-btn');
-          
-          ticketButtons.forEach(button => {
-            button.addEventListener('click', function() {
-              // 這裡可以添加購票邏輯
-              if (this.id === 'onsite-btn') {
-                alert('現場票請於活動當天至現場購買');
-              } else {
-                // 其他票種的購票連結
-                window.open("https://tour.ibon.com.tw/event/e2508000028lhmm", "_blank");
-              }
-            });
-          });
-        }
-
         // 平滑滾動功能
         function initSmoothScroll() {
           const navLinks = document.querySelectorAll('.nav-item[href^="#"]');
@@ -1145,7 +1128,6 @@
         // 初始化所有功能
         initLanguageSwitch();
         initFAQ();
-        initTicketButtons();
         initSmoothScroll();
         initExhibitors();
         updateTicketStatus(); // 更新票券狀態
