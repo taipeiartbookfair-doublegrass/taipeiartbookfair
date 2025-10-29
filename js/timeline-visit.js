@@ -506,6 +506,9 @@ function renderTimelineWithData(timelineData) {
     const endHourNum = parseInt(endParts.find(p => p.type === 'hour').value);
     const endMinuteNum = parseInt(endParts.find(p => p.type === 'minute').value);
 
+    // 創建台灣時區的日期物件 - 使用已經獲得的台灣時區的年、月、日和時間
+    const taiwanEventDate = new Date(taiwanYear, taiwanMonth, taiwanDay, startHourNum, startMinuteNum);
+
     // 計算活動長條位置 - 精確到分鐘
     const timelineStartHour = 9; // 時間軸開始時間
     let startTimeY = timelineStartY + ((startHourNum - timelineStartHour) * 60) + (startMinuteNum * 1); // 每分鐘1px，每小時60px
