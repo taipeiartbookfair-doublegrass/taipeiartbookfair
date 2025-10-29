@@ -293,11 +293,24 @@ function renderTimelineWithData(timelineData) {
   timelineData.forEach((event) => {
     const eventDate = new Date(event.start.dateTime || event.start.date);
     
+    // 使用台灣時區獲取年、月、日進行日期比較
+    const taiwanDateFormatter = new Intl.DateTimeFormat("en-US", {
+      timeZone: "Asia/Taipei",
+      year: "numeric",
+      month: "numeric",
+      day: "numeric"
+    });
+    
+    const dateParts = taiwanDateFormatter.formatToParts(eventDate);
+    const taiwanYear = parseInt(dateParts.find(p => p.type === 'year').value);
+    const taiwanMonth = parseInt(dateParts.find(p => p.type === 'month').value) - 1; // JavaScript月份是0-based
+    const taiwanDay = parseInt(dateParts.find(p => p.type === 'day').value);
+    
     // 只顯示這三天的活動
     const dayIndex = eventDays.findIndex(({ year, month, day }) => 
-      eventDate.getFullYear() === year && 
-      eventDate.getMonth() === month && 
-      eventDate.getDate() === day
+      taiwanYear === year && 
+      taiwanMonth === month && 
+      taiwanDay === day
     );
 
     if (dayIndex === -1) return;
@@ -333,17 +346,21 @@ function renderTimelineWithData(timelineData) {
     const eventStartTime = new Date(event.start.dateTime || event.start.date);
     const eventEndTime = new Date(event.end.dateTime || event.end.date);
     
-    // 使用 toLocaleString 轉換為台灣時間，然後重新解析
-    const taiwanStartStr = eventStartTime.toLocaleString("sv-SE", {timeZone: "Asia/Taipei"});
-    const taiwanEndStr = eventEndTime.toLocaleString("sv-SE", {timeZone: "Asia/Taipei"});
+    // 使用 Intl.DateTimeFormat 獲取台灣時區的小時和分鐘，避免時區轉換問題
+    const taiwanFormatter = new Intl.DateTimeFormat("zh-TW", {
+      timeZone: "Asia/Taipei",
+      hour: "2-digit",
+      minute: "2-digit",
+      hour12: false
+    });
     
-    const taiwanStartTime = new Date(taiwanStartStr);
-    const taiwanEndTime = new Date(taiwanEndStr);
+    const startParts = taiwanFormatter.formatToParts(eventStartTime);
+    const endParts = taiwanFormatter.formatToParts(eventEndTime);
     
-    const startHour = taiwanStartTime.getHours();
-    const startMinute = taiwanStartTime.getMinutes();
-    const endHour = taiwanEndTime.getHours();
-    const endMinute = taiwanEndTime.getMinutes();
+    const startHour = parseInt(startParts.find(p => p.type === 'hour').value);
+    const startMinute = parseInt(startParts.find(p => p.type === 'minute').value);
+    const endHour = parseInt(endParts.find(p => p.type === 'hour').value);
+    const endMinute = parseInt(endParts.find(p => p.type === 'minute').value);
 
     // 固定計算活動長條位置 - 基於9:00-22:00
     const startTimeY = timelineStartY + ((startHour - 9) * 60) + (startMinute * 1); // 每分鐘1px
@@ -373,12 +390,11 @@ function renderTimelineWithData(timelineData) {
       console.log("解析後的欄位:", eventFields);
       
       const eventTime = new Date(event.start.dateTime || event.start.date);
-      // 轉換為台灣時間
-      const taiwanEventStr = eventTime.toLocaleString("sv-SE", {timeZone: "Asia/Taipei"});
-      const taiwanEventTime = new Date(taiwanEventStr);
-      const timeStr = taiwanEventTime.toLocaleTimeString("zh-TW", { 
+      // 直接格式化為台灣時間，避免時區問題
+      const timeStr = eventTime.toLocaleTimeString("zh-TW", { 
         hour: "2-digit", 
         minute: "2-digit",
+        hour12: false,
         timeZone: "Asia/Taipei"
       });
       
@@ -433,16 +449,35 @@ function renderEvents(items) {
     return;
   }
 
-  // 過濾出今天之後的活動
-  const today = new Date();
-  today.setHours(0, 0, 0, 0); // 設為今天的開始
+  // 過濾出今天之後的活動（使用台灣時區）
+  const now = new Date();
+  // 獲取台灣時區今天的開始時間（00:00:00）
+  const taiwanTodayFormatter = new Intl.DateTimeFormat("en-US", {
+    timeZone: "Asia/Taipei",
+    year: "numeric",
+    month: "numeric",
+    day: "numeric"
+  });
+  const todayParts = taiwanTodayFormatter.formatToParts(now);
+  const taiwanTodayYear = parseInt(todayParts.find(p => p.type === 'year').value);
+  const taiwanTodayMonth = parseInt(todayParts.find(p => p.type === 'month').value) - 1;
+  const taiwanTodayDay = parseInt(todayParts.find(p => p.type === 'day').value);
+  // 創建台灣時區今天開始的 Date 物件（UTC時間）
+  const taiwanToday = new Date(Date.UTC(taiwanTodayYear, taiwanTodayMonth, taiwanTodayDay, 0, 0, 0));
   
   const futureEvents = items.filter((item) => {
     const eventDate = new Date(item.start.dateTime || item.start.date);
     const eventFields = parseDescription(item.description);
     const hasType = eventFields.TYPE && eventFields.TYPE.trim() !== "";
     
-    return eventDate >= today && hasType;
+    // 獲取活動在台灣時區的日期
+    const eventDateParts = taiwanTodayFormatter.formatToParts(eventDate);
+    const eventYear = parseInt(eventDateParts.find(p => p.type === 'year').value);
+    const eventMonth = parseInt(eventDateParts.find(p => p.type === 'month').value) - 1;
+    const eventDay = parseInt(eventDateParts.find(p => p.type === 'day').value);
+    const eventTaiwanDate = new Date(Date.UTC(eventYear, eventMonth, eventDay, 0, 0, 0));
+    
+    return eventTaiwanDate >= taiwanToday && hasType;
   });
 
   // 按時間排序
@@ -493,29 +528,23 @@ function renderEvents(items) {
     const startTime = new Date(item.start.dateTime || item.start.date);
     const endTime = new Date(item.end.dateTime || item.end.date);
     
-    // 轉換為台灣時間
-    const taiwanStartStr = startTime.toLocaleString("sv-SE", {timeZone: "Asia/Taipei"});
-    const taiwanEndStr = endTime.toLocaleString("sv-SE", {timeZone: "Asia/Taipei"});
-    const taiwanStartTime = new Date(taiwanStartStr);
-    const taiwanEndTime = new Date(taiwanEndStr);
-    
-    // 格式化日期
-    const dateStr = taiwanStartTime.toLocaleString("zh-TW", {
+    // 直接格式化為台灣時間字符串，不再創建新的 Date 對象（避免時區問題）
+    const dateStr = startTime.toLocaleDateString("zh-TW", {
       timeZone: "Asia/Taipei",
       year: "numeric",
       month: "2-digit",
       day: "2-digit"
     });
     
-    // 格式化時間 - 24小時制，不顯示秒數
-    const startTimeStr = taiwanStartTime.toLocaleString("zh-TW", {
+    // 格式化時間 - 24小時制，不顯示秒數，強制使用台灣時區
+    const startTimeStr = startTime.toLocaleTimeString("zh-TW", {
       timeZone: "Asia/Taipei",
       hour: "2-digit",
       minute: "2-digit",
       hour12: false
     });
     
-    const endTimeStr = taiwanEndTime.toLocaleString("zh-TW", {
+    const endTimeStr = endTime.toLocaleTimeString("zh-TW", {
       timeZone: "Asia/Taipei",
       hour: "2-digit",
       minute: "2-digit",

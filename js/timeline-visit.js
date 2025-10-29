@@ -429,18 +429,27 @@ function renderTimelineWithData(timelineData) {
   timelineData.forEach((event) => {
     const eventDate = new Date(event.start.dateTime || event.start.date);
     
-    // 轉換為台灣時間進行日期比較
-    const taiwanEventDate = eventDate;
+    // 使用台灣時區獲取年、月、日進行日期比較
+    const taiwanDateFormatter = new Intl.DateTimeFormat("en-US", {
+      timeZone: "Asia/Taipei",
+      year: "numeric",
+      month: "numeric",
+      day: "numeric"
+    });
+    
+    const dateParts = taiwanDateFormatter.formatToParts(eventDate);
+    const taiwanYear = parseInt(dateParts.find(p => p.type === 'year').value);
+    const taiwanMonth = parseInt(dateParts.find(p => p.type === 'month').value) - 1; // JavaScript月份是0-based
+    const taiwanDay = parseInt(dateParts.find(p => p.type === 'day').value);
     
     console.log("活動原始時間:", eventDate);
-    console.log("活動台灣時間:", taiwanEventDate);
-    console.log("活動日期:", taiwanEventDate.getFullYear(), taiwanEventDate.getMonth(), taiwanEventDate.getDate());
+    console.log("活動台灣日期:", taiwanYear, taiwanMonth, taiwanDay);
     
     // 只顯示這三天的活動
     const dayIndex = eventDays.findIndex(({ year, month, day }) => 
-      taiwanEventDate.getFullYear() === year && 
-      taiwanEventDate.getMonth() === month && 
-      taiwanEventDate.getDate() === day
+      taiwanYear === year && 
+      taiwanMonth === month && 
+      taiwanDay === day
     );
 
     console.log("日期匹配結果:", dayIndex, "for event:", event.summary);
@@ -477,20 +486,25 @@ function renderTimelineWithData(timelineData) {
     // 添加到篩選數組
     allEventElements.push(eventBar);
 
-    // 計算活動的開始和結束時間 - 確保使用GMT+8台灣時間
+    // 計算活動的開始和結束時間 - 確保使用台灣時區
     const eventStartTime = new Date(event.start.dateTime || event.start.date);
     const eventEndTime = new Date(event.end.dateTime || event.end.date);
     
-    // 直接使用台灣時區的時間
-    const startHour = eventStartTime.toLocaleString("en-US", {timeZone: "Asia/Taipei", hour: "2-digit", hour12: false});
-    const startMinute = eventStartTime.toLocaleString("en-US", {timeZone: "Asia/Taipei", minute: "2-digit"});
-    const endHour = eventEndTime.toLocaleString("en-US", {timeZone: "Asia/Taipei", hour: "2-digit", hour12: false});
-    const endMinute = eventEndTime.toLocaleString("en-US", {timeZone: "Asia/Taipei", minute: "2-digit"});
+    // 使用 Intl.DateTimeFormat 獲取台灣時區的小時和分鐘，避免時區轉換問題
+    const taiwanFormatter = new Intl.DateTimeFormat("en-US", {
+      timeZone: "Asia/Taipei",
+      hour: "2-digit",
+      minute: "2-digit",
+      hour12: false
+    });
     
-    const startHourNum = parseInt(startHour);
-    const startMinuteNum = parseInt(startMinute);
-    const endHourNum = parseInt(endHour);
-    const endMinuteNum = parseInt(endMinute);
+    const startParts = taiwanFormatter.formatToParts(eventStartTime);
+    const endParts = taiwanFormatter.formatToParts(eventEndTime);
+    
+    const startHourNum = parseInt(startParts.find(p => p.type === 'hour').value);
+    const startMinuteNum = parseInt(startParts.find(p => p.type === 'minute').value);
+    const endHourNum = parseInt(endParts.find(p => p.type === 'hour').value);
+    const endMinuteNum = parseInt(endParts.find(p => p.type === 'minute').value);
 
     // 計算活動長條位置 - 精確到分鐘
     const timelineStartHour = 9; // 時間軸開始時間
