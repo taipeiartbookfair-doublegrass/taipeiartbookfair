@@ -2199,18 +2199,18 @@ p {
 
 .rotata div:nth-child(2) {
   position: absolute;
- top: 950px;
+ top: 960px;
   left: 16px;
   width: 25rem;
-  height: 29rem;
+  height: 28rem;
 }
 
 .rotata div:nth-child(3) {
   position: absolute;
-  top: 950px;
+  top: 960px;
   left: 26.5rem;
   width: 18rem;
-  height: 14rem;
+  height: 13rem;
 }
 
 .image-strip {

@@ -13,10 +13,6 @@
   font-size: 1rem;
 }
 
-/* 舊的攤商名稱和攤位樣式已移除，現在使用新的卡片佈局 */
-
-/* 響應式設計已移至 mainpage.css 中的新卡片佈局 */
-
 .calender-content {
   max-width: 1200px;
   margin: 0 auto;
@@ -676,9 +672,9 @@ margin-right: 20px;
 /* 模式容器 */
 .calender-mode-container {
   width: 100%;
-  max-width: 100%; /* 確保不超出父容器 */
-  height: 70vh; /* 設定固定高度，確保兩個模式一致 */
-  overflow: hidden; /* 防止內容溢出 */
+  max-width: 100%; 
+  height: 700px; 
+  overflow: hidden; 
 }
 
 .calender-mode-container.hidden {
