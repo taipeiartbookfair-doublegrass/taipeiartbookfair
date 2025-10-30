@@ -2090,6 +2090,9 @@ display:none;
   .timeline-right-container{
     flex: 0 0 21%;
   }
+  .timeline-date-column.dynamic{
+    bottom: 90%;
+  }
 }
 
 @media (max-width: 480px) {
