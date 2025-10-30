@@ -2088,6 +2088,9 @@ display:none;
   .timeline-right-container.dynamic{
     overflow-y:hidden;
   }
+  .timeline-right-container{
+    flex: 0 0 21%;
+  }
 }
 
 @media (max-width: 480px) {
