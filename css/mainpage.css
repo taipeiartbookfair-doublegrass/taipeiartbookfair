@@ -2889,15 +2889,6 @@ p {
    flex: 1;
  }
 
-.event-card .event-image {
-  width: 150px !important;
-  height: 80px !important;
-  object-fit: cover !important;
-  border-radius: 0;
-  flex-shrink: 0;
-  background-color: #000;
-}
-
 .event-content {
   flex: 1;
   display: flex;
@@ -2989,7 +2980,7 @@ p {
 
   .event-card .event-image {
     width: 100% !important;
-    height: 120px !important;
+    height: auto!important;
     object-fit: cover !important;
     border-radius: 0;
     align-self: center;

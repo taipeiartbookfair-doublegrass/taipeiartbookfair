@@ -332,17 +332,6 @@ margin-right: 20px;
   background-color: #000;
 }
 
-/* 手機版活動圖片樣式 */
-@media (max-width: 768px) {
-  .event-image {
-    width: 100% !important;
-    height: 120px !important;
-    object-fit: cover !important;
-    border-radius: 0;
-    align-self: center;
-  }
-}
-
 /* Timeline 相關樣式 - 從 JavaScript 移過來 */
 .timeline-main-container {
   display: block;
