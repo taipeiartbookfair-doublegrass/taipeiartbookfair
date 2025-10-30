@@ -2082,6 +2082,12 @@ display:none;
     height: 45px;
     font-size: 1.8rem;
   }
+  .timeline-preview-image {
+    width:250px;
+  }
+  .timeline-right-container.dynamic{
+    overflow-y:hidden;
+  }
 }
 
 @media (max-width: 480px) {
