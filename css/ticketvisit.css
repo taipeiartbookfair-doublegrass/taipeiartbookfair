@@ -1603,7 +1603,6 @@ display:none;
     margin-left: 0;
     margin-right: 0;
     padding: 0;
-    min-height: calc(100vw * 16 / 9); /* 容納旋轉後的 iframe 高度 */
     overflow: visible;
     display: flex;
     justify-content: center;
@@ -1611,7 +1610,7 @@ display:none;
   }
   
   .hero-poster-section iframe {
-    transform: rotate(90deg);
+    transform: rotate(0deg);
     /* 旋轉後，原本的 height 變成可見的寬度，原本的 width 變成可見的高度 */
     /* 要讓旋轉後的寬度填滿容器，需要讓原本的 height = 100vw */
     height: 100vw !important;
@@ -2087,6 +2086,12 @@ display:none;
   }
   .timeline-right-container.dynamic{
     overflow-y:hidden;
+  }
+  .timeline-right-container{
+    flex: 0 0 21%;
+  }
+  .timeline-date-column.dynamic{
+    bottom: 90%;
   }
 }
 
