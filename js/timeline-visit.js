@@ -268,19 +268,14 @@ function renderTimelineWithData(timelineData) {
       <div class="timeline-preview-date-time">
         ${dateTimeStr}
       </div>
-      <div class="timeline-preview-event-title">
+      <div style="overflow:scroll">
+        <div class="timeline-preview-event-title">
         ${randomWorkshop.summary || "未命名活動"}
-      </div>
-      <div class="timeline-preview-description">
-        ${fields.DESCRIPTION || randomWorkshop.description || "暫無詳細描述"}
-      </div>
-      ${fields.SIGNUP ? `<div class="timeline-preview-signup"><a href="${fields.SIGNUP}" target="_blank" class="timeline-preview-signup-btn">SIGN UP</a></div>` : ''}
-    `;
-  } else {
-    // 如果沒有 workshop，只顯示提示
-    previewContainer.innerHTML = `
-      <div class="timeline-preview-default">
-        <p data-zh="點擊左側活動查看詳情" data-en="Click on the left events to view details">點擊左側活動查看詳情</p>
+        </div>
+        <div class="timeline-preview-description">
+          ${fields.DESCRIPTION || randomWorkshop.description || "暫無詳細描述"}
+        </div>
+        ${fields.SIGNUP ? `<div class="timeline-preview-signup"><a href="${fields.SIGNUP}" target="_blank" class="timeline-preview-signup-btn">SIGN UP</a></div>` : ''}
       </div>
     `;
   }
