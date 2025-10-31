@@ -1,93 +1,5 @@
-.exhibitors-grid {
-  width: 100%;
-  height: 450px; /* 精確計算：15個攤商 × 30px = 450px，與海報區域等高 */
-  overflow: hidden;
-  position: relative;
-}
-
-/* 攤商流動容器 */
-.exhibitors-flow-container {
-  width: 100%;
-  animation: exhibitorsFlow 45s linear infinite; /* 調整動畫時間，讓滑動更流暢 */
-}
-
-/* 攤商流動動畫 */
-@keyframes exhibitorsFlow {
-  0% {
-    transform: translateY(0);
-  }
-  100% {
-    transform: translateY(-100%);
-  }
-}
-
-/* 攤商列表容器 */
-.exhibitors-flow-container {
-  width: 100%;
-}
-
-/* 攤商條列項目 */
-.exhibitor-item {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  height: 30px;
-  width: 100%;
-  padding: 0 1rem;
-  margin: 0;
-  border-bottom: 1px solid black;
-  font-size: 0.9rem;
-  font-weight: 400;
-  transition: background-color 0.2s ease;
-  position: relative;
-}
-
-/* 攤位類型指示點 */
-.exhibitor-item::before {
-  content: "";
-  position: absolute;
-  left: 0.5rem;
-  top: 50%;
-  transform: translateY(-50%);
-  width: 8px;
-  height: 8px;
-  border-radius: 50%;
-  background-color: #666; /* 預設顏色 */
-}
-
-/* 攤商名稱左邊間距 */
-.exhibitor-name {
-  margin-left: 3px;
-}
-
-/* 不同攤位類型的顏色 */
-.exhibitor-item.book-booth::before {
-  background-color: #392100; /* 藍色 - 書攤 */
-}
-
-.exhibitor-item.creative-booth::before {
-  background-color: #083154; /* 紅色 - 創作商品攤 */
-}
-
-.exhibitor-item.installation-booth::before {
-  background-color: #000000; /* 橙色 - 裝置攤 */
-}
-
-.exhibitor-item.food-booth::before {
-  background-color: #063500; /* 綠色 - 食物酒水攤 */
-}
-
-.exhibitor-item.international-booth::before {
-  background-color: #50006f; /* 紫色 - 國際攤位 */
-}
-
-.exhibitor-item:hover {
-  background-color: #f8f9fa;
-}
-
-.exhibitor-item:last-child {
-  border-bottom: none;
-}
+@import url('https://fonts.googleapis.com/css2?family=Alice&family=Instrument+Serif:ital@0;1&display=swap');
+/* 舊的攤商條列項目樣式已移除，現在使用新的卡片佈局 */
 
 /* 讀取中訊息 */
 .loading-message {
@@ -99,41 +11,6 @@
 .loading-message p {
   margin: 0.5rem 0;
   font-size: 1rem;
-}
-
-/* 攤商名稱（左側） */
-.exhibitor-name {
-  flex: 1;
-  text-align: left;
-  color: #333;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
-
-/* 攤位編號（右側） */
-.exhibitor-booth {
-  text-align: right;
-  color: black;
-  margin-left: 1rem;
-  min-width: 60px;
-}
-
-/* 響應式設計 */
-@media (max-width: 768px) {
-  .exhibitors-grid {
-    max-width: 100%;
-    padding: 0 0.5rem;
-  }
-
-  .exhibitor-item {
-    padding: 0 0.5rem;
-    font-size: 0.8rem;
-  }
-
-  .exhibitor-booth {
-    min-width: 50px;
-  }
 }
 
 .calender-content {
@@ -192,14 +69,15 @@
 /* 日曆滑動容器 */
 .calender-scroll-container {
   display: block; /* 改為block佈局 */
-  background-image: url(../bgbg.jpg);
+  background-image: url(../image/web-event.png);
+  background-repeat: no-repeat;
+  background-size: 100% auto;
   overflow-x: hidden; /* 隱藏水平滾動 */
   overflow-y: auto; /* 允許垂直滾動 */
   scroll-behavior: smooth;
   -webkit-overflow-scrolling: touch; /* iOS 流暢滾動 */
   scrollbar-width: none; /* Firefox 隱藏滾動條 */
   -ms-overflow-style: none; /* IE/Edge 隱藏滾動條 */
-  padding: 16px 0;
   height: 100%; /* 填滿父容器高度 */
   width: 458px;
   padding-top: 0px;
@@ -217,7 +95,7 @@
   gap: 0; /* 移除間距，改用分隔線 */
   padding: 0;
   width: 100%; /* 佔滿寬度 */
-  background-color: lightcyan;
+  background-color: var(--secondary-color);
 }
 
 /* 日曆項目容器 */
@@ -269,14 +147,28 @@
 
 /* 底部時間區域 */
 .event-footer {
-  font-family: "IBM Plex Mono", sans-serif;
+  font-family: "Inclusive Sans", sans-serif;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-top: auto;
-  padding-top: 0.5rem;
+  margin-top: 20px;
   border-top: 1px solid #eee;
   gap: 1rem;
+  border-bottom: 1px dashed var(--main-color);
+}
+
+.event-image {
+float:left;
+margin-right: 20px;
+}
+
+.event-card {
+  margin-top: 20px;
+  border-bottom: 3px dotted var(--main-color);
+}
+
+.event-card:first-child {
+  margin-top: 0;
 }
 
 /* 日期時間組合 */
@@ -287,20 +179,33 @@
 
 /* 事件日期 */
 .event-date {
-  font-size: 0.8rem;
+  font-size: 1.1rem;
   color: black;
+  flex: 1;
+  text-align: left;
+  text-decoration: underline;
 }
 
 /* 事件時間 */
 .event-time {
-  font-size: 0.8rem;
+  font-size: 1.1rem;
   color: black;
+  flex: 1;
+  text-align: left;
+  border-bottom: 1px dotted black;
+  text-decoration: underline;
+}
+
+/* 空白區域 - 保持三等份布局 */
+.event-empty {
+  flex: 1;
+  text-align: right;
 }
 
 /* 舊版時間樣式 - 保留但不使用 */
 .timeline-time {
   writing-mode: sideways-rl;
-  font-family: "IBM Plex Sans", sans-serif;
+  font-family: "Inclusive Sans", sans-serif;
   color: #000;
   font-size: 0.8rem;
   text-align: right;
@@ -320,9 +225,11 @@
 
 /* 事件標題 */
 .event-title {
-  font-family: "Inclusive Sans", sans-serif;
-  font-size: 1.8rem;
-  color: #50006f;
+  font-family: "Alice", serif;
+    font-weight: 400;
+  font-style: normal;
+  font-size: 1.3rem;
+  color: black;
   line-height: 1.3;
   word-wrap: break-word; /* 允許長單詞換行 */
   overflow-wrap: break-word; /* 現代瀏覽器的換行屬性 */
@@ -331,7 +238,20 @@
   flex: 1; /* 佔據剩餘空間 */
   text-transform: uppercase;
   margin: 0;
-  margin-bottom: 0.5rem;
+  margin-bottom: 15px;
+  background-color: whitesmoke;
+  letter-spacing: -0.1rem;
+}
+
+.signup-button{
+  font-size: 1rem;
+  background-color: black;
+  color: ghostwhite;
+  padding: 0.85rem 1rem;
+  text-decoration: none;
+  flex: 1;
+  text-align: center;
+  float:right;
 }
 
 /* 描述區塊 */
@@ -342,7 +262,7 @@
 .event-description {
   font-family: "Inclusive Sans", sans-serif;
   font-size: 1rem;
-  color: #686868;
+  color: black;
   line-height: 1.6;
   text-align: left;
 }
@@ -351,10 +271,9 @@
 .event-signup-btn {
   display: inline-block;
   padding: 0.3rem 0.8rem;
-  background-color: darkolivegreen;
+  background-color: black;
   color: ghostwhite;
   text-decoration: none;
-  border-radius: 20px;
   font-size: 0.8rem;
   transition: background-color 0.3s ease;
   text-align: center;
@@ -363,7 +282,7 @@
 }
 
 .event-signup-btn:hover {
-  background-color: #3a0052;
+  background-color: green;
   color: white;
 }
 
@@ -394,8 +313,8 @@
   justify-content: center;
   align-items: center;
   overflow: hidden;
-  background: firebrick;
-  color: firebrick;
+  background: black;
+  color: black;
 }
 
 .event-thumb img {
@@ -404,10 +323,166 @@
   object-fit: cover;
 }
 
+/* 活動圖片樣式 - 可以在這裡修改圖片大小 */
+.event-image {
+  width: 150px !important;
+  object-fit: cover !important;
+  border-radius: 0;
+  flex-shrink: 0;
+  background-color: #000;
+}
+
+/* Timeline 相關樣式 - 從 JavaScript 移過來 */
+.timeline-main-container {
+  display: block;
+  width: 100%;
+  position: relative;
+}
+
+.timeline-left-container {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 75%;
+  padding: 100px;
+  overflow-x: auto;
+  overflow-y: auto;
+  background-color: #fff;
+  border: 2px solid #000;
+}
+
+.timeline-right-container {
+  position: absolute;
+  right: 0;
+  top: 0;
+  width: 25%;
+  border: 2px solid #000;
+  border-left: none;
+  padding: 20px;
+  background-color: #f5f5f5;
+  display: block;
+  box-sizing: border-box;
+}
+
+.timeline-area {
+  position: relative;
+  width: 100%;
+  background-color: #fff;
+  border: 1px solid #ddd;
+  margin-top: 20px;
+  padding-left: 120px;
+}
+
+.timeline-time-line {
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background-color: #ddd;
+  z-index: 1;
+}
+
+.timeline-time-label {
+  position: absolute;
+  left: -110px;
+  font-size: 12px;
+  color: #000;
+  font-weight: bold;
+  transform: translateY(-50%);
+  text-align: right;
+  width: 100px;
+  z-index: 10;
+  background-color: #fff;
+  padding: 2px 4px;
+}
+
+.timeline-date-column {
+  position: absolute;
+  bottom: 20px;
+  width: 200px;
+  font-size: 16px;
+  font-weight: bold;
+  color: #000;
+  text-align: center;
+  text-transform: uppercase;
+}
+
+.timeline-date-line {
+  position: absolute;
+  top: 0;
+  width: 2px;
+  background-color: #000;
+  z-index: 2;
+}
+
+.timeline-event-bar {
+  position: absolute;
+  height: 12px;
+  background-color: #007bff;
+  border-radius: 2px;
+  display: flex;
+  align-items: center;
+  padding: 0 4px;
+  font-size: 9px;
+  color: white;
+  cursor: pointer;
+  z-index: 10;
+  transition: all 0.2s ease;
+}
+
+.timeline-event-bar.talk {
+  background-color: #ff69b4;
+}
+
+.timeline-event-bar.workshop {
+  background-color: #007bff;
+}
+
+.timeline-event-bar.performance {
+  background-color: #ffc107;
+}
+
+.timeline-event-bar.exhibition {
+  background-color: #fd7e14;
+}
+
+.timeline-event-bar.default {
+  background-color: #6c757d;
+}
+
+.timeline-event-content {
+  font-size: 6px;
+  font-weight: 500;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  text-align: center;
+  line-height: 1.1;
+  padding: 1px;
+}
+
+.timeline-event-bar:hover {
+  transform: scale(1.1);
+  box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+  z-index: 20;
+}
+
+.timeline-event-bar:not(:hover) {
+  transform: scale(1);
+  box-shadow: none;
+  z-index: 10;
+}
+
 /* 響應式設計 */
 @media (max-width: 768px) {
+  .calender-mode-container{
+    height:auto !important;
+  }
   .calender-content {
     padding: 0 1rem;
+    border-left: 1px solid black;
+    border-right: 1px solid black;
+    overflow: scroll;
   }
 
   .calender-header {
@@ -431,11 +506,7 @@
 
   .calender-scroll-container {
     padding: 1rem 0;
-  }
-
-  .timeline-item {
-    width: 100%;
-    padding: 1rem;
+    width:100%;
   }
 
   .timeline-time {
@@ -450,7 +521,8 @@
 
   .event-thumb {
     width: 100%;
-    max-width: 200px;
+    max-width: 80px;
+    max-height: 80px;
   }
 
   .event-thumb img {
@@ -511,7 +583,7 @@
 @media (max-width: 480px) {
   .timeline-item {
     width: 100%;
-    padding: 1rem;
+    padding: 15px 0px;
   }
 
   .event-title {
@@ -589,9 +661,9 @@
 /* 模式容器 */
 .calender-mode-container {
   width: 100%;
-  max-width: 100%; /* 確保不超出父容器 */
-  height: 88vh; /* 設定固定高度，確保兩個模式一致 */
-  overflow: hidden; /* 防止內容溢出 */
+  max-width: 100%; 
+  height: 700px; 
+  overflow: hidden; 
 }
 
 .calender-mode-container.hidden {
@@ -664,7 +736,7 @@
   text-transform: uppercase;
   letter-spacing: 0.1rem;
   border-bottom: 1px solid #000000;
-  font-family: "IBM Plex Mono", sans-serif;
+  font-family: "Inclusive Sans", sans-serif;
   background: radial-gradient(circle, ghostwhite, yellow);
 }
 
@@ -672,12 +744,12 @@
   position: relative;
   height: 20px;
   display: block; /* 改為 block，因為日期點現在是絕對定位 */
-  font-family: "IBM Plex Mono", sans-serif;
+  font-family: "Inclusive Sans", sans-serif;
   /* 移除固定寬度，改由 JavaScript 動態設定 */
 }
 
 .timeline-day {
-  font-family: "IBM Plex Mono", sans-serif;
+  font-family: "Inclusive Sans", sans-serif;
   flex: none; /* 移除 flex: 1，使用固定寬度 */
   height: 0.8rem;
   display: flex;
@@ -690,6 +762,7 @@
   background-color: gray;
   position: absolute; /* 絕對定位 */
   top: 0; /* 垂直居中 */
+  border-radius: 50%;
 }
 
 .timeline-day.today {
@@ -701,7 +774,7 @@
 /* 活動區域 - 甘特圖樣式 */
 .timeline-events-area {
   position: relative;
-  min-height: 47vh;
+  min-height: 58vh;
   /* padding-left 改由 JavaScript 動態設定 */
   background: linear-gradient(
     0.5turn,
@@ -709,7 +782,7 @@
     aliceblue,
     aliceblue,
     lavender,
-    rebeccapurple
+    blueviolet
   );
 }
 

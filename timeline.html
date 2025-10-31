@@ -1,0 +1,466 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Timeline - 草率季 Taipei Art Book Fair</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=BioRhyme+Expanded:wght@200;300;400;700;800&family=Libre+Franklin:ital,wght@0,100..900;1,100..900&family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="shortcut icon" href="image/icon-1.ico" />
+    <link rel="stylesheet" href="css/font.css" />
+    
+    <style>
+      :root {
+        --main-color: #2c3e50;
+        --secondary-color: #ecf0f1;
+        --border: #bdc3c7;
+      }
+
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: "Inclusive Sans", sans-serif;
+        background-color: var(--secondary-color);
+        color: var(--main-color);
+        overflow-x: hidden;
+      }
+
+      .container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 20px;
+      }
+
+      /* 時間軸模式區域 - 鋪滿下方 */
+      .timeline-section {
+        width: 100vw;
+        background: var(--secondary-color);
+        border: 1px solid var(--main-color);
+        padding: 2rem 0;
+        margin-top: 2rem;
+        position: relative;
+      }
+
+      .timeline-section .container {
+        display: flex;
+        align-items: flex-start;
+        padding-left: 200px; 
+        flex-direction: column;
+      }
+
+      /* L 型 Zine 布局容器樣式 */
+      .timeline-left-zine-container {
+        position: absolute;
+        left: 16px;
+        display: flex;
+        flex-direction: column;
+        gap: 5px;
+        z-index: 10;
+      }
+
+      /* 下方水平 Zine 容器樣式 */
+      .timeline-bottom-zine-container {
+        position: absolute;
+        bottom: 16px;
+        left: 180px; /* 從左側第3本zine的右側開始，避免重疊 */
+        right: 16px;
+        display: flex;
+        gap: 5px;
+        z-index: 10;
+      }
+
+      .timeline-zine-item {
+        flex: 0 0 auto;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background-color: var(--secondary-color);
+        border: 1px solid var(--main-color);
+        color: var(--main-color);
+        font-family: "Inclusive Sans", sans-serif;
+        font-size: 0.7rem;
+        text-align: center;
+        box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+      }
+
+      /* 垂直 Zine 樣式 */
+      .timeline-zine-vertical {
+        writing-mode: vertical-lr;
+        text-orientation: mixed;
+        width: 148px;
+        height: 210px;
+        margin-bottom: 10px;
+      }
+
+      /* 水平 Zine 樣式 - 改為與垂直 zine 相同尺寸和排列 */
+      .timeline-zine-horizontal {
+        writing-mode: vertical-lr;
+        text-orientation: mixed;
+        width: 148px;
+        height: 210px;
+        margin-right: 10px;
+      }
+
+      .timeline-section h3 {
+        text-align: center;
+        font-size: 2rem;
+        color: var(--secondary-color);
+        background: var(--main-color);
+        text-shadow: none;
+        padding: 1rem 2rem;
+        margin-bottom: 2rem;
+        font-family: "Inclusive Sans", sans-serif;
+        border-radius: 8px;
+      }
+
+      /* 時間軸模式容器樣式 */
+      .timeline-section .timeline-mode-container {
+        width: calc(100vw - 220px); /* 限制寬度，為左側zine留空間 */
+        height: 63vh; /* 設定為55vh高度 */
+        margin-bottom: 225px; /* 為下方水平zine留空間 */
+        overflow: hidden;
+        border: 1px solid var(--border);
+        border-radius: 8px;
+        background: white;
+        position: relative;
+      }
+
+      /* 確保時間軸區域的可見性 */
+      .timeline-section {
+        display: block;
+        visibility: visible;
+      }
+
+      .timeline-section .timeline-scroll-container {
+        overflow-x: auto;
+        overflow-y: hidden;
+        scroll-behavior: smooth;
+        -webkit-overflow-scrolling: touch;
+        scrollbar-width: none;
+        height: 100%;
+        width: 100%;
+      }
+
+      .timeline-section .timeline-scroll-container::-webkit-scrollbar {
+        display: none;
+      }
+
+      .timeline-section .timeline-calendar {
+        display: flex;
+      }
+
+      /* 時間軸圖例樣式 */
+      .timeline-legend {
+        position: absolute;
+        bottom: 0px;
+        right: 0px;
+        font-family: "Inclusive Sans", sans-serif;
+        font-size: 0.75rem;
+        background: rgba(255, 255, 255, 0.9);
+        padding: 10px;
+        border-radius: 4px;
+        border: 1px solid var(--border);
+      }
+
+      .timeline-legend h4 {
+        margin: 0 0 8px 0;
+        font-size: 0.7rem;
+        font-weight: 400;
+        color: var(--main-color);
+        text-transform: uppercase;
+      }
+
+      .legend-items {
+        display: flex;
+        flex-direction: column;
+        gap: 4px;
+      }
+
+      .legend-item {
+        display: flex;
+        align-items: center;
+        gap: 6px;
+      }
+
+      .legend-dot {
+        width: 8px;
+        height: 8px;
+        border-radius: 50%;
+        flex-shrink: 0;
+      }
+
+      .legend-dot.talk { background-color: #e74c3c; }
+      .legend-dot.workshop { background-color: #3498db; }
+      .legend-dot.performance { background-color: #9b59b6; }
+      .legend-dot.exhibition { background-color: #f39c12; }
+      .legend-dot.other { background-color: #95a5a6; }
+
+      .legend-label {
+        font-size: 0.6rem;
+        color: var(--main-color);
+      }
+
+      /* Agenda 標題行 */
+      .agenda-header {
+        width: 100%;
+        margin-bottom: 2rem;
+      }
+
+      .agenda-controls {
+        text-align: center;
+        margin-top: 1rem;
+      }
+
+      .agenda-subscribe a {
+        color: var(--main-color);
+        text-decoration: none;
+        font-family: "Inclusive Sans", sans-serif;
+        font-size: 0.9rem;
+        padding: 8px 16px;
+        border: 1px solid var(--main-color);
+        border-radius: 4px;
+        transition: all 0.3s ease;
+      }
+
+      .agenda-subscribe a:hover {
+        background-color: var(--main-color);
+        color: var(--secondary-color);
+      }
+
+      /* 自定義 Scrollbar 樣式 */
+      .timeline-scroll-container::-webkit-scrollbar {
+        width: 8px;
+      }
+
+      .timeline-scroll-container::-webkit-scrollbar-track {
+        background: rgba(0, 0, 0, 0.1);
+        border-radius: 4px;
+      }
+
+      .timeline-scroll-container::-webkit-scrollbar-thumb {
+        background-color: #666;
+        border-radius: 4px;
+        border: 1px solid transparent;
+        background-clip: padding-box;
+      }
+
+      .timeline-scroll-container::-webkit-scrollbar-thumb:hover {
+        background-color: darkolivegreen;
+      }
+
+      /* Firefox scrollbar */
+      .timeline-scroll-container {
+        scrollbar-width: auto;
+        scrollbar-color: #666 rgba(0, 0, 0, 0.1);
+      }
+
+      /* 響應式設計 */
+      @media (max-width: 768px) {
+        /* 平板版時間軸區域 */
+        .timeline-section {
+          padding: 1.5rem 0;
+        }
+
+        .timeline-section .container {
+          padding-left: 120px; /* 平板版減少左側空間 */
+        }
+
+        .agenda-header {
+          max-width: calc(100vw - 140px); /* 平板版調整寬度 */
+        }
+
+        .timeline-section .timeline-mode-container {
+          width: calc(100vw - 140px); /* 平板版調整寬度 */
+          height: 40vh; /* 平板版調整為40vh */
+          margin-bottom: 120px; /* 平板版減少下方空間 */
+        }
+
+        .timeline-zine-item {
+          width: 100px; /* 平板版縮小 */
+          height: 150px; /* 平板版縮小 */
+          font-size: 0.8rem;
+          padding: 4px;
+        }
+        
+        /* 平板版下方 Zine 容器調整 */
+        .timeline-bottom-zine-container {
+          bottom: 10px;
+          left: 120px; /* 平板版從左側第3本zine的右側開始 */
+          right: 10px;
+          gap: 3px;
+        }
+      }
+
+      @media (max-width: 480px) {
+        /* 手機版時間軸區域 */
+        .timeline-section {
+          padding: 1rem 0;
+        }
+
+        .timeline-section .container {
+          padding-left: 80px; /* 手機版進一步減少左側空間 */
+          flex-direction: column;
+        }
+
+        .agenda-header {
+          max-width: calc(100vw - 100px);
+        }
+
+        .timeline-section .timeline-mode-container {
+          width: calc(100vw - 100px); /* 手機版調整寬度 */
+        }
+
+        .timeline-section h3 {
+        font-size: 1.5rem;
+        margin-bottom: 1rem;
+        font-family: "Inclusive Sans", sans-serif;
+        }
+
+        .timeline-section .timeline-mode-container {
+          height: 35vh; /* 手機版調整為35vh */
+          margin-bottom: 90px; /* 手機版進一步減少下方空間 */
+        }
+
+        .timeline-zine-item {
+          width: 70px; /* 手機版進一步縮小 */
+          height: 100px; /* 手機版進一步縮小 */
+          font-size: 0.6rem;
+          padding: 2px;
+        }
+        
+        /* 手機版下方 Zine 容器調整 */
+        .timeline-bottom-zine-container {
+          bottom: 8px;
+          left: 90px; /* 手機版從左側第3本zine的右側開始 */
+          right: 8px;
+          gap: 2px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <!-- 時間軸模式區域 - 鋪滿下方 -->
+    <section class="timeline-section" id="timelineSection">
+      <div class="container">
+        <!-- L 型 Zine 區域 - 包圍時間軸 -->
+        <!-- 左側垂直 Zine 區域 -->
+        <div class="timeline-left-zine-container">
+          <div class="timeline-zine-item timeline-zine-vertical"></div>
+          <div class="timeline-zine-item timeline-zine-vertical"></div>
+          <div class="timeline-zine-item timeline-zine-vertical"></div>
+        </div>
+        
+        <!-- 下方水平 Zine 區域 -->
+        <div class="timeline-bottom-zine-container">
+          <div class="timeline-zine-item timeline-zine-horizontal"></div>
+          <div class="timeline-zine-item timeline-zine-horizontal"></div>
+          <div class="timeline-zine-item timeline-zine-horizontal"></div>
+          <div class="timeline-zine-item timeline-zine-horizontal"></div>
+        </div>
+
+        <!-- Agenda 標題行 -->
+        <div class="agenda-header">
+          <h3 style="transform: rotate(1deg);">
+            The Grand Agenda of TAIPEI ART BOOK FAIR
+          </h3>
+          <div class="agenda-controls">
+            <p class="agenda-subscribe">
+              <a
+                href="https://calendar.google.com/calendar/u/2?cid=OTA1MjdmNjdmYTQ2MmM4M2UxODRiMGM2MmRlZjEwZWJjOGIwMGNjOGM2N2E1YjgzYWYyYWZiOTBhMWJkYjI5M0Bncm91cC5jYWxlbmRhci5nb29nbGUuY29t"
+                >Suscribe to TPABF's calender</a
+              >
+            </p>
+          </div>
+        </div>
+        <!-- 時間軸模式容器 - 確保ID正確且始終顯示 -->
+        <div
+          class="timeline-mode-container"
+          id="timelineModeContainer"
+          style="display: block"
+        >
+          <div class="timeline-scroll-container" id="timelineScroll">
+            <div class="timeline-calendar" id="timelineCalendar">
+              <!-- 時間軸日曆將由 JavaScript 動態生成 -->
+              <!-- 測試內容 - 如果看到這個說明容器是可見的 -->
+              <div
+                style="
+                  padding: 20px;
+                  text-align: center;
+                  color: #666;
+                  font-size: 14px;
+                "
+              >
+                LOADING...
+              </div>
+            </div>
+          </div>
+
+          <!-- 時間軸圖例 - 右下方 -->
+          <div class="timeline-legend">
+            <h4>Event Types</h4>
+            <div class="legend-items">
+              <div class="legend-item">
+                <span class="legend-dot talk"></span>
+                <span class="legend-label">Talk</span>
+              </div>
+              <div class="legend-item">
+                <span class="legend-dot workshop"></span>
+                <span class="legend-label">Workshop</span>
+              </div>
+              <div class="legend-item">
+                <span class="legend-dot performance"></span>
+                <span class="legend-label">Performance</span>
+              </div>
+              <div class="legend-item">
+                <span class="legend-dot exhibition"></span>
+                <span class="legend-label">Exhibition</span>
+              </div>
+              <div class="legend-item">
+                <span class="legend-dot other"></span>
+                <span class="legend-label">Other</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 初始化時間軸模式的腳本 -->
+    <script>
+      // 等待 DOM 和 calender.js 載入完成後執行
+      document.addEventListener("DOMContentLoaded", function () {
+        // 延遲執行，確保 calender.js 已經載入
+        setTimeout(function () {
+          console.log("強制顯示時間軸模式");
+
+          // 確保時間軸容器顯示
+          const timelineModeContainer = document.getElementById(
+            "timelineModeContainer"
+          );
+          if (timelineModeContainer) {
+            timelineModeContainer.style.display = "block";
+            timelineModeContainer.classList.remove("hidden");
+            console.log("時間軸容器已設置為顯示");
+
+            // 如果 renderTimelineMode 函數存在，調用它
+            if (typeof renderTimelineMode === "function") {
+              renderTimelineMode();
+              console.log("時間軸模式已渲染");
+            }
+          }
+        }, 1000); // 延遲1秒執行
+      });
+    </script>
+    
+    <!-- 載入相關的 JavaScript 文件 -->
+    <script src="js/calender.js"></script>
+  </body>
+</html>

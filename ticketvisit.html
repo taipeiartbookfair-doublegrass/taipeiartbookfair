@@ -1,0 +1,1304 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0"
+    />
+    <title>購票參觀 | Taipei Art Book Fair Visit</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=BioRhyme+Expanded:wght@200;300;400;700;800&family=Libre+Franklin:ital,wght@0,100..900;1,100..900&family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="shortcut icon" href="image/icon-1.ico" />
+    <link rel="stylesheet" href="css/font.css" />
+    <link rel="stylesheet" href="css/ticketvisit.css">
+  </head>
+  <body>
+    <!-- 頂部導航 -->
+    <nav class="top-navigation">
+      <div class="nav-container">
+        <a href="mainpage.html" class="nav-back-btn" data-zh="← 返回" data-en="← Back">← 返回</a>
+        
+        <ul class="nav-menu">
+          <li><a href="#general-info" class="nav-item">GENERAL INFO</a></li>
+          <li><a href="#access" class="nav-item">ACCESS</a></li>
+          <li><a href="#tickets" class="nav-item">TICKETS</a></li>
+          <li><a href="#timeline" class="nav-item">PROGRAMS</a></li>
+          <li><a href="#exhibitors" class="nav-item">EXHIBITORS</a></li>
+          <button id="lang-btn" class="nav-lang">EN</button>
+        </ul>
+      </div>
+    </nav>
+    
+    <!-- 回到頂部按鈕 -->
+    <button id="backToTop" class="back-to-top-btn">
+      ↑
+    </button>
+    
+
+    <!-- 主視覺區域 -->
+    <section class="hero-section">
+      <div class="hero-container">
+        <!-- 影片區域 - 單獨佔滿整行 -->
+        <div class="hero-poster-section">
+         <iframe 
+           src="https://player.vimeo.com/video/1130257764?background=1&autoplay=1&loop=1&muted=1" 
+           width="100%" 
+           height="100%" 
+           frameborder="0" 
+           allow="autoplay; fullscreen; picture-in-picture" 
+           allowfullscreen>
+          </iframe>
+        </div>
+      </div>
+    </section>
+
+    <!-- 交通資訊區域 - 獨立的 section -->
+    <section class="hero-traffic" id="general-info">
+          <!-- 展覽資訊區域 -->
+          <div class="exhibition-info-section">
+            <h2 class="exhibition-title" data-zh="2025 草率季 Taipei Art Book Fair" data-en="2025 Taipei Art Book Fair">2025 草率季 Taipei Art Book Fair</h2>
+            <p class="exhibition-subtitle" data-zh="- Soft POW 無限柔軟 -" data-en="- Soft POW 無限柔軟 -">- Soft POW 無限柔軟 -</p>
+            <p class="exhibition-poem" data-zh='<mark>今天早上你叫我「軟軟」，於是我寫了一首小詩。<br><br>軟軟是身體的投誠，<br>是陶土記得手指的樣子，<br>原子鬆開手，<br>一扇風雨中敞開的小門，<br>pow pow 不止。<br><br>或是<br><br>軟軟是一片戰場上的香蕉皮，<br>小指頭抹過你的硬漢臉，<br>彩虹滲漏，<br>pow pow，不止。</mark>' data-en='<mark>This morning you whispered "wobbly bobbly" in my ear and a little poem was born.<br><br>Softness is the body&#39;s surrender,<br>the way clay remembers every touch,<br>atoms loosening their grip,<br>a small door left open in the storm,<br>pow pow non stop.<br><br>or<br><br>a banana peel on the battlefield,<br>pinky wiggle through your harden face,<br>the rainbow leaks,<br>pow pow, can&#39;t stop.</mark>' style="font-size:.9rem; margin-bottom:10px;">
+              <mark>今天早上你叫我「軟軟」，於是我寫了一首小詩。
+              <br><br>  
+              軟軟是身體的投誠，
+              <br>
+              是陶土記得手指的樣子，
+              <br>
+              原子鬆開手，
+              <br>
+              一扇風雨中敞開的小門，
+              <br>
+              pow pow 不止。
+              <br><br> 
+              或是
+              <br><br> 
+              軟軟是一片戰場上的香蕉皮，
+              <br>
+              小指頭抹過你的硬漢臉，
+              <br>
+              彩虹滲漏，
+              <br>
+              pow pow，不止。</mark>
+              </p>         
+          </div>
+
+          <div class="exhibition-details">
+            <div class="detail-item">
+              <h3 class="detail-item-title">時間 Time</h3>
+              <ul class="time-list">
+                <li>11/21(Fri.) 13-21</li>
+                <li>11/22(Sat.) 11-20</li>
+                <li>11/23(Sun.) 11-18</li>
+              </ul>
+            </div>
+            
+            <div class="detail-item">
+              <h3 class="detail-item-title">活動地點 Location</h3>
+              <p><a href="https://www.huashan1914.com" target="_blank">華山1914文化創意產業園區 東二 ABCD棟 <br>Huashan Creative Park</a></p>
+              <div class="map-container">
+                <iframe 
+                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3614.8!2d121.529!3d25.043!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3442a9c8b8b8b8b8%3A0x8b8b8b8b8b8b8b8b!2z6Ie65YyX5biC5Lit5aSu5Yy65Y2X5pys5a6J5Yy65Y2X5pys5a6J5Yy65Y2X5pys5a6J!5e0!3m2!1szh-TW!2stw!4v1234567890"
+                  allowfullscreen="" 
+                  loading="lazy" 
+                  referrerpolicy="no-referrer-when-downgrade">
+                </iframe>
+              </div>
+            </div>
+            
+            <div class="detail-item">
+              <h3 class="detail-item-title">重要資訊 Info Log</h3>
+            </div>
+            <div id="info-log" style="background-color:white;border-left:1px solid black;border-right:1px solid black;border-bottom:1px solid black;border-top:none;">🚧 讀取中…</div>
+          </div>
+          
+          <div class="access-info-section" id="access">
+            
+            <h2 class="access-section-title">Access</h2>
+          
+          <div class="access-info">
+            <h3 data-zh="捷運" data-en="MRT">捷運</h3>
+            <p data-zh="板南線、新蘆線 忠孝新生站｜1號出口步行約3分鐘" data-en="Blue Line / Orange Line | Zhongxiao Xinsheng Station : Exit 1, walk for approximately 3 minutes">
+              板南線、新蘆線 忠孝新生站｜1號出口步行約3分鐘
+            </p>
+            
+            <h3 data-zh="公車" data-en="Bus">公車</h3>
+            <p data-zh="華山公園站（市民大道一）、華山公園（市民）｜669" data-en="Huasha Park (Civic Boulevard)｜699">
+              華山公園站（市民大道一）、華山公園（市民）｜669
+            </p>
+            <p data-zh="台北科技大學站（八德路）｜205、257、276" data-en="National Taipei University of Technology (Bade Road)｜205, 257, 276">
+              台北科技大學站（八德路）｜205、257、276
+            </p>
+              <p data-zh="忠孝國小站｜202、202區、212夜間公車、212直行忠孝東路、212經南港路、262、262區、299、600、605、605新台五線、忠孝幹線" data-en="Zhongxiao Elementary School｜202, 202 Section, 212, 232, 232 Vice, 269, 299, 600, 605, 605 Vice, 605 (Xintai 5th Route), Zhongxiao New Main Line">
+                忠孝國小站｜202、202區、212夜間公車、212直行忠孝東路、212經南港路、262、262區、299、600、605、605新台五線、忠孝幹線
+              </p>
+              <p data-zh="華山文創園區｜202、202區、205、212、257、262、262區、276、299、600、605、忠孝幹線、1813D經中山區、1813E大武崙、1815、1815A、1815D、1815E、台北市觀光巴士紅線(往善導寺)" data-en="Huashan 1914 Creative Park (Zhongxiao E. Road)｜247, 205, 212, 220, 232, 232 Vice, 257, 262, 276, Taipei Double-Decker Sightseeing Bus">
+                華山文創園區｜202、202區、205、212、257、262、262區、276、299、600、605、忠孝幹線、1813D經中山區、1813E大武崙、1815、1815A、1815D、1815E、台北市觀光巴士紅線(往善導寺)
+            </p>
+            
+            <h3 data-zh="自行開車" data-en="By Car">自行開車</h3>
+              <p data-zh="國道1號－圓山交流道下－建國高架道路－忠孝東路出口下－忠孝東路三段至二段" data-en="Sun Yat-sen Freeway - Yuanshan Interchange - Jianguo Expressway - Zhongxiao East Road Exit - Zhongxiao East Road">
+                國道1號－圓山交流道下－建國高架道路－忠孝東路出口下－忠孝東路三段至二段
+            </p>
+            <p><a href="https://maps.app.goo.gl/nSoNsZuY2akwD2jZA" target="_blank" data-zh="華山停車場" data-en="Parking Lot">華山停車場</a></p>
+              <p data-zh="汽車平日每小時40元、假日每小時60元<br>機車每小時25元" data-en="Parking fee is NT$ 40/hr on weekdays, and NT$60/hr on holidays for cars.<br>NT$25/hr for motorcycles.">
+                汽車平日每小時40元、假日每小時60元<br>機車每小時25元
+              </p>
+              
+              <h3 data-zh="YouBike" data-en="YouBike">YouBike</h3>
+              <p data-zh="鄰近站點｜YouBike微笑單車 2.0：華山文創園區" data-en="Station｜YouBike 2.0：Huashan1914 Creative Park">
+                鄰近站點｜YouBike微笑單車 2.0：華山文創園區
+              </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- 兩欄布局：Tickets | FAQ -->
+    <section class="two-column-section" id="tickets">
+      <div class="two-column-container">
+        <!-- 左欄：Tickets (佔2/3) -->
+        <div class="column tickets-column">
+          <h2 class="column-title">Ticket Information</h2>
+          
+          <div class="tickets-grid">
+            <!-- 第一行：早鳥票 + 預售票 -->
+            <div class="ticket-card" data-ticket-type="early-bird">
+              <h3 class="ticket-title" data-zh="早鳥票" data-en="Early Bird">早鳥票</h3>
+              <div class="ticket-price" data-zh="NT$ 300／人" data-en="NT$ 300 / person">NT$ 300／人</div>
+              <div class="ticket-period" data-zh="販售日期：2025/09/01 - 2025/09/07" data-en="Sale Period: 2025/09/01 – 2025/09/07">販售日期：2025/09/01 - 2025/09/07</div>
+              <div class="ticket-limit" data-zh="限量 100 張" data-en="Limited to 100 tickets">限量 100 張</div>
+              <div class="ticket-status">未開放</div>
+              <a href="https://tour.ibon.com.tw/event/e2508000028lhmm" class="ticket-btn" target="_blank" data-zh="立即購票" data-en="Buy Now">立即購票</a>
+            </div>
+
+            <div class="ticket-card" data-ticket-type="presale">
+              <h3 class="ticket-title" data-zh="預售票" data-en="Pre-sale">預售票</h3>
+              <div class="ticket-price" data-zh="NT$ 380／人" data-en="NT$ 380 / person">NT$ 380／人</div>
+              <div class="ticket-period" data-zh="販售日期：2025/09/08 -2025/11/20" data-en="Sale Period: 2025/09/08 – 2025/11/20">販售日期：2025/09/08 -2025/11/20</div>
+              <div class="ticket-limit" data-zh="限量 2000 張" data-en="Limited to 2,000 tickets">限量 2000 張</div>
+              <div class="ticket-status">未開放</div>
+              <a href="https://tour.ibon.com.tw/event/e2508000028lhmm" class="ticket-btn" target="_blank" data-zh="立即購票" data-en="Buy Now">立即購票</a>
+            </div>
+
+            <!-- 第二行：快速通關票 + 學生團體票 -->
+            <div class="ticket-card" data-ticket-type="fast-pass">
+              <h3 class="ticket-title" data-zh="快速通關票" data-en="Fast Pass">快速通關票</h3>
+              <div class="ticket-price" data-zh="NT$ 499／人" data-en="NT$ 499 / person">NT$ 499／人</div>
+              <div class="ticket-period" data-zh="販售日期：2025/11/21 - 2025/11/23" data-en="Sale Period: 2025/11/21 – 2025/11/23">販售日期：2025/11/21 - 2025/11/23</div>
+              <div class="ticket-limit" data-zh="無限量" data-en="Unlimited availability">無限量</div>
+              <div class="ticket-status">未開放</div>
+              <a href="https://tour.ibon.com.tw/event/e2508000028lhmm" class="ticket-btn" target="_blank" data-zh="立即購票" data-en="Buy Now">立即購票</a>
+            </div>
+
+            <div class="ticket-card" data-ticket-type="student">
+              <h3 class="ticket-title" data-zh="學生團體票" data-en="Student Group Ticket">學生團體票</h3>
+              <div class="ticket-price" data-zh="NT$ 300／人" data-en="NT$ 300 / person">NT$ 300／人</div>
+              <div class="ticket-period" data-zh="售票期限：2025/09/08 - 2025/11/23" data-en="Sale Period: 2025/09/08 – 2025/11/23">售票期限：2025/09/08 - 2025/11/23</div>
+              <p class="ticket-desc" data-zh="10 人以上學生團體優惠票價，入場時需出示學生證或其他有效學生身分證明文件。" data-en="Discounted admission for student groups of 10 or more. Valid student ID required upon entry.">
+                10 人以上學生團體優惠票價，入場時需出示學生證或其他有效學生身分證明文件。
+              </p>
+              <div class="ticket-status">未開放</div>
+              <a href="https://nmhw.taipeiartbookfair.com/products/%E5%AD%B8%E7%94%9F%E5%9C%98%E9%AB%94%E7%A5%A8" class="ticket-btn" target="_blank" data-zh="立即購票" data-en="Buy Now">立即購票</a>
+            </div>
+
+            <!-- 第三行：優待票 + 現場票 -->
+            <div class="ticket-card" data-ticket-type="discount">
+              <h3 class="ticket-title" data-zh="優待票" data-en="Concession Ticket">優待票</h3>
+              <div class="ticket-price" data-zh="NT$ 250／人" data-en="NT$ 250 / person">NT$ 250／人</div>
+              <div class="ticket-period" data-zh="售票期限：2025/09/08 - 2025/11/23" data-en="Sale Period: 2025/09/08 – 2025/11/23">售票期限：2025/09/08 - 2025/11/23</div>
+              <p class="ticket-desc" data-zh="適用於 110 cm 以下幼童、65 歲以上長者、身心障礙者及其陪同者。需出示證明文件。" data-en="Available for children under 110 cm, seniors 65+, and persons with disabilities (plus one accompanying guest). Valid ID required.">
+                適用於 110 cm 以下幼童、65 歲以上長者、身心障礙者及其陪同者。需出示證明文件。
+              </p>
+              <div class="ticket-status">未開放</div>
+              <a href="https://tour.ibon.com.tw/event/e2508000028lhmm" class="ticket-btn" target="_blank" data-zh="立即購票" data-en="Buy Now">立即購票</a>
+            </div>
+
+            <div class="ticket-card" data-ticket-type="onsite">
+              <h3 class="ticket-title" data-zh="現場票" data-en="On-site Ticket">現場票</h3>
+              <div class="ticket-price" data-zh="NT$ 400／人" data-en="NT$ 400 / person">NT$ 400／人</div>
+              <div class="ticket-period" data-zh="販售日期：2025/11/21 - 2025/11/23" data-en="Sale Period: 2025/11/21 – 2025/11/23">販售日期：2025/11/21 - 2025/11/23</div>
+              <div class="ticket-limit" data-zh="無限量" data-en="Unlimited availability">無限量</div>
+              <p class="ticket-desc" data-zh="活動當天現場購買的票券。適合臨時決定參觀的觀眾，惟需配合現場排隊購買入場。" data-en="Tickets available for purchase at the venue during fair dates. Recommended for last-minute visitors; on-site queuing required.">
+                活動當天現場購買的票券。適合臨時決定參觀的觀眾，惟需配合現場排隊購買入場。
+              </p>
+              <div class="ticket-status" data-zh="現場購買" data-en="On-site Purchase">現場購買</div>
+            </div>
+          </div>
+              </div>
+
+        <!-- 右欄：FAQ -->
+        <div class="column">
+          <h2 class="column-title">FAQ</h2>
+          
+          <div class="faq-item">
+            <div class="faq-question" data-zh="Q：請問票券可以轉讓嗎？" data-en="Q: Can tickets be transferred?">
+              Q：請問票券可以轉讓嗎？
+            </div>
+            <div class="faq-answer" data-zh="A：可以，票券不記名。注意使用優待票須出示相關證明。" data-en="A: Yes, tickets are non-transferable. Note that concession tickets require valid ID.">
+              A：可以，票券不記名。注意使用優待票須出示相關證明。
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <div class="faq-question" data-zh="Q：小朋友需要購票嗎？" data-en="Q: Do children need tickets?">
+              Q：小朋友需要購票嗎？
+            </div>
+            <div class="faq-answer" data-zh="A：是，優待票為250元，供12歲以下孩童使用。" data-en="A: Yes, concession tickets are NT$250 for children under 12.">
+              A：是，優待票為250元，供12歲以下孩童使用。
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <div class="faq-question" data-zh="Q：已購預售票是否能退票？" data-en="Q: Can pre-sale tickets be refunded?">
+              Q：已購預售票是否能退票？
+            </div>
+            <div class="faq-answer" data-zh="A：現場無退票服務，但可轉讓他人使用。" data-en="A: No refunds on-site, but tickets can be transferred to others.">
+              A：現場無退票服務，但可轉讓他人使用。
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <div class="faq-question" data-zh="Q：現場是否可以刷卡或使用電子支付？" data-en="Q: Can I pay by card or electronic payment on-site?">
+              Q：現場是否可以刷卡或使用電子支付？
+            </div>
+            <div class="faq-answer" data-zh="A：每個攤位支付方式不同，建議攜帶現金及行動支付App備用。" data-en="A: Payment methods vary by booth. We recommend bringing cash and mobile payment apps as backup.">
+              A：每個攤位支付方式不同，建議攜帶現金及行動支付App備用。
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <div class="faq-question" data-zh="Q：現場購票是否可以使用文化幣？" data-en="Q: Can I use cultural vouchers for on-site tickets?">
+              Q：現場購票是否可以使用文化幣？
+            </div>
+            <div class="faq-answer" data-zh="A：目前票券未提供文化幣支付，欲使用可參考 ibon 快速通關票種。" data-en="A: Cultural vouchers are not currently accepted for tickets. Please refer to ibon fast pass tickets for alternative options.">
+              A：目前票券未提供文化幣支付，欲使用可參考 ibon 快速通關票種。
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <div class="faq-question" data-zh="Q：票種是否可以重複使用？" data-en="Q: Can tickets be reused?">
+              Q：票種是否可以重複使用？
+            </div>
+            <div class="faq-answer" data-zh="A：活動票種皆為單日票，不同日進場請各別購票。" data-en="A: All event tickets are single-day passes. Separate tickets are required for different days.">
+              A：活動票種皆為單日票，不同日進場請各別購票。
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <div class="faq-question" data-zh="Q：現場提供的票種？" data-en="Q: What tickets are available on-site?">
+              Q：現場提供的票種？
+            </div>
+            <div class="faq-answer" data-zh="A：活動現場僅售現場票（NT＄400）。" data-en="A: Only on-site tickets (NT$400) are available at the venue.">
+              A：活動現場僅售現場票（NT＄400）。
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <div class="faq-question" data-zh="Q：是否可以先購買現場票後隔日進場？" data-en="Q: Can I buy on-site tickets for the next day?">
+              Q：是否可以先購買現場票後隔日進場？
+            </div>
+            <div class="faq-answer" data-zh="A：現場票售出當下蓋章入場，不提供隔日使用。" data-en="A: On-site tickets are stamped for immediate entry and cannot be used the next day.">
+              A：現場票售出當下蓋章入場，不提供隔日使用。
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <div class="faq-question" data-zh="Q：是否可以先替不在場友人購買現場票？" data-en="Q: Can I buy on-site tickets for absent friends?">
+              Q：是否可以先替不在場友人購買現場票？
+            </div>
+            <div class="faq-answer" data-zh="A：現場票售出當下蓋章入場，需使用者本人到場方可購買使用。" data-en="A: On-site tickets are stamped for immediate entry. The ticket holder must be present to purchase and use the ticket.">
+              A：現場票售出當下蓋章入場，需使用者本人到場方可購買使用。
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <div class="faq-question" data-zh="Q：購票是否提供發票？" data-en="Q: Are receipts provided for ticket purchases?">
+              Q：購票是否提供發票？
+            </div>
+            <div class="faq-answer" data-zh="A：本活動為免稅活動，如需開立發票請於活動時間至購票處詢問。" data-en="A: This is a tax-exempt event. Please inquire at the ticket counter during the event if you need a receipt.">
+              A：本活動為免稅活動，如需開立發票請於活動時間至購票處詢問。
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <div class="faq-question" data-zh="Q：發票可以打統編嗎？" data-en="Q: Can receipts include company tax ID?">
+              Q：發票可以打統編嗎？
+            </div>
+            <div class="faq-answer" data-zh="A：可以，請於活動時間至現場購票處詢問工作人員。" data-en="A: Yes, please inquire with staff at the on-site ticket counter during the event.">
+              A：可以，請於活動時間至現場購票處詢問工作人員。
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <div class="faq-question" data-zh="Q：票券遺失怎麼辦？" data-en="Q: What if I lose my ticket?">
+              Q：票券遺失怎麼辦？
+            </div>
+            <div class="faq-answer" data-zh="A：票券請自行妥善保管，發生遺失、燒毀、破損等情形，恕不退換補發。" data-en="A: Please keep your ticket safe. Lost, damaged, or destroyed tickets will not be refunded or reissued.">
+              A：票券請自行妥善保管，發生遺失、燒毀、破損等情形，恕不退換補發。
+            </div>
+          </div>
+      </div>
+      </div>
+    </section>
+
+    <!-- Timeline 區域 -->
+    <section class="timeline-section" id="timeline">
+      <div class="timeline-container">
+        <h2 class="timeline-title">Programs</h2>
+        
+        <!-- Subscribe to Calendar - 直接放在標題下方 -->
+        <div class="timeline-subscribe">
+          <p class="agenda-subscribe">
+            <a
+              href="https://calendar.google.com/calendar/u/2?cid=OTA1MjdmNjdmYTQ2MmM4M2UxODRiMGM2MmRlZjEwZWJjOGIwMGNjOGM2N2E1YjgzYWYyYWZiOTBhMWJkYjI5M0Bncm91cC5jYWxlbmRhci5nb29nbGUuY29t"
+              >\Suscribe to TPABF's calendar/</a
+            >
+          </p>
+        </div>
+
+        <div class="timeline-instructions" data-zh="操作說明：1) 點擊下方時間軸上的活動項目查看詳細資訊。2) 活動詳情會顯示在右側預覽區，請向右滑動或點擊活動後會自動滾動至預覽區。3) 使用上方的活動類型按鈕（ALL、TALK、WORKSHOP、PERFORMANCE）可快速篩選特定類型的活動。" data-en="Instructions: 1) Click on any event item in the timeline below to view detailed information. 2) Event details will appear in the preview area on the right. Swipe right or the container will automatically scroll to the preview area after clicking an event. 3) Use the event type filter buttons at the top (ALL, TALK, WORKSHOP, PERFORMANCE) to quickly filter events by type.">
+          操作說明：1) 點擊下方時間軸上的活動項目查看詳細資訊。2) 活動詳情會顯示在右側預覽區，請向右滑動或點擊活動後會自動滾動至預覽區。3) 使用上方的活動類型按鈕（ALL、TALK、WORKSHOP、PERFORMANCE）可快速篩選特定類型的活動。
+        </div>
+        
+        <!-- Agenda 標題行 -->
+        <div class="agenda-header">
+          <div class="agenda-controls">
+          </div>
+        </div>
+        
+        <!-- 時間軸模式容器 - 確保ID正確且始終顯示 -->
+        <div
+          class="timeline-mode-container"
+          id="timelineModeContainer"
+        >
+          <div class="timeline-scroll-container" id="timelineScroll">
+            <div class="timeline-calendar" id="timelineCalendar">
+              <!-- 時間軸日曆將由 JavaScript 動態生成 -->
+            </div>
+      </div>          
+          </div>
+          </div>
+    </section>
+
+    <!-- Exhibitor 區域 -->
+    <section class="exhibitor-section" id="exhibitors">
+      <div class="exhibitor-container">
+        <h2 class="exhibitor-title">Exhibitors</h2>
+        
+        <!-- 搜尋和篩選控制面板 -->
+        <div class="exhibitor-search-panel">
+          <!-- 搜尋輸入框 -->
+          <div class="search-section">
+            <div class="search-input-container">
+              <input 
+                type="text" 
+                id="exhibitor-search-input" 
+                class="search-input" 
+                placeholder="SEARCH..." 
+                data-zh="SEARCH..." 
+                data-en="SEARCH..."
+              />
+              <button id="search-clear-btn" class="search-clear-btn" title="清空搜尋">×</button>
+            </div>
+          </div>
+          
+          <!-- 排序按鈕組 -->
+          <div class="filter-section">
+            <ul id="sort_button" class="sort_button" data-sort="atoz">
+              <li data-label="atoz" class="sort-btn active" data-zh="A-Z" data-en="A-Z">A-Z</li>
+              <li data-label="zone" class="sort-btn" data-zh="ZONE" data-en="ZONE">ZONE</li>
+              <li data-label="country" class="sort-btn" data-zh="COUNTRY" data-en="COUNTRY">COUNTRY</li>
+              <li data-label="length" class="sort-btn" data-zh="字數" data-en="LENGTH">LENGTH</li>
+            </ul>
+          </div>
+        </div>
+        
+        <!-- 原有的篩選器控制面板（保留作為備用） -->
+        <div class="exhibitor-filters">
+          <div class="filter-buttons">
+            <button id="sort-name-btn" class="filter-btn active" data-zh="品牌名稱 A-Z" data-en="Brand Name A-Z">品牌名稱 A-Z</button>
+            <button id="sort-country-btn" class="filter-btn" data-zh="國籍" data-en="Country">國籍</button>
+            <button id="sort-number-btn" class="filter-btn" data-zh="攤商編號 A-Z" data-en="Booth Number A-Z">攤商編號 A-Z</button>
+          </div>
+        </div>
+        
+        <!-- 攤商資訊顯示區域 -->
+        <div class="exhibitor-info-content">
+         
+          
+          <div class="exhibitor-display-container" id="exhibitorDisplayContainer">
+            <div class="exhibitors-grid-main">
+              <!-- 參展商將由 JavaScript 動態生成 -->
+            </div>
+          </div>
+          </div>
+          
+        <!-- 攤商名單展開區域 -->
+        <div class="exhibitor-full-list" id="exhibitorFullList">
+          <!-- 頂部控制區域 -->
+          <div class="exhibitor-top-controls">
+            <div class="exhibitor-expand-btn" id="exhibitorExpandBtn">
+              <span class="expand-text">攤商</span>
+              <span class="expand-arrow">↓</span>
+          </div>
+          
+            <!-- 排序按鈕 -->
+            <div class="exhibitor-sort-buttons">
+              <button class="sort-button active" data-sort="country">COUNTRY</button>
+              <button class="sort-button" data-sort="zone">ZONE</button>
+              <button class="sort-button" data-sort="name">NAME</button>
+          </div>
+          </div>
+          
+          <div class="exhibitors-grid"></div>
+          </div>
+          </div>
+    </section>
+
+    <!-- Credit/Team 區域 -->
+    <!-- <section class="credit-section">
+      <div class="credit-container">
+        <h2 class="credit-title" data-zh="製作團隊" data-en="Credits">製作團隊</h2>
+       
+        </div>
+    </section> -->
+
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        // 語言切換功能
+        function initLanguageSwitch() {
+          const langBtn = document.getElementById("lang-btn");
+
+          function switchLanguage() {
+            // 根據按鈕文字判斷當前語言並切換
+            const isCurrentlyZh = langBtn.textContent === "EN";
+            const newLang = isCurrentlyZh ? "en" : "zh";
+
+            // 更新按鈕文字
+            langBtn.textContent = newLang === "zh" ? "EN" : "中文";
+
+            // 更新所有有翻譯屬性的元素
+            const elementsWithTranslation =
+              document.querySelectorAll("[data-zh][data-en]");
+            elementsWithTranslation.forEach((element) => {
+              const text = element.getAttribute(`data-${newLang}`);
+              if (text) {
+                element.innerHTML = text;
+              }
+            });
+
+            // 更新動態票券狀態
+            updateTicketStatusLanguage(newLang);
+          }
+
+          langBtn.addEventListener("click", switchLanguage);
+        }
+
+        // 更新票券狀態的語言
+        function updateTicketStatusLanguage(lang) {
+          const statusElements = document.querySelectorAll('.ticket-status');
+          const buttonElements = document.querySelectorAll('.ticket-btn');
+          
+          
+          statusElements.forEach(statusElement => {
+            const currentText = statusElement.textContent.trim();
+            
+            if (currentText === '開放中' || currentText === 'Available') {
+              statusElement.textContent = lang === 'zh' ? '開放中' : 'Available';
+            } else if (currentText === '未開放' || currentText === 'Not Yet Available') {
+              statusElement.textContent = lang === 'zh' ? '未開放' : 'Not Yet Available';
+            } else if (currentText === '現場購買' || currentText === 'On-site Purchase') {
+              statusElement.textContent = lang === 'zh' ? '現場購買' : 'On-site Purchase';
+            }
+          });
+
+          buttonElements.forEach(buttonElement => {
+            const currentText = buttonElement.textContent.trim();
+            if (currentText === '立即購票' || currentText === 'Buy Now') {
+              buttonElement.textContent = lang === 'zh' ? '立即購票' : 'Buy Now';
+            } else if (currentText === '未開放' || currentText === 'Not Available') {
+              buttonElement.textContent = lang === 'zh' ? '未開放' : 'Not Available';
+            }
+          });
+        }
+
+        // FAQ 點擊功能
+        function initFAQ() {
+          const faqItems = document.querySelectorAll('.faq-item');
+          
+          faqItems.forEach(item => {
+            item.addEventListener('click', function() {
+              // 關閉其他已開啟的FAQ
+              faqItems.forEach(otherItem => {
+                if (otherItem !== item) {
+                  otherItem.classList.remove('active');
+                }
+              });
+              
+              // 切換當前FAQ的狀態
+              item.classList.toggle('active');
+            });
+          });
+        }
+
+        // 票券狀態動態控制
+        function updateTicketStatus() {
+          const currentDate = new Date();
+          
+          // 票種開放日期設定
+          const ticketDates = {
+            "early-bird": {
+              start: new Date("2025-09-01T00:00:00+08:00"),
+              end: new Date("2025-09-07T23:59:59+08:00"),
+            },
+            "presale": {
+              start: new Date("2025-09-08T00:00:00+08:00"),
+              end: new Date("2025-11-20T23:59:59+08:00"),
+            },
+            "fast-pass": {
+              start: new Date("2025-11-21T00:00:00+08:00"),
+              end: new Date("2025-11-23T23:59:59+08:00"),
+            },
+            "student": {
+              start: new Date("2025-09-08T00:00:00+08:00"),
+              end: new Date("2025-11-23T23:59:59+08:00"),
+            },
+            "discount": {
+              start: new Date("2025-09-08T00:00:00+08:00"),
+              end: new Date("2025-11-23T23:59:59+08:00"),
+            },
+            "onsite": {
+              start: new Date("2025-11-21T00:00:00+08:00"),
+              end: new Date("2025-11-23T23:59:59+08:00"),
+            }
+          };
+
+          // 更新票券狀態的函數
+          function updateTicketCard(ticketType, dateRange) {
+            const targetCard = document.querySelector(`[data-ticket-type="${ticketType}"]`);
+            
+            if (!targetCard) {
+              return;
+            }
+
+            const statusElement = targetCard.querySelector('.ticket-status');
+            if (!statusElement) return;
+
+            // 現場票特殊處理：始終顯示為"現場購買"
+            if (ticketType === 'onsite') {
+              // 獲取當前語言
+              const langBtn = document.getElementById("lang-btn");
+              const currentLang = langBtn.textContent === "EN" ? "zh" : "en";
+              
+              statusElement.textContent = currentLang === 'zh' ? '現場購買' : 'On-site Purchase';
+              statusElement.className = 'ticket-status onsite';
+              
+              // 現場票不需要按鈕，保持原有狀態
+              const button = targetCard.querySelector('.ticket-btn');
+              if (button) {
+                button.className = 'ticket-btn hidden'; // 隱藏按鈕
+              }
+            } else {
+              // 其他票種的正常邏輯
+              const isAvailable = dateRange.start && dateRange.end && 
+                                 currentDate >= dateRange.start && 
+                                 currentDate <= dateRange.end;
+
+
+              // 獲取當前語言
+              const langBtn = document.getElementById("lang-btn");
+              const currentLang = langBtn.textContent === "EN" ? "zh" : "en";
+
+              if (isAvailable) {
+                statusElement.textContent = currentLang === 'zh' ? '開放中' : 'Available';
+                statusElement.className = 'ticket-status available';
+                
+                // 更新按鈕文字
+                const button = targetCard.querySelector('.ticket-btn');
+                if (button) {
+                  button.textContent = currentLang === 'zh' ? '立即購票' : 'Buy Now';
+                  button.className = 'ticket-btn available';
+                }
+              } else {
+                statusElement.textContent = currentLang === 'zh' ? '未開放' : 'Not Yet Available';
+                statusElement.className = 'ticket-status unavailable';
+                
+                // 更新按鈕文字
+                const button = targetCard.querySelector('.ticket-btn');
+                if (button) {
+                  button.textContent = currentLang === 'zh' ? '未開放' : 'Not Available';
+                  button.className = 'ticket-btn unavailable';
+                  button.onclick = function(e) {
+                    e.preventDefault();
+                    return false;
+                  };
+                }
+              }
+            }
+          }
+
+          // 更新各個票券狀態
+          updateTicketCard('early-bird', ticketDates['early-bird']);
+          updateTicketCard('presale', ticketDates['presale']);
+          updateTicketCard('fast-pass', ticketDates['fast-pass']);
+          updateTicketCard('student', ticketDates['student']);
+          updateTicketCard('discount', ticketDates['discount']);
+          updateTicketCard('onsite', ticketDates['onsite']);
+          
+          // 確保票券狀態語言正確
+          const langBtn = document.getElementById("lang-btn");
+          const currentLang = langBtn.textContent === "EN" ? "zh" : "en";
+          updateTicketStatusLanguage(currentLang);
+        }
+
+        // 平滑滾動功能
+        function initSmoothScroll() {
+          const navLinks = document.querySelectorAll('.nav-item[href^="#"]');
+          
+          navLinks.forEach(link => {
+            link.addEventListener('click', function(e) {
+              e.preventDefault();
+              const targetId = this.getAttribute('href');
+              const targetElement = document.querySelector(targetId);
+              
+              if (targetElement) {
+                targetElement.scrollIntoView({
+                  behavior: 'smooth',
+                  block: 'start'
+                });
+              }
+            });
+          });
+        }
+
+        // Timeline 初始化功能 - 移除，使用獨立的腳本標籤
+
+        // Exhibitor 初始化功能
+        function initExhibitors() {
+          // 延遲執行，確保 exhibitor-display.js 和 exhibitors-list.js 已經載入
+          setTimeout(function () {
+            console.log("初始化攤商功能");
+
+            // 初始化攤商顯示功能
+            if (typeof ExhibitorDisplay === "function") {
+              window.exhibitorDisplayInstance = new ExhibitorDisplay();
+              console.log("攤商顯示功能已初始化");
+            }
+
+            // 初始化攤商名單功能
+            if (typeof ExhibitorsList === "function") {
+              new ExhibitorsList();
+              console.log("攤商名單功能已初始化");
+            }
+
+            // 初始化篩選器功能
+            initExhibitorFilters();
+            
+            // 初始化新的搜尋系統
+            initExhibitorSearch();
+            
+            // 初始化焦點效果
+            initExhibitorFocusEffect();
+          }, 1500); // 延遲1.5秒執行，確保所有 JS 文件都已載入
+        }
+
+        // 攤商篩選器功能
+        function initExhibitorFilters() {
+          const nameBtn = document.getElementById('sort-name-btn');
+          const countryBtn = document.getElementById('sort-country-btn');
+          const numberBtn = document.getElementById('sort-number-btn');
+
+          // 按鈕點擊事件
+          if (nameBtn) {
+            nameBtn.addEventListener('click', function() {
+              setActiveButton(this);
+              sortExhibitorsByName();
+            });
+          }
+
+          if (countryBtn) {
+            countryBtn.addEventListener('click', function() {
+              setActiveButton(this);
+              sortExhibitorsByCountry();
+            });
+          }
+
+          if (numberBtn) {
+            numberBtn.addEventListener('click', function() {
+              setActiveButton(this);
+              sortExhibitorsByNumber();
+            });
+          }
+
+          // 預設排序為品牌名稱 A-Z
+          sortExhibitorsByName();
+        }
+
+        // 新的搜尋系統功能
+        function initExhibitorSearch() {
+          const searchInput = document.getElementById('exhibitor-search-input');
+          const searchClearBtn = document.getElementById('search-clear-btn');
+          const sortButtons = document.querySelectorAll('.sort-btn');
+
+          // 搜尋輸入框事件
+          if (searchInput) {
+            searchInput.addEventListener('input', function() {
+              performSearch();
+            });
+          }
+
+          // 清空搜尋按鈕
+          if (searchClearBtn) {
+            searchClearBtn.addEventListener('click', function() {
+              searchInput.value = '';
+              performSearch();
+            });
+          }
+
+          // 排序按鈕事件
+          sortButtons.forEach(button => {
+            button.addEventListener('click', function() {
+              // 移除所有按鈕的active類
+              sortButtons.forEach(btn => btn.classList.remove('active'));
+              // 添加當前按鈕的active類
+              this.classList.add('active');
+              
+              // 執行排序
+              const sortType = this.getAttribute('data-label');
+              performSort(sortType);
+            });
+          });
+
+          // 執行搜尋
+          function performSearch() {
+            const searchTerm = searchInput.value.toLowerCase().trim();
+
+            // 獲取所有攤商卡片
+            const exhibitorCards = document.querySelectorAll('.exhibitor-card-main');
+            let visibleCount = 0;
+
+            exhibitorCards.forEach(card => {
+              const brandName = card.querySelector('.exhibitor-brand-display')?.textContent.toLowerCase() || '';
+              const description = card.querySelector('.exhibitor-description')?.textContent.toLowerCase() || '';
+
+              // 搜尋條件檢查
+              let matchesSearch = true;
+
+              // 文字搜尋
+              if (searchTerm) {
+                matchesSearch = brandName.includes(searchTerm) || 
+                               description.includes(searchTerm);
+              }
+
+              // 顯示或隱藏卡片
+              if (matchesSearch) {
+                card.className = 'exhibitor-card-main visible';
+                visibleCount++;
+              } else {
+                card.className = 'exhibitor-card-main hidden';
+              }
+            });
+
+            // 更新搜尋統計
+            updateSearchStats(visibleCount, exhibitorCards.length);
+          }
+
+          // 執行排序
+          function performSort(sortType) {
+            const container = document.getElementById('exhibitorDisplayContainer');
+            if (!container) return;
+
+            const gridContainer = container.querySelector('.exhibitors-grid-main');
+            if (!gridContainer) return;
+
+            const cards = Array.from(document.querySelectorAll('.exhibitor-card-main'));
+            
+            switch (sortType) {
+              case 'atoz':
+                // A-Z 排序（按品牌名稱）
+                cards.sort((a, b) => {
+                  const nameA = a.querySelector('.exhibitor-brand-display')?.textContent.trim() || '';
+                  const nameB = b.querySelector('.exhibitor-brand-display')?.textContent.trim() || '';
+                  return nameA.localeCompare(nameB, 'zh-TW', { numeric: true });
+                });
+                break;
+                
+              case 'zone':
+                // ZONE 排序（按攤位編號）
+                cards.sort((a, b) => {
+                  const numberA = a.querySelector('.exhibitor-booth-display')?.textContent.trim() || '';
+                  const numberB = b.querySelector('.exhibitor-booth-display')?.textContent.trim() || '';
+                  
+                  // 提取數字部分進行排序
+                  const numA = parseInt(numberA.match(/\d+/)?.[0] || '0');
+                  const numB = parseInt(numberB.match(/\d+/)?.[0] || '0');
+                  
+                  if (numA !== numB) {
+                    return numA - numB;
+                  }
+                  
+                  // 如果數字相同，按完整編號排序
+                  return numberA.localeCompare(numberB);
+                });
+                break;
+                
+              case 'country':
+                // COUNTRY 排序（按國籍A-Z排序）
+                cards.sort((a, b) => {
+                  const countryA = a.querySelector('.exhibitor-nationality-display')?.textContent.trim() || '';
+                  const countryB = b.querySelector('.exhibitor-nationality-display')?.textContent.trim() || '';
+                  
+                  // 按國家名稱A-Z排序
+                  return countryA.localeCompare(countryB, 'zh-TW', { numeric: true });
+                });
+                break;
+                
+              case 'length':
+                // 字數排序（按品牌名稱字數）
+                cards.sort((a, b) => {
+                  const nameA = a.querySelector('.exhibitor-brand-display')?.textContent.trim() || '';
+                  const nameB = b.querySelector('.exhibitor-brand-display')?.textContent.trim() || '';
+                  
+                  // 按字數排序（短到長）
+                  const lengthA = nameA.length;
+                  const lengthB = nameB.length;
+                  
+                  if (lengthA !== lengthB) {
+                    return lengthA - lengthB;
+                  }
+                  
+                  // 如果字數相同，按A-Z排序
+                  return nameA.localeCompare(nameB, 'zh-TW', { numeric: true });
+                });
+                break;
+            }
+
+            // 重新排列卡片
+            cards.forEach(card => gridContainer.appendChild(card));
+            
+            // 執行搜尋以更新統計
+            performSearch();
+          }
+
+          // 更新搜尋統計 - 已移除顯示總數功能
+          function updateSearchStats(visibleCount, totalCount) {
+            // 功能已移除
+          }
+        }
+
+        // 初始化參展商焦點效果
+        function initExhibitorFocusEffect() {
+          // 使用定時器確保在外部JS載入後執行
+          setTimeout(function() {
+            // 監聽所有詳細資訊的展開/收合
+            const observer = new MutationObserver(function(mutations) {
+              mutations.forEach(function(mutation) {
+                if (mutation.type === 'attributes' && mutation.attributeName === 'class') {
+                  const target = mutation.target;
+                  if (target.classList.contains('exhibitor-details')) {
+                    const card = target.closest('.exhibitor-card-main');
+                    const allCards = document.querySelectorAll('.exhibitor-card-main');
+                    
+                    if (target.classList.contains('expanded')) {
+                      // 詳細資訊展開時，給其他卡片添加焦點效果
+                      console.log('攤商展開，添加反白效果');
+                      console.log('找到的卡片數量:', allCards.length);
+                      allCards.forEach(c => {
+                        if (c !== card) {
+                          c.classList.add('focused-out');
+                          console.log('添加 focused-out 類別到卡片:', c);
+                        }
+                      });
+                    } else {
+                      // 詳細資訊收合時，移除所有焦點效果
+                      console.log('攤商收合，移除反白效果');
+                      allCards.forEach(c => {
+                        c.classList.remove('focused-out');
+                        console.log('移除 focused-out 類別從卡片:', c);
+                      });
+                    }
+                  }
+                }
+              });
+            });
+            
+            // 開始觀察所有詳細資訊元素
+            const detailsElements = document.querySelectorAll('.exhibitor-details');
+            detailsElements.forEach(element => {
+              observer.observe(element, { attributes: true });
+            });
+            
+            console.log('參展商焦點效果已初始化，監聽', detailsElements.length, '個詳細資訊元素');
+          }, 2000); // 延遲2秒執行，確保外部JS已載入
+        }
+
+        // 設置活動按鈕
+        function setActiveButton(activeBtn) {
+          const buttons = document.querySelectorAll('.filter-btn');
+          buttons.forEach(btn => btn.classList.remove('active'));
+          activeBtn.classList.add('active');
+        }
+
+        // 品牌名稱 A-Z 排序（中文用注音排序）
+        function sortExhibitorsByName() {
+          // 檢查是否有 ExhibitorDisplay 實例並重新渲染
+          if (window.exhibitorDisplayInstance && typeof window.exhibitorDisplayInstance.showAllExhibitors === 'function') {
+            window.exhibitorDisplayInstance.showAllExhibitors();
+            return;
+          }
+
+          const container = document.getElementById('exhibitorDisplayContainer');
+          if (!container) return;
+
+          // 找到網格容器
+          const gridContainer = container.querySelector('.exhibitors-grid-main');
+          if (!gridContainer) return;
+
+          const cards = Array.from(document.querySelectorAll('.exhibitor-card-main'));
+          
+          cards.sort((a, b) => {
+            const nameA = a.querySelector('.exhibitor-name')?.textContent.trim() || '';
+            const nameB = b.querySelector('.exhibitor-name')?.textContent.trim() || '';
+            
+            // 使用 localeCompare 進行中文注音排序
+            return nameA.localeCompare(nameB, 'zh-TW', { numeric: true });
+          });
+
+          // 清除現有內容並重新排列
+          gridContainer.innerHTML = '';
+          cards.forEach(card => gridContainer.appendChild(card));
+        }
+
+        // 國籍排序（按五大洲分組）
+        function sortExhibitorsByCountry() {
+          // 檢查是否有 ExhibitorDisplay 實例並重新渲染
+          if (window.exhibitorDisplayInstance && typeof window.exhibitorDisplayInstance.showAllExhibitors === 'function') {
+            window.exhibitorDisplayInstance.showAllExhibitors();
+            return;
+          }
+
+          const container = document.getElementById('exhibitorDisplayContainer');
+          if (!container) return;
+
+          // 找到網格容器
+          const gridContainer = container.querySelector('.exhibitors-grid-main');
+          if (!gridContainer) return;
+
+          const cards = Array.from(document.querySelectorAll('.exhibitor-card-main'));
+          
+          // 五大洲順序定義
+          const continentOrder = {
+            'ASIA': 1,
+            'EUROPE': 2,
+            'AMERICAS': 3,
+            'AFRICA': 4,
+            'OCEANIA': 5
+          };
+
+          // 國籍到洲的映射
+          const countryToContinent = {
+            '台灣': 'ASIA',
+            '日本': 'ASIA',
+            '韓國': 'ASIA',
+            '中國': 'ASIA',
+            '香港': 'ASIA',
+            '新加坡': 'ASIA',
+            '泰國': 'ASIA',
+            '馬來西亞': 'ASIA',
+            '印尼': 'ASIA',
+            '菲律賓': 'ASIA',
+            '越南': 'ASIA',
+            '印度': 'ASIA',
+            '德國': 'EUROPE',
+            '法國': 'EUROPE',
+            '英國': 'EUROPE',
+            '義大利': 'EUROPE',
+            '西班牙': 'EUROPE',
+            '荷蘭': 'EUROPE',
+            '瑞士': 'EUROPE',
+            '奧地利': 'EUROPE',
+            '比利時': 'EUROPE',
+            '丹麥': 'EUROPE',
+            '瑞典': 'EUROPE',
+            '挪威': 'EUROPE',
+            '芬蘭': 'EUROPE',
+            '美國': 'AMERICAS',
+            '加拿大': 'AMERICAS',
+            '墨西哥': 'AMERICAS',
+            '巴西': 'AMERICAS',
+            '阿根廷': 'AMERICAS',
+            '智利': 'AMERICAS',
+            '秘魯': 'AMERICAS',
+            '哥倫比亞': 'AMERICAS',
+            '澳洲': 'OCEANIA',
+            '紐西蘭': 'OCEANIA',
+            '斐濟': 'OCEANIA',
+            '南非': 'AFRICA',
+            '埃及': 'AFRICA',
+            '摩洛哥': 'AFRICA',
+            '肯亞': 'AFRICA'
+          };
+
+          // 按洲分組
+          const groupedCards = {};
+          cards.forEach(card => {
+            const country = card.querySelector('.exhibitor-country')?.textContent.trim() || '';
+            const continent = countryToContinent[country] || 'OTHER';
+            
+            if (!groupedCards[continent]) {
+              groupedCards[continent] = [];
+            }
+            groupedCards[continent].push(card);
+          });
+
+          // 按洲順序排列並添加分隔標題
+          const sortedContinents = Object.keys(groupedCards).sort((a, b) => {
+            const orderA = continentOrder[a] || 999;
+            const orderB = continentOrder[b] || 999;
+            return orderA - orderB;
+          });
+
+          sortedContinents.forEach(continent => {
+            // 添加洲標題
+            const titleDiv = document.createElement('div');
+            titleDiv.className = 'continent-title';
+            titleDiv.textContent = continent;
+            gridContainer.appendChild(titleDiv);
+
+            // 添加分隔線
+            const separatorDiv = document.createElement('div');
+            separatorDiv.className = 'continent-separator';
+            gridContainer.appendChild(separatorDiv);
+
+            // 排序該洲內的攤商
+            const continentCards = groupedCards[continent];
+            continentCards.sort((a, b) => {
+              const countryA = a.querySelector('.exhibitor-country')?.textContent.trim() || '';
+              const countryB = b.querySelector('.exhibitor-country')?.textContent.trim() || '';
+              return countryA.localeCompare(countryB, 'zh-TW');
+            });
+
+            // 添加該洲的攤商卡片
+            continentCards.forEach(card => gridContainer.appendChild(card));
+          });
+        }
+
+        // 攤商編號 A-Z 排序
+        function sortExhibitorsByNumber() {
+          // 檢查是否有 ExhibitorDisplay 實例並重新渲染
+          if (window.exhibitorDisplayInstance && typeof window.exhibitorDisplayInstance.showAllExhibitors === 'function') {
+            window.exhibitorDisplayInstance.showAllExhibitors();
+            return;
+          }
+
+          const container = document.getElementById('exhibitorDisplayContainer');
+          if (!container) return;
+
+          // 找到網格容器
+          const gridContainer = container.querySelector('.exhibitors-grid-main');
+          if (!gridContainer) return;
+
+          const cards = Array.from(document.querySelectorAll('.exhibitor-card-main'));
+          
+          cards.sort((a, b) => {
+            const numberA = a.querySelector('.exhibitor-number')?.textContent.trim() || '';
+            const numberB = b.querySelector('.exhibitor-number')?.textContent.trim() || '';
+            
+            // 提取數字部分進行排序
+            const numA = parseInt(numberA.match(/\d+/)?.[0] || '0');
+            const numB = parseInt(numberB.match(/\d+/)?.[0] || '0');
+            
+            if (numA !== numB) {
+              return numA - numB;
+            }
+            
+            // 如果數字相同，按完整編號排序
+            return numberA.localeCompare(numberB);
+          });
+
+          // 重新排列卡片到網格容器
+          cards.forEach(card => gridContainer.appendChild(card));
+        }
+
+        // 初始化所有功能
+        initLanguageSwitch();
+        initFAQ();
+        initSmoothScroll();
+        initExhibitors();
+        updateTicketStatus(); // 更新票券狀態
+      });
+      
+      // 攤商動態寬度展開效果
+      setTimeout(() => {
+        console.log('初始化攤商動態寬度展開效果');
+        
+        // 檢查攤商卡片是否存在
+        const allCards = document.querySelectorAll('.exhibitor-card-main');
+        console.log('找到的攤商卡片數量:', allCards.length);
+        
+        if (allCards.length === 0) {
+          console.log('沒有找到攤商卡片，可能數據還沒載入，等待更長時間...');
+          // 如果沒有找到卡片，再等待 2 秒
+          setTimeout(() => {
+            const retryCards = document.querySelectorAll('.exhibitor-card-main');
+            console.log('重試後找到的攤商卡片數量:', retryCards.length);
+            
+            if (retryCards.length === 0) {
+              console.log('仍然沒有找到攤商卡片，請檢查數據載入');
+              return;
+            }
+            
+            // 如果找到了卡片，繼續執行
+            initExhibitorClickHandler();
+          }, 2000);
+          return;
+        }
+        
+        // 檢查第一個卡片的結構
+        const firstCard = allCards[0];
+        console.log('第一個卡片:', firstCard);
+        console.log('第一個卡片的類別:', firstCard.className);
+        console.log('第一個卡片的詳細資訊元素:', firstCard.querySelector('.exhibitor-details'));
+        
+        // 初始化點擊處理器
+        initExhibitorClickHandler();
+      }, 5000); // 增加延遲時間到 5 秒
+      
+      function initExhibitorClickHandler() {
+        console.log('初始化攤商點擊處理器');
+        
+        // 使用事件委託，監聽整個文檔的點擊事件
+        document.addEventListener('click', function(e) {
+          console.log('點擊事件:', e.target);
+          console.log('點擊的目標類別:', e.target.className);
+          
+          // 尋找最近的攤商卡片
+          const card = e.target.closest('.exhibitor-card-main');
+          console.log('找到的卡片:', card);
+          
+          if (!card) {
+            console.log('沒有找到攤商卡片');
+            return;
+          }
+          
+          console.log('點擊了攤商卡片:', card);
+          
+          // 尋找詳細資訊元素
+          const detailsElement = card.querySelector('.exhibitor-details');
+          console.log('找到的詳細資訊元素:', detailsElement);
+          
+          if (!detailsElement) {
+            console.log('沒有找到詳細資訊元素');
+            return;
+          }
+          
+          console.log('找到詳細資訊元素');
+          
+          // 檢查是否已經展開
+          const isExpanded = card.classList.contains('expanded-wide');
+          console.log('是否已展開:', isExpanded);
+          
+          if (isExpanded) {
+            // 如果已經展開，則收合
+            console.log('收合攤商卡片');
+            card.classList.remove('expanded-wide', 'long-content');
+            detailsElement.classList.remove('expanded');
+          } else {
+            // 展開攤商卡片
+            console.log('展開攤商卡片');
+            
+            // 計算 description 的長度來決定佔據多少寬度
+            const descriptionElement = card.querySelector('.exhibitor-description');
+            const contentText = descriptionElement ? descriptionElement.textContent || '' : '';
+            const contentLength = contentText.length;
+            
+            console.log('Description 內容:', contentText);
+            console.log('Description 長度:', contentLength);
+            
+            // 添加展開類別
+            card.classList.add('expanded-wide');
+            detailsElement.classList.add('expanded');
+            
+            // 如果 description 很長，佔據 3 列寬度
+            if (contentLength > 100) {
+              card.classList.add('long-content');
+              console.log('Description 較長，佔據 3 列寬度');
+            } else {
+              console.log('Description 一般，佔據 2 列寬度');
+            }
+            
+            // 添加隨機背景色（只在第一次點擊時添加）
+            console.log('檢查是否已有顏色:', card.dataset.hasColor);
+            if (!card.dataset.hasColor) {
+              const highlightColors = [
+                'yellowgreen',
+                'yellow',
+                'cyan',
+                'orangered',
+                'magenta',
+                'pink',
+                'rgb(52, 77, 203)',
+                'forestgreen'
+              ];
+              
+              const randomColor = highlightColors[Math.floor(Math.random() * highlightColors.length)];
+              console.log('選擇的隨機顏色:', randomColor);
+              card.style.backgroundColor = randomColor;
+              card.dataset.hasColor = 'true';
+              console.log('添加隨機背景色:', randomColor);
+              console.log('卡片現在的背景色:', card.style.backgroundColor);
+            } else {
+              console.log('卡片已經有顏色，跳過');
+            }
+          }
+        });
+      }
+    </script>
+    
+    <!-- 載入相關的 JavaScript 文件 -->
+    <script src="js/infolog.js"></script>
+
+    <script src="js/timeline-visit.js"></script>
+    <script src="js/exhibitors-list.js"></script>
+    <script src="js/exhibitor-display.js"></script>
+    
+    
+    <script>
+      // 回到頂部按鈕功能
+      document.addEventListener('DOMContentLoaded', function() {
+        const backToTopBtn = document.getElementById('backToTop');
+        
+        // 顯示/隱藏按鈕（當頁面向下滾動超過 300px 時顯示）
+        function toggleBackToTop() {
+          if (window.pageYOffset > 300) {
+            backToTopBtn.style.display = 'flex';
+          } else {
+            backToTopBtn.style.display = 'none';
+          }
+        }
+        
+        // 平滑滾動到頂部
+        function scrollToTop() {
+          window.scrollTo({
+            top: 0,
+            behavior: 'smooth'
+          });
+        }
+        
+        // 監聽滾動事件
+        window.addEventListener('scroll', toggleBackToTop);
+        
+        // 點擊按鈕滾動到頂部
+        backToTopBtn.addEventListener('click', scrollToTop);
+        
+        // 初始化隱藏按鈕
+        backToTopBtn.style.display = 'none';
+      });
+    </script>
+  </body>
+</html>

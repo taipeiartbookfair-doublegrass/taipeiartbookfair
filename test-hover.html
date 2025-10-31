@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Zine Hover 測試</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            background: #f5f5f5;
+        }
+        .test-container {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            margin-bottom: 20px;
+        }
+        .book-item {
+            flex: 0 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1rem;
+            color: black;
+            background-color: plum;
+            border: 1px solid black;
+            cursor: pointer;
+            writing-mode: vertical-lr;
+            text-orientation: mixed;
+            min-width: 80px;
+            min-height: 80px;
+            aspect-ratio: 1;
+            width: 148px;
+            height: 210px;
+            margin-bottom: 10px;
+            transition: all 0.2s ease;
+        }
+        .book-item:hover {
+            background-color: yellow !important;
+            color: red !important;
+        }
+        .test-row {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+        .debug-info {
+            background: #f8f9fa;
+            border: 1px solid #dee2e6;
+            border-radius: 4px;
+            padding: 15px;
+            margin-top: 10px;
+            font-family: monospace;
+            font-size: 12px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Zine Hover 測試</h1>
+    
+    <div class="test-container">
+        <h2>測試左排 Zine Hover 效果</h2>
+        <div class="test-row">
+            <div class="book-item" data-index="1">Zine 1</div>
+            <div class="book-item" data-index="2">Zine 2</div>
+            <div class="book-item" data-index="3">Zine 3</div>
+        </div>
+        
+        <div class="debug-info" id="debug-info">
+            等待 hover 事件...
+        </div>
+    </div>
+
+    <script>
+        const bookItems = document.querySelectorAll('.book-item');
+        const debugInfo = document.getElementById('debug-info');
+        
+        bookItems.forEach((item, index) => {
+            console.log(`綁定 hover 事件到第 ${index + 1} 個 zine`);
+            
+            item.addEventListener('mouseenter', function() {
+                const timestamp = new Date().toLocaleTimeString();
+                const message = `[${timestamp}] Hover 事件觸發 - ${this.textContent}`;
+                console.log(message);
+                debugInfo.textContent = message;
+                
+                // 測試樣式變更
+                this.style.backgroundColor = 'yellow';
+                this.style.color = 'red';
+                this.style.transform = 'rotate(5deg)';
+            });
+            
+            item.addEventListener('mouseleave', function() {
+                const timestamp = new Date().toLocaleTimeString();
+                const message = `[${timestamp}] Mouse leave - ${this.textContent}`;
+                console.log(message);
+                debugInfo.textContent = message;
+                
+                // 恢復樣式
+                this.style.backgroundColor = 'plum';
+                this.style.color = 'black';
+                this.style.transform = 'rotate(0deg)';
+            });
+            
+            // 測試點擊事件
+            item.addEventListener('click', function() {
+                const timestamp = new Date().toLocaleTimeString();
+                const message = `[${timestamp}] 點擊事件觸發 - ${this.textContent}`;
+                console.log(message);
+                debugInfo.textContent = message;
+            });
+        });
+        
+        // 檢查元素狀態
+        console.log(`找到 ${bookItems.length} 個 book-item 元素`);
+        bookItems.forEach((item, index) => {
+            console.log(`第 ${index + 1} 個元素:`, {
+                textContent: item.textContent,
+                className: item.className,
+                style: item.style.cssText,
+                computedStyle: window.getComputedStyle(item)
+            });
+        });
+    </script>
+</body>
+</html>
