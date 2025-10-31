@@ -2084,9 +2084,6 @@ display:none;
   .timeline-preview-image {
     width:250px;
   }
-  .timeline-right-container.dynamic{
-    overflow-y:hidden;
-  }
   .timeline-right-container{
     flex: 0 0 21%;
   }
