@@ -268,7 +268,6 @@ function renderTimelineWithData(timelineData) {
       <div class="timeline-preview-date-time">
         ${dateTimeStr}
       </div>
-      <div style="overflow:scroll">
         <div class="timeline-preview-event-title">
         ${randomWorkshop.summary || "未命名活動"}
         </div>
@@ -276,7 +275,6 @@ function renderTimelineWithData(timelineData) {
           ${fields.DESCRIPTION || randomWorkshop.description || "暫無詳細描述"}
         </div>
         ${fields.SIGNUP ? `<div class="timeline-preview-signup"><a href="${fields.SIGNUP}" target="_blank" class="timeline-preview-signup-btn">SIGN UP</a></div>` : ''}
-      </div>
     `;
   }
 
