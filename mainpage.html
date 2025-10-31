@@ -392,6 +392,41 @@
       </div>
     </div>
 
+    <!-- Credit Drop-up -->
+    <div class="credit-dropup-container" aria-live="polite">
+      <div class="credit-panel" id="creditPanel" role="dialog" aria-modal="false" aria-labelledby="creditTitle">
+        <h3 id="creditTitle">CREDITS · COLOPHON</h3>
+        <p>
+          This website's front-end is designed and hand coded by Nai-Syuan Ye(cherrythehuman).
+          Po-Chen Yeh and Po-yu Yeh are the back-end developer and the assistance. 
+          This site is programmed with love and a bit of roughness. Built with vanilla HTML/CSS/JS, no heavy frameworks.
+        </p>
+       <p>
+          Special thanks to Doğa Gönüllü, Merle Findhammer, and Polina Slavova for being my eyes and providing some quirks. All the tools, software and hardwares that support the whole process along the way.
+         Yuxin Hu, Polina Titova, all our family and friends for providing me emotional support and of course the whole team of TPABF (especially Frank, Xavia, and Shao) for giving me so much freedom to build such a crazy website<3 </p>
+      
+        <p>
+          Images, calendar UI, ZINE UI and timeline UI are custom-built for Taipei Art Book Fair. Code is intentionally modular with styles centralized for easier maintenance.
+        </p>
+       <p><strong>Open-source fonts in use</strong>:</p>
+        <ul>
+          <li>Inclusive Sans (Google Fonts)</li>
+          <li>BioRhyme Expanded (Google Fonts)</li>
+          <li>Libre Franklin (Google Fonts)</li>
+          <li>Montserrat (Google Fonts)</li>
+          <li>Alice (Google Fonts)</li>
+          <li>Instrument Serif (Google Fonts)</li>
+          <li>IBM Plex Sans (Google Fonts)</li>
+          <li>IBM Plex Sans JP (Google Fonts)</li>
+          <li>IBM Plex Mono (Google Fonts)</li>
+          <li>Poppins (Google Fonts)</li>
+          <li>PicNic (velvetyne)</li>
+          <li>Fungal-Grow (velvetyne)</li>
+        </ul>
+        
+      </div>
+    </div>
+
     <!-- 頁腳 -->
     <footer class="footer">
       <div class="footer-content">
@@ -405,113 +440,7 @@
       </div>
     </footer>
 
-    <!-- Credit Drop-up -->
-    <div class="credit-dropup-container" aria-live="polite">
-      <div class="credit-panel" id="creditPanel" role="dialog" aria-modal="false" aria-labelledby="creditTitle">
-        <h3 id="creditTitle">CREDITS · COLOPHON</h3>
-        <p>
-          This site is coded with love and a bit of roughness. Built with vanilla HTML/CSS/JS, no heavy frameworks.
-        </p>
-        <p><strong>Open-source fonts in use</strong>:</p>
-        <ul>
-          <li>Inclusive Sans (Google Fonts)</li>
-          <li>BioRhyme Expanded (Google Fonts)</li>
-          <li>Libre Franklin (Google Fonts)</li>
-          <li>Montserrat (Google Fonts)</li>
-        </ul>
-        <p>
-          Images, zine mockups and timeline UI are custom-built for Taipei Art Book Fair. Code is intentionally modular with styles centralized for easier maintenance.
-        </p>
-      </div>
-    </div>
-
-    <script>
-      // Newsletter 彈出視窗功能
-      const newsletterPopup = document.getElementById("newsletterPopup");
-      const closeNewsletter = document.getElementById("closeNewsletter");
-
-      // 語言切換器功能
-      const languageToggle = document.getElementById("language-toggle");
-      let currentLanguage = "zh"; // 預設中文
-
-      // 根據當前語言設置按鈕文字
-      function updateLanguageButton() {
-        if (currentLanguage === "zh") {
-          // 當前是中文，顯示 English 按鈕
-          languageToggle.textContent = "English";
-        } else {
-          // 當前是英文，顯示中文按鈕
-          languageToggle.textContent = "中文";
-        }
-      }
-
-      // 點擊切換按鈕
-      languageToggle.addEventListener("click", () => {
-        if (currentLanguage === "zh") {
-          currentLanguage = "en";
-          // 調用 duolanguage.js 的更新功能
-          if (typeof updateText === "function") {
-            updateText("en");
-          }
-          console.log("切換到英文");
-        } else {
-          currentLanguage = "zh";
-          // 調用 duolanguage.js 的更新功能
-          if (typeof updateText === "function") {
-            updateText("zh");
-          }
-          console.log("切換到中文");
-        }
-        updateLanguageButton();
-      });
-
-      // 監聽語言變化事件
-      window.addEventListener("languageChanged", function (event) {
-        currentLanguage = event.detail.language;
-        updateLanguageButton();
-      });
-
-      // 初始化按鈕文字
-      updateLanguageButton();
-
-      // Custom form submission handling for Mailchimp newsletter
-      document.addEventListener('DOMContentLoaded', function() {
-        const newsletterForm = document.getElementById("mc-embedded-subscribe-form");
-        if (newsletterForm) {
-          newsletterForm.addEventListener("submit", function (e) {
-            const email = document.getElementById("mce-EMAIL");
-            if (!email) return;
-            
-            const emailValue = email.value;
-            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-
-            // Simple validation
-            if (!emailValue || !emailRegex.test(emailValue)) {
-              e.preventDefault();
-              return false;
-            }
-
-            // Show loading state and let the form submit naturally to Mailchimp
-            const submitBtn = document.getElementById("mc-embedded-subscribe");
-            if (submitBtn) {
-              const originalText = submitBtn.value;
-              submitBtn.value = "SUBSCRIBING...";
-              submitBtn.disabled = true;
-
-              // Reset form after submission
-              setTimeout(() => {
-                submitBtn.value = originalText;
-                submitBtn.disabled = false;
-                email.value = "";
-              }, 2000);
-            }
-
-            // Allow the form to submit naturally to Mailchimp
-            return true;
-          });
-        }
-      });
-    </script>
+    
     <script src="js/poster-flip.js"></script>
     <script src="js/calender.js"></script>
     <script src="js/duolanguage.js"></script>
@@ -524,17 +453,30 @@
         const trigger = document.getElementById('footerCredits');
         const panel = document.getElementById('creditPanel');
         if (!trigger || !panel) return;
+        
         trigger.addEventListener('click', function(e){
           e.preventDefault();
+          e.stopPropagation(); // 阻止事件冒泡
           const isOpen = panel.classList.toggle('open');
           trigger.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
           trigger.setAttribute('aria-controls', 'creditPanel');
+          
+          // 如果打開了，滾動到頁面最底部
+          if (isOpen) {
+            setTimeout(() => {
+              window.scrollTo({ top: document.documentElement.scrollHeight, behavior: 'smooth' });
+            }, 100);
+          }
         });
-        // click outside to close
+        
+        // click outside to close - 只在面板打開時才關閉
         document.addEventListener('click', function(e){
-          if (!panel.contains(e.target) && e.target !== trigger) {
-            panel.classList.remove('open');
-            trigger.setAttribute('aria-expanded', 'false');
+          if (panel.classList.contains('open')) {
+            // 如果點擊的不是面板內容也不是觸發按鈕，則關閉
+            if (!panel.contains(e.target) && e.target !== trigger) {
+              panel.classList.remove('open');
+              trigger.setAttribute('aria-expanded', 'false');
+            }
           }
         });
       })();

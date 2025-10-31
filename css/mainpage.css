@@ -2583,7 +2583,7 @@ p {
     display: flex;
     flex-direction: column;
     width: 100%;
-    padding: 0.5rem;
+    padding: .4rem;
     gap: 1rem;
     order: 1;
   }
@@ -3121,7 +3121,7 @@ p {
   .event-gallery-divider {
     border: none;
     border-top: 1px dashed var(--main-color);
-    margin: 1rem 0;
+    margin: .8rem 0;
     width: 100%;
   }
 
@@ -3937,6 +3937,11 @@ p {
 }
 /* About 頁面響應式設計 */
 @media (max-width: 768px) {
+  .calender-section {
+    background-color:lime;
+    padding-bottom:15px !important;
+  }
+
   .about-title {
     font-size: 2.5rem;
     margin-bottom: 2rem;
@@ -3974,10 +3979,8 @@ p {
 
 /* --- Credit drop-up button & panel (dark grey) --- */
 .credit-dropup-container {
-  position: fixed;
-  right: 16px;
-  bottom: 16px;
-  z-index: 1000;
+  position: relative;
+  width: 100%;
 }
 
 .credit-btn {
@@ -3998,22 +4001,22 @@ p {
 .credit-btn:active { transform: translateY(1px); }
 
 .credit-panel {
-  position: absolute;
-  right: 0;
-  bottom: 48px; /* drop up */
-  width: min(88vw, 360px);
-  max-height: 60vh;
-  overflow: auto;
-  padding: 14px 16px;
+  padding: 0;
   background: #2b2b2b;
   color: #f0f0f0;
   border: 2px solid #1f1f1f;
-  border-radius: 12px;
   box-shadow: 0 8px 24px rgba(0,0,0,0.28);
-  display: none;
+  max-height: 0;
+  opacity: 0;
+  overflow: hidden;
 }
 
-.credit-panel.open { display: block; }
+.credit-panel.open {
+  max-height: 2000px;
+  opacity: 1;
+  padding: 14px 16px;
+  overflow: auto;
+}
 
 .credit-panel h3 {
   margin: 0 0 8px 0;
