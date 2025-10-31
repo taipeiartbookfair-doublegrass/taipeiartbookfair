@@ -4,7 +4,7 @@ const creditsHTML = `
           This website's front end was designed and hand-coded by 
           <a href="https://www.naisyuanye.com" target="_blank">Nai-Syuan Ye (cherrythehuman)</a> ☁︎☁︎☁︎.  
           <a href="https://pochunyeh.com" target="_blank">Po-Chen Yeh</a> and Po-Yu Yeh are the back-end developer and assistant.  
-          This site was muddily coded between Arnhem and Taipei (2025–2026), with frequent coffee refills, oolong milk tea overflows, sweat, and occasional typos. Conceptualized under the blinding light of too many browser tabs, memes from all eras, and books and newspapers from my studio shelf, friends’ shelves, and secondhand stores. Built with lavender-vanilla HTML, CSS, and JS.  
+          This site was muddily coded between Arnhem and Taipei (2025–2026), with frequent coffee refills, oolong milk tea overflows, sweat, and occasional typos. Conceptualized under the blinding light of too many browser tabs, memes from all eras, books & newspapers from my studio shelf, friends’ shelves, and secondhand stores. Built with lavender-vanilla HTML, CSS, and JS.  
           The structure, zine wall, timeline, calendar, and all the random functions were custom-built for the Taipei Art Book Fair — with love.  
         </p>
 
@@ -30,7 +30,7 @@ const creditsHTML = `
           <a href="https://yaodejn.com/" target="_blank">Yaode JN</a>,
           Canavar, Threecups, Salmon, Hanji — and to all our family and friends — for being my eyes, adding their quirks, providing emotional support, and bearing with my messy coding schedule/chaotic hive mind;  
           to all the tools, software, hardware, power cables and computers, w3schools, MDN Web Docs, all kinds of AI, people on Reddit, StackOverflow, GitHub, and other forums that supported the process along the way;  
-          the musics on spotify and random youtube music bundles that vibe my code and feed my spirit; The Beatles; The hoomans who build the internet, My pillows and my house plants;
+          the musics on spotify and random youtube music bundles that vibe my code and feed my spirit; The Beatles; The hoomans who build the internet; My pillows and my house plants;
           and of course, to the entire Taipei Art Book Fair team (especially Frank, Xavia, and Shao) for their support, guidance, and for giving me the freedom to build such a lovely and chaotic website <span style="font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;"><3</span>
         </p>
 
@@ -39,8 +39,7 @@ const creditsHTML = `
       </p>
 
         <p>
-          Version 1.0 · Published October 2025
-          Updated sporadically when inspiration (or panic) strikes.<br>
+          Version 1.0 · Published October 2025 · Updated sporadically when inspiration (or panic) strikes.<br>
           © 2025 Taipei Art Book Fair
         </p>
 `;
