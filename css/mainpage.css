@@ -2258,38 +2258,20 @@ p {
   }
 }
 
-/* 手機版專用動畫 - 平滑回彈效果 */
+/* 手機版專用動畫 - 移動50%因為有兩組相同的圖片 */
 @keyframes slide-mobile {
   0% {
     transform: translateX(0);
   }
-  25% {
-    transform: translateX(-25%);
-  }
-  50% {
-    transform: translateX(-50%);
-  }
-  75% {
-    transform: translateX(-75%);
-  }
   100% {
-    transform: translateX(-100%);
+    transform: translateX(-50%);
   }
 }
 
-/* 第二個輪播的反向動畫 */
+/* 第二個輪播的反向動畫 - 從-50%移動回0 */
 @keyframes slide-mobile-reverse {
   0% {
-    transform: translateX(-100%);
-  }
-  25% {
-    transform: translateX(-75%);
-  }
-  50% {
     transform: translateX(-50%);
-  }
-  75% {
-    transform: translateX(-25%);
   }
   100% {
     transform: translateX(0);
@@ -4027,10 +4009,20 @@ p {
 .credit-panel p, .credit-panel li {
   font-size: 0.9rem;
   line-height: 1.5;
+  color:plum;
 }
 
-.credit-panel ul { margin: 6px 0 0 18px; }
+.credit-panel a {
+  background-color: plum; color: black;
+}
 
+.credit-panel ul { 
+  margin: 6px 0 0 18px; 
+}
+
+.credit-panel li {
+  color: lightgray;
+}
 @media (max-width: 768px) {
   .credit-panel {
     width: calc(100vw - 24px);

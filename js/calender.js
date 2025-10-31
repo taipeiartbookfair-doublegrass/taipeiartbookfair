@@ -622,7 +622,7 @@ function renderEvents(items) {
             eventTypeTag.style.color = "#0066CC"; // blue
             break;
           case "PERFORMANCE":
-            eventTypeTag.style.color = "#FFD700"; // yellow
+            eventTypeTag.style.color = "blueviolet"; // blueviolet
             break;
           case "EXHIBITION":
             eventTypeTag.style.color = "#000000"; // black
