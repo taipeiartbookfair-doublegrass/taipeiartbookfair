@@ -28,7 +28,7 @@ const creditsHTML = `
           <a href="https://polinatitova.nl/" target="_blank">Polina Titova</a>, 
           <a href="https://pascalburgers.nl/" target="_blank">Pascal Burgers</a>, 
           <a href="https://yaodejn.com/" target="_blank">Yaode JN</a>,
-          Canavar, Threecups, Salmon, Hanji, all our family and friends — for being my eyes, adding their quirks, providing emotional support, and bearing with my messy coding schedule/chaotic hive mind;  
+          Canavar, Threecups, Salmon, Hanji, all our family and friends — for being my eyes, adding their quirks, providing emotional support and food, and bearing with my messy coding schedule/chaotic hive mind;  
           to all the tools, software, hardware, power cables and computers, w3schools, MDN Web Docs, all kinds of AI, people on Reddit, StackOverflow, GitHub, and other forums that supported the process along the way;  
           The musics, night markets, de Rijn, electronic shops, viruses and ads that vibe my code and feed my soul; The Beatles; The hoomans who build the internet; My pillows and my house plants; 
           and of course, to the entire Taipei Art Book Fair team (especially Frank, Xavia, and Shao) for their support, guidance, and for giving me the freedom to build such a lovely and chaotic website <span style="font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;"><3</span>
