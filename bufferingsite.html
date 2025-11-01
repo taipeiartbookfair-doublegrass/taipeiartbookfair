@@ -1,0 +1,512 @@
+<!-- force rebuild -->
+<!-- This website's front-end is designed and rushly coded by Nai-Syuan Ye(cherrythehuman).
+Po-Chen Yeh and Po-yu Yeh are the back-end developer and the assistance. This serves merely as a buffering site before the true 2025 TPABF site is up.
+
+Special thanks to Doğa Gönüllü and Merle Findhammer for being my eyes and providing some quirks, Yaode JN for providing me so many technical helps and of course the whole team of TPABF for giving me so much freedom<3 
+
+www.naisyuanye.com
+https://github.com/taipeiartbookfair-doublegrass/taipeiartbookfair.github.io 
+
+font in use: Poppins, PicNic, and Inclusive Sans 
+-->
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>草率季Taipei Art Book Fair</title>
+    <link rel="stylesheet" href="css/style.css" />
+    <link rel="stylesheet" href="css/font.css" />
+    <link rel="shortcut icon" href="image/icon-1.ico" />
+
+    <script src="jquery-ui-1.14.1/jquery-ui.js"></script>
+    <!-- safari background -->
+    <script>
+      document.addEventListener("DOMContentLoaded", () => {
+        const isSafari = /^((?!chrome|android).)*safari/i.test(
+          navigator.userAgent
+        );
+        const img = document.getElementById("sasa");
+
+        if (isSafari && img) {
+          img.src = "safaririp.jpg";
+          img.style.filter = "none";
+        }
+      });
+    </script>
+
+    <!-- Google tag (gtag.js) -->
+    <script
+      async
+      src="https://www.googletagmanager.com/gtag/js?id=G-EPSXJPDH6L"
+    ></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+      gtag("js", new Date());
+
+      gtag("config", "G-EPSXJPDH6L");
+    </script>
+  </head>
+  <body>
+    <img
+      draggable="false"
+      (dragstart)="false;"
+      class="bgimg"
+      id="sasa"
+      src="001.jpg"
+    />
+
+    <div class="grid-layer overlay" style="z-index: -2"></div>
+
+    <!-- Toggle UI -->
+    <div class="toggle-ui">
+      <button id="toggle-ads">關閉廣告 ✕</button>
+    </div>
+
+    <!-- 廣告刷起來 -->
+    <div class="flickers" id="flickers"></div>
+    <div class="tag-m">
+      <p>&nbsp;TAIPEI ART BOOK FAIR&nbsp;</p>
+    </div>
+    <div class="tag2-m">
+      <p>&nbsp;草率季&nbsp;</p>
+    </div>
+    <!-- <div class="tag3-m">
+      <p>&nbsp;Soft POW 無限柔軟&nbsp;</p>
+    </div> -->
+
+    <!-- moshimoshi -->
+    <nav>
+      <a class="vertical about" onclick="myAbout()">ABOUT</a>
+      <!-- <div onclick="openThis(openopencall);" class="open-call">
+        <span>OPEN CALL</span><br />
+        <span>OPEN CALL</span><br />
+        <span>OPEN CALL</span><br />
+        <span>OPEN CALL</span><br />
+        <span>OPEN CALL</span><br />
+        <span>OPEN CALL</span><br />
+        <span>OPEN CALL</span><br />
+        <span>OPEN CALL</span><br />
+        <span>OPEN CALL</span><br />
+        <span>OPEN CALL</span><br />
+        <span>OPEN CALL</span><br />
+        <span>OPEN CALL</span><br />
+        <span>OPEN CALL</span><br />
+        <span>OPEN CALL</span><br />
+        <span>OPEN CALL</span><br />
+        <span>OPEN CALL</span><br />
+        <span>OPEN CALL</span><br />
+        <span>OPEN CALL</span>
+      </div>
+      <a onclick="openThis(openopencall);" class="vertical open-call-m"
+        >OPEN CALL</a
+      > -->
+      <div class="open-call">
+        <a href="ticket.html" style="color: ghostwhite">
+          <span>GET A TICKET</span><br />
+          <span>GET A TICKET</span><br />
+          <span>GET A TICKET</span><br />
+          <span>GET A TICKET</span><br />
+          <span>GET A TICKET</span><br />
+          <span>GET A TICKET</span><br />
+          <span>GET A TICKET</span><br />
+          <span>GET A TICKET</span><br />
+          <span>GET A TICKET</span><br />
+          <span>GET A TICKET</span><br />
+          <span>GET A TICKET</span><br />
+          <span>GET A TICKET</span><br />
+          <span>GET A TICKET</span><br />
+          <span>GET A TICKET</span><br />
+          <span>GET A TICKET</span><br />
+          <span>GET A TICKET</span><br />
+          <span>GET A TICKET</span><br />
+          <span>GET A TICKET</span></a
+        >
+      </div>
+      <a href="ticket.html" class="vertical open-call-m">GET A TICKET</a>
+      <a
+        href="https://nmhw.taipeiartbookfair.com/"
+        target="_blank"
+        class="vertical shop"
+        >SHOP</a
+      >
+      <a
+        href="https://www.facebook.com/taipeiartbookfair/"
+        target="_blank"
+        class="vertical fb"
+        >FACEBOOK</a
+      >
+      <a
+        href="https://www.instagram.com/taipeiartbookfair/"
+        target="_blank"
+        class="vertical ig"
+        >INSTAGRAM</a
+      >
+      <a href="mailto:shakyfloor@double-grass.com" class="vertical email"
+        >EMAIL</a
+      >
+    </nav>
+
+    <!-- 照片轉起來！Hot! -->
+    <div class="rotata" id="rotata">
+      <!-- automation!! -->
+    </div>
+
+    <!-- Date & Location -->
+    <div class="info">
+      <div>
+        2025 草率季 Taipei Art Book Fair<br />
+        - Soft POW 無限柔軟 -<br /><br />
+        [時間Time] 2025.11.21–23
+        <br />
+        &nbsp;&nbsp;- 11/21(Fri.) 13-21 <br />
+        &nbsp;&nbsp;- 11/22(Sat.) 11-20 <br />
+        &nbsp;&nbsp;- 11/23(Sun.) 11-18<br />
+        [地址Address] 華山1914文化創意產業園區 東二 ABCD棟 Huashan Creative Park
+        <br />
+        [重要資訊 Info Log]<br />
+        <div id="info-log" style="white-space: pre-wrap">🚧 讀取中…</div>
+        <div
+          style="
+            background-color: blueviolet;
+
+            border-radius: 10px;
+            text-align: center;
+          "
+        >
+          <a href="ticket.html" style="color: white; text-decoration: none">
+            購票頁面 | GET A TICKET</a
+          >
+        </div>
+      </div>
+    </div>
+
+    <!-- banana -->
+    <div class="banner">
+      <div class="banner-track">
+        <div class="banner-content">
+          <span class="dot"></span> 2025 草率季 TPABF
+          徵件結果已公布，請有報名的單位登入攤商系統查詢。 →→
+          <span class="dot"></span> The selection results for the 2025 TPABF are
+          now available. Please log in to the exhibitor system to check your
+          application status. →→
+          <span class="dot" style="background-color: blueviolet"></span>
+          請持續關注我們的社群平台，掌握最新活動消息。Follow us on social media
+          for the latest updates.
+          <span class="dot"></span> 2025 草率季 TPABF
+          徵件結果已公布，請有報名的單位登入攤商系統查詢。 →→
+          <span class="dot"></span> The selection results for the 2025 TPABF are
+          now available. Please log in to the exhibitor system to check your
+          application status. →→
+          <span class="dot" style="background-color: blueviolet"></span>
+          請持續關注我們的社群平台，掌握最新活動消息。Follow us on social media
+          for the latest updates.
+        </div>
+        <div class="banner-content">
+          <span class="dot"></span> 2025 草率季 TPABF
+          徵件結果已公布，請有報名的單位登入攤商系統查詢。 →→
+          <span class="dot"></span> The selection results for the 2025 TPABF are
+          now available. Please log in to the exhibitor system to check your
+          application status. →→
+          <span class="dot" style="background-color: blueviolet"></span>
+          請持續關注我們的社群平台，掌握最新活動消息。Follow us on social media
+          for the latest updates.
+          <span class="dot"></span> 2025 草率季 TPABF
+          徵件結果已公布，請有報名的單位登入攤商系統查詢。 →→
+          <span class="dot"></span> The selection results for the 2025 TPABF are
+          now available. Please log in to the exhibitor system to check your
+          application status. →→
+          <span class="dot" style="background-color: blueviolet"></span>
+          請持續關注我們的社群平台，掌握最新活動消息。Follow us on social media
+          for the latest updates.
+          <span class="dot"></span> 2025 草率季 TPABF
+          徵件結果已公布，請有報名的單位登入攤商系統查詢。 →→
+          <span class="dot"></span> The selection results for the 2025 TPABF are
+          now available. Please log in to the exhibitor system to check your
+          application status. →→
+          <span class="dot" style="background-color: blueviolet"></span>
+          請持續關注我們的社群平台，掌握最新活動消息。Follow us on social media
+          for the latest updates.
+          <span class="dot"></span> 2025 草率季 TPABF
+          徵件結果已公布，請有報名的單位登入攤商系統查詢。 →→
+          <span class="dot"></span> The selection results for the 2025 TPABF are
+          now available. Please log in to the exhibitor system to check your
+          application status. →→
+          <span class="dot" style="background-color: blueviolet"></span>
+          請持續關注我們的社群平台，掌握最新活動消息。Follow us on social media
+          for the latest updates.
+        </div>
+      </div>
+    </div>
+    <!-- tags -->
+    <div class="tag">
+      <p>&nbsp;TAIPEI ART BOOK FAIR&nbsp;</p>
+    </div>
+    <div class="tag2">
+      <p>&nbsp;草率季&nbsp;</p>
+    </div>
+    <!-- <div class="tag3">
+      <p>&nbsp;Soft POW 無限柔軟&nbsp;</p>
+    </div> -->
+    <!-- 關羽
+  <div class="about-text">
+    <p>一年一度的獨立藝文盛會「草率季」（Taipei Art Book Fair）在今年邁入第八屆。這個自2016年起年年舉行（除2021年因疫情停辦）的文創活動，迄今仍不斷打破大眾對市集的想像。<br><br>現場集結各路創作者、出版社、獨立書店與藝術家等攤位，展出各項獨立刊物、畫冊、藝術雜誌、美術書刊、特色服飾、配件、手做小物⋯⋯等極具特色的出版品與實體創作品，堪稱是年度最大攤的獨立出版創作者派對。
+      <br>每年為期三天的活動裡皆湧入大量人潮，集結所有熱愛設計、攝影、插畫、漫畫、印刷等不同類型的各路文青＋潮青們齊聚一堂。<br><br>This three-day event showcases a diverse range of art books from various publishers, artists, and creators from around the globe. It's a platform for exploring and discovering unique perspectives within the world of art and creativity.</p>
+  </div> -->
+    <div id="openopencall" class="openopencall">
+      <div class="opencallframe">
+        <div class="opencall-title">OPEN CALL</div>
+
+        <div class="textcolumn">
+          <div class="mobiledirection" id="zh"></div>
+          <div class="column zh">
+            <h2>歡迎來到 2025 草率季 - Soft POW 無限柔軟</h2>
+            <p>
+              <span style="color: red">草率季2025徵件已截止！</span><br /><br />
+              感謝您對草率季-台北藝術書展的支持，2025年第9屆草率季「Soft POW
+              無限柔軟」徵件開始，在您繼續提交申請前，請耐心閱讀以下參展條件，申請即表示您已閱讀、了解並同意並接受。
+            </p>
+            <br />
+            <h3>書展資訊</h3>
+            <div>
+              <span>時間: </span>11月21日（五）13:00–21:00<br />
+              <span style="visibility: hidden">時間: </span
+              >11月22日（六）11:00–20:00<br />
+              <span style="visibility: hidden">時間: </span
+              >11月23日（日）11:00–18:00
+            </div>
+            <p>
+              地點: 華山1914文化創意產業園區 東二 ABCD棟
+              <small
+                ><a href="https://g.co/kgs/mVt7cw6"
+                  >(https://g.co/kgs/mVt7cw6)</a
+                ></small
+              >
+            </p>
+            <br />
+            <h3>申明</h3>
+            <p>
+              本表單適用於欲擁有桌位或空地展示／販售出版品、藝術品或裝置的參展者。當我們收到大量申請資料時，主辦單位保留依填表內容篩選、拒絕之權利。
+            </p>
+            <br />
+            <h3>申請時程</h3>
+            <p>
+              <span class="deadline-highlight"
+                >申請截止：6月15日（日）24:00<br
+              /></span>
+              審核通知：6月30日（一）12:00<br />
+              &nbsp;&nbsp;&nbsp; &bull; 通過者須於 7月13日（日）24:00前付款<br />
+              備取名單通知：7月16日（三）24:00<br />
+              &nbsp;&nbsp;&nbsp; &bull; 備取者須於 7月22日（二）24:00 前付款<br />
+            </p>
+            <br />
+            <h3>在展會上</h3>
+            <p>
+              &bull;
+              主辦單位將依整體展場佈局統一安排攤位位置，為公平起見，平面圖完成前後皆不接受位置偏好申請，並於展會前一天公布最終配置。<br />
+              &bull; 我們將於 9 月提供攤位樣式示意圖。<br />
+              &bull; 立面展示因場地空間限制隨機分配，且可能與其他單位共用。
+            </p>
+            <br /><br />
+            <h3>展位類型</h3>
+            <p>
+              錄取參展單位將獲得資格於2025年草率簿中露出個人宣傳一頁，並獲得
+              2025 草率簿一本。
+            </p>
+            <br />
+            <p><strong>ㄧ般書攤 ｜5,000 元（含稅）</strong></p>
+            <p>
+              針對以書本為主要創作／販售的參展單位，申請時需提出三本以上已出版刊物及審查資料。
+              &bull; 基礎設備：桌面（120*60cm) 1 個、椅子 2 張、工作證 2
+              張、草率簿 1 本（含露出一面）
+            </p>
+            <br />
+
+            <p><strong>創作攤｜8,000 元（含稅） </strong></p>
+            <p>
+              針對以各類商品為主要創作／販售的參展單位。 &bull;
+              基礎設備：桌面（120*60cm) 1 個、椅子 2 張、工作證 2 張、草率簿 1
+              本（含露出一面）
+            </p>
+            <br />
+
+            <p><strong>裝置攤｜10,000 元（含稅）</strong></p>
+            <p>
+              針對大型裝置或空間創作為主的參展單位。 &bull;
+              基礎設備：1.5M*1.5M空地、工作證 2 張、草率簿 1 本（含露出一面）
+            </p>
+            <br />
+
+            <p><strong>食物酒水攤｜13,000 元（含稅</strong></p>
+            <p>
+              針對以食物或飲品為主要販售類型的單位。 &bull;
+              基礎設備：桌面（180*60cm) 1 個、椅子 2 張、工作證 2 張、草率簿 1
+              本（含露出一面）
+            </p>
+            <blockquote>
+              <small
+                >*每單位於繳費階段可加購1張工作證，工作證僅限持證人本人使用，不得轉讓或借用；因場地空間有限，攤位人數超過3人者請另行申請攤位。如需臨時輪班，可於購票階段購買「親友票」。
+              </small>
+            </blockquote>
+            <br />
+            <h3>迎接 草率十年</h3>
+            <p>
+              2026年，草率季十週年，我們將舉辦草率十年特場（預計將落在 3–4
+              月）。在十歲之際，我們將回到更實驗的精神持續探索藝術書展的更多可能，在此誠摯邀請您填寫本報名表時一併回覆
+              2026 年度參展意願，跳上草率季的全新旅程！<br /><br />
+
+              展期將視進度優先公布予有意願參展的各位，場地、精彩亮點等資訊則於2025
+              年草率季現場公布公開，敬請期待！
+            </p>
+            <br />
+            <h3>聯繫</h3>
+            <p>hooroo@double-grass.com</p>
+          </div>
+          <hr class="mobileline" />
+          <div class="mobiledirection" id="en"></div>
+          <div class="column en">
+            <h2>
+              Welcome to the 2025 9th Annual Taipei Art Book Fair - Soft POW!
+            </h2>
+            <p>
+              <span style="color: red"
+                >Taipei Art Book Fair 2025 OPEN CALL is now closed!</span
+              ><br /><br />
+              Thank you for your support—welcome aboard! Before you submit your
+              application, please read the following terms carefully. By
+              applying, you agree to abide by them.
+            </p>
+            <div>
+              <span>Dates & Times: </span>
+              Nov 21 (Fri) 13:00–21:00<br />
+              <span style="visibility: hidden">Dates & Times: </span>
+              Nov 22 (Sat) 11:00–20:00<br />
+              <span style="visibility: hidden">Dates & Times: </span>
+              Nov 23 (Sun) 11:00–18:00
+            </div>
+            <p>
+              Location: Huashan 1914 Creative Park, East 2 ABCD Halls
+              <br /><small
+                ><a href="https://g.co/kgs/mVt7cw6" target="_blank"
+                  >(https://g.co/kgs/mVt7cw6)</a
+                ></small
+              >
+            </p>
+            <br />
+            <h3>About the participation</h3>
+            <p>
+              This form is for participants who wish to reserve a table or booth
+              to display/sell publications, artworks, or installations. If we
+              receive more applications than we can accommodate, the organizers
+              reserve the right to screen or decline applications based on
+              submitted information.
+            </p>
+            <br />
+            <h3>Deadline</h3>
+            <p>
+              <span class="deadline-highlight"
+                >Deadline to Apply: <i>June 15, 2025 (Sun) 24:00</i><br
+              /></span>
+              Acceptance Notices: <i>June 30, 2025 (Mon) 12:00</i><br />
+              &nbsp;&nbsp;&nbsp; &bull; Successful applicants complete the
+              payment by <i>July 13 (Sun) 24:00</i><br />
+              Waitlist Notices: <i>July 16, 2025 (Wed) 24:00</i><br />
+              &nbsp;&nbsp;&nbsp; &bull; Waitlisted applicants must complete the
+              payment by <i>July 22 (Tue) 24:00</i><br />
+            </p>
+            <br />
+            <h3>At the Fair</h3>
+            <p>
+              &bull; Booth locations will be assigned by the organizers
+              according to the overall floor plan; preferences cannot be
+              accommodated before or after layout finalization; final floor plan
+              will be published one day before opening.
+              <br />
+              &bull; In September we’ll share booth-style mockups<br />
+              &bull; Wall displays are allocated at random and may be shared
+              with neighboring booths.
+            </p>
+            <br />
+            <h3>Booth Types</h3>
+            <p>
+              Starting from 2025, we will issue TPABF Catalog that includes all
+              exhibitors’ promotion pages each year. And the admitted exhibitor
+              can recieve one free copy.
+            </p>
+            <br />
+            <p><strong>One Regular Booth USD$165 incl. tax</strong></p>
+            <p>
+              &bull; Includes: 120 × 60 cm table ×1, chairs ×2, passes ×2, TPABF
+              Catalog ×1 (one page featured)
+            </p>
+            <br />
+            <p><strong>Two Regular Booth USD$330 incl. tax</strong></p>
+            <p>
+              &bull; Includes: 120 × 60 cm table ×2, chairs ×4, passes ×4, TPABF
+              Catalog ×1 (one page featured)
+            </p>
+            <br />
+            <p><strong>Curation Booth USD$780 incl. tax</strong></p>
+            <p>
+              &bull; Includes: 3M*3M space, 120 × 60 cm table ×2, chairs ×4,
+              passes ×3, TPABF Catalog ×1 (one page featured)
+            </p>
+
+            <blockquote>
+              <small
+                >* Each unit may purchase 1 additional pass during payment.
+                Passes are non-transferable and for the named holder only; no
+                “sharing.” For occasional shift-swaps, you may purchase a
+                “Friend Ticket” during ticketing.
+              </small>
+            </blockquote>
+            <br />
+            <h3>Preparing for Taipei Art Book Fair’s 10-year anniversary</h3>
+            <p>
+              2026 marks the tenth year of Taipei Art Book Fair. We here at
+              Taipei Art Book Fair are ready to explore the boundary of how an
+              art-book-fair can be. The 10-year anniversary fair will be held in
+              Spring (March or April.) We look forward to hearing your interest
+              about joining the next spring edition in this application.
+              <br /><br />
+
+              The 10-year anniversary fair’s exact date will be provided asap to
+              the applicants who replied “Count me in.” Other info about the
+              10-year anniversary fair will be announced at 2025’s fair. We
+              can’t wait moving on to the new/experimental journey with you!
+              Stay tuned!
+            </p>
+            <br />
+            <h3>Last Year’s Highlights</h3>
+            <p>
+              &bull; 450 exhibiting units (200 international, 250 local) from
+              30+ countries/regions<br />
+              &bull; 12,000 paid visitors
+            </p>
+
+            <br />
+            <h3>Contact</h3>
+            <p>hooroo@double-grass.com</p>
+          </div>
+        </div>
+      </div>
+      <button class="close-btn" onclick="closeThis(openopencall);">✕</button>
+      <div class="application-button-lang-container">
+        <a href="#zh" class="application-button-lang" rel="history">中文</a>
+        <a href="#en" class="application-button-lang" rel="history">English</a>
+      </div>
+    </div>
+
+    <a href="login.html"
+      ><div class="login-btn">攤主登入｜Exhibitor Login</div></a
+    >
+
+    <script src="js/infolog.js"></script>
+    <script src="js/script.js"></script>
+  </body>
+</html>
