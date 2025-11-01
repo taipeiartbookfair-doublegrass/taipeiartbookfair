@@ -4,8 +4,8 @@ const creditsHTML = `
           This website's front end was designed and hand-coded by 
           <a href="https://www.naisyuanye.com" target="_blank">Nai-Syuan Ye (cherrythehuman)</a> ☁︎☁︎☁︎.  
           <a href="https://pochunyeh.com" target="_blank">Po-Chen Yeh</a> and Po-Yu Yeh are the back-end developer and assistant.  
-          This site was muddily coded between Arnhem and Taipei (2025–2026), with frequent coffee refills, oolong milk tea overflows, sweat, and occasional typos. Conceptualized under the blinding light of too many browser tabs, memes from all eras, books & newspapers from my studio shelf, friends’ shelves, and secondhand stores. Built with lavender-vanilla HTML, CSS, and JS.  
-          The structure, zine wall, timeline, calendar, and all the random functions were custom-built for the Taipei Art Book Fair — with love.  
+          This site was muddily coded between Arnhem and Taipei (2025–2026), with frequent coffee refills, oolong milk tea overflows, sweat, and occasional typos. Conceptualized under the blinding light of too many browser tabs, memes from all eras, books & newspapers from my studio shelf, friends’ shelves, and secondhand stores. 
+          The structure, zine wall, timeline, calendar, and all the random functions were custom-built for the Taipei Art Book Fair — with love. Built with lavender-vanilla HTML, CSS, and JS.  
         </p>
 
 
