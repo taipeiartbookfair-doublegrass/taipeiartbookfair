@@ -11,8 +11,11 @@ const calendarId = "90527f67fa462c83e184b0c62def10ebc8b00cc8c67a5b83af2afb90a1bd
 const apiKey = "AIzaSyCOLToQuZFbB1mULxYrMyQVeTVGnhk8-U4";
 
 // 時間軸模式專用 URL - 只顯示 2025/11/21-2025/11/23 的活動
-const eventStartDate = new Date(2025, 10, 21); // 2025年11月21日 (月份是0-based)
-const eventEndDate = new Date(2025, 10, 24); // 2025年11月24日 (包含23日整天)
+// 使用台灣時區的日期時間，避免時區轉換問題
+// 台灣時間 2025-11-21 00:00:00 (UTC+8) = UTC 2025-11-20 16:00:00
+// 所以需要明確指定台灣時區的日期
+const eventStartDate = new Date('2025-11-21T00:00:00+08:00'); // 台灣時間 2025年11月21日 00:00:00
+const eventEndDate = new Date('2025-11-24T00:00:00+08:00'); // 台灣時間 2025年11月24日 00:00:00 (包含23日整天)
 const timelineUrl = `https://www.googleapis.com/calendar/v3/calendars/${encodeURIComponent(
   calendarId
 )}/events?key=${apiKey}&singleEvents=true&orderBy=startTime&timeMin=${eventStartDate.toISOString()}&timeMax=${eventEndDate.toISOString()}`;
@@ -335,7 +338,9 @@ function renderTimelineWithData(timelineData) {
     dateColumn.style.left = `${columnStartX}px`; // 日期標記在區域起始位置
     dateColumn.style.width = `${dayWidth}px`; // 設置區域寬度
     
-    const date = new Date(year, month, day);
+    // 使用明確的台灣時區日期，固定顯示 21-23 日，不受使用者系統時區影響
+    // 月份需要 +1 因為 ISO 格式是 1-based，而 month 變數是 0-based
+    const date = new Date(`${year}-${String(month + 1).padStart(2, '0')}-${String(day).padStart(2, '0')}T00:00:00+08:00`);
     // 使用英文格式顯示日期
     const weekday = date.toLocaleDateString("en-US", { 
       weekday: "short",
