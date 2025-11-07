@@ -99,12 +99,17 @@ const parseDescription = (description) => {
       console.log(
         `parseDescription: 找到欄位 "${currentKey}" = "${currentValue}"`
       );
-    } else if (currentKey && line) {
-      // 如果這行沒有冒號但有內容，且我們正在處理一個欄位，則將其加到當前值
-      currentValue += " " + line;
-      console.log(
-        `parseDescription: 繼續多行欄位 "${currentKey}"，新增內容: "${line}"`
-      );
+    } else if (currentKey) {
+      // 如果這行沒有冒號，且我們正在處理一個欄位，則將其加到當前值
+      // 即使這行是空行，也繼續處理（因為可能是 DESCRIPTION: 後面的空行）
+      if (line) {
+        // 如果這行有內容，加到當前值
+        currentValue += (currentValue ? " " : "") + line;
+        console.log(
+          `parseDescription: 繼續多行欄位 "${currentKey}"，新增內容: "${line}"`
+        );
+      }
+      // 如果這行是空行，不處理，繼續等待下一行
     } else {
       console.log(`parseDescription: 第${index + 1}行沒有冒號或格式不正確`);
     }
@@ -417,7 +422,7 @@ function renderTimelineWithData(timelineData) {
           ${event.summary || "未命名活動"}
         </div>
         <div style="font-size: 0.9rem; line-height: 1.4; color: #666;">
-          ${eventFields.DESCRIPTION || event.description || "暫無詳細描述"}
+          ${eventFields.DESCRIPTION || "暫無詳細描述"}
         </div>
         ${eventFields.SIGNUP ? `<div style="margin-top: 15px;"><a href="${eventFields.SIGNUP}" target="_blank" style="display: inline-block; padding: 8px 16px; background: #000; color: #fff; text-decoration: none; border-radius: 4px; font-size: 0.9rem;">SIGN UP</a></div>` : ''}
       `;
