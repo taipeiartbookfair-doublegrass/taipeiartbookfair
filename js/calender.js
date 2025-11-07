@@ -83,35 +83,93 @@ const parseDescription = (description) => {
     line = line.trim(); // 清理每行的空白
     console.log(`parseDescription: 處理第${index + 1}行: "${line}"`);
 
-    const colonIndex = line.indexOf(":");
-    if (colonIndex > 0) {
+    // 檢查這一行是否包含多個欄位（例如：TYPE: PERFORMANCE  IMAGE: xxx  DESCRIPTION: xxx）
+    // 先找到所有 "KEY:" 的位置
+    const keyPattern = /\b([A-Z_][A-Z0-9_\s]*?):/g;
+    const keyMatches = [];
+    let keyMatch;
+    
+    while ((keyMatch = keyPattern.exec(line)) !== null) {
+      keyMatches.push({
+        key: keyMatch[1].trim(),
+        index: keyMatch.index,
+        keyEndIndex: keyMatch.index + keyMatch[0].length
+      });
+    }
+    
+    // 如果有找到多個 KEY，提取每個 KEY 的值
+    const matches = [];
+    if (keyMatches.length > 1) {
+      keyMatches.forEach((km, i) => {
+        const valueStartIndex = km.keyEndIndex;
+        const valueEndIndex = i < keyMatches.length - 1 
+          ? keyMatches[i + 1].index 
+          : line.length;
+        const value = line.substring(valueStartIndex, valueEndIndex).trim();
+        matches.push({ key: km.key, value });
+      });
+    }
+
+    if (matches.length > 0) {
       // 如果前面有未完成的欄位，先儲存它
       if (currentKey) {
         fields[currentKey] = currentValue.trim();
         console.log(
           `parseDescription: 儲存多行欄位 "${currentKey}" = "${currentValue.trim()}"`
         );
+        currentKey = null;
+        currentValue = "";
       }
 
-      // 開始新的欄位
-      currentKey = line.substring(0, colonIndex).trim();
-      currentValue = line.substring(colonIndex + 1).trim();
-      console.log(
-        `parseDescription: 找到欄位 "${currentKey}" = "${currentValue}"`
-      );
-    } else if (currentKey) {
-      // 如果這行沒有冒號，且我們正在處理一個欄位，則將其加到當前值
-      // 即使這行是空行，也繼續處理（因為可能是 DESCRIPTION: 後面的空行）
-      if (line) {
-        // 如果這行有內容，加到當前值
-        currentValue += (currentValue ? " " : "") + line;
-        console.log(
-          `parseDescription: 繼續多行欄位 "${currentKey}"，新增內容: "${line}"`
-        );
-      }
-      // 如果這行是空行，不處理，繼續等待下一行
+      // 處理同一行的多個欄位
+      matches.forEach((m, i) => {
+        if (i < matches.length - 1) {
+          // 不是最後一個欄位，直接儲存
+          fields[m.key] = m.value;
+          console.log(
+            `parseDescription: 找到欄位 "${m.key}" = "${m.value}"`
+          );
+        } else {
+          // 最後一個欄位，可能是多行的，先設定為當前處理的欄位
+          currentKey = m.key;
+          currentValue = m.value;
+          console.log(
+            `parseDescription: 找到欄位（可能是多行） "${m.key}" = "${m.value}"`
+          );
+        }
+      });
     } else {
-      console.log(`parseDescription: 第${index + 1}行沒有冒號或格式不正確`);
+      // 沒有找到欄位模式，檢查是否有單個冒號（舊格式）
+      const colonIndex = line.indexOf(":");
+      if (colonIndex > 0) {
+        // 如果前面有未完成的欄位，先儲存它
+        if (currentKey) {
+          fields[currentKey] = currentValue.trim();
+          console.log(
+            `parseDescription: 儲存多行欄位 "${currentKey}" = "${currentValue.trim()}"`
+          );
+        }
+
+        // 開始新的欄位
+        currentKey = line.substring(0, colonIndex).trim();
+        currentValue = line.substring(colonIndex + 1).trim();
+        console.log(
+          `parseDescription: 找到欄位 "${currentKey}" = "${currentValue}"`
+        );
+      } else if (currentKey) {
+        // 如果這行沒有冒號，且我們正在處理一個欄位，則將其加到當前值
+        // 即使這行是空行，也繼續處理（因為可能是 DESCRIPTION: 後面的空行）
+        if (line) {
+          // 如果這行有內容，加到當前值
+          currentValue += (currentValue ? " " : "") + line;
+          console.log(
+            `parseDescription: 繼續多行欄位 "${currentKey}"，新增內容: "${line}"`
+          );
+        }
+        // 如果這行是空行，不處理，繼續等待下一行
+      } else {
+        console.log(`parseDescription: 第${index + 1}行沒有冒號或格式不正確`);
+      }
     }
   });
 
