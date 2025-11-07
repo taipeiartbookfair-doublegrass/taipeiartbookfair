@@ -83,8 +83,63 @@ const parseDescription = (description) => {
     line = line.trim(); // 清理每行的空白
     console.log(`parseDescription: 處理第${index + 1}行: "${line}"`);
 
-    const colonIndex = line.indexOf(":");
-    if (colonIndex > 0) {
+    // 檢查這一行是否包含多個欄位（例如：TYPE: PERFORMANCE  IMAGE: xxx  DESCRIPTION: xxx）
+    // 使用更精確的正則：匹配大寫字母開頭的欄位名，不包含空格
+    const keyPattern = /\b([A-Z_][A-Z0-9_]*?):/g;
+    const keyMatches = [];
+    let keyMatch;
+    
+    // 重置正則表達式的 lastIndex，確保每次從頭開始匹配
+    keyPattern.lastIndex = 0;
+    while ((keyMatch = keyPattern.exec(line)) !== null) {
+      const key = keyMatch[1].trim();
+      // 只處理已知的欄位名，避免誤匹配
+      if (['TYPE', 'IMAGE', 'DESCRIPTION', 'SIGNUP', 'SIGN UP'].includes(key)) {
+        keyMatches.push({
+          key: key,
+          index: keyMatch.index,
+          keyEndIndex: keyMatch.index + keyMatch[0].length
+        });
+      }
+    }
+    
+    // 如果找到多個欄位（同一行格式）
+    if (keyMatches.length > 1) {
+      // 如果前面有未完成的欄位，先儲存它
+      if (currentKey) {
+        fields[currentKey] = currentValue.trim();
+        console.log(
+          `parseDescription: 儲存多行欄位 "${currentKey}" = "${currentValue.trim()}"`
+        );
+        currentKey = null;
+        currentValue = "";
+      }
+
+      // 處理同一行的多個欄位
+      keyMatches.forEach((km, i) => {
+        const valueStartIndex = km.keyEndIndex;
+        const valueEndIndex = i < keyMatches.length - 1 
+          ? keyMatches[i + 1].index 
+          : line.length;
+        const value = line.substring(valueStartIndex, valueEndIndex).trim();
+        
+        if (i < keyMatches.length - 1) {
+          // 不是最後一個欄位，直接儲存
+          fields[km.key] = value;
+          console.log(`parseDescription: 找到欄位 "${km.key}" = "${value}"`);
+        } else {
+          // 最後一個欄位，可能是多行的，先設定為當前處理的欄位
+          currentKey = km.key;
+          currentValue = value;
+          console.log(`parseDescription: 找到欄位（可能是多行） "${km.key}" = "${value}"`);
+        }
+      });
+    } 
+    // 如果只找到一個欄位
+    else if (keyMatches.length === 1) {
+      const km = keyMatches[0];
+      const value = line.substring(km.keyEndIndex).trim();
+      
       // 如果前面有未完成的欄位，先儲存它
       if (currentKey) {
         fields[currentKey] = currentValue.trim();
@@ -92,26 +147,62 @@ const parseDescription = (description) => {
           `parseDescription: 儲存多行欄位 "${currentKey}" = "${currentValue.trim()}"`
         );
       }
+      
+      // 開始新的欄位（可能是多行的）
+      // 如果值是空的（DESCRIPTION: 後面是空行或只有空格），繼續等待下一行
+      currentKey = km.key;
+      currentValue = value || ""; // 允許空值，等待下一行
+      console.log(`parseDescription: 找到欄位 "${km.key}" = "${value || '(空，等待下一行)'}"`);
+    } 
+    // 沒有找到欄位模式，檢查是否有單個冒號（舊格式）
+    else {
+      const colonIndex = line.indexOf(":");
+      if (colonIndex > 0) {
+        const potentialKey = line.substring(0, colonIndex).trim();
+        // 只處理已知的欄位名
+        if (['TYPE', 'IMAGE', 'DESCRIPTION', 'SIGNUP', 'SIGN UP'].includes(potentialKey)) {
+          // 如果前面有未完成的欄位，先儲存它
+          if (currentKey) {
+            fields[currentKey] = currentValue.trim();
+            console.log(
+              `parseDescription: 儲存多行欄位 "${currentKey}" = "${currentValue.trim()}"`
+            );
+          }
 
-      // 開始新的欄位
-      currentKey = line.substring(0, colonIndex).trim();
-      currentValue = line.substring(colonIndex + 1).trim();
-      console.log(
-        `parseDescription: 找到欄位 "${currentKey}" = "${currentValue}"`
-      );
-    } else if (currentKey) {
-      // 如果這行沒有冒號，且我們正在處理一個欄位，則將其加到當前值
-      // 即使這行是空行，也繼續處理（因為可能是 DESCRIPTION: 後面的空行）
-      if (line) {
-        // 如果這行有內容，加到當前值
-        currentValue += (currentValue ? " " : "") + line;
-        console.log(
-          `parseDescription: 繼續多行欄位 "${currentKey}"，新增內容: "${line}"`
-        );
+          // 開始新的欄位
+          // 如果值是空的（DESCRIPTION: 後面是空行或只有空格），繼續等待下一行
+          currentKey = potentialKey;
+          currentValue = line.substring(colonIndex + 1).trim() || ""; // 允許空值，等待下一行
+          console.log(
+            `parseDescription: 找到欄位 "${currentKey}" = "${currentValue || '(空，等待下一行)'}"`
+          );
+        }
+      } else if (currentKey) {
+        // 如果這行沒有冒號，且我們正在處理一個欄位，則將其加到當前值
+        // 特別處理 DESCRIPTION：持續收集所有行，直到遇到新的欄位
+        if (currentKey === 'DESCRIPTION') {
+          // DESCRIPTION 欄位：保留換行符，持續收集所有內容（包括空行）
+          // 如果 currentValue 是空的，直接使用這行；否則用換行符連接
+          if (currentValue) {
+            currentValue += "\n" + line;
+          } else {
+            currentValue = line;
+          }
+          console.log(
+            `parseDescription: 繼續 DESCRIPTION 欄位，新增內容: "${line || '(空行)'}"`
+          );
+        } else {
+          // 其他欄位：用空格連接
+          if (line) {
+            currentValue += (currentValue ? " " : "") + line;
+            console.log(
+              `parseDescription: 繼續多行欄位 "${currentKey}"，新增內容: "${line}"`
+            );
+          }
+        }
+      } else {
+        console.log(`parseDescription: 第${index + 1}行沒有冒號或格式不正確`);
       }
-      // 如果這行是空行，不處理，繼續等待下一行
-    } else {
-      console.log(`parseDescription: 第${index + 1}行沒有冒號或格式不正確`);
     }
   });
 
@@ -421,8 +512,17 @@ function renderTimelineWithData(timelineData) {
         <div style="font-size: 1.1rem; font-weight: bold; margin-bottom: 15px; text-transform: uppercase;">
           ${event.summary || "未命名活動"}
         </div>
-        <div style="font-size: 0.9rem; line-height: 1.4; color: #666;">
-          ${eventFields.DESCRIPTION || "暫無詳細描述"}
+        <div style="font-size: 0.9rem; line-height: 1.4; color: #666; white-space: pre-wrap;">
+          ${(() => {
+            const desc = eventFields.DESCRIPTION || "暫無詳細描述";
+            // 轉義 HTML 特殊字符，保留換行符
+            return desc
+              .replace(/&/g, '&amp;')
+              .replace(/</g, '&lt;')
+              .replace(/>/g, '&gt;')
+              .replace(/"/g, '&quot;')
+              .replace(/'/g, '&#039;');
+          })()}
         </div>
         ${eventFields.SIGNUP ? `<div style="margin-top: 15px;"><a href="${eventFields.SIGNUP}" target="_blank" style="display: inline-block; padding: 8px 16px; background: #000; color: #fff; text-decoration: none; border-radius: 4px; font-size: 0.9rem;">SIGN UP</a></div>` : ''}
       `;
@@ -609,7 +709,15 @@ function renderEvents(items) {
       eventDescription.className = "event-description";
       
       if (eventFields.DESCRIPTION) {
-        eventDescription.textContent = eventFields.DESCRIPTION;
+        // 使用 innerHTML 以支援換行，先轉義 HTML 特殊字符
+        const safeDescription = eventFields.DESCRIPTION
+          .replace(/&/g, '&amp;')
+          .replace(/</g, '&lt;')
+          .replace(/>/g, '&gt;')
+          .replace(/"/g, '&quot;')
+          .replace(/'/g, '&#039;')
+          .replace(/\n/g, '<br>');
+        eventDescription.innerHTML = safeDescription;
       }
       
       // 活動類型標籤 - 添加到同一個段落中
