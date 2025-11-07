@@ -760,17 +760,8 @@ function renderTimelineWithData(timelineData) {
           <div class="timeline-preview-event-title">
             ${event.summary || "未命名活動"}
           </div>
-          <div class="timeline-preview-description" style="white-space: pre-wrap;">
-            ${(() => {
-              const desc = eventFields.DESCRIPTION || "暫無詳細描述";
-              // 轉義 HTML 特殊字符，保留換行符
-              return desc
-                .replace(/&/g, '&amp;')
-                .replace(/</g, '&lt;')
-                .replace(/>/g, '&gt;')
-                .replace(/"/g, '&quot;')
-                .replace(/'/g, '&#039;');
-            })()}
+          <div class="timeline-preview-description">
+            ${eventFields.DESCRIPTION || event.description || "暫無詳細描述"}
           </div>
           ${eventFields.SIGNUP ? `<div class="timeline-preview-signup"><a href="${eventFields.SIGNUP}" target="_blank" class="timeline-preview-signup-btn">報名參加</a></div>` : ''}
         `;
