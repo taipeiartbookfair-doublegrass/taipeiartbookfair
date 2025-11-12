@@ -6,7 +6,7 @@
     <meta
       http-equiv="Content-Security-Policy"
       content="default-src 'self'; 
-             script-src 'self' 'unsafe-inline' https://www.google.com https://www.gstatic.com https://code.jquery.com https://www.googletagmanager.com; 
+             script-src 'self' 'unsafe-inline' https://www.google.com https://www.gstatic.com https://code.jquery.com https://www.googletagmanager.com https://cdn.jsdelivr.net; 
              style-src 'self' 'unsafe-inline'; 
              connect-src https://www.google-analytics.com https://script.google.com https://script.googleusercontent.com/;
              frame-src https://www.google.com;"
@@ -33,38 +33,11 @@
     <script src="js/cookie.js"></script>
     <script src="js/dashboard-basic.js"></script>
     <script src="js/edit-profile.js"></script>
+    <!-- JsBarcode library for barcode generation -->
+    <script src="https://cdn.jsdelivr.net/npm/jsbarcode@3.11.5/dist/JsBarcode.all.min.js"></script>
+    <script src="js/barcode-generator.js"></script>
   </head>
   <body>
-    <!-- 草-草=草 -->
-    <div id="grass-mask" style="display: none">
-      <div id="grass-tip">
-        <span
-          style="transform: translate(-50%, -50%) rotate(-5deg) skewX(-9deg)"
-        >
-          手機版未開放<br
-        /></span>
-        Mobile version is currently under renovation<br /><br />
-        <span
-          style="transform: translate(-50%, -50%) rotate(2deg) skewX(-4deg)"
-        >
-          請改用桌機瀏覽<br />
-          Try using a desktop browser.</span
-        >
-      </div>
-      <canvas id="grass-canvas"></canvas>
-      <div
-        id="grass-cursor"
-        style="
-          display: none;
-          position: absolute;
-          z-index: 10;
-          font-size: 4em;
-          pointer-events: none;
-        "
-      >
-        🧹
-      </div>
-    </div>
     <!-- fake loading -->
     <div id="loading-mask" style="display: flex">
       <div class="loading-grid"></div>
@@ -74,7 +47,7 @@
       <tr>
         <!-- Sidebar -->
         <td class="sidebar">
-          <p style="background-color: olivedrab; color: ghostwhite">
+          <p class="sidebar-logo" style="background-color: olivedrab; color: ghostwhite">
             <!-- 草率季<br />TPABF -->
             <img
               src="image/icon-1.ico"
@@ -90,7 +63,7 @@
             onclick="showDashboardSection(); setSidebarActive('dashboard'); return false;"
           >
             <p>
-              <mark>攤商管理<br />Dashboard</mark>
+              <mark>攤商管理<br />Panel</mark>
             </p>
           </a>
           <hr class="sidebar-hr" />
@@ -162,12 +135,20 @@
         <td class="mid">
           <div class="scroll-inner">
             <table width="100%">
+              <tr id="barcode-row" style="display: none;">
+                <td colspan="2" style="position: relative; width: 55%">
+                  <span class="label" >報到條碼 Check-in Barcode</span><br />
+                  <canvas id="barcode-canvas" style="width: 100%; height: auto;"></canvas>
+                </td>
+              </tr>
               <tr>
                 <td colspan="1" style="position: relative; width: 55%">
                   <span class="label">報名編號 Application Number</span><br />
                   <span style="font-size: 3rem" id="application-number"
                     >25-LB001</span
                   >
+                  <br />
+                  
                 </td>
                 <td style="width: 45%">
                   <span class="label">錄取結果 Application Result</span><br />
@@ -440,29 +421,26 @@
 
         <!-- 編輯品牌 -->
         <td class="edit-page" id="edit-brand-page" style="display: none">
-          <span
-            style="
-              position: absolute;
-              top: 0.7rem;
-              right: 1.2rem;
-              font-size: 2rem;
-              color: black;
-              cursor: pointer;
-              z-index: 10;
-              transition: color 0.2s;
-            "
-            title="關閉"
-            onclick="
-            document.getElementById('edit-brand-page').style.display='none';
-            document.querySelector('.mid').style.display='table-cell';
-            document.querySelector('.right').style.display='table-cell';
-            document.querySelector('.account').style.display='none';
-            "
-            >&#10005;</span
-          >
           <div class="scroll-inner">
             <form class="edit-form">
-              <h2 style="font-size: 1.5rem">編輯品牌資料 Edit Brand Info</h2>
+              <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
+                <h2 style="font-size: 1.5rem; margin: 0;">編輯品牌資料 Edit Brand Info</h2>
+                <span
+                  style="
+                    font-size: 2rem;
+                    color: black;
+                    cursor: pointer;
+                    transition: color 0.2s;
+                    padding: 0.5rem;
+                    line-height: 1;
+                  "
+                  title="關閉"
+                  onclick="closeEditBrandPage();"
+                  onmouseover="this.style.color='#666'"
+                  onmouseout="this.style.color='black'"
+                  >&#10005;</span
+                >
+              </div>
               <table width="100%">
                 <tr>
                   <td colspan="2">
@@ -1748,27 +1726,26 @@
           </div>
         </td>
         <td class="edit-page" id="edit-account-page" style="display: none">
-          <span
-            style="
-              position: absolute;
-              top: 0.7rem;
-              right: 1.2rem;
-              font-size: 2rem;
-              color: black;
-              cursor: pointer;
-              z-index: 10;
-              transition: color 0.2s;
-            "
-            title="關閉"
-            onclick="
-              document.getElementById('edit-account-page').style.display='none';
-              document.getElementById('account').style.display='table-cell';
-            "
-            >&#10005;</span
-          >
           <div class="scroll-inner">
             <form class="edit-form">
-              <h2 style="font-size: 1.5rem">編輯帳戶資料 Edit Profile</h2>
+              <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
+                <h2 style="font-size: 1.5rem; margin: 0;">編輯帳戶資料 Edit Profile</h2>
+                <span
+                  style="
+                    font-size: 2rem;
+                    color: black;
+                    cursor: pointer;
+                    transition: color 0.2s;
+                    padding: 0.5rem;
+                    line-height: 1;
+                  "
+                  title="關閉"
+                  onclick="closeEditAccountPage();"
+                  onmouseover="this.style.color='#666'"
+                  onmouseout="this.style.color='black'"
+                  >&#10005;</span
+                >
+              </div>
               <table width="100%">
                 <tr>
                   <td>
@@ -2169,7 +2146,7 @@
           </div>
         </td>
         <td class="admin" id="faq" style="display: none">
-          <div>
+          <div class="scroll-inner">
             <h3 style="z-index: 99">FAQ</h3>
             <table class="faqtable" width="100%">
               <tr>
@@ -2321,25 +2298,6 @@
         </td>
       </tr>
     </table>
-
-    <!-- 手機版要大家拔點草 -->
-    <div id="grass-mask" style="display: none">
-      <div
-        id="grass-tip"
-        style="
-          text-align: center;
-          color: #222;
-          font-size: 1.2em;
-          font-weight: bold;
-          margin-top: 2em;
-        "
-      >
-        手機版還在整理中<br />Mobile version is under construction<br />
-        請移步至桌機做使用<br />Please use desktop version<br />
-      </div>
-      <canvas id="grass-canvas"></canvas>
-      <div id="grass-progress"></div>
-    </div>
     <script src="js/dashboardupload/upload_dashboard.js"></script>
     <script src="js/dashboard-body.js"></script>
     <script src="js/oxox.js"></script>

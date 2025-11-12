@@ -513,66 +513,243 @@ html::-webkit-scrollbar-thumb:hover {
 
 /* ===== 行動版 Mobile ===== */
 @media screen and (max-width: 600px) {
-  /* html,
+  html,
   body {
-    overflow: auto !important;
-  } */
+    overflow-x: hidden !important;
+    overflow-y: auto !important;
+    width: 100vw;
+    max-width: 100vw;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    background-color: aliceblue;
+  }
+  .sidebar-middle{
+    display: none !important;
+  }
+  .sidebar-logo {
+    display: none !important;
+  }
   .layout {
     width: 100vw;
     height: auto;
     display: block;
+    max-width: 100vw;
+    overflow-x: hidden;
   }
   .sidebar {
-    width: 100vw;
+    width: 100vw !important;
+    max-width: 100vw !important;
     height: auto;
-    flex-direction: row;
-    justify-content: flex-start;
+    display: flex !important;
+    flex-direction: row !important;
+    flex-wrap: nowrap;
+    justify-content: space-around;
     align-items: center;
-    position: static;
-    border-bottom: 1px solid #ccc;
+    position: static !important;
+    border-bottom: 1px solid black;
     padding: 0;
     font-size: 1rem;
+    writing-mode: horizontal-tb;
+    background-color: olive;
+    white-space: normal;
+    overflow-x: hidden;
+    box-sizing: border-box;
+  }
+
+
+  .sidebar a,
+  .sidebar > a,
+  .sidebar > div {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0;
+    padding: 0.5em 0.3em;
+    flex: 1 1 0;
+    min-width: 0;
+    box-sizing: border-box;
+    border-right: 1px solid black;
+    border-bottom: none;
+    height: auto;
+    white-space: nowrap;
+    text-align: center;
   }
   .sidebar hr,
   .sidebar-hr {
     display: none;
   }
-  .sidebar-middle {
-    display: none;
-  }
-  .sidebar a,
-  .sidebar > a,
-  .sidebar > div {
-    display: inline-block;
-    margin: 0 0.5em;
-    padding: 0;
-  }
   .sidebar p,
   .sidebar a p {
-    display: inline;
+    display: block;
     font-size: 1rem;
-    padding: 0 0.5em;
     margin: 0;
     background: none !important;
-    color: #222 !important;
+    color: black !important;
+    padding: 0.3rem 0.5rem;
+    white-space: nowrap;
+    text-align: center;
+    width: 100%;
   }
-  .machine-rotate-logo {
-    width: 2.5em !important;
-    height: auto !important;
-    margin-right: 0.5em;
-  }
-  .mid,
+  /* 手機版：所有內容區塊預設隱藏 */
+  .mid, 
   .right,
   .account,
   .admin,
-  .edit-page {
-    display: block !important;
+  .edit-page,
+  #faq,
+  #contact-method,
+  #edit-account-page,
+  #edit-brand-page {
+    display: none !important;
     width: 100vw !important;
     min-width: 0 !important;
     max-width: 100vw !important;
-    height: auto !important;
     overflow: visible !important;
     box-sizing: border-box;
+    height: 100%;
+  }
+  /* 手機版：只有有 mobile-active class 的元素才顯示 */
+  .mid.mobile-active,
+  .right.mobile-active,
+  .account.mobile-active,
+  .admin.mobile-active,
+  .edit-page.mobile-active,
+  #faq.mobile-active,
+  #contact-method.mobile-active,
+  #edit-account-page.mobile-active,
+  #edit-brand-page.mobile-active {
+    display: block !important;
+  }
+  /* 手機版：mid section 內的表格保持完整寬度 */
+  .mid table,
+  .mid.mobile-active table {
+    width: 100% !important;
+    table-layout: fixed !important;
+    display: table !important; /* 確保表格結構正常 */
+  }
+  .mid table tbody,
+  .mid.mobile-active table tbody {
+    width: 100% !important;
+    display: table-row-group !important; /* 確保 tbody 保持表格結構 */
+  }
+  /* 手機版：right section 內的表格保持完整寬度 */
+  .right table,
+  .right.mobile-active table {
+    width: 100% !important;
+    table-layout: fixed !important;
+    display: table !important; /* 確保表格結構正常 */
+  }
+  .right table tbody,
+  .right.mobile-active table tbody {
+    width: 100% !important;
+    display: table-row-group !important; /* 確保 tbody 保持表格結構 */
+  }
+  /* 手機版：確保 booth-number-row 正確顯示為表格行 */
+  #booth-number-row {
+    display: table-row !important;
+    width: 100% !important;
+    position: relative !important;
+    overflow: visible !important;
+  }
+  /* 手機版：booth-number-row 內部的 td 寬度調整 */
+  #booth-number-row td[colspan="3"] {
+    width: 100% !important;
+    padding: 0 !important;
+    border: none !important;
+  }
+  #booth-number-row table {
+    width: 100% !important;
+    display: table !important;
+  }
+  #booth-number-row table tr {
+    display: table-row !important;
+    width: 100% !important;
+  }
+  #booth-number-row table td {
+    width: auto !important;
+    display: table-cell !important;
+  }
+  #booth-number-row table td:first-child {
+    width: 60% !important;
+  }
+  #booth-number-row table td:last-child {
+    width: 40% !important;
+  }
+  /* 確保隱藏的條碼行不影響表格寬度 */
+  #barcode-row[style*="display: none"] {
+    display: none !important;
+  }
+  .open-call-schedule{
+    display: none !important;
+  }
+  
+  /* 手機版：schedule 表格使用 flex，讓日期和項目對齊 */
+  #open-call-schedule table {
+    width: 100%;
+    display: block;
+  }
+  #open-call-schedule table tr {
+    display: flex !important;
+    flex-direction: row;
+    width: 100%;
+    gap: 0.5em;
+    margin-bottom: 0;
+  }
+  #open-call-schedule table tr:nth-child(even) {
+    margin-bottom: 1em;
+  }
+  #open-call-schedule table td {
+    flex: 1 1 0;
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+    padding: 0.75em;
+    text-align: left;
+    box-sizing: border-box;
+    align-items: flex-start;
+    justify-content: center;
+  }
+  /* 標題欄位 */
+  #open-call-schedule table tr:nth-child(odd) td {
+    background-color: #e8e8e8;
+    border-bottom: 2px solid #999;
+    padding-bottom: 0.5em;
+  }
+  /* 日期欄位 - 緊接在標題下方 */
+  #open-call-schedule table tr:nth-child(even) td {
+    font-weight: normal;
+    margin-top: -2px;
+    border-top: none;
+    padding-top: 0.5em;
+    font-size: .8rem;
+  }
+  /* 讓 rotated 文字在手機版正常顯示 */
+  #open-call-schedule .rotated {
+    transform: none !important;
+    white-space: wrap;
+    display: block;
+    font-size: 0.7rem;
+    line-height: 1.4;
+    width: 100%;
+  }
+
+  /* 手機版：account 區塊內的表格保持正常表格結構 */
+  .account table,
+  .account table tbody {
+    display: table !important;
+    width: 100% !important;
+    table-layout: auto !important;
+  }
+  .account table td,
+  .account table th {
+    display: table-cell !important;
+    width: auto !important;
+  }
+  .account.mobile-active {
+    display: block !important;
+    width: 100vw !important;
+    max-width: 100vw !important;
   }
   .scroll-inner {
     height: auto !important;
@@ -583,8 +760,7 @@ html::-webkit-scrollbar-thumb:hover {
   table.layout,
   table,
   .faqtable {
-    width: 100vw !important;
-    display: block;
+    display: table;
     table-layout: fixed;
     overflow-x: auto;
   }
@@ -594,7 +770,6 @@ html::-webkit-scrollbar-thumb:hover {
     width: 100% !important;
     box-sizing: border-box;
     font-size: 1rem;
-    border: none;
     padding: 0.7em 0.5em;
   }
   .bio {
@@ -626,17 +801,21 @@ html::-webkit-scrollbar-thumb:hover {
   }
   .label,
   .labelAQ {
-    font-size: 1rem !important;
+    font-size: .8rem !important;
     padding: 2px 4px;
   }
   h3 {
-    font-size: 2.2rem !important;
-    line-height: 2.5rem !important;
+    font-size: 6rem !important;
+    line-height: 4.5rem !important;
   }
   /* FAQ number cell */
   .faq-number-cell {
-    width: 2em !important;
-    font-size: 1.2em;
+    font-size: 1em;
+    border: none;
+    text-align: center;
+    border-top: 1px dashed black;
+    padding: 5px;
+    line-height: 3.5rem;
   }
   /* Hide some less important columns if needed */
   #media-section-row5 td,
@@ -646,79 +825,59 @@ html::-webkit-scrollbar-thumb:hover {
   #tictactoe-container {
     display: none !important;
   }
+  .QA-section {
+    border: none;
+  }
 
-  /* 手機版來不及做所以先劃掉 */
+  /* 手機版 loading 樣式 - 全螢幕寬度 */
   #loading-mask {
-    display: none !important;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(255, 255, 255, 1);
+    z-index: 9999;
+    overflow: hidden;
   }
 
   html,
   body {
     width: 100vw;
+    max-width: 100vw;
     height: 100vh;
     margin: 0;
     padding: 0;
-    overflow: hidden !important;
-    user-select: none !important;
-    -webkit-user-select: none !important; /* for Safari */
-    -ms-user-select: none !important; /* for IE/Edge */
+    overflow-x: hidden !important;
+    overflow-y: auto !important;
+    box-sizing: border-box;
   }
-  #grass-mask {
-    position: fixed;
-    left: 0;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    width: 100vw;
-    height: 100vh;
-    z-index: 9999;
-    margin: 0;
-    padding: 0;
-    overflow: hidden;
-    background-image: url(../image/Cracked_dry_land.jpg);
-    background-color: #925f52;
-    background-blend-mode: multiply;
-    background-position: center;
-    background-size: cover;
-    background-attachment: fixed;
+  
+  /* 確保 sidebar 在手機版中始終是 static，不會變成 fixed */
+  .sidebar,
+  .sidebar.mobile-active {
+    position: static !important;
   }
-  #grass-canvas {
-    overflow: hidden;
-    position: absolute;
-    width: 110vw;
-    height: 110vh;
-    left: -2.5vw;
-    top: -2.5vh;
+  
+  /* 確保 admin/contact section 不會影響 sidebar */
+  .admin.mobile-active,
+  #contact-method.mobile-active {
+    position: relative !important;
+  }
+  
+  /* 條碼樣式 */
+  #barcode-canvas {
+    width: 100% !important;
+    height: auto !important;
     display: block;
-    margin: 0;
-    padding: 0;
-    z-index: 1;
   }
-  #grass-tip {
-    font-size: 1.7rem;
-    font-weight: bold;
-    font-family: "Inclusive Sans", sans-serif;
-    color: #ff6f4c;
-    text-align: center;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    filter: blur(0.5px) contrast(120%) saturate(80%);
-    transform: translate(-50%, -50%) rotate(-0.3deg);
-  }
+}
 
-  #grass-cursor {
-    position: absolute;
-    z-index: 10;
-    font-size: 5em;
-    pointer-events: none;
-    user-select: none;
-    transition: transform 0.05s;
-  }
-  #grass-mask {
-    cursor: none !important; /* 隱藏原生游標 */
-  }
+/* 條碼樣式（通用） */
+#barcode-canvas {
+  width: 100% !important;
+  height: auto !important;
+  display: block;
 }
 
 /* ===== 大螢幕版 4K+ ===== */
