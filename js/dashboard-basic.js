@@ -308,6 +308,39 @@ document.addEventListener("DOMContentLoaded", async function () {
   applicationResultEl.textContent = resultText;
   setApplicationResultStyle(applicationResultEl, resultText);
 
+  // 判斷是否有參展資格（顯示條碼的條件）
+  function hasExhibitionQualification(resultText) {
+    // 參展資格成立的情況
+    const qualifiedStatuses = [
+      "錄取",
+      "Accepted",
+      "條件式錄取",
+      "Conditionally Accepted",
+      "NGO"
+    ];
+    return qualifiedStatuses.includes(resultText);
+  }
+
+  // 控制條碼顯示
+  const barcodeRow = document.getElementById("barcode-row");
+  const shouldShowBarcode = hasExhibitionQualification(resultText);
+  
+  if (barcodeRow) {
+    if (shouldShowBarcode) {
+      // 顯示條碼行
+      const isMobile = window.innerWidth <= 600;
+      barcodeRow.style.display = isMobile ? "block" : "table-row";
+      // 生成條碼
+      if (window.generateBarcode) {
+        setTimeout(() => {
+          window.generateBarcode();
+        }, 100);
+      }
+    } else {
+      barcodeRow.style.display = "none";
+    }
+  }
+
   // boothType 設備、價錢、付款、電力、付款連結產生
   function updateBoothInfo(boothType) {
     let price = "";
@@ -1248,9 +1281,4 @@ document.addEventListener("DOMContentLoaded", async function () {
   if (window.setLoading) window.setLoading(1);
   if (window.hideLoading) window.hideLoading();
   if (window.stopFakeLoading) window.stopFakeLoading();
-
-  // 手機移除 loading mask
-  if (/Mobi|Android|iPhone|iPad|iPod/i.test(navigator.userAgent)) {
-    if (loadingMask) loadingMask.style.display = "none";
-  }
 });
