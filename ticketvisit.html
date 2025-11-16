@@ -429,7 +429,13 @@
         
         <!-- 攤商資訊顯示區域 -->
         <div class="exhibitor-info-content">
-         
+          <div id="exhibitor-map-container" class="exhibitor-map-container">
+            <div class="exhibitor-map-header">
+              <span class="exhibitor-map-title" data-zh="攤位地圖 Booth Map" data-en="Booth Map">攤位地圖 Booth Map</span>
+            </div>
+            <div class="exhibitor-map-resize-handle"></div>
+            <img src="image/exhibitormap.jpg" alt="Exhibitor Map" class="exhibitor-map-image" id="exhibitor-map-image" />
+          </div>
           
           <div class="exhibitor-display-container" id="exhibitorDisplayContainer">
             <div class="exhibitors-grid-main">
@@ -1298,6 +1304,230 @@
         
         // 初始化隱藏按鈕
         backToTopBtn.style.display = 'none';
+      });
+    </script>
+    <script>
+      // 地圖浮動視窗拖動和調整大小功能
+      document.addEventListener('DOMContentLoaded', function() {
+        const mapContainer = document.getElementById('exhibitor-map-container');
+        const mapHeader = mapContainer?.querySelector('.exhibitor-map-header');
+        const mapCloseBtn = document.getElementById('map-close-btn');
+        const resizeHandle = mapContainer?.querySelector('.exhibitor-map-resize-handle');
+        const parentContainer = mapContainer?.closest('.exhibitor-info-content');
+        
+        if (!mapContainer || !parentContainer) return;
+        
+        // 檢測是否為手機版或平板版
+        function isMobileOrTablet() {
+          return window.innerWidth <= 1024;
+        }
+        
+        // 如果為手機版或平板版，不啟用拖動和調整大小功能
+        if (isMobileOrTablet()) {
+          return;
+        }
+        
+        let isDragging = false;
+        let isResizing = false;
+        let startX, startY, startWidth, startHeight, startLeft, startTop;
+        let aspectRatio = 1; // 地圖的寬高比
+        
+        // 獲取地圖圖片的原始寬高比
+        const mapImage = mapContainer.querySelector('.exhibitor-map-image');
+        if (mapImage) {
+          mapImage.addEventListener('load', function() {
+            aspectRatio = mapImage.naturalWidth / mapImage.naturalHeight;
+            // 如果圖片還沒載入，使用當前容器的寬高比
+            if (!aspectRatio || aspectRatio === 0) {
+              aspectRatio = mapContainer.offsetWidth / mapContainer.offsetHeight;
+            }
+          });
+          // 如果圖片已經載入
+          if (mapImage.complete) {
+            aspectRatio = mapImage.naturalWidth / mapImage.naturalHeight;
+            if (!aspectRatio || aspectRatio === 0) {
+              aspectRatio = mapContainer.offsetWidth / mapContainer.offsetHeight;
+            }
+          } else {
+            // 使用當前容器的寬高比作為初始值
+            aspectRatio = mapContainer.offsetWidth / mapContainer.offsetHeight;
+          }
+        }
+        
+        // 獲取父容器的邊界（相對於視窗）
+        function getParentBounds() {
+          const parentRect = parentContainer.getBoundingClientRect();
+          return {
+            left: parentRect.left,
+            top: parentRect.top,
+            right: parentRect.right,
+            bottom: parentRect.bottom,
+            width: parentRect.width,
+            height: parentRect.height
+          };
+        }
+        
+        // 拖動功能 - 整個地圖容器都可以拖動
+        mapContainer.addEventListener('mousedown', function(e) {
+          // 如果點擊的是調整大小手柄，不觸發拖動
+          if (e.target === resizeHandle || e.target.closest('.exhibitor-map-resize-handle')) {
+            return;
+          }
+          // 如果點擊的是關閉按鈕，不觸發拖動
+          if (e.target === mapCloseBtn || e.target.closest('.exhibitor-map-close')) {
+            return;
+          }
+          
+          isDragging = true;
+          startX = e.clientX;
+          startY = e.clientY;
+          const mapRect = mapContainer.getBoundingClientRect();
+          const parentRect = parentContainer.getBoundingClientRect();
+          // 計算相對於父容器的位置
+          startLeft = mapRect.left - parentRect.left;
+          startTop = mapRect.top - parentRect.top;
+          
+          e.preventDefault();
+        });
+        
+        // 調整大小功能
+        if (resizeHandle) {
+          resizeHandle.addEventListener('mousedown', function(e) {
+            isResizing = true;
+            startX = e.clientX;
+            startY = e.clientY;
+            startWidth = parseInt(window.getComputedStyle(mapContainer).width, 10);
+            startHeight = parseInt(window.getComputedStyle(mapContainer).height, 10);
+            
+            // 確保使用當前的寬高比
+            if (mapImage && mapImage.complete && mapImage.naturalWidth && mapImage.naturalHeight) {
+              aspectRatio = mapImage.naturalWidth / mapImage.naturalHeight;
+            } else {
+              aspectRatio = startWidth / startHeight;
+            }
+            
+            e.preventDefault();
+            e.stopPropagation();
+          });
+        }
+        
+        // 鼠標移動事件
+        document.addEventListener('mousemove', function(e) {
+          if (isDragging && !isResizing) {
+            const deltaX = e.clientX - startX;
+            const deltaY = e.clientY - startY;
+            
+            const parentBounds = getParentBounds();
+            const mapRect = mapContainer.getBoundingClientRect();
+            
+            // 計算新的位置（相對於父容器）
+            let newLeft = startLeft + deltaX;
+            let newTop = startTop + deltaY;
+            
+            // 限制在父容器範圍內
+            const minLeft = 0;
+            const minTop = 0;
+            const maxLeft = parentBounds.width - mapContainer.offsetWidth;
+            const maxTop = parentBounds.height - mapContainer.offsetHeight;
+            
+            newLeft = Math.max(minLeft, Math.min(newLeft, maxLeft));
+            newTop = Math.max(minTop, Math.min(newTop, maxTop));
+            
+            mapContainer.style.left = newLeft + 'px';
+            mapContainer.style.top = newTop + 'px';
+            mapContainer.style.right = 'auto';
+            mapContainer.style.bottom = 'auto';
+          } else if (isResizing) {
+            const deltaX = e.clientX - startX;
+            const deltaY = e.clientY - startY;
+            
+            const parentBounds = getParentBounds();
+            const mapRect = mapContainer.getBoundingClientRect();
+            const currentLeft = mapRect.left - parentBounds.left;
+            const currentTop = mapRect.top - parentBounds.top;
+            
+            // 等比例縮放：使用deltaX和deltaY中較大的變化量來保持比例
+            // 這樣可以確保無論拖動方向如何，都能保持等比例
+            const delta = Math.abs(deltaX) > Math.abs(deltaY) ? deltaX : deltaY;
+            
+            // 根據變化量計算新的寬度，然後根據寬高比計算高度
+            let newWidth = startWidth + delta;
+            let newHeight = newWidth / aspectRatio;
+            
+            // 限制最小和最大尺寸
+            const minWidth = 400;
+            const minHeight = minWidth / aspectRatio;
+            const maxWidth = Math.min(parentBounds.width - currentLeft, parentBounds.width - 40);
+            const maxHeight = Math.min(parentBounds.height - currentTop, parentBounds.height - 40);
+            
+            // 檢查是否超出父容器範圍
+            if (newWidth > maxWidth) {
+              newWidth = maxWidth;
+              newHeight = newWidth / aspectRatio;
+            }
+            if (newHeight > maxHeight) {
+              newHeight = maxHeight;
+              newWidth = newHeight * aspectRatio;
+            }
+            
+            // 確保不小於最小尺寸
+            if (newWidth < minWidth) {
+              newWidth = minWidth;
+              newHeight = newWidth / aspectRatio;
+            }
+            if (newHeight < minHeight) {
+              newHeight = minHeight;
+              newWidth = newHeight * aspectRatio;
+            }
+            
+            mapContainer.style.width = newWidth + 'px';
+            mapContainer.style.height = newHeight + 'px';
+          }
+        });
+        
+        // 鼠標釋放事件
+        document.addEventListener('mouseup', function() {
+          isDragging = false;
+          isResizing = false;
+        });
+        
+        // 關閉按鈕功能
+        if (mapCloseBtn) {
+          mapCloseBtn.addEventListener('click', function() {
+            mapContainer.style.display = 'none';
+          });
+        }
+        
+        // 窗口大小改變時，如果是手機版或平板版則重置樣式
+        window.addEventListener('resize', function() {
+          if (isMobileOrTablet()) {
+            mapContainer.style.left = '';
+            mapContainer.style.top = '';
+            mapContainer.style.right = '';
+            mapContainer.style.width = '';
+            mapContainer.style.height = '';
+          } else {
+            // 桌面版：確保地圖仍在父容器範圍內
+            const parentBounds = getParentBounds();
+            const mapRect = mapContainer.getBoundingClientRect();
+            const currentLeft = mapRect.left - parentBounds.left;
+            const currentTop = mapRect.top - parentBounds.top;
+            
+            // 如果超出範圍，調整位置
+            if (currentLeft + mapContainer.offsetWidth > parentBounds.width) {
+              mapContainer.style.left = (parentBounds.width - mapContainer.offsetWidth) + 'px';
+            }
+            if (currentTop + mapContainer.offsetHeight > parentBounds.height) {
+              mapContainer.style.top = (parentBounds.height - mapContainer.offsetHeight) + 'px';
+            }
+            if (currentLeft < 0) {
+              mapContainer.style.left = '0px';
+            }
+            if (currentTop < 0) {
+              mapContainer.style.top = '0px';
+            }
+          }
+        });
       });
     </script>
   </body>
