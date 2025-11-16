@@ -1183,6 +1183,7 @@ body {
   border: 2px solid var(--border-light);
   padding: var(--spacing-sm);
   background: rgb(100,100,100);
+  position: relative;
 }
 
 .exhibitor-expand-btn {
@@ -2212,6 +2213,11 @@ display:none;
 }
 
 @media (max-width: 1024px) {
+  .exhibitor-info-content {
+    display: flex;
+    flex-direction: column;
+  }
+
   .exhibitor-map-container {
     position: relative;
     top: auto;
@@ -2224,6 +2230,7 @@ display:none;
 
   .exhibitor-map-header {
     border-radius: 9px 9px 0 0;
+    cursor: default !important;
   }
 
   .exhibitor-map-resize-handle {
