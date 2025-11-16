@@ -78,20 +78,13 @@ const parseDescription = (description) => {
 
   let currentKey = null;
   let currentValue = "";
-  let hasExplicitFields = false; // 追蹤是否有明確的欄位標記
 
   lines.forEach((line, index) => {
     line = line.trim(); // 清理每行的空白
-    if (!line) return; // 跳過空行
     console.log(`parseDescription: 處理第${index + 1}行: "${line}"`);
 
     const colonIndex = line.indexOf(":");
-    // 檢查是否為時間格式（如 "16:00"），避免誤判為欄位分隔符
-    // 時間格式通常是數字:數字，且冒號前後都是數字
-    const isTimeFormat = /^\d{1,2}:\d{2}/.test(line);
-    
-    if (colonIndex > 0 && !isTimeFormat) {
-      hasExplicitFields = true; // 找到明確的欄位標記
+    if (colonIndex > 0) {
       // 如果前面有未完成的欄位，先儲存它
       if (currentKey) {
         fields[currentKey] = currentValue.trim();
@@ -100,31 +93,20 @@ const parseDescription = (description) => {
         );
       }
 
-      // 開始新的欄位 - 只提取欄位名和值，不包含整行
-      currentKey = line.substring(0, colonIndex).trim().toUpperCase();
+      // 開始新的欄位
+      currentKey = line.substring(0, colonIndex).trim();
       currentValue = line.substring(colonIndex + 1).trim();
       console.log(
         `parseDescription: 找到欄位 "${currentKey}" = "${currentValue}"`
       );
     } else if (currentKey && line) {
       // 如果這行沒有冒號但有內容，且我們正在處理一個欄位，則將其加到當前值
-      // 這表示這是多行欄位內容的延續
-      currentValue += "\n" + line; // 使用換行符保持格式
+      currentValue += " " + line;
       console.log(
         `parseDescription: 繼續多行欄位 "${currentKey}"，新增內容: "${line}"`
       );
-    } else if (!hasExplicitFields && line) {
-      // 如果沒有明確的欄位標記，將所有內容收集到 DESCRIPTION
-      if (!currentKey) {
-        currentKey = "DESCRIPTION";
-        currentValue = line;
-      } else {
-        currentValue += "\n" + line; // 使用換行符保持格式
-      }
-      console.log(`parseDescription: 收集到 DESCRIPTION: "${line}"`);
     } else {
-      // 有明確欄位標記但這行不符合任何條件，跳過（可能是空行或格式不正確）
-      console.log(`parseDescription: 第${index + 1}行跳過（有明確欄位標記但格式不符）`);
+      console.log(`parseDescription: 第${index + 1}行沒有冒號或格式不正確`);
     }
   });
 
@@ -434,19 +416,8 @@ function renderTimelineWithData(timelineData) {
         <div style="font-size: 1.1rem; font-weight: bold; margin-bottom: 15px; text-transform: uppercase;">
           ${event.summary || "未命名活動"}
         </div>
-        <div style="font-size: 0.9rem; line-height: 1.4; color: #666; white-space: pre-wrap;">
-          ${(() => {
-            // 只使用解析後的 DESCRIPTION 欄位，如果不存在或為空則顯示預設訊息
-            // 不使用原始 event.description，避免顯示欄位標記行
-            const desc = (eventFields.DESCRIPTION && eventFields.DESCRIPTION.trim()) || "暫無詳細描述";
-            // 轉義 HTML 特殊字符，保留換行符
-            return desc
-              .replace(/&/g, '&amp;')
-              .replace(/</g, '&lt;')
-              .replace(/>/g, '&gt;')
-              .replace(/"/g, '&quot;')
-              .replace(/'/g, '&#039;');
-          })()}
+        <div style="font-size: 0.9rem; line-height: 1.4; color: #666;">
+          ${eventFields.DESCRIPTION || event.description || "暫無詳細描述"}
         </div>
         ${eventFields.SIGNUP ? `<div style="margin-top: 15px;"><a href="${eventFields.SIGNUP}" target="_blank" style="display: inline-block; padding: 8px 16px; background: #000; color: #fff; text-decoration: none; border-radius: 4px; font-size: 0.9rem;">SIGN UP</a></div>` : ''}
       `;
