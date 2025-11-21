@@ -745,11 +745,11 @@ document.addEventListener("DOMContentLoaded", async function () {
         boothText === "Two Regular Booth" ||
         boothText === "Curation Booth"
       ) {
-        ticketlink.innerHTML = "Ticket Link";
+        ticketlink.innerHTML = "Fast Track Ticket Link";
         familyticketdesc.innerHTML =
           "◆ Friends & Family Pre-sale Ticket ｜ Starts 9/8 ｜ NT$350 ｜ Limited to 800 tickets<br>◆ Friends & Family Fast Track Ticket ｜ 11/21 – 11/23 ｜ NT$400<br>(For detailed instructions, please refer to the ticketing website.)<br><br>Your exclusive discount code:<br>";
       } else {
-        ticketlink.innerHTML = "購票連結";
+        ticketlink.innerHTML = "快速通關票購票連結";
         familyticketdesc.innerHTML =
           "◆ 親友預售票｜9/8 起開賣｜NT$350｜限量 800 張 <br>◆ 親友快速通關票｜11/21 – 11/23｜NT$400｜無限量<br>(詳細使用說明請見售票網頁)<br><br>您的專屬優惠序號：<br>";
       }
