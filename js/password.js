@@ -86,37 +86,3 @@ function showError(msgZh, msgEn) {
   }
 }
 
-// ✅ Google reCAPTCHA callback functions 必須掛到 window 才會被觸發
-window.onRecaptchaSuccess = function () {
-  document.getElementById("submitButton").disabled = false;
-};
-
-window.onRecaptchaExpired = function () {
-  alertMessage(
-    "驗證已過期，請重新嘗試。",
-    "Verification expired. Please try again."
-  );
-  document.getElementById("submitButton").disabled = true;
-};
-
-window.onRecaptchaError = function () {
-  alertMessage(
-    "驗證失敗，請重新嘗試。",
-    "Verification failed. Please try again."
-  );
-  document.getElementById("submitButton").disabled = true;
-};
-
-// 表單送出前再次檢查 reCAPTCHA
-document
-  .getElementById("BoothApplication")
-  .addEventListener("submit", function (e) {
-    const response = grecaptcha.getResponse();
-    if (!response) {
-      e.preventDefault();
-      alertMessage(
-        "請完成驗證再提交表單！",
-        "Please complete the verification before submitting."
-      );
-    }
-  });

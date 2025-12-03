@@ -45,6 +45,7 @@ document.addEventListener("DOMContentLoaded", function () {
     // 定義所有 sidebar id
     const sidebarIds = [
       "sidebar-dashboard",
+      "sidebar-open-call",
       "sidebar-contact",
       "sidebar-faq",
       "sidebar-account",
@@ -69,7 +70,7 @@ document.addEventListener("DOMContentLoaded", function () {
     });
 
     // 只給目前選到的加 <mark>
-    if (section === "dashboard" || section === "contact" || section === "faq") {
+    if (section === "dashboard" || section === "open-call" || section === "contact" || section === "faq") {
       const a = document.getElementById("sidebar-" + section);
       if (a) {
         const p = a.querySelector("p");
@@ -158,7 +159,8 @@ document.addEventListener("DOMContentLoaded", function () {
     const account = document.querySelector(".account");
     const faq = document.getElementById("faq");
     const contact = document.getElementById("contact-method");
-    const allSections = [editBrandPage, mid, right, editPage, account, faq, contact];
+    const openCallForm = document.getElementById("open-call-form");
+    const allSections = [editBrandPage, mid, right, editPage, account, faq, contact, openCallForm];
     
     // 移除所有 active class 和 inline style
     allSections.forEach(el => {
@@ -190,7 +192,8 @@ document.addEventListener("DOMContentLoaded", function () {
     const account = document.querySelector(".account");
     const faq = document.getElementById("faq");
     const contact = document.getElementById("contact-method");
-    const allSections = [editBrandPage, mid, right, editPage, account, faq, contact];
+    const openCallForm = document.getElementById("open-call-form");
+    const allSections = [editBrandPage, mid, right, editPage, account, faq, contact, openCallForm];
     
     // 移除所有 active class 和 inline style
     allSections.forEach(el => {
@@ -292,6 +295,39 @@ document.addEventListener("DOMContentLoaded", function () {
     }
   };
 
+  window.showOpenCallForm = function showOpenCallForm() {
+    const editBrandPage = document.getElementById("edit-brand-page");
+    const mid = document.querySelector(".mid");
+    const right = document.querySelector(".right");
+    const editPage = document.getElementById("edit-account-page");
+    const account = document.querySelector(".account");
+    const faq = document.getElementById("faq");
+    const contact = document.getElementById("contact-method");
+    const openCallForm = document.getElementById("open-call-form");
+    const allSections = [editBrandPage, mid, right, editPage, account, faq, contact];
+    
+    // 移除所有 active class 和 inline style
+    allSections.forEach(el => {
+      if (el) {
+        el.classList.remove("mobile-active");
+        if (isMobile) {
+          el.style.display = "";
+        } else {
+          el.style.display = "none";
+        }
+      }
+    });
+    
+    // 顯示 OPEN CALL 表單
+    if (openCallForm) {
+      if (isMobile) {
+        openCallForm.classList.add("mobile-active");
+      } else {
+        openCallForm.style.display = "table-cell";
+      }
+    }
+  };
+
   window.showDashboardSection = function showDashboardSection() {
     const editBrandPage = document.getElementById("edit-brand-page");
     const mid = document.querySelector(".mid");
@@ -300,7 +336,8 @@ document.addEventListener("DOMContentLoaded", function () {
     const account = document.querySelector(".account");
     const faq = document.getElementById("faq");
     const contact = document.getElementById("contact-method");
-    const allSections = [editBrandPage, editPage, account, faq, contact];
+    const openCallForm = document.getElementById("open-call-form");
+    const allSections = [editBrandPage, editPage, account, faq, contact, openCallForm];
     
     // 移除所有 active class 和 inline style
     allSections.forEach(el => {

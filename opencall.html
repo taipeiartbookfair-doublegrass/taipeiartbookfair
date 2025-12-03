@@ -1,0 +1,824 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      http-equiv="Content-Security-Policy"
+      content="default-src 'self'; 
+             script-src 'self' 'unsafe-inline' https://www.google.com https://www.gstatic.com https://code.jquery.com https://www.googletagmanager.com; 
+             style-src 'self' 'unsafe-inline'; 
+             connect-src https://www.google-analytics.com https://script.google.com https://script.googleusercontent.com/;
+             frame-src https://www.google.com;"
+    />
+    <title>Open Call - 草率季Taipei Art Book Fair</title>
+    <link rel="shortcut icon" href="image/icon-1.ico" />
+    <link rel="stylesheet" href="css/font.css" />
+
+    <!-- Google tag (gtag.js) -->
+    <script
+      async
+      src="https://www.googletagmanager.com/gtag/js?id=G-EPSXJPDH6L"
+    ></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+      gtag("js", new Date());
+
+      gtag("config", "G-EPSXJPDH6L");
+    </script>
+    <style>
+      body {
+        margin: 0;
+        padding: 0;
+        font-family: "Poppins", sans-serif;
+        background-color: #808080;
+        background-image: 
+          repeating-linear-gradient(0deg, 
+            rgba(0,0,0,0.05) 0px, 
+            rgba(0,0,0,0.05) 1px, 
+            transparent 1px, 
+            transparent 4px,
+            rgba(255,255,255,0.05) 4px,
+            rgba(255,255,255,0.05) 5px,
+            transparent 5px,
+            transparent 8px),
+          repeating-linear-gradient(90deg, 
+            rgba(0,0,0,0.05) 0px, 
+            rgba(0,0,0,0.05) 1px, 
+            transparent 1px, 
+            transparent 4px,
+            rgba(255,255,255,0.05) 4px,
+            rgba(255,255,255,0.05) 5px,
+            transparent 5px,
+            transparent 8px),
+          radial-gradient(circle at 2px 2px, rgba(0,0,0,0.1) 1px, transparent 0),
+          radial-gradient(circle at 6px 6px, rgba(255,255,255,0.1) 1px, transparent 0);
+        background-size: 8px 8px, 8px 8px, 4px 4px, 4px 4px;
+        background-position: 0 0, 0 0, 0 0, 2px 2px;
+        image-rendering: pixelated;
+        image-rendering: -moz-crisp-edges;
+        image-rendering: crisp-edges;
+        min-height: 100vh;
+        overflow-x: hidden;
+        padding-bottom: 120px;
+      }
+
+      .opencall-container {
+
+        margin: 0 auto;
+        padding: 2vw;
+        box-sizing: border-box;
+      }
+
+      .textcolumn {
+        text-align: left;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 2vw;
+        margin-bottom: 20px;
+      }
+
+      .column {
+        font-size: 14px;
+        line-height: 1.4rem;
+        padding: 10px;
+        background-color: yellow;
+        border: 1px solid black;
+        overflow-y: auto;
+        max-height: calc(100vh - 200px);
+      }
+
+      .column h2,
+      .column h3 {
+        margin-top: 0;
+        margin-bottom: 5px;
+        font-weight: 600;
+      }
+
+      .column h2 {
+        font-size: 1.3rem;
+      }
+
+      .column h3 {
+        font-size: 1.1rem;
+      }
+
+      .column p,
+      .column small {
+        margin-bottom: 5px;
+        font-size: 14px;
+        line-height: 1.4rem;
+      }
+
+      .column ul,
+      .column ol {
+        margin-bottom: 5px;
+        padding-left: 20px;
+      }
+
+      .column li {
+        margin-bottom: 3px;
+        font-size: 14px;
+        line-height: 1.4rem;
+      }
+
+      .column a {
+        color: black;
+        text-decoration: underline;
+      }
+
+      .column a:hover {
+        color: olive;
+      }
+
+      .column blockquote {
+        margin: 10px 0;
+        padding-left: 15px;
+        border-left: 2px solid #ccc;
+      }
+
+      .deadline-highlight {
+        border: 1.5px solid #e53935;
+        padding: 1px 12px;
+        margin: 2px 0;
+        display: inline-block;
+      }
+
+      .column strong {
+        font-weight: 600;
+      }
+
+      /* 語言快捷鍵（手機版） */
+      .application-button-lang-container {
+        display: none;
+      }
+
+      .application-button-lang {
+        display: inline-block;
+        padding: 5px 10px;
+        background: white;
+        border: 1px solid black;
+        font-size: 0.9rem;
+        text-decoration: none;
+        color: black;
+        text-align: center;
+        margin-right: 5px;
+      }
+
+      .application-button-lang:hover {
+        background-color: olive;
+        color: white;
+      }
+
+      .mobiledirection {
+        display: none;
+        height: 4rem;
+      }
+
+      .mobileline {
+        display: none;
+        border-top: 1px dashed black;
+        border-bottom: none;
+        margin: 20px 0;
+      }
+
+      /* 國籍選擇表單 - 固定在底部 */
+      .form-section {
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        background-color: ghostwhite;
+        border-top: 1px solid black;
+        padding: 20px;
+        z-index: 100;
+        box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
+      }
+
+      .form-wrapper {
+        max-width: 1400px;
+        margin: 0 auto;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 20px;
+      }
+
+      .selection-form {
+        display: flex;
+        align-items: center;
+        gap: 15px;
+        flex: 1;
+        max-width: 600px;
+      }
+
+      .selection-form label {
+        font-size: 14px;
+        color: black;
+        font-weight: 500;
+        white-space: nowrap;
+      }
+
+      .selection-form select {
+        padding: 10px;
+        font-size: 14px;
+        border: 1px solid #000;
+        background-color: white;
+        font-family: "Poppins", sans-serif;
+        cursor: pointer;
+        flex: 1;
+        min-width: 200px;
+      }
+
+      .selection-form select:focus {
+        background-color: olive;
+        outline: none;
+        color: white;
+      }
+
+      .selection-form button {
+        padding: 10px 30px;
+        background-color: black;
+        color: white;
+        border: none;
+        text-align: center;
+        cursor: pointer;
+        letter-spacing: 1px;
+        font-size: 14px;
+        font-family: "Poppins", sans-serif;
+        transition: all 0.3s ease;
+        white-space: nowrap;
+      }
+
+      .selection-form button:hover {
+        color: palegreen;
+        background-color: olive;
+      }
+
+      .back {
+        font-size: 0.9rem;
+        font-family: "Inclusive Sans", sans-serif;
+        overflow: hidden;
+        color: black;
+        background-color: white;
+        white-space: nowrap;
+        position: fixed;
+        top: 0px;
+        left: 0px;
+        padding: 5px;
+        text-align: center;
+        font-weight: 500;
+        cursor: pointer;
+        border: 1px solid black;
+        z-index: 1000;
+      }
+
+      ::selection {
+        color: palegreen;
+        background-color: olive;
+      }
+
+      /* 手機版樣式 */
+      @media screen and (max-width: 768px) {
+        body {
+          padding-bottom: 180px;
+        }
+
+        .opencall-container {
+          width: 95vw;
+          padding: 4vh 5vw;
+        }
+
+        .textcolumn {
+          display: block;
+          gap: 4vw;
+        }
+
+        .column {
+          font-size: 16px;
+          line-height: 1.6rem;
+          padding: 1.5rem;
+          max-height: none;
+          margin-bottom: 20px;
+        }
+
+        .column h2 {
+          font-size: 1.5rem;
+        }
+
+        .column h3 {
+          font-size: 1.3rem;
+        }
+
+        .column p,
+        .column small {
+          font-size: 16px;
+          line-height: 1.6rem;
+        }
+
+        .column li {
+          font-size: 16px;
+          line-height: 1.6rem;
+        }
+
+        .application-button-lang-container {
+          display: block;
+          position: fixed;
+          top: 50px;
+          left: 20px;
+          z-index: 20;
+        }
+
+        .mobiledirection {
+          display: block;
+        }
+
+        .mobileline {
+          display: block;
+        }
+
+        .form-section {
+          padding: 15px;
+        }
+
+        .form-wrapper {
+          flex-direction: column;
+          align-items: stretch;
+        }
+
+        .selection-form {
+          flex-direction: column;
+          align-items: stretch;
+          gap: 10px;
+        }
+
+        .selection-form label {
+          font-size: 16px;
+        }
+
+        .selection-form select {
+          font-size: 16px;
+          padding: 12px;
+        }
+
+        .selection-form button {
+          font-size: 16px;
+          padding: 12px;
+          width: 100%;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <a href="index.html"><div class="back">回主頁 Back</div></a>
+
+    <!-- 語言快捷鍵（手機版） -->
+    <div class="application-button-lang-container">
+      <a href="#zh" class="application-button-lang" rel="history">中文</a>
+      <a href="#en" class="application-button-lang" rel="history">English</a>
+    </div>
+
+    <div class="opencall-container">
+      <div class="textcolumn">
+        <!-- 中文欄 -->
+        <div class="mobiledirection" id="zh"></div>
+        <div class="column zh">
+          <marquee><h2>歡迎來到 2026 草率季</h2></marquee>
+          <p>
+            感謝您對草率季-台北藝術書展的支持，2026草率季十週年徵件開始，在您繼續提交申請前，請耐心閱讀以下參展條件，申請即表示您已閱讀、了解並同意並接受。
+          </p>
+          <br />
+          <h3>展會資訊</h3>
+          <div>
+            <span>時間: </span>3月6日（五）13:00–21:00<br />
+            <span style="visibility: hidden">時間: </span>3月7日（六）13:00–21:00<br />
+            <span style="visibility: hidden">時間: </span>3月8日（日）12:00–20:00<br />
+            <span style="visibility: hidden">時間: </span><small>(實際開放時間可能會略作調整）</small>
+          </div>
+          <p>
+            地點：台北表演藝術中心 超級大劇院<br />
+            <small
+              ><a href="https://share.google/72JR110LbdETo7zw2" target="_blank"
+                >(https://share.google/72JR110LbdETo7zw2)</a
+              ></small
+            >
+          </p>
+          <br />
+          <h3>聲明</h3>
+          <p>
+            本表單適用於欲擁有桌位或空地展示／販售出版品、藝術品或裝置的參展者。當我們收到大量申請資料時，主辦單位保留依填表內容篩選、拒絕之權利。
+          </p>
+          <br />
+          <h3>申請時程</h3>
+          <p>
+            申請截止：12月18日（四）24:00<br />
+            審核通知：12月25日（四）18:00前<br />
+            &nbsp;&nbsp;&nbsp; &bull; 通過者須於 1月1日（四）24:00 前付款<br />
+          </p>
+          <br />
+          <h3>在展會上</h3>
+          <p>
+            主辦單位將依整體展場佈局統一安排攤位位置，為公平起見，平面圖完成前後皆不接受位置偏好申請。<br /><br />
+            我們將於 2 月提供攤位樣式示意圖。<br /><br />
+            立面展示因場地空間限制隨機分配，且可能與其他單位共用。
+          </p>
+          <br /><br />
+          <h3>展位類型</h3>
+          <p>
+            錄取參展單位將獲得資格於2026年草率簿中露出個人宣傳一頁，並獲得 2026 草率簿一本。
+          </p>
+          <br />
+          <p><strong>ㄧ般書攤 ｜5,000 元（含稅）</strong></p>
+          <p>
+            針對以書本為主要創作／販售的參展單位，申請時需提出三本以上已出版刊物及審查資料。<br />
+            基礎設備：桌面（120*60cm) 1 個、椅子 2 張、工作證 2 張、草率簿 1 本（含露出一面）
+          </p>
+          <br />
+
+          <p><strong>非書（創作）攤｜8,000 元（含稅）</strong></p>
+          <p>
+            針對以非書類型為主要創作／販售的參展單位。<br />
+            基礎設備：桌面（120*60cm) 1 個、椅子 2 張、工作證 2 張、草率簿 1 本（含露出一面）
+          </p>
+          <br />
+
+          <p><strong>裝置攤｜10,000 元（含稅）</strong></p>
+          <p>
+            針對大型裝置或空間創作為主的參展單位。<br />
+            基礎設備：1.5M*1.5M空地、工作證 2 張、草率簿 1 本（含露出一面）
+          </p>
+          <br />
+
+          <p><strong>策展攤｜50,000 元（含稅）</strong></p>
+          <p>
+            針對有大量作品展示需求的參展單位。<br />
+            基礎設備：3M*3M空間、桌面（120*60cm) 2 個、椅子 4 張、工作證 6 張、草率簿 1 本（含露出一面）
+          </p>
+          <br />
+
+          <p><strong>食物酒水攤｜13,000 元（含稅）</strong></p>
+          <p>
+            針對以食物或飲品為主要販售類型的單位。<br />
+            基礎設備：桌面（180*60cm) 1 個、椅子 2 張、工作證 2 張、草率簿 1 本（含露出一面）
+          </p>
+          <blockquote>
+            <small
+              >*每個單位在繳費階段最多可加購 1 張工作證（含入場憑證），以「天」為計算單位。因場地空間有限，若攤位需要超過指定數量之工作人員，或需短暫輪班，可於購票階段購買「親友票」。
+            </small>
+          </blockquote>
+          <br />
+          
+          <h3>聯繫</h3>
+          <p>
+            <a href="mailto:hooroo@double-grass.com">hooroo@double-grass.com</a>
+          </p>
+        </div>
+        <hr class="mobileline" />
+        <!-- 英文欄 -->
+        <div class="mobiledirection" id="en"></div>
+        <div class="column en">
+          <marquee><h2>Welcome to the 2026 10th Annual Taipei Art Book Fair</h2></marquee>
+          <p>
+            Thank you for your support for TPABF – Taipei Art Book Fair.<br /><br />
+            The application for the 10th Anniversary Edition of TPABF 2026 is now open.<br /><br />
+            Before you proceed, please read the following conditions carefully. By submitting the application, you acknowledge that you have read, understood, and agree to all terms below.
+          </p>
+          <h3>Fair Date</h3>
+          <div>
+            <span>Dates & Hours: </span>March 6 (Fri) 13:00–21:00<br />
+            <span style="visibility: hidden">Dates & Hours: </span>March 7 (Sat) 13:00–21:00<br />
+            <span style="visibility: hidden">Dates & Hours: </span>March 8 (Sun) 12:00–20:00<br />
+            <span style="visibility: hidden">Dates & Hours: </span><small>(Actual opening hours may be adjusted slightly.)</small>
+          </div>
+          <p>
+            <strong>Venue</strong><br />
+            Taipei Performing Arts Center – Super Theater<br />
+            <small
+            ><a href="https://share.google/72JR110LbdETo7zw2" target="_blank"
+              >(https://share.google/72JR110LbdETo7zw2)</a
+            ></small
+          >
+          </p>
+          <br />
+          <h3>About the participation</h3>
+          <p>
+            This form is intended for exhibitors who wish to apply for a tabletop booth or floor space to display or sell publications, artworks, products, or installations.<br /><br />
+            When receiving a large number of applications, the organizer reserves the right to review, select, or decline submissions based on the information provided.
+          </p>
+          <br />
+          <h3>Deadline</h3>
+          <p>
+            Application Deadline: December 18 (Thu) 24:00<br />
+            Notification of Results: Before December 25 (Thu) 18:00<br />
+            &nbsp;&nbsp;&nbsp; &bull; Accepted applicants must complete payment by January 1 (Thu.) 24:00
+          </p>
+          <br />
+          <h3>At the Fair</h3>
+          <p>
+            Booth locations will be arranged by the organizer according to overall venue planning.<br /><br />
+            To ensure fairness, we do not accept requests for booth location preferences before or after the floor plan is finalized.<br /><br />
+            Booth style mockups will be provided in February.<br /><br />
+            Due to venue limitations, vertical display spaces will be allocated randomly and may be shared with other exhibitors.
+          </p>
+          <br />
+          <h3>Booth Types</h3>
+          <p>
+            All accepted exhibitors will receive one promotional page in the TPABF 2026 Catalog (草率簿) and one complimentary catalog.
+          </p>
+          <br />
+          <p><strong>- Regular Book Booth <span style="font-weight: 200;">NTD$5,000 incl. tax</span></strong></p>
+          <p>
+            For exhibitors whose primary practice or sales focus on books.<br />
+            Applicants must submit at least three previously published titles and relevant review materials.<br />
+            Includes: 120 × 60 cm table ×1, chairs ×2, passes ×2, TPABF Catalog ×1 (one page featured)
+          </p>
+          <br />
+          <p><strong>- Regular Non-Book Booth <span style="font-weight: 200;">NTD$8,000 incl. tax</span></strong></p>
+          <p>
+            For exhibitors whose main works or products are non-book items.<br />
+            Includes: 120 × 60 cm table ×1, chairs ×2, passes ×2, TPABF Catalog ×1 (one page featured)
+          </p>
+          <br />
+          <p><strong>- Installation Booth <span style="font-weight: 200;">NTD$10,000 incl. tax</span></strong></p>
+          <p>
+            For exhibitors presenting large-scale installations or spatial works.<br />
+            Includes: 1.5 m × 1.5 m space, passes ×2, TPABF Catalog ×1 (one page featured)
+          </p>
+          <br />
+          <p><strong>- Curation Booth <span style="font-weight: 200">&nbsp; NTD$50,000 incl. tax</span></strong></p>
+          <p>
+            For exhibitors who need a larger space to display a significant amount of work.<br />
+            Includes: 3m*3m space, 120 × 60 cm table ×2, chairs ×4, passes ×6, TPABF Catalog ×1 (one page featured)
+          </p>
+          <br />
+          
+          <blockquote>
+            <small
+              >*Each unit may purchase one additional staff pass during the payment phase, calculated per day. If your booth requires more staff than the allotted number, or if you need occasional shift changes, you may purchase "Friend&Family Ticker" during the ticketing phase.
+            </small>
+          </blockquote>
+          <br />
+         
+          <h3>Last Year's Highlights</h3>
+          <p>
+            450 exhibiting units (200 international, 250 local) from 30 countries/regions<br /><br />
+            12,000 paid visitors
+          </p>
+
+          <br />
+          <h3>Contact</h3>
+          <p>
+            <a href="mailto:hooroo@double-grass.com">hooroo@double-grass.com</a>
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <!-- 國籍選擇表單 - 固定在底部 -->
+    <div class="form-section">
+      <div class="form-wrapper">
+        <form id="nationality-form" class="selection-form">
+          <label for="nationality">國籍 (Nationality):</label>
+          <select name="nationality" id="nationality" required>
+            <option value="">請選擇 Please select</option>
+            <option value="Taiwan">台灣 Taiwan</option>
+            <option value="Afghanistan">阿富汗 Afghanistan</option>
+            <option value="Albania">阿爾巴尼亞 Albania</option>
+            <option value="Algeria">阿爾及利亞 Algeria</option>
+            <option value="Andorra">安道爾 Andorra</option>
+            <option value="Angola">安哥拉 Angola</option>
+            <option value="Antigua and Barbuda">安地卡及巴布達 Antigua and Barbuda</option>
+            <option value="Argentina">阿根廷 Argentina</option>
+            <option value="Armenia">亞美尼亞 Armenia</option>
+            <option value="Australia">澳洲 Australia</option>
+            <option value="Austria">奧地利 Austria</option>
+            <option value="Azerbaijan">亞塞拜然 Azerbaijan</option>
+            <option value="Bahamas">巴哈馬 Bahamas</option>
+            <option value="Bahrain">巴林 Bahrain</option>
+            <option value="Bangladesh">孟加拉 Bangladesh</option>
+            <option value="Barbados">巴貝多 Barbados</option>
+            <option value="Belarus">白俄羅斯 Belarus</option>
+            <option value="Belgium">比利時 Belgium</option>
+            <option value="Belize">貝里斯 Belize</option>
+            <option value="Benin">貝南 Benin</option>
+            <option value="Bhutan">不丹 Bhutan</option>
+            <option value="Bolivia">玻利維亞 Bolivia</option>
+            <option value="Bosnia and Herzegovina">波士尼亞與赫塞哥維納 Bosnia and Herzegovina</option>
+            <option value="Botswana">波札那 Botswana</option>
+            <option value="Brazil">巴西 Brazil</option>
+            <option value="Brunei">汶萊 Brunei</option>
+            <option value="Bulgaria">保加利亞 Bulgaria</option>
+            <option value="Burkina Faso">布吉納法索 Burkina Faso</option>
+            <option value="Burundi">蒲隆地 Burundi</option>
+            <option value="Cambodia">柬埔寨 Cambodia</option>
+            <option value="Cameroon">喀麥隆 Cameroon</option>
+            <option value="Canada">加拿大 Canada</option>
+            <option value="Cape Verde">維德角 Cape Verde</option>
+            <option value="Central African Republic">中非 Central African Republic</option>
+            <option value="Chad">查德 Chad</option>
+            <option value="Chile">智利 Chile</option>
+            <option value="China">中國 China</option>
+            <option value="Colombia">哥倫比亞 Colombia</option>
+            <option value="Comoros">葛摩 Comoros</option>
+            <option value="Congo">剛果 Congo</option>
+            <option value="Costa Rica">哥斯大黎加 Costa Rica</option>
+            <option value="Croatia">克羅埃西亞 Croatia</option>
+            <option value="Cuba">古巴 Cuba</option>
+            <option value="Cyprus">賽普勒斯 Cyprus</option>
+            <option value="Czech Republic">捷克 Czech Republic</option>
+            <option value="Denmark">丹麥 Denmark</option>
+            <option value="Djibouti">吉布地 Djibouti</option>
+            <option value="Dominica">多米尼克 Dominica</option>
+            <option value="Dominican Republic">多明尼加 Dominican Republic</option>
+            <option value="East Timor">東帝汶 East Timor</option>
+            <option value="Ecuador">厄瓜多 Ecuador</option>
+            <option value="Egypt">埃及 Egypt</option>
+            <option value="El Salvador">薩爾瓦多 El Salvador</option>
+            <option value="Equatorial Guinea">赤道幾內亞 Equatorial Guinea</option>
+            <option value="Eritrea">厄利垂亞 Eritrea</option>
+            <option value="Estonia">愛沙尼亞 Estonia</option>
+            <option value="Eswatini">史瓦帝尼 Eswatini</option>
+            <option value="Ethiopia">衣索比亞 Ethiopia</option>
+            <option value="Fiji">斐濟 Fiji</option>
+            <option value="Finland">芬蘭 Finland</option>
+            <option value="France">法國 France</option>
+            <option value="Gabon">加彭 Gabon</option>
+            <option value="Gambia">甘比亞 Gambia</option>
+            <option value="Georgia">喬治亞 Georgia</option>
+            <option value="Germany">德國 Germany</option>
+            <option value="Ghana">迦納 Ghana</option>
+            <option value="Greece">希臘 Greece</option>
+            <option value="Grenada">格瑞那達 Grenada</option>
+            <option value="Guatemala">瓜地馬拉 Guatemala</option>
+            <option value="Guinea">幾內亞 Guinea</option>
+            <option value="Guinea-Bissau">幾內亞比索 Guinea-Bissau</option>
+            <option value="Guyana">蓋亞那 Guyana</option>
+            <option value="Haiti">海地 Haiti</option>
+            <option value="Honduras">宏都拉斯 Honduras</option>
+            <option value="Hong Kong">香港 Hong Kong</option>
+            <option value="Hungary">匈牙利 Hungary</option>
+            <option value="Iceland">冰島 Iceland</option>
+            <option value="India">印度 India</option>
+            <option value="Indonesia">印尼 Indonesia</option>
+            <option value="Iran">伊朗 Iran</option>
+            <option value="Iraq">伊拉克 Iraq</option>
+            <option value="Ireland">愛爾蘭 Ireland</option>
+            <option value="Israel">以色列 Israel</option>
+            <option value="Italy">義大利 Italy</option>
+            <option value="Ivory Coast">象牙海岸 Ivory Coast</option>
+            <option value="Jamaica">牙買加 Jamaica</option>
+            <option value="Japan">日本 Japan</option>
+            <option value="Jordan">約旦 Jordan</option>
+            <option value="Kazakhstan">哈薩克 Kazakhstan</option>
+            <option value="Kenya">肯亞 Kenya</option>
+            <option value="Kiribati">吉里巴斯 Kiribati</option>
+            <option value="Kosovo">科索沃 Kosovo</option>
+            <option value="Kuwait">科威特 Kuwait</option>
+            <option value="Kyrgyzstan">吉爾吉斯 Kyrgyzstan</option>
+            <option value="Laos">寮國 Laos</option>
+            <option value="Latvia">拉脫維亞 Latvia</option>
+            <option value="Lebanon">黎巴嫩 Lebanon</option>
+            <option value="Lesotho">賴索托 Lesotho</option>
+            <option value="Liberia">賴比瑞亞 Liberia</option>
+            <option value="Libya">利比亞 Libya</option>
+            <option value="Liechtenstein">列支敦斯登 Liechtenstein</option>
+            <option value="Lithuania">立陶宛 Lithuania</option>
+            <option value="Luxembourg">盧森堡 Luxembourg</option>
+            <option value="Macau">澳門 Macau</option>
+            <option value="Madagascar">馬達加斯加 Madagascar</option>
+            <option value="Malawi">馬拉威 Malawi</option>
+            <option value="Malaysia">馬來西亞 Malaysia</option>
+            <option value="Maldives">馬爾地夫 Maldives</option>
+            <option value="Mali">馬利 Mali</option>
+            <option value="Malta">馬爾他 Malta</option>
+            <option value="Marshall Islands">馬紹爾群島 Marshall Islands</option>
+            <option value="Mauritania">茅利塔尼亞 Mauritania</option>
+            <option value="Mauritius">模里西斯 Mauritius</option>
+            <option value="Mexico">墨西哥 Mexico</option>
+            <option value="Micronesia">密克羅尼西亞 Micronesia</option>
+            <option value="Moldova">摩爾多瓦 Moldova</option>
+            <option value="Monaco">摩納哥 Monaco</option>
+            <option value="Mongolia">蒙古 Mongolia</option>
+            <option value="Montenegro">蒙特內哥羅 Montenegro</option>
+            <option value="Morocco">摩洛哥 Morocco</option>
+            <option value="Mozambique">莫三比克 Mozambique</option>
+            <option value="Myanmar">緬甸 Myanmar</option>
+            <option value="Namibia">納米比亞 Namibia</option>
+            <option value="Nauru">諾魯 Nauru</option>
+            <option value="Nepal">尼泊爾 Nepal</option>
+            <option value="Netherlands">荷蘭 Netherlands</option>
+            <option value="New Zealand">紐西蘭 New Zealand</option>
+            <option value="Nicaragua">尼加拉瓜 Nicaragua</option>
+            <option value="Niger">尼日 Niger</option>
+            <option value="Nigeria">奈及利亞 Nigeria</option>
+            <option value="North Korea">北韓 North Korea</option>
+            <option value="North Macedonia">北馬其頓 North Macedonia</option>
+            <option value="Norway">挪威 Norway</option>
+            <option value="Oman">阿曼 Oman</option>
+            <option value="Pakistan">巴基斯坦 Pakistan</option>
+            <option value="Palau">帛琉 Palau</option>
+            <option value="Palestine">巴勒斯坦 Palestine</option>
+            <option value="Panama">巴拿馬 Panama</option>
+            <option value="Papua New Guinea">巴布亞紐幾內亞 Papua New Guinea</option>
+            <option value="Paraguay">巴拉圭 Paraguay</option>
+            <option value="Peru">秘魯 Peru</option>
+            <option value="Philippines">菲律賓 Philippines</option>
+            <option value="Poland">波蘭 Poland</option>
+            <option value="Portugal">葡萄牙 Portugal</option>
+            <option value="Qatar">卡達 Qatar</option>
+            <option value="Romania">羅馬尼亞 Romania</option>
+            <option value="Russia">俄羅斯 Russia</option>
+            <option value="Rwanda">盧安達 Rwanda</option>
+            <option value="Saint Kitts and Nevis">聖克里斯多福及尼維斯 Saint Kitts and Nevis</option>
+            <option value="Saint Lucia">聖露西亞 Saint Lucia</option>
+            <option value="Saint Vincent and the Grenadines">聖文森及格瑞那丁 Saint Vincent and the Grenadines</option>
+            <option value="Samoa">薩摩亞 Samoa</option>
+            <option value="San Marino">聖馬利諾 San Marino</option>
+            <option value="Sao Tome and Principe">聖多美普林西比 Sao Tome and Principe</option>
+            <option value="Saudi Arabia">沙烏地阿拉伯 Saudi Arabia</option>
+            <option value="Senegal">塞內加爾 Senegal</option>
+            <option value="Serbia">塞爾維亞 Serbia</option>
+            <option value="Seychelles">塞席爾 Seychelles</option>
+            <option value="Sierra Leone">獅子山 Sierra Leone</option>
+            <option value="Singapore">新加坡 Singapore</option>
+            <option value="Slovakia">斯洛伐克 Slovakia</option>
+            <option value="Slovenia">斯洛維尼亞 Slovenia</option>
+            <option value="Solomon Islands">索羅門群島 Solomon Islands</option>
+            <option value="Somalia">索馬利亞 Somalia</option>
+            <option value="South Africa">南非 South Africa</option>
+            <option value="South Korea">韓國 South Korea</option>
+            <option value="South Sudan">南蘇丹 South Sudan</option>
+            <option value="Spain">西班牙 Spain</option>
+            <option value="Sri Lanka">斯里蘭卡 Sri Lanka</option>
+            <option value="Sudan">蘇丹 Sudan</option>
+            <option value="Suriname">蘇利南 Suriname</option>
+            <option value="Sweden">瑞典 Sweden</option>
+            <option value="Switzerland">瑞士 Switzerland</option>
+            <option value="Syria">敘利亞 Syria</option>
+            <option value="Tajikistan">塔吉克 Tajikistan</option>
+            <option value="Tanzania">坦尚尼亞 Tanzania</option>
+            <option value="Thailand">泰國 Thailand</option>
+            <option value="Togo">多哥 Togo</option>
+            <option value="Tonga">東加 Tonga</option>
+            <option value="Trinidad and Tobago">千里達及托巴哥 Trinidad and Tobago</option>
+            <option value="Tunisia">突尼西亞 Tunisia</option>
+            <option value="Turkey">土耳其 Turkey</option>
+            <option value="Turkmenistan">土庫曼 Turkmenistan</option>
+            <option value="Tuvalu">吐瓦魯 Tuvalu</option>
+            <option value="Uganda">烏干達 Uganda</option>
+            <option value="Ukraine">烏克蘭 Ukraine</option>
+            <option value="United Arab Emirates">阿拉伯聯合大公國 United Arab Emirates</option>
+            <option value="United Kingdom">英國 United Kingdom</option>
+            <option value="United States">美國 United States</option>
+            <option value="Uruguay">烏拉圭 Uruguay</option>
+            <option value="Uzbekistan">烏茲別克 Uzbekistan</option>
+            <option value="Vanuatu">萬那杜 Vanuatu</option>
+            <option value="Vatican City">梵蒂岡 Vatican City</option>
+            <option value="Venezuela">委內瑞拉 Venezuela</option>
+            <option value="Vietnam">越南 Vietnam</option>
+            <option value="Yemen">葉門 Yemen</option>
+            <option value="Zambia">尚比亞 Zambia</option>
+            <option value="Zimbabwe">辛巴威 Zimbabwe</option>
+            <option value="Other">其他 Other</option>
+          </select>
+          <button type="submit">繼續 Continue</button>
+        </form>
+      </div>
+    </div>
+
+    <script>
+      document
+        .getElementById("nationality-form")
+        .addEventListener("submit", function (e) {
+          e.preventDefault();
+          const nationality = document.getElementById("nationality").value;
+
+          if (!nationality) {
+            alert("請選擇地區/國籍 Please select a region/nationality");
+            return;
+          }
+
+          if (nationality === "Taiwan") {
+            window.location.href = "localapplication.html";
+          } else {
+            window.location.href = "overseaapplication.html";
+          }
+        });
+
+      // 語言快捷鍵功能
+      document.querySelectorAll(".application-button-lang").forEach((link) => {
+        link.addEventListener("click", function (e) {
+          e.preventDefault();
+          const targetId = this.getAttribute("href").substring(1);
+          const targetElement = document.getElementById(targetId);
+          if (targetElement) {
+            targetElement.scrollIntoView({ behavior: "smooth", block: "start" });
+          }
+        });
+      });
+    </script>
+  </body>
+</html>
