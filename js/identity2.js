@@ -75,8 +75,14 @@ boothTypeRadios.forEach((radio) => {
       categoryKey = "nonbook";
     } else if (boothType === "食物酒水") {
       categoryKey = "food";
+    } else if (boothType === "裝置類" || boothType === "策展攤") {
+      // 裝置類和策展攤，隱藏 sub-category
+      subSelect.innerHTML = "";
+      leftthing.style.display = "none";
+      rightthing.style.display = "none";
+      return;
     } else {
-      // 裝置類，隱藏 sub-category
+      // 其他情況，隱藏 sub-category
       subSelect.innerHTML = "";
       leftthing.style.display = "none";
       rightthing.style.display = "none";

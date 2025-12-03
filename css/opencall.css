@@ -1,8 +1,11 @@
-body {
-  margin: 0;
-  padding: 3rem;
-  font-family: "Poppins", sans-serif;
-  background-color: black;
+body{
+ 
+    margin: 0;
+    padding: 3rem;
+    font-family: "Poppins", sans-serif;
+    background-color:blue;
+    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.6), 0 6px 12px rgba(0, 0, 0, 0.4), inset 0 6px 20px rgba(240, 232, 232, 0.8), inset 0 -6px 20px rgba(0, 0, 0, 0.6), inset 0 0 40px rgba(255, 255, 255, 0.3);
+  
 }
 ::selection {
   color: palegreen;
@@ -133,7 +136,7 @@ form {
   font-size: 0.9rem;
 }
 .from-description-header-ness {
-  color: #e55e25;
+  color: orangered;
   font-size: 0.7rem;
 }
 .from-description-header-ness-no {
@@ -145,9 +148,13 @@ form {
   font-weight: 600;
 }
 .from-header {
-  color: #6b4ca5;
+  color: black;
   font-size: 1rem;
   font-weight: 700;
+  border: 1px solid black;
+  border-radius: 50%;
+  background-color: yellow;
+  padding: 0.3rem;
 }
 .description-header {
   font-size: 0.8rem;

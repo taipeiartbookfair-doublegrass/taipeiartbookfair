@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      http-equiv="Content-Security-Policy"
+      content="default-src 'self'; 
+         script-src 'self' 'unsafe-inline' https://www.google.com https://www.gstatic.com https://code.jquery.com https://www.googletagmanager.com; 
+         style-src 'self' 'unsafe-inline'; 
+         connect-src https://www.google-analytics.com https://script.google.com https://script.googleusercontent.com;
+         frame-src https://www.google.com;"
+    />
+    <title>Sign Up - 草率季Taipei Art Book Fair</title>
+    <link rel="shortcut icon" href="image/icon-1.ico" />
+
+    <!-- <link rel="stylesheet" href="css/style.css" /> -->
+    <link rel="stylesheet" href="css/font.css" />
+    <link rel="shortcut icon" href="css/font.css" />
+
+    <!-- Google tag (gtag.js) -->
+    <script
+      async
+      src="https://www.googletagmanager.com/gtag/js?id=G-EPSXJPDH6L"
+    ></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+      gtag("js", new Date());
+
+      gtag("config", "G-EPSXJPDH6L");
+    </script>
+    <style>
+      body {
+        margin: 0;
+        padding: 0;
+        font-family: "Poppins", sans-serif;
+        /* background: whitesmoke; */
+        overflow: hidden;
+        position: relative;
+        background-color: #f2f2f2;
+      }
+
+      .login-wrapper {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        height: 80vh;
+        padding: 0 10px;
+      }
+
+      h2 {
+        font-size: 1rem;
+        font-weight: normal;
+        text-transform: uppercase;
+        margin-bottom: 10px;
+        padding-left: 10px;
+        padding-right: 10px;
+        color: black;
+        background-color: ghostwhite;
+        border: 1px solid black;
+        text-align: left;
+      }
+
+      .login-form {
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        max-width: 380px;
+        padding: 8px;
+        box-sizing: border-box;
+        border: 1px solid black;
+        background-color: ghostwhite;
+      }
+
+      .input-box {
+        display: flex;
+        flex-direction: column;
+        margin-bottom: 8px;
+        padding: 4px;
+        border: 1px solid #000;
+      }
+
+      .input-box label {
+        font-size: 12px;
+        color: black;
+        margin-bottom: 2px;
+      }
+
+      .input-box input,
+      .input-box select {
+        padding: 6px;
+        font-size: 12px;
+        border: 1px solid #000;
+      }
+
+      .input-box input:focus,
+      .input-box select:focus {
+        background-color: olive;
+        outline: none;
+      }
+
+      .sub-actions {
+        display: flex;
+        justify-content: flex-end;
+        margin-top: 4px;
+        padding-right: 6px;
+      }
+
+      .fp {
+        text-decoration: underline;
+        font-size: 11px;
+        color: black;
+      }
+
+      .submit-box {
+        display: flex;
+        justify-content: center;
+        margin-top: 10px;
+      }
+
+      button {
+        padding: 8px;
+        background-color: black;
+        color: white;
+        border: none;
+        width: 100%;
+        text-align: center;
+        cursor: pointer;
+        letter-spacing: 1px;
+        font-size: 0.9rem;
+      }
+
+      button:hover {
+        color: palegreen;
+        background-color: olive;
+      }
+
+      .bgimg {
+        filter: saturate(500) hue-rotate(185deg) contrast(200%) brightness(90%)
+          sepia(25%);
+        position: fixed;
+        z-index: -50;
+        width: 100vw;
+        height: 100vh;
+        -webkit-user-drag: none;
+        top: 0;
+        left: 0;
+      }
+      .fp {
+        padding-left: 5px;
+        padding-right: 5px;
+        font-size: 0.8rem;
+        text-decoration: underline;
+        color: grey;
+        display: inline-block;
+        margin-bottom: 1rem;
+      }
+      .back {
+        font-size: 0.9rem;
+        font-family: "Inclusive Sans", sans-serif;
+        overflow: hidden;
+        color: black;
+        background-color: white;
+        white-space: nowrap;
+        position: fixed;
+        bottom: 0px;
+        left: 0px;
+        padding: 5px;
+        text-align: center;
+        font-weight: 500;
+        cursor: pointer;
+      }
+      ::selection {
+        color: palegreen;
+        background-color: olive;
+      }
+    </style>
+  </head>
+  <body>
+    <img
+      draggable="false"
+      (dragstart)="false;"
+      class="bgimg"
+      id="sasa"
+      src="image/bgimg4.jpg"
+    />
+
+    <div class="login-wrapper">
+      <h2>註冊 Sign Up</h2>
+      <div class="login-form">
+        <form action="/signup" method="POST">
+          <div class="input-box">
+            <label for="email">電子郵件 Email</label>
+            <input
+              type="email"
+              name="email"
+              id="email"
+              placeholder="your@email.com"
+              required
+            />
+          </div>
+
+          <div class="input-box">
+            <label for="password">密碼 Password</label>
+            <input
+              type="password"
+              name="password"
+              id="password"
+              placeholder="Enter your password"
+              required
+            />
+          </div>
+
+          <div class="input-box">
+            <label for="phone">電話 Phone</label>
+            <input
+              type="tel"
+              name="phone"
+              id="phone"
+              placeholder="Enter your phone number"
+              required
+            />
+          </div>
+
+          <div class="input-box">
+            <label for="name">姓名 Name</label>
+            <input
+              type="text"
+              name="name"
+              id="name"
+              placeholder="Enter your name"
+              required
+            />
+          </div>
+
+          <div class="input-box">
+            <label for="region">地區/國籍 Region (Nationality)</label>
+            <select name="region" id="region" required>
+              <option value="">請選擇 Please select</option>
+              <option value="Taiwan">台灣 Taiwan</option>
+              <option value="China">中國 China</option>
+              <option value="Hong Kong">香港 Hong Kong</option>
+              <option value="Macau">澳門 Macau</option>
+              <option value="Japan">日本 Japan</option>
+              <option value="South Korea">韓國 South Korea</option>
+              <option value="Singapore">新加坡 Singapore</option>
+              <option value="Malaysia">馬來西亞 Malaysia</option>
+              <option value="Thailand">泰國 Thailand</option>
+              <option value="Philippines">菲律賓 Philippines</option>
+              <option value="Indonesia">印尼 Indonesia</option>
+              <option value="Vietnam">越南 Vietnam</option>
+              <option value="United States">美國 United States</option>
+              <option value="Canada">加拿大 Canada</option>
+              <option value="United Kingdom">英國 United Kingdom</option>
+              <option value="Australia">澳洲 Australia</option>
+              <option value="New Zealand">紐西蘭 New Zealand</option>
+              <option value="Germany">德國 Germany</option>
+              <option value="France">法國 France</option>
+              <option value="Italy">義大利 Italy</option>
+              <option value="Spain">西班牙 Spain</option>
+              <option value="Netherlands">荷蘭 Netherlands</option>
+              <option value="Belgium">比利時 Belgium</option>
+              <option value="Switzerland">瑞士 Switzerland</option>
+              <option value="Austria">奧地利 Austria</option>
+              <option value="Sweden">瑞典 Sweden</option>
+              <option value="Norway">挪威 Norway</option>
+              <option value="Denmark">丹麥 Denmark</option>
+              <option value="Finland">芬蘭 Finland</option>
+              <option value="Poland">波蘭 Poland</option>
+              <option value="Czech Republic">捷克 Czech Republic</option>
+              <option value="Russia">俄羅斯 Russia</option>
+              <option value="Brazil">巴西 Brazil</option>
+              <option value="Argentina">阿根廷 Argentina</option>
+              <option value="Mexico">墨西哥 Mexico</option>
+              <option value="India">印度 India</option>
+              <option value="Other">其他 Other</option>
+            </select>
+          </div>
+
+          <div class="submit-box">
+            <button type="submit">註冊 Sign Up</button>
+          </div>
+        </form>
+        
+        <div class="sub-actions">
+          <a href="login.html" class="fp">已有帳號？回到登入 Already have an account? Back to Login</a>
+        </div>
+      </div>
+    </div>
+
+    <a href="index.html"><div class="back">回主頁 Back</div></a>
+  </body>
+</html>
+
