@@ -1,0 +1,900 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <!-- <meta
+      http-equiv="Content-Security-Policy"
+      content="default-src 'self'; 
+             script-src 'self' 'unsafe-inline' https://www.google.com https://www.gstatic.com https://code.jquery.com https://www.googletagmanager.com; 
+             style-src 'self' 'unsafe-inline'; 
+             connect-src https://www.google-analytics.com https://script.google.com https://script.googleusercontent.com/;
+             frame-src https://www.google.com;
+             form-action 'self' https://docs.google.com;"
+    />
+    <meta
+      name="description"
+      content="草率季 Taipei Art Book Fair 本地申請表單，歡迎創作者、書店、出版商等報名參加。"
+    />
+    <meta
+      name="keywords"
+      content="草率季, Taipei Art Book Fair, 本地申請, 書展, 攤主, 報名"
+    />
+    <meta name="author" content="Taipei Art Book Fair" />
+
+    <meta
+      property="og:title"
+      content="本地申請 - 草率季 Taipei Art Book Fair"
+    />
+    <meta
+      property="og:description"
+      content="草率季 Taipei Art Book Fair 本地申請表單，歡迎創作者、書店、出版商等報名參加。"
+    />
+    <meta property="og:type" content="website" />
+    <meta
+      property="og:url"
+      content="https://taipeiartbookfair.github.io/localapplication.html"
+    />
+    <meta
+      property="og:image"
+      content="https://taipeiartbookfair.github.io/image/og-image.jpg"
+    />
+
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta
+      name="twitter:title"
+      content="本地申請 - 草率季 Taipei Art Book Fair"
+    />
+    <meta
+      name="twitter:description"
+      content="草率季 Taipei Art Book Fair 本地申請表單，歡迎創作者、書店、出版商等報名參加。"
+    />
+    <meta
+      name="twitter:image"
+      content="https://taipeiartbookfair.github.io/image/og-image.jpg"
+    />
+
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+
+    <meta name="format-detection" content="telephone=no" />
+
+    <link rel="apple-touch-icon" href="image/icon-1.ico" /> -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>本地申請 - 草率季Taipei Art Book Fair</title>
+    <link rel="shortcut icon" href="image/icon-1.ico" />
+    <link rel="stylesheet" href="css/opencall.css" />
+    <link rel="stylesheet" href="css/font.css" />
+
+    <!-- 圖靈測驗 -->
+    <script
+      src="https://www.google.com/recaptcha/api.js?hl=zh-TW"
+      async
+      defer
+    ></script>
+    <!-- Google tag (gtag.js) -->
+    <script
+      async
+      src="https://www.googletagmanager.com/gtag/js?id=G-EPSXJPDH6L"
+    ></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+      gtag("js", new Date());
+
+      gtag("config", "G-EPSXJPDH6L");
+    </script>
+  </head>
+  <body>
+    <iframe
+      name="hidden_iframe"
+      id="hidden_iframe"
+      style="display: none"
+    ></iframe>
+    <div class="ETgohome">
+      <a href="index.html">
+        <div class="backhome">←</div>
+        <div class="backhome-smalltext">回<br />主<br />頁</div></a
+      >
+    </div>
+
+    <form
+      id="BoothApplication"
+      target="hidden_iframe"
+      action="https://docs.google.com/forms/d/e/1FAIpQLSeQfsc_9GX_CjXIbTd6jknI0nBJ60KETLJNF5D7GEgYxwM_4w/formResponse"
+      method="post"
+    >
+      <div style="font-size: 1rem; text-align: center; font-weight: 600">
+        本地申請<br />TAIPEI ART BOOK FAIR OPEN CALL
+      </div>
+      <!-- <div style="font-size: 0.7rem; text-align: center; font-weight: 600">
+        海外申請請移駕至 → <a href="overseaapplication.html">Oversea Panel</a>
+      </div> -->
+      <br /><br />
+      <span class="description-header">Exhibitor's Name</span>
+      <div class="module-form layout-form-columnized">
+        <!--Exhibitor Name-->
+        <div class="column">
+          <span class="from-header">攤商品牌名稱</span>
+          輸入內容將公開顯示於官網目錄及標籤上。
+        </div>
+        <div class="column layout-form-column-grid-1">
+          <span class="from-description-header-ness">必填問題</span>
+          <input
+            class="form-input"
+            name="entry.1159390039"
+            placeholder="品牌名稱"
+            maxlength="150"
+            required
+            pattern="^[\p{L}\p{N}\s!&quot;#$%&'()*+,\-./:;<=>?@[\\\]^_`{|}~]+$"
+            title="請勿輸入特殊符號"
+          />
+        </div>
+      </div>
+      <span class="description-header">Participating in a record survey</span>
+      <div class="module-form layout-form-columnized">
+        <!--Participated In-->
+        <div class="column">
+          <span class="from-header">您是否曾經參與過草率季</span>
+          請問您是否曾在歷屆草率季中以攤主身份參與？
+        </div>
+        <div class="column layout-form-column-grid-2">
+          <span class="from-description-header-ness">必填問題</span>
+          <input
+            type="radio"
+            class="form-input-radio"
+            name="entry.1144386047"
+            id="participatedin_Yes"
+            value="參與"
+            required
+          />
+          <label for="participatedin_Yes" class="form-label">
+            <span class="from-label-header">是，我參與過</span>
+            <span class="from-label-description-header">
+              如果您之前曾參與過草率季擺攤，請選擇此選項
+            </span>
+          </label>
+          <input
+            type="radio"
+            class="form-input-radio"
+            name="entry.1144386047"
+            id="participatedin_Firsttime"
+            value="首次"
+            required
+          />
+          <label for="participatedin_Firsttime" class="form-label">
+            <span class="from-label-header">否，我第一次</span>
+            <span class="from-label-description-header">
+              如果您是第一次參與請選擇此選項
+            </span>
+          </label>
+        </div>
+
+        <!--Participated Years-->
+        <div class="column question-ParticipatedYears">
+          <span class="from-sub-header"
+            >請告訴我們，您印象中曾參與過哪些年份</span
+          >
+          請選擇您印象中曾參與過往屆草率季擺攤的年份。
+        </div>
+        <div
+          class="column layout-form-column-grid-4 question-ParticipatedYears"
+        >
+          <span class="from-description-header-ness">必填問題、可多選</span>
+          <input
+            type="checkbox"
+            class="form-input-checkbox"
+            name="entry.1734398784"
+            id="ParticipatedYears_2016"
+            value="2016"
+          />
+          <label for="ParticipatedYears_2016" class="form-label">
+            <span class="from-label-header">2016</span>
+            <span class="from-label-description-header">海綿</span>
+          </label>
+          <input
+            type="checkbox"
+            class="form-input-checkbox"
+            name="entry.1734398784"
+            id="ParticipatedYears_2017"
+            value="2017"
+          />
+          <label for="ParticipatedYears_2017" class="form-label">
+            <span class="from-label-header">2017</span>
+            <span class="from-label-description-header">草藥</span>
+          </label>
+          <input
+            type="checkbox"
+            class="form-input-checkbox"
+            name="entry.1734398784"
+            id="ParticipatedYears_2018"
+            value="2018"
+          />
+          <label for="ParticipatedYears_2018" class="form-label">
+            <span class="from-label-header">2018</span>
+            <span class="from-label-description-header">大爆炸</span>
+          </label>
+          <input
+            type="checkbox"
+            class="form-input-checkbox"
+            name="entry.1734398784"
+            id="ParticipatedYears_2019"
+            value="2019"
+          />
+          <label for="ParticipatedYears_2019" class="form-label">
+            <span class="from-label-header">2019</span>
+            <span class="from-label-description-header">網起來</span>
+          </label>
+          <input
+            type="checkbox"
+            class="form-input-checkbox"
+            name="entry.1734398784"
+            id="ParticipatedYears_2020"
+            value="2020"
+          />
+          <label for="ParticipatedYears_2020" class="form-label">
+            <span class="from-label-header">2020</span>
+            <span class="from-label-description-header">開天窗</span>
+          </label>
+          <input
+            type="checkbox"
+            class="form-input-checkbox"
+            name="entry.1734398784"
+            id="ParticipatedYears_2022"
+            value="2022"
+          />
+          <label for="ParticipatedYears_2022" class="form-label">
+            <span class="from-label-header">2022</span>
+            <span class="from-label-description-header">面盆面紗面對面</span>
+          </label>
+          <input
+            type="checkbox"
+            class="form-input-checkbox"
+            name="entry.1734398784"
+            id="ParticipatedYears_2023"
+            value="2023"
+          />
+          <label for="ParticipatedYears_2023" class="form-label">
+            <span class="from-label-header">2023</span>
+            <span class="from-label-description-header">一直滑下去</span>
+          </label>
+          <input
+            type="checkbox"
+            class="form-input-checkbox"
+            name="entry.1734398784"
+            id="ParticipatedYears_2024"
+            value="2024"
+          />
+          <label for="ParticipatedYears_2024" class="form-label">
+            <span class="from-label-header">2024</span>
+            <span class="from-label-description-header">沒有錯</span>
+          </label>
+        </div>
+      </div>
+
+      <span class="description-header">Preferred Booth Type</span>
+      <div class="module-form layout-form-columnized">
+        <!--Preferred Booth Type-->
+        <div class="column">
+          <span class="from-header">選擇您欲報名的攤位類型</span>
+          主辦單位將針對不同的攤種，提供相應設備、空間及位置。攤位位置將由主辦單位統一安排，不提供指定位置，
+          請務必審慎評估合適的攤種，一旦提交恕不提供修改及調整，如需修改請重新填寫報名表單。
+          <br />
+          <br />
+          錄取時將通知檯面尺寸與細項，錄取後請於兩週內完成攤位費用繳交，逾時將自動取消參與資格。
+          請注意：錄取後將同步開放工作證加購服務（每攤限加購一張），請務必於加購期限內申請，逾期不候。
+        </div>
+        <div class="column layout-form-column-grid-2">
+          <span class="from-description-header-ness">必填問題</span>
+          <span class="from-description-header">
+            書攤類．
+            針對以書本為主要創作／販售的參展單位，申請時需提出三本以上的書及審查資料。
+          </span>
+          <input
+            type="radio"
+            class="form-input-radio"
+            name="entry.133172086"
+            id="PreferredBoothType_LargeBookStalls"
+            value="書攤"
+            required
+          />
+          <label for="PreferredBoothType_LargeBookStalls" class="form-label">
+            <span class="from-label-header">一般書攤</span>
+            <span class="from-label-sub-header">5,000 元（含稅）</span><br />
+            <span class="from-label-description-header">
+              基礎設備：桌面（120*60cm) 1 個、椅子 2 張、工作證 2 張、草率簿 1
+              本（含露出一面）
+            </span>
+          </label>
+
+          <span class="from-description-header">
+            創作攤．針對以各類商品為主要創作／販售的參展單位。
+          </span>
+          <input
+            type="radio"
+            class="form-input-radio"
+            name="entry.133172086"
+            id="PreferredBoothType_CreativeProducts"
+            value="創作商品"
+            required
+          />
+          <label for="PreferredBoothType_CreativeProducts" class="form-label">
+            <span class="from-label-header">創作攤</span>
+            <span class="from-label-sub-header">8,000 元（含稅）</span><br />
+            <span class="from-label-description-header">
+              基礎設備：桌面（120*60cm) 1 個、椅子 2 張、工作證 2 張、草率簿 1
+              本（含露出一面）
+            </span>
+          </label>
+          <input
+            type="radio"
+            class="form-input-radio"
+            name="entry.133172086"
+            id="PreferredBoothType_FoodBeverages"
+            value="食物酒水"
+            required
+          />
+          <label for="PreferredBoothType_FoodBeverages" class="form-label">
+            <span class="from-label-header">食物酒水攤</span>
+            <span class="from-label-sub-header">13,000 元（含稅）</span><br />
+            <span class="from-label-description-header">
+              基礎設備：桌面（180*60cm) 1 個、椅子 2 張、工作證 2 張、草率簿 1
+              本（含露出一面）
+            </span>
+          </label>
+
+          <span class="from-description-header">
+            裝置類．針對大型裝置或空間創作為主的參展單位。
+          </span>
+          <input
+            type="radio"
+            class="form-input-radio"
+            name="entry.133172086"
+            id="PreferredBoothType_Curation"
+            value="裝置類"
+            required
+          />
+          <label for="PreferredBoothType_Curation" class="form-label">
+            <span class="from-label-header">裝置攤</span>
+            <span class="from-label-sub-header">10,000 元（含稅） </span><br />
+            <span class="from-label-description-header">
+              基礎設備：1.5M*1.5M空地、工作證 2 張、草率簿 1 本（含露出一面）
+            </span>
+          </label>
+        </div>
+      </div>
+
+      <span class="description-header">Submission Info</span>
+      <div class="module-form layout-form-columnized">
+        <!--Role-->
+        <div class="column">
+          <span class="from-header">身份類別</span>
+          輸入內容將公開顯示於官網目錄及標籤上。
+        </div>
+        <div class="column layout-form-column-grid-1">
+          <span class="from-description-header-ness">必填問題</span>
+          <select
+            class="form-input"
+            name="entry.2022316464"
+            required
+            style="color: grey"
+            onchange="this.style.color = this.value ? 'black' : 'grey';"
+          >
+            <option value="" disabled selected hidden>請選擇身份類別</option>
+            <option value="a0 Creator">a0 Creator 創作者</option>
+            <option value="a1 Bookstore">a1 Bookstore 書店</option>
+            <option value="a2 Publisher/Press">
+              a2 Publisher/Press 出版商
+            </option>
+            <option value="a3 Printing/Paper">
+              a3 Printing/Paper 印刷廠/紙廠
+            </option>
+            <option value="a4 Cultural Institution">
+              a4 Cultural Institution 文化機構
+            </option>
+            <option value="a5 Select Shop">a5 Select Shop 選品店</option>
+            <option value="a6 Group/Structure">a6 Group/Structure 團體</option>
+          </select>
+        </div>
+
+        <!--Nationality-->
+        <div class="column">
+          <span class="from-header">主要創作據點</span>
+          輸入內容將公開顯示於官網目錄及標籤上。
+        </div>
+        <div class="column layout-form-column-grid-1">
+          <span class="from-description-header-ness">必填問題</span>
+          <input
+            class="form-input"
+            name="entry.637996839"
+            placeholder="主要創作據點。例：台北"
+            maxlength="100"
+            required
+          />
+        </div>
+
+        <!--Bio-->
+        <div class="column">
+          <span class="from-header">品牌介紹</span>
+          輸入內容將公開顯示於官網目錄及標籤上。
+        </div>
+        <div class="column layout-form-column-grid-1">
+          <span class="from-description-header-ness"
+            >必填問題、300 個字元內</span
+          >
+          <textarea
+            class="form-input-textarea"
+            name="entry.1877870250"
+            placeholder="品牌介紹"
+            maxlength="1000"
+            required
+          ></textarea>
+        </div>
+
+        <!-- 作品類別 -->
+        <div class="column" id="workcat">
+          <span class="from-header">作品類別</span>
+          <span style="color: red"></span>輸入內容將公開顯示於官網目錄及標籤上。
+        </div>
+        <div class="column layout-form-column-grid-1" id="workcat2">
+          <span class="from-description-header-ness" style="display: block"
+            >必填問題</span
+          >
+          <select
+            id="sub-category"
+            name="entry.1482635628"
+            required
+            disabled
+            style="color: grey; max-width: 65%"
+          >
+            <option value="" disabled selected hidden>請先選擇攤種</option>
+          </select>
+        </div>
+
+        <!--Product Links-->
+        <div
+          class="column question-ProductLinks"
+          id="productLink"
+          style="display: none"
+        >
+          <span class="from-header">販售商品描述</span>
+          請簡述您攤位準備販售之商品品項。
+        </div>
+        <div
+          class="column layout-form-column-grid-1 question-ProductLinks"
+          id="productLink-l"
+          style="display: none"
+        >
+          <span class="from-description-header-ness">必填問題</span><br />
+          <textarea
+            class="form-input-textarea"
+            name="entry.1111437113"
+            placeholder="商品品項。例：五金雕塑、鑰匙圈、飲品⋯⋯"
+            maxlength="1000"
+            style="width: 100%"
+          ></textarea>
+        </div>
+        <!-- work link -->
+        <div
+          class="column question-WorkLinks"
+          id="uploadArtwork"
+          style="display: none"
+        >
+          <span class="from-header">作品上傳</span>
+          <span id="port-description">
+            報名「一般書攤」之單位，請提供已發行或預計發行之書籍相關作品。（不包含記事本、日月曆、明信片等輸出物），如提供之內容未達到錄取書攤類之標準，主辦單位將視情況條件式錄取其他攤種。
+            從事藝術書刊創作者將作為入選優先條件審核，主辦單位將依照您所提交的內容供主辦單位審核。<br /><br />
+            同時歡迎創作者依每屆主題發想創作及佈置攤位，這也將此納入攤位審核及草率獎參考。
+          </span>
+        </div>
+        <div
+          class="column layout-form-column-grid-1 question-ProductLinks"
+          id="uploadArtwork-l"
+          style="display: none"
+        >
+          <span class="from-description-header-ness">
+            必填問題，請上傳<strong>一份合併好的 PDF 檔案</strong
+            >，上限為<strong>最多 10 頁 A4、檔案大小不超過 8MB</strong
+            >。請勿上傳多個 PDF，如有多頁內容，請合併成<u>一份 PDF 上傳</u
+            >。 </span
+          ><br />
+          <div class="upload-container">
+            <input type="file" id="fileInput" name="file" />
+            <input
+              type="hidden"
+              name="entry.715764736"
+              id="uploadedFileUrl"
+              value="some-unique-id-or-timestamp"
+            />
+            <input type="hidden" name="category" value="artwork" />
+          </div>
+        </div>
+
+        <!--Plan Links-->
+        <div
+          class="column question-PlanLinks"
+          id="proposalLink"
+          style="display: none"
+        >
+          <span class="from-header">企劃書連結</span>
+          內需包含裝置草圖、計畫說明、創作者介紹、作品介紹、販售清單⋯⋯等內容
+        </div>
+        <div
+          class="column layout-form-column-grid-1 question-PlanLinks"
+          id="proposalLink-l"
+          style="display: none"
+        >
+          <span class="from-description-header-ness">
+            必填問題，請上傳<strong>一份合併好的 PDF 檔案</strong
+            >，上限為<strong>最多 10 頁 A4、檔案大小不超過 8MB</strong
+            >。請勿上傳多個 PDF，如有多頁內容，請合併成<u>一份 PDF 上傳</u
+            >。 </span
+          ><br />
+          <div class="upload-container">
+            <input type="file" id="fileInput2" name="file" />
+            <input
+              type="hidden"
+              name="entry.1801583093"
+              id="uploadedFileUrl2"
+              value="some-unique-id-or-timestamp"
+            />
+            <input type="hidden" name="category" value="proposal" />
+          </div>
+        </div>
+
+        <!--Social Media-->
+        <div class="column">
+          <span class="from-header">社群媒體</span>
+          請附上社群媒體供評選參考。輸入內容將公開顯示於官網目錄及標籤上。
+        </div>
+        <div class="column layout-form-column-grid-2">
+          <span class="from-description-header-ness-no">非必填問題</span>
+          <input
+            type="url"
+            class="form-input"
+            name="entry.1361490241"
+            placeholder="Facebook。 https://facebook.com/"
+            maxlength="1500"
+          />
+          <input
+            type="url"
+            class="form-input"
+            name="entry.138567696"
+            placeholder="Instagram。 https://instagram.com/"
+            maxlength="1500"
+          />
+          <input
+            type="url"
+            class="form-input"
+            name="entry.699732974"
+            placeholder="網站。 https://"
+            maxlength="3000"
+          />
+          <input
+            type="url"
+            class="form-input"
+            name="entry.2050899252"
+            placeholder="其他。 https://"
+            maxlength="3000"
+          />
+          <input
+            type="url"
+            class="form-input"
+            name="entry.830227276"
+            placeholder="其他。 https://"
+            maxlength="3000"
+          />
+        </div>
+
+        <!--Promotion Content-->
+        <div class="column">
+          <span class="from-header">行銷資料蒐集與使用</span>
+          若錄取此屆攤商，您是否同意將以上提供之內容資料，供主辦單位用於本屆攤商介紹、網路媒體與貼文宣傳及活動資料使用？
+        </div>
+        <div class="column layout-form-column-grid-2">
+          <span class="from-description-header-ness">必填問題</span>
+          <input
+            type="radio"
+            class="form-input-radio"
+            name="entry.7322984"
+            id="PromotionContent_Agree"
+            value="同意"
+            required
+          />
+          <label for="PromotionContent_Agree" class="form-label">
+            <span class="from-label-header">同意</span>
+            <span class="from-label-description-header"
+              >同意使用請選擇此選項</span
+            >
+          </label>
+          <input
+            type="radio"
+            class="form-input-radio"
+            name="entry.7322984"
+            id="PromotionContent_Disagree"
+            value="不同意"
+            required
+          />
+          <label for="PromotionContent_Disagree" class="form-label">
+            <span class="from-label-header">不同意</span>
+            <span class="from-label-description-header"
+              >不同意使用請選擇此選項</span
+            >
+          </label>
+        </div>
+
+        <!--Insufficient Information-->
+        <div class="column question-InsufficientInformation">
+          <span class="from-sub-header">當攤商行銷資料不足時</span>
+          您否同意草率季團隊使用、分享您所提供之
+          Instagram、Facebook、網站⋯⋯等內容用於本屆攤商介紹、網路媒體與貼文宣傳及活動資料使用？
+        </div>
+        <div
+          class="column layout-form-column-grid-2 question-InsufficientInformation"
+        >
+          <span class="from-description-header-ness">必填問題</span>
+          <input
+            type="radio"
+            class="form-input-radio"
+            name="entry.1214650515"
+            id="InsufficientInformation_Agree"
+            value="同意"
+          />
+          <label for="InsufficientInformation_Agree" class="form-label">
+            <span class="from-label-header">同意</span>
+            <span class="from-label-description-header"
+              >同意使用請選擇此選項</span
+            >
+          </label>
+          <input
+            type="radio"
+            class="form-input-radio"
+            name="entry.1214650515"
+            id="InsufficientInformation_Disagree"
+            value="不同意"
+          />
+          <label for="InsufficientInformation_Disagree" class="form-label">
+            <span class="from-label-header">不同意</span>
+            <span class="from-label-description-header"
+              >不同意使用請選擇此選項</span
+            >
+          </label>
+        </div>
+
+        <!--Workshop Proposal-->
+        <div class="column">
+          <span class="from-header">主題工作坊提案</span>
+          依據今年主題盡情發揮想像，如有適合的工作坊提案，我們將會與您聯繫。若現在沒想法，若日後突然靈光一現也可將提案寄至
+          hooroo@double-grass.com。
+        </div>
+        <div class="column layout-form-column-grid-1">
+          <span class="from-description-header-ness-no">非必填問題</span>
+          <textarea
+            class="form-input-textarea"
+            name="entry.1347561831"
+            placeholder="主題工作坊提案"
+            maxlength="1000"
+          ></textarea>
+        </div>
+
+        <!-- 十年特場 -->
+        <div class="column">
+          <span class="from-header">2026 春季草率十年特場！</span>
+          草率十年特場預計於 2026 年 3–4 月舉行，請勾選是否有參展意願。
+        </div>
+
+        <div class="column layout-form-column-grid-1">
+          <span class="from-description-header-ness-no">非必填問題</span>
+          <input
+            type="checkbox"
+            class="form-input-checkbox"
+            name="entry.1381238601"
+            id="early_signup_2026"
+            value="要報名"
+          />
+          <label for="early_signup_2026" class="form-label-10y">
+            我要搶先報名 2026 春季草率十年特場！
+          </label>
+        </div>
+      </div>
+
+      <span class="description-header">Contact Info</span>
+      <div class="module-form layout-form-columnized">
+        <!--Name of Person in Charge-->
+        <div class="column">
+          <span class="from-header">聯絡代表姓名</span>
+          如果您以公司、團體或其他集體的身份報名，您必須為您的攤商選擇一名代表人。
+        </div>
+        <div class="column layout-form-column-grid-1">
+          <span class="from-description-header-ness">必填問題</span>
+          <input
+            autocomplete="name"
+            class="form-input"
+            name="entry.1522532449"
+            placeholder="聯絡代表姓名"
+            maxlength="100"
+            required
+          />
+        </div>
+
+        <!--Email-->
+        <div class="column">
+          <span class="from-header">電子信箱</span>
+          此電子信箱將作為日後通知、註冊、查詢帳號之使用，<strong>一旦提交將不提供修改及調整</strong>。錄取與備取通知信將以此電子信箱寄出，請留意收信信箱或垃圾信箱，未錄取不另行通知。
+        </div>
+        <div class="column layout-form-column-grid-1">
+          <span class="from-description-header-ness">必填問題</span>
+          <input
+            type="email"
+            autocomplete="email"
+            class="form-input"
+            name="entry.529156755"
+            id="email-input"
+            placeholder="電子信箱"
+            maxlength="500"
+            required
+          />
+          <div
+            id="email-error"
+            style="color: plum; display: none; font-size: 13px"
+          >
+            請輸入有效的電子信箱，例如：example@gmail.com
+          </div>
+        </div>
+
+        <!--Password-->
+        <div class="column">
+          <span class="from-header">登錄密碼</span>
+          此登錄密碼將作為日後註冊、查詢帳號之使用，<strong>一旦提交將不提供修改及調整，</strong>若重複報名將後輸入密碼為主。
+        </div>
+        <div class="column layout-form-column-grid-1">
+          <span class="from-description-header-ness">必填問題</span>
+          <div style="position: relative">
+            <input
+              id="password"
+              type="password"
+              autocomplete="off"
+              class="form-input"
+              name="entry.174970451"
+              placeholder="Password"
+              maxlength="500"
+              required
+              style="padding-right: 30px"
+            />
+            <button
+              type="button"
+              id="togglePassword"
+              style="
+                position: absolute;
+                right: 5px;
+                top: 50%;
+                transform: translateY(-50%);
+                font-size: 14px;
+              "
+            >
+              Show
+            </button>
+          </div>
+
+          <div id="password-rules" style="margin-top: 8px; font-size: 14px">
+            <div id="length-rule">✕ 至少 8 個字元</div>
+            <div id="uppercase-rule">✕ 至少一個大寫字母</div>
+            <div id="lowercase-rule">✕ 至少一個小寫字母</div>
+            <div id="number-rule">✕ 至少一個數字</div>
+          </div>
+        </div>
+
+        <!--Telephone Number-->
+        <div class="column">
+          <span class="from-header">聯絡電話</span>
+          此聯絡電話將作為日後聯繫使用。
+        </div>
+        <div class="column layout-form-column-grid-1">
+          <span class="from-description-header-ness">必填問題</span>
+          <input
+            autocomplete="tel"
+            class="form-input"
+            name="entry.1057735065"
+            placeholder="聯絡電話。例：0212345678"
+            maxlength="50"
+            required
+          />
+        </div>
+
+        <!--Further Questions-->
+        <div class="column">
+          <span class="from-header">想對草率季說的話！</span>
+          如果您有其他問題與意見或有想對我們說的話，請在此留言。
+        </div>
+        <div class="column layout-form-column-grid-1">
+          <span class="from-description-header-ness-no">非必填問題</span>
+          <textarea
+            class="form-input-textarea"
+            name="entry.2019239800"
+            placeholder="留言"
+            maxlength="1000"
+          ></textarea>
+        </div>
+      </div>
+
+      <span class="description-header">Notice</span>
+      <div class="module-form layout-form-columnized">
+        <div class="column">
+          <ol class="from-ol">
+            <li>
+              從事藝術書刊創作者將作為入選優先條件審核，主辦單位將依照您所提交的內容供主辦單位審核。同時歡迎創作者依每屆主題發想創作及佈置攤位，這也將此納入攤位審核及草率獎參考。
+            </li>
+            <li>
+              主辦單位將針對不同的攤種，提供相應設備、空間及位置，申請後不開放調整。且攤位位置由主辦單位統一安排，不提供申請指定位置。請務必選擇最合適的攤種，一旦提交將不提供修改及調整，如需修改請重新填寫報名表單。
+            </li>
+            <li>
+              錄取與備取通知信將寄至您所填寫電子信箱，請留意收信信箱或垃圾信箱，未錄取不另行通知。
+            </li>
+            <li>
+              錄取時將通知檯面尺寸與細項，錄取後請於兩週內完成攤位費用繳交，逾時自動取消參與資格。同時錄取後將提供工作證加購，請注意，加購工作證期間截止後恕無法再加購。
+            </li>
+            <li>
+              收到通知錄取信且付款完成後，草率季將於一週內進行核帳。您可使用您所填寫的電子信箱使用攤商後台查詢繳費狀態與下載其他說明與指南。
+            </li>
+          </ol>
+        </div>
+        <div class="column layout-form-column-grid-2">
+          <span class="from-description-header">
+            <br />
+            我已詳細閱讀徵件相關說明，並同意遵守本次徵件之規則，如有未盡事宜，主辦單位保留解釋、修改及補充本活動辦法、細則等說明內容之權利。
+          </span>
+          <input
+            type="checkbox"
+            class="form-input-checkbox from-input-Agre"
+            id="InformationRulesAgree"
+            value=""
+            required
+          />
+          <label for="InformationRulesAgree" class="form-label from-label-Agre">
+            <span class="from-label-header">點擊並同意</span>
+          </label>
+        </div>
+      </div>
+      <span class="description-header">Submit</span>
+      <div class="module-form layout-form-columnized">
+        <div class="column">
+          <span class="from-description-header">
+            <strong>按下提交按鈕前，請再次檢查您輸入的回答</strong
+            >，表單提交後將無法再次修改，如需修改請再次提交表單。我們收到您的申請後，您將收到一封自動確認電子郵件。如果您沒有收到電子郵件，請檢查您的垃圾信箱。
+          </span>
+        </div>
+        <div class="column">
+          <div
+            class="g-recaptcha"
+            data-sitekey="6Ld5yzUrAAAAANxGXgmtKuR3reXVdstBSKRu-iOO"
+            data-callback="onRecaptchaSuccess"
+            data-expired-callback="onRecaptchaExpired"
+            data-error-callback="onRecaptchaError"
+          ></div>
+          <div
+            id="form-error"
+            style="display: none; color: plum; margin-top: 1em"
+          ></div>
+          <button
+            type="submit"
+            class="button-from-submit"
+            id="submitButton"
+            value="submit"
+            disabled
+          >
+            提交
+          </button>
+        </div>
+      </div>
+    </form>
+
+    <script src="js/upload.js"></script>
+    <script src="js/identity2.js"></script>
+    <script src="js/main.js"></script>
+    <!-- <script src="js/jump.js"></script> -->
+    <script src="js/yes.js"></script>
+    <script src="js/password.js"></script>
+    <!-- <script src="hide.js"></script> -->
+  </body>
+</html>
