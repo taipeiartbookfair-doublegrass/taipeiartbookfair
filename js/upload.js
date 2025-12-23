@@ -15,7 +15,7 @@ if (agreeCheckbox && submitButton) {
 }
 
 // Consolidate Captcha logic and shared functionality
-const handleFileUpload = async (fileInput, form, submitButton, uploadUrl) => {
+const handleFormFileUpload = async (fileInput, form, submitButton, uploadUrl) => {
   // 如果沒有檔案輸入框或沒有選擇檔案，返回 true（允許繼續提交）
   if (!fileInput || !fileInput.files || !fileInput.files.length) {
     return true;
@@ -105,7 +105,7 @@ form.addEventListener("submit", async function (e) {
       submitButton.disabled = true;
       submitButton.innerText = "Submitting...";
 
-      const uploadSuccess = await handleFileUpload(
+      const uploadSuccess = await handleFormFileUpload(
         fileInput,
         form,
         submitButton,
