@@ -85,13 +85,13 @@ form.addEventListener("submit", async function (e) {
   
   if (selectedBoothType) {
     const boothValue = selectedBoothType.value;
-    if (boothValue === "Installation Booth") {
+    if (boothValue === "裝置類") {
       fileInput = document.getElementById("fileInput2");
       needsUpload = true;
-    } else if (["Regular Non-Book Booth", "Regular Book Booth"].includes(boothValue)) {
+    } else if (["創作商品", "書攤"].includes(boothValue)) {
       fileInput = document.getElementById("fileInput");
       needsUpload = true;
-    } else if (boothValue === "Curation Booth") {
+    } else if (boothValue === "策展攤") {
       fileInput = document.getElementById("fileInput3");
       needsUpload = true;
     }

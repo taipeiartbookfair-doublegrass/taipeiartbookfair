@@ -7,7 +7,7 @@ if (!account || !region) {
 }
 
 const apiUrl =
-  "https://script.google.com/macros/s/AKfycbwNWgPsLK_ldHUIvoIg5a9k3PNIlmjvJeTgbCZ5CZsvKFQ7e1DoxbMsAawi4nI3Rea4DA/exec";
+  "https://script.google.com/macros/s/AKfycbxOxo-ZzjkkDlkIyCNlmFgYfPhpLOHQr3278Mv36PJrM_jdb_RsaG42hwM23Cp7b7onBw/exec";
 const publishApiUrl =
   "https://script.google.com/macros/s/AKfycbxJkcTqW6xJfhCSVFdI-Mk9SFSGTdQnCB2-_-8sluqgTHul2wjNS6jV9wJZMPtIdSy3Pw/exec";
 
@@ -198,26 +198,43 @@ document.addEventListener("DOMContentLoaded", async function () {
   setSocialText("yearlyanswer", apiData["當屆問答"]);
   setSocialText("electricity-answer", apiData["電力需求"]);
 
-  document.getElementById("application-number").textContent =
-    apiData["報名編號"] || "";
-
+  const applicationNumberEl = document.getElementById("application-number");
+  if (applicationNumberEl) {
+    applicationNumberEl.textContent = apiData["報名編號"] || "";
+  }
+  const paymentStatusEl = document.getElementById("payment-status");
+  if (paymentStatusEl) {
+    paymentStatusEl.textContent = apiData["匯款備註"] || "（人工審核塞車中）";
+  }
+  const declarationStatusEl = document.getElementById("declaration-status");
+  if (declarationStatusEl) {
+    declarationStatusEl.textContent = apiData["同意書狀態"] || "（人工審核塞車中）";
+  }
   // 取得報名編號與 boothType
   function getBoothTypeFromNumber(applicationNumber) {
-    if (applicationNumber.includes("LB")) return "書攤";
-    if (applicationNumber.includes("LM")) return "創作商品攤";
-    if (applicationNumber.includes("LI")) return "裝置攤";
-    if (applicationNumber.includes("LF")) return "食物酒水攤";
-    if (applicationNumber.includes("IO")) return "One Regular Booth";
-    if (applicationNumber.includes("IT")) return "Two Regular Booth";
-    if (applicationNumber.includes("IC")) return "Curation Booth";
+    const map = {
+      LB: "書攤",
+      LM: "創作商品攤",
+      LF: "食物酒水攤",
+      LI: "裝置攤",
+      LC: "策展攤",
+      IB: "Regular Book Booth",
+      IN: "Regular Non-Book Booth",
+      II: "Installation Booth",
+      IC: "Curation Booth",
+    };
+    
+    for (const [code, type] of Object.entries(map)) {
+      if (applicationNumber.includes(code)) {
+        return type;
+      }
+    }
     return "";
   }
-  const applicationNumber = document
-    .getElementById("application-number")
-    .textContent.trim();
+  const applicationNumber = applicationNumberEl ? applicationNumberEl.textContent.trim() : "";
   const boothType = getBoothTypeFromNumber(applicationNumber);
   const boothTypeEl = document.getElementById("booth-type");
-  if (boothType) {
+  if (boothType && boothTypeEl) {
     boothTypeEl.textContent = boothType;
     if (/^[A-Za-z\s]+$/.test(boothType)) {
       boothTypeEl.classList.add("booth-type-en");
@@ -226,12 +243,19 @@ document.addEventListener("DOMContentLoaded", async function () {
     }
   }
 
+  // 判斷是否為英文攤位
+  function isEnglishBoothType(boothType) {
+    return (
+      boothType === "Regular Book Booth" ||
+      boothType === "Regular Non-Book Booth" ||
+      boothType === "Installation Booth" ||
+      boothType === "Curation Booth"
+    );
+  }
+
   // 錄取狀態顯示
   function getApplicationResultText(raw, boothType) {
-    const isEnglishBooth =
-      boothType === "One Regular Booth" ||
-      boothType === "Two Regular Booth" ||
-      boothType === "Curation Booth";
+    const isEnglishBooth = isEnglishBoothType(boothType);
     if (!raw) return "";
     if (isEnglishBooth) {
       if (raw === "4-是-條件式錄取") return "Conditionally Accepted";
@@ -321,9 +345,12 @@ document.addEventListener("DOMContentLoaded", async function () {
     return qualifiedStatuses.includes(resultText);
   }
 
-  // 控制條碼顯示
+  // 控制條碼顯示（需要錄取狀態、匯款和同意書都完成）
   const barcodeRow = document.getElementById("barcode-row");
-  const shouldShowBarcode = hasExhibitionQualification(resultText);
+  const hasQualifiedStatus = hasExhibitionQualification(resultText);
+  const paymentChecked = !!apiData["已匯款"];
+  const declarationChecked = !!apiData["同意書"];
+  const shouldShowBarcode = hasQualifiedStatus && paymentChecked && declarationChecked;
   
   if (barcodeRow) {
     if (shouldShowBarcode) {
@@ -352,7 +379,7 @@ document.addEventListener("DOMContentLoaded", async function () {
         equipment = [
           "– 桌面<small>(120×60cm)</small> ×1",
           "– 椅子 ×2",
-          "– 工作證 ×2",
+          "– 通行憑證 ×2",
           "– 草率簿 ×1<small> (含露出一面)</small>",
         ];
         break;
@@ -361,7 +388,7 @@ document.addEventListener("DOMContentLoaded", async function () {
         equipment = [
           "– 桌面<small>(120×60cm)</small> ×1",
           "– 椅子 ×2",
-          "– 工作證 ×2",
+          "– 通行憑證 ×2",
           "– 草率簿 ×1<small> (含露出一面)</small>",
         ];
         break;
@@ -369,7 +396,7 @@ document.addEventListener("DOMContentLoaded", async function () {
         price = "10,000 元 <small>(含稅)</small>";
         equipment = [
           "– 1.5M × 1.5M 空地",
-          "– 工作證 ×2",
+          "– 通行憑證 ×2",
           "– 草率簿 ×1<small> (含露出一面)</small>",
         ];
         break;
@@ -378,35 +405,53 @@ document.addEventListener("DOMContentLoaded", async function () {
         equipment = [
           "– 桌面<small>(180×60cm)</small> ×1",
           "– 椅子 ×2",
-          "– 工作證 ×2",
+          "– 通行憑證 ×2",
           "– 草率簿 ×1<small> (含露出一面)</small>",
         ];
         break;
-      case "One Regular Booth":
-        price = 'USD$165 <span style="font-size:1.3rem;">incl. tax</span>';
+      case "策展攤":
+        price = "50,000 元 <small>(含稅)</small>";
+        equipment = [
+          "– 3M × 3M 空間",
+          "",
+          "– 通行憑證 ×6",
+          "– 草率簿 ×1<small> (含露出一面)</small>",
+        ];
+        break;
+      case "Regular Book Booth":
+        price = 'NTD$5,000 <span style="font-size:1.3rem;">incl. tax</span>';
         equipment = [
           "– Table<small>(120×60cm)</small> ×1",
           "– Chairs ×2",
-          "– Passes ×2",
+          "– Access Pass ×2",
           "– TPABF Catalog ×1 <small>(one page featured)</small>",
         ];
         break;
-      case "Two Regular Booth":
-        price = 'USD$330 <span style="font-size:1.3rem;">incl. tax</span>';
+      case "Regular Non-Book Booth":
+        price = 'NTD$8,000 <span style="font-size:1.3rem;">incl. tax</span>';
         equipment = [
-          "– Table<small>(120×60cm)</small> ×2",
-          "– Chairs ×4",
-          "– Passes ×4",
+          "– Table<small>(120×60cm)</small> ×1",
+          "– Chairs ×2",
+          "– Access Pass ×2",
+          "– TPABF Catalog ×1 <small>(one page featured)</small>",
+        ];
+        break;
+      case "Installation Booth":
+        price = 'NTD$10,000 <span style="font-size:1.3rem;">incl. tax</span>';
+        equipment = [
+          "– 3M × 3M space",
+          "",
+          "– Access Pass ×2",
           "– TPABF Catalog ×1 <small>(one page featured)</small>",
         ];
         break;
       case "Curation Booth":
-        price = 'USD$780 <span style="font-size:1.3rem;">incl. tax</span>';
+        price = 'NTD$50,000 <span style="font-size:1.3rem;">incl. tax</span>';
         equipment = [
           "– 3M × 3M space",
           "– Table<small>(120×60cm)</small> ×2",
           "– Chairs ×4",
-          "– Passes ×3",
+          "– Access Pass ×6",
           "– TPABF Catalog ×1 <small>(one page featured)</small>",
         ];
         break;
@@ -442,112 +487,53 @@ document.addEventListener("DOMContentLoaded", async function () {
       case "食物酒水攤":
         price1 = "13,000";
         break;
+      case "策展攤":
+        price1 = "50,000";
+        break;
+      case "Regular Book Booth":
+        price1 = "5,000";
+        break;
+      case "Regular Non-Book Booth":
+        price1 = "8,000";
+        break;
+      case "Installation Booth":
+        price1 = "10,000";
+        break;
+      case "Curation Booth":
+        price1 = "50,000";
+        break;
       default:
         price1 = "";
     }
 
-    // 方案一價錢顯示，方案二自動加錢
+    // 價錢顯示
     if (price1) {
-      document.getElementById("billing1-price").innerHTML =
-        price1 + "元 <small>(含稅)</small>";
-      const price2 = (
-        parseInt(price1.replace(/,/g, "")) + 500
-      ).toLocaleString();
-      document.getElementById("billing2-price").innerHTML =
-        price2 + "元 <small>(含稅)</small>";
-    } else if (
-      boothType === "One Regular Booth" ||
-      boothType === "Two Regular Booth" ||
-      boothType === "Curation Booth"
-    ) {
-      let usd1 = 0;
-      if (boothType === "One Regular Booth") usd1 = 165;
-      if (boothType === "Two Regular Booth") usd1 = 330;
-      if (boothType === "Curation Booth") usd1 = 780;
-      document.getElementById(
-        "billing1-price"
-      ).innerHTML = `USD$${usd1} <span style="font-size:1.3rem;">incl. tax</span>`;
-      document.getElementById("billing2-price").innerHTML = `USD$${
-        usd1 + 20
-      } <span style="font-size:1.3rem;">incl. tax</span>`;
-    }
-
-    // 商品名稱與金額
-    let productName1 = "",
-      productName2 = "",
-      amount1 = "",
-      amount2 = "";
-    const isOversea =
-      boothType === "One Regular Booth" ||
-      boothType === "Two Regular Booth" ||
-      boothType === "Curation Booth";
-    if (isOversea) {
-      if (boothType === "One Regular Booth") {
-        productName1 = "Basic Fee";
-        productName2 = "Basic Fee + Extra Pass";
-        amount1 = "165";
-        amount2 = "185";
-      } else if (boothType === "Two Regular Booth") {
-        productName1 = "Basic Fee";
-        productName2 = "Basic Fee + Extra Pass";
-        amount1 = "330";
-        amount2 = "350";
-      } else if (boothType === "Curation Booth") {
-        productName1 = "Basic Fee";
-        productName2 = "Basic Fee + Extra Pass";
-        amount1 = "780";
-        amount2 = "800";
-      }
-    } else {
-      if (boothType === "書攤") {
-        productName1 = "基礎攤費";
-        productName2 = "基礎攤費-工作證一張";
-      } else if (boothType === "創作商品攤") {
-        productName1 = "基礎攤費";
-        productName2 = "基礎攤費-工作證一張";
-      } else if (boothType === "裝置攤") {
-        productName1 = "基礎攤費";
-        productName2 = "基礎攤費-工作證一張";
-      } else if (boothType === "食物酒水攤") {
-        productName1 = "基礎攤費";
-        productName2 = "基礎攤費-工作證一張";
+      if (isEnglishBoothType(boothType)) {
+        document.getElementById("billing1-price").innerHTML =
+          `NTD$${price1} <span style="font-size:1.3rem;">incl. tax</span>`;
+      } else {
+        document.getElementById("billing1-price").innerHTML =
+          price1 + "元 <small>(含稅)</small>";
       }
     }
 
-    // 產生連結
-    let payLink1 = "#",
-      payLink2 = "#";
-    if (isOversea) {
-      payLink1 = `https://www.paypal.com/cgi-bin/webscr?cmd=_xclick&business=hooroo@double-grass.com&item_name=${encodeURIComponent(
-        applicationNumber + " - " + productName1
-      )}&amount=${amount1}&currency_code=USD&custom=${applicationNumber}`;
-      payLink2 = `https://www.paypal.com/cgi-bin/webscr?cmd=_xclick&business=hooroo@double-grass.com&item_name=${encodeURIComponent(
-        applicationNumber + " - " + productName2
-      )}&amount=${amount2}&currency_code=USD&custom=${applicationNumber}`;
-    } else {
-      payLink1 = toProductUrl(applicationNumber, productName1);
-      payLink2 = toProductUrl(applicationNumber, productName2);
-    }
+    // 產生連結（現在所有攤種都用台灣付款方式）
+    let payLink1 = toProductUrl(applicationNumber);
 
-    // 分別設定 pay1/pay2 按鈕
+    // 設定 pay1 按鈕
     const payBtn1 = document.getElementById("pay1");
-    const payBtn2 = document.getElementById("pay2");
     if (payBtn1) {
       payBtn1.onclick = () => window.open(payLink1, "_blank");
-      payBtn1.textContent = isOversea ? "Pay (Plan 1)" : "付款（方案一）";
-    }
-    if (payBtn2) {
-      payBtn2.onclick = () => window.open(payLink2, "_blank");
-      payBtn2.textContent = isOversea ? "Pay (Plan 2)" : "付款（方案二）";
+      payBtn1.textContent = "付款 Pay";
     }
 
     // 產生產品連結
-    function toProductUrl(applicationNumber, productName) {
+    function toProductUrl(applicationNumber) {
+      // 格式：25-{applicationNumber}-booth-fee2026
       return (
         "https://nmhw.taipeiartbookfair.com/products/" +
-        (applicationNumber + "-" + productName)
-          .replace(/\s+/g, "")
-          .toLowerCase()
+        applicationNumber.toLowerCase() +
+        "-booth-fee2026"
       );
     }
 
@@ -573,11 +559,7 @@ document.addEventListener("DOMContentLoaded", async function () {
 
   // 設備標題
   const equipmentTitleEl = document.getElementById("equipment-title");
-  if (
-    boothType === "One Regular Booth" ||
-    boothType === "Two Regular Booth" ||
-    boothType === "Curation Booth"
-  ) {
+  if (isEnglishBoothType(boothType)) {
     equipmentTitleEl.textContent = "Equipments:";
   } else {
     equipmentTitleEl.textContent = "基礎設備：";
@@ -585,24 +567,32 @@ document.addEventListener("DOMContentLoaded", async function () {
 
   // 付款方案標題/說明動態切換
   function setBillingInfoLanguage(boothType) {
-    const isEnglishBooth =
-      boothType === "One Regular Booth" ||
-      boothType === "Two Regular Booth" ||
-      boothType === "Curation Booth";
+    const isEnglishBooth = isEnglishBoothType(boothType);
     document.querySelector("span[for-billing1-title]").innerHTML =
       isEnglishBooth
-        ? "<strong>Plan 1</strong>: Basic Fee"
-        : "<strong>方案一</strong>：基礎攤費";
-    document.querySelector("span[for-billing1-desc]").innerHTML = isEnglishBooth
-      ? "Basic plan only"
-      : "僅基礎方案";
-    document.querySelector("span[for-billing2-title]").innerHTML =
-      isEnglishBooth
-        ? "<strong>Plan 2</strong>: Basic Fee + Extra Pass"
-        : "<strong>方案二</strong>：基礎攤費+工作證一張";
-    document.querySelector("span[for-billing2-desc]").innerHTML = isEnglishBooth
-      ? "For those who shift-swaps"
-      : "適合有輪班擺攤需求之攤主";
+        ? "<strong>Basic Fee</strong>"
+        : "<strong>基礎攤費</strong>";
+    const billing1Desc = document.querySelector("div[for-billing1-desc]") || document.querySelector("span[for-billing1-desc]");
+    if (billing1Desc) {
+      billing1Desc.innerHTML = isEnglishBooth
+        ? `<strong>Shipping Method:</strong> Please select "Booth Fee – Exclusive Checkout" when making payment. Shipping fees charged due to incorrect selection will not be refunded.<br><br>
+<strong>Payment Method:</strong> If selecting "Bank Transfer", this method is only available until Dec. 28 (Sun) 24:00 (GMT+8).<br><br>
+Payments made after the deadline may result in cancellation without refund.<br><br>
+<strong>Access Pass Add-on:</strong><br>
+Each booth may select <u>1–2 tables</u>; each table includes <u>2 daily access passes per day</u>.<br>
+Each booth may purchase up to <u>1 additional pass</u> (allowing <u>1 extra person per day</u>).<br>
+If daily entry exceeds the available passes, <u>general admission tickets must be purchased</u>.<br>
+This is the only pass add-on period. <u>No changes after payment</u>.<br><br>
+<strong>Refund:</strong> Refund requests due to force majeure must be submitted by Jan. 15. A 10% handling fee applies. No refunds after the deadline.`
+         : `<strong>送貨方式：</strong>請務必選擇「攤位費專屬」結帳。若誤選其他方式並被系統收取運費，恕不退款。<br><br>
+<strong>付款方式：</strong>如選擇「銀行轉帳」，此方式 僅開放至 12/28（日）24:00（GMT+8），即使付款連結仍可操作，若超過繳費期限付款，主辦單位有權取消資格，並不予退款。<br><br>
+<strong>通行憑證加購：</strong><br>
+每攤位可選擇 1–2 桌，每桌每日皆附贈 2 張當日通行憑證。<br>
+&nbsp;&nbsp;&nbsp;&nbsp;• 每攤位最多可加購 1 張通行憑證（每日可額外增加 1 位進場人員）。<br>
+&nbsp;&nbsp;&nbsp;&nbsp;• 若單日進場人數超過通行憑證可使用數量，請依實際活動天數與人數，另行購買入場票券。<br>
+&nbsp;&nbsp;&nbsp;&nbsp;• 本階段為唯一的通行憑證加購申請時段，完成繳費後恕不接受任何變更。<br><br>
+<strong>退款：</strong>若因不可抗因素需放棄參展，請於 1/15（四）前 通知主辦單位，並辦理退款（將酌收10%手續費）。逾期恕不受理退款。`;
+    }
   }
   setBillingInfoLanguage(boothType);
 
@@ -615,12 +605,7 @@ document.addEventListener("DOMContentLoaded", async function () {
     console.log("boothType:", boothType);
     console.log("declarationdesc:", declarationdesc);
     if (boothType && declardownloadLink && declarationdesc) {
-      var boothText = boothType.trim();
-      if (
-        boothText === "One Regular Booth" ||
-        boothText === "Two Regular Booth" ||
-        boothText === "Curation Booth"
-      ) {
+      if (isEnglishBoothType(boothType)) {
         declardownloadLink.innerHTML = "Download Exhibitor Declaration";
         declarationdesc.innerHTML =
           "Please download and sign the exhibitor declaration, then upload the signed file below.";
@@ -636,36 +621,27 @@ document.addEventListener("DOMContentLoaded", async function () {
   // 動態勾勾區塊語言還有攤商編號說明搭便車
   function setYesLanguage(boothType, rawResult) {
     var yesdesc = document.getElementById("registration-status-desc");
-    var boothnumberdesc = document.getElementById("booth-number-desc");
     var billingnote1 = document.getElementById("billing-note1");
-    var billingnote2 = document.getElementById("billing-note2");
 
     // 判斷期限
-    let deadline = "7 月 13 日";
-    let deadlineEn = "July 13, 2025 at 11:59 PM (UTC+8)";
+    let deadline = "12 月 31 日";
+    let deadlineEn = "December 31, 2025 at 11:59 PM (UTC+8)";
     if (rawResult === "2-是-2波") {
-      deadline = "7 月 22 日";
-      deadlineEn = "July 22, 2025 at 11:59 PM (UTC+8)";
+      deadline = "12 月 31 日";
+      deadlineEn = "December 31, 2025 at 11:59 PM (UTC+8)";
     }
 
-    if (boothType && yesdesc && boothnumberdesc) {
-      var boothText = boothType.trim();
-      if (
-        boothText === "One Regular Booth" ||
-        boothText === "Two Regular Booth" ||
-        boothText === "Curation Booth"
-      ) {
-        yesdesc.innerHTML = `Please complete your payment and upload the signed agreement by <b><mark>${deadlineEn}</mark></b>. Late submissions will be considered a forfeiture of your participation. <br><br>Our team will manually verify all payment and agreement uploads by July 15.<br>If you have already completed the process, please keep a screenshot of your payment or upload confirmation. If your status hasn’t been updated after July 15, feel free to contact us again.`;
-        boothnumberdesc.innerHTML =
-          "Booth numbers and the floor plan will be announced on <b>November 20</b>, the check-in day.";
-        billingnote1.innerHTML = `Payment Deadline: ${deadlineEn}`;
-        billingnote2.innerHTML = `Payment Deadline: ${deadlineEn}`;
+    if (boothType && yesdesc) {
+      if (isEnglishBoothType(boothType)) {
+        yesdesc.innerHTML = `Please complete your payment and upload the signed agreement by <b><mark>${deadlineEn}</mark></b>. Late submissions will be considered a forfeiture of your participation. Our team will manually verify all payment and agreement uploads by <mark>January 5</mark>. If you have already completed the process, please keep a screenshot of your payment or upload confirmation. If your status hasn't been updated after <mark>January 5</mark>, feel free to contact us again.`;
+        if (billingnote1) {
+          billingnote1.innerHTML = `Payment Deadline: ${deadlineEn}`;
+        }
       } else {
-        yesdesc.innerHTML = `請於<b><mark>${deadline}</mark></b>前完成繳費與同意書上傳，逾期將視同放棄參展資格。<br><br>團隊將於 7 月 15 日前 逐一人工確認繳費與同意書的上傳狀態。<br>如您已完成繳交，請先保留相關繳費或上傳截圖；若狀態在 7 月 15 日後仍未更新，請與我們聯繫。`;
-        boothnumberdesc.innerHTML =
-          "攤位編號與攤位地圖將於報到當天（11/20）公布，屆時請留意公告。";
-        billingnote1.innerHTML = `付款期限: ${deadline}`;
-        billingnote2.innerHTML = `付款期限: ${deadline}`;
+        yesdesc.innerHTML = `請於<b><mark>${deadline}</mark></b>前完成繳費與同意書上傳，逾期將視同放棄參展資格。團隊將於<mark> 1月5日前 </mark>逐一人工確認繳費與同意書的上傳狀態。如您已完成繳交，請先保留相關繳費或上傳截圖；若狀態在 <mark>1月5日</mark> 後仍未更新，請與我們聯繫。`;
+        if (billingnote1) {
+          billingnote1.innerHTML = `付款期限: ${deadline}`;
+        }
       }
     }
   }
@@ -675,17 +651,12 @@ document.addEventListener("DOMContentLoaded", async function () {
   function setBillingNoticeLanguage(boothType) {
     var billingNoticedesc = document.getElementById("billing-notice");
     if (boothType && billingNoticedesc) {
-      var boothText = boothType.trim();
-      if (
-        boothText === "One Regular Booth" ||
-        boothText === "Two Regular Booth" ||
-        boothText === "Curation Booth"
-      ) {
+      if (isEnglishBoothType(boothType)) {
         billingNoticedesc.innerHTML =
-          "<li>Please assess your payment requirements before proceeding. Once payment is made, we will not accept changes to your application options.</li><li>Each booth may purchase only one additional staff badge. If you need more, please purchase a regular ticket for entry.</li><li>Please keep your invoice after payment for your own records.</li><li>Even if the payment link remains accessible, any payment made after the deadline may result in disqualification at the organizer’s discretion, and no refund will be issued.</li>";
+          "-  Please complete all payments in accordance with the instructions above. If payment is incorrect, late, or made via non-designated methods, the Organizer reserves the right to <b>cancel participation without refund</b>.<br>- For all matters related to registration, payment, and participation, <b>TPABF reserves the final right of review, adjustment, and interpretation.</b><br>- In the event of cancellation due to force majeure (including natural disasters, pandemics, or policy changes), the Organizer will announce further arrangements separately.";
       } else {
         billingNoticedesc.innerHTML =
-          "<li>請自行評估需求繳費，繳款後我們不再提供更改申請選項。</li><li>每攤<u>限加購 1張工作證</u>，如需更多數量請買當日票入場。</li><li>付款之後請自行留存發票。</li><li>即使付款連結仍可操作，若超過繳費期限付款，主辦單位有權取消資格，並不予退款。</li>";
+          "- 請務必依繳費說明完成付款流程。如未依規定完成付款（如繳納錯誤金額、超過期限、未依指定方式匯款等），主辦單位將不保留參展資格，亦不提供退款。<br>- 所有報名、繳費及參展相關事宜，草率季保留最終審核、調整及解釋之權利。<br>- 若因不可抗力（如天災、疫情、政策變動等）導致活動取消，主辦單位將另行公告後續處理方式。";
       }
     }
   }
@@ -695,12 +666,7 @@ document.addEventListener("DOMContentLoaded", async function () {
   function setConditionalAcceptence(boothType) {
     var tooltip = document.getElementById("tooltip-text");
     if (boothType && tooltip) {
-      var boothText = boothType.trim();
-      if (
-        boothText === "One Regular Booth" ||
-        boothText === "Two Regular Booth" ||
-        boothText === "Curation Booth"
-      ) {
+      if (isEnglishBoothType(boothType)) {
         tooltip.innerHTML =
           "Your application did not fully meet the criteria for your originally selected booth type. However, we truly appreciate your work and proposal, and hope to see you at the fair. If you are willing to accept an adjustment to your booth category, we will be happy to reserve your participation.";
       } else {
@@ -716,15 +682,10 @@ document.addEventListener("DOMContentLoaded", async function () {
     var catalogdownloadLink = document.getElementById("catalog-download-link");
     var catalogdesc = document.getElementById("catalog-desc");
     if (boothType && catalogdownloadLink && catalogdesc) {
-      var boothText = boothType.trim();
-      if (
-        boothText === "One Regular Booth" ||
-        boothText === "Two Regular Booth" ||
-        boothText === "Curation Booth"
-      ) {
+      if (isEnglishBoothType(boothType)) {
         catalogdownloadLink.innerHTML = "Template Download";
         catalogdesc.innerHTML =
-          "Each exhibitor is entitled to a one-page feature in this year’s <i>TPABF Catalog</i>. Late submissions will be considered as forfeiting the opportunity.<br /><br />📌 Submission requirements: <br />1. <b>Image file</b>: PDF format, final size <b>120 × 195 mm</b>, with <b>5 mm bleed</b>. Please use <b>black and white</b> only.<br />2. <b>Text content</b>: Please edit and complete the information on the left side of the exhibitor info sheet.<br />";
+          "Each exhibitor is entitled to a one-page feature in this year's <i>TPABF Catalog</i>. Late submissions will be considered as forfeiting the opportunity.<br /><br />📌 Submission requirements: <br />1. <b>Image file</b>: PDF format, final size <b>120 × 195 mm</b>, with <b>5 mm bleed</b>. Please use <b>black and white</b> only.<br />2. <b>Text content</b>: Please edit and complete the information on the left side of the exhibitor info sheet.<br />";
       } else {
         catalogdownloadLink.innerHTML = "公版下載";
         catalogdesc.innerHTML =
@@ -739,12 +700,7 @@ document.addEventListener("DOMContentLoaded", async function () {
     var ticketlink = document.getElementById("ticket-link");
     var familyticketdesc = document.getElementById("familyticket-desc");
     if (boothType && ticketlink && familyticketdesc) {
-      var boothText = boothType.trim();
-      if (
-        boothText === "One Regular Booth" ||
-        boothText === "Two Regular Booth" ||
-        boothText === "Curation Booth"
-      ) {
+      if (isEnglishBoothType(boothType)) {
         ticketlink.innerHTML = "Ticket Link";
         familyticketdesc.innerHTML =
           "◆ Friends & Family Pre-sale Ticket ｜ Starts 9/8 ｜ NT$350 ｜ Limited to 800 tickets<br>◆ Friends & Family Fast Track Ticket ｜ 11/21 – 11/23 ｜ NT$400<br>(For detailed instructions, please refer to the ticketing website.)<br><br>Your exclusive discount code:<br>";
@@ -765,12 +721,7 @@ document.addEventListener("DOMContentLoaded", async function () {
       "live-event-schedule-desc"
     );
     if (boothType && liveEventLink && liveEventdesc) {
-      var boothText = boothType.trim();
-      if (
-        boothText === "One Regular Booth" ||
-        boothText === "Two Regular Booth" ||
-        boothText === "Curation Booth"
-      ) {
+      if (isEnglishBoothType(boothType)) {
         liveEventLink.innerHTML = "Sign Up Form";
         liveEventdesc.innerHTML =
           "Want to engage with visitors more directly? Propose on-site programs such as short talks, performances, or workshops!";
@@ -792,12 +743,7 @@ document.addEventListener("DOMContentLoaded", async function () {
     var manualdownloadLink = document.getElementById("manual-link");
     var manualdesc = document.getElementById("manual-desc");
     if (boothType && manualdownloadLink && manualdesc) {
-      var boothText = boothType.trim();
-      if (
-        boothText === "One Regular Booth" ||
-        boothText === "Two Regular Booth" ||
-        boothText === "Curation Booth"
-      ) {
+      if (isEnglishBoothType(boothType)) {
         manualdownloadLink.innerHTML = "Download Manual";
         manualdesc.innerHTML =
           "Please read it thoroughly and follow all instructions. It includes fair schedule, exhibitor regulations, and booth specifications, and the Venue Violation Handling and Penalty Manual. <br />";
@@ -817,12 +763,7 @@ document.addEventListener("DOMContentLoaded", async function () {
     var materialuploaddesc = document.getElementById("material-upload-desc");
 
     if (boothType && mediaziplink && mediamaterialdesc) {
-      var boothText = boothType.trim();
-      if (
-        boothText === "One Regular Booth" ||
-        boothText === "Two Regular Booth" ||
-        boothText === "Curation Booth"
-      ) {
+      if (isEnglishBoothType(boothType)) {
         mediaziplink.innerHTML = "Download";
         mediamaterialdesc.innerHTML =
           "<b>Media Kit:</b><br />You're welcome to use the 2025 TPABF key visual assets — click here to download.";
@@ -852,11 +793,7 @@ document.addEventListener("DOMContentLoaded", async function () {
       <li>不得使用大電器</li>
       <li>非每攤都有，需自備延長線與他人協調</li>
     `;
-    } else if (
-      boothType === "One Regular Booth" ||
-      boothType === "Two Regular Booth" ||
-      boothType === "Curation Booth"
-    ) {
+    } else if (isEnglishBoothType(boothType)) {
       electricityTitle.textContent = "Electricity:";
       electricityList.innerHTML = `
       <li>Standard 110v power supply</li>
@@ -893,7 +830,6 @@ document.addEventListener("DOMContentLoaded", async function () {
   const conditionalyes = document.getElementById("booth-type-tooltip");
   const foreignShipping = document.getElementById("foreign-shipping");
   const visaCN = document.getElementById("visaCN");
-  const overseavisa = document.getElementById("overseasvisa");
   const familyticket = document.getElementById("familyticket");
   const manualBoothappearance = document.getElementById(
     "manual-boothappearance"
@@ -915,10 +851,7 @@ document.addEventListener("DOMContentLoaded", async function () {
     if (checkPayment) checkPayment.checked = paymentChecked;
     if (checkDeclaration) checkDeclaration.checked = declarationChecked;
 
-    const isEnglishBooth =
-      boothType === "One Regular Booth" ||
-      boothType === "Two Regular Booth" ||
-      boothType === "Curation Booth";
+    const isEnglishBooth = isEnglishBoothType(boothType);
     function getStatusText(confirmed) {
       if (isEnglishBooth) {
         return confirmed ? "Confirmed" : "Unfulfilled";
@@ -936,7 +869,6 @@ document.addEventListener("DOMContentLoaded", async function () {
     if (liveEventSection) liveEventSection.style.display = "none";
     foreignShipping.style.display = "none";
     if (visaCN) visaCN.style.display = "none";
-    overseavisa.style.display = "none";
     familyticket.style.display = "none";
     manualBoothappearance.style.display = "none";
     registrationStatus.style.display = "none";
@@ -1007,10 +939,9 @@ document.addEventListener("DOMContentLoaded", async function () {
       }
       if (nationality === "CN") {
         visaCN.style.display = "block";
-      } else if (nationality !== "TW" && nationality !== "CN") {
-        overseavisa.style.display = "block";
       }
-    } else if (rawResult === "0") {
+    } else if (!rawResult || rawResult === "" || rawResult === "0") {
+      // 錄取結果為空時，右側內容都隱藏
       registrationStatusEl.textContent = "-";
     } else if (
       rawResult === "6-1-繳費後取消-已退費" ||
@@ -1034,8 +965,6 @@ document.addEventListener("DOMContentLoaded", async function () {
         boothnumber.style.display = "block";
         if (nationality === "CN") {
           visaCN.style.display = "block";
-        } else if (nationality !== "TW" && nationality !== "CN") {
-          overseavisa.style.display = "block";
         }
         // boothappearance.style.display = "block";
       } else {
@@ -1045,8 +974,6 @@ document.addEventListener("DOMContentLoaded", async function () {
         boothnumber.style.display = "block";
         if (nationality === "CN") {
           visaCN.style.display = "block";
-        } else if (nationality !== "TW" && nationality !== "CN") {
-          overseavisa.style.display = "block";
         }
       }
     } else if (rawResult === "3-猶豫") {
@@ -1063,8 +990,6 @@ document.addEventListener("DOMContentLoaded", async function () {
         }
         if (nationality === "CN") {
           visaCN.style.display = "block";
-        } else if (nationality !== "TW" && nationality !== "CN") {
-          overseavisa.style.display = "block";
         }
         familyticket.style.display = "block";
         manualBoothappearance.style.display = "block";
@@ -1081,32 +1006,164 @@ document.addEventListener("DOMContentLoaded", async function () {
   }
   updateRegistrationStatusAndChecks();
 
-  function extraPass() {
-    const paymentChecked = !!apiData["證"];
-    const extrapasstxt = document.getElementById("extrapasstxt");
 
-    if (!extrapasstxt) return; // 防呆
+  // 動態更新桌子數量
+  function extraTable() {
+    const tableCount = apiData["桌"];
+    const equipmentTable = document.getElementById("equipment-table");
 
-    if (paymentChecked) {
-      extrapasstxt.style.display = "block"; // ← 這裡要加 .style
-      if (
-        boothType === "One Regular Booth" ||
-        boothType === "Two Regular Booth" ||
-        boothType === "Curation Booth"
-      ) {
-        extrapasstxt.textContent = "- Extra Pass x1";
-      } else {
-        extrapasstxt.textContent = "- 加購工作證 x1";
-      }
+    if (!equipmentTable) return; // 防呆
+
+    // 如果沒有加購桌子，保持原本的顯示
+    if (!tableCount || tableCount === "" || tableCount === "None") {
+      return;
+    }
+
+    // 將 tableCount 轉換為數字
+    let count = null;
+    const tableCountStr = String(tableCount).trim();
+    
+    // 檢查中文數字
+    if (tableCountStr.includes("一") || tableCountStr === "1") {
+      count = 1;
+    } else if (tableCountStr.includes("二") || tableCountStr === "2") {
+      count = 2;
     } else {
-      extrapasstxt.style.display = "none"; // 沒有加購就隱藏
+     // 嘗試解析為數字
+      count = parseInt(tableCountStr, 10);
+    }
+    
+    // 如果無法解析為有效數字，保持原本的顯示
+    if (!count || isNaN(count) || count < 1) {
+      return;
+    }
+
+    // 獲取現有的內容
+    let currentContent = equipmentTable.innerHTML;
+
+    // 提取桌面尺寸資訊（例如：120×60cm 或 180×60cm）
+    // 匹配格式：桌面<small>(120×60cm)</small> 或 Table<small>(120×60cm)</small>
+    const sizeMatch = currentContent.match(/<small>\(([^)]+)\)<\/small>/);
+    const size = sizeMatch ? sizeMatch[1] : "";
+
+    // 判斷是否為英文攤位
+    const isEnglishBooth =
+      isEnglishBoothType(boothType);
+
+    // 構建新的內容
+    let newContent = "";
+    if (isEnglishBooth) {
+      // 英文格式：– Table<small>(120×60cm)</small> ×{count}
+      newContent = `– Table${size ? `<small>(${size})</small>` : ""} ×${count}`;
+    } else {
+      // 中文格式：– 桌面<small>(120×60cm)</small> ×{count}
+      newContent = `– 桌面${size ? `<small>(${size})</small>` : ""} ×${count}`;
+    }
+
+    // 更新內容
+    equipmentTable.innerHTML = newContent;
+
+    // 如果數量是 2，設置顏色為紅色
+    if (count === 2) {
+      equipmentTable.style.color = "red";
+    } else {
+      equipmentTable.style.color = ""; // 恢復預設顏色
     }
   }
-  extraPass();
+  extraTable();
+
+  // 動態更新通行憑證顯示（基礎數量 + 加購顯示）
+  function updateBadgeCount() {
+    const equipmentBadge = document.getElementById("equipment-badge");
+    const extrapasstxt = document.getElementById("extrapasstxt");
+    
+    if (!equipmentBadge) return; // 防呆
+
+    // 基礎通行憑證數量（不含加購）
+    let baseBadgeCount = 2;
+    
+    // 判斷是否為英文攤位
+    const isEnglishBooth = isEnglishBoothType(boothType);
+
+    // 根據不同攤位類型設定基礎數量
+    switch (boothType) {
+      case "策展攤":
+        baseBadgeCount = 6;
+        break;
+      case "Curation Booth":
+        baseBadgeCount = 6;
+        break;
+      case "書攤":
+      case "創作商品攤":
+      case "裝置攤":
+      case "食物酒水攤":
+      case "Regular Book Booth":
+      case "Regular Non-Book Booth":
+      case "Installation Booth":
+      default:
+        baseBadgeCount = 2;
+        break;
+    }
+
+    // 只顯示基礎數量
+    if (isEnglishBooth) {
+      equipmentBadge.innerHTML = `– Access Pass ×${baseBadgeCount}`;
+    } else {
+      equipmentBadge.innerHTML = `– 通行憑證 ×${baseBadgeCount}`;
+    }
+
+    // 檢查加購情況並顯示加購的通行憑證
+    const tableCount = apiData["桌"];
+    const passCount = apiData["證"];
+    
+    let additionalBadges = 0;
+    
+    // 解析桌子數量（apiData["桌"] 返回的是總桌子數量）
+    // 基礎已有1張桌子，只有當總數為2時才加通行憑證
+    if (tableCount && tableCount !== "" && tableCount !== "None") {
+      const tableCountStr = String(tableCount).trim();
+      let tableNum = 0;
+      
+      if (tableCountStr.includes("一") || tableCountStr === "1") {
+        tableNum = 1;
+      } else if (tableCountStr.includes("二") || tableCountStr === "2") {
+        tableNum = 2;
+      } else {
+        tableNum = parseInt(tableCountStr, 10) || 0;
+      }
+      
+      // 只有當總桌子數量為2時（基礎1張+加購1張），才加2張通行憑證
+      if (tableNum === 2) {
+        additionalBadges += 2;
+      }
+    }
+    
+    // 檢查是否加購通行憑證
+    if (passCount && passCount !== "" && passCount !== "None") {
+      // 加購1張通行憑證 +1
+      additionalBadges += 1;
+    }
+    
+    // 如果有加購，顯示加購的通行憑證
+    if (extrapasstxt) {
+      if (additionalBadges > 0) {
+        extrapasstxt.style.display = "block";
+        if (isEnglishBooth) {
+          extrapasstxt.textContent = `- Access Pass Add-on +${additionalBadges}`;
+        } else {
+          extrapasstxt.textContent = `- 加購通行憑證 +${additionalBadges}`;
+        }
+      } else {
+        extrapasstxt.style.display = "none";
+      }
+    }
+  }
+  updateBadgeCount();
 
   // 社群欄位顯示
   function setSocialText(id, value) {
     const el = document.getElementById(id);
+    if (!el) return; // 如果元素不存在，直接返回
     if (!value || value === "None") {
       el.textContent = "None";
       el.style.color = "lightgrey";
@@ -1196,10 +1253,7 @@ document.addEventListener("DOMContentLoaded", async function () {
     const ddlDiv = document.getElementById("ddl-" + sectionId);
     if (ddlDiv && deadline) {
       // 判斷語言
-      const isEnglishBooth =
-        boothType === "One Regular Booth" ||
-        boothType === "Two Regular Booth" ||
-        boothType === "Curation Booth";
+      const isEnglishBooth = isEnglishBoothType(boothType);
       // 格式化日期
       const deadlineStr = deadlineTime
         ? `${deadlineTime.getFullYear()}-${(deadlineTime.getMonth() + 1)

@@ -277,7 +277,7 @@
                             – 桌面<small>(120×60cm)</small> ×1
                           </li>
                           <li id="equipment-chair">– 椅子 ×2</li>
-                          <li id="equipment-badge">– 工作證 ×2</li>
+                          <li id="equipment-badge">– 通行憑證 ×2</li>
                           <li id="equipment-book">
                             – 草率簿 ×1<small> (含露出一面)</small>
                           </li>
@@ -285,7 +285,7 @@
                             id="extrapasstxt"
                             style="display: none; color: orangered"
                           >
-                            加購工作證 x1
+                            加購通行憑證 x1
                           </li>
                         </ul>
                       </td>
@@ -404,12 +404,12 @@
                   <span id="facebook"></span>
                 </td>
               </tr>
-              <tr>
+              <!-- <tr>
                 <td colspan="2">
                   <span class="label">無限柔軟是 Soft POW is…...</span><br />
                   <span id="yearlyanswer"></span>
                 </td>
-              </tr>
+              </tr> -->
               <tr
                 id="electricity-row"
                 style="background-color: #d3c4bc; display: none"
@@ -823,7 +823,7 @@
                     />
                   </td>
                 </tr>
-                <tr>
+                <!-- <tr>
                   <td colspan="2">
                     <span class="label"
                       >無限柔軟是 Soft POW is…..(50字內 Within 50 words）</span
@@ -836,7 +836,7 @@
                       maxlength="50"
                     ></textarea>
                   </td>
-                </tr>
+                </tr> -->
                 <tr id="edit-electricity-row">
                   <td
                     colspan="2"
@@ -903,31 +903,21 @@
                         <div style="vertical-align: middle; font-size: 2.7rem">
                           <span
                             style="
-                              font-size: 2rem;
+                              font-size: 1.5rem;
                               color: black;
                               line-height: 1.5rem;
                             "
                             id="Booth-number"
                             >N/A
                           </span>
-                          <span
-                            id="booth-number-desc"
-                            style="
-                              font-size: 1rem;
-                              color: darkgray;
-                              line-height: 1rem;
-                              display: block;
-                              margin-top: 0.5rem;
-                            "
-                            >攤位編號與攤位地圖將於報到當天（11/20）公布，屆時請留意公告。
-                          </span>
+                          
                         </div>
                       </td>
                       <td
+                      id="booth-map-row"
                         style="
                           border-bottom: 1px solid aliceblue;
                           width: 15vw;
-
                           border-top: 1px solid black;
                           border-left: none;
                           border-right: 1px solid black;
@@ -936,7 +926,7 @@
                         <span class="label">攤位地圖 Booth Map</span><br /><span
                           id="booth-map-desc"
                           style="
-                            font-size: 1.2rem;
+                            font-size: 1rem;
                             color: black;
                             line-height: 2rem;
                           "
@@ -982,10 +972,9 @@
                       <td style="width: 70%; border-left: none">
                         <div style="vertical-align: middle">
                           <span id="registration-status-desc"
-                            >請於<b> 7 月 15 日</b
-                            >前完成繳費與同意書上傳，否則將無法參展。經確認完成繳費動作＆同意書上傳，才算是取得最終參展資格，團隊將於7
-                            月 15 日核對後進行統一更新。</span
-                          >
+                            >請於<b> 12 月 31 日</b
+                            >前完成繳費與同意書上傳，逾期將視同放棄參展資格。團隊將於<mark> 1月5日前 </mark>逐一人工確認繳費與同意書的上傳狀態。如您已完成繳交，請先保留相關繳費或上傳截圖；若狀態在 <mark>1月5日</mark> 後仍未更新，請與我們聯繫。</span
+                          ><br><br>
                           <label
                             style="
                               display: flex;
@@ -999,7 +988,7 @@
                               disabled
                               style="margin-right: 0.5em"
                             />
-                            參展費 Payment
+                            參展費 Payment <span id="payment-status">（人工審核塞車中）</span>
                           </label>
                           <label
                             style="
@@ -1014,7 +1003,7 @@
                               disabled
                               style="margin-right: 0.5em"
                             />
-                            同意書 Exhibitor Declaration
+                            同意書 Exhibitor Declaration <span id="declaration-status">（人工審核塞車中）</span>
                           </label>
                         </div>
                       </td>
@@ -1025,7 +1014,6 @@
 
               <tr id="billing-info" style="display: block">
                 <td
-                  colspan="3"
                   style="
                     padding: 0;
                     border-top: none;
@@ -1038,7 +1026,7 @@
                     <tr
                       id="agreement-row"
                       style="
-                        width: 25%;
+                        width: 50%;
                         border-top: 0.5px solid pink;
                         border-bottom: 0.5px solid pink;
 
@@ -1071,7 +1059,7 @@
                               style="padding: 0.5em 0em 0em 0.5em; border: none"
                             >
                               <a
-                                href="https://drive.google.com/drive/folders/1sSZO1vXReBIxDEMiPNR_B0q-eQ711vJ2?usp=drive_link"
+                                href="https://drive.google.com/drive/folders/1D4fSfNj9tBgT_nOR9cI8Qm0nKrSXkSdv"
                                 target="_blank"
                                 id="declaration-download-link"
                               >
@@ -1117,9 +1105,8 @@
                         </table>
                       </td>
                       <td
-                        colspan="2"
                         style="
-                          width: 80%;
+                          width: 50%;
                           padding: 0;
                           border-top: 0.5px solid pink;
                           border-left: 1px solid black;
@@ -1132,7 +1119,7 @@
                           <table style="width: 100%">
                             <tr>
                               <td
-                                colspan="2"
+                                colspan="1"
                                 style="
                                   border-left: none;
                                   background: #000;
@@ -1141,7 +1128,7 @@
                                   padding: 2px 6px;
                                 "
                               >
-                                付款方案 Payment Information
+                                付款方案 Payment & Pass Information
                               </td>
                             </tr>
                             <tr>
@@ -1150,11 +1137,12 @@
                                   border-top: 0.5px solid pink;
                                   border-left: none;
                                   border-bottom: 1px dashed black;
+                                  border-right: none;
                                   background-color: lemonchiffon;
                                 "
                               >
                                 <span for-billing1-title
-                                  ><strong>方案一</strong>：基礎攤費</span
+                                  ><strong>基礎攤費</strong></span
                                 >
                                 <hr
                                   style="
@@ -1169,44 +1157,16 @@
                                   >8,000 NTD</span
                                 >
                                 <br />
-                                <span for-billing1-desc>僅基礎方案</span>
+                                <div for-billing1-desc style="font-size: 0.9rem; line-height: 1.6;">
+                                  <strong>送貨方式：</strong>請務必選擇「攤位費專屬」結帳。若誤選其他方式並被系統收取運費，恕不退款。<br><br>
+                                  <strong>付款方式：</strong>如選擇「銷行轉帳」，此方式 僅開放至 12/28（日）24:00（GMT+8）<br><br>
+                                  <strong>注意事項：</strong>即使付款連結仍可操作，若超過繳費期限付款，主辦單位有權取消資格，並不予退款。<br><br>
+                                  <strong>退款：</strong>若因不可抗因素需放棄參展，請於 1/15（四）前 通知主辦單位，並辦理退款（將酌收10%手續費）。逾期恕不受理退款。
+                                </div>
                                 <div class="billing-note" id="billing-note1">
-                                  Payment Deadline: July 13
+                                  Payment Deadline: December 31
                                 </div>
                                 <div class="pay-button" id="pay1">付款 Pay</div>
-                              </td>
-                              <td
-                                style="
-                                  border-top: 0.5px solid pink;
-                                  border-left: none;
-                                  border-bottom: 1px dashed black;
-                                  border-right: none;
-                                  background-color: lemonchiffon;
-                                "
-                              >
-                                <span for-billing2-title
-                                  ><strong>方案二：</strong
-                                  >基礎攤費+工作證一張</span
-                                >
-                                <hr
-                                  style="
-                                    border-top: 1px dashed black;
-                                    margin: 6px 0;
-                                    border-bottom: none;
-                                  "
-                                />
-                                <span
-                                  style="font-size: 2rem"
-                                  id="billing2-price"
-                                  >13,000 NTD </span
-                                ><br />
-                                <span for-billing2-desc
-                                  >適合有輪班擺攤需求之攤主</span
-                                >
-                                <div class="billing-note" id="billing-note2">
-                                  Payment Deadline: July 13
-                                </div>
-                                <div class="pay-button" id="pay2">付款 Pay</div>
                               </td>
                             </tr>
                           </table>
@@ -1218,25 +1178,20 @@
                             margin: 6px 0;
                           "
                         >
-                          <span class="label">注意事項 Notice</span><br />
-                          <ul
+                          <span class="label">聲明 Declaration</span><br />
+                          <div
                             style="
                               margin-top: 10px;
                               margin-bottom: 5px;
-                              padding-left: 20px;
                               font-size: 0.8rem;
+                              line-height: 1.6;
                             "
                             id="billing-notice"
                           >
-                            <li>
-                              請自行評估需求繳費，繳款後我們不再提供更改申請選項。
-                            </li>
-                            <li>
-                              每攤限加購 1
-                              張工作證，如需更多數量請買當日票入場。
-                            </li>
-                            <li>付款之後請自行留存發票。</li>
-                          </ul>
+                            請務必依繳費說明完成付款流程。如未依規定完成付款（如繳納錯誤金額、超過期限、未依指定方式匯款等），主辦單位將不保留參展資格，亦不提供退款。<br><br>
+                            所有報名、繳費及參展相關事宜，草率季保留最終審核、調整及解釋之權利。<br><br>
+                            若因不可抗力（如天災、疫情、政策變動等）導致活動取消，主辦單位將另行公告後續處理方式。
+                          </div>
                         </div>
                       </td>
                     </tr>
@@ -1245,17 +1200,17 @@
               </tr>
               <tr id="negative-letter" style="display: none">
                 <td colspan="3">
-                  感謝您對本次徵件／申請活動的關注與投入。經過審慎評選，本屆草率季，我們收到了900多海內外具創意與潛力的申請作品／計畫。經評審團綜合討論後，遺憾地通知您，此次您所提交的申請未列入最終入選名單。<br />
+                  感謝您對本次徵件／申請活動的關注與投入。經過審慎評選，本屆草率季，我們收到了海內外具創意與潛力的申請作品／計畫。經評審團綜合討論後，遺憾地通知您，此次您所提交的申請未列入最終入選名單。<br />
                   我們非常感謝您願意分享您的創作／計畫，也十分肯定您在其中展現出的努力與思考。誠摯地希望未來仍有機會與您合作或再次收到您的申請。也歡迎您參與草率季的其他活動，或是持續關注我們的網站與社群媒體，了解更多最新消息。<br />
                   祝一切順利，創作茂盛。<br /><br />
-                  草率季 2025.06.30<br />
+                  草率季<br />
                   <small>hooroo@double-grass.com</small><br />
                   <hr
                     style="margin: 1rem 0; border: none; border-top: 1px solid"
                   />
                   Thank you for your interest and participation in this year’s
                   open call/application event. After a careful selection
-                  process, we received over 900 creative and promising
+                  process, we received creative and promising
                   submissions and proposals from both Taiwan and abroad for this
                   year’s Taipei Art Book Fair. After comprehensive discussions
                   by the jury, we regret to inform you that your application was
@@ -1270,33 +1225,33 @@
                   media for the latest updates. <br /><br />
 
                   Wishing you all the best and continued creative growth.<br /><br />
-                  Taipei Art Book Fair 2025.06.30<br />
+                  Taipei Art Book Fair<br />
                   <small>hooroo@double-grass.com</small><br />
                 </td>
               </tr>
               <tr id="runnerup-letter" style="display: none">
                 <td colspan="3">
                   感謝您對本次徵件／申請活動的關注與投入。<br /><br />
-                  經過審慎評選，本屆草率季，我們收到了900多封來自海內外具創意與潛力的申請作品／計畫。<br />
-                  經評審團綜合討論後，您的申請目前列為備取，我們將於<u>7/16日</u>公布備取錄取、繳費通知。<br />
+                  經過審慎評選，我們收到了來自海內外具創意與潛力的申請作品／計畫。<br />
+                  經評審團綜合討論後，您的申請目前列為備取，我們將於<u>1/5日</u>前公布備取錄取、繳費通知。<br />
                   <br />
                   我們非常感謝您願意分享您的創作／計畫，也十分肯定您在其中展現出的努力與思考。誠摯地希望未來仍有機會與您合作或再次收到您的申請。也歡迎您參與草率季的其他活動，或是持續關注我們的網站與社群媒體，了解更多最新消息。<br />
                   <br />
                   祝一切順利，創作茂盛。<br /><br />
-                  草率季 2025.06.30<br />
+                  草率季<br />
                   <small>hooroo@double-grass.com</small>
                   <hr
                     style="margin: 1rem 0; border: none; border-top: 1px solid"
                   />
                   Thank you for your interest and participation in this year’s
                   open call/application event.<br /><br />
-                  After a careful selection process, we received over 900
+                  After a careful selection process, we received
                   creative and promising submissions and proposals from both
                   Taiwan and abroad for this year’s Taipei Art Book Fair.<br />
                   Following comprehensive discussions by the jury, your
                   application is currently on the waiting list. We will announce
                   the results for waitlisted participants and provide payment
-                  instructions on <u>July 16</u>.<br />
+                  instructions before <u>January 5</u>.<br />
                   <br />
                   We sincerely appreciate your willingness to share your work or
                   project, and we highly value the effort and thought you have
@@ -1307,7 +1262,7 @@
                   media for the latest updates.<br />
                   <br />
                   Wishing you all the best and continued creative growth.<br /><br />
-                  Taipei Art Book Fair 2025.06.30<br />
+                  Taipei Art Book Fair<br />
                   <small>hooroo@double-grass.com</small>
                 </td>
               </tr>
@@ -1321,33 +1276,15 @@
                       id="visa-warning"
                       style="color: #c00; font-size: 0.9em"
                     >
-                      請務必於 <b>7月7日</b>前完成下列表單，以利安排申請流程。
+                      請務必於 <b>12月31日前</b>前完成下列表單，以利安排申請流程。
                     </div>
                     <br />
                     <a
-                      href="https://forms.gle/fP76GbEVv4F33Fvo6"
+                      href="https://forms.gle/fMsfak9D1BsH6emF7"
                       target="_blank"
                       >填寫表單</a
                     >
                   </div>
-                </td>
-              </tr>
-
-              <!-- 海外簽證資料連結-->
-              <tr style="display: none" id="overseasvisa">
-                <td style="border-top: none; width: 55vw">
-                  <div id="overseasvisa-desc">
-                    <span class="label">簽證申請 Visa Support</span><br />
-                    We provide a visa support package, including an official
-                    invitation letter and a brief introduction to TPABF. If you
-                    need any additional documents or information, feel free to
-                    contact us.
-                  </div>
-                  <a
-                    href="https://drive.google.com/drive/folders/1sN6Yl2VnHXzTWAwXyOrTQ_cMjrITii0p?usp=sharing"
-                    target="_blank"
-                    >Download Package</a
-                  >
                 </td>
               </tr>
 
@@ -1435,7 +1372,7 @@
                     ensure your items arrive safely and on time, please complete
                     the shipping service form first and follow its instructions.
                     It is important that your package
-                    <u>arrives before</u> November 7, 2025 (Friday) at the
+                    <u>arrives before</u> February 11, 2026 (Wed.) at the
                     designated address. <br /><br />
                     Late or unregistered shipments will not be delivered to the
                     venue.
@@ -1453,7 +1390,7 @@
                   <div id="foreign-shipping-form-section">
                     <div style="min-width: 198px" id="foreign-shipping-form">
                       <a
-                        href="https://forms.gle/hVu54wUfqqUMRxfG8"
+                        href="https://forms.gle/WExjyPUMcDxgXTaTA"
                         target="_blank"
                         >Shipping Service Form</a
                       >
@@ -1486,7 +1423,7 @@
                   <div id="media-live-event-form-section">
                     <div id="media-live-event-form" style="min-width: 198px">
                       <a
-                        href="https://forms.gle/ckXiewW68i1VwKYt6"
+                        href="https://forms.gle/QzSjtM3SjvudrdnQ6"
                         target="_blank"
                         id="live-event-signup-link"
                       >
@@ -1611,73 +1548,7 @@
                   </div>
                 </td>
               </tr>
-              <!-- <tr style="display: none" id="media-section-row6"></tr> -->
-
-              <tr style="display: block" id="open-call-schedule">
-                <td style="border-top: none; border-right: 1px solid black">
-                  <span class="label">徵件流程表 Open Call Schedule</span><br />
-                  <table style="width: 100%; margin-top: 10px">
-                    <tr>
-                      <td>
-                        <span class="rotated" id="schedule-announce"
-                          >徵件開始<br />Open Call Start</span
-                        >
-                      </td>
-                      <td>
-                        <span class="rotated" id="schedule-out"
-                          >徵件截止<br />Open Call End</span
-                        >
-                      </td>
-                      <td>
-                        <span class="rotated" id="schedule-result"
-                          >審核結果通知<br />Result Notification</span
-                        >
-                      </td>
-                      <td>
-                        <span class="rotated" id="schedule-payment"
-                          >通過者付款截止<br />Payment Deadline</span
-                        >
-                      </td>
-                    </tr>
-                    <tr>
-                      <td id="schedule-date-announce">2024/5/5（日）</td>
-                      <td id="schedule-date-out">2024/6/15（日）24:00</td>
-                      <td id="schedule-date-result">2024/6/30（一）12:00</td>
-                      <td id="schedule-date-payment">2024/7/13（日）24:00</td>
-                    </tr>
-                    <tr>
-                      <td>
-                        <span class="rotated" id="schedule-runnerup"
-                          >備取名單通知<br />Waitlisted Notification</span
-                        >
-                      </td>
-                      <td>
-                        <span class="rotated" id="schedule-runnerup-payment"
-                          >備取付款截止<br />Waitlisted Payment Deadline</span
-                        >
-                      </td>
-                      <td>
-                        <span class="rotated" id="schedule-list"
-                          >公布參展名單<br />Exhibitor List</span
-                        >
-                      </td>
-                      <td>
-                        <span class="rotated" id="schedule-booth"
-                          >攤位位置公布<br />Booth Location</span
-                        >
-                      </td>
-                    </tr>
-                    <tr>
-                      <td id="schedule-date-runnerup">2024/7/16（三）24:00</td>
-                      <td id="schedule-date-runnerup-payment">
-                        2024/7/22（二）24:00
-                      </td>
-                      <td id="schedule-date-list">2024/9月</td>
-                      <td id="schedule-date-booth">2024/11/20（四）</td>
-                    </tr>
-                  </table>
-                </td>
-              </tr>
+              
             </table>
           </div>
         </td>
@@ -2268,7 +2139,7 @@
                 </td>
                 <td class="QA-section" style="border-right: none">
                   <span class="labelAQ"
-                    >Q: 已付款基礎攤位費，但想加購工作證？</span
+                    >Q: 已付款基礎攤位費，但想加購通行憑證？</span
                   ><br />
                   <span
                     style="
@@ -2324,7 +2195,7 @@
                   <span class="faq-number">6</span>
                 </td>
                 <td class="QA-section" style="border-right: none">
-                  <span class="labelAQ">Q: 我還可以加購工作證嗎？</span><br />
+                  <span class="labelAQ">Q: 我還可以加購通行憑證嗎？</span><br />
                   <span
                     style="
                       font-size: 1rem;
@@ -2336,10 +2207,10 @@
                 </td>
                 <td class="QA-section">
                   <span class="labelAQ en"
-                    >Q: Can I purchase additional staff passes?</span
+                    >Q: Can I purchase additional access passes?</span
                   ><br />
                   <span class="faq-answer-en">
-                    A: Additional staff passes are currently not available. If someone needs entry, please purchase a "Fast Track Friend Pass" through the Exhibitor Management Page.
+                    A: Additional access passes are currently not available. If someone needs entry, please purchase a "Fast Track Friend Pass" through the Exhibitor Management Page.
                   </span>
                 </td>
               </tr>
@@ -2374,22 +2245,22 @@
                   <span class="faq-number">8</span>
                 </td>
                 <td class="QA-section" style="border-right: none">
-                  <span class="labelAQ">Q: 工作證可以讓不同人使用嗎？</span><br />
+                  <span class="labelAQ">Q: 通行憑證可以讓不同人使用嗎？</span><br />
                   <span
                     style="
                       font-size: 1rem;
                       font-family: 'Inclusive Sans', sans-serif;
                     "
                   >
-                    A: 可以。但活動入場以「紋身貼紙」為憑證，工作證僅作識別使用。
+                    A: 可以。但活動入場以「紋身貼紙」為憑證，通行憑證僅作識別使用。
                   </span>
                 </td>
                 <td class="QA-section">
                   <span class="labelAQ en"
-                    >Q: Can staff passes be used by different people?</span
+                    >Q: Can access passes be used by different people?</span
                   ><br />
                   <span class="faq-answer-en">
-                    A: Yes. However, entry to the event requires the "tattoo sticker" as the admission credential. The staff pass is for identification only.
+                    A: Yes. However, entry to the event requires the "tattoo sticker" as the admission credential. The access pass is for identification only.
                   </span>
                 </td>
               </tr>
@@ -2730,7 +2601,7 @@
                   <br />
                   <br />
                   錄取時將通知檯面尺寸與細項，錄取後請於兩週內完成攤位費用繳交，逾時將自動取消參與資格。
-                  請注意：錄取後將同步開放工作證加購服務（每攤限加購一張），請務必於加購期限內申請，逾期不候。
+                  請注意：錄取後將同步開放通行憑證加購服務（每攤限加購一張），請務必於加購期限內申請，逾期不候。
                 </div>
                 <div class="column layout-form-column-grid-2">
                   <span class="from-description-header-ness">必填問題</span>
@@ -2750,7 +2621,7 @@
                     <span class="from-label-header">一般書攤</span>
                     <span class="from-label-sub-header">5,000 元（含稅）</span><br />
                     <span class="from-label-description-header">
-                      基礎設備：桌面（120*60cm) 1 個、椅子 2 張、工作證 2 張、草率簿 1
+                      基礎設備：桌面（120*60cm) 1 個、椅子 2 張、通行憑證 2 張、草率簿 1
                       本（含露出一面）
                     </span>
                   </label>
@@ -2770,7 +2641,7 @@
                     <span class="from-label-header">創作攤</span>
                     <span class="from-label-sub-header">8,000 元（含稅）</span><br />
                     <span class="from-label-description-header">
-                      基礎設備：桌面（120*60cm) 1 個、椅子 2 張、工作證 2 張、草率簿 1
+                      基礎設備：桌面（120*60cm) 1 個、椅子 2 張、通行憑證 2 張、草率簿 1
                       本（含露出一面）
                     </span>
                   </label>
@@ -2786,7 +2657,7 @@
                     <span class="from-label-header">食物酒水攤</span>
                     <span class="from-label-sub-header">13,000 元（含稅）</span><br />
                     <span class="from-label-description-header">
-                      基礎設備：桌面（180*60cm) 1 個、椅子 2 張、工作證 2 張、草率簿 1
+                      基礎設備：桌面（180*60cm) 1 個、椅子 2 張、通行憑證 2 張、草率簿 1
                       本（含露出一面）
                     </span>
                   </label>
@@ -2806,7 +2677,7 @@
                     <span class="from-label-header">裝置攤</span>
                     <span class="from-label-sub-header">10,000 元（含稅） </span><br />
                     <span class="from-label-description-header">
-                      基礎設備：1.5M*1.5M空地、工作證 2 張、草率簿 1 本（含露出一面）
+                      基礎設備：1.5M*1.5M空地、通行憑證 2 張、草率簿 1 本（含露出一面）
                     </span>
                   </label>
                 </div>
@@ -3279,7 +3150,7 @@
                       錄取與備取通知信將寄至您所填寫電子信箱，請留意收信信箱或垃圾信箱，未錄取不另行通知。
                     </li>
                     <li>
-                      錄取時將通知檯面尺寸與細項，錄取後請於兩週內完成攤位費用繳交，逾時自動取消參與資格。同時錄取後將提供工作證加購，請注意，加購工作證期間截止後恕無法再加購。
+                      錄取時將通知檯面尺寸與細項，錄取後請於兩週內完成攤位費用繳交，逾時自動取消參與資格。同時錄取後將提供通行憑證加購，請注意，加購通行憑證期間截止後恕無法再加購。
                     </li>
                     <li>
                       收到通知錄取信且付款完成後，草率季將於一週內進行核帳。您可使用您所填寫的電子信箱使用攤商後台查詢繳費狀態與下載其他說明與指南。
