@@ -929,13 +929,13 @@ This is the only pass add-on period. <u>No changes after payment</u>.<br><br>
         familyticket.style.display = "block";
         manualBoothappearance.style.display = "block";
         registrationStatus.style.display = "block";
-        boothnumber.style.display = "block";
+        boothnumber.style.display = "table";
         // boothappearance.style.display = "block";
       } else {
         registrationStatusEl.textContent = getStatusText(false);
         billinginfo.style.display = "block";
         registrationStatus.style.display = "block";
-        boothnumber.style.display = "block";
+        boothnumber.style.display = "table";
       }
       if (nationality === "CN") {
         visaCN.style.display = "block";
@@ -962,7 +962,7 @@ This is the only pass add-on period. <u>No changes after payment</u>.<br><br>
         familyticket.style.display = "block";
         manualBoothappearance.style.display = "block";
         registrationStatus.style.display = "block";
-        boothnumber.style.display = "block";
+        boothnumber.style.display = "table";
         if (nationality === "CN") {
           visaCN.style.display = "block";
         }
@@ -971,7 +971,7 @@ This is the only pass add-on period. <u>No changes after payment</u>.<br><br>
         registrationStatusEl.textContent = getStatusText(false);
         billinginfo.style.display = "block";
         registrationStatus.style.display = "block";
-        boothnumber.style.display = "block";
+        boothnumber.style.display = "table";
         if (nationality === "CN") {
           visaCN.style.display = "block";
         }
@@ -994,13 +994,13 @@ This is the only pass add-on period. <u>No changes after payment</u>.<br><br>
         familyticket.style.display = "block";
         manualBoothappearance.style.display = "block";
         registrationStatus.style.display = "block";
-        boothnumber.style.display = "block";
+        boothnumber.style.display = "table";
         // boothappearance.style.display = "block";
       } else {
         registrationStatusEl.textContent = getStatusText(false);
         billinginfo.style.display = "block";
         registrationStatus.style.display = "block";
-        boothnumber.style.display = "block";
+        boothnumber.style.display = "table";
       }
     }
   }

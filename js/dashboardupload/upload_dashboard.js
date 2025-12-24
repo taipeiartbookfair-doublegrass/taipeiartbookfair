@@ -32,7 +32,7 @@ const uploadStatusMap = {
     status: "declaration-upload-status",
     storage: "declaration-uploaded-filename",
     folder: folderIds.declaration,
-    successMsg: "同意書檔案上傳成功 Declaration uploaded successfully!",
+    successMsg: "上傳成功！我們將盡快完成審核。\nUpload successful! We'll review your submission shortly.",
     failMsg: "同意書檔案上傳失敗 Upload failed.",
   },
 };
