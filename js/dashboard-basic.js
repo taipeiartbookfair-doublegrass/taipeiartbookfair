@@ -575,23 +575,26 @@ document.addEventListener("DOMContentLoaded", async function () {
     const billing1Desc = document.querySelector("div[for-billing1-desc]") || document.querySelector("span[for-billing1-desc]");
     if (billing1Desc) {
       billing1Desc.innerHTML = isEnglishBooth
-        ? `<strong>Shipping Method:</strong> Please select "Booth Fee – Exclusive Checkout" when making payment. Shipping fees charged due to incorrect selection will not be refunded.<br><br>
-<strong>Payment Method:</strong> If selecting "Bank Transfer", this method is only available until Dec. 28 (Sun) 24:00 (GMT+8).<br><br>
-Payments made after the deadline may result in cancellation without refund.<br><br>
-<strong>Access Pass Add-on:</strong><br>
-Each booth may select <u>1–2 tables</u>; each table includes <u>2 daily access passes per day</u>.<br>
-Each booth may purchase up to <u>1 additional pass</u> (allowing <u>1 extra person per day</u>).<br>
-If daily entry exceeds the available passes, <u>general admission tickets must be purchased</u>.<br>
-This is the only pass add-on period. <u>No changes after payment</u>.<br><br>
-<strong>Refund:</strong> Refund requests due to force majeure must be submitted by Jan. 15. A 10% handling fee applies. No refunds after the deadline.`
-         : `<strong>送貨方式：</strong>請務必選擇「攤位費專屬」結帳。若誤選其他方式並被系統收取運費，恕不退款。<br><br>
-<strong>付款方式：</strong>如選擇「銀行轉帳」，此方式 僅開放至 12/28（日）24:00（GMT+8），即使付款連結仍可操作，若超過繳費期限付款，主辦單位有權取消資格，並不予退款。<br><br>
-<strong>通行憑證加購：</strong><br>
-每攤位可選擇 1–2 桌，每桌每日皆附贈 2 張當日通行憑證。<br>
-&nbsp;&nbsp;&nbsp;&nbsp;• 每攤位最多可加購 1 張通行憑證（每日可額外增加 1 位進場人員）。<br>
-&nbsp;&nbsp;&nbsp;&nbsp;• 若單日進場人數超過通行憑證可使用數量，請依實際活動天數與人數，另行購買入場票券。<br>
-&nbsp;&nbsp;&nbsp;&nbsp;• 本階段為唯一的通行憑證加購申請時段，完成繳費後恕不接受任何變更。<br><br>
-<strong>退款：</strong>若因不可抗因素需放棄參展，請於 1/15（四）前 通知主辦單位，並辦理退款（將酌收10%手續費）。逾期恕不受理退款。`;
+        ? `<strong>Invoice: </strong> For overseas exhibitors who require an invoice, please fill out <a href=https://docs.google.com/forms/d/e/1FAIpQLScuHHfn3zhWd4RVrOCPLY72xf9XiNAf1Sb8De4WJaOCAHovDQ/viewform?usp=header" target="_blank">this form</a>. Once submitted, we will send the invoice to your email as soon as possible.<br><br>
+<strong>Refund: </strong> Cancel by <u>January 15</u> for a refund (10% handling fee). Requests after this date <u>will not be accepted</u>.<br><br>
+<strong>Additional Purchase Instructions:</strong><br>
+&nbsp;&nbsp;a. Number of Tables: Each booth may select 1–2 tables, with 2 access passes included per table (excluding Installation or Curation booths).<br>
+&nbsp;&nbsp;b. Access Passes:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;• Provided in the form of temporary tattoo stickers; 1 pass is valid for all three days (each tattoo sticker may only be used by one person per day).<br>
+&nbsp;&nbsp;&nbsp;&nbsp;• Each booth may purchase up to 1 additional access pass (allowing 1 extra person per day).<br>
+&nbsp;&nbsp;&nbsp;&nbsp;• If the number of people attending on a single day exceeds the available access passes, please purchase additional admission tickets according to the actual number of days and attendees. (Pre-sale friend & family tickets will be available Jan 26 – Feb 8; for additional tickets, please follow our IG posts.)<br><br>
+&nbsp;&nbsp;c. <strong>This is the only period for additional purchase applications. Once payment is completed, no changes will be accepted.</strong><br>
+&nbsp;&nbsp;d. Not sure what to add on? Enter your booth type, tables, and attendees—<a href=https://docs.google.com/spreadsheets/d/1A33pr06kXFJKgvln3-ie_YdIw-BeYaRm9ckBdDQZtyc/edit?usp=sharing" target="_blank">we’ll calculate it for you</a>.`
+         : `<strong>發票：</strong>台灣訂單網站將自動開立電子發票，請確認報名時所填Email。海外單位如需開立發票需填寫<a href=https://docs.google.com/forms/d/e/1FAIpQLScuHHfn3zhWd4RVrOCPLY72xf9XiNAf1Sb8De4WJaOCAHovDQ/viewform?usp=header" target="_blank">此表單</a>，提交後，我們將盡快寄送發票至您的電子郵件信箱。<br><br>
+<strong>退款：</strong>若因不可抗因素需放棄參展，請於<u> 1/15（四）前 </u>通知主辦單位，並辦理退款（將酌收10%手續費）。逾期恕不受理退款。<br><br>
+<strong>加購説明：</strong><br>
+&nbsp;&nbsp;a. 桌子數量：每攤位可選擇 1–2 桌，每桌皆附贈 2份 通行憑證。（裝置攤／策展攤除外）<br>
+&nbsp;&nbsp;b. 通行憑證：<br>
+&nbsp;&nbsp;&nbsp;&nbsp;• 為刺青貼紙形式，1份為三天量。（每張刺青貼紙同一天僅限一人使用）<br>
+&nbsp;&nbsp;&nbsp;&nbsp;• 每攤位最多可加購 1份 通行憑證（每天可增加 1人 通行）。<br>
+&nbsp;&nbsp;&nbsp;&nbsp;• 若單日進場人數超過通行憑證可使用數量，請依實際活動天數與人數，另行購買入場票券（親友預售票將於 01/26–02/08 販售，更多入場票券請持續關注我們的 IG 貼文喔）。<br><br>
+&nbsp;&nbsp;c. <strong>本階段為唯一的加購申請時段，完成繳費後恕不接受任何變更。</strong><br>
+&nbsp;&nbsp;d. 不知道怎麼加購？填寫攤位類型、桌數與進場人數，<a href=https://docs.google.com/spreadsheets/d/1A33pr06kXFJKgvln3-ie_YdIw-BeYaRm9ckBdDQZtyc/edit?usp=sharing" target="_blank">我們幫你算</a>。`;
     }
   }
   setBillingInfoLanguage(boothType);
@@ -617,6 +620,21 @@ This is the only pass add-on period. <u>No changes after payment</u>.<br><br>
     }
   }
   setDeclarationLanguage(boothType);
+
+    // 動態Billing Notice 區塊語言
+    function setBillingNoticeLanguage(boothType) {
+      var billingNoticedesc = document.getElementById("billing-notice");
+      if (boothType && billingNoticedesc) {
+        if (isEnglishBoothType(boothType)) {
+          billingNoticedesc.innerHTML =
+            "-  Please complete all payments in accordance with the instructions above. If payment is incorrect, late, or made via non-designated methods, the Organizer reserves the right to <b>cancel participation without refund.</b><br>- For all matters related to registration, payment, and participation, <b>TPABF reserves the final right of review, adjustment, and interpretation.</b><br>- In the event of cancellation due to force majeure (including natural disasters, pandemics, or policy changes), the Organizer will announce further arrangements separately.";
+        } else {
+          billingNoticedesc.innerHTML =
+            "- 請務必依繳費說明完成付款流程。如未依規定完成付款（如繳納錯誤金額、超過期限、未依指定方式匯款等），主辦單位將不保留參展資格，亦不提供退款。- 所有報名、繳費及參展相關事宜，草率季保留最終審核、調整及解釋之權利。<br>- 若因不可抗力（如天災、疫情、政策變動等）導致活動取消，主辦單位將另行公告後續處理方式。";
+        }
+      }
+    }
+    setBillingNoticeLanguage(boothType);
 
   // 動態勾勾區塊語言還有攤商編號說明搭便車
   function setYesLanguage(boothType, rawResult) {
@@ -646,21 +664,6 @@ This is the only pass add-on period. <u>No changes after payment</u>.<br><br>
     }
   }
   setYesLanguage(boothType, apiData["錄取"]);
-
-  // 動態Billing Notice 區塊語言
-  function setBillingNoticeLanguage(boothType) {
-    var billingNoticedesc = document.getElementById("billing-notice");
-    if (boothType && billingNoticedesc) {
-      if (isEnglishBoothType(boothType)) {
-        billingNoticedesc.innerHTML =
-          "-  Please complete all payments in accordance with the instructions above. If payment is incorrect, late, or made via non-designated methods, the Organizer reserves the right to <b>cancel participation without refund</b>.<br>- For all matters related to registration, payment, and participation, <b>TPABF reserves the final right of review, adjustment, and interpretation.</b><br>- In the event of cancellation due to force majeure (including natural disasters, pandemics, or policy changes), the Organizer will announce further arrangements separately.";
-      } else {
-        billingNoticedesc.innerHTML =
-          "- 請務必依繳費說明完成付款流程。如未依規定完成付款（如繳納錯誤金額、超過期限、未依指定方式匯款等），主辦單位將不保留參展資格，亦不提供退款。<br>- 所有報名、繳費及參展相關事宜，草率季保留最終審核、調整及解釋之權利。<br>- 若因不可抗力（如天災、疫情、政策變動等）導致活動取消，主辦單位將另行公告後續處理方式。";
-      }
-    }
-  }
-  setBillingNoticeLanguage(boothType);
 
   // 動態條件是錄取 區塊語言
   function setConditionalAcceptence(boothType) {
