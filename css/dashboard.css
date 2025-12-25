@@ -120,7 +120,7 @@ h3 {
 }
 .faq-number-cell {
   vertical-align: top;
-  width: 2em;
+  width: 2em !important;
   border-right: none !important;
   padding: 20px 15px;
 }
