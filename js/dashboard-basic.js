@@ -932,13 +932,14 @@ document.addEventListener("DOMContentLoaded", async function () {
         familyticket.style.display = "block";
         manualBoothappearance.style.display = "block";
         registrationStatus.style.display = "block";
-        boothnumber.style.display = "table";
+        // 正確顯示 tr，避免 Safari 重算錯誤
+        boothnumber.style.display = "table-row";
         // boothappearance.style.display = "block";
       } else {
         registrationStatusEl.textContent = getStatusText(false);
         billinginfo.style.display = "block";
         registrationStatus.style.display = "block";
-        boothnumber.style.display = "table";
+        boothnumber.style.display = "table-row";
       }
       if (nationality === "CN") {
         visaCN.style.display = "block";
@@ -974,7 +975,7 @@ document.addEventListener("DOMContentLoaded", async function () {
         registrationStatusEl.textContent = getStatusText(false);
         billinginfo.style.display = "block";
         registrationStatus.style.display = "block";
-        boothnumber.style.display = "table";
+        boothnumber.style.display = "table-row";
         if (nationality === "CN") {
           visaCN.style.display = "block";
         }
@@ -1003,7 +1004,7 @@ document.addEventListener("DOMContentLoaded", async function () {
         registrationStatusEl.textContent = getStatusText(false);
         billinginfo.style.display = "block";
         registrationStatus.style.display = "block";
-        boothnumber.style.display = "table";
+        boothnumber.style.display = "table-row";
       }
     }
   }
