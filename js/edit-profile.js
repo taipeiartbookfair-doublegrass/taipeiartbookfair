@@ -1,6 +1,6 @@
 document.addEventListener("DOMContentLoaded", function () {
   const apiUrl =
-    "https://script.google.com/macros/s/AKfycbwNWgPsLK_ldHUIvoIg5a9k3PNIlmjvJeTgbCZ5CZsvKFQ7e1DoxbMsAawi4nI3Rea4DA/exec";
+    "https://script.google.com/macros/s/AKfycbxOxo-ZzjkkDlkIyCNlmFgYfPhpLOHQr3278Mv36PJrM_jdb_RsaG42hwM23Cp7b7onBw/exec";
 
   // 編輯品牌資料
   const branch_summit_btn = document.getElementById("submit-edit-brand");
