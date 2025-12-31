@@ -784,41 +784,34 @@ document.addEventListener("DOMContentLoaded", async function () {
   setMediaUploadLanguage(boothType);
 
   // 電力資訊
-  function updateElectricityList(boothType) {
-    const electricityTitle = document.getElementById("electricity-title");
-    const electricityList = document.querySelector("#electricity-title + ul");
-    if (!electricityList) return;
-
-    if (boothType === "書攤" || boothType === "創作商品攤") {
-      electricityTitle.textContent = "電源配置：";
-      electricityList.innerHTML = `
-      <li>供應一般電源110v</li>
-      <li>不得使用大電器</li>
-      <li>非每攤都有，需自備延長線與他人協調</li>
-    `;
-    } else if (isEnglishBoothType(boothType)) {
-      electricityTitle.textContent = "Electricity:";
-      electricityList.innerHTML = `
-      <li>Standard 110v power supply</li>
-      <li>No high-power appliances allowed</li>
-      <li>Not available for every booth; please bring your own extension cord and coordinate with others</li>
-    `;
-    } else if (boothType === "裝置攤" || boothType === "食物酒水攤") {
-      electricityTitle.textContent = "電源配置：";
-      electricityList.innerHTML = `
-      <li>供應一般電源110v</li>
-      <li>
-        9月前需提供<span style="text-decoration: underline; text-decoration-style: dashed; cursor: pointer;" onclick="document.getElementById('electricity-row').scrollIntoView({behavior:'smooth'});">電力需求申請
-        </span>，不得於現場臨時申請：
-        <ul style="margin: 0.3em 0 0 1.5em; list-style-type: disc;">
-          <li>條列使用電器＆瓦數</li>
-          <li>220V需以1000元加購，不得使用變壓器</li>
-        </ul>
-      </li>
-    `;
+    function updateElectricityList(boothType) {
+      const electricityTitle = document.getElementById("electricity-title");
+      const electricityList = document.querySelector("#electricity-title + ul");
+      if (!electricityList) return;
+  
+      // 中文與英文文本更新為指定簡短內容
+      if (isEnglishBoothType(boothType)) {
+        electricityTitle.textContent = "Electricity:";
+        electricityList.innerHTML = `
+          <li>Standard 110v power supply</li>
+          <li>Submit electricity request by <strong>Jan 9 (Fri)</strong>:</li>
+          <li style="margin-left:1em">List equipment name & wattage</li>
+          <li style="margin-left:1em">On-site last-minute requests will NOT be accepted</li>
+          <li style="margin-left:1em">Do not use transformers; 220v requires an add-on fee of NT$1000</li>
+        `;
+      } else {
+        electricityTitle.textContent = "電源配置：";
+        electricityList.innerHTML = `
+          <li>供應一般電源110v</li>
+          <li><mark>1/9（五）</mark>前需提供電力需求申請：</li>
+          <li style="margin-left:1em">條列使用電器設備＆瓦數</li>
+          <li style="margin-left:1em">不接受現場臨時申請</li>
+          <li style="margin-left:1em">不得使用變壓器，220v 需以 NT$1000 加購</li>
+        `;
+      }
     }
-  }
-  updateElectricityList(boothType);
+    updateElectricityList(boothType);
+
 
   // 狀態與欄位顯示
   const registrationStatusEl = document.getElementById("registration-status");
