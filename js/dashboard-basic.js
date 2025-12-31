@@ -769,56 +769,49 @@ document.addEventListener("DOMContentLoaded", async function () {
       if (isEnglishBoothType(boothType)) {
         mediaziplink.innerHTML = "Download";
         mediamaterialdesc.innerHTML =
-          "<b>Media Kit:</b><br />You're welcome to use the 2025 TPABF key visual assets — click here to download.";
+          "<b>Media Kit:</b><br />You're welcome to use the 2026 TPABF key visual assets — click here to download.";
         materialuploaddesc.innerHTML =
-          "<b>Social Media Promo Images Upload:</b><br />Please follow the instructions in the asset kit to create your <b>post and story</b> images, then upload them as a zipped file.<br><br>⚠️ Submissions received after the deadline may not be included in our social media promotion—thank you for your understanding ;)";
+          "<b>Marketing Material Upload：Please follow the instructions below to create your materials, and upload the completed images/text as a ZIP file.<br><br> 📌 The ZIP file should include:<br>1. Image for social media post: JPG × 1<br>2. Image for Stories: JPG × 1<br>3. Threads introduction images: JPG / PNG × 5<br>4. Threads introduction text: DOCX × 1<br>br>⚠️Submissions received after the deadline may not be included in our social media promotion—thank you for your understanding ;)";
       } else {
         mediaziplink.innerHTML = "下載";
         mediamaterialdesc.innerHTML =
-          "<b>視覺素材包：</b><br />歡迎使用 2025 草率季主視覺素材，點此下載檔案。";
+          "<b>視覺素材包：</b><br />歡迎使用 2026 草率季主視覺素材，點此下載檔案。";
         materialuploaddesc.innerHTML =
-          "<b>社群宣傳圖檔上傳：</b><br />請依照素材包內的說明製作，並將製作完成的<b>貼文、限時動態圖檔</b>打包為 zip上傳。<br><br>⚠️ 若未於期限內完成上傳，可能無法安排社群曝光，敬請留意;)";
+          "<b>行銷素材檔案上傳：請依照以下製作說明，並將製作完成的圖／文打包為 zip上傳。<br><br> 📌壓縮檔需包含：<br>1. 社群貼文用圖：JPG × 1<br>2. 限時動態用圖：JPG × 1<br>3. Threads 介紹圖：JPG / PNG × 5<br>4. Threads 介紹文：DOCX × 1<br>br>⚠️若未於期限內可能無法安排社群曝光，敬請留意;)";
       }
     }
   }
   setMediaUploadLanguage(boothType);
 
   // 電力資訊
-  function updateElectricityList(boothType) {
-    const electricityTitle = document.getElementById("electricity-title");
-    const electricityList = document.querySelector("#electricity-title + ul");
-    if (!electricityList) return;
-
-    if (boothType === "書攤" || boothType === "創作商品攤") {
+    function updateElectricityList(boothType) {
+      const electricityTitle = document.getElementById("electricity-title");
+      const electricityList = document.querySelector("#electricity-title + ul");
+      if (!electricityList) return;
+  
+      // 中文與英文文本更新為指定簡短內容
+     if (boothType === "書攤" || boothType === "創作商品攤") {
       electricityTitle.textContent = "電源配置：";
       electricityList.innerHTML = `
-      <li>供應一般電源110v</li>
-      <li>不得使用大電器</li>
-      <li>非每攤都有，需自備延長線與他人協調</li>
-    `;
-    } else if (isEnglishBoothType(boothType)) {
-      electricityTitle.textContent = "Electricity:";
-      electricityList.innerHTML = `
-      <li>Standard 110v power supply</li>
-      <li>No high-power appliances allowed</li>
-      <li>Not available for every booth; please bring your own extension cord and coordinate with others</li>
-    `;
+          <li>Standard 110v power supply</li>
+          <li>Submit electricity request by <strong>Jan 9 (Fri)</strong>:</li>
+          <li style="margin-left:1em">List equipment name & wattage</li>
+          <li style="margin-left:1em">On-site last-minute requests will NOT be accepted</li>
+          <li style="margin-left:1em">Do not use transformers; 220v requires an add-on fee of NT$1000</li>
+        `;
     } else if (boothType === "裝置攤" || boothType === "食物酒水攤") {
       electricityTitle.textContent = "電源配置：";
       electricityList.innerHTML = `
-      <li>供應一般電源110v</li>
-      <li>
-        9月前需提供<span style="text-decoration: underline; text-decoration-style: dashed; cursor: pointer;" onclick="document.getElementById('electricity-row').scrollIntoView({behavior:'smooth'});">電力需求申請
-        </span>，不得於現場臨時申請：
-        <ul style="margin: 0.3em 0 0 1.5em; list-style-type: disc;">
-          <li>條列使用電器＆瓦數</li>
-          <li>220V需以1000元加購，不得使用變壓器</li>
-        </ul>
-      </li>
-    `;
+          <li>供應一般電源110v</li>
+          <li><mark>1/9（五）</mark>前需提供電力需求申請：</li>
+          <li style="margin-left:1em">條列使用電器設備＆瓦數</li>
+          <li style="margin-left:1em">不接受現場臨時申請</li>
+          <li style="margin-left:1em">不得使用變壓器，220v 需以 NT$1000 加購</li>
+        `;
+      }
     }
-  }
-  updateElectricityList(boothType);
+    updateElectricityList(boothType);
+
 
   // 狀態與欄位顯示
   const registrationStatusEl = document.getElementById("registration-status");
@@ -833,6 +826,7 @@ document.addEventListener("DOMContentLoaded", async function () {
   const conditionalyes = document.getElementById("booth-type-tooltip");
   const foreignShipping = document.getElementById("foreign-shipping");
   const visaCN = document.getElementById("visaCN");
+  const overseavisa = document.getElementById("overseasvisa");
   const familyticket = document.getElementById("familyticket");
   const manualBoothappearance = document.getElementById(
     "manual-boothappearance"
@@ -872,6 +866,7 @@ document.addEventListener("DOMContentLoaded", async function () {
     if (liveEventSection) liveEventSection.style.display = "none";
     foreignShipping.style.display = "none";
     if (visaCN) visaCN.style.display = "none";
+    if (overseavisa) overseavisa.style.display = "none";
     familyticket.style.display = "none";
     manualBoothappearance.style.display = "none";
     registrationStatus.style.display = "none";
@@ -941,8 +936,14 @@ document.addEventListener("DOMContentLoaded", async function () {
         registrationStatus.style.display = "block";
         boothnumber.style.display = "table-row";
       }
+
+      // Visa logic:
+      // - nationality CN => show visaCN
+      // - other non-TW nationalities => show overseavisa ONLY for English booth types
       if (nationality === "CN") {
-        visaCN.style.display = "block";
+        if (visaCN) visaCN.style.display = "block";
+      } else if (nationality !== "TW" && isEnglishBooth) {
+        if (overseavisa) overseavisa.style.display = "block";
       }
     } else if (!rawResult || rawResult === "" || rawResult === "0") {
       // 錄取結果為空時，右側內容都隱藏
@@ -968,7 +969,9 @@ document.addEventListener("DOMContentLoaded", async function () {
         registrationStatus.style.display = "block";
         boothnumber.style.display = "table";
         if (nationality === "CN") {
-          visaCN.style.display = "block";
+          if (visaCN) visaCN.style.display = "block";
+        } else if (nationality !== "TW" && isEnglishBooth) {
+          if (overseavisa) overseavisa.style.display = "block";
         }
         // boothappearance.style.display = "block";
       } else {
@@ -977,7 +980,9 @@ document.addEventListener("DOMContentLoaded", async function () {
         registrationStatus.style.display = "block";
         boothnumber.style.display = "table-row";
         if (nationality === "CN") {
-          visaCN.style.display = "block";
+          if (visaCN) visaCN.style.display = "block";
+        } else if (nationality !== "TW" && isEnglishBooth) {
+          if (overseavisa) overseavisa.style.display = "block";
         }
       }
     } else if (rawResult === "3-猶豫") {
@@ -993,7 +998,9 @@ document.addEventListener("DOMContentLoaded", async function () {
           foreignShipping.style.display = "block";
         }
         if (nationality === "CN") {
-          visaCN.style.display = "block";
+          if (visaCN) visaCN.style.display = "block";
+        } else if (nationality !== "TW" && isEnglishBooth) {
+          if (overseavisa) overseavisa.style.display = "block";
         }
         familyticket.style.display = "block";
         manualBoothappearance.style.display = "block";
