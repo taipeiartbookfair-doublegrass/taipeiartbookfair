@@ -790,18 +790,18 @@ document.addEventListener("DOMContentLoaded", async function () {
       if (!electricityList) return;
   
       // 中文與英文文本更新為指定簡短內容
-      if (isEnglishBoothType(boothType)) {
-        electricityTitle.textContent = "Electricity:";
-        electricityList.innerHTML = `
+     if (boothType === "書攤" || boothType === "創作商品攤") {
+      electricityTitle.textContent = "電源配置：";
+      electricityList.innerHTML = `
           <li>Standard 110v power supply</li>
           <li>Submit electricity request by <strong>Jan 9 (Fri)</strong>:</li>
           <li style="margin-left:1em">List equipment name & wattage</li>
           <li style="margin-left:1em">On-site last-minute requests will NOT be accepted</li>
           <li style="margin-left:1em">Do not use transformers; 220v requires an add-on fee of NT$1000</li>
         `;
-      } else {
-        electricityTitle.textContent = "電源配置：";
-        electricityList.innerHTML = `
+    } else if (boothType === "裝置攤" || boothType === "食物酒水攤") {
+      electricityTitle.textContent = "電源配置：";
+      electricityList.innerHTML = `
           <li>供應一般電源110v</li>
           <li><mark>1/9（五）</mark>前需提供電力需求申請：</li>
           <li style="margin-left:1em">條列使用電器設備＆瓦數</li>
