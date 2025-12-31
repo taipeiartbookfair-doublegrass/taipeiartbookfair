@@ -833,6 +833,7 @@ document.addEventListener("DOMContentLoaded", async function () {
   const conditionalyes = document.getElementById("booth-type-tooltip");
   const foreignShipping = document.getElementById("foreign-shipping");
   const visaCN = document.getElementById("visaCN");
+  const overseavisa = document.getElementById("overseasvisa");
   const familyticket = document.getElementById("familyticket");
   const manualBoothappearance = document.getElementById(
     "manual-boothappearance"
@@ -872,6 +873,7 @@ document.addEventListener("DOMContentLoaded", async function () {
     if (liveEventSection) liveEventSection.style.display = "none";
     foreignShipping.style.display = "none";
     if (visaCN) visaCN.style.display = "none";
+    if (overseavisa) overseavisa.style.display = "none";
     familyticket.style.display = "none";
     manualBoothappearance.style.display = "none";
     registrationStatus.style.display = "none";
@@ -941,8 +943,14 @@ document.addEventListener("DOMContentLoaded", async function () {
         registrationStatus.style.display = "block";
         boothnumber.style.display = "table-row";
       }
+
+      // Visa logic:
+      // - nationality CN => show visaCN
+      // - other non-TW nationalities => show overseavisa ONLY for English booth types
       if (nationality === "CN") {
-        visaCN.style.display = "block";
+        if (visaCN) visaCN.style.display = "block";
+      } else if (nationality !== "TW" && isEnglishBooth) {
+        if (overseavisa) overseavisa.style.display = "block";
       }
     } else if (!rawResult || rawResult === "" || rawResult === "0") {
       // 錄取結果為空時，右側內容都隱藏
@@ -968,7 +976,9 @@ document.addEventListener("DOMContentLoaded", async function () {
         registrationStatus.style.display = "block";
         boothnumber.style.display = "table";
         if (nationality === "CN") {
-          visaCN.style.display = "block";
+          if (visaCN) visaCN.style.display = "block";
+        } else if (nationality !== "TW" && isEnglishBooth) {
+          if (overseavisa) overseavisa.style.display = "block";
         }
         // boothappearance.style.display = "block";
       } else {
@@ -977,7 +987,9 @@ document.addEventListener("DOMContentLoaded", async function () {
         registrationStatus.style.display = "block";
         boothnumber.style.display = "table-row";
         if (nationality === "CN") {
-          visaCN.style.display = "block";
+          if (visaCN) visaCN.style.display = "block";
+        } else if (nationality !== "TW" && isEnglishBooth) {
+          if (overseavisa) overseavisa.style.display = "block";
         }
       }
     } else if (rawResult === "3-猶豫") {
@@ -993,7 +1005,9 @@ document.addEventListener("DOMContentLoaded", async function () {
           foreignShipping.style.display = "block";
         }
         if (nationality === "CN") {
-          visaCN.style.display = "block";
+          if (visaCN) visaCN.style.display = "block";
+        } else if (nationality !== "TW" && isEnglishBooth) {
+          if (overseavisa) overseavisa.style.display = "block";
         }
         familyticket.style.display = "block";
         manualBoothappearance.style.display = "block";
