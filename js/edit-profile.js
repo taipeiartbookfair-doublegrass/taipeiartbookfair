@@ -30,9 +30,9 @@ document.addEventListener("DOMContentLoaded", function () {
         .getElementById("attendedYears-edit")
         .value.trim();
       const nationality = document.getElementById("nationality-edit").value;
-      // const yearlyanswer = document
-      //   .getElementById("yearlyanswer-edit")
-      //   .value.trim();
+      const yearlyanswer = document
+        .getElementById("yearlyanswer-edit")
+        .value.trim();
       const electricity = document
         .getElementById("electricity-edit")
         .value.trim();
@@ -49,7 +49,7 @@ document.addEventListener("DOMContentLoaded", function () {
         主要創作據點: baselocation,
         參與年份: attendedYears,
         region: nationality,
-        // 當屆問答: yearlyanswer,
+        當屆問答: yearlyanswer,
         電力需求: electricity,
       }).toString();
 
