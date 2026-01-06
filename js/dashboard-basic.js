@@ -792,17 +792,20 @@ document.addEventListener("DOMContentLoaded", async function () {
   }
   setMediaUploadLanguage(boothType);
 
-  // 電力資訊
+  // 電力資訊（single source of truth）
   function updateElectricityList(boothType) {
     const electricityTitle = document.getElementById("electricity-title");
     const electricityList = document.querySelector("#electricity-title + ul");
-    if (!electricityList || !electricityTitle) return;
+    const regulationEl = document.getElementById("electricity-regulation");
+    if (!electricityList || !electricityTitle || !regulationEl) return;
 
-    // use region (cookie) which is available here; nationality is defined later
     const isForeign = (region || "").trim().toUpperCase() !== "TW";
     const isInstallation =
       boothType === "裝置攤" || boothType === "Installation Booth";
-    const isFood = boothType === "食物酒水攤";
+    const isFood =
+      boothType === "食物酒水攤" ||
+      boothType === "Food & Beverage" ||
+      boothType === "食物酒水";
 
     // 基本三行（中 / 英）
     const basicCN = `
@@ -816,9 +819,8 @@ document.addEventListener("DOMContentLoaded", async function () {
       <li>Not every booth has sockets; please bring an extension cord & coordinate with neighbors</li>
     `;
 
-    // 國外（非 TW）
+    // 設定上方「電源配置」
     if (isForeign) {
-      // Overseas: only Installation Booth requires the 1/9 detailed request (English)
       if (isInstallation) {
         electricityTitle.textContent = "Electricity:";
         electricityList.innerHTML = `
@@ -829,51 +831,68 @@ document.addEventListener("DOMContentLoaded", async function () {
           <li style="margin-left:1em">Do not use transformers; 220v requires an add-on fee of NT$1000</li>
         `;
       } else {
-        // 非 Installation 的國外攤位顯示基本三行（英文）
         electricityTitle.textContent = "Electricity:";
         electricityList.innerHTML = basicEN;
       }
-      return;
+    } else {
+      // 國內
+      if (isInstallation || isFood) {
+        electricityTitle.textContent = "電源配置：";
+        electricityList.innerHTML = `
+          <li>供應一般電源110v</li>
+          <li><mark>1/9（五）</mark>前需提供電力需求申請：</li>
+          <li style="margin-left:1em">條列使用電器設備＆瓦數</li>
+          <li style="margin-left:1em">不接受現場臨時申請</li>
+          <li style="margin-left:1em">不得使用變壓器，220v 需以 NT$1000 加購</li>
+        `;
+      } else {
+        electricityTitle.textContent = "電源配置：";
+        electricityList.innerHTML = basicCN;
+      }
     }
 
-    // 國內（TW）
-    if (isInstallation || isFood) {
-      // 食物攤與裝置攤需於 1/9 前提出電力需求（中文）
-      electricityTitle.textContent = "電源配置：";
-      electricityList.innerHTML = `
-        <li>供應一般電源110v</li>
-        <li><mark>1/9（五）</mark>前需提供電力需求申請：</li>
-        <li style="margin-left:1em">條列使用電器設備＆瓦數</li>
-        <li style="margin-left:1em">不接受現場臨時申請</li>
-        <li style="margin-left:1em">不得使用變壓器，220v 需以 NT$1000 加購</li>
+    // 設定下方「電力需求」文字（單一來源）
+    let regulationHtml = "";
+    if (isForeign && isInstallation) {
+      regulationHtml = `
+        Edit via the <strong>Edit</strong> button (top-right). Please list equipment name & wattage in detail. Example:<br />
+        Microwave / 1100W / 1 unit<br />
+        Electric kettle / 1500W / 1 unit<br />
+        Electric fan / 65W / 1 unit<br /><br />
+        📌 Unregistered appliances are NOT permitted on site. Repeated violations will be subject to fines as specified in the Exhibitor’s Manual.<br />
+        📌 If 220v is required, an additional fee of NT$1000 will be charged — please state this in the form.<br />
+        📌 For safety, do not use transformers; the Organizer does not provide voltage conversion services.
+      `;
+    } else if (isForeign) {
+      // 其他國外攤位：簡短英文提示
+      regulationHtml = `
+        Please refer to the event guidelines. If you have electricity needs, bring an extension cord and coordinate with neighbors.
       `;
     } else {
-      // 其他國內攤位顯示原本三行（中文）
-      electricityTitle.textContent = "電源配置：";
-      electricityList.innerHTML = basicCN;
+      // 國內（中文）
+      regulationHtml = `
+        於右上角 <strong>編輯 Edit</strong> 做修改。請務必詳列設備名稱與瓦數，範例如下：<br />
+        微波爐／1100W／1個<br />
+        熱水壺／1500W／1個<br />
+        電扇／65W／1個<br /><br />
+        📌 未事先申報之電器不得於現場使用，如於現場發現並屢勸不聽，將依《攤主手冊》規定處以罰款。<br />
+        📌 如需使用 220v 電壓，將收取費用 NT$1000，並請於表單中註明。<br />
+        📌 為維護安全，請勿使用變壓器，主辦單位不提供電壓轉換服務。
+      `;
     }
+    regulationEl.innerHTML = regulationHtml;
+
+    // 統一控制該 row 的顯示（single place）
+    const electricityRow = document.getElementById("electricity-row");
+    const editElectricityRow = document.getElementById("edit-electricity-row");
+    const showForRow =
+      (!isForeign && (isFood || isInstallation)) ||
+      (isForeign && isInstallation);
+    if (electricityRow) electricityRow.style.display = showForRow ? "" : "none";
+    if (editElectricityRow) editElectricityRow.style.display = showForRow ? "" : "none";
   }
+  // initial call
   updateElectricityList(boothType);
-
-  // 控制電力需求顯示（哪些攤位會看到電力列）
-  const electricityRow = document.getElementById("electricity-row");
-  const editElectricityRow = document.getElementById("edit-electricity-row");
-  // use region here as well (nationality variable is declared later)
-  const isForeign = (region || "").trim().toUpperCase() !== "TW";
-
-  // 顯示條件：
-  // - 國內 (TW)：食物酒水攤 (LF) 與 裝置攤 (LI)
-  // - 國外：僅 Installation Booth (II)
-  const showForRow =
-    (!isForeign && (boothType === "食物酒水攤" || boothType === "裝置攤")) ||
-    (isForeign && boothType === "Installation Booth");
-
-  if (electricityRow) {
-    electricityRow.style.display = showForRow ? "" : "none";
-  }
-  if (editElectricityRow) {
-    editElectricityRow.style.display = showForRow ? "" : "none";
-  }
 
   // 狀態與欄位顯示
   const registrationStatusEl = document.getElementById("registration-status");
@@ -1404,6 +1423,7 @@ document.addEventListener("DOMContentLoaded", async function () {
       if (oldOverlay) oldOverlay.remove();
     }
   });
+
 
   if (window.setLoading) window.setLoading(1);
   if (window.hideLoading) window.hideLoading();
