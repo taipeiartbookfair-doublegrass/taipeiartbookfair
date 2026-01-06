@@ -396,6 +396,7 @@ document.addEventListener("DOMContentLoaded", async function () {
         price = "10,000 元 <small>(含稅)</small>";
         equipment = [
           "– 1.5M × 1.5M 空地",
+          "", // 保留空位，讓通行憑證對應到 equipment-badge（避免重複顯示）
           "– 通行憑證 ×2",
           "– 草率簿 ×1<small> (含露出一面)</small>",
         ];
@@ -413,7 +414,7 @@ document.addEventListener("DOMContentLoaded", async function () {
         price = "50,000 元 <small>(含稅)</small>";
         equipment = [
           "– 3M × 3M 空間",
-          "",
+          "– 桌面<small>(120×60cm)</small> ×2",
           "– 通行憑證 ×6",
           "– 草率簿 ×1<small> (含露出一面)</small>",
         ];
@@ -450,7 +451,6 @@ document.addEventListener("DOMContentLoaded", async function () {
         equipment = [
           "– 3M × 3M space",
           "– Table<small>(120×60cm)</small> ×2",
-          "– Chairs ×4",
           "– Access Pass ×6",
           "– TPABF Catalog ×1 <small>(one page featured)</small>",
         ];
@@ -469,7 +469,16 @@ document.addEventListener("DOMContentLoaded", async function () {
     ];
     eqList.forEach((id, idx) => {
       const el = document.getElementById(id);
-      if (el) el.innerHTML = equipment[idx] || "";
+      const content = equipment[idx] || "";
+      if (!el) return;
+      if (String(content).trim() === "") {
+        // 隱藏沒有內容的 li，避免出現空行
+        el.style.display = "none";
+        el.innerHTML = "";
+      } else {
+        el.style.display = "";
+        el.innerHTML = content;
+      }
     });
 
     // 方案一價錢
@@ -784,34 +793,87 @@ document.addEventListener("DOMContentLoaded", async function () {
   setMediaUploadLanguage(boothType);
 
   // 電力資訊
-    function updateElectricityList(boothType) {
-      const electricityTitle = document.getElementById("electricity-title");
-      const electricityList = document.querySelector("#electricity-title + ul");
-      if (!electricityList) return;
-  
-      // 中文與英文文本更新為指定簡短內容
-     if (boothType === "書攤" || boothType === "創作商品攤") {
-      electricityTitle.textContent = "電源配置：";
-      electricityList.innerHTML = `
+  function updateElectricityList(boothType) {
+    const electricityTitle = document.getElementById("electricity-title");
+    const electricityList = document.querySelector("#electricity-title + ul");
+    if (!electricityList || !electricityTitle) return;
+
+    // use region (cookie) which is available here; nationality is defined later
+    const isForeign = (region || "").trim().toUpperCase() !== "TW";
+    const isInstallation =
+      boothType === "裝置攤" || boothType === "Installation Booth";
+    const isFood = boothType === "食物酒水攤";
+
+    // 基本三行（中 / 英）
+    const basicCN = `
+      <li>供應一般電源110v</li>
+      <li>不得使用大電器</li>
+      <li>非每攤皆有插座，需自備延長線與他人協調</li>
+    `;
+    const basicEN = `
+      <li>Standard 110v power supply</li>
+      <li>Do not use large appliances</li>
+      <li>Not every booth has sockets; please bring an extension cord & coordinate with neighbors</li>
+    `;
+
+    // 國外（非 TW）
+    if (isForeign) {
+      // Overseas: only Installation Booth requires the 1/9 detailed request (English)
+      if (isInstallation) {
+        electricityTitle.textContent = "Electricity:";
+        electricityList.innerHTML = `
           <li>Standard 110v power supply</li>
           <li>Submit electricity request by <strong>Jan 9 (Fri)</strong>:</li>
           <li style="margin-left:1em">List equipment name & wattage</li>
           <li style="margin-left:1em">On-site last-minute requests will NOT be accepted</li>
           <li style="margin-left:1em">Do not use transformers; 220v requires an add-on fee of NT$1000</li>
         `;
-    } else if (boothType === "裝置攤" || boothType === "食物酒水攤") {
+      } else {
+        // 非 Installation 的國外攤位顯示基本三行（英文）
+        electricityTitle.textContent = "Electricity:";
+        electricityList.innerHTML = basicEN;
+      }
+      return;
+    }
+
+    // 國內（TW）
+    if (isInstallation || isFood) {
+      // 食物攤與裝置攤需於 1/9 前提出電力需求（中文）
       electricityTitle.textContent = "電源配置：";
       electricityList.innerHTML = `
-          <li>供應一般電源110v</li>
-          <li><mark>1/9（五）</mark>前需提供電力需求申請：</li>
-          <li style="margin-left:1em">條列使用電器設備＆瓦數</li>
-          <li style="margin-left:1em">不接受現場臨時申請</li>
-          <li style="margin-left:1em">不得使用變壓器，220v 需以 NT$1000 加購</li>
-        `;
-      }
+        <li>供應一般電源110v</li>
+        <li><mark>1/9（五）</mark>前需提供電力需求申請：</li>
+        <li style="margin-left:1em">條列使用電器設備＆瓦數</li>
+        <li style="margin-left:1em">不接受現場臨時申請</li>
+        <li style="margin-left:1em">不得使用變壓器，220v 需以 NT$1000 加購</li>
+      `;
+    } else {
+      // 其他國內攤位顯示原本三行（中文）
+      electricityTitle.textContent = "電源配置：";
+      electricityList.innerHTML = basicCN;
     }
-    updateElectricityList(boothType);
+  }
+  updateElectricityList(boothType);
 
+  // 控制電力需求顯示（哪些攤位會看到電力列）
+  const electricityRow = document.getElementById("electricity-row");
+  const editElectricityRow = document.getElementById("edit-electricity-row");
+  // use region here as well (nationality variable is declared later)
+  const isForeign = (region || "").trim().toUpperCase() !== "TW";
+
+  // 顯示條件：
+  // - 國內 (TW)：食物酒水攤 (LF) 與 裝置攤 (LI)
+  // - 國外：僅 Installation Booth (II)
+  const showForRow =
+    (!isForeign && (boothType === "食物酒水攤" || boothType === "裝置攤")) ||
+    (isForeign && boothType === "Installation Booth");
+
+  if (electricityRow) {
+    electricityRow.style.display = showForRow ? "" : "none";
+  }
+  if (editElectricityRow) {
+    editElectricityRow.style.display = showForRow ? "" : "none";
+  }
 
   // 狀態與欄位顯示
   const registrationStatusEl = document.getElementById("registration-status");
