@@ -258,7 +258,7 @@ document.addEventListener("DOMContentLoaded", async function () {
     const isEnglishBooth = isEnglishBoothType(boothType);
     if (!raw) return "";
     if (isEnglishBooth) {
-      if (raw === "4-是-條件式錄取") return "Conditionally Accepted";
+      if (raw.includes("條件式錄取")) return "Conditionally Accepted";
       if (
         raw === "1-是-1波" ||
         raw === "2-是-2波" ||
@@ -273,7 +273,7 @@ document.addEventListener("DOMContentLoaded", async function () {
         return "Cancelled";
       return raw;
     } else {
-      if (raw === "4-是-條件式錄取") return "條件式錄取";
+      if (raw.includes("條件式錄取")) return "條件式錄取";
       if (
         raw === "1-是-1波" ||
         raw === "2-是-2波" ||
