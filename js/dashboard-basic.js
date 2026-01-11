@@ -549,7 +549,7 @@ document.addEventListener("DOMContentLoaded", async function () {
     // 控制電力需求顯示
     const electricityRow = document.getElementById("electricity-row");
     if (electricityRow) {
-      if (boothType === "食物酒水攤" || boothType === "裝置攤") {
+      if (boothType === "食物酒水攤" || boothType === "裝置攤" || boothType === "策展攤") {
         electricityRow.style.display = "";
       } else {
         electricityRow.style.display = "none";
@@ -557,7 +557,7 @@ document.addEventListener("DOMContentLoaded", async function () {
     }
     const editElectricityRow = document.getElementById("edit-electricity-row");
     if (editElectricityRow) {
-      if (boothType === "食物酒水攤" || boothType === "裝置攤") {
+      if (boothType === "食物酒水攤" || boothType === "裝置攤" || boothType === "策展攤") {
         editElectricityRow.style.display = "";
       } else {
         editElectricityRow.style.display = "none";
@@ -801,7 +801,7 @@ document.addEventListener("DOMContentLoaded", async function () {
 
     const isForeign = (region || "").trim().toUpperCase() !== "TW";
     const isInstallation =
-      boothType === "裝置攤" || boothType === "Installation Booth";
+      boothType === "裝置攤" || boothType === "Installation Booth" || boothType === "策展攤" || boothType === "Curation Booth";
     const isFood =
       boothType === "食物酒水攤" ||
       boothType === "Food & Beverage" ||
