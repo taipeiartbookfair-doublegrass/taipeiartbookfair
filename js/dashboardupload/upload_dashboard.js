@@ -57,10 +57,10 @@ const uploadStatusMap = {
 
 // 顯示勾勾圖示的函數
 function showCheckmark(btn, conf) {
-  // 如果已經有狀態文字，觸發一次動畫即可
+  // 先找包含按鈕的 td（如 catalog-upload-td / material-download-td）
   const td = btn.closest("td") || btn.parentElement;
   if (!td) {
-    // fallback to original behavior (append next to button)
+    // fallback: 原本行為（在按鈕旁插入）
     const existingCheckmark = btn.parentElement.querySelector(`.upload-checkmark-${conf.btn}`);
     if (existingCheckmark) {
       existingCheckmark.classList.remove("checkmark-animate");
@@ -69,28 +69,28 @@ function showCheckmark(btn, conf) {
     }
     const checkmark = document.createElement("span");
     checkmark.className = `upload-checkmark upload-checkmark-${conf.btn}`;
-    checkmark.innerHTML = "（已上傳）";
+    checkmark.innerHTML = "（已上傳 Uploaded）";
     btn.parentElement.insertBefore(checkmark, btn.nextSibling);
     return;
   }
 
-  // 在 td 上顯示已上傳狀態，並改變背景顏色
+  // 設定 td 背景與文字色（保持明顯）
   td.style.transition = "background-color 0.3s ease, color 0.3s ease";
-  td.style.backgroundColor = "greenyellow"; 
+  td.style.backgroundColor = "forestgreen";
+  td.style.color = "white";
 
-  // 移除可能存在的舊元素
-  let statusSpan = td.querySelector(`.upload-status-text-${conf.btn}`);
-  if (statusSpan) {
-    // retrigger animation
-    statusSpan.classList.remove("status-animate");
+  // 如果已經有狀態文字，重新觸發動畫即可
+  let existing = td.querySelector(`.upload-status-text-${conf.btn}`);
+  if (existing) {
+    existing.style.opacity = "0";
     // force reflow
-    void statusSpan.offsetWidth;
-    statusSpan.classList.add("status-animate");
+    void existing.offsetWidth;
+    existing.style.opacity = "1";
     return;
   }
 
-  // 建立顯示文字
-  statusSpan = document.createElement("span");
+  // 建立顯示文字，並放在 td 裡面、在 .ddl（若存在）之前
+  const statusSpan = document.createElement("span");
   statusSpan.className = `upload-status-text upload-status-text-${conf.btn}`;
   statusSpan.textContent = "（已上傳Uploaded）";
   statusSpan.style.cssText = `
@@ -101,14 +101,19 @@ function showCheckmark(btn, conf) {
     text-align: center;
   `;
 
-  // 插入到按鈕後（保持原結構）
-  btn.parentElement.insertBefore(statusSpan, btn.nextSibling);
+  // 嘗試插入到 ddl 上方（確保顯示在原內容下面、ddl 之上）
+  const ddlInsideTd = td.querySelector(".ddl");
+  if (ddlInsideTd) {
+    td.insertBefore(statusSpan, ddlInsideTd);
+  } else {
+    // 沒有 ddl 時放在按鈕區塊後面
+    td.appendChild(statusSpan);
+  }
 
-  // 觸發出場動畫
+  // 觸發進場動畫
   setTimeout(() => {
     statusSpan.style.opacity = "1";
     statusSpan.style.transform = "translateY(0)";
-    statusSpan.classList.add("status-animate");
   }, 10);
 }
 
