@@ -774,20 +774,36 @@ document.addEventListener("DOMContentLoaded", async function () {
     var mediamaterialdesc = document.getElementById("material-download-desc");
     var materialuploaddesc = document.getElementById("material-upload-desc");
 
-    if (boothType && mediaziplink && mediamaterialdesc) {
-      if (isEnglishBoothType(boothType)) {
-        mediaziplink.innerHTML = "Download";
-        mediamaterialdesc.innerHTML =
-          "<b>Media Kit:</b><br />You're welcome to use the 2026 TPABF key visual assets — click here to download.";
-        materialuploaddesc.innerHTML =
-          "<b>Marketing Material Upload：Please follow the instructions below to create your materials, and upload the completed images/text as a ZIP file.<br><br> 📌 The ZIP file should include:<br>1. Image for social media post: JPG × 1<br>2. Image for Stories: JPG × 1<br>3. Threads introduction images: JPG / PNG × 5<br>4. Threads introduction text: DOCX × 1<br>br>⚠️Submissions received after the deadline may not be included in our social media promotion—thank you for your understanding ;)";
-      } else {
-        mediaziplink.innerHTML = "下載";
-        mediamaterialdesc.innerHTML =
-          "<b>視覺素材包：</b><br />歡迎使用 2026 草率季主視覺素材，點此下載檔案。";
-        materialuploaddesc.innerHTML =
-          "<b>行銷素材檔案上傳：請依照以下製作說明，並將製作完成的圖／文打包為 zip上傳。<br><br> 📌壓縮檔需包含：<br>1. 社群貼文用圖：JPG × 1<br>2. 限時動態用圖：JPG × 1<br>3. Threads 介紹圖：JPG / PNG × 5<br>4. Threads 介紹文：DOCX × 1<br>br>⚠️若未於期限內可能無法安排社群曝光，敬請留意;)";
-      }
+    if (!mediaziplink || !mediamaterialdesc || !materialuploaddesc) return;
+
+    if (isEnglishBoothType(boothType)) {
+      mediaziplink.innerHTML = "Download";
+      mediamaterialdesc.innerHTML =
+        "Media Kit<br>You're welcome to use the 2026 TPABF key visual assets — click here to download.";
+      materialuploaddesc.innerHTML = `<strong>Marketing Material Upload</strong><br>
+Please follow the instructions below to create your materials, and upload the completed images/text as a ZIP file.<br><br>
+📌 The ZIP file should include:<br>
+1. Image for social media post: JPG × 1<br>
+2. Image for Stories: JPG × 1<br>
+3. Threads introduction images: JPG / PNG × 5<br>
+4. Threads introduction text: DOCX / TXT × 1<br><br>
+<strong>Deadline：</strong>1/23（Fri.）（GMT+8 24:00）<br><br>
+⚠️ Late submissions will not be accepted. Please do not send files via email.<br>
+*If materials are not submitted by the deadline, social media exposure may not be arranged. Thank you ;)`;
+    } else {
+      mediaziplink.innerHTML = "下載";
+      mediamaterialdesc.innerHTML =
+        "視覺素材包<br>歡迎使用 2026 草率季主視覺素材，點此下載檔案。";
+      materialuploaddesc.innerHTML = `<strong>行銷素材檔案上傳</strong><br>
+請依照以下製作說明，並將製作完成的圖／文打包為 zip上傳。<br><br>
+📌壓縮檔需包含：<br>
+1. 社群貼文用圖：JPG × 1<br>
+2. 限時動態用圖：JPG × 1<br>
+3. Threads 介紹圖：JPG / PNG × 5<br>
+4. Threads 介紹文：DOCX / TXT × 1<br><br>
+截止日期：1/23（五）（GMT+8 24:00）<br>
+⚠️逾期不接受補交，請勿將檔案傳至email<br>
+*若未於期限內可能無法安排社群曝光，敬請留意;)`;
     }
   }
   setMediaUploadLanguage(boothType);
