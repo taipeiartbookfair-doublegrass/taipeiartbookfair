@@ -66,7 +66,7 @@
  * 最後提醒：若要我把 API Key 改為從伺服器端取得或加入 fetch 的快取邏輯，我可以幫你實作。
  */
  
-// ...existing code...
+
 const calendarId =
   "90527f67fa462c83e184b0c62def10ebc8b00cc8c67a5b83af2afb90a1bdb293@group.calendar.google.com";
 const apiKey = "AIzaSyCOLToQuZFbB1mULxYrMyQVeTVGnhk8-U4";
@@ -160,314 +160,21 @@ const parseDescription = (description) => {
   return fields;
 };
 
-// 計算不同模式的時間範圍
-const now = new Date();
-
 // 卡片模式：從今天開始的即將到來的活動
+const now = new Date();
 const upcomingUrl = `https://www.googleapis.com/calendar/v3/calendars/${encodeURIComponent(
   calendarId
 )}/events?key=${apiKey}&singleEvents=true&orderBy=startTime&timeMin=${now.toISOString()}`;
 
-// 時間軸模式：只顯示 2024/11/21-2024/11/23 的活動
-const eventStartDate = new Date(2025, 10, 21); // 2024年11月21日 (月份是0-based)
-const eventEndDate = new Date(2025, 10, 23); // 2024年11月24日 (包含23日整天)
-const timelineUrl = `https://www.googleapis.com/calendar/v3/calendars/${encodeURIComponent(
-  calendarId
-)}/events?key=${apiKey}&singleEvents=true&orderBy=startTime&timeMin=${eventStartDate.toISOString()}&timeMax=${eventEndDate.toISOString()}`;
-
-// 預設使用卡片模式的 URL（保持向後兼容）
-const url = upcomingUrl;
-
-// DOM 元素引用
-let timelineCalendar = null;
+// DOM 元素引用（只保留卡片模式用的 eventsTimeline）
 let eventsTimeline = null;
 let calendarData = null;
 
 // 初始化 DOM 元素
 document.addEventListener("DOMContentLoaded", function () {
-  timelineCalendar = document.getElementById("timelineCalendar");
   eventsTimeline = document.getElementById("eventsTimeline");
-  
-  console.log("DOM 元素初始化完成");
-  console.log("timelineCalendar:", timelineCalendar);
-  console.log("eventsTimeline:", eventsTimeline);
+  console.log("DOM 元素初始化完成: eventsTimeline =", eventsTimeline);
 });
-
-/**
- * 渲染時間軸模式 - 以甘特圖方式顯示活動
- */
-function renderTimelineMode() {
-  if (!timelineCalendar) return;
-
-  // 為時間軸模式獲取前後六個月的資料
-  fetchTimelineData();
-}
-
-/**
- * 獲取時間軸模式專用的資料（前後六個月）
- */
-function fetchTimelineData() {
-  console.log("正在獲取時間軸資料...");
-
-  fetch(timelineUrl)
-    .then((response) => response.json())
-    .then((data) => {
-      console.log("時間軸資料獲取成功:", data.items?.length || 0, "個活動");
-      renderTimelineWithData(data.items || []);
-    })
-    .catch((err) => {
-      console.error("獲取時間軸資料時出錯:", err);
-      timelineCalendar.innerHTML =
-        "<p style='text-align: center; padding: 20px;'>Oh No!! Its an error! Refresh the page!</p>";
-    });
-}
-
-/**
- * 使用資料渲染時間軸
- */
-function renderTimelineWithData(timelineData) {
-  if (!timelineCalendar) return;
-
-  timelineCalendar.innerHTML = "";
-
-  // 固定時間軸高度 - 從9:00到22:00，13小時，每小時60px
-  const startHour = 9; // 9:00開始
-  const endHour = 22; // 22:00結束
-  const hoursInDay = endHour - startHour; // 13小時
-  const timelineHeight = hoursInDay * 60; // 780px
-  const containerHeight = timelineHeight + 200; // 980px
-
-  // 創建主容器 - 固定像素寬度，對應24小時高度
-  const mainContainer = document.createElement("div");
-  mainContainer.className = "timeline-main-container";
-  mainContainer.style.height = `${containerHeight}px`; // 動態高度
-
-  // 左側時間軸容器 - 固定像素寬度
-  const timelineContainer = document.createElement("div");
-  timelineContainer.className = "timeline-left-container";
-  timelineContainer.style.height = `${containerHeight}px`; // 動態高度
-
-  // 右側預覽容器 - 固定像素寬度
-  const previewContainer = document.createElement("div");
-  previewContainer.className = "timeline-right-container";
-  previewContainer.style.height = `${containerHeight}px`; // 動態高度
-
-  // 預覽區域的默認內容
-  previewContainer.innerHTML = `
-    <div style="text-align: center; color: #666; font-size: 1rem;">
-      <p>點擊左側活動查看詳情</p>
-    </div>
-  `;
-
-  // 只顯示 2025/11/21-2025/11/23 這三天
-  const eventDays = [
-    { year: 2025, month: 10, day: 21 }, // 11月21日
-    { year: 2025, month: 10, day: 22 }, // 11月22日
-    { year: 2025, month: 10, day: 23 }  // 11月23日
-  ];
-
-  // 創建時間軸區域（縱軸是時間，橫軸是日期）
-  const timelineArea = document.createElement("div");
-  timelineArea.className = "timeline-area";
-  timelineArea.style.height = `${timelineHeight + 150}px`; // 動態高度
-
-  // 創建時間標記（縱軸時間）- 固定位置，24小時
-  const timelineStartY = 100; // 上邊距
-  
-  // 繪製時間格線（縱軸）- 從6:00到23:00，每小時60px
-  for (let hour = startHour; hour < endHour; hour++) {
-    const yPosition = timelineStartY + ((hour - startHour) * 60);
-    
-    const timeLine = document.createElement("div");
-    timeLine.className = "timeline-time-line";
-    timeLine.style.top = `${yPosition}px`;
-
-    const timeLabel = document.createElement("div");
-    timeLabel.className = "timeline-time-label";
-    timeLabel.style.top = `${yPosition}px`;
-    timeLabel.textContent = `${hour.toString().padStart(2, '0')}:00`;
-
-    timelineArea.appendChild(timeLine);
-    timelineArea.appendChild(timeLabel);
-  }
-
-  // 創建日期標記（橫軸日期）- 固定位置
-  const dateColumns = [];
-  eventDays.forEach(({ year, month, day }, dayIndex) => {
-    const xPosition = 120 + (dayIndex * 250); // 每個日期間隔250px，固定位置
-    
-    const dateColumn = document.createElement("div");
-    dateColumn.className = "timeline-date-column";
-    dateColumn.style.left = `${xPosition}px`;
-    
-    const date = new Date(year, month, day);
-    const dayName = date.toLocaleDateString("zh-TW", { 
-      month: "long", 
-      day: "numeric",
-      weekday: "short",
-      timeZone: "Asia/Taipei"
-    });
-    dateColumn.textContent = `${dayName}`;
-
-    // 創建日期分隔線（垂直線）
-    const dateLine = document.createElement("div");
-    dateLine.className = "timeline-date-line";
-    dateLine.style.left = `${xPosition + 100}px`; // 居中
-    dateLine.style.top = `${timelineStartY}px`;
-    dateLine.style.height = `${timelineHeight}px`;
-
-    timelineArea.appendChild(dateColumn);
-    timelineArea.appendChild(dateLine);
-    dateColumns.push({ column: dateColumn, line: dateLine, day });
-  });
-
-  // 渲染所有活動
-  timelineData.forEach((event) => {
-    const eventDate = new Date(event.start.dateTime || event.start.date);
-    
-    // 使用台灣時區獲取年、月、日進行日期比較
-    const taiwanDateFormatter = new Intl.DateTimeFormat("en-US", {
-      timeZone: "Asia/Taipei",
-      year: "numeric",
-      month: "numeric",
-      day: "numeric"
-    });
-    
-    const dateParts = taiwanDateFormatter.formatToParts(eventDate);
-    const taiwanYear = parseInt(dateParts.find(p => p.type === 'year').value);
-    const taiwanMonth = parseInt(dateParts.find(p => p.type === 'month').value) - 1; // JavaScript月份是0-based
-    const taiwanDay = parseInt(dateParts.find(p => p.type === 'day').value);
-    
-    // 只顯示這三天的活動
-    const dayIndex = eventDays.findIndex(({ year, month, day }) => 
-      taiwanYear === year && 
-      taiwanMonth === month && 
-      taiwanDay === day
-    );
-
-    if (dayIndex === -1) return;
-
-    // 創建活動長條
-    const eventBar = document.createElement("div");
-    eventBar.className = "timeline-event-bar";
-
-    // 解析活動描述
-    const eventFields = parseDescription(event.description);
-    console.log("活動解析結果:", eventFields);
-    const eventType = eventFields.TYPE || "DEFAULT";
-
-    // 根據類型設置不同的 CSS 類別
-    switch (eventType.toUpperCase()) {
-      case "TALK":
-        eventBar.classList.add("talk");
-        break;
-      case "WORKSHOP":
-        eventBar.classList.add("workshop");
-        break;
-      case "PERFORMANCE":
-        eventBar.classList.add("performance");
-        break;
-      case "EXHIBITION":
-        eventBar.classList.add("exhibition");
-        break;
-      default:
-        eventBar.classList.add("default");
-    }
-
-    // 計算活動的開始和結束時間 - 轉換為台灣時間
-    const eventStartTime = new Date(event.start.dateTime || event.start.date);
-    const eventEndTime = new Date(event.end.dateTime || event.end.date);
-    
-    // 使用 Intl.DateTimeFormat 獲取台灣時區的小時和分鐘，避免時區轉換問題
-    const taiwanFormatter = new Intl.DateTimeFormat("zh-TW", {
-      timeZone: "Asia/Taipei",
-      hour: "2-digit",
-      minute: "2-digit",
-      hour12: false
-    });
-    
-    const startParts = taiwanFormatter.formatToParts(eventStartTime);
-    const endParts = taiwanFormatter.formatToParts(eventEndTime);
-    
-    const startHour = parseInt(startParts.find(p => p.type === 'hour').value);
-    const startMinute = parseInt(startParts.find(p => p.type === 'minute').value);
-    const endHour = parseInt(endParts.find(p => p.type === 'hour').value);
-    const endMinute = parseInt(endParts.find(p => p.type === 'minute').value);
-
-    // 固定計算活動長條位置 - 基於9:00-22:00
-    const startTimeY = timelineStartY + ((startHour - 9) * 60) + (startMinute * 1); // 每分鐘1px
-    const endTimeY = timelineStartY + ((endHour - 9) * 60) + (endMinute * 1);
-    const barHeight = Math.max(endTimeY - startTimeY, 20); // 最小高度20px
-
-    // 固定日期位置（橫軸）
-    const dateX = 120 + (dayIndex * 250) + 100; // 居中在日期列
-    const barWidth = 150; // 固定寬度
-
-    eventBar.style.width = `${barWidth}px`;
-    eventBar.style.height = `${barHeight}px`;
-    eventBar.style.left = `${dateX - barWidth/2}px`; // 居中
-    eventBar.style.top = `${startTimeY}px`;
-
-    // 創建活動內容
-    const eventContent = document.createElement("div");
-    eventContent.className = "timeline-event-content";
-    eventContent.textContent = event.summary || "未命名活動";
-
-    eventBar.appendChild(eventContent);
-
-    // 添加點擊事件
-    const showEventPreview = () => {
-      console.log("顯示活動預覽:", event.summary);
-      console.log("活動描述:", event.description);
-      console.log("解析後的欄位:", eventFields);
-      
-      const eventTime = new Date(event.start.dateTime || event.start.date);
-      // 直接格式化為台灣時間，避免時區問題
-      const timeStr = eventTime.toLocaleTimeString("zh-TW", { 
-        hour: "2-digit", 
-        minute: "2-digit",
-        hour12: false,
-        timeZone: "Asia/Taipei"
-      });
-      
-      previewContainer.innerHTML = `
-        <div style="text-align: center;">
-          ${eventFields.IMAGE ? `<img src="image/programIMG/${eventFields.IMAGE}" style="width: 100%; max-width: 200px; height: auto; border-radius: 8px; margin-bottom: 15px;" alt="活動圖片" onerror="this.style.display='none'; console.log('時間軸圖片載入失敗:', 'image/programIMG/${eventFields.IMAGE}');" onload="console.log('時間軸圖片載入成功:', 'image/programIMG/${eventFields.IMAGE}');">` : ''}
-        </div>
-        <div style="font-size: 1.5rem; font-weight: bold; margin-bottom: 10px; text-transform: uppercase;">
-          ${eventDate.toLocaleDateString("zh-TW", { 
-            month: "long", 
-            day: "numeric",
-            weekday: "short",
-            timeZone: "Asia/Taipei"
-          })}
-        </div>
-        <div style="font-size: 1.2rem; font-weight: bold; margin-bottom: 10px;">
-          ${timeStr}
-        </div>
-        <div style="font-size: 1.1rem; font-weight: bold; margin-bottom: 15px; text-transform: uppercase;">
-          ${event.summary || "未命名活動"}
-        </div>
-        <div style="font-size: 0.9rem; line-height: 1.4; color: #666;">
-          ${eventFields.DESCRIPTION || event.description || "暫無詳細描述"}
-        </div>
-        ${eventFields.SIGNUP ? `<div style="margin-top: 15px;"><a href="${eventFields.SIGNUP}" target="_blank" style="display: inline-block; padding: 8px 16px; background: #000; color: #fff; text-decoration: none; border-radius: 4px; font-size: 0.9rem;">SIGN UP</a></div>` : ''}
-      `;
-    };
-
-    eventBar.addEventListener("click", showEventPreview);
-
-    // 添加 hover 效果
-    // Hover 效果現在由 CSS 處理
-
-    timelineArea.appendChild(eventBar);
-  });
-
-  timelineContainer.appendChild(timelineArea);
-  mainContainer.appendChild(timelineContainer);
-  mainContainer.appendChild(previewContainer);
-  timelineCalendar.appendChild(mainContainer);
-}
 
 /**
  * 渲染事件的函數 - 卡片模式
@@ -658,6 +365,8 @@ function renderEvents(items) {
             break;
           case "EXHIBITION":
             eventTypeTag.style.color = "#000000"; // black
+          case "NEWS":
+            eventTypeTag.style.color = "plum"; // pink
             break;
           default:
             eventTypeTag.style.color = "#666"; // gray
@@ -689,6 +398,8 @@ const getTypeLabel = (type) => {
       return "表演";
     case "EXHIBITION":
       return "展覽";
+    case "NEWS":
+      return "新聞";
     default:
       return "活動";
   }
@@ -709,6 +420,8 @@ const getTypeColor = (type) => {
       return "#ffc107"; // 黃色
     case "EXHIBITION":
       return "#fd7e14"; // 橙色
+    case "NEWS":
+      return "#28a745"; // 綠色
     default:
       return "#6c757d"; // 灰色
   }
@@ -743,13 +456,12 @@ function setupEventTypeFilter() {
   });
 }
 
-// 獲取日曆數據
+// 獲取日曆數據（卡片模式）
 function fetchCalendarData() {
   console.log("正在獲取日曆數據...");
-
-fetch(url)
+  fetch(upcomingUrl)
     .then((response) => response.json())
-  .then((data) => {
+    .then((data) => {
       console.log("日曆數據獲取成功:", data.items?.length || 0, "個活動");
       calendarData = data.items || [];
       renderEvents(calendarData);
@@ -765,12 +477,7 @@ fetch(url)
 // 初始化
 document.addEventListener("DOMContentLoaded", function () {
   console.log("日曆系統初始化開始");
-  
-  // 設置篩選器
   setupEventTypeFilter();
-  
-  // 獲取日曆數據
   fetchCalendarData();
-  
   console.log("日曆系統初始化完成");
 });
