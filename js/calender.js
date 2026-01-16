@@ -1,40 +1,72 @@
 /*
- * 台北藝術書展 - 日曆系統使用說明
- * ======================================
+ * 台北藝術書展 - 日曆系統使用說明（操作手冊）
+ * =================================================
  *
- * 這個系統會從 Google Calendar 讀取活動資料，並支援兩種顯示模式：
- * 1. 卡片模式：顯示從今天開始的即將到來的活動
- * 2. 時間軸模式：以甘特圖方式顯示前後各6個月的所有活動
+ * 快速上手
+ * 1. 修改日曆與金鑰
+ *    - 把下面的 calendarId 和 apiKey 改為你的 Google Calendar ID 與 API Key。
+ *    - Calendar ID：從 Google Calendar → 設定 → 日曆整合 取得「日曆 ID」。
+ *    - API Key：到 Google Cloud Console 建立 API Key，啟用 Google Calendar API。
  *
- * 活動描述格式說明：
- * 在 Google Calendar 的活動描述中，請使用以下格式：
+ * 2. 活動描述格式（放在 Google Calendar event 的 description）
+ *    - 每個欄位以 "KEY: value" 換行書寫，支援多行欄位（冒號後續行會合併）。
+ *    - 範例：
+ *        SIGNUP: https://example.com/signup
+ *        IMAGE: my-image.jpg
+ *        DESCRIPTION: 這是一個精彩的講座，詳情在此
+ *        TYPE: TALK
  *
- * SIGNUP: https://example.com/signup
- * IMAGE: https://example.com/image.jpg
- * DESCRIPTION: 這是一個精彩的講座，將分享最新的藝術趨勢
- * TYPE: TALK
+ *    - 支援 KEY：
+ *        SIGNUP     -> 報名連結（會變成按鈕）
+ *        IMAGE      -> 本地或遠端圖片檔名/路徑（預設載入 image/programIMG/<IMAGE>）
+ *        DESCRIPTION-> 活動說明
+ *        TYPE       -> 活動類型（影響顏色與是否在卡片中顯示）
  *
- * 支援的活動類型 (TYPE)：
- * - TALK: 講座 (洋紅色點)
- * - WORKSHOP: 工作坊 (藍色點)
- * - PERFORMANCE: 表演 (黃色點)
- * - EXHIBITION: 展覽 (橙色點)
- * - 注意：沒有寫 TYPE 的活動在卡片模式中不會顯示
+ *    - 支援 TYPE 值（區分大小寫不敏感）：
+ *        TALK, WORKSHOP, PERFORMANCE, EXHIBITION
+ *      （未填 TYPE 的活動會被卡片模式過濾掉）
  *
- * 注意事項：
- * - 所有欄位都是可選的，如果沒有填寫會使用預設值
- * - 圖片連結必須是完整的 URL
- * - 報名連結會自動變成可點擊的按鈕
- * - 跨天數的活動會自動調整點的寬度
+ * 3. 如何新增活動圖片與資源
+ *    - 若在 description 的 IMAGE 欄位使用檔名，請把檔案放到專案的 image/programIMG/ 下，或改程式使用完整 URL。
  *
- * 系統設定：
- * - 預設顯示 4 個活動
- * - 支援觸控滑動
- * - 自動排序（按開始時間）
- * - 響應式設計（支援不同螢幕尺寸）
+ * 4. 切換顯示模式與時間範圍
+ *    - 卡片模式（預設）：會載入從現在往後（timeMin = now）的活動。
+ *      變數：upcomingUrl（在程式中設定）
+ *    - 時間軸模式：目前程式會以固定三天（範例為 2025/11/21–23）渲染甘特圖。
+ *      若要改天數或範圍，修改 eventStartDate / eventEndDate 變數。
+ *
+ * 5. 時區注意事項
+ *    - 程式以「Asia/Taipei」格式化與比較日期，避免時區偏差。
+ *    - Google Calendar 回傳的 date/time 仍會根據 event 的 timeZone，請用 Intl.formatToParts 或 toLocaleString 指定時區。
+ *
+ * 6. 診斷與測試
+ *    - console.log 已在多處加入，遇到無法顯示或時間錯誤，打開瀏覽器開發者工具查看 console。
+ *    - 若圖片沒有顯示，確認 image/programIMG/<IMAGE> 路徑正確或 description 中使用完整 URL。
+ *
+ * 7. 部署與安全
+ *    - 前端直接放 API Key 會被看到；建議正式環境用後端 proxy 或在伺服器端取得資料後再提供給前端。
+ *    - 注意 Google API 使用配額限制，若大量請求請加上快取或伺服器端緩存。
+ *
+ * 8. 常見改動
+ *    - 改變顯示活動數量、卡片樣式或類別顏色：修改 renderEvents / getTypeColor / CSS。
+ *    - 要讓沒有 TYPE 的事件也顯示：在 renderEvents -> futureEvents 過濾邏輯移除 hasType 條件。
+ *
+ * 9. 若需新增欄位解析
+ *    - 在 parseDescription 加入對新 KEY 的處理即可（目前會自動解析 KEY: value 格式，多行內容會合併）。
+ *
+ * 10. 問題回報（最小可復現案例）
+ *    - 提供以下資訊會加快定位：
+ *      * 失敗的 event JSON（從 Google Calendar API 回傳的 items 中該 event 的物件）
+ *      * description 原始內容
+ *      * 錯誤的 console.log 訊息
+ *
+ * 範例：修改位置
+ * - calendarId / apiKey 變更在檔案上方常數（請勿直接把正式 key 提交到公開 repo）
+ *
+ * 最後提醒：若要我把 API Key 改為從伺服器端取得或加入 fetch 的快取邏輯，我可以幫你實作。
  */
-
-// 把下面兩個換成你的
+ 
+// ...existing code...
 const calendarId =
   "90527f67fa462c83e184b0c62def10ebc8b00cc8c67a5b83af2afb90a1bdb293@group.calendar.google.com";
 const apiKey = "AIzaSyCOLToQuZFbB1mULxYrMyQVeTVGnhk8-U4";
