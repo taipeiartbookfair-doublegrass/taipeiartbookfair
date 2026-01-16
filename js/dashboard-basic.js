@@ -1064,7 +1064,7 @@ Please follow the instructions below to create your materials, and upload the co
         familyticket.style.display = "block";
         manualBoothappearance.style.display = "block";
         registrationStatus.style.display = "block";
-        boothnumber.style.display = "table";
+        boothnumber.style.display = "table-row";
         if (nationality === "CN") {
           if (visaCN) visaCN.style.display = "block";
         } else if (nationality !== "TW" && isEnglishBooth) {
@@ -1102,7 +1102,7 @@ Please follow the instructions below to create your materials, and upload the co
         familyticket.style.display = "block";
         manualBoothappearance.style.display = "block";
         registrationStatus.style.display = "block";
-        boothnumber.style.display = "table";
+        boothnumber.style.display = "table-row";
         // boothappearance.style.display = "block";
       } else {
         registrationStatusEl.textContent = getStatusText(false);
