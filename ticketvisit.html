@@ -16,6 +16,7 @@
     <link rel="shortcut icon" href="image/icon-1.ico" />
     <link rel="stylesheet" href="css/font.css" />
     <link rel="stylesheet" href="css/ticketvisit.css">
+    <script src="js/ticketmagic.js"></script>
   </head>
   <body>
     <!-- 頂部導航 -->
@@ -112,7 +113,7 @@
             </div>
             
             <div class="detail-item">
-              <h3 class="detail-item-title">重要資訊 Info Log</h3>
+              <h3 class="detail-item-title">即時資訊 Info Log</h3>
             </div>
             <div id="info-log" style="background-color:white;border-left:1px solid black;border-right:1px solid black;border-bottom:1px solid black;border-top:none;">🚧 讀取中…</div>
           </div>
@@ -164,72 +165,11 @@
         <!-- 左欄：Tickets (佔2/3) -->
         <div class="column tickets-column">
           <h2 class="column-title">Ticket Information</h2>
-          
-          <div class="tickets-grid">
-            <!-- 第一行：早鳥票 + 預售票 -->
-            <div class="ticket-card" data-ticket-type="early-bird">
-              <h3 class="ticket-title" data-zh="早鳥票" data-en="Early Bird">早鳥票</h3>
-              <div class="ticket-price" data-zh="NT$ 300／人" data-en="NT$ 300 / person">NT$ 300／人</div>
-              <div class="ticket-period" data-zh="販售日期：2025/09/01 - 2025/09/07" data-en="Sale Period: 2025/09/01 – 2025/09/07">販售日期：2025/09/01 - 2025/09/07</div>
-              <div class="ticket-limit" data-zh="限量 100 張" data-en="Limited to 100 tickets">限量 100 張</div>
-              <div class="ticket-status">未開放</div>
-              <a href="https://tour.ibon.com.tw/event/e2508000028lhmm" class="ticket-btn" target="_blank" data-zh="立即購票" data-en="Buy Now">立即購票</a>
+            <div class="tickets-grid">
+              
             </div>
-
-            <div class="ticket-card" data-ticket-type="presale">
-              <h3 class="ticket-title" data-zh="預售票" data-en="Pre-sale">預售票</h3>
-              <div class="ticket-price" data-zh="NT$ 380／人" data-en="NT$ 380 / person">NT$ 380／人</div>
-              <div class="ticket-period" data-zh="販售日期：2025/09/08 -2025/11/20" data-en="Sale Period: 2025/09/08 – 2025/11/20">販售日期：2025/09/08 -2025/11/20</div>
-              <div class="ticket-limit" data-zh="限量 2000 張" data-en="Limited to 2,000 tickets">限量 2000 張</div>
-              <div class="ticket-status">未開放</div>
-              <a href="https://tour.ibon.com.tw/event/e2508000028lhmm" class="ticket-btn" target="_blank" data-zh="立即購票" data-en="Buy Now">立即購票</a>
-            </div>
-
-            <!-- 第二行：快速通關票 + 學生團體票 -->
-            <div class="ticket-card" data-ticket-type="fast-pass">
-              <h3 class="ticket-title" data-zh="快速通關票" data-en="Fast Pass">快速通關票</h3>
-              <div class="ticket-price" data-zh="NT$ 499／人" data-en="NT$ 499 / person">NT$ 499／人</div>
-              <div class="ticket-period" data-zh="販售日期：2025/11/19 - 2025/11/23" data-en="Sale Period: 2025/11/19 – 2025/11/23">販售日期：2025/11/19 - 2025/11/23</div>
-              <div class="ticket-limit" data-zh="無限量" data-en="Unlimited availability">無限量</div>
-              <div class="ticket-status">未開放</div>
-              <a href="https://tour.ibon.com.tw/event/e2508000028lhmm" class="ticket-btn" target="_blank" data-zh="立即購票" data-en="Buy Now">立即購票</a>
-            </div>
-
-            <div class="ticket-card" data-ticket-type="student">
-              <h3 class="ticket-title" data-zh="學生團體票" data-en="Student Group Ticket">學生團體票</h3>
-              <div class="ticket-price" data-zh="NT$ 300／人" data-en="NT$ 300 / person">NT$ 300／人</div>
-              <div class="ticket-period" data-zh="售票期限：2025/09/08 - 2025/11/23" data-en="Sale Period: 2025/09/08 – 2025/11/23">售票期限：2025/09/08 - 2025/11/23</div>
-              <p class="ticket-desc" data-zh="10 人以上學生團體優惠票價，入場時需出示學生證或其他有效學生身分證明文件。" data-en="Discounted admission for student groups of 10 or more. Valid student ID required upon entry.">
-                10 人以上學生團體優惠票價，入場時需出示學生證或其他有效學生身分證明文件。
-              </p>
-              <div class="ticket-status">未開放</div>
-              <a href="https://nmhw.taipeiartbookfair.com/products/%E5%AD%B8%E7%94%9F%E5%9C%98%E9%AB%94%E7%A5%A8" class="ticket-btn" target="_blank" data-zh="立即購票" data-en="Buy Now">立即購票</a>
-            </div>
-
-            <!-- 第三行：優待票 + 現場票 -->
-            <div class="ticket-card" data-ticket-type="discount">
-              <h3 class="ticket-title" data-zh="優待票" data-en="Concession Ticket">優待票</h3>
-              <div class="ticket-price" data-zh="NT$ 250／人" data-en="NT$ 250 / person">NT$ 250／人</div>
-              <div class="ticket-period" data-zh="售票期限：2025/09/08 - 2025/11/23" data-en="Sale Period: 2025/09/08 – 2025/11/23">售票期限：2025/09/08 - 2025/11/23</div>
-              <p class="ticket-desc" data-zh="適用於 110 cm 以下幼童、65 歲以上長者、身心障礙者及其陪同者。需出示證明文件。" data-en="Available for children under 110 cm, seniors 65+, and persons with disabilities (plus one accompanying guest). Valid ID required.">
-                適用於 110 cm 以下幼童、65 歲以上長者、身心障礙者及其陪同者。需出示證明文件。
-              </p>
-              <div class="ticket-status">未開放</div>
-              <a href="https://tour.ibon.com.tw/event/e2508000028lhmm" class="ticket-btn" target="_blank" data-zh="立即購票" data-en="Buy Now">立即購票</a>
-            </div>
-
-            <div class="ticket-card" data-ticket-type="onsite">
-              <h3 class="ticket-title" data-zh="現場票" data-en="On-site Ticket">現場票</h3>
-              <div class="ticket-price" data-zh="NT$ 400／人" data-en="NT$ 400 / person">NT$ 400／人</div>
-              <div class="ticket-period" data-zh="販售日期：2025/11/21 - 2025/11/23" data-en="Sale Period: 2025/11/21 – 2025/11/23">販售日期：2025/11/21 - 2025/11/23</div>
-              <div class="ticket-limit" data-zh="無限量" data-en="Unlimited availability">無限量</div>
-              <p class="ticket-desc" data-zh="活動當天現場購買的票券。適合臨時決定參觀的觀眾，惟需配合現場排隊購買入場。" data-en="Tickets available for purchase at the venue during fair dates. Recommended for last-minute visitors; on-site queuing required.">
-                活動當天現場購買的票券。適合臨時決定參觀的觀眾，惟需配合現場排隊購買入場。
-              </p>
-              <div class="ticket-status" data-zh="現場購買" data-en="On-site Purchase">現場購買</div>
-            </div>
-          </div>
-              </div>
+         </div>
+      </div>
 
         <!-- 右欄：FAQ -->
         <div class="column">
@@ -552,114 +492,47 @@
           });
         }
 
+
         // 票券狀態動態控制
         function updateTicketStatus() {
           const currentDate = new Date();
-          
-          // 票種開放日期設定
-          const ticketDates = {
-            "early-bird": {
-              start: new Date("2025-09-01T00:00:00+08:00"),
-              end: new Date("2025-09-07T23:59:59+08:00"),
-            },
-            "presale": {
-              start: new Date("2025-09-08T00:00:00+08:00"),
-              end: new Date("2025-11-20T23:59:59+08:00"),
-            },
-            "fast-pass": {
-              start: new Date("2025-11-19T00:00:00+08:00"),
-              end: new Date("2025-11-23T23:59:59+08:00"),
-            },
-            "student": {
-              start: new Date("2025-09-08T00:00:00+08:00"),
-              end: new Date("2025-11-23T23:59:59+08:00"),
-            },
-            "discount": {
-              start: new Date("2025-09-08T00:00:00+08:00"),
-              end: new Date("2025-11-23T23:59:59+08:00"),
-            },
-            "onsite": {
-              start: new Date("2025-11-21T00:00:00+08:00"),
-              end: new Date("2025-11-23T23:59:59+08:00"),
-            }
-          };
+        }
 
-          // 更新票券狀態的函數
-          function updateTicketCard(ticketType, dateRange) {
-            const targetCard = document.querySelector(`[data-ticket-type="${ticketType}"]`);
-            
-            if (!targetCard) {
+        // 票券狀態動態控制（改為以 DOM data-* 驅動，或委由 apply-tickets.js 處理）
+        function updateTicketStatus() {
+          // 若外部腳本有提供 updateTicketStatusFromDOM，直接呼叫它
+          if (typeof window.updateTicketStatusFromDOM === "function") {
+            window.updateTicketStatusFromDOM();
+            return;
+          }
+      
+          // fallback：根據 DOM 上的 data-start-iso / data-end-iso 判斷狀態
+          const now = new Date();
+          const isEN = document.documentElement.lang && document.documentElement.lang.startsWith("en");
+          document.querySelectorAll('.ticket-card').forEach(card => {
+            const startIso = card.dataset.startIso || card.dataset.start || "";
+            const endIso = card.dataset.endIso || card.dataset.end || "";
+            const start = startIso ? new Date(startIso) : null;
+            const end = endIso ? new Date(endIso) : null;
+            const statusEl = card.querySelector('.ticket-status');
+            const btn = card.querySelector('.ticket-btn');
+            const type = (card.getAttribute('data-ticket-type') || '').toLowerCase();
+      
+            if (type.includes('onsite')) {
+              if (statusEl) statusEl.textContent = isEN ? 'On-site Purchase' : '現場購買';
+              if (btn) btn.style.display = 'none';
               return;
             }
-
-            const statusElement = targetCard.querySelector('.ticket-status');
-            if (!statusElement) return;
-
-            // 現場票特殊處理：始終顯示為"現場購買"
-            if (ticketType === 'onsite') {
-              // 獲取當前語言
-              const langBtn = document.getElementById("lang-btn");
-              const currentLang = langBtn.textContent === "EN" ? "zh" : "en";
-              
-              statusElement.textContent = currentLang === 'zh' ? '現場購買' : 'On-site Purchase';
-              statusElement.className = 'ticket-status onsite';
-              
-              // 現場票不需要按鈕，保持原有狀態
-              const button = targetCard.querySelector('.ticket-btn');
-              if (button) {
-                button.className = 'ticket-btn hidden'; // 隱藏按鈕
-              }
+      
+            const available = start && end && now >= start && now <= end;
+            if (available) {
+              if (statusEl) statusEl.textContent = isEN ? 'Available' : '開放中';
+              if (btn) { btn.textContent = isEN ? 'Buy Now' : '立即購票'; btn.classList.add('available'); btn.style.pointerEvents = ''; }
             } else {
-              // 其他票種的正常邏輯
-              const isAvailable = dateRange.start && dateRange.end && 
-                                 currentDate >= dateRange.start && 
-                                 currentDate <= dateRange.end;
-
-
-              // 獲取當前語言
-              const langBtn = document.getElementById("lang-btn");
-              const currentLang = langBtn.textContent === "EN" ? "zh" : "en";
-
-              if (isAvailable) {
-                statusElement.textContent = currentLang === 'zh' ? '開放中' : 'Available';
-                statusElement.className = 'ticket-status available';
-                
-                // 更新按鈕文字
-                const button = targetCard.querySelector('.ticket-btn');
-                if (button) {
-                  button.textContent = currentLang === 'zh' ? '立即購票' : 'Buy Now';
-                  button.className = 'ticket-btn available';
-                }
-              } else {
-                statusElement.textContent = currentLang === 'zh' ? '未開放' : 'Not Yet Available';
-                statusElement.className = 'ticket-status unavailable';
-                
-                // 更新按鈕文字
-                const button = targetCard.querySelector('.ticket-btn');
-                if (button) {
-                  button.textContent = currentLang === 'zh' ? '未開放' : 'Not Available';
-                  button.className = 'ticket-btn unavailable';
-                  button.onclick = function(e) {
-                    e.preventDefault();
-                    return false;
-                  };
-                }
-              }
+              if (statusEl) statusEl.textContent = isEN ? 'Not Yet Available' : '未開放';
+              if (btn) { btn.textContent = isEN ? 'Not Available' : '未開放'; btn.classList.remove('available'); btn.style.pointerEvents = 'none'; }
             }
-          }
-
-          // 更新各個票券狀態
-          updateTicketCard('early-bird', ticketDates['early-bird']);
-          updateTicketCard('presale', ticketDates['presale']);
-          updateTicketCard('fast-pass', ticketDates['fast-pass']);
-          updateTicketCard('student', ticketDates['student']);
-          updateTicketCard('discount', ticketDates['discount']);
-          updateTicketCard('onsite', ticketDates['onsite']);
-          
-          // 確保票券狀態語言正確
-          const langBtn = document.getElementById("lang-btn");
-          const currentLang = langBtn.textContent === "EN" ? "zh" : "en";
-          updateTicketStatusLanguage(currentLang);
+          });
         }
 
         // 平滑滾動功能
@@ -1265,14 +1138,6 @@
         });
       }
     </script>
-    
-    <!-- 載入相關的 JavaScript 文件 -->
-    <script src="js/infolog.js"></script>
-    <script src="js/timeline-visit.js"></script>
-    <script src="js/exhibitors-list.js"></script>
-    <script src="js/exhibitor-display.js"></script>
-    
-    
     <script>
       // 回到頂部按鈕功能
       document.addEventListener('DOMContentLoaded', function() {
@@ -1529,5 +1394,10 @@
         });
       });
     </script>
+
+    <script src="js/infolog.js"></script>
+    <script src="js/timeline-visit.js"></script>
+    <script src="js/exhibitors-list.js"></script>
+    <script src="js/exhibitor-display.js"></script>
   </body>
 </html>
