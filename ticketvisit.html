@@ -169,9 +169,7 @@
               
             </div>
          </div>
-      </div>
-
-        <!-- 右欄：FAQ -->
+         <!-- 右欄：FAQ -->
         <div class="column">
           <h2 class="column-title">FAQ</h2>
           
@@ -282,7 +280,7 @@
               A：票券請自行妥善保管，發生遺失、燒毀、破損等情形，恕不退換補發。
             </div>
           </div>
-      </div>
+        </div>
       </div>
     </section>
 
@@ -316,6 +314,9 @@
           class="timeline-mode-container"
           id="timelineModeContainer"
         >
+        <div id="timeline-coming-soon" class="coming-soon-mask" style="display:none;">
+          <span>COMING SOON</span>
+        </div>
           <div class="timeline-scroll-container" id="timelineScroll">
             <div class="timeline-calendar" id="timelineCalendar">
               <!-- 時間軸日曆將由 JavaScript 動態生成 -->
@@ -369,6 +370,10 @@
         
         <!-- 攤商資訊顯示區域 -->
         <div class="exhibitor-info-content">
+          <div id="exhibitor-coming-soon" class="coming-soon-mask" style="display:none;">
+          <span>COMING SOON</span>
+        </div>
+        
           <div id="exhibitor-map-container" class="exhibitor-map-container">
             <div class="exhibitor-map-header">
               <span class="exhibitor-map-title" data-zh="攤位地圖 Booth Map" data-en="Booth Map">攤位地圖 Booth Map</span>
@@ -1394,10 +1399,85 @@
         });
       });
     </script>
+    <script>
+      // 取得開關狀態，控制遮罩與地圖顯示
+      (function() {
+        const API_URL = 'https://script.google.com/macros/s/AKfycbx4kCNOPx1UPlxuXLOL2Ni_UCG7OJY7O3RUigeDzE3WLhailtKd90q4SkLLqyhOXn27/exec?type=openstatus';
+
+        console.log('[openstatus] fetching status from', API_URL);
+
+        fetch(API_URL)
+          .then(function(r) {
+            console.log('[openstatus] HTTP status', r.status);
+            return r.json();
+          })
+          .then(function(status) {
+            console.log('[openstatus] payload', status);
+
+            if (!status || typeof status !== 'object') return;
+
+            // 攤商列表遮罩
+            var exhibMask = document.getElementById('exhibitor-coming-soon');
+            if (exhibMask) {
+              console.log('[openstatus] exhibitors =', status.exhibitors);
+              if (status.exhibitors === false || status.exhibitors === 'FALSE') {
+                exhibMask.style.display = 'flex';
+              } else {
+                exhibMask.style.display = 'none';
+              }
+            }
+
+            // 行程表遮罩
+            var tlMask = document.getElementById('timeline-coming-soon');
+            if (tlMask) {
+              console.log('[openstatus] timeline =', status.timeline);
+              if (status.timeline === false || status.timeline === 'FALSE') {
+                tlMask.style.display = 'flex';
+              } else {
+                tlMask.style.display = 'none';
+              }
+            }
+
+            // 攤位地圖顯示 / 隱藏（不用遮罩，只控制 display）
+            var mapContainer = document.getElementById('exhibitor-map-container');
+            if (mapContainer) {
+              console.log('[openstatus] map =', status.map);
+              if (status.map === false || status.map === 'FALSE') {
+                mapContainer.style.display = 'none';
+              } else {
+                mapContainer.style.display = '';
+              }
+            }
+          })
+          .catch(function(err) {
+            console.warn('[openstatus] fetch error', err);
+          });
+      })();
+    </script>
 
     <script src="js/infolog.js"></script>
     <script src="js/timeline-visit.js"></script>
     <script src="js/exhibitors-list.js"></script>
     <script src="js/exhibitor-display.js"></script>
   </body>
+  
+  <style>
+    .coming-soon-mask {
+      position: absolute;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: rgba(255,255,255,0.92);
+      z-index: 99;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 2.2rem;
+      font-weight: bold;
+      color: #222;
+      letter-spacing: 0.1em;
+      pointer-events: all;
+    }
+    .timeline-section, .exhibitor-section {
+      position: relative;
+    }
+  </style>
 </html>
