@@ -1,7 +1,7 @@
 (function () {
   // ===== 共用設定 =====
   const BASE_API =
-    "https://script.google.com/macros/s/AKfycbzj0helq04_cDIwtASoLNwQIvTjC5Jt8KBgtD5yUmdj8wkqLnsgwTWx52qub4LKsklj/exec";
+    "https://script.google.com/macros/s/AKfycbxWzlZPxSrpsLhwrKd4VdEHTA1tfeGwdT9Guj-lnFaUcofQ1i9aJEmr6SzETAKqOr48/exec";
 
   // 依目前 <html lang> 判斷是否為英文
   function isEnglish() {
@@ -212,7 +212,28 @@
       });
   }
 
+
+
   // ===== 2. FAQ：從 VisitFAQ sheet 讀 =====
+   // FAQ 點擊功能
+    function initFAQ() {
+        const faqItems = document.querySelectorAll('.faq-item');
+        
+        faqItems.forEach(item => {
+        item.addEventListener('click', function() {
+            // 關閉其他已開啟的FAQ
+            faqItems.forEach(otherItem => {
+            if (otherItem !== item) {
+                otherItem.classList.remove('active');
+            }
+            });
+            
+            // 切換當前FAQ的狀態
+            item.classList.toggle('active');
+        });
+        });
+    }
+
   function loadFAQ() {
     const FAQ_API = BASE_API + "?type=faq";
 
@@ -239,38 +260,94 @@
         faqContainer.innerHTML = "";
 
         data.items.forEach(function (item) {
-          const qText = isEnglish()
-            ? item.q_en || item.q_zh || ""
-            : item.q_zh || item.q_en || "";
-          const aText = isEnglish()
-            ? item.a_en || item.a_zh || ""
-            : item.a_zh || item.a_en || "";
+        const qZh = item.q_zh || "";
+        const qEn = item.q_en || qZh;
+        const aZh = item.a_zh || "";
+        const aEn = item.a_en || aZh;
 
-          if (!qText && !aText) return;
+        if (!qZh && !qEn) return;
 
-          const faqItem = document.createElement("div");
-          faqItem.className = "faq-item";
+        const faqItem = document.createElement("div");
+        faqItem.className = "faq-item";
 
-          const qDiv = document.createElement("div");
-          qDiv.className = "faq-question";
-          qDiv.textContent = qText;
+        const qDiv = document.createElement("div");
+        qDiv.className = "faq-question";
+        qDiv.setAttribute("data-zh", qZh);
+        qDiv.setAttribute("data-en", qEn);
+        qDiv.innerHTML = withBr(isEnglish() ? qEn : qZh);
 
-          const aDiv = document.createElement("div");
-          aDiv.className = "faq-answer";
-          aDiv.textContent = aText;
+        const aDiv = document.createElement("div");
+        aDiv.className = "faq-answer";
+        aDiv.setAttribute("data-zh", aZh);
+        aDiv.setAttribute("data-en", aEn);
+        aDiv.innerHTML = withBr(isEnglish() ? aEn : aZh);
 
-          faqItem.appendChild(qDiv);
-          faqItem.appendChild(aDiv);
-
-          faqContainer.appendChild(faqItem);
+        faqItem.appendChild(qDiv);
+        faqItem.appendChild(aDiv);
+        faqContainer.appendChild(faqItem);
         });
+
+        initFAQ();
       })
       .catch(function (err) {
         console.warn("[faq] fetch error", err);
       });
   }
 
+  // ===== 3. Open Status：控制遮罩 / 地圖 =====
+    function loadOpenStatus() {
+    const API_URL = BASE_API + "?type=openstatus";
+
+    console.log("[openstatus] fetching status from", API_URL);
+
+    fetch(API_URL)
+        .then(function (r) {
+        console.log("[openstatus] HTTP status", r.status);
+        return r.json();
+        })
+        .then(function (status) {
+        console.log("[openstatus] payload", status);
+
+        if (!status || typeof status !== "object") return;
+
+        // 攤商列表遮罩
+        var exhibMask = document.getElementById("exhibitor-coming-soon");
+        if (exhibMask) {
+            if (status.exhibitors === false || status.exhibitors === "FALSE") {
+            exhibMask.style.display = "flex";
+            } else {
+            exhibMask.style.display = "none";
+            }
+        }
+
+        // 行程表遮罩
+        var tlMask = document.getElementById("timeline-coming-soon");
+        if (tlMask) {
+            if (status.timeline === false || status.timeline === "FALSE") {
+            tlMask.style.display = "flex";
+            } else {
+            tlMask.style.display = "none";
+            }
+        }
+
+        // 攤位地圖顯示 / 隱藏
+        var mapContainer = document.getElementById("exhibitor-map-container");
+        if (mapContainer) {
+            if (status.map === false || status.map === "FALSE") {
+            mapContainer.style.display = "none";
+            } else {
+            mapContainer.style.display = "";
+            }
+        }
+        })
+        .catch(function (err) {
+        console.warn("[openstatus] fetch error", err);
+        });
+    }
+
+
   // ===== 初始化 =====
   loadPageConfig();
   loadFAQ();
+  loadOpenStatus();
 })();
