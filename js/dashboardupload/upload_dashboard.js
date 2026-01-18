@@ -515,7 +515,7 @@ const handleFileUpload = async (
       errorMessage += `建議 Solutions:\n`;
       errorMessage += `- 檢查網路連線 Check network connection\n`;
       errorMessage += `- 稍後再試 Try again later\n`;
-      errorMessage += `- 如持續失敗，請截圖此錯誤訊息並聯繫我們 If the problem persists, please screenshot this error message and contact us`;
+      errorMessage += `- 如持續失敗，請使用無痕模式上傳試試 If the problem persists, please try uploading in incognito mode. If that fails, please screenshot this error message and contact us.`;
     } else if (error.message.includes("read") || error.message.includes("FileReader")) {
       errorMessage += `可能原因 Possible causes:\n`;
       errorMessage += `1. 檔案損壞或格式不正確 File corrupted or incorrect format\n`;
@@ -524,12 +524,12 @@ const handleFileUpload = async (
       errorMessage += `建議 Solutions:\n`;
       errorMessage += `- 檢查檔案是否完整 Check if file is complete\n`;
       errorMessage += `- 嘗試使用其他檔案格式 Try a different file format\n`;
-      errorMessage += `- 如持續失敗，請截圖此錯誤訊息並聯繫我們 If the problem persists, please screenshot this error message and contact us`;
+      errorMessage += `- 如持續失敗，請使用無痕模式上傳試試 If the problem persists, please try uploading in incognito mode. If that fails, please screenshot this error message and contact us.screenshot this error message and contact us`;
     } else {
       errorMessage += `建議 Solutions:\n`;
       errorMessage += `- 重新整理頁面後再試 Refresh the page and try again\n`;
       errorMessage += `- 檢查檔案格式是否正確 Check if file format is correct\n`;
-      errorMessage += `- 如持續失敗，請截圖此錯誤訊息並聯繫我們 If the problem persists, please screenshot this error message and contact us`;
+      errorMessage += `- 如持續失敗，請使用無痕模式上傳試試 If the problem persists, please try uploading in incognito mode. If that fails, please screenshot this error message and contact us.screenshot this error message and contact us`;
     }
 
     // 更新狀態顯示
