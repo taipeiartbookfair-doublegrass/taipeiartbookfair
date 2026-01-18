@@ -1,6 +1,6 @@
 // 依 spreadsheet 的 tickets sheet 動態產生票卡並控制狀態
 (function () {
-  const API_URL = "https://script.google.com/macros/s/AKfycbx4kCNOPx1UPlxuXLOL2Ni_UCG7OJY7O3RUigeDzE3WLhailtKd90q4SkLLqyhOXn27/exec"; 
+  const API_URL = "https://script.google.com/macros/s/AKfycbzj0helq04_cDIwtASoLNwQIvTjC5Jt8KBgtD5yUmdj8wkqLnsgwTWx52qub4LKsklj/exec"; 
 
   async function fetchTickets() {
     try {
@@ -30,13 +30,15 @@
   const quantityRaw = (item.quantity || item['限量張數'] || '');
   const quantity = (quantityRaw !== null && quantityRaw !== undefined && String(quantityRaw).trim() !== '') ? String(quantityRaw).trim() : '';
 
-  const desc = String(item.short_desc || item.short_desc_zh || item['票券說明(簡)'] || item['票券說明(中)'] || '').trim();
+  const desc = String(item.short_desc_zh ||item['票券說明(中)'] || '').trim();
   const descEn = String(item.short_desc_en || item['票券說明(英)'] || '').trim();
 
   const link = String(item.purchase_link || item['購票連結'] || '').trim();
   const bg = String(item.bg_color || item['背景顏色'] || '').trim();
   const startIso = String(item.start_iso || item['開始時間ISO格式'] || '').trim();
   const endIso = String(item.end_iso || item['結束時間ISO格式'] || '').trim();
+  const soldRaw = item.sold || item['是否完售'];
+  const sold = soldRaw === true || soldRaw === 'TRUE' || soldRaw === 'true';
 
   function formatPeriodPair(sIso, eIso) {
     if (!sIso || !eIso) return { zh: '', en: '' };
@@ -62,6 +64,7 @@
   const card = document.createElement('div');
   card.className = 'ticket-card';
   card.setAttribute('data-ticket-type', dataType);
+  if (sold) card.setAttribute('data-sold', 'true');
   if (startIso) card.dataset.startIso = startIso;
   if (endIso) card.dataset.endIso = endIso;
   if (link) card.dataset.link = link;
@@ -125,6 +128,18 @@
     a.setAttribute('data-en', 'Buy Now');
     a.textContent = document.documentElement.lang && document.documentElement.lang.startsWith('en') ? 'Buy Now' : '立即購票';
     if (link) a.href = link;
+    // 若已完售，初始化時就標記為完售
+    if (sold) {
+      a.classList.remove('available');
+      a.classList.add('unavailable');
+      a.textContent = document.documentElement.lang && document.documentElement.lang.startsWith('en') ? 'Sold Out' : '完售';
+      a.style.pointerEvents = 'none';
+      if (a.href) a.removeAttribute('href');
+      status.className = 'ticket-status unavailable';
+      status.setAttribute('data-zh', '完售');
+      status.setAttribute('data-en', 'Sold Out');
+      status.textContent = document.documentElement.lang && document.documentElement.lang.startsWith('en') ? 'Sold Out' : '完售';
+    }
     card.appendChild(a);
   }
 
@@ -143,9 +158,13 @@ function updateStatuses() {
     const type = (card.getAttribute('data-ticket-type') || '').toLowerCase();
     const title = (card.querySelector('.ticket-title') && card.querySelector('.ticket-title').textContent) || '';
 
-    const isOnsiteCard = type.includes('onsite') || type.includes('on-site') || title.indexOf('現場') !== -1 || title.toLowerCase().indexOf('on-site') !== -1 || title.toLowerCase().indexOf('onsite') !== -1;
+  const isOnsiteCard = type.includes('onsite') || type.includes('on-site') || title.indexOf('現場') !== -1 || title.toLowerCase().indexOf('on-site') !== -1 || title.toLowerCase().indexOf('onsite') !== -1;
 
-    if (isOnsiteCard) {
+  // 從 dataset 或屬性重新讀取 sold 狀態（由 createCard 設定）
+  const soldAttr = card.getAttribute('data-sold');
+  const isSold = soldAttr === 'true' || soldAttr === 'TRUE';
+
+  if (isOnsiteCard) {
       if (statusEl) {
         statusEl.className = 'ticket-status onsite';
         statusEl.setAttribute('data-zh', '現場購買');
@@ -153,6 +172,24 @@ function updateStatuses() {
         statusEl.textContent = isEN ? 'On-site Purchase' : '現場購買';
       }
       if (btn) btn.remove();
+      return;
+    }
+
+    // 完售優先於時間判斷
+    if (isSold) {
+      if (statusEl) {
+        statusEl.className = 'ticket-status unavailable';
+        statusEl.setAttribute('data-zh', '完售');
+        statusEl.setAttribute('data-en', 'Sold Out');
+        statusEl.textContent = isEN ? 'Sold Out' : '完售';
+      }
+      if (btn) {
+        btn.classList.remove('available');
+        btn.classList.add('unavailable');
+        btn.textContent = isEN ? 'Sold Out' : '完售';
+        btn.style.pointerEvents = 'none';
+        if (btn.href) btn.removeAttribute('href');
+      }
       return;
     }
 
