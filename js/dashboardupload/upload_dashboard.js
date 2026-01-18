@@ -331,6 +331,7 @@ const handleFileUpload = async (
       errorMessage: "請先選擇檔案 Please select a file first."
     };
   }
+  //ajis
 
   const file = fileInput.files[0];
   const fileSizeMB = (file.size / (1024 * 1024)).toFixed(2);
