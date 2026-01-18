@@ -17,6 +17,7 @@
     <link rel="stylesheet" href="css/font.css" />
     <link rel="stylesheet" href="css/ticketvisit.css">
     <script src="js/ticketmagic.js"></script>
+    <script src="js/ticketvisitupdate.js"></script>
   </head>
   <body>
     <!-- 頂部導航 -->
@@ -47,7 +48,8 @@
         <!-- 影片區域 - 單獨佔滿整行 -->
         <div class="hero-poster-section">
          <iframe 
-           src="https://player.vimeo.com/video/1130257764?background=1&autoplay=1&loop=1&muted=1" 
+           id="hero-video"
+           src="" 
            width="100%" 
            height="100%" 
            frameborder="0" 
@@ -62,52 +64,31 @@
     <section class="hero-traffic" id="general-info">
           <!-- 展覽資訊區域 -->
           <div class="exhibition-info-section">
-            <h2 class="exhibition-title" data-zh="2025 草率季 Taipei Art Book Fair" data-en="2025 Taipei Art Book Fair">2025 草率季 Taipei Art Book Fair</h2>
-            <p class="exhibition-subtitle" data-zh="- Soft POW 無限柔軟 -" data-en="- Soft POW 無限柔軟 -">- Soft POW 無限柔軟 -</p>
-            <p class="exhibition-poem" data-zh='<mark>今天早上你叫我「軟軟」，於是我寫了一首小詩。<br><br>軟軟是身體的投誠，<br>是陶土記得手指的樣子，<br>原子鬆開手，<br>一扇風雨中敞開的小門，<br>pow pow 不止。<br><br>或是<br><br>軟軟是一片戰場上的香蕉皮，<br>小指頭抹過你的硬漢臉，<br>彩虹滲漏，<br>pow pow，不止。</mark>' data-en='<mark>This morning you whispered "wobbly bobbly" in my ear and a little poem was born.<br><br>Softness is the body&#39;s surrender,<br>the way clay remembers every touch,<br>atoms loosening their grip,<br>a small door left open in the storm,<br>pow pow non stop.<br><br>or<br><br>a banana peel on the battlefield,<br>pinky wiggle through your harden face,<br>the rainbow leaks,<br>pow pow, can&#39;t stop.</mark>' style="font-size:.9rem; margin-bottom:10px;">
-              <mark>今天早上你叫我「軟軟」，於是我寫了一首小詩。
-              <br><br>  
-              軟軟是身體的投誠，
-              <br>
-              是陶土記得手指的樣子，
-              <br>
-              原子鬆開手，
-              <br>
-              一扇風雨中敞開的小門，
-              <br>
-              pow pow 不止。
-              <br><br> 
-              或是
-              <br><br> 
-              軟軟是一片戰場上的香蕉皮，
-              <br>
-              小指頭抹過你的硬漢臉，
-              <br>
-              彩虹滲漏，
-              <br>
-              pow pow，不止。</mark>
+            <h2 id="exhibition-title" class="exhibition-title"></h2>
+            <p id="exhibition-subtitle" class="exhibition-subtitle"></p>
+            <p>
+              <mark id="exhibition-poem" class="exhibition-poem" style="font-size:.9rem; margin-bottom:10px;">
+              </mark>
               </p>         
           </div>
 
           <div class="exhibition-details">
             <div class="detail-item">
               <h3 class="detail-item-title">時間 Time</h3>
-              <ul class="time-list">
-                <li>11/21(Fri.) 13-21</li>
-                <li>11/22(Sat.) 11-20</li>
-                <li>11/23(Sun.) 11-18</li>
+              <ul id="time-list" class="time-list" >
+                
               </ul>
             </div>
             
             <div class="detail-item">
               <h3 class="detail-item-title">活動地點 Location</h3>
-              <p><a href="https://www.huashan1914.com" target="_blank">華山1914文化創意產業園區 東二 ABCD棟 <br>Huashan Creative Park</a></p>
-              <div class="map-container">
+              <p><a id="location" href="" target="_blank"></a></p>
+              <div class="map-container" id="googlemap">
                 <iframe 
-                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3614.8!2d121.529!3d25.043!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3442a9c8b8b8b8b8%3A0x8b8b8b8b8b8b8b8b!2z6Ie65YyX5biC5Lit5aSu5Yy65Y2X5pys5a6J5Yy65Y2X5pys5a6J5Yy65Y2X5pys5a6J!5e0!3m2!1szh-TW!2stw!4v1234567890"
-                  allowfullscreen="" 
-                  loading="lazy" 
-                  referrerpolicy="no-referrer-when-downgrade">
+                src="" 
+                allowfullscreen="" 
+                loading="lazy" 
+                referrerpolicy="no-referrer-when-downgrade">
                 </iframe>
               </div>
             </div>
@@ -120,41 +101,20 @@
           
           <div class="access-info-section" id="access">
             
-            <h2 class="access-section-title">Access</h2>
+          <h2 class="access-section-title">Access</h2>
           
           <div class="access-info">
             <h3 data-zh="捷運" data-en="MRT">捷運</h3>
-            <p data-zh="板南線、新蘆線 忠孝新生站｜1號出口步行約3分鐘" data-en="Blue Line / Orange Line | Zhongxiao Xinsheng Station : Exit 1, walk for approximately 3 minutes">
-              板南線、新蘆線 忠孝新生站｜1號出口步行約3分鐘
-            </p>
+            <p id="mrt-info"></p>
             
             <h3 data-zh="公車" data-en="Bus">公車</h3>
-            <p data-zh="華山公園站（市民大道一）、華山公園（市民）｜669" data-en="Huasha Park (Civic Boulevard)｜699">
-              華山公園站（市民大道一）、華山公園（市民）｜669
-            </p>
-            <p data-zh="台北科技大學站（八德路）｜205、257、276" data-en="National Taipei University of Technology (Bade Road)｜205, 257, 276">
-              台北科技大學站（八德路）｜205、257、276
-            </p>
-              <p data-zh="忠孝國小站｜202、202區、212夜間公車、212直行忠孝東路、212經南港路、262、262區、299、600、605、605新台五線、忠孝幹線" data-en="Zhongxiao Elementary School｜202, 202 Section, 212, 232, 232 Vice, 269, 299, 600, 605, 605 Vice, 605 (Xintai 5th Route), Zhongxiao New Main Line">
-                忠孝國小站｜202、202區、212夜間公車、212直行忠孝東路、212經南港路、262、262區、299、600、605、605新台五線、忠孝幹線
-              </p>
-              <p data-zh="華山文創園區｜202、202區、205、212、257、262、262區、276、299、600、605、忠孝幹線、1813D經中山區、1813E大武崙、1815、1815A、1815D、1815E、台北市觀光巴士紅線(往善導寺)" data-en="Huashan 1914 Creative Park (Zhongxiao E. Road)｜247, 205, 212, 220, 232, 232 Vice, 257, 262, 276, Taipei Double-Decker Sightseeing Bus">
-                華山文創園區｜202、202區、205、212、257、262、262區、276、299、600、605、忠孝幹線、1813D經中山區、1813E大武崙、1815、1815A、1815D、1815E、台北市觀光巴士紅線(往善導寺)
-            </p>
+            <p id="bus-info"></p>
             
             <h3 data-zh="自行開車" data-en="By Car">自行開車</h3>
-              <p data-zh="國道1號－圓山交流道下－建國高架道路－忠孝東路出口下－忠孝東路三段至二段" data-en="Sun Yat-sen Freeway - Yuanshan Interchange - Jianguo Expressway - Zhongxiao East Road Exit - Zhongxiao East Road">
-                國道1號－圓山交流道下－建國高架道路－忠孝東路出口下－忠孝東路三段至二段
-            </p>
-            <p><a href="https://maps.app.goo.gl/nSoNsZuY2akwD2jZA" target="_blank" data-zh="華山停車場" data-en="Parking Lot">華山停車場</a></p>
-              <p data-zh="汽車平日每小時40元、假日每小時60元<br>機車每小時25元" data-en="Parking fee is NT$ 40/hr on weekdays, and NT$60/hr on holidays for cars.<br>NT$25/hr for motorcycles.">
-                汽車平日每小時40元、假日每小時60元<br>機車每小時25元
-              </p>
+            <p id="by-car-info"></p>
               
-              <h3 data-zh="YouBike" data-en="YouBike">YouBike</h3>
-              <p data-zh="鄰近站點｜YouBike微笑單車 2.0：華山文創園區" data-en="Station｜YouBike 2.0：Huashan1914 Creative Park">
-                鄰近站點｜YouBike微笑單車 2.0：華山文創園區
-              </p>
+            <h3 data-zh="YouBike" data-en="YouBike">YouBike</h3>
+            <p id="youbike-info"></p>
         </div>
       </div>
     </section>
@@ -172,113 +132,8 @@
          <!-- 右欄：FAQ -->
         <div class="column">
           <h2 class="column-title">FAQ</h2>
-          
-          <div class="faq-item">
-            <div class="faq-question" data-zh="Q：請問票券可以轉讓嗎？" data-en="Q: Can tickets be transferred?">
-              Q：請問票券可以轉讓嗎？
-            </div>
-            <div class="faq-answer" data-zh="A：可以，票券不記名。注意使用優待票須出示相關證明。" data-en="A: Yes, tickets are non-transferable. Note that concession tickets require valid ID.">
-              A：可以，票券不記名。注意使用優待票須出示相關證明。
-            </div>
-          </div>
-
-          <div class="faq-item">
-            <div class="faq-question" data-zh="Q：小朋友需要購票嗎？" data-en="Q: Do children need tickets?">
-              Q：小朋友需要購票嗎？
-            </div>
-            <div class="faq-answer" data-zh="A：是，優待票為250元，供12歲以下孩童使用。" data-en="A: Yes, concession tickets are NT$250 for children under 12.">
-              A：是，優待票為250元，供12歲以下孩童使用。
-            </div>
-          </div>
-
-          <div class="faq-item">
-            <div class="faq-question" data-zh="Q：已購預售票是否能退票？" data-en="Q: Can pre-sale tickets be refunded?">
-              Q：已購預售票是否能退票？
-            </div>
-            <div class="faq-answer" data-zh="A：現場無退票服務，但可轉讓他人使用。" data-en="A: No refunds on-site, but tickets can be transferred to others.">
-              A：現場無退票服務，但可轉讓他人使用。
-            </div>
-          </div>
-
-          <div class="faq-item">
-            <div class="faq-question" data-zh="Q：現場是否可以刷卡或使用電子支付？" data-en="Q: Can I pay by card or electronic payment on-site?">
-              Q：現場是否可以刷卡或使用電子支付？
-            </div>
-            <div class="faq-answer" data-zh="A：每個攤位支付方式不同，建議攜帶現金及行動支付App備用。" data-en="A: Payment methods vary by booth. We recommend bringing cash and mobile payment apps as backup.">
-              A：每個攤位支付方式不同，建議攜帶現金及行動支付App備用。
-            </div>
-          </div>
-
-          <div class="faq-item">
-            <div class="faq-question" data-zh="Q：現場購票是否可以使用文化幣？" data-en="Q: Can I use cultural vouchers for on-site tickets?">
-              Q：現場購票是否可以使用文化幣？
-            </div>
-            <div class="faq-answer" data-zh="A：目前票券未提供文化幣支付，欲使用可參考 ibon 快速通關票種。" data-en="A: Cultural vouchers are not currently accepted for tickets. Please refer to ibon fast pass tickets for alternative options.">
-              A：目前票券未提供文化幣支付，欲使用可參考 ibon 快速通關票種。
-            </div>
-          </div>
-
-          <div class="faq-item">
-            <div class="faq-question" data-zh="Q：票種是否可以重複使用？" data-en="Q: Can tickets be reused?">
-              Q：票種是否可以重複使用？
-            </div>
-            <div class="faq-answer" data-zh="A：活動票種皆為單日票，不同日進場請各別購票。" data-en="A: All event tickets are single-day passes. Separate tickets are required for different days.">
-              A：活動票種皆為單日票，不同日進場請各別購票。
-            </div>
-          </div>
-
-          <div class="faq-item">
-            <div class="faq-question" data-zh="Q：現場提供的票種？" data-en="Q: What tickets are available on-site?">
-              Q：現場提供的票種？
-            </div>
-            <div class="faq-answer" data-zh="A：活動現場僅售現場票（NT＄400）。" data-en="A: Only on-site tickets (NT$400) are available at the venue.">
-              A：活動現場僅售現場票（NT＄400）。
-            </div>
-          </div>
-
-          <div class="faq-item">
-            <div class="faq-question" data-zh="Q：是否可以先購買現場票後隔日進場？" data-en="Q: Can I buy on-site tickets for the next day?">
-              Q：是否可以先購買現場票後隔日進場？
-            </div>
-            <div class="faq-answer" data-zh="A：現場票售出當下蓋章入場，不提供隔日使用。" data-en="A: On-site tickets are stamped for immediate entry and cannot be used the next day.">
-              A：現場票售出當下蓋章入場，不提供隔日使用。
-            </div>
-          </div>
-
-          <div class="faq-item">
-            <div class="faq-question" data-zh="Q：是否可以先替不在場友人購買現場票？" data-en="Q: Can I buy on-site tickets for absent friends?">
-              Q：是否可以先替不在場友人購買現場票？
-            </div>
-            <div class="faq-answer" data-zh="A：現場票售出當下蓋章入場，需使用者本人到場方可購買使用。" data-en="A: On-site tickets are stamped for immediate entry. The ticket holder must be present to purchase and use the ticket.">
-              A：現場票售出當下蓋章入場，需使用者本人到場方可購買使用。
-            </div>
-          </div>
-
-          <div class="faq-item">
-            <div class="faq-question" data-zh="Q：購票是否提供發票？" data-en="Q: Are receipts provided for ticket purchases?">
-              Q：購票是否提供發票？
-            </div>
-            <div class="faq-answer" data-zh="A：本活動為免稅活動，如需開立發票請於活動時間至購票處詢問。" data-en="A: This is a tax-exempt event. Please inquire at the ticket counter during the event if you need a receipt.">
-              A：本活動為免稅活動，如需開立發票請於活動時間至購票處詢問。
-            </div>
-          </div>
-
-          <div class="faq-item">
-            <div class="faq-question" data-zh="Q：發票可以打統編嗎？" data-en="Q: Can receipts include company tax ID?">
-              Q：發票可以打統編嗎？
-            </div>
-            <div class="faq-answer" data-zh="A：可以，請於活動時間至現場購票處詢問工作人員。" data-en="A: Yes, please inquire with staff at the on-site ticket counter during the event.">
-              A：可以，請於活動時間至現場購票處詢問工作人員。
-            </div>
-          </div>
-
-          <div class="faq-item">
-            <div class="faq-question" data-zh="Q：票券遺失怎麼辦？" data-en="Q: What if I lose my ticket?">
-              Q：票券遺失怎麼辦？
-            </div>
-            <div class="faq-answer" data-zh="A：票券請自行妥善保管，發生遺失、燒毀、破損等情形，恕不退換補發。" data-en="A: Please keep your ticket safe. Lost, damaged, or destroyed tickets will not be refunded or reissued.">
-              A：票券請自行妥善保管，發生遺失、燒毀、破損等情形，恕不退換補發。
-            </div>
+          <div class="faq-container">
+            <!-- FAQ 項目將由 JavaScript 動態生成 -->
           </div>
         </div>
       </div>
@@ -1455,10 +1310,10 @@
       })();
     </script>
 
-    <script src="js/infolog.js"></script>
     <script src="js/timeline-visit.js"></script>
     <script src="js/exhibitors-list.js"></script>
     <script src="js/exhibitor-display.js"></script>
+    
   </body>
   
   <style>
