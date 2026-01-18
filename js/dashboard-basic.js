@@ -781,7 +781,7 @@ document.addEventListener("DOMContentLoaded", async function () {
       mediamaterialdesc.innerHTML =
         "Media Kit<br>You're welcome to use the 2026 TPABF key visual assets — click here to download.";
       materialuploaddesc.innerHTML = `<strong>Marketing Material Upload</strong><br>
-Please follow the instructions below to create your materials, and upload the completed images/text as a ZIP file.<br><br>
+Please follow the instructions below to create your materials, and upload the completed images/text as a ZIP file. The file size should not exceed 50MB.<br><br>
 📌 The ZIP file should include:<br>
 1. Image for social media post: JPG × 1<br>
 2. Image for Stories: JPG × 1<br>
@@ -795,7 +795,7 @@ Please follow the instructions below to create your materials, and upload the co
       mediamaterialdesc.innerHTML =
         "視覺素材包<br>歡迎使用 2026 草率季主視覺素材，點此下載檔案。";
       materialuploaddesc.innerHTML = `<strong>行銷素材檔案上傳</strong><br>
-請依照以下製作說明，並將製作完成的圖／文打包為 zip上傳。<br><br>
+請依照以下製作說明，並將製作完成的圖／文打包為 zip上傳。檔案大小請勿超過 50MB。<br><br>
 📌壓縮檔需包含：<br>
 1. 社群貼文用圖：JPG × 1<br>
 2. 限時動態用圖：JPG × 1<br>
