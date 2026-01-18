@@ -1,6 +1,6 @@
 // 依 spreadsheet 的 tickets sheet 動態產生票卡並控制狀態
 (function () {
-  const API_URL = "https://script.google.com/macros/s/AKfycbzj0helq04_cDIwtASoLNwQIvTjC5Jt8KBgtD5yUmdj8wkqLnsgwTWx52qub4LKsklj/exec"; 
+  const API_URL = "https://script.google.com/macros/s/AKfycbxWzlZPxSrpsLhwrKd4VdEHTA1tfeGwdT9Guj-lnFaUcofQ1i9aJEmr6SzETAKqOr48/exec"; 
 
   async function fetchTickets() {
     try {
@@ -133,6 +133,9 @@
       a.classList.remove('available');
       a.classList.add('unavailable');
       a.textContent = document.documentElement.lang && document.documentElement.lang.startsWith('en') ? 'Sold Out' : '完售';
+      // 完售：黑底白字按鈕，禁用點擊
+      a.style.backgroundColor = '#000';
+      a.style.color = '#fff';
       a.style.pointerEvents = 'none';
       if (a.href) a.removeAttribute('href');
       status.className = 'ticket-status unavailable';
@@ -187,6 +190,9 @@ function updateStatuses() {
         btn.classList.remove('available');
         btn.classList.add('unavailable');
         btn.textContent = isEN ? 'Sold Out' : '完售';
+        // 完售：黑底白字按鈕，禁用點擊
+        btn.style.backgroundColor = '#000';
+        btn.style.color = '#fff';
         btn.style.pointerEvents = 'none';
         if (btn.href) btn.removeAttribute('href');
       }

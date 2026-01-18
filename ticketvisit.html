@@ -169,7 +169,7 @@
           class="timeline-mode-container"
           id="timelineModeContainer"
         >
-        <div id="timeline-coming-soon" class="coming-soon-mask" style="display:none;">
+        <div id="timeline-coming-soon" class="coming-soon-mask" style="display:absolute;">
           <span>COMING SOON</span>
         </div>
           <div class="timeline-scroll-container" id="timelineScroll">
@@ -225,7 +225,7 @@
         
         <!-- 攤商資訊顯示區域 -->
         <div class="exhibitor-info-content">
-          <div id="exhibitor-coming-soon" class="coming-soon-mask" style="display:none;">
+          <div id="exhibitor-coming-soon" class="coming-soon-mask" style="display:absolute;">
           <span>COMING SOON</span>
         </div>
         
@@ -332,26 +332,6 @@
             }
           });
         }
-
-        // FAQ 點擊功能
-        function initFAQ() {
-          const faqItems = document.querySelectorAll('.faq-item');
-          
-          faqItems.forEach(item => {
-            item.addEventListener('click', function() {
-              // 關閉其他已開啟的FAQ
-              faqItems.forEach(otherItem => {
-                if (otherItem !== item) {
-                  otherItem.classList.remove('active');
-                }
-              });
-              
-              // 切換當前FAQ的狀態
-              item.classList.toggle('active');
-            });
-          });
-        }
-
 
         // 票券狀態動態控制
         function updateTicketStatus() {
@@ -1254,62 +1234,6 @@
         });
       });
     </script>
-    <script>
-      // 取得開關狀態，控制遮罩與地圖顯示
-      (function() {
-        const API_URL = 'https://script.google.com/macros/s/AKfycbx4kCNOPx1UPlxuXLOL2Ni_UCG7OJY7O3RUigeDzE3WLhailtKd90q4SkLLqyhOXn27/exec?type=openstatus';
-
-        console.log('[openstatus] fetching status from', API_URL);
-
-        fetch(API_URL)
-          .then(function(r) {
-            console.log('[openstatus] HTTP status', r.status);
-            return r.json();
-          })
-          .then(function(status) {
-            console.log('[openstatus] payload', status);
-
-            if (!status || typeof status !== 'object') return;
-
-            // 攤商列表遮罩
-            var exhibMask = document.getElementById('exhibitor-coming-soon');
-            if (exhibMask) {
-              console.log('[openstatus] exhibitors =', status.exhibitors);
-              if (status.exhibitors === false || status.exhibitors === 'FALSE') {
-                exhibMask.style.display = 'flex';
-              } else {
-                exhibMask.style.display = 'none';
-              }
-            }
-
-            // 行程表遮罩
-            var tlMask = document.getElementById('timeline-coming-soon');
-            if (tlMask) {
-              console.log('[openstatus] timeline =', status.timeline);
-              if (status.timeline === false || status.timeline === 'FALSE') {
-                tlMask.style.display = 'flex';
-              } else {
-                tlMask.style.display = 'none';
-              }
-            }
-
-            // 攤位地圖顯示 / 隱藏（不用遮罩，只控制 display）
-            var mapContainer = document.getElementById('exhibitor-map-container');
-            if (mapContainer) {
-              console.log('[openstatus] map =', status.map);
-              if (status.map === false || status.map === 'FALSE') {
-                mapContainer.style.display = 'none';
-              } else {
-                mapContainer.style.display = '';
-              }
-            }
-          })
-          .catch(function(err) {
-            console.warn('[openstatus] fetch error', err);
-          });
-      })();
-    </script>
-
     <script src="js/timeline-visit.js"></script>
     <script src="js/exhibitors-list.js"></script>
     <script src="js/exhibitor-display.js"></script>
@@ -1320,7 +1244,7 @@
     .coming-soon-mask {
       position: absolute;
       top: 0; left: 0; right: 0; bottom: 0;
-      background: rgba(255,255,255,0.92);
+      background: rgba(255,255,255);
       z-index: 99;
       display: flex;
       align-items: center;
