@@ -39,7 +39,7 @@ const creditsHTML = `
       </p>
 
         <p>
-          Version 1.0 · Published October 2025 · Updated sporadically when inspiration (or panic) strikes.<br>
+          Version 1.2 · Published October 2025 · Updated sporadically when inspiration (or panic) strikes.<br>
           © 2025 Taipei Art Book Fair
         </p>
 `;
