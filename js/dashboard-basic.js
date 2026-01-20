@@ -715,11 +715,11 @@ document.addEventListener("DOMContentLoaded", async function () {
       if (isEnglishBoothType(boothType)) {
         ticketlink.innerHTML = "Ticket Link";
         familyticketdesc.innerHTML =
-          "◆ Friends & Family Pre-sale Ticket ｜ Starts 9/8 ｜ NT$350 ｜ Limited to 800 tickets<br>◆ Friends & Family Fast Track Ticket ｜ 11/21 – 11/23 ｜ NT$400<br>(For detailed instructions, please refer to the ticketing website.)<br><br>Your exclusive discount code:<br>";
+          "◆ Pre-Sale Discount ◆  1/19-2/15｜ NT$350<br>• Select Pre-Sale Ticket and enter the exhibitor discount code to purchase<br><br>◆ Fast Pass Discount ◆ 2/16-3/8｜ NT$400<br>Enjoy fast-track entry with priority access. No need to queue in the general admission line<br>• Select Fast Pass Ticket and enter the exhibitor discount code to purchase<br>(For detailed usage instructions, please refer to the ticketing page.)<br>⚠️ Limited quantity, available while supplies last<br><br>Your exclusive discount code:<br>";
       } else {
         ticketlink.innerHTML = "購票連結";
         familyticketdesc.innerHTML =
-          "◆ 親友預售票｜9/8 起開賣｜NT$350｜限量 800 張 <br>◆ 親友快速通關票｜11/21 – 11/23｜NT$400｜無限量<br>(詳細使用說明請見售票網頁)<br><br>您的專屬優惠序號：<br>";
+          "◆ 預售優惠◆ 1/19-2/15｜NT$350<br>• 點選預售票並輸入攤商優惠代碼即可購買<br><br>◆ 快速通關優惠◆ 2/16-3/8｜NT$400<br>享有入場快速通關權益，現場可免排一般入場隊伍<br>• 點選快速通關票並輸入攤商優惠代碼即可購買<br>(詳細使用說明請見售票網頁)<br>⚠️數量有限，售完為止<br><br>您的專屬優惠序號：<br>";
       }
     }
   }
