@@ -337,11 +337,16 @@ const handleFileUpload = async (
   const fileSizeMB = (file.size / (1024 * 1024)).toFixed(2);
   
   // 檢查檔案大小（設定 50MB 限制）
-  const maxSize = 50 * 1024 * 1024;
+  const maxSize = 20 * 1024 * 1024; // 20MB
+
   if (file.size > maxSize) {
     return {
       success: false,
-      errorMessage: `檔案大小超過限制 File size exceeds limit.\n\n檔案資訊 File Info:\n- 檔名 Filename: ${file.name}\n- 大小 Size: ${fileSizeMB} MB\n- 限制 Limit: 50 MB\n\n請壓縮檔案後再試。\nPlease compress the file and try again.`
+      errorMessage:
+        `檔案大小超過限制 File size exceeds limit.\n\n` +
+        `檔案資訊 File Info:\n- 檔名 Filename: ${file.name}\n- 大小 Size: ${fileSizeMB} MB\n- 限制 Limit: 20 MB\n\n` +
+        `建議：請壓縮到 20MB 以下再試。\n` +
+        `Please compress the file to under 20MB and try again.`
     };
   }
 
@@ -423,7 +428,19 @@ const handleFileUpload = async (
       if (fetchError.name === "TypeError" && fetchError.message.includes("fetch")) {
         return {
           success: false,
-          errorMessage: `網路連線錯誤 Network connection error.\n\n錯誤詳情 Error Details:\n- 步驟 Step: ${errorStep}\n- 錯誤 Error: ${fetchError.message}\n- 檔案資訊 File Info:\n  - 檔名 Filename: ${file.name}\n  - 大小 Size: ${fileSizeMB} MB\n\n可能原因 Possible causes:\n1. 網路連線不穩定 Unstable network connection\n2. 防火牆或代理伺服器阻擋 Firewall or proxy blocking\n3. 伺服器暫時無法連線 Server temporarily unavailable\n\n建議 Solutions:\n- 檢查網路連線 Check network connection\n- 稍後再試 Try again later\n- 如持續失敗，請截圖此錯誤訊息並聯繫我們 If the problem persists, please screenshot this error message and contact us`
+          errorMessage:
+            `網路連線錯誤 Network connection error.\n\n` +
+            `可能原因 Possible causes:\n` +
+            `1. 網路連線不穩定 Unstable network connection\n` +
+            `2. 檔案過大，上傳時間過長 File too large, upload takes too long\n` +
+            `3. 防火牆或代理伺服器阻擋 Firewall or proxy blocking\n\n` +
+            `建議 Solutions:\n` +
+            `- 請將檔案壓縮到 10–20MB 以內，再重新上傳。\n` +
+            `- 使用其他網路（例如手機熱點）再試。\n` +
+            `- 若您多次嘗試（更換網路／瀏覽器／壓縮檔案）仍無法成功上傳，請將此錯誤訊息截圖寄給主辦單位。此外附上您上傳的瀏覽器類型以及檔案，以助工程師排查問題。\n` +
+            `Please compress the file to under 10–20MB and try again.\n` +
+            `Try using a different network (e.g., mobile hotspot).\n` +
+            `If you still cannot upload the file after several attempts (changing network/browsers and compressing the file), please take a screenshot of this error message and send it to the organizer, along with your browser type and the file you are trying to upload for further investigation.`
         };
       }
       throw fetchError;
@@ -516,7 +533,7 @@ const handleFileUpload = async (
       errorMessage += `建議 Solutions:\n`;
       errorMessage += `- 檢查網路連線 Check network connection\n`;
       errorMessage += `- 稍後再試 Try again later\n`;
-      errorMessage += `- 如持續失敗，請使用無痕模式上傳試試 If the problem persists, please try uploading in incognito mode. If that fails, please screenshot this error message and contact us.`;
+      errorMessage += `- 如持續失敗，請使用無痕模式上傳試試 If the problem persists, please try uploading in incognito mode. If that fails, please screenshot this error message and contact us`;
     } else if (error.message.includes("read") || error.message.includes("FileReader")) {
       errorMessage += `可能原因 Possible causes:\n`;
       errorMessage += `1. 檔案損壞或格式不正確 File corrupted or incorrect format\n`;
