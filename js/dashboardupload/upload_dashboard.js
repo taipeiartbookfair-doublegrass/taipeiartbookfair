@@ -19,7 +19,6 @@ const uploadStatusMap = {
     status: "catalog-upload-status",
     storage: "catalog-uploaded-filename",
     storageTime: "catalog-uploaded-time",
-    folder: folderIds.catalog,
     successMsg: "草率簿檔案上傳成功 Catalog uploaded successfully!",
     failMsg: "草率簿檔案上傳失敗 Upload failed.",
     typeName: "草率簿檔案",
@@ -336,17 +335,17 @@ const handleFileUpload = async (
   const file = fileInput.files[0];
   const fileSizeMB = (file.size / (1024 * 1024)).toFixed(2);
   
-  // 檢查檔案大小（設定 50MB 限制）
-  const maxSize = 20 * 1024 * 1024; // 20MB
+  // 檢查檔案大小（設定 100MB 硬上限，但建議 40MB 以下）
+  const maxSize = 100 * 1024 * 1024; // 100MB
 
   if (file.size > maxSize) {
     return {
       success: false,
       errorMessage:
         `檔案大小超過限制 File size exceeds limit.\n\n` +
-        `檔案資訊 File Info:\n- 檔名 Filename: ${file.name}\n- 大小 Size: ${fileSizeMB} MB\n- 限制 Limit: 20 MB\n\n` +
-        `建議：請壓縮到 20MB 以下再試。\n` +
-        `Please compress the file to under 20MB and try again.`
+        `檔案資訊 File Info:\n- 檔名 Filename: ${file.name}\n- 大小 Size: ${fileSizeMB} MB\n- 限制 Limit: 100 MB\n\n` +
+        `建議：請將檔案壓縮到 40MB 以下再試，以避免網路中斷。\n` +
+        `Suggestion: Please compress the file to under 40MB to reduce the risk of network issues, then try again.`
     };
   }
 
