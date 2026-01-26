@@ -2,7 +2,7 @@
 const uploadApiUrl = "https://script.google.com/macros/s/AKfycbxOxo-ZzjkkDlkIyCNlmFgYfPhpLOHQr3278Mv36PJrM_jdb_RsaG42hwM23Cp7b7onBw/exec";
 
 // 獲取 account（從 cookie）
-const uploadAccount = getCookie("account");
+const account = getCookie("account");
 
 // 3 個 folder ID
 const folderIds = {
@@ -19,6 +19,7 @@ const uploadStatusMap = {
     status: "catalog-upload-status",
     storage: "catalog-uploaded-filename",
     storageTime: "catalog-uploaded-time",
+    folder: folderIds.catalog,
     successMsg: "草率簿檔案上傳成功 Catalog uploaded successfully!",
     failMsg: "草率簿檔案上傳失敗 Upload failed.",
     typeName: "草率簿檔案",
@@ -56,101 +57,68 @@ const uploadStatusMap = {
 
 // 顯示勾勾圖示的函數
 function showCheckmark(btn, conf) {
-  // 先找包含按鈕的 td（如 catalog-upload-td / material-download-td）
-  const td = btn.closest("td") || btn.parentElement;
-  if (!td) {
-    // fallback: 原本行為（在按鈕旁插入）
-    const existingCheckmark = btn.parentElement.querySelector(`.upload-checkmark-${conf.btn}`);
-    if (existingCheckmark) {
-      existingCheckmark.classList.remove("checkmark-animate");
-      setTimeout(() => existingCheckmark.classList.add("checkmark-animate"), 10);
-      return;
-    }
-    const checkmark = document.createElement("span");
-    checkmark.className = `upload-checkmark upload-checkmark-${conf.btn}`;
-    checkmark.innerHTML = "（已上傳 Uploaded）";
-    btn.parentElement.insertBefore(checkmark, btn.nextSibling);
+  // 檢查是否已經有勾勾圖示
+  const existingCheckmark = btn.parentElement.querySelector(`.upload-checkmark-${conf.btn}`);
+  if (existingCheckmark) {
+    // 如果已經存在，觸發動畫
+    existingCheckmark.classList.remove("checkmark-animate");
+    setTimeout(() => {
+      existingCheckmark.classList.add("checkmark-animate");
+    }, 10);
     return;
   }
 
-  // 設定 td 背景與文字色（保持明顯）
-  td.style.transition = "background-color 0.3s ease, color 0.3s ease";
-  td.style.backgroundColor = "forestgreen";
-  td.style.color = "white";
-
-  // 如果已經有狀態文字，重新觸發動畫即可
-  let existing = td.querySelector(`.upload-status-text-${conf.btn}`);
-  if (existing) {
-    existing.style.opacity = "0";
-    // force reflow
-    void existing.offsetWidth;
-    existing.style.opacity = "1";
-    return;
-  }
-
-  // 建立顯示文字，並放在 td 裡面、在 .ddl（若存在）之前
-  const statusSpan = document.createElement("span");
-  statusSpan.className = `upload-status-text upload-status-text-${conf.btn}`;
-  statusSpan.textContent = "（已上傳Uploaded）";
-  statusSpan.style.cssText = `
-    margin-top: 0.3rem;
-    color: lightgreen;
-    display:block;
-    background-color: blue;
-    text-align: center;
+  // 創建勾勾圖示元素
+  const checkmark = document.createElement("span");
+  checkmark.className = `upload-checkmark upload-checkmark-${conf.btn}`;
+  checkmark.innerHTML = "✓";
+  checkmark.style.cssText = `
+    display: inline-block;
+    margin-left: 0.5em;
+    color: #28a745;
+    font-size: 1.8em;
+    font-weight: bold;
+    line-height: 1;
+    vertical-align: middle;
+    opacity: 0;
+    transform: scale(0) rotate(-45deg);
+    transition: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+    text-shadow: 0 0 3px rgba(40, 167, 69, 0.5);
   `;
 
-  // 嘗試插入到 ddl 上方（確保顯示在原內容下面、ddl 之上）
-  const ddlInsideTd = td.querySelector(".ddl");
-  if (ddlInsideTd) {
-    td.insertBefore(statusSpan, ddlInsideTd);
-  } else {
-    // 沒有 ddl 時放在按鈕區塊後面
-    td.appendChild(statusSpan);
-  }
+  // 插入到按鈕後面
+  btn.parentElement.insertBefore(checkmark, btn.nextSibling);
 
-  // 觸發進場動畫
+  // 觸發動畫（先放大再恢復，有彈性效果）
   setTimeout(() => {
-    statusSpan.style.opacity = "1";
-    statusSpan.style.transform = "translateY(0)";
+    checkmark.style.opacity = "1";
+    checkmark.style.transform = "scale(1.2) rotate(0deg)";
+    checkmark.classList.add("checkmark-animate");
+    
+    // 再稍微縮小到正常大小，形成彈性效果
+    setTimeout(() => {
+      checkmark.style.transform = "scale(1) rotate(0deg)";
+    }, 200);
   }, 10);
 }
 
-// 移除勾勾/已上傳文字的函數（還原背景）
+// 移除勾勾圖示的函數
 function removeCheckmark(btn, conf) {
-  const td = btn.closest("td") || btn.parentElement;
-  if (!td) {
-    const checkmark = btn.parentElement.querySelector(`.upload-checkmark-${conf.btn}`);
-    if (checkmark) {
-      checkmark.style.opacity = "0";
-      checkmark.style.transform = "scale(0)";
-      setTimeout(() => {
-        if (checkmark.parentElement) checkmark.parentElement.removeChild(checkmark);
-      }, 300);
-    }
-    return;
-  }
-
-  const statusSpan = td.querySelector(`.upload-status-text-${conf.btn}`);
-  if (statusSpan) {
-    statusSpan.style.opacity = "0";
-    statusSpan.style.transform = "translateY(-6px)";
+  const checkmark = btn.parentElement.querySelector(`.upload-checkmark-${conf.btn}`);
+  if (checkmark) {
+    checkmark.style.opacity = "0";
+    checkmark.style.transform = "scale(0)";
     setTimeout(() => {
-      if (statusSpan.parentElement) statusSpan.parentElement.removeChild(statusSpan);
-      // 如果沒有其他成功標示，還原背景色與文字色
-      td.style.backgroundColor = "";
-      td.style.color = "";
+      if (checkmark.parentElement) {
+        checkmark.remove();
+      }
     }, 300);
-  } else {
-    // 仍嘗試還原背景
-    td.style.backgroundColor = "";
-    td.style.color = "";
   }
 }
 
 // 更新試算表的布林值
 async function updateSpreadsheetStatus(apiField, value) {
-  if (!uploadAccount || !apiField) {
+  if (!account || !apiField) {
     console.warn("無法更新試算表：缺少 account 或 apiField");
     return false;
   }
@@ -187,7 +155,7 @@ async function updateSpreadsheetStatus(apiField, value) {
 
 // 從 API 獲取上傳狀態並顯示勾勾
 async function loadUploadStatusFromAPI() {
-  if (!uploadAccount) {
+  if (!account) {
     console.warn("無法從 API 載入狀態：缺少 account");
     return;
   }
@@ -330,22 +298,16 @@ const handleFileUpload = async (
       errorMessage: "請先選擇檔案 Please select a file first."
     };
   }
-  //ajis
 
   const file = fileInput.files[0];
   const fileSizeMB = (file.size / (1024 * 1024)).toFixed(2);
   
-  // 檢查檔案大小（設定 100MB 硬上限，但建議 40MB 以下）
-  const maxSize = 100 * 1024 * 1024; // 100MB
-
+  // 檢查檔案大小（設定 50MB 限制）
+  const maxSize = 50 * 1024 * 1024;
   if (file.size > maxSize) {
     return {
       success: false,
-      errorMessage:
-        `檔案大小超過限制 File size exceeds limit.\n\n` +
-        `檔案資訊 File Info:\n- 檔名 Filename: ${file.name}\n- 大小 Size: ${fileSizeMB} MB\n- 限制 Limit: 100 MB\n\n` +
-        `建議：請將檔案壓縮到 40MB 以下再試，以避免網路中斷。\n` +
-        `Suggestion: Please compress the file to under 40MB to reduce the risk of network issues, then try again.`
+      errorMessage: `檔案大小超過限制 File size exceeds limit.\n\n檔案資訊 File Info:\n- 檔名 Filename: ${file.name}\n- 大小 Size: ${fileSizeMB} MB\n- 限制 Limit: 50 MB\n\n請壓縮檔案後再試。\nPlease compress the file and try again.`
     };
   }
 
@@ -427,19 +389,7 @@ const handleFileUpload = async (
       if (fetchError.name === "TypeError" && fetchError.message.includes("fetch")) {
         return {
           success: false,
-          errorMessage:
-            `網路連線錯誤 Network connection error.\n\n` +
-            `可能原因 Possible causes:\n` +
-            `1. 網路連線不穩定 Unstable network connection\n` +
-            `2. 檔案過大，上傳時間過長 File too large, upload takes too long\n` +
-            `3. 防火牆或代理伺服器阻擋 Firewall or proxy blocking\n\n` +
-            `建議 Solutions:\n` +
-            `- 請將檔案壓縮到 10–20MB 以內，再重新上傳。\n` +
-            `- 使用其他網路（例如手機熱點）再試。\n` +
-            `- 若您多次嘗試（更換網路／瀏覽器／壓縮檔案）仍無法成功上傳，請將此錯誤訊息截圖寄給主辦單位。此外附上您上傳的瀏覽器類型以及檔案，以助工程師排查問題。\n` +
-            `Please compress the file to under 10–20MB and try again.\n` +
-            `Try using a different network (e.g., mobile hotspot).\n` +
-            `If you still cannot upload the file after several attempts (changing network/browsers and compressing the file), please take a screenshot of this error message and send it to the organizer, along with your browser type and the file you are trying to upload for further investigation.`
+          errorMessage: `網路連線錯誤 Network connection error.\n\n錯誤詳情 Error Details:\n- 步驟 Step: ${errorStep}\n- 錯誤 Error: ${fetchError.message}\n- 檔案資訊 File Info:\n  - 檔名 Filename: ${file.name}\n  - 大小 Size: ${fileSizeMB} MB\n\n可能原因 Possible causes:\n1. 網路連線不穩定 Unstable network connection\n2. 防火牆或代理伺服器阻擋 Firewall or proxy blocking\n3. 伺服器暫時無法連線 Server temporarily unavailable\n\n建議 Solutions:\n- 檢查網路連線 Check network connection\n- 稍後再試 Try again later\n- 如持續失敗，請截圖此錯誤訊息並聯繫我們 If the problem persists, please screenshot this error message and contact us`
         };
       }
       throw fetchError;
@@ -532,7 +482,7 @@ const handleFileUpload = async (
       errorMessage += `建議 Solutions:\n`;
       errorMessage += `- 檢查網路連線 Check network connection\n`;
       errorMessage += `- 稍後再試 Try again later\n`;
-      errorMessage += `- 如持續失敗，請使用無痕模式上傳試試 If the problem persists, please try uploading in incognito mode. If that fails, please screenshot this error message and contact us`;
+      errorMessage += `- 如持續失敗，請截圖此錯誤訊息並聯繫我們 If the problem persists, please screenshot this error message and contact us`;
     } else if (error.message.includes("read") || error.message.includes("FileReader")) {
       errorMessage += `可能原因 Possible causes:\n`;
       errorMessage += `1. 檔案損壞或格式不正確 File corrupted or incorrect format\n`;
@@ -541,12 +491,12 @@ const handleFileUpload = async (
       errorMessage += `建議 Solutions:\n`;
       errorMessage += `- 檢查檔案是否完整 Check if file is complete\n`;
       errorMessage += `- 嘗試使用其他檔案格式 Try a different file format\n`;
-      errorMessage += `- 如持續失敗，請使用無痕模式上傳試試 If the problem persists, please try uploading in incognito mode. If that fails, please screenshot this error message and contact us.screenshot this error message and contact us`;
+      errorMessage += `- 如持續失敗，請截圖此錯誤訊息並聯繫我們 If the problem persists, please screenshot this error message and contact us`;
     } else {
       errorMessage += `建議 Solutions:\n`;
       errorMessage += `- 重新整理頁面後再試 Refresh the page and try again\n`;
       errorMessage += `- 檢查檔案格式是否正確 Check if file format is correct\n`;
-      errorMessage += `- 如持續失敗，請使用無痕模式上傳試試 If the problem persists, please try uploading in incognito mode. If that fails, please screenshot this error message and contact us.screenshot this error message and contact us`;
+      errorMessage += `- 如持續失敗，請截圖此錯誤訊息並聯繫我們 If the problem persists, please screenshot this error message and contact us`;
     }
 
     // 更新狀態顯示
@@ -606,7 +556,7 @@ function isUploadStatusExpired(uploadTimeString) {
 // 頁面載入時自動顯示 localStorage 狀態和從 API 獲取狀態
 window.addEventListener("DOMContentLoaded", async function () {
   // 先從 API 獲取狀態（如果有 account）
-  if (uploadAccount) {
+  if (account) {
     await loadUploadStatusFromAPI();
   }
   

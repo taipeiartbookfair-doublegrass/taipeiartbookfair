@@ -1,7 +1,7 @@
 (function () {
   // ===== 共用設定 =====
   const BASE_API =
-    "https://script.google.com/macros/s/AKfycbxWzlZPxSrpsLhwrKd4VdEHTA1tfeGwdT9Guj-lnFaUcofQ1i9aJEmr6SzETAKqOr48/exec";
+    "https://script.google.com/macros/s/AKfycbxGy6StTnQw2PPv0yOjftfsXTDhn1G4SPXeYc6OCQdmjl8O5PsOKRQ3-xjrF4bWMyxk/exec";
 
   // 依目前 <html lang> 判斷是否為英文
   function isEnglish() {
