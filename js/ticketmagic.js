@@ -1,6 +1,6 @@
 // 依 spreadsheet 的 tickets sheet 動態產生票卡並控制狀態
 (function () {
-  const API_URL = "https://script.google.com/macros/s/AKfycbxWzlZPxSrpsLhwrKd4VdEHTA1tfeGwdT9Guj-lnFaUcofQ1i9aJEmr6SzETAKqOr48/exec"; 
+  const API_URL = "https://script.google.com/macros/s/AKfycbxGy6StTnQw2PPv0yOjftfsXTDhn1G4SPXeYc6OCQdmjl8O5PsOKRQ3-xjrF4bWMyxk/exec"; 
 
   async function fetchTickets() {
     try {
