@@ -14,9 +14,8 @@ if (agreeCheckbox && submitButton) {
   });
 }
 
-// Consolidate Captcha logic and shared functionality
-const handleFileUpload = async (fileInput, form, submitButton, uploadUrl) => {
-  // 如果沒有檔案輸入框或沒有選擇檔案，返回 true（允許繼續提交）
+// 上傳檔案並將回傳的 URL 寫入指定的 hidden 欄位（支援 Portfolio / Proposal / Curation 三個欄位）
+const handleFileUpload = async (fileInput, form, submitButton, uploadUrl, hiddenFieldId) => {
   if (!fileInput || !fileInput.files || !fileInput.files.length) {
     return true;
   }
@@ -34,6 +33,7 @@ const handleFileUpload = async (fileInput, form, submitButton, uploadUrl) => {
     return false;
   }
 
+  const fieldId = hiddenFieldId || "uploadedFileUrl";
   try {
     const base64String = await new Promise((resolve, reject) => {
       const reader = new FileReader();
@@ -42,9 +42,8 @@ const handleFileUpload = async (fileInput, form, submitButton, uploadUrl) => {
       reader.readAsDataURL(file);
     });
 
-    const inputValue = document.querySelector(
-      "input[name='entry.1159390039']"
-    ).value;
+    const exhibitorInput = document.querySelector("input[name='entry.1159390039']");
+    const inputValue = exhibitorInput ? exhibitorInput.value : "exhibitor";
     const currentDateTime = new Date()
       .toISOString()
       .replace(/[-T:.]/g, "")
@@ -68,7 +67,8 @@ const handleFileUpload = async (fileInput, form, submitButton, uploadUrl) => {
     });
 
     const fileUrl = await uploadRes.text();
-    document.getElementById("uploadedFileUrl").value = fileUrl;
+    const hiddenEl = document.getElementById(fieldId);
+    if (hiddenEl) hiddenEl.value = fileUrl;
     return true;
   } catch (error) {
     alert("File upload failed. Please try again.");
@@ -76,65 +76,67 @@ const handleFileUpload = async (fileInput, form, submitButton, uploadUrl) => {
   }
 };
 
+const UPLOAD_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbzDAdWlQzwUInG1tLQWjI-GE54ZzJEjpvUwhP_MXzewEwPsfG2Gon7HsDw2C_eKwJsa/exec";
+
+// 送出後統一跳轉到成功頁（表單 target 為 hidden_iframe，主頁不會換頁，需手動跳轉）
+function redirectToSuccessPage() {
+  // 與表單同目錄，避免 ../ 在部分環境錯誤
+  const successUrl = "application-received.html";
+  window.location.href = successUrl;
+}
+
 form.addEventListener("submit", async function (e) {
+  e.preventDefault();
+
   const selectedBoothType = document.querySelector(
     'input[name="entry.133172086"]:checked'
   );
   let fileInput;
+  let hiddenFieldId;
   let needsUpload = false;
-  
+  // 支援中文（本地）與英文（海外 oversea_20251218_invite.html）攤位類型
   if (selectedBoothType) {
     const boothValue = selectedBoothType.value;
-    if (boothValue === "裝置類") {
+    if (boothValue === "裝置類" || boothValue === "Installation Booth") {
       fileInput = document.getElementById("fileInput2");
+      hiddenFieldId = "uploadedFileUrl2";
       needsUpload = true;
-    } else if (["創作商品", "書攤"].includes(boothValue)) {
+    } else if (["創作商品", "書攤", "Regular Book Booth", "Regular Non-Book Booth"].includes(boothValue)) {
       fileInput = document.getElementById("fileInput");
+      hiddenFieldId = "uploadedFileUrl";
       needsUpload = true;
-    } else if (boothValue === "策展攤") {
+    } else if (boothValue === "策展攤" || boothValue === "Curation Booth") {
       fileInput = document.getElementById("fileInput3");
+      hiddenFieldId = "uploadedFileUrl3";
       needsUpload = true;
     }
   }
 
-  // 如果需要上傳檔案，先處理上傳
-  if (needsUpload && fileInput) {
-    // 檢查是否有選擇檔案
-    if (fileInput.files && fileInput.files.length > 0) {
-      e.preventDefault(); // 只有需要上傳時才阻止預設提交
-      submitButton.disabled = true;
-      submitButton.innerText = "Submitting...";
-
-      const uploadSuccess = await handleFileUpload(
-        fileInput,
-        form,
-        submitButton,
-        "https://script.google.com/macros/s/AKfycbzDAdWlQzwUInG1tLQWjI-GE54ZzJEjpvUwhP_MXzewEwPsfG2Gon7HsDw2C_eKwJsa/exec"
-      );
-
-      if (!uploadSuccess) {
-        // 上傳失敗，恢復按鈕
-        submitButton.disabled = false;
-        submitButton.innerText = "Submit";
-        return;
-      }
-
-      // 上傳成功，提交表單
-      submitButton.disabled = true;
-      form.submit();
-      setTimeout(() => {
-        window.location.href = "../application-received.html";
-      }, 3000);
-    } else {
-      // 需要上傳但沒有選擇檔案，阻止提交並提示
-      e.preventDefault();
-      alert("Please select a file first.");
-      return;
-    }
-  } else {
-    // 不需要上傳檔案，讓表單正常提交
+  if (needsUpload && fileInput && fileInput.files && fileInput.files.length > 0) {
     submitButton.disabled = true;
     submitButton.innerText = "Submitting...";
-    // 不阻止預設提交行為，讓表單直接提交到 Google Forms
+
+    const uploadSuccess = await handleFileUpload(
+      fileInput,
+      form,
+      submitButton,
+      UPLOAD_SCRIPT_URL,
+      hiddenFieldId
+    );
+
+    if (!uploadSuccess) {
+      submitButton.disabled = false;
+      submitButton.innerText = "Submit";
+      return;
+    }
+  } else if (needsUpload && fileInput) {
+    alert("Please select a file first.");
+    return;
   }
+
+  // 表單送交到 hidden iframe，主頁不換頁，故一律由我們送出並跳轉
+  submitButton.disabled = true;
+  submitButton.innerText = "Submitting...";
+  form.submit();
+  setTimeout(redirectToSuccessPage, 3000);
 });
