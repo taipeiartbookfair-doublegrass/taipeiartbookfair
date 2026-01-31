@@ -69,13 +69,13 @@ boothTypeRadios.forEach((radio) => {
     const boothType = this.value;
     let categoryKey = "";
 
-    if (boothType === "書攤") {
+    if (boothType === "書攤" || boothType === "Regular Book Booth") {
       categoryKey = "book";
-    } else if (boothType === "創作商品") {
+    } else if (boothType === "創作商品" || boothType === "Regular Non-Book Booth") {
       categoryKey = "nonbook";
     } else if (boothType === "食物酒水") {
       categoryKey = "food";
-    } else if (boothType === "裝置類" || boothType === "策展攤") {
+    } else if (boothType === "裝置類" || boothType === "策展攤" || boothType === "Installation Booth" || boothType === "Curation Booth") {
       // 裝置類和策展攤，隱藏 sub-category
       subSelect.innerHTML = "";
       leftthing.style.display = "none";
