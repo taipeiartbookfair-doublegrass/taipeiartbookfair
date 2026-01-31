@@ -758,11 +758,11 @@ document.addEventListener("DOMContentLoaded", async function () {
       if (isEnglishBoothType(boothType)) {
         manualdownloadLink.innerHTML = "Download Manual";
         manualdesc.innerHTML =
-          "Please read it thoroughly and follow all instructions. It includes fair schedule, exhibitor regulations, and booth specifications, and the Venue Violation Handling and Penalty Manual. <br />";
+          "Please read carefully and prepare accordingly. This includes all exhibitor information: event schedule, details, guidelines, booth types, and on-site regulations. <br />";
       } else {
         manualdownloadLink.innerHTML = "下載手冊";
         manualdesc.innerHTML =
-          "請務必詳閱並依說明準備。內含展會流程、細節、注意事項與攤位樣式、現場規範與《場地違規處理與罰則手冊》等所有參展須知。<br /";
+          "請務必詳閱並依說明準備。內含展會流程、細節、注意事項與攤位樣式、現場規範等所有參展須知。<br /";
       }
     }
   }
