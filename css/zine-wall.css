@@ -1,5 +1,3 @@
-/* Zine Wall 頁面專用 - 風格與 ticketvisit 一致 */
-
 .zine-wall-hero {
   margin-top: var(--spacing-sm);
   padding: var(--spacing-lg) var(--spacing-sm);
@@ -102,6 +100,7 @@
   display: grid;
   grid-template-columns: repeat(auto-fill, 90px);
   grid-auto-rows: 120px;
+  grid-auto-flow: dense; /* 讓小卡片可以填補大卡片留下的空隙 */
   gap: var(--spacing-sm);
   width: 100%;
   overflow: visible;
@@ -110,7 +109,6 @@
 
 .zine-wall-card {
   --card-rotate: 0deg; 
-  overflow: hidden;
   cursor: pointer;
   transition: transform 0.2s ease, box-shadow 0.2s ease;
   opacity: 0;
@@ -186,8 +184,9 @@
   right: 0;
   padding: var(--spacing-sm);
   /* background: linear-gradient(transparent, rgba(0, 0, 0, 0.85)); */
-  color: black;
-  font-size: var(--font-sm);
+  color: yellow;
+  text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;
+  font-size: 1.2rem;
   font-weight: bold;
   text-transform: uppercase;
   letter-spacing: 0.03em;
@@ -196,7 +195,7 @@
   display: -webkit-box;
   -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;
-  overflow: hidden;
+  overflow: visible;
 }
 
 .zine-wall-card-meta {
@@ -260,13 +259,14 @@
   display: flex;
   align-items: flex-end;
   justify-content: center;
-  pointer-events: none; /* 整體不擋點擊，只有 panel 可點 */
+  pointer-events: none;
   opacity: 0;
   visibility: hidden;
   transition: opacity 0.25s ease, visibility 0.25s ease;
 }
 
 .zine-dropup[aria-hidden="false"] {
+  pointer-events: auto;
   opacity: 1;
   visibility: visible;
 }
@@ -274,16 +274,16 @@
 .zine-dropup-backdrop {
   position: absolute;
   inset: 0;
-  pointer-events: none; /* 不擋住 wall，可照常滑動與點另一本 */
+  cursor: pointer;
 }
 
 .zine-dropup-panel {
   position: relative;
   width: 100%;
-  max-width: 900px;
-  height: 25vh;
-  min-height: 180px;
-  max-height: 25vh;
+  max-width: 1000px;
+  height: 50vh;
+  min-height: 300px;
+  max-height: 50vh;
   background: var(--bg-primary);
   border: 2px solid var(--border-light);
   border-radius: 20px 20px 0 0;
@@ -300,7 +300,29 @@
   transform: translateY(0);
 }
 
-/* 關閉鈕已移除：dropup 常駐不消失 */
+.zine-dropup-close {
+  position: absolute;
+  top: var(--spacing-sm);
+  right: var(--spacing-sm);
+  z-index: 10;
+  width: 40px;
+  height: 40px;
+  border: 2px solid var(--border-light);
+  background: var(--bg-primary);
+  font-size: 1.5rem;
+  line-height: 1;
+  cursor: pointer;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.2s, color 0.2s;
+}
+
+.zine-dropup-close:hover {
+  background: var(--bg-dark);
+  color: var(--text-light);
+}
 
 .zine-dropup-body {
   display: grid;
@@ -312,13 +334,13 @@
   min-height: 0;
 }
 
-/* 圖片輪播（下方 1/4 內縮小） */
+/* 圖片輪播（配合 50vh 的 dropup） */
 .zine-dropup-gallery {
   position: relative;
   background: var(--bg-dark);
   border-radius: 12px;
   overflow: hidden;
-  min-height: 120px;
+  min-height: 200px;
   max-height: 100%;
 }
 
@@ -328,14 +350,14 @@
   scroll-snap-type: x mandatory;
   scroll-behavior: smooth;
   height: 100%;
-  min-height: 120px;
+  min-height: 200px;
 }
 
 .zine-dropup-images img {
   flex: 0 0 100%;
   width: 100%;
   height: 100%;
-  min-height: 120px;
+  min-height: 200px;
   object-fit: contain;
   scroll-snap-align: start;
   background: #111;

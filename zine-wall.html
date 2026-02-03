@@ -38,8 +38,26 @@
             </select>
           </div>
           <div class="zine-filter-group">
+            <label for="zine-filter-from" class="zine-filter-label">來自 From</label>
+            <select id="zine-filter-from" class="zine-filter-select">
+              <option value="">全部 All</option>
+            </select>
+          </div>
+          <div class="zine-filter-group">
+            <label for="zine-filter-language" class="zine-filter-label">語言 Language</label>
+            <select id="zine-filter-language" class="zine-filter-select">
+              <option value="">全部 All</option>
+            </select>
+          </div>
+          <div class="zine-filter-group">
             <label for="zine-filter-year" class="zine-filter-label">年份 Year</label>
             <select id="zine-filter-year" class="zine-filter-select">
+              <option value="">全部 All</option>
+            </select>
+          </div>
+          <div class="zine-filter-group">
+            <label for="zine-filter-creator" class="zine-filter-label">創作者 Creator</label>
+            <select id="zine-filter-creator" class="zine-filter-select">
               <option value="">全部 All</option>
             </select>
           </div>
@@ -59,11 +77,11 @@
       </div>
     </section>
 
-    <!-- Dropup 詳情彈出層 -->
-    <!-- Dropup 常駐下方 1/4，進入頁面即自動選第一本顯示 -->
+    <!-- Dropup 詳情彈出層：點擊卡片後彈出 -->
     <div id="zine-dropup" class="zine-dropup" aria-hidden="true">
       <div class="zine-dropup-backdrop" id="zine-dropup-backdrop"></div>
       <div class="zine-dropup-panel">
+        <button type="button" class="zine-dropup-close" id="zine-dropup-close" aria-label="關閉">×</button>
         <div class="zine-dropup-body">
           <!-- 左：圖片輪播 -->
           <div class="zine-dropup-gallery">
