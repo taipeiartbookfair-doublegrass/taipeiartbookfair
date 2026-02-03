@@ -228,15 +228,29 @@ function renderCardsWithStagger(records) {
   gridEl.innerHTML = "";
   emptyEl.style.display = records.length ? "none" : "block";
 
-  // 打亂順序，讓不同尺寸的書混在一起顯示
-  const shuffled = [...records].sort(() => Math.random() - 0.5);
+  // 依尺寸分組後交錯排列，讓大小混在一起（避免小書都擠在右邊）
+  const byTier = { sm: [], md: [], lg: [], xl: [] };
+  records.forEach((item) => {
+    const tier = getSizeTier(item);
+    byTier[tier].push(item);
+  });
+  
+  // 交錯插入：xl → md → lg → sm → md → xl → ... 讓大小均勻分佈
+  const shuffled = [];
+  const maxLen = Math.max(byTier.xl.length, byTier.lg.length, byTier.md.length, byTier.sm.length);
+  for (let i = 0; i < maxLen; i++) {
+    if (byTier.xl[i]) shuffled.push(byTier.xl[i]);
+    if (byTier.md[i]) shuffled.push(byTier.md[i]);
+    if (byTier.lg[i]) shuffled.push(byTier.lg[i]);
+    if (byTier.sm[i]) shuffled.push(byTier.sm[i]);
+  }
 
-  shuffled.forEach((item, index) => {
+  shuffled.forEach((item, shuffledIndex) => {
     const card = document.createElement("div");
     const tier = getSizeTier(item);
-    const rotate = getCardRotation(index, item);
+    const rotate = getCardRotation(shuffledIndex, item);
     card.className = "zine-wall-card zine-wall-card--" + tier;
-    card.setAttribute("data-index", index);
+    card.setAttribute("data-index", shuffledIndex);
     card.style.setProperty("--card-rotate", rotate + "deg");
 
     const photo = getPhoto(item);
@@ -264,13 +278,16 @@ function renderCardsWithStagger(records) {
     card.appendChild(inner);
     card.appendChild(metaEl);
 
-    card.addEventListener("click", () => openDropup(index, records));
+    // 點擊時：直接傳入 item，openDropup 會在 shuffled 中找索引
+    card.addEventListener("click", () => {
+      openDropupWithItem(item, shuffled);
+    });
 
     gridEl.appendChild(card);
 
     setTimeout(() => {
       card.classList.add("visible");
-    }, 50 * index);
+    }, 50 * shuffledIndex);
   });
 
   statsEl.textContent = `共 ${records.length} 筆`;
@@ -295,6 +312,23 @@ function openDropup(index, filteredList) {
   dropupCurrentIndex = Math.max(0, Math.min(index, dropupFilteredList.length - 1));
   dropupEl.setAttribute("aria-hidden", "false");
   document.body.style.overflow = ""; /* 不鎖 body，wall 可照常滑 */
+  renderDropupContent();
+  updateCardHighlight();
+}
+
+/** 用 item 物件開啟 dropup（避免索引不一致） */
+function openDropupWithItem(item, filteredList) {
+  dropupFilteredList = filteredList || getFilteredRecords();
+  // 用書名來比對（因為物件引用可能不同）
+  const itemTitle = getTitle(item);
+  dropupCurrentIndex = dropupFilteredList.findIndex((r) => getTitle(r) === itemTitle);
+  if (dropupCurrentIndex === -1) {
+    // 如果書名比對失敗，嘗試用物件引用比對
+    dropupCurrentIndex = dropupFilteredList.findIndex((r) => r === item);
+    if (dropupCurrentIndex === -1) dropupCurrentIndex = 0; // 都找不到時用第一個
+  }
+  dropupEl.setAttribute("aria-hidden", "false");
+  document.body.style.overflow = "";
   renderDropupContent();
   updateCardHighlight();
 }
