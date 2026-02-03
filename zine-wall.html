@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Zine Wall | Taipei Art Book Fair</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=BioRhyme+Expanded:wght@200;300;400;700;800&family=Libre+Franklin:ital,wght@0,100..900;1,100..900&family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="shortcut icon" href="image/icon-1.ico" />
+    <link rel="stylesheet" href="css/font.css" />
+    <link rel="stylesheet" href="css/ticketvisit.css" />
+    <link rel="stylesheet" href="css/zine-wall.css" />
+  </head>
+  <body>
+    <!-- 頂部導航 -->
+    <nav class="top-navigation">
+      <div class="nav-container">
+        <a href="index.html" class="nav-back-btn" style="background-color: lime;border:none;color:black;font-weight: bold;">← 返回主頁 Home</a>
+      </div>
+    </nav>
+
+    <button id="backToTop" class="back-to-top-btn">↑</button>
+
+
+    <!-- 篩選與內容區 -->
+    <section class="zine-wall-section" id="zine-wall-content">
+      <div class="zine-wall-container">
+        <!-- 篩選面板 -->
+        <div class="zine-wall-filters">
+          <div class="zine-filter-group">
+            <label for="zine-filter-category" class="zine-filter-label">分類 Category</label>
+            <select id="zine-filter-category" class="zine-filter-select">
+              <option value="">全部 All</option>
+            </select>
+          </div>
+          <div class="zine-filter-group">
+            <label for="zine-filter-year" class="zine-filter-label">年份 Year</label>
+            <select id="zine-filter-year" class="zine-filter-select">
+              <option value="">全部 All</option>
+            </select>
+          </div>
+          <div class="zine-filter-stats" id="zine-filter-stats">—</div>
+        </div>
+
+        <!-- 載入中 -->
+        <div id="zine-wall-loading" class="zine-wall-loading">讀取中…</div>
+
+        <!-- 卡片網格（一個一個跑出來） -->
+        <div id="zine-wall-grid" class="zine-wall-grid"></div>
+
+        <!-- 無結果 -->
+        <div id="zine-wall-empty" class="zine-wall-empty" style="display: none;">
+          目前沒有符合條件的項目。
+        </div>
+      </div>
+    </section>
+
+    <!-- Dropup 詳情彈出層 -->
+    <!-- Dropup 常駐下方 1/4，進入頁面即自動選第一本顯示 -->
+    <div id="zine-dropup" class="zine-dropup" aria-hidden="true">
+      <div class="zine-dropup-backdrop" id="zine-dropup-backdrop"></div>
+      <div class="zine-dropup-panel">
+        <div class="zine-dropup-body">
+          <!-- 左：圖片輪播 -->
+          <div class="zine-dropup-gallery">
+            <div class="zine-dropup-images" id="zine-dropup-images"></div>
+            <button type="button" class="zine-dropup-gallery-prev" id="zine-dropup-prev" aria-label="上一張">‹</button>
+            <button type="button" class="zine-dropup-gallery-next" id="zine-dropup-next" aria-label="下一張">›</button>
+            <div class="zine-dropup-gallery-dots" id="zine-dropup-dots"></div>
+          </div>
+
+          <!-- 右：書籍資料 -->
+          <div class="zine-dropup-info">
+            <div class="zine-dropup-store-badge" id="zine-dropup-store-badge"></div>
+            <h2 class="zine-dropup-title" id="zine-dropup-title"></h2>
+            <dl class="zine-dropup-fields" id="zine-dropup-fields"></dl>
+            <!-- 上一本 / 下一本 -->
+            <div class="zine-dropup-nav">
+              <button type="button" class="zine-dropup-nav-btn" id="zine-dropup-prev-book" aria-label="上一本">← 上一本</button>
+              <span class="zine-dropup-nav-counter" id="zine-dropup-counter"></span>
+              <button type="button" class="zine-dropup-nav-btn" id="zine-dropup-next-book" aria-label="下一本">下一本 →</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script src="js/zine-wall.js"></script>
+  </body>
+</html>

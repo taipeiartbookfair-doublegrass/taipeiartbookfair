@@ -1,0 +1,512 @@
+/* Zine Wall 頁面專用 - 風格與 ticketvisit 一致 */
+
+.zine-wall-hero {
+  margin-top: var(--spacing-sm);
+  padding: var(--spacing-lg) var(--spacing-sm);
+  background: var(--bg-primary);
+  border-bottom: 2px solid var(--border-light);
+}
+
+.zine-wall-hero-inner {
+  max-width: 100%;
+  margin: 0 auto;
+}
+
+.zine-wall-title {
+  font-size: var(--font-section, 6.5rem);
+  font-weight: bold;
+  color: var(--text-primary);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  line-height: 0.95;
+  margin-bottom: var(--spacing-xs);
+}
+
+.zine-wall-subtitle {
+  font-size: var(--font-md);
+  color: var(--text-secondary);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+
+.zine-wall-section {
+  padding: var(--spacing-md);
+  background: lightgrey;
+  min-height: 50vh;
+}
+
+.zine-wall-container {
+  max-width: 100%;
+  margin: 0 auto;
+}
+
+/* 篩選面板 - 與 ticketvisit exhibitor-search-panel 風格一致 */
+.zine-wall-filters {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--spacing-md);
+  padding: var(--spacing-md);
+  background: darkgrey;
+  border: 2px solid var(--border-light);
+  margin-bottom: var(--spacing-md);
+}
+
+.zine-filter-group {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-sm);
+}
+
+.zine-filter-label {
+  font-size: var(--font-sm);
+  font-weight: bold;
+  color: var(--text-primary);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.zine-filter-select {
+  padding: var(--spacing-sm) var(--spacing-md);
+  border: 2px solid var(--border-light);
+  background: var(--bg-primary);
+  font-size: var(--font-md);
+  font-family: "Inclusive Sans", sans-serif;
+  color: var(--text-primary);
+  min-width: 140px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.zine-filter-select:focus {
+  outline: none;
+  border-color: var(--bg-dark);
+}
+
+.zine-filter-stats {
+  margin-left: auto;
+  font-size: var(--font-sm);
+  color: var(--text-secondary);
+}
+
+/* 載入中 */
+.zine-wall-loading {
+  padding: var(--spacing-xl);
+  text-align: center;
+  font-size: var(--font-lg);
+  color: var(--text-secondary);
+}
+
+/* 卡片網格 - 四種尺寸等級（sm/md/lg/xl）對應實際格數，±15° 隨機旋轉 */
+.zine-wall-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, 90px);
+  grid-auto-rows: 120px;
+  gap: var(--spacing-sm);
+  width: 100%;
+  overflow: visible;
+  justify-content: center;
+}
+
+.zine-wall-card {
+  --card-rotate: 0deg; 
+  overflow: hidden;
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  opacity: 0;
+  transform: translateY(20px) rotate(var(--card-rotate));
+  transform-origin: center center;
+  min-width: 0;
+  min-height: 0;
+}
+
+/* 四種尺寸：依試算表「尺寸」欄分級，對應不同格數 */
+.zine-wall-card--sm {
+  grid-column: span 1;
+  grid-row: span 1;
+}
+.zine-wall-card--md {
+  grid-column: span 2;
+  grid-row: span 2;
+}
+.zine-wall-card--lg {
+  grid-column: span 2;
+  grid-row: span 3;
+}
+.zine-wall-card--xl {
+  grid-column: span 3;
+  grid-row: span 3;
+}
+
+.zine-wall-card.visible {
+  opacity: 1;
+  transform: translateY(0) rotate(var(--card-rotate));
+  animation: zine-card-in 0.4s ease forwards;
+}
+
+@keyframes zine-card-in {
+  from {
+    opacity: 0;
+    transform: translateY(20px) rotate(var(--card-rotate));
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) rotate(var(--card-rotate));
+  }
+}
+
+.zine-wall-card:hover {
+  border: 1px solid blue;
+  box-shadow: 0 0 0 1px blue;
+}
+
+/* 目前選中的書（dropup 顯示的那本） */
+.zine-wall-card.zine-wall-card-selected {
+  border: 1px solid lime;
+  box-shadow: 0 0 0 1px lime;
+}
+
+.zine-wall-card-inner {
+  width: 100%;
+  height: 100%;
+  min-height: 0;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+}
+
+.zine-wall-card-title {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: var(--spacing-sm);
+  /* background: linear-gradient(transparent, rgba(0, 0, 0, 0.85)); */
+  color: black;
+  font-size: var(--font-sm);
+  font-weight: bold;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+  line-height: 1.2;
+  min-height: 2.5em;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.zine-wall-card-meta {
+  padding: var(--spacing-xs) var(--spacing-sm);
+  font-size: var(--font-xs);
+  color: var(--text-secondary);
+}
+
+/* 無結果 */
+.zine-wall-empty {
+  padding: var(--spacing-xl);
+  text-align: center;
+  font-size: var(--font-lg);
+  color: var(--text-secondary);
+}
+
+@media (max-width: 768px) {
+  .zine-wall-title {
+    font-size: var(--font-xxl, 1.8rem);
+  }
+
+  .zine-wall-filters {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .zine-filter-group {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .zine-filter-select {
+    min-width: 100%;
+  }
+
+  .zine-filter-stats {
+    margin-left: 0;
+    text-align: center;
+  }
+
+  .zine-wall-grid {
+    grid-template-columns: repeat(auto-fill, 70px);
+    grid-auto-rows: 93px;
+    gap: var(--spacing-xs);
+  }
+}
+
+@media (max-width: 480px) {
+  .zine-wall-grid {
+    grid-template-columns: repeat(auto-fill, 60px);
+    grid-auto-rows: 80px;
+    gap: var(--spacing-xs);
+  }
+}
+
+/* ========== Dropup 詳情彈出層：固定下方 1/4，背後 wall 可照常滑動與點擊 ========== */
+.zine-dropup {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  pointer-events: none; /* 整體不擋點擊，只有 panel 可點 */
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.25s ease, visibility 0.25s ease;
+}
+
+.zine-dropup[aria-hidden="false"] {
+  opacity: 1;
+  visibility: visible;
+}
+
+.zine-dropup-backdrop {
+  position: absolute;
+  inset: 0;
+  pointer-events: none; /* 不擋住 wall，可照常滑動與點另一本 */
+}
+
+.zine-dropup-panel {
+  position: relative;
+  width: 100%;
+  max-width: 900px;
+  height: 25vh;
+  min-height: 180px;
+  max-height: 25vh;
+  background: var(--bg-primary);
+  border: 2px solid var(--border-light);
+  border-radius: 20px 20px 0 0;
+  box-shadow: 0 -8px 32px var(--shadow-medium);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  pointer-events: auto; /* 只有 panel 可點擊 */
+  transform: translateY(100%);
+  transition: transform 0.3s ease;
+}
+
+.zine-dropup[aria-hidden="false"] .zine-dropup-panel {
+  transform: translateY(0);
+}
+
+/* 關閉鈕已移除：dropup 常駐不消失 */
+
+.zine-dropup-body {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--spacing-lg);
+  padding: var(--spacing-lg);
+  overflow: auto;
+  flex: 1;
+  min-height: 0;
+}
+
+/* 圖片輪播（下方 1/4 內縮小） */
+.zine-dropup-gallery {
+  position: relative;
+  background: var(--bg-dark);
+  border-radius: 12px;
+  overflow: hidden;
+  min-height: 120px;
+  max-height: 100%;
+}
+
+.zine-dropup-images {
+  display: flex;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  scroll-behavior: smooth;
+  height: 100%;
+  min-height: 120px;
+}
+
+.zine-dropup-images img {
+  flex: 0 0 100%;
+  width: 100%;
+  height: 100%;
+  min-height: 120px;
+  object-fit: contain;
+  scroll-snap-align: start;
+  background: #111;
+}
+
+.zine-dropup-gallery-prev,
+.zine-dropup-gallery-next {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 44px;
+  height: 44px;
+  border: 2px solid var(--border-light);
+  background: rgba(255, 255, 255, 0.9);
+  font-size: 1.5rem;
+  line-height: 1;
+  cursor: pointer;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 5;
+  transition: background 0.2s;
+}
+
+.zine-dropup-gallery-prev {
+  left: var(--spacing-sm);
+}
+
+.zine-dropup-gallery-next {
+  right: var(--spacing-sm);
+}
+
+.zine-dropup-gallery-prev:hover,
+.zine-dropup-gallery-next:hover {
+  background: var(--bg-dark);
+  color: var(--text-light);
+}
+
+.zine-dropup-gallery-dots {
+  position: absolute;
+  bottom: var(--spacing-sm);
+  left: 0;
+  right: 0;
+  display: flex;
+  justify-content: center;
+  gap: 6px;
+  z-index: 5;
+}
+
+.zine-dropup-gallery-dots span {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.5);
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.zine-dropup-gallery-dots span.active {
+  background: var(--text-light);
+}
+
+/* 右側資料 */
+.zine-dropup-info {
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+  overflow: hidden;
+}
+
+.zine-dropup-store-badge {
+  margin-bottom: var(--spacing-sm);
+  font-size: var(--font-sm);
+  font-weight: bold;
+}
+
+.zine-dropup-store-badge.has-store {
+  color: var(--color-one, green);
+}
+
+.zine-dropup-store-badge.no-store {
+  color: var(--text-secondary);
+}
+
+.zine-dropup-title {
+  font-size: var(--font-lg);
+  font-weight: bold;
+  color: var(--text-primary);
+  margin-bottom: var(--spacing-md);
+  line-height: 1.3;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+}
+
+.zine-dropup-fields {
+  flex: 1;
+  overflow-y: auto;
+  margin: 0 0 var(--spacing-md);
+  font-size: var(--font-sm);
+}
+
+.zine-dropup-fields dt {
+  color: var(--text-secondary);
+  margin-top: var(--spacing-sm);
+  margin-bottom: 2px;
+  font-weight: bold;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.zine-dropup-fields dt:first-child {
+  margin-top: 0;
+}
+
+.zine-dropup-fields dd {
+  margin: 0 0 0 0;
+  padding-bottom: var(--spacing-xs);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+  line-height: 1.5;
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+
+/* 上一本 / 下一本 */
+.zine-dropup-nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--spacing-md);
+  padding-top: var(--spacing-md);
+  border-top: 2px solid var(--border-light);
+}
+
+.zine-dropup-nav-btn {
+  padding: var(--spacing-sm) var(--spacing-md);
+  border: 2px solid var(--border-light);
+  background: var(--bg-primary);
+  font-size: var(--font-sm);
+  font-weight: bold;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  cursor: pointer;
+  transition: background 0.2s, color 0.2s;
+}
+
+.zine-dropup-nav-btn:hover:not(:disabled) {
+  background: var(--bg-dark);
+  color: var(--text-light);
+}
+
+.zine-dropup-nav-btn:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+.zine-dropup-nav-counter {
+  font-size: var(--font-sm);
+  color: var(--text-secondary);
+}
+
+@media (max-width: 768px) {
+  .zine-dropup-body {
+    grid-template-columns: 1fr;
+  }
+
+  .zine-dropup-gallery {
+    min-height: 220px;
+  }
+
+  .zine-dropup-images img {
+    min-height: 220px;
+  }
+}
