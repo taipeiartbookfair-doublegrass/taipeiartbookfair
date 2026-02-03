@@ -370,11 +370,11 @@ function renderDropupContent() {
     };
   }
 
-  // 詳細欄位（依 DETAIL_FIELD_MAP，且跳過「書籍照片」僅在輪播顯示）
+  // 詳細欄位（跳過已在上方顯示的書名、以及僅在輪播顯示的書籍照片）
   dropupFieldsEl.innerHTML = "";
-  const skipPhotoLabel = "書籍照片＊ Photo";
+  const skipLabels = ["書籍照片＊ Photo", "書名"];
   for (const [label, keys] of Object.entries(DETAIL_FIELD_MAP)) {
-    if (label === skipPhotoLabel) continue;
+    if (skipLabels.includes(label)) continue;
     const val = getFirstMatch(item, keys);
     if (!val) continue;
     const dt = document.createElement("dt");
