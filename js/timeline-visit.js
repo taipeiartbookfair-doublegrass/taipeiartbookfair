@@ -14,8 +14,8 @@ const apiKey = "AIzaSyCOLToQuZFbB1mULxYrMyQVeTVGnhk8-U4";
 // 使用台灣時區的日期時間，避免時區轉換問題
 // 台灣時間 2025-11-21 00:00:00 (UTC+8) = UTC 2025-11-20 16:00:00
 // 所以需要明確指定台灣時區的日期
-const eventStartDate = new Date('2025-11-21T00:00:00+08:00'); // 台灣時間 2025年11月21日 00:00:00
-const eventEndDate = new Date('2025-11-24T00:00:00+08:00'); // 台灣時間 2025年11月24日 00:00:00 (包含23日整天)
+const eventStartDate = new Date('2026-03-06T00:00:00+08:00'); // 台灣時間 2025年11月21日 00:00:00
+const eventEndDate = new Date('2026-03-08T00:00:00+08:00'); // 台灣時間 2025年11月24日 00:00:00 (包含23日整天)
 const timelineUrl = `https://www.googleapis.com/calendar/v3/calendars/${encodeURIComponent(
   calendarId
 )}/events?key=${apiKey}&singleEvents=true&orderBy=startTime&timeMin=${eventStartDate.toISOString()}&timeMax=${eventEndDate.toISOString()}`;
@@ -185,9 +185,9 @@ function renderTimelineWithData(timelineData) {
 
   // 只顯示 2025/11/21-2025/11/23 這三天
   const eventDays = [
-    { year: 2025, month: 10, day: 21 }, // 11月21日
-    { year: 2025, month: 10, day: 22 }, // 11月22日
-    { year: 2025, month: 10, day: 23 }  // 11月23日
+    { year: 2026, month: 2, day: 6 }, // 3月6日
+    { year: 2026, month: 2, day: 7 }, // 3月7日
+    { year: 2026, month: 2, day: 8 }  // 3月8日
   ];
 
   // 創建主容器 - 包含時間軸和預覽區
