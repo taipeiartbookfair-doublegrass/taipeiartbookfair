@@ -15,7 +15,7 @@ const apiKey = "AIzaSyCOLToQuZFbB1mULxYrMyQVeTVGnhk8-U4";
 // 台灣時間 2025-11-21 00:00:00 (UTC+8) = UTC 2025-11-20 16:00:00
 // 所以需要明確指定台灣時區的日期
 const eventStartDate = new Date('2026-03-06T00:00:00+08:00'); // 台灣時間 2025年11月21日 00:00:00
-const eventEndDate = new Date('2026-03-08T00:00:00+08:00'); // 台灣時間 2025年11月24日 00:00:00 (包含23日整天)
+const eventEndDate = new Date('2026-03-09T00:00:00+08:00'); // 台灣時間 2025年11月24日 00:00:00 (包含23日整天)
 const timelineUrl = `https://www.googleapis.com/calendar/v3/calendars/${encodeURIComponent(
   calendarId
 )}/events?key=${apiKey}&singleEvents=true&orderBy=startTime&timeMin=${eventStartDate.toISOString()}&timeMax=${eventEndDate.toISOString()}`;
