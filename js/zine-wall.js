@@ -6,7 +6,12 @@ const ZINE_WALL_API =
   "https://script.google.com/macros/s/AKfycbyWRK0RBVwgvoD6IvPp9cOyJB6zXizkAWrvCJ5qTLOuReah_MFBAoSV8viZvqKZptOR/exec";
 
 // 可能的分類／年份／創作者／來自／語言欄位名（試算表表頭）
-const CATEGORY_KEYS = ["分類", "類別", "Category", "category", "作品類別", "類型"];
+// 分類欄位：優先使用與 BILINGUAL_PAIRS 一致的欄位
+const CATEGORY_KEYS = [
+  "分類(中)（BN）", "分類(中)(BN)", "分類(中)", "BN",
+  "分類(英)Category", "分類(英) Catagory", "分類(英)", "Category", "Catagory",
+  "分類", "類別", "category", "作品類別", "類型"
+];
 const YEAR_KEYS = ["年份", "年", "Year", "year", "出版年", "出版年份"];
 const CREATOR_KEYS = ["創作者", "Creator", "創作者*", "作者", "Author"];
 const FROM_KEYS = ["來自", "From", "來自(英)", "來自(中)"];
@@ -37,9 +42,9 @@ const DETAIL_FIELD_MAP = {
 
 // 中英文欄位配對：{ 合併後的顯示標籤: [中文欄位標籤, 英文欄位標籤] }
 const BILINGUAL_PAIRS = {
-  "來自": ["來自(中)", "來自(英)"],
-  "分類": ["分類(中)（BN）", "分類(英) Category"],
-  "內容介紹": ["內容介紹(中)＊ Intro", "內容介紹(英)＊ Intro"],
+  "來自 From": ["來自(中)", "來自(英)"],
+  "分類 Category": ["分類(中)（BN）", "分類(英) Category"],
+  "內容介紹 Description": ["內容介紹(中)＊ Intro", "內容介紹(英)＊ Intro"],
 };
 
 function getFirstMatch(item, keys) {
@@ -119,10 +124,33 @@ function detectFieldKeys(records) {
   let fromKey = null;
   let languageKey = null;
   const keys = records.length ? Object.keys(records[0]) : [];
+  
+  // 優先尋找與 BILINGUAL_PAIRS 一致的分類欄位
+  // 優先順序：分類(中)（BN） > 分類(英) Category > 其他分類欄位
+  const categoryZhKeys = DETAIL_FIELD_MAP["分類(中)（BN）"] || [];
+  const categoryEnKeys = DETAIL_FIELD_MAP["分類(英) Category"] || [];
+  
   for (const k of keys) {
     const n = k.replace(/\s+/g, "").toLowerCase();
+    
+    // 優先尋找中文分類欄位
+    if (!categoryKey && categoryZhKeys.some((c) => {
+      const cNorm = c.replace(/\s+/g, "").toLowerCase();
+      return n === cNorm || n.includes(cNorm) || cNorm.includes(n);
+    })) {
+      categoryKey = k;
+    }
+    // 如果沒有中文分類，尋找英文分類欄位
+    if (!categoryKey && categoryEnKeys.some((c) => {
+      const cNorm = c.replace(/\s+/g, "").toLowerCase();
+      return n === cNorm || n.includes(cNorm) || cNorm.includes(n);
+    })) {
+      categoryKey = k;
+    }
+    // 如果都沒有，使用原本的通用分類欄位搜尋
     if (!categoryKey && CATEGORY_KEYS.some((c) => n.includes(c.replace(/\s+/g, "").toLowerCase())))
       categoryKey = k;
+      
     if (!yearKey && YEAR_KEYS.some((y) => n.includes(y.replace(/\s+/g, "").toLowerCase())))
       yearKey = k;
     if (!creatorKey && CREATOR_KEYS.some((c) => n.includes(c.replace(/\s+/g, "").toLowerCase())))
@@ -461,14 +489,14 @@ function renderDropupContent() {
   const fieldOrder = [
     "創作者 Creator",
     "出版商 Publisher",
-    "來自",
-    "分類",
+    "來自 From",
+    "分類 Category",
     "尺寸 Size",
     "頁數 Pages",
     "出版年 Year",
     "語言 Language",
     "ISBN/ISSN",
-    "內容介紹",
+    "內容介紹 Description",
     "篩選標籤 Filter tag",
   ];
 
