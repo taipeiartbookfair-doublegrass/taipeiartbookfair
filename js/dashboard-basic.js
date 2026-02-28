@@ -1,3 +1,4 @@
+
 // 先檢查 cookie
 const account = getCookie("account");
 const region = getCookie("region");
@@ -197,6 +198,8 @@ document.addEventListener("DOMContentLoaded", async function () {
   setSocialText("facebook", apiData["facebook"]);
   setSocialText("yearlyanswer", apiData["當屆問答"]);
   setSocialText("electricity-answer", apiData["電力需求"]);
+  setSocialText("Booth-number", apiData["攤商編號"]);
+
 
   const applicationNumberEl = document.getElementById("application-number");
   if (applicationNumberEl) {
