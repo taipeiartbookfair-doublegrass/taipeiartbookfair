@@ -85,8 +85,11 @@ function redirectToSuccessPage() {
   window.location.href = successUrl;
 }
 
+window._opencallUploadPromise = null;
+
 form.addEventListener("submit", async function (e) {
   e.preventDefault();
+  window._opencallUploadPromise = null;
 
   const selectedBoothType = document.querySelector(
     'input[name="entry.133172086"]:checked'
@@ -94,7 +97,7 @@ form.addEventListener("submit", async function (e) {
   let fileInput;
   let hiddenFieldId;
   let needsUpload = false;
-  // 支援中文（本地）與英文（海外 oversea_20251218_invite.html）攤位類型
+
   if (selectedBoothType) {
     const boothValue = selectedBoothType.value;
     if (boothValue === "裝置類" || boothValue === "Installation Booth") {
@@ -112,31 +115,35 @@ form.addEventListener("submit", async function (e) {
     }
   }
 
-  if (needsUpload && fileInput && fileInput.files && fileInput.files.length > 0) {
-    submitButton.disabled = true;
-    submitButton.innerText = "Submitting...";
+  if (needsUpload && fileInput) {
+    if (fileInput.files && fileInput.files.length > 0) {
+      submitButton.disabled = true;
+      submitButton.innerText = "Uploading...";
 
-    const uploadSuccess = await handleFileUpload(
-      fileInput,
-      form,
-      submitButton,
-      UPLOAD_SCRIPT_URL,
-      hiddenFieldId
-    );
+      let resolveUpload, rejectUpload;
+      window._opencallUploadPromise = new Promise((res, rej) => {
+        resolveUpload = res;
+        rejectUpload = rej;
+      });
 
-    if (!uploadSuccess) {
-      submitButton.disabled = false;
-      submitButton.innerText = "Submit";
-      return;
+      const uploadSuccess = await handleFileUpload(
+        fileInput, form, submitButton, UPLOAD_SCRIPT_URL, hiddenFieldId
+      );
+
+      if (!uploadSuccess) {
+        submitButton.disabled = false;
+        submitButton.innerText = "Submit";
+        rejectUpload(new Error("upload failed"));
+        return;
+      }
+      resolveUpload();
+
+    } else {
+      let rejectUpload;
+      window._opencallUploadPromise = new Promise((_, rej) => rejectUpload = rej);
+      rejectUpload(new Error("no file selected"));
+      alert("Please select a file first.");
     }
-  } else if (needsUpload && fileInput) {
-    alert("Please select a file first.");
-    return;
   }
-
-  // 表單送交到 hidden iframe，主頁不換頁，故一律由我們送出並跳轉
-  submitButton.disabled = true;
-  submitButton.innerText = "Submitting...";
-  form.submit();
-  setTimeout(redirectToSuccessPage, 3000);
+  // 不呼叫 form.submit() 或 redirectToSuccessPage
 });

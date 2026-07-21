@@ -34,6 +34,7 @@ th {
   width: 100vw;
   height: 100vh;
   vertical-align: top;
+  background-color: #e8e8e8;
 }
 .sidebar {
   border: none;
@@ -97,6 +98,70 @@ th {
   overflow-y: auto;
   padding-bottom: 3rem;
 }
+/* Open Call / FAQ / Consignment：主表格 td 的全域 border／padding／word-break 會擠壓內嵌 iframe */
+td.admin#open-call-form,
+td.admin#faq,
+td.admin#consignment-form {
+  border: none;
+  padding: 0;
+  word-break: normal;
+}
+/* Open Call / Consignment：單一捲軸在 iframe 內，主欄不雙重捲動 */
+#open-call-form.admin,
+#consignment-form.admin {
+  overflow: hidden !important;
+}
+#open-call-form.admin > .scroll-inner.opencall-dashboard-host {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  max-height: 100vh;
+  min-height: 0;
+  overflow: hidden;
+  padding: 0;
+  padding-bottom: 0;
+  box-sizing: border-box;
+}
+#open-call-form .opencall-dashboard-iframe,
+#consignment-form iframe {
+  flex: 1 1 auto;
+  width: 100%;
+  min-height: 0;
+  height: 100vh;
+  border: 0;
+  display: block;
+  background: transparent;
+}
+/* FAQ：PDF 嵌入改為視窗比例高度，不再固定 600px */
+#faq.admin {
+  overflow: hidden !important;
+}
+#faq.admin > .scroll-inner {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  max-height: 100vh;
+  min-height: 0;
+  overflow: hidden;
+  padding-bottom: 0;
+  box-sizing: border-box;
+}
+#faq .faq-pdf-embed {
+  flex: 1 1 auto;
+  width: 100%;
+  min-height: 0;
+  height: 100%;
+  border: 1px solid #ddd;
+  box-sizing: border-box;
+}
+/* 避免全域 h3 的裝飾用超大字級壓縮 FAQ PDF 區 */
+#faq.admin .scroll-inner > h3 {
+  flex: 0 0 auto;
+  font-size: 1.35rem !important;
+  line-height: 1.3 !important;
+  margin: 0.6rem 0 0.75rem !important;
+  z-index: 99;
+}
 .faqtable {
   z-index: 3;
 }
@@ -159,7 +224,7 @@ h3 {
   font-size: 0.75rem;
 }
 .pay-button {
-  background: #000;
+  background: olivedrab;
   color: #fff;
   text-align: center;
   padding: 10px;
@@ -443,7 +508,8 @@ html::-webkit-scrollbar-thumb:hover {
   left: 0;
   right: 0;
   bottom: 0;
-  background: repeating-linear-gradient(
+  background:
+    repeating-linear-gradient(
       to bottom,
       #3e3e3e 0px,
       #aaa 6px,
@@ -524,7 +590,7 @@ html::-webkit-scrollbar-thumb:hover {
     box-sizing: border-box;
     background-color: aliceblue;
   }
-  .sidebar-middle{
+  .sidebar-middle {
     display: none !important;
   }
   .sidebar-logo {
@@ -556,7 +622,6 @@ html::-webkit-scrollbar-thumb:hover {
     overflow-x: hidden;
     box-sizing: border-box;
   }
-
 
   .sidebar a,
   .sidebar > a,
@@ -592,7 +657,7 @@ html::-webkit-scrollbar-thumb:hover {
     width: 100%;
   }
   /* 手機版：所有內容區塊預設隱藏 */
-  .mid, 
+  .mid,
   .right,
   .account,
   .admin,
@@ -680,10 +745,10 @@ html::-webkit-scrollbar-thumb:hover {
   #barcode-row[style*="display: none"] {
     display: none !important;
   }
-  .open-call-schedule{
+  .open-call-schedule {
     display: none !important;
   }
-  
+
   /* 手機版：schedule 表格使用 flex，讓日期和項目對齊 */
   #open-call-schedule table {
     width: 100%;
@@ -722,7 +787,7 @@ html::-webkit-scrollbar-thumb:hover {
     margin-top: -2px;
     border-top: none;
     padding-top: 0.5em;
-    font-size: .8rem;
+    font-size: 0.8rem;
   }
   /* 讓 rotated 文字在手機版正常顯示 */
   #open-call-schedule .rotated {
@@ -756,6 +821,23 @@ html::-webkit-scrollbar-thumb:hover {
     max-height: none !important;
     overflow: visible !important;
     padding-bottom: 2em;
+  }
+  /* Open Call / FAQ：覆寫手機版 .scroll-inner，讓 iframe／PDF 仍有足夠視窗高度 */
+  #open-call-form.admin.mobile-active > .scroll-inner.opencall-dashboard-host,
+  #faq.admin.mobile-active > .scroll-inner {
+    height: 100dvh !important;
+    max-height: 100dvh !important;
+    min-height: 0 !important;
+    overflow: hidden !important;
+    display: flex !important;
+    flex-direction: column !important;
+    padding-bottom: 0 !important;
+  }
+  #open-call-form.admin.mobile-active .opencall-dashboard-iframe,
+  #faq.admin.mobile-active .faq-pdf-embed {
+    flex: 1 1 auto !important;
+    min-height: 65dvh !important;
+    width: 100% !important;
   }
   table.layout,
   table,
@@ -801,7 +883,7 @@ html::-webkit-scrollbar-thumb:hover {
   }
   .label,
   .labelAQ {
-    font-size: .8rem !important;
+    font-size: 0.8rem !important;
     padding: 2px 4px;
   }
   h3 {
@@ -852,19 +934,19 @@ html::-webkit-scrollbar-thumb:hover {
     overflow-y: auto !important;
     box-sizing: border-box;
   }
-  
+
   /* 確保 sidebar 在手機版中始終是 static，不會變成 fixed */
   .sidebar,
   .sidebar.mobile-active {
     position: static !important;
   }
-  
+
   /* 確保 admin/contact section 不會影響 sidebar */
   .admin.mobile-active,
   #contact-method.mobile-active {
     position: relative !important;
   }
-  
+
   /* 條碼樣式 */
   #barcode-canvas {
     width: 100% !important;
@@ -928,4 +1010,9 @@ html::-webkit-scrollbar-thumb:hover {
     font-size: 28rem !important;
     line-height: 20rem !important;
   }
+}
+
+/* Open Call iframe：隱藏海外／本地其一時用（其餘由 #open-call-form 內 flex 決定高度） */
+.opencall-dashboard-iframe.opencall-dashboard-iframe--hidden {
+  display: none !important;
 }

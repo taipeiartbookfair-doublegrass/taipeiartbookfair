@@ -76,13 +76,20 @@ const handleFormFileUpload = async (fileInput, form, submitButton, uploadUrl) =>
   }
 };
 
+// _opencallUploadPromise：我們的 submit handler 等這個 Promise，
+// 由此 handler 設定，確保上傳完成後再呼叫 API。
+window._opencallUploadPromise = null;
+
 form.addEventListener("submit", async function (e) {
+  e.preventDefault();
+  window._opencallUploadPromise = null;
+
   const selectedBoothType = document.querySelector(
     'input[name="entry.133172086"]:checked'
   );
   let fileInput;
   let needsUpload = false;
-  
+
   if (selectedBoothType) {
     const boothValue = selectedBoothType.value;
     if (boothValue === "裝置類") {
@@ -97,13 +104,16 @@ form.addEventListener("submit", async function (e) {
     }
   }
 
-  // 如果需要上傳檔案，先處理上傳
   if (needsUpload && fileInput) {
-    // 檢查是否有選擇檔案
     if (fileInput.files && fileInput.files.length > 0) {
-      e.preventDefault(); // 只有需要上傳時才阻止預設提交
       submitButton.disabled = true;
-      submitButton.innerText = "Submitting...";
+      submitButton.innerText = "上傳中...";
+
+      let resolveUpload, rejectUpload;
+      window._opencallUploadPromise = new Promise((res, rej) => {
+        resolveUpload = res;
+        rejectUpload = rej;
+      });
 
       const uploadSuccess = await handleFormFileUpload(
         fileInput,
@@ -113,28 +123,19 @@ form.addEventListener("submit", async function (e) {
       );
 
       if (!uploadSuccess) {
-        // 上傳失敗，恢復按鈕
         submitButton.disabled = false;
         submitButton.innerText = "提交";
+        rejectUpload(new Error("upload failed"));
         return;
       }
+      resolveUpload(); // 通知我們的 handler：上傳完成
 
-      // 上傳成功，提交表單
-      submitButton.disabled = true;
-      form.submit();
-      setTimeout(() => {
-        window.location.href = "../application-received.html";
-      }, 3000);
     } else {
-      // 需要上傳但沒有選擇檔案，阻止提交並提示
-      e.preventDefault();
+      let rejectUpload;
+      window._opencallUploadPromise = new Promise((_, rej) => rejectUpload = rej);
+      rejectUpload(new Error("no file selected"));
       alert("請先選擇檔案");
-      return;
     }
-  } else {
-    // 不需要上傳檔案，讓表單正常提交
-    submitButton.disabled = true;
-    submitButton.innerText = "Submitting...";
-    // 不阻止預設提交行為，讓表單直接提交到 Google Forms
   }
+  // 不呼叫 form.submit()，由我們的 handler 負責送出
 });

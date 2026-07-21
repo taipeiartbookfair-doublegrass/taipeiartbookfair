@@ -2766,6 +2766,16 @@ p {
     padding: 0.3rem; /* 減少內邊距 */
   }
 
+/* Upcoming：無未來場次時改顯示最近活動的說明文字 */
+.events-timeline-fallback-note {
+  font-size: 0.85rem;
+  color: #444;
+  line-height: 1.45;
+  margin: 0 0 0.75rem;
+  padding: 0.4rem 0.15rem 0.6rem;
+  border-bottom: 1px dashed rgba(0, 0, 0, 0.12);
+}
+
 /* 桌面版 Event Card 樣式 - 簡潔列表樣式 */
 .event-card {
   display: flex;

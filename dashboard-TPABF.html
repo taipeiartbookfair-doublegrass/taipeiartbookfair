@@ -9,15 +9,15 @@
              script-src 'self' 'unsafe-inline' 'unsafe-eval' https://www.google.com https://www.gstatic.com https://code.jquery.com https://www.googletagmanager.com https://cdn.jsdelivr.net; 
              style-src 'self' 'unsafe-inline' https://www.google.com https://www.gstatic.com; 
              connect-src https://www.google-analytics.com https://script.google.com https://script.googleusercontent.com/ https://www.google.com https://www.gstatic.com;
-             frame-src https://www.google.com https://www.gstatic.com;
+             frame-src 'self' https://www.google.com https://www.gstatic.com;
              img-src 'self' data: https://www.google.com https://www.gstatic.com;"
     />
     <title>Dashboard - 草率季Taipei Art Book Fair</title>
     <link rel="stylesheet" href="css/dashboard.css" />
     <link rel="stylesheet" href="css/font.css" />
-    <!-- <link rel="stylesheet" href="css/opencall.css" /> -->
     <link rel="shortcut icon" href="image/icon-1.ico" />
 
+    <!-- checking -->
     <!-- Google tag (gtag.js) -->
     <script
       async
@@ -38,12 +38,12 @@
       async
       defer
     ></script>
-    <script src="js/cookie.js"></script>
-    <script src="js/dashboard-basic.js"></script>
-    <script src="js/edit-profile.js"></script>
+    <script src="js/cookie.js?v=20260512c"></script>
+    <script src="js/dashboard-basic.js?v=20260513a"></script>
+    <script src="js/edit-profile.js?v=20260512c"></script>
     <!-- JsBarcode library for barcode generation -->
     <script src="https://cdn.jsdelivr.net/npm/jsbarcode@3.11.5/dist/JsBarcode.all.min.js"></script>
-    <script src="js/barcode-generator.js"></script>
+    <script src="js/barcode-generator.js?v=20260512c"></script>
   </head>
   <body>
     <!-- Hidden iframe for form submission -->
@@ -70,16 +70,29 @@
               style="width: 4.5vw; height: auto; transform: rotate(45deg)"
             />
           </p>
-          <!-- <a
+          <a
             id="sidebar-open-call"
             href="#"
             style="text-decoration: none; color: black"
             onclick="showOpenCallForm(); setSidebarActive('open-call'); return false;"
           >
             <p>
-              <mark>OPEN<br />CALL</mark>
+              申請參展<br>
+              OPEN CALL
             </p>
-          </a> -->
+          </a>
+          <hr class="sidebar-hr" />
+          <a
+            id="sidebar-consignment"
+            href="#"
+            style="text-decoration: none; color: black"
+            onclick="showConsignmentForm(); setSidebarActive('consignment'); return false;"
+          >
+            <p>
+              寄售申請<br>
+              Consignment
+            </p>
+          </a>
           <hr class="sidebar-hr" />
           <a
             id="sidebar-dashboard"
@@ -88,17 +101,8 @@
             onclick="showDashboardSection(); setSidebarActive('dashboard'); return false;"
           >
             <p>
-              <mark>攤商管理<br />Panel</mark>
+              攤商管理<br />Panel
             </p>
-          </a>
-          <hr class="sidebar-hr" />
-          <a
-            id="sidebar-contact"
-            href="#"
-            style="text-decoration: none; color: black"
-            onclick="showContactSection(); setSidebarActive('contact'); return false;"
-          >
-            <p>聯絡我們<br />Contact</p>
           </a>
           <hr class="sidebar-hr" />
           <a
@@ -157,7 +161,7 @@
         </td>
 
         <!-- Middle Column -->
-        <td class="mid">
+        <td class="mid" style="display: none">
           <div class="scroll-inner">
             <table width="100%">
               <tr id="barcode-row" style="display: none;">
@@ -204,7 +208,7 @@
                     style="margin-top: 0.5em; font-size: 1rem"
                     id="live-event-schedule-desc"
                   >
-                    我們將會在此列出你所報名現場提供的活動服務場次資訊，相關活動內容已寄到你的信箱，不要忘了提早15分鐘到相對應的區域報到喔。
+                    你報名的現場活動資訊將列於此，相關內容已寄至你的信箱，別忘了提前 15 分鐘到場報到喔！Your registered session details will be listed here. Please arrive 15 minutes early for check-in
                   </div>
                   <hr
                     style="
@@ -246,7 +250,7 @@
                   ><br /><span
                     style="font-size: 2rem; padding-top: 15px"
                     id="booth-type"
-                    >One Regular Booth</span
+                    ></span
                   >
                   <hr
                     style="
@@ -274,18 +278,18 @@
                           "
                         >
                           <li id="equipment-table">
-                            – 桌面<small>(120×60cm)</small> ×1
+                           
                           </li>
-                          <li id="equipment-chair">– 椅子 ×2</li>
-                          <li id="equipment-badge">– 通行憑證 ×2</li>
+                          <li id="equipment-chair"></li>
+                          <li id="equipment-badge"></li>
                           <li id="equipment-book">
-                            – 草率簿 ×1<small> (含露出一面)</small>
+                            </small>
                           </li>
                           <li
                             id="extrapasstxt"
                             style="display: none; color: orangered"
                           >
-                            加購通行憑證 x1
+                            
                           </li>
                         </ul>
                       </td>
@@ -299,9 +303,6 @@
                             font-size: 1em;
                           "
                         >
-                          <li>供應一般電源110v</li>
-                          <li>不得使用大電器</li>
-                          <li>非每攤都有，需自備延長線與他人協調</li>
                         </ul>
                       </td>
                     </tr>
@@ -310,8 +311,13 @@
               </tr>
 
               <!-- 編輯按鈕 -->
-              <tr style="background-color: black; text-align: right">
-                <td colspan="2" style="padding: 2px 5px">
+              <tr id="edit-button-row" style="background-color: black; text-align: right; position: relative">
+                <td colspan="2" style="padding: 2px 5px;">
+                  <span
+                    id="edit-button-ddl"
+                    data-ddl="electricity-row"
+                    style="font-size: 0.7rem; color: #ffb3a7; display: none;"
+                  ></span>
                   <span
                     style="
                       text-align: right;
@@ -328,37 +334,31 @@
               <tr>
                 <td colspan="2" style="position: relative">
                   <span class="label">品牌名稱 Brand Name</span><br />
-                  <span style="font-size: 3rem" id="brand-name">品牌名稱</span>
+                  <span style="font-size: 3rem" id="brand-name"></span>
+                  <br />
+                  <span id="brand-name" style="font-size: 1.1rem; color: #555;"></span>
+                </td>
+              </tr>
+              <tr>
+                <td colspan="2" style="position: relative">
+                  <span class="label">品牌名稱 Brand Name(原文)</span><br />
+                  <span style="font-size: 3rem" id="brand-name-original"></span>
+                  <br />
+                  <span id="brand-name-original" style="font-size: 1.1rem; color: #555;"></span>
                 </td>
               </tr>
 
               <tr>
                 <td colspan="2">
                   <span class="label">品牌簡介 Bio</span><br />
-                  <div class="bio" id="bio">
-                    草率季」是臺灣大型藝術書刊的文化市集，也是臺灣首度串連各種理念的創作者、出版社、獨立書店、藝術家等的市集，展出各式畫冊、獨立刊物、藝術雜誌等特色刊物。臺灣目前正在形成在地文化底蘊的背景下，這份狂野與不確定性的特質，吸引了亞洲如韓國、日本等藝術創作者前來共襄盛舉，草率季漸漸成為臺灣與國際間出版連結的大型藝術書刊市集。從
-                    2016
-                    第一屆草率季開始，每年都規劃不同主題、廣邀國內外各領域藝文創作者，提供各個參展單位表達自我與理想的交流平台。
-                  </div>
+                  <div class="bio" id="bio"></div>
+                  <div class="bio" id="bio-en" style="color: #444; margin-top: 0.3em;"></div>
                 </td>
               </tr>
               <tr>
                 <td colspan="2" style="padding: 0">
                   <table style="width: 100%; table-layout: fixed">
                     <tr>
-                      <td
-                        style="
-                          border-top: 0.5px solid pink;
-                          border-left: none;
-                          border-right: 1px solid black;
-                          border-bottom: none;
-                        "
-                      >
-                        <span class="label">國籍 Nationality</span><br /><span
-                          id="nationality"
-                          >TW</span
-                        >
-                      </td>
                       <td
                         style="
                           border-top: 0.5px solid pink;
@@ -383,7 +383,7 @@
               <tr>
                 <td style="width: 50%" colspan="2">
                   <span class="label">身份類別 Role</span><br /><span id="role"
-                    >t0 Organizer</span
+                    ></span
                   >
                 </td>
               </tr>
@@ -406,7 +406,7 @@
               </tr>
               <tr>
                 <td colspan="2">
-                  <span class="label">2026TPABF 主題小提問：我最驕傲的小動作Ctrl+Y是？ (small behavior I re-do)</span><br />
+                  <span class="label">當屆問答</span><br />
                   <span id="yearlyanswer"></span>
                 </td>
               </tr>
@@ -418,20 +418,7 @@
                   <span class="label">電力需求 Electricity Requirement</span
                   ><br />
                   <span id="electricity-regulation">
-                    於右上角<span
-                      style="
-                        background-color: black;
-                        color: ghostwhite;
-                        padding: 1px;
-                      "
-                      >編輯 Edit</span
-                    >做修改。請務必詳列設備名稱與瓦數，範例如下：<br />
-                    微波爐／1100W／1個<br />
-                    熱水壺／1500W／1個<br />
-                    電扇／65W／1個<br /><br />
-                    📌 未事先申報之電器不得於現場使用，如於現場發現並屢勸不聽，將依《攤主手冊》規定處以罰款。<br />
-                    📌 如需使用 220v 電壓，將收取費用 NT$1000，並請於表單中註明。<br>
-                    📌 為維護安全，請勿使用變壓器，主辦單位不提供電壓轉換服務。
+                    
                   </span>
                 </td>
                 <td>
@@ -467,11 +454,12 @@
               <table width="100%">
                 <tr>
                   <td colspan="2">
-                    <span class="label">品牌名稱 Brand Name</span><br />
+                    <span class="label">英文品牌名稱 English Brand Name</span>
+                    <span style="font-size:0.8em; color:#888;">（必填 Required）</span><br />
                     <input
                       type="text"
                       name="brandName"
-                      value="品牌名稱"
+                      value=""
                       style="width: 95%"
                       id="brandName-edit"
                       maxlength="150"
@@ -481,14 +469,48 @@
                 </tr>
                 <tr>
                   <td colspan="2">
-                    <span class="label">品牌簡介 Bio</span><br />
+                    <span class="label">原文品牌名稱 Original Brand Name</span>
+                    <span style="font-size:0.8em; color:#888;">（非必填 optional）</span><br />
+                    <input
+                      type="text"
+                      name="brandNameOriginal"
+                      value=""
+                      style="width: 95%"
+                      id="brandName-original-edit"
+                      maxlength="150"
+                    />
+                  </td>
+                </tr>
+                <tr>
+                  <td colspan="2">
+                    <span class="label">中文品牌簡介 Chinese Bio</span>
+                    <span style="font-size:0.8em; color:#888;">（最多 80 字 / max 80 characters）</span><br />
                     <textarea
                       name="bio"
-                      rows="6"
+                      rows="3"
                       style="width: 95%"
                       id="bio-edit"
-                      maxlength="1000"
+                      maxlength="80"
                     ></textarea>
+                    <div style="font-size:0.8em; color:#888; text-align:right; width:95%;">
+                      <span id="bio-edit-counter">0</span> / 80
+                    </div>
+                  </td>
+                </tr>
+                <tr>
+                  <td colspan="2">
+                    <span class="label">英文品牌簡介 English Bio</span>
+                    <span style="font-size:0.8em; color:#888;">（最多 100 字 / max 100 characters）</span><br />
+                    <textarea
+                      name="bio-en"
+                      rows="3"
+                      style="width: 95%"
+                      id="bio-edit-en"
+                      maxlength="100"
+                    ></textarea>
+                    <div style="font-size:0.8em; color:#888; text-align:right; width:95%;">
+                      <span id="bio-edit-en-counter">0</span> / 100
+                    </div>
                   </td>
                 </tr>
                 <tr>
@@ -529,251 +551,7 @@
                     />
                   </td>
                 </tr>
-                <tr>
-                  <td>
-                    <span class="label">國籍 Nationality</span><br />
-                    <select id="nationality-edit">
-                      <option>Please select your nationality</option>
-                      <option value="AF">Afghanistan (AF)</option>
-                      <option value="AL">Albania (AL)</option>
-                      <option value="DZ">Algeria (DZ)</option>
-                      <option value="AS">American Samoa (AS)</option>
-                      <option value="AD">Andorra (AD)</option>
-                      <option value="AO">Angola (AO)</option>
-                      <option value="AI">Anguilla (AI)</option>
-                      <option value="AQ">Antarctica (AQ)</option>
-                      <option value="AG">Antigua and Barbuda (AG)</option>
-                      <option value="AR">Argentina (AR)</option>
-                      <option value="AM">Armenia (AM)</option>
-                      <option value="AW">Aruba (AW)</option>
-                      <option value="AU">Australia (AU)</option>
-                      <option value="AT">Austria (AT)</option>
-                      <option value="AZ">Azerbaijan (AZ)</option>
-                      <option value="BS">Bahamas, The (BS)</option>
-                      <option value="BH">Bahrain (BH)</option>
-                      <option value="BD">Bangladesh (BD)</option>
-                      <option value="BB">Barbados (BB)</option>
-                      <option value="BY">Belarus (BY)</option>
-                      <option value="BE">Belgium (BE)</option>
-                      <option value="BZ">Belize (BZ)</option>
-                      <option value="BJ">Benin (BJ)</option>
-                      <option value="BM">Bermuda (BM)</option>
-                      <option value="BT">Bhutan (BT)</option>
-                      <option value="BO">Bolivia (BO)</option>
-                      <option value="BA">Bosnia and Herzegovina (BA)</option>
-                      <option value="BW">Botswana (BW)</option>
-                      <option value="BR">Brazil (BR)</option>
-                      <option value="IO">
-                        British Indian Ocean Territory (IO)
-                      </option>
-                      <option value="VG">British Virgin Islands (VG)</option>
-                      <option value="BN">Brunei (BN)</option>
-                      <option value="BG">Bulgaria (BG)</option>
-                      <option value="BF">Burkina Faso (BF)</option>
-                      <option value="MM">Burma (MM)</option>
-                      <option value="BI">Burundi (BI)</option>
-                      <option value="KH">Cambodia (KH)</option>
-                      <option value="CM">Cameroon (CM)</option>
-                      <option value="CA">Canada (CA)</option>
-                      <option value="CV">Cape Verde (CV)</option>
-                      <option value="KY">Cayman Islands (KY)</option>
-                      <option value="CF">Central African Republic (CF)</option>
-                      <option value="TD">Chad (TD)</option>
-                      <option value="CL">Chile (CL)</option>
-                      <option value="CN">China (CN)</option>
-                      <option value="CX">Christmas Island (CX)</option>
-                      <option value="CC">Cocos (Keeling) Islands (CC)</option>
-                      <option value="CO">Colombia (CO)</option>
-                      <option value="KM">Comoros (KM)</option>
-                      <option value="CD">
-                        Congo, Democratic Republic of the (CD)
-                      </option>
-                      <option value="CG">Congo, Republic of the (CG)</option>
-                      <option value="CK">Cook Islands (CK)</option>
-                      <option value="CR">Costa Rica (CR)</option>
-                      <option value="CI">Cote d'Ivoire (CI)</option>
-                      <option value="HR">Croatia (HR)</option>
-                      <option value="CU">Cuba (CU)</option>
-                      <option value="CY">Cyprus (CY)</option>
-                      <option value="CZ">Czech Republic (CZ)</option>
-                      <option value="DK">Denmark (DK)</option>
-                      <option value="DJ">Djibouti (DJ)</option>
-                      <option value="DM">Dominica (DM)</option>
-                      <option value="DO">Dominican Republic (DO)</option>
-                      <option value="EC">Ecuador (EC)</option>
-                      <option value="EG">Egypt (EG)</option>
-                      <option value="SV">El Salvador (SV)</option>
-                      <option value="GQ">Equatorial Guinea (GQ)</option>
-                      <option value="ER">Eritrea (ER)</option>
-                      <option value="EE">Estonia (EE)</option>
-                      <option value="ET">Ethiopia (ET)</option>
-                      <option value="FK">
-                        Falkland Islands (Islas Malvinas) (FK)
-                      </option>
-                      <option value="FO">Faroe Islands (FO)</option>
-                      <option value="FJ">Fiji (FJ)</option>
-                      <option value="FI">Finland (FI)</option>
-                      <option value="FR">France (FR)</option>
-                      <option value="GF">French Guiana (GF)</option>
-                      <option value="PF">French Polynesia (PF)</option>
-                      <option value="TF">
-                        French Southern and Antarctic Lands (TF)
-                      </option>
-                      <option value="GA">Gabon (GA)</option>
-                      <option value="GM">Gambia, The (GM)</option>
-                      <option value="GE">Georgia (GE)</option>
-                      <option value="DE">Germany (DE)</option>
-                      <option value="GH">Ghana (GH)</option>
-                      <option value="GI">Gibraltar (GI)</option>
-                      <option value="GR">Greece (GR)</option>
-                      <option value="GL">Greenland (GL)</option>
-                      <option value="GD">Grenada (GD)</option>
-                      <option value="GP">Guadeloupe (GP)</option>
-                      <option value="GU">Guam (GU)</option>
-                      <option value="GT">Guatemala (GT)</option>
-                      <option value="GG">Guernsey (GG)</option>
-                      <option value="GN">Guinea (GN)</option>
-                      <option value="GW">Guinea-Bissau (GW)</option>
-                      <option value="GY">Guyana (GY)</option>
-                      <option value="HT">Haiti (HT)</option>
-                      <option value="VA">Holy See (Vatican City) (VA)</option>
-                      <option value="HN">Honduras (HN)</option>
-                      <option value="HK">Hong Kong (HK)</option>
-                      <option value="HU">Hungary (HU)</option>
-                      <option value="IS">Iceland (IS)</option>
-                      <option value="IN">India (IN)</option>
-                      <option value="ID">Indonesia (ID)</option>
-                      <option value="IR">Iran (IR)</option>
-                      <option value="IQ">Iraq (IQ)</option>
-                      <option value="IE">Ireland (IE)</option>
-                      <option value="IM">Isle of Man (IM)</option>
-                      <option value="IL">Israel (IL)</option>
-                      <option value="IT">Italy (IT)</option>
-                      <option value="JM">Jamaica (JM)</option>
-                      <option value="JP">Japan (JP)</option>
-                      <option value="JE">Jersey (JE)</option>
-                      <option value="JO">Jordan (JO)</option>
-                      <option value="KZ">Kazakhstan (KZ)</option>
-                      <option value="KE">Kenya (KE)</option>
-                      <option value="KI">Kiribati (KI)</option>
-                      <option value="KP">Korea, North (KP)</option>
-                      <option value="KR">Korea, South (KR)</option>
-                      <option value="KW">Kuwait (KW)</option>
-                      <option value="KG">Kyrgyzstan (KG)</option>
-                      <option value="LA">Laos (LA)</option>
-                      <option value="LV">Latvia (LV)</option>
-                      <option value="LB">Lebanon (LB)</option>
-                      <option value="LS">Lesotho (LS)</option>
-                      <option value="LR">Liberia (LR)</option>
-                      <option value="LY">Libya (LY)</option>
-                      <option value="LI">Liechtenstein (LI)</option>
-                      <option value="LT">Lithuania (LT)</option>
-                      <option value="LU">Luxembourg (LU)</option>
-                      <option value="MO">Macau (MO)</option>
-                      <option value="MK">Macedonia (MK)</option>
-                      <option value="MG">Madagascar (MG)</option>
-                      <option value="MW">Malawi (MW)</option>
-                      <option value="MY">Malaysia (MY)</option>
-                      <option value="MV">Maldives (MV)</option>
-                      <option value="ML">Mali (ML)</option>
-                      <option value="MT">Malta (MT)</option>
-                      <option value="MH">Marshall Islands (MH)</option>
-                      <option value="MQ">Martinique (MQ)</option>
-                      <option value="MR">Mauritania (MR)</option>
-                      <option value="MU">Mauritius (MU)</option>
-                      <option value="YT">Mayotte (YT)</option>
-                      <option value="MX">Mexico (MX)</option>
-                      <option value="FM">
-                        Micronesia, Federated States of (FM)
-                      </option>
-                      <option value="MD">Moldova (MD)</option>
-                      <option value="MC">Monaco (MC)</option>
-                      <option value="MN">Mongolia (MN)</option>
-                      <option value="MA">Morocco (MA)</option>
-                      <option value="MZ">Mozambique (MZ)</option>
-                      <option value="NA">Namibia (NA)</option>
-                      <option value="NR">Nauru (NR)</option>
-                      <option value="NP">Nepal (NP)</option>
-                      <option value="NL">Netherlands (NL)</option>
-                      <option value="NC">New Caledonia (NC)</option>
-                      <option value="NZ">New Zealand (NZ)</option>
-                      <option value="NI">Nicaragua (NI)</option>
-                      <option value="NE">Niger (NE)</option>
-                      <option value="NG">Nigeria (NG)</option>
-                      <option value="NO">Norway (NO)</option>
-                      <option value="OM">Oman (OM)</option>
-                      <option value="PK">Pakistan (PK)</option>
-                      <option value="PW">Palau (PW)</option>
-                      <option value="PA">Panama (PA)</option>
-                      <option value="PG">Papua New Guinea (PG)</option>
-                      <option value="PY">Paraguay (PY)</option>
-                      <option value="PE">Peru (PE)</option>
-                      <option value="PH">Philippines (PH)</option>
-                      <option value="PL">Poland (PL)</option>
-                      <option value="PT">Portugal (PT)</option>
-                      <option value="PR">Puerto Rico (PR)</option>
-                      <option value="QA">Qatar (QA)</option>
-                      <option value="RE">Reunion (RE)</option>
-                      <option value="RO">Romania (RO)</option>
-                      <option value="RU">Russia (RU)</option>
-                      <option value="RW">Rwanda (RW)</option>
-                      <option value="SH">Saint Helena (SH)</option>
-                      <option value="KN">Saint Kitts and Nevis (KN)</option>
-                      <option value="LC">Saint Lucia (LC)</option>
-                      <option value="PM">Saint Pierre and Miquelon (PM)</option>
-                      <option value="VC">
-                        Saint Vincent and the Grenadines (VC)
-                      </option>
-                      <option value="WS">Samoa (WS)</option>
-                      <option value="SM">San Marino (SM)</option>
-                      <option value="ST">Sao Tome and Principe (ST)</option>
-                      <option value="SA">Saudi Arabia (SA)</option>
-                      <option value="SN">Senegal (SN)</option>
-                      <option value="RS">Serbia (RS)</option>
-                      <option value="SC">Seychelles (SC)</option>
-                      <option value="SL">Sierra Leone (SL)</option>
-                      <option value="SG">Singapore (SG)</option>
-                      <option value="SK">Slovakia (SK)</option>
-                      <option value="SI">Slovenia (SI)</option>
-                      <option value="SB">Solomon Islands (SB)</option>
-                      <option value="SO">Somalia (SO)</option>
-                      <option value="ZA">South Africa (ZA)</option>
-                      <option value="ES">Spain (ES)</option>
-                      <option value="LK">Sri Lanka (LK)</option>
-                      <option value="SD">Sudan (SD)</option>
-                      <option value="SR">Suriname (SR)</option>
-                      <option value="SZ">Swaziland (SZ)</option>
-                      <option value="SE">Sweden (SE)</option>
-                      <option value="CH">Switzerland (CH)</option>
-                      <option value="SY">Syria (SY)</option>
-                      <option value="TW">Taiwan (TW)</option>
-                      <option value="TJ">Tajikistan (TJ)</option>
-                      <option value="TZ">Tanzania (TZ)</option>
-                      <option value="TH">Thailand (TH)</option>
-                      <option value="TL">Timor-Leste (TL)</option>
-                      <option value="TG">Togo (TG)</option>
-                      <option value="TO">Tonga (TO)</option>
-                      <option value="TT">Trinidad and Tobago (TT)</option>
-                      <option value="TN">Tunisia (TN)</option>
-                      <option value="TR">Turkey (TR)</option>
-                      <option value="TM">Turkmenistan (TM)</option>
-                      <option value="TV">Tuvalu (TV)</option>
-                      <option value="UG">Uganda (UG)</option>
-                      <option value="UA">Ukraine (UA)</option>
-                      <option value="AE">United Arab Emirates (AE)</option>
-                      <option value="GB">United Kingdom (GB)</option>
-                      <option value="US">United States (US)</option>
-                      <option value="UY">Uruguay (UY)</option>
-                      <option value="UZ">Uzbekistan (UZ)</option>
-                      <option value="VU">Vanuatu (VU)</option>
-                      <option value="VE">Venezuela (VE)</option>
-                      <option value="VN">Vietnam (VN)</option>
-                      <option value="YE">Yemen (YE)</option>
-                      <option value="ZM">Zambia (ZM)</option>
-                      <option value="ZW">Zimbabwe (ZW)</option>
-                    </select>
-                  </td>
-                  <td>
+                <td>
                     <span class="label">主要創作據點 Based at</span><br />
                     <input
                       type="text"
@@ -824,14 +602,13 @@
                 <tr>
                   <td colspan="2">
                     <span class="label"
-                      >2026TPABF 主題小提問：我最驕傲的小動作Ctrl+Y是？ (small behavior I re-do)</span
+                      >當屆問答</span
                     ><br />
                     <textarea
                       name="yearlyanswer"
                       rows="3"
                       style="width: 95%"
                       id="yearlyanswer-edit"
-                      maxlength="50"
                     ></textarea>
                   </td>
                 </tr>
@@ -842,6 +619,7 @@
                   >
                     <span class="label">電力需求 Electricity Requirement</span
                     ><br />
+                    <span id="electricity-edit-deadline-notice" style="font-size:0.8em; color:#c00; display:block; margin-bottom:0.3em;"></span>
                     <textarea
                       name="electricity"
                       rows="3"
@@ -853,8 +631,9 @@
                 </tr>
               </table>
 
-              <p style="margin-top: 2rem; color: darkgray">
-                請再次確認資訊是否正確後再進行修改。請於 1/9 前完成調整，草率簿及相關露出文字將以最終由工作同仁彙整的版本為準。Please double-check that all information is correct before making any changes. Adjustments should be completed by January 9, and the final version of the Catalog and related text will be based on the version compiled by our team.
+              <p style="margin-top: 2rem; color: darkgray" id="edit-form-deadline-note">
+                請再次確認資訊是否正確後再進行修改。<br>
+                Please double-check that all information is correct before making changes.
               </p>
 
               <div style="margin-top: 1rem">
@@ -878,7 +657,7 @@
         </td>
 
         <!-- Right Column -->
-        <td class="right">
+        <td class="right" style="display: none">
           <div class="scroll-inner">
             <table style="width: 100%; table-layout: auto">
               <!-- 攤商編號 -->
@@ -938,12 +717,12 @@
               </tr>
 
               <!-- 資格勾勾區 -->
-              <tr id="registration-status-row" display="none;">
+              <tr id="registration-status-row" style="display: none">
                 <td colspan="3" style="padding: 0; border: none">
                   <table style="width: 100%; table-layout: auto">
                     <tr style="padding: 0; border: none">
                       <!-- 參展資格 -->
-                      <td style="width: 30%; border-right: 1px dashed black">
+                      <td style="width: 30%; border-right: 1px dashed black;background-color:cyan">
                         <span class="label">參展資格 Exhibitor Status</span
                         ><br />
                         <div style="vertical-align: middle; font-size: 2.7rem">
@@ -954,7 +733,7 @@
                               line-height: 1.5rem;
                             "
                             id="registration-status"
-                            >未完成</span
+                            ></span
                           >
                           <span
                             style="
@@ -1057,51 +836,52 @@
                             <td
                               style="padding: 0.5em 0em 0em 0.5em; border: none"
                             >
-                              <a
-                                href="https://drive.google.com/drive/folders/1D4fSfNj9tBgT_nOR9cI8Qm0nKrSXkSdv"
-                                target="_blank"
+                              <span
                                 id="declaration-download-link"
+                                style="font-size: 0.85em; font-weight: bold; display: block; margin-bottom: 0.4em;"
                               >
-                                下載參展同意書
-                              </a>
-                              <br />
+                                參展同意書 Exhibitor Declaration
+                              </span>
                               <span
                                 style="
                                   font-size: 0.8em;
-                                  line-height: 0.7rem;
+                                  line-height: 1.3rem;
                                   color: #888;
+                                  display: block;
+                                  margin-top: 0.2em;
+                                  margin-bottom: 0.5em;
                                 "
                                 id="declaration-desc"
-                              >
-                                請下載並簽署參展同意書，完成後請上傳。</span
-                              ><br />
-                              <input
-                                type="file"
-                                id="declaration-file"
-                                accept=".pdf,.jpg,.jpeg,.png"
-                                style="margin-bottom: 0.5em; max-width: 198px"
-                              />
+                              >請點擊下方按鈕，閱讀並確認同意書。</span>
+                              <!-- 開啟 modal 的按鈕，確認後自動隱藏 -->
                               <button
-                                id="uploadBtnDeclaration"
+                                id="declaration-open-modal-btn"
                                 type="button"
                                 style="
-                                  padding: 0.3em 1.2em;
-                                  background: #000;
+                                  padding: 0.35em 1.1em;
+                                  background: olivedrab;
                                   color: #fff;
                                   border: none;
                                   border-radius: 3px;
                                   cursor: pointer;
+                                  font-size: 0.82em;
                                 "
-                              >
-                                上傳 Upload</button
-                              ><br />
+                              >閱讀並確認 Read &amp; Confirm →</button>
+                              <!-- 隱藏 checkbox，供 loadUploadStatusFromAPI 狀態偵測用 -->
+                              <input
+                                type="checkbox"
+                                id="declaration-agree-checkbox"
+                                style="display: none;"
+                              />
+                              <button id="confirmBtnDeclaration" type="button" style="display:none;">確認同意</button>
                               <span
                                 id="declaration-upload-status"
-                                style="color: green"
+                                style="color: green; font-size: 0.8em; display: block; margin-top: 0.3em;"
                               ></span>
                             </td>
                           </tr>
                         </table>
+                        <div data-ddl="agreement-section" class="ddl"></div>
                       </td>
                       <td
                         style="
@@ -1156,13 +936,8 @@
                                   >8,000 NTD</span
                                 >
                                 <br />
-                                <div for-billing1-desc style="font-size: 0.9rem; line-height: 1.6;">
-                                  <strong>送貨方式：</strong>請務必選擇「攤位費專屬」結帳。若誤選其他方式並被系統收取運費，恕不退款。<br><br>
-                                  <strong>付款方式：</strong>如選擇「銷行轉帳」，此方式 僅開放至 12/28（日）24:00（GMT+8）<br><br>
-                                  <strong>注意事項：</strong>即使付款連結仍可操作，若超過繳費期限付款，主辦單位有權取消資格，並不予退款。<br><br>
-                                  <strong>退款：</strong>若因不可抗因素需放棄參展，請於 1/15（四）前 通知主辦單位，並辦理退款（將酌收10%手續費）。逾期恕不受理退款。
-                                </div>
-                                <div class="billing-note" id="billing-note1">
+                                <div id="billing1-desc" for-billing1-desc style="font-size: 0.9rem; line-height: 1.6;"></div>
+                                <div class="billing-note" data-ddl="billing-section" >
                                   Payment Deadline: December 31
                                 </div>
                                 <div class="pay-button" id="pay1">付款 Pay</div>
@@ -1267,23 +1042,11 @@
               </tr>
 
               <!-- 中國簽證資料上傳 Visa Upload -->
-              <tr style="display: none" id="visaCN">
-                <td style="border-top: none; width: 55vw; border-right: none">
-                  <div id="visa-upload" style="background-color: mintcream">
-                    <span class="label">簽證申請 Visa Support</span><br />
-                    由於規定，目前中國地區人士來台需由在台單位協助申辦。
-                    <div
-                      id="visa-warning"
-                      style="color: #c00; font-size: 0.9em"
-                    >
-                      請務必於 <b>12月31日前</b>前完成下列表單，以利安排申請流程。
-                    </div>
-                    <br />
-                    <a
-                      href="https://forms.gle/fMsfak9D1BsH6emF7"
-                      target="_blank"
-                      >填寫表單</a
-                    >
+              <tr style="display: none;background-color: mintcream" id="visaCN">
+                <td style="border-top: none; width: 55vw;">
+                <span class="label">入台證申請</span><br />
+                  <div id="visa-upload">
+                    
                   </div>
                 </td>
               </tr>
@@ -1291,8 +1054,9 @@
                <!-- 海外簽證資料連結-->
               <tr style="display: none" id="overseasvisa">
                 <td style="border-top: none; width: 55vw">
+                   <span class="label">簽證申請 Visa Support</span><br />
+
                   <div id="overseasvisa-desc">
-                    <span class="label">簽證申請 Visa Support</span><br />
                     We provide a visa support package, including an official invitation letter and a brief introduction to TPABF.
                     If you need any additional documents or information, feel free to contact us.
                   </div>
@@ -1312,26 +1076,16 @@
                   class="material-download-td"
                 >
                   <span class="label"
-                    >行銷素材下載＆上傳 ​Download & Upload Marketing
+                    >行銷素材下載&上傳 ​Download & Upload Marketing
                     Materials</span
                   >
                   <div id="material-download-annouce-time">
                     <div id="material-download-desc" style="margin-top: 0.5em">
                       <strong>視覺素材包：</strong><br />
-                      歡迎使用 2026 草率季主視覺素材，點此下載檔案。
                     </div>
-                    <a
-                      id="media-zip-link"
-                      href="https://drive.google.com/drive/folders/1Xn8yRXOP4LZ9tIZed-NpQGe-tylq_7K6?usp=drive_link"
-                      download
-                      >Download</a
-                    ><br /><br />
+                    <br /><br />
                     <div id="material-upload-desc">
-                      <strong>行銷素材檔案上傳:</strong><br />
-                      請依照素材包內的說明製作，並將製作完成的<b>貼文、限時動態圖檔</b>打包為
-                      zip上傳。<br />
-                      ⚠️
-                      若未於期限內完成上傳，可能無法安排社群曝光，敬請留意;)<br />
+                      
                     </div>
                   </div>
                 </td>
@@ -1350,9 +1104,12 @@
                       <input
                         type="file"
                         id="marketing-file"
-                        accept=".zip,.ZIP,.rar,.RAR,.7z,.7Z"
+                        accept=".zip,.ZIP,application/zip,application/x-zip-compressed"
                         style="max-width: 198px"
                       /><br />
+                      <span style="font-size:0.75rem; color:#666; display:block; margin-top:0.25em; max-width:220px;"
+                        >僅限 .zip，單檔 ≤20MB · ZIP only, max 20MB</span
+                      >
                       <button
                         style="
                           padding: 0.3em 1.2em;
@@ -1385,14 +1142,7 @@
                 >
                   <span class="label">寄件服務 Shipping Service</span>
                   <div id="foreigner-form" style="margin-top: 0.5rem">
-                    For those who would like to send their items in advance: To
-                    ensure your items arrive safely and on time, please complete
-                    the shipping service form first and follow its instructions.
-                    It is important that your package
-                    <u>arrives before</u> by 2/15 (Sun.). at the
-                    designated address. <br /><br />
-                    Late or unregistered shipments will not be delivered to the
-                    venue.
+                    
                   </div>
                 </td>
                 <!-- 寄件表格 -->
@@ -1406,11 +1156,7 @@
                 >
                   <div id="foreign-shipping-form-section">
                     <div style="min-width: 198px" id="foreign-shipping-form">
-                      <a
-                        href="https://forms.gle/Gi8PrGFw4ksQghxg7"
-                        target="_blank"
-                        >Shipping Service Form</a
-                      >
+                      
                     </div>
                   </div>
                   <div id="ddl-foreign-shipping-form-section" class="ddl"></div>
@@ -1418,38 +1164,26 @@
               </tr>
 
               <tr id="media-live-event-section" style="display: none">
-                <td colspan="1" style="border-top: none; border-right: none">
+                <td colspan="2"
+                  style="
+                    border-top: none;
+                    width: 20%;
+                    border-left: 1px solid black;
+                  "
+                >
                   <span class="label">現場活動徵集 Program Open Call</span>
                   <div id="live-even-annouce-time">
                     <div
                       style="margin-top: 0.5em; font-size: 1rem"
                       id="live-event-desc"
                     >
-                      想與大家更近距離互動？我們開放以下形式的現場活動徵集：短講、表演、工作坊等。
+                      
                     </div>
                   </div>
+                <div id="ddl-media-live-event-form-section" class="ddl"></div>
+
                 </td>
-                <td
-                  colspan="1"
-                  style="
-                    border-top: none;
-                    width: 20%;
-                    border-left: 1px dashed black;
-                  "
-                >
-                  <div id="media-live-event-form-section">
-                    <div id="media-live-event-form" style="min-width: 198px">
-                      <a
-                        href="https://forms.gle/QzSjtM3SjvudrdnQ6"
-                        target="_blank"
-                        id="live-event-signup-link"
-                      >
-                        報名表單
-                      </a>
-                    </div>
-                  </div>
-                  <div id="ddl-media-live-event-form-section" class="ddl"></div>
-                </td>
+                
               </tr>
 
               <tr id="catalog-section" style="display: none">
@@ -1462,21 +1196,7 @@
                       style="margin-top: 0.5em; font-size: 1rem"
                       id="catalog-desc"
                     >
-                      每個參展單位可於本屆《草率簿 TPABF
-                      Catalog》中獲得一面頁面露出，逾期未繳交者將視同放棄刊登權益。<br /><br />
-                      📌 繳交內容如下：<br />
-                      <b>圖檔</b>：PDF 格式，完稿尺寸 120 × 195 mm，需包含 5 mm
-                      出血，色彩請設為黑白。<br />
-                      <b>文字資料</b>：請依左方參展資訊進行修改與補充。<br />
-                    </div>
-                    <br />
-                    <a
-                      href="https://drive.google.com/file/d/1zm8dL5ElUdGKYjGFjN5y4R3Ml5baaEKw/view?usp=drive_link"
-                      target="_blank"
-                      id="catalog-download-link"
-                    >
-                      點此公版下載
-                    </a>
+                      
                   </div>
                 </td>
                 <td
@@ -1496,6 +1216,9 @@
                         accept=".pdf"
                         style="max-width: 198px"
                       />
+                      <span style="font-size:0.75rem; color:#666; display:block; margin-top:0.25em; max-width:220px;"
+                        >僅限 .pdf，單檔 ≤20MB · PDF only, max 20MB</span
+                      >
                       <button
                         style="
                           padding: 0.3em 1.2em;
@@ -1529,19 +1252,14 @@
                       style="margin-top: 0.5em; font-size: 1rem"
                       id="familyticket-desc"
                     ></div>
-                    <span id="ticket-discountcode"></span>
+                    <div>您的優惠序號 Your Discount Code: <span id="ticket-discountcode"></span></div>
                     <br /><br />
-                    <a
-                      href="https://www.accupass.com/eflow/ticket/2512310947135246631630"
-                      target="_blank"
-                      id="ticket-link"
-                      >快速通關票購票連結</a
-                    >
+                    
                   </div>
                 </td>
               </tr>
 
-              <!-- 親友票 Shopline -->
+              <!-- 攤主手冊 -->
               <tr style="display: none" id="manual-boothappearance">
                 <td
                   colspan="2"
@@ -1554,15 +1272,9 @@
                     style="margin-top: 0.5em; font-size: 1rem"
                     id="manual-desc"
                   >
-                    請務必詳閱並依說明準備。內含展會流程、細節、注意事項與攤位樣式、現場規範與《場地違規處理與罰則手冊》等所有參展須知。
                   </div>
                   <div id="manual-annouce-time">
-                    <a
-                      href="https://drive.google.com/drive/folders/1hez89vTSId3veAt9NWcr2pgOuJJBGn_e?usp=sharing"
-                      target="_blank"
-                      id="manual-link"
-                      >下載 Download</a
-                    >
+                    
                   </div>
                 </td>
               </tr>
@@ -1577,28 +1289,6 @@
           <br />
           <div class="scroll-inner">
             <table width="100%">
-              <tr
-                style="
-                  background-color: blue;
-                  text-align: right;
-                  border-color: blue;
-                "
-              >
-                <td colspan="2">
-                  <span
-                    <span
-                    style="
-                      text-align: right;
-                      font-size: 1rem;
-                      color: ghostwhite;
-                      cursor: pointer;
-                    "
-                    onclick="openAccountEditPage();"
-                    title="編輯"
-                    >編輯 Edit</span
-                  >
-                </td>
-              </tr>
               <tr colspan="2" style="position: relative">
                 <!-- 左欄：代表人，一格佔 5 行 -->
                 <td rowspan="3">
@@ -1638,1741 +1328,156 @@
             </table>
           </div>
         </td>
-        <td class="edit-page" id="edit-account-page" style="display: none">
-          <div class="scroll-inner">
-            <form class="edit-form">
-              <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
-                <h2 style="font-size: 1.5rem; margin: 0;">編輯帳戶資料 Edit Profile</h2>
-          <span
-            style="
-              font-size: 2rem;
-              color: black;
-              cursor: pointer;
-              transition: color 0.2s;
-                    padding: 0.5rem;
-                    line-height: 1;
-            "
-            title="關閉"
-                  onclick="closeEditAccountPage();"
-                  onmouseover="this.style.color='#666'"
-                  onmouseout="this.style.color='black'"
-            >&#10005;</span
-          >
-              </div>
-              <table width="100%">
-                <tr>
-                  <td>
-                    <span class="label">代表人 Contact Person</span><br />
-                    <input
-                      type="text"
-                      name="contact-person"
-                      style="width: 95%"
-                      id="contact-person-edit"
-                      placeholder="代表人"
-                    />
-                  </td>
-                  <td>
-                    <span class="label">聯絡電話 Contact Phone</span><br />
-                    <input
-                      type="text"
-                      name="phone"
-                      value="聯絡電話"
-                      style="width: 95%"
-                      id="phone-edit"
-                    />
-                  </td>
-                </tr>
-
-                <tr>
-                  <td colspan="2">
-                    <span class="label">國籍 Nationality</span><br />
-                    <select id="nationality-edit2">
-                      <option>Please select your nationality</option>
-                      <option value="AF">Afghanistan (AF)</option>
-                      <option value="AL">Albania (AL)</option>
-                      <option value="DZ">Algeria (DZ)</option>
-                      <option value="AS">American Samoa (AS)</option>
-                      <option value="AD">Andorra (AD)</option>
-                      <option value="AO">Angola (AO)</option>
-                      <option value="AI">Anguilla (AI)</option>
-                      <option value="AQ">Antarctica (AQ)</option>
-                      <option value="AG">Antigua and Barbuda (AG)</option>
-                      <option value="AR">Argentina (AR)</option>
-                      <option value="AM">Armenia (AM)</option>
-                      <option value="AW">Aruba (AW)</option>
-                      <option value="AU">Australia (AU)</option>
-                      <option value="AT">Austria (AT)</option>
-                      <option value="AZ">Azerbaijan (AZ)</option>
-                      <option value="BS">Bahamas, The (BS)</option>
-                      <option value="BH">Bahrain (BH)</option>
-                      <option value="BD">Bangladesh (BD)</option>
-                      <option value="BB">Barbados (BB)</option>
-                      <option value="BY">Belarus (BY)</option>
-                      <option value="BE">Belgium (BE)</option>
-                      <option value="BZ">Belize (BZ)</option>
-                      <option value="BJ">Benin (BJ)</option>
-                      <option value="BM">Bermuda (BM)</option>
-                      <option value="BT">Bhutan (BT)</option>
-                      <option value="BO">Bolivia (BO)</option>
-                      <option value="BA">Bosnia and Herzegovina (BA)</option>
-                      <option value="BW">Botswana (BW)</option>
-                      <option value="BR">Brazil (BR)</option>
-                      <option value="IO">
-                        British Indian Ocean Territory (IO)
-                      </option>
-                      <option value="VG">British Virgin Islands (VG)</option>
-                      <option value="BN">Brunei (BN)</option>
-                      <option value="BG">Bulgaria (BG)</option>
-                      <option value="BF">Burkina Faso (BF)</option>
-                      <option value="MM">Burma (MM)</option>
-                      <option value="BI">Burundi (BI)</option>
-                      <option value="KH">Cambodia (KH)</option>
-                      <option value="CM">Cameroon (CM)</option>
-                      <option value="CA">Canada (CA)</option>
-                      <option value="CV">Cape Verde (CV)</option>
-                      <option value="KY">Cayman Islands (KY)</option>
-                      <option value="CF">Central African Republic (CF)</option>
-                      <option value="TD">Chad (TD)</option>
-                      <option value="CL">Chile (CL)</option>
-                      <option value="CN">China (CN)</option>
-                      <option value="CX">Christmas Island (CX)</option>
-                      <option value="CC">Cocos (Keeling) Islands (CC)</option>
-                      <option value="CO">Colombia (CO)</option>
-                      <option value="KM">Comoros (KM)</option>
-                      <option value="CD">
-                        Congo, Democratic Republic of the (CD)
-                      </option>
-                      <option value="CG">Congo, Republic of the (CG)</option>
-                      <option value="CK">Cook Islands (CK)</option>
-                      <option value="CR">Costa Rica (CR)</option>
-                      <option value="CI">Cote d'Ivoire (CI)</option>
-                      <option value="HR">Croatia (HR)</option>
-                      <option value="CU">Cuba (CU)</option>
-                      <option value="CY">Cyprus (CY)</option>
-                      <option value="CZ">Czech Republic (CZ)</option>
-                      <option value="DK">Denmark (DK)</option>
-                      <option value="DJ">Djibouti (DJ)</option>
-                      <option value="DM">Dominica (DM)</option>
-                      <option value="DO">Dominican Republic (DO)</option>
-                      <option value="EC">Ecuador (EC)</option>
-                      <option value="EG">Egypt (EG)</option>
-                      <option value="SV">El Salvador (SV)</option>
-                      <option value="GQ">Equatorial Guinea (GQ)</option>
-                      <option value="ER">Eritrea (ER)</option>
-                      <option value="EE">Estonia (EE)</option>
-                      <option value="ET">Ethiopia (ET)</option>
-                      <option value="FK">
-                        Falkland Islands (Islas Malvinas) (FK)
-                      </option>
-                      <option value="FO">Faroe Islands (FO)</option>
-                      <option value="FJ">Fiji (FJ)</option>
-                      <option value="FI">Finland (FI)</option>
-                      <option value="FR">France (FR)</option>
-                      <option value="GF">French Guiana (GF)</option>
-                      <option value="PF">French Polynesia (PF)</option>
-                      <option value="TF">
-                        French Southern and Antarctic Lands (TF)
-                      </option>
-                      <option value="GA">Gabon (GA)</option>
-                      <option value="GM">Gambia, The (GM)</option>
-                      <option value="GE">Georgia (GE)</option>
-                      <option value="DE">Germany (DE)</option>
-                      <option value="GH">Ghana (GH)</option>
-                      <option value="GI">Gibraltar (GI)</option>
-                      <option value="GR">Greece (GR)</option>
-                      <option value="GL">Greenland (GL)</option>
-                      <option value="GD">Grenada (GD)</option>
-                      <option value="GP">Guadeloupe (GP)</option>
-                      <option value="GU">Guam (GU)</option>
-                      <option value="GT">Guatemala (GT)</option>
-                      <option value="GG">Guernsey (GG)</option>
-                      <option value="GN">Guinea (GN)</option>
-                      <option value="GW">Guinea-Bissau (GW)</option>
-                      <option value="GY">Guyana (GY)</option>
-                      <option value="HT">Haiti (HT)</option>
-                      <option value="VA">Holy See (Vatican City) (VA)</option>
-                      <option value="HN">Honduras (HN)</option>
-                      <option value="HK">Hong Kong (HK)</option>
-                      <option value="HU">Hungary (HU)</option>
-                      <option value="IS">Iceland (IS)</option>
-                      <option value="IN">India (IN)</option>
-                      <option value="ID">Indonesia (ID)</option>
-                      <option value="IR">Iran (IR)</option>
-                      <option value="IQ">Iraq (IQ)</option>
-                      <option value="IE">Ireland (IE)</option>
-                      <option value="IM">Isle of Man (IM)</option>
-                      <option value="IL">Israel (IL)</option>
-                      <option value="IT">Italy (IT)</option>
-                      <option value="JM">Jamaica (JM)</option>
-                      <option value="JP">Japan (JP)</option>
-                      <option value="JE">Jersey (JE)</option>
-                      <option value="JO">Jordan (JO)</option>
-                      <option value="KZ">Kazakhstan (KZ)</option>
-                      <option value="KE">Kenya (KE)</option>
-                      <option value="KI">Kiribati (KI)</option>
-                      <option value="KP">Korea, North (KP)</option>
-                      <option value="KR">Korea, South (KR)</option>
-                      <option value="KW">Kuwait (KW)</option>
-                      <option value="KG">Kyrgyzstan (KG)</option>
-                      <option value="LA">Laos (LA)</option>
-                      <option value="LV">Latvia (LV)</option>
-                      <option value="LB">Lebanon (LB)</option>
-                      <option value="LS">Lesotho (LS)</option>
-                      <option value="LR">Liberia (LR)</option>
-                      <option value="LY">Libya (LY)</option>
-                      <option value="LI">Liechtenstein (LI)</option>
-                      <option value="LT">Lithuania (LT)</option>
-                      <option value="LU">Luxembourg (LU)</option>
-                      <option value="MO">Macau (MO)</option>
-                      <option value="MK">Macedonia (MK)</option>
-                      <option value="MG">Madagascar (MG)</option>
-                      <option value="MW">Malawi (MW)</option>
-                      <option value="MY">Malaysia (MY)</option>
-                      <option value="MV">Maldives (MV)</option>
-                      <option value="ML">Mali (ML)</option>
-                      <option value="MT">Malta (MT)</option>
-                      <option value="MH">Marshall Islands (MH)</option>
-                      <option value="MQ">Martinique (MQ)</option>
-                      <option value="MR">Mauritania (MR)</option>
-                      <option value="MU">Mauritius (MU)</option>
-                      <option value="YT">Mayotte (YT)</option>
-                      <option value="MX">Mexico (MX)</option>
-                      <option value="FM">
-                        Micronesia, Federated States of (FM)
-                      </option>
-                      <option value="MD">Moldova (MD)</option>
-                      <option value="MC">Monaco (MC)</option>
-                      <option value="MN">Mongolia (MN)</option>
-                      <option value="MA">Morocco (MA)</option>
-                      <option value="MZ">Mozambique (MZ)</option>
-                      <option value="NA">Namibia (NA)</option>
-                      <option value="NR">Nauru (NR)</option>
-                      <option value="NP">Nepal (NP)</option>
-                      <option value="NL">Netherlands (NL)</option>
-                      <option value="NC">New Caledonia (NC)</option>
-                      <option value="NZ">New Zealand (NZ)</option>
-                      <option value="NI">Nicaragua (NI)</option>
-                      <option value="NE">Niger (NE)</option>
-                      <option value="NG">Nigeria (NG)</option>
-                      <option value="NO">Norway (NO)</option>
-                      <option value="OM">Oman (OM)</option>
-                      <option value="PK">Pakistan (PK)</option>
-                      <option value="PW">Palau (PW)</option>
-                      <option value="PA">Panama (PA)</option>
-                      <option value="PG">Papua New Guinea (PG)</option>
-                      <option value="PY">Paraguay (PY)</option>
-                      <option value="PE">Peru (PE)</option>
-                      <option value="PH">Philippines (PH)</option>
-                      <option value="PL">Poland (PL)</option>
-                      <option value="PT">Portugal (PT)</option>
-                      <option value="PR">Puerto Rico (PR)</option>
-                      <option value="QA">Qatar (QA)</option>
-                      <option value="RE">Reunion (RE)</option>
-                      <option value="RO">Romania (RO)</option>
-                      <option value="RU">Russia (RU)</option>
-                      <option value="RW">Rwanda (RW)</option>
-                      <option value="SH">Saint Helena (SH)</option>
-                      <option value="KN">Saint Kitts and Nevis (KN)</option>
-                      <option value="LC">Saint Lucia (LC)</option>
-                      <option value="PM">Saint Pierre and Miquelon (PM)</option>
-                      <option value="VC">
-                        Saint Vincent and the Grenadines (VC)
-                      </option>
-                      <option value="WS">Samoa (WS)</option>
-                      <option value="SM">San Marino (SM)</option>
-                      <option value="ST">Sao Tome and Principe (ST)</option>
-                      <option value="SA">Saudi Arabia (SA)</option>
-                      <option value="SN">Senegal (SN)</option>
-                      <option value="RS">Serbia (RS)</option>
-                      <option value="SC">Seychelles (SC)</option>
-                      <option value="SL">Sierra Leone (SL)</option>
-                      <option value="SG">Singapore (SG)</option>
-                      <option value="SK">Slovakia (SK)</option>
-                      <option value="SI">Slovenia (SI)</option>
-                      <option value="SB">Solomon Islands (SB)</option>
-                      <option value="SO">Somalia (SO)</option>
-                      <option value="ZA">South Africa (ZA)</option>
-                      <option value="ES">Spain (ES)</option>
-                      <option value="LK">Sri Lanka (LK)</option>
-                      <option value="SD">Sudan (SD)</option>
-                      <option value="SR">Suriname (SR)</option>
-                      <option value="SZ">Swaziland (SZ)</option>
-                      <option value="SE">Sweden (SE)</option>
-                      <option value="CH">Switzerland (CH)</option>
-                      <option value="SY">Syria (SY)</option>
-                      <option value="TW">Taiwan (TW)</option>
-                      <option value="TJ">Tajikistan (TJ)</option>
-                      <option value="TZ">Tanzania (TZ)</option>
-                      <option value="TH">Thailand (TH)</option>
-                      <option value="TL">Timor-Leste (TL)</option>
-                      <option value="TG">Togo (TG)</option>
-                      <option value="TO">Tonga (TO)</option>
-                      <option value="TT">Trinidad and Tobago (TT)</option>
-                      <option value="TN">Tunisia (TN)</option>
-                      <option value="TR">Turkey (TR)</option>
-                      <option value="TM">Turkmenistan (TM)</option>
-                      <option value="TV">Tuvalu (TV)</option>
-                      <option value="UG">Uganda (UG)</option>
-                      <option value="UA">Ukraine (UA)</option>
-                      <option value="AE">United Arab Emirates (AE)</option>
-                      <option value="GB">United Kingdom (GB)</option>
-                      <option value="US">United States (US)</option>
-                      <option value="UY">Uruguay (UY)</option>
-                      <option value="UZ">Uzbekistan (UZ)</option>
-                      <option value="VU">Vanuatu (VU)</option>
-                      <option value="VE">Venezuela (VE)</option>
-                      <option value="VN">Vietnam (VN)</option>
-                      <option value="YE">Yemen (YE)</option>
-                      <option value="ZM">Zambia (ZM)</option>
-                      <option value="ZW">Zimbabwe (ZW)</option>
-                    </select>
-                  </td>
-                </tr>
-              </table>
-
-              <div style="margin-top: 1rem">
-                <button
-                  type="submit"
-                  id="submit-edit-account"
-                  style="
-                    padding: 0.3em 1.2em;
-                    background: #000;
-                    color: #fff;
-                    border: none;
-                    border-radius: 3px;
-                    cursor: pointer;
-                  "
-                >
-                  送出 Submit
-                </button>
-              </div>
-            </form>
-          </div>
-        </td>
         <!-- 帳號完 -->
 
-        <!-- contact method -->
-        <td class="admin" id="contact-method" style="display: none; font-family: 'Inclusive Sans', sans-serif;">
-          <div class="scroll-inner">
-            <table width="100%">
-              <tr>
-                <td style="border: none">
-                  <h3>Contact</h3>
-        
-                  <p>
-                    活動期間，我們將陸續寄送 4 封重要通知，請特別留意信件主旨前標示<b>「＊」</b>的郵件，這些皆為重要資訊，包括：
-                    <br />
-                    Throughout the event, we will send out 4 important notifications. Please pay special attention to emails with a <b>“＊”</b> at the beginning of the subject line, as these contain essential information, including:
-                  </p>
-        
-                  <ul>
-                    <li>參展報名完成 · Registration Complete</li>
-                    <li>攤主手冊公布 · Release of the Exhibitor’s Manual</li>
-                    <li>進場 &amp; 報到須知 · Set Up &amp; Check In Guidelines</li>
-                    <li>報到條碼 · Check In Barcode</li>
-                    <li>展後調查問卷 · Exhibitors Survey</li>
-                  </ul>
-        
-                  <p>
-                    此外，也會有相關資訊提醒信件。請攤主協助留意收件箱，並檢查垃圾郵件，以免錯過任何重要訊息。
-                    <br />
-                    Additional reminder emails with relevant information may also be sent. Exhibitors are kindly asked to check their inbox and spam folder to ensure no important emails are missed.
-                  </p>
-        
-                  <p>
-                    如有任何問題，請依主題聯繫對應窗口，我們將盡快回覆您。<br />
-                    If you have any questions, please contact the appropriate email address below.
-                  </p>
-        
-                  <p>
-                    <strong>＊＊我們將主要透過 <i>Email</i> 聯繫與回覆，來信時請務必在主旨註明您的<mark>報名編號及附上相關截圖畫面</mark>，以利我們快速查詢與回覆。</strong><br />
-                    <strong>＊＊We will primarily respond via email. Please include your <mark>application number and attached relevant screenshots</mark> in the subject of each email to help us respond efficiently.</strong>
-                  </p>
-                  <br>
-                  <hr style="border-top: 1px dashed black; margin: 1rem 0; border-bottom: none;" />
-        
-                  <p><strong>📌 主要回應 Email 窗口 · Primary Contact Email</strong><br />
-                    ✉️ <a href="mailto:hooroo@double-grass.com">hooroo@double-grass.com</a><br />
-                    （攤位與參展相關、現場活動、資料上傳等相關問題 · Booth & exhibitor inquiries, on-site events, material uploads）
-                  </p>
-        
-                  <p><strong>📌 簽證相關／收據問題 · Visa Support & Invoice Questions</strong><br />
-                    ✉️ <a href="mailto:anm@double-grass.com">anm@double-grass.com</a>（CC：<a href="mailto:hooroo@double-grass.com">hooroo@double-grass.com</a>）
-                  </p>
-        
-                  <p><strong>📌 寄件服務 · Shipping Service</strong><br />
-                    ✉️ <a href="mailto:yun@double-grass.com">yun@double-grass.com</a>（CC：<a href="mailto:hooroo@double-grass.com">hooroo@double-grass.com</a>）
-                  </p>
-                </td>
-              </tr>
-            </table>
-          </div>
-        </td>
-        
         <!-- faq -->
         <td class="admin" id="faq" style="display: none">
           <div class="scroll-inner">
-            <h3 style="z-index: 99">FAQ</h3>
-            <table class="faqtable" width="100%">
-              <tr>
-                <td class="faq-number-cell" style="background-color:lemonchiffon"></td>
-                <td style="background-color: #000; color: #fff;"><marquee><strong>(綠取階段)</strong></marquee></td>
-                <td style="background-color: #000; color: #fff;"><marquee><strong>(Application Phase)</strong></marquee></td>
-              </tr>
-              <tr>
-                <td class="faq-number-cell">
-                  <span class="faq-number">1</span>
-                </td>
-                <td class="QA-section" style="border-right: none">
-                  <span class="labelAQ">Q: 我該不該加購通行憑證呢？</span><br />
-                  <span
-                    style="
-                      font-size: 1rem;
-                      font-family: 'Inclusive Sans', sans-serif;
-                    "
-                  >
-                    A:
-                    我們提供了一個<a href=https://docs.google.com/spreadsheets/d/1A33pr06kXFJKgvln3-ie_YdIw-BeYaRm9ckBdDQZtyc/edit?usp=sharing" target="_blank">簡易計算表格</a>，只需填寫攤位類型、桌數以及預計進場人數，系統將會提供最佳加購建議，幫助您避免錯誤購買。歡迎善加利用！
-                  </span>
-                </td>
-                <td class="QA-section">
-                  <span class="labelAQ en"
-                    >Q: Should I purchase additional access passes?</span
-                  ><br />
-                  <span class="faq-answer-en">
-                    A: We have provided a <a href=https://docs.google.com/spreadsheets/d/1A33pr06kXFJKgvln3-ie_YdIw-BeYaRm9ckBdDQZtyc/edit?usp=sharing" target="_blank">simple calculation spreadsheet</a>. By entering your booth type, number of tables, and expected number of attendees, the system will suggest the optimal number of passes to purchase, helping you avoid incorrect purchases. We encourage you to make use of it!
-                  </span>
-                </td>
-              </tr>
-              <!-- 2 -->
-              <tr>
-                <td class="faq-number-cell">
-                  <span class="faq-number">2</span>
-                </td>
-                <td class="QA-section" style="border-right: none">
-                  <span class="labelAQ">Q: 同一天的通行憑證可以讓不同人使用嗎？</span
-                  ><br />
-                  <span
-                    style="
-                      font-size: 1rem;
-                      font-family: 'Inclusive Sans', sans-serif;
-                    "
-                  >
-                    A:
-                    不可以。通行憑證為刺青貼紙形式，每張貼紙於同一天僅限一人使用，當日不可更換使用者，亦不可跨日使用。
-                  </span>
-                </td>
-                <td class="QA-section">
-                  <span class="labelAQ en"
-                    >Q: Can the same-day access pass be used by different people?
-                    </span
-                  ><br />
-                  <span class="faq-answer-en">
-                    A: No. Access passes are provided as temporary tattoo stickers. Each sticker may only be used by one person per day and cannot be transferred to another person on the same day or used across different days.
-                  </span>
-                </td>
-              </tr>
-              <!-- 3 -->
-              <tr>
-                <td class="faq-number-cell">
-                  <span class="faq-number">3</span>
-                </td>
-                <td class="QA-section" style="border-right: none">
-                  <span class="labelAQ">Q: 如果我需要更多通行憑證，可以加購嗎？</span
-                  ><br />
-                  <span
-                    style="
-                      font-size: 1rem;
-                      font-family: 'Inclusive Sans', sans-serif;
-                    "
-                  >
-                    A:
-                    每個攤位最多僅能加購 1 份通行憑證。如有超過需求，請依實際活動天數與人數，另行購買入場票券。<br><br>
-
-                    （親友預售票將於 01/26–02/08 開賣。）<br>
-                    （各票種與相關資訊，請持續關注我們的 IG 貼文喔～～）
-                  </span>
-                </td>
-                <td class="QA-section">
-                  <span class="labelAQ en"
-                    >Q:  Can I purchase more access passes if needed?
-                    </span
-                  ><br />
-                  <span class="faq-answer-en">
-                    A: Each booth may purchase up to one additional access pass. If you need more, please purchase admission tickets based on the actual number of event days and attendees.<br><br>
-
-                    (Friends & Family Ticket available from 01/26 to 02/08.)<br>
-                    (For ticket types and updates, please follow our Instagram for more information.)
-                  </span>
-                </td>
-              </tr>
-              <!-- 4 -->
-              <tr>
-                <td class="faq-number-cell">
-                  <span class="faq-number">4</span>
-                </td>
-                <td class="QA-section" style="border-right: none">
-                  <span class="labelAQ"
-                    >Q:可以用什麼繳費？</span
-                  ><br />
-                  <span
-                    style="
-                      font-size: 1rem;
-                      font-family: 'Inclusive Sans', sans-serif;
-                    "
-                  >
-                    A:繳費頁面有說明支援的付款方式，信用卡、apple pay、銀行轉帳（轉帳已關閉）。
-                  </span>
-                </td>
-                <td class="QA-section">
-                  <span class="labelAQ en"
-                    >Q: What payment methods are available?
-                    </span
-                  ><br />
-                  <span class="faq-answer-en">
-                    A: Supported payment methods are listed on the payment page, including credit card, Apple Pay, and bank transfer(bank transfer is now closed).
-                  </span>
-                </td>
-              </tr>
-              <!-- 5 -->
-              <tr>
-                <td class="faq-number-cell">
-                  <span class="faq-number">5</span>
-                </td>
-                <td class="QA-section" style="border-right: none">
-                  <span class="labelAQ"
-                    >Q: 如何確認是否付款成功？</span
-                  ><br />
-                  <span
-                    style="
-                      font-size: 1rem;
-                      font-family: 'Inclusive Sans', sans-serif;
-                    "
-                  >
-                    A:
-                    完成付款後，訂單的付款狀態將會在官方商店中顯示。
-                  </span>
-                </td>
-                <td class="QA-section">
-                  <span class="labelAQ en"
-                    >Q: How can I confirm if my payment was successful?
-                    </span
-                  ><br />
-                  <span class="faq-answer-en">
-                    A: After completing payment, the payment status will be shown in your order on the official store.
-                  </span>
-                </td>
-              </tr>
-              <!-- 6  -->
-              <tr>
-                <td class="faq-number-cell">
-                  <span class="faq-number">6</span>
-                </td>
-                <td class="QA-section" style="border-right: none">
-                  <span class="labelAQ">Q: 我已完成付款，但參展資格狀態尚未更新？</span><br />
-                  <span
-                    style="
-                      font-size: 1rem;
-                      font-family: 'Inclusive Sans', sans-serif;
-                    "
-                  >
-                    A: 請耐心等候，團隊將於 1 月 5 日前 統一更新「攤商管理頁面」的狀態。如有急件或任何疑問，請附上付款截圖來信洽詢。
-                  </span>
-                </td>
-                <td class="QA-section">
-                  <span class="labelAQ en"
-                    >Q: I’ve completed the payment, but my Exhibitor Status hasn’t been updated.</span
-                  ><br />
-                  <span class="faq-answer-en">
-                    A: Please allow some time for processing. The team will update the status on the Exhibitor Management Page by January 5. If you have any urgent matters or questions, please contact us and include a screenshot of your payment.
-                  </span>
-                </td>
-              </tr>
-              <!-- 7 -->
-              <tr>
-                <td class="faq-number-cell">
-                  <span class="faq-number">7</span>
-                </td>
-                <td class="QA-section" style="border-right: none">
-                  <span class="labelAQ">Q: 我已完成付款，還可以更改加購的桌數或通行憑證數量嗎？</span><br />
-                  <span
-                    style="
-                      font-size: 1rem;
-                      font-family: 'Inclusive Sans', sans-serif;
-                    "
-                  >
-                    A: 本階段為唯一的加購申請時段（至 12/31 為止）。完成繳費後恕不接受任何變更，請於付款前確認所需的加購項目。
-                  </span>
-                </td>
-                <td class="QA-section">
-                  <span class="labelAQ en"
-                    >Q: I’ve completed the payment. Can I still change the number of additional tables or access passes?
-                    </span
-                  ><br />
-                  <span class="faq-answer-en">
-                    A: This is the only period for add-on applications (until Dec 31). No changes will be accepted after payment is completed, so please confirm all add-on items before payment.
-                  </span>
-                </td>
-              </tr>
-              <!-- 8 -->
-              <tr>
-                <td class="faq-number-cell">
-                  <span class="faq-number">8</span>
-                </td>
-                <td class="QA-section" style="border-right: none">
-                  <span class="labelAQ">Q: 是否會提供發票或收據？
-                  </span><br />
-                  <span
-                    style="
-                      font-size: 1rem;
-                      font-family: 'Inclusive Sans', sans-serif;
-                    "
-                  >
-                    A: 台灣訂單將由網站自動開立電子發票，請確認報名時填寫的 Email 正確。海外單位如需開立發票，請填寫<a href="https://docs.google.com/forms/d/e/1FAIpQLScuHHfn3zhWd4RVrOCPLY72xf9XiNAf1Sb8De4WJaOCAHovDQ/viewform?usp=header" target="_blank">此表單</a>；提交後，我們將盡快將發票寄送至您的電子郵件信箱。
-                  </span>
-                </td>
-                <td class="QA-section">
-                  <span class="labelAQ en"
-                    >Q: Will an invoice or receipt be provided?
-                    </span
-                  ><br />
-                  <span class="faq-answer-en">
-                    A: Overseas participants who require an invoice should complete <a href="https://docs.google.com/forms/d/e/1FAIpQLScuHHfn3zhWd4RVrOCPLY72xf9XiNAf1Sb8De4WJaOCAHovDQ/viewform?usp=header" target="_blank">this form</a>; once submitted, the invoice will be sent to your email as soon as possible.
-                  </span>
-                </td>
-              </tr>
-              <!-- 9 -->
-              <tr>
-                <td class="faq-number-cell">
-                  <span class="faq-number">9</span>
-                </td>
-                <td class="QA-section" style="border-right: none">
-                  <span class="labelAQ">Q:攤位費可以開發票打統編嗎？
-                  </span><br />
-                  <span
-                    style="
-                      font-size: 1rem;
-                      font-family: 'Inclusive Sans', sans-serif;
-                    "
-                  >
-                    A:可以，繳費處可填寫發票抬頭。
-                  </span>
-                </td>
-                <td class="QA-section">
-                  <span class="labelAQ en"
-                    >Q: Can I request an invoice with my company tax ID for the booth fee?
-                    </span
-                  ><br />
-                  <span class="faq-answer-en">
-                    A: Yes. You may fill in the invoice details at the payment page.
-                  </span>
-                </td>
-              </tr>
-               <tr>
-                <td class="faq-number-cell" style="background-color:lightgreen"></td>
-                <td style="background-color: #000; color: #fff;"><marquee><strong>（完成報名後）</strong></marquee></td>
-                <td style="background-color: #000; color: #fff;"><marquee><strong>(After Application Phase)</strong></marquee></td>
-              </tr>
-              <tr>
-                <td class="faq-number-cell">
-                  <span class="faq-number">1</span>
-                </td>
-                <td class="QA-section" style="border-right: none">
-                  <span class="labelAQ">Q: 候補錄取什麼時候會通知？</span><br />
-                  <span
-                    style="
-                      font-size: 1rem;
-                      font-family: 'Inclusive Sans', sans-serif;
-                    "
-                  >
-                    A: 預計1/2會寄信告知有候補上的攤商。
-                  </span>
-                </td>
-                <td class="QA-section">
-                  <span class="labelAQ en"
-                    >Q: When will waitlisted exhibitors be notified?</span
-                  ><br />
-                  <span class="faq-answer-en">
-                    A: We expect to notify exhibitors who move up from the waitlist before January 5 via email.
-                  </span>
-                </td>
-              </tr>
-              <tr>
-                <td class="faq-number-cell">
-                  <span class="faq-number">2</span>
-                </td>
-                <td class="QA-section" style="border-right: none">
-                  <span class="labelAQ">Q: 已經上傳同意書了，為什麼網頁上還是顯示未完成？</span><br />
-                  <span
-                    style="
-                      font-size: 1rem;
-                      font-family: 'Inclusive Sans', sans-serif;
-                    "
-                  >
-                   A: 我們近期（1/2前）會手動審核，請再稍等一下。
-                  </span>
-                </td>
-                <td class="QA-section">
-                  <span class="labelAQ en"
-                    >Q: I’ve uploaded the agreement, but the page still shows “incomplete.” Why?</span
-                  ><br />
-                  <span class="faq-answer-en">
-                    A: We will manually review the “Exhibitor Declaration” soon (before January 2). Please allow some time.
-                  </span>
-                </td>
-              </tr>
-              <tr>
-                <td class="faq-number-cell">
-                  <span class="faq-number">3</span>
-                </td>
-                <td class="QA-section" style="border-right: none">
-                  <span class="labelAQ">Q: 我原本是創作攤，可以換成書攤嗎？</span><br />
-                  <span
-                    style="
-                      font-size: 1rem;
-                      font-family: 'Inclusive Sans', sans-serif;
-                    "
-                  >
-                   A: 本次入選攤位將以當初錄取的攤種為準，恕無法再更改攤位類型，感謝理解。
-                  </span>
-                </td>
-                <td class="QA-section">
-                  <span class="labelAQ en"
-                    >Q: I was accepted as a non-book booth. Can I change to a book booth?</span
-                  ><br />
-                  <span class="faq-answer-en">
-                    A: No. Booth types will remain as originally accepted and cannot be changed.
-                  </span>
-                </td>
-              </tr>
-              <tr>
-                <td class="faq-number-cell">
-                  <span class="faq-number">4</span>
-                </td>
-                <td class="QA-section" style="border-right: none">
-                  <span class="labelAQ">Q: 請問可以增加合攤夥伴嗎？</span><br />
-                  <span
-                    style="
-                      font-size: 1rem;
-                      font-family: 'Inclusive Sans', sans-serif;
-                    "
-                  >
-                   A: 可以增加合攤夥伴沒問題，但攤位名稱和社群宣傳只會以錄取的品牌為主要露出。
-                  </span>
-                </td>
-                <td class="QA-section">
-                  <span class="labelAQ en"
-                    >Q: Can I add a co-exhibitor?</span
-                  ><br />
-                  <span class="faq-answer-en">
-                    A: Yes, adding a co-exhibitor is fine. However, the booth name and social media promotion will be based on the accepted brand only.
-                  </span>
-                </td>
-              </tr>
-              <tr>
-                <td class="faq-number-cell">
-                  <span class="faq-number">5</span>
-                </td>
-                <td class="QA-section" style="border-right: none">
-                  <span class="labelAQ">Q: 有推薦的飯店嗎？</span><br />
-                  <span
-                    style="
-                      font-size: 1rem;
-                      font-family: 'Inclusive Sans', sans-serif;
-                    "
-                  >
-                   A: 天雲旅棧台北基河館、天閣酒店台北劍潭、見潭璞旅(走路即可抵達會場)
-                  </span>
-                </td>
-                <td class="QA-section">
-                  <span class="labelAQ en"
-                    >Q: Do you recommend any hotels?</span
-                  ><br />
-                  <span class="faq-answer-en">
-                    A: Tango Inn Taipei JiHe, the tango taipei jiantan,Boutech Jiantan Hotel (Within walking distance to the venue)
-                  </span>
-                </td>
-              </tr>
-              <tr>
-                <td class="faq-number-cell">
-                  <span class="faq-number">6</span>
-                </td>
-                <td class="QA-section" style="border-right: none">
-                  <span class="labelAQ">Q: 可以在活動前先寄包裹嗎？</span><br />
-                  <span
-                    style="
-                      font-size: 1rem;
-                      font-family: 'Inclusive Sans', sans-serif;
-                    "
-                  >
-                   A: 可以，可在攤商管理頁面點選「寄件服務」（1/2開放申請，僅開放國外攤商）。
-                  </span>
-                </td>
-                <td class="QA-section">
-                  <span class="labelAQ en"
-                    >Q: Can I send parcels in advance before the event?</span
-                  ><br />
-                  <span class="faq-answer-en">
-                    A: Yes. You may select “Shipping Service” in the exhibitor management page (open at January 2, available to international exhibitors only).
-                  </span>
-                </td>
-              </tr>
-              <tr>
-                <td class="faq-number-cell">
-                  <span class="faq-number">7</span>
-                </td>
-                <td class="QA-section" style="border-right: none">
-                  <span class="labelAQ">Q: 可以使用發電機嗎？</span><br />
-                  <span
-                    style="
-                      font-size: 1rem;
-                      font-family: 'Inclusive Sans', sans-serif;
-                    "
-                  >
-                   A: :不開放使用發電機。若有使用的電力需求，請至攤商管理頁面下方的「電力需求」欄位進行編輯。
-                  </span>
-                </td>
-                <td class="QA-section">
-                  <span class="labelAQ en"
-                    >Q: Is it allowed to use a generator?</span
-                  ><br />
-                  <span class="faq-answer-en">
-                    A: Generators are not allowed. If you have any power requirements, please fill them in under the “Power Requirements” section at the bottom of your Exhibitor Management Page.
-                  </span>
-                </td>
-              </tr>
-              <tr>
-                <td class="faq-number-cell">
-                  <span class="faq-number">8</span>
-                </td>
-                <td class="QA-section" style="border-right: none">
-                  <span class="labelAQ">Q: 攤位是否有背牆？我可以換到靠牆的位子嗎？</span><br />
-                  <span
-                    style="
-                      font-size: 1rem;
-                      font-family: 'Inclusive Sans', sans-serif;
-                    "
-                  >
-                   A: :可以先參考以往攤位的展示方式，實際攤位配置方式可參考攤商管理頁面之攤主手冊（一月底寄出）。
-                  </span>
-                </td>
-                <td class="QA-section">
-                  <span class="labelAQ en"
-                    >Q: Will there be a back wall for the booth? Is it possible to switch to a wall-side booth?</span
-                  ><br />
-                  <span class="faq-answer-en">
-                    A: Please refer to previous booth setups for reference. Final booth layouts and wall availability will be detailed in the Exhibitor Manual, which will be sent at the end of January.
-                  </span>
-                </td>
-              </tr>
-              <tr>
-                <td class="faq-number-cell">
-                  <span class="faq-number">9</span>
-                </td>
-                <td class="QA-section" style="border-right: none">
-                  <span class="labelAQ">Q: 常見付款方式有哪些？
-                  </span><br />
-                  <span
-                    style="
-                      font-size: 1rem;
-                      font-family: 'Inclusive Sans', sans-serif;
-                    "
-                  >
-                   A: :大部分訪客偏好使用現金，但也有不少人使用信用卡或 Apple Pay。PayPal 較少見，但偶爾有人使用。如果可能，建議提供至少一種數位支付方式，但僅收現金也完全沒問題。
-                  </span>
-                </td>
-                <td class="QA-section">
-                  <span class="labelAQ en"
-                    >Q: What are the common payment methods?
-                    </span
-                  ><br />
-                  <span class="faq-answer-en">
-                    A: Most visitors prefer cash, but many also use credit cards and Apple Pay. PayPal is less common but still used occasionally. If possible, it’s a good idea to offer at least one digital payment option, though accepting cash only is also fine.
-                  </span>
-                </td>
-              </tr>
-              <tr>
-                <td class="faq-number-cell" style="background-color:lime"></td>
-                <td style="background-color: #000; color: #fff;"><marquee><strong>（活動期間）</strong></marquee></td>
-                <td style="background-color: #000; color: #fff;"><marquee><strong>(Event Period)</strong></marquee></td>
-              </tr>
-              <tr>
-                <td class="faq-number-cell">
-                  <span class="faq-number">1</span>
-                </td>
-                <td class="QA-section" style="border-right: none">
-                  <span class="labelAQ">Q: 我可以換攤位位置嗎？</span><br />
-                  <span
-                    style="
-                      font-size: 1rem;
-                      font-family: 'Inclusive Sans', sans-serif;
-                    "
-                  >
-                    A: 可以！只要雙方協調同意即可自行交換攤位位置。但官方公布的攤位地圖將不會調整。
-                  </span>
-                </td>
-                <td class="QA-section">
-                  <span class="labelAQ en"
-                    >Q: Can I change my booth location?</span
-                  ><br />
-                  <span class="faq-answer-en">
-                    A: Yes! As long as both parties agree, you may swap booths directly. However, the official venue map will not be updated.
-                  </span>
-                </td>
-              </tr>
-              <tr>
-                <td class="faq-number-cell">
-                  <span class="faq-number">2</span>
-                </td>
-                <td class="QA-section" style="border-right: none">
-                  <span class="labelAQ">Q: 草率簿可以多拿幾本嗎？</span><br />
-                  <span
-                    style="
-                      font-size: 1rem;
-                      font-family: 'Inclusive Sans', sans-serif;
-                    "
-                  >
-                    A: 每攤限領一本。如需額外購買，可至現場「草率大本攤」。
-                  </span>
-                </td>
-                <td class="QA-section">
-                  <span class="labelAQ en"
-                    >Q: Can I take more copies of the Catalog?</span
-                  ><br />
-                  <span class="faq-answer-en">
-                    A: Each booth may claim one copy. Additional copies can be purchased at the "NMHW by TPABF" onsite.
-                  </span>
-                </td>
-              </tr>
-              <!-- 12 -->
-              <tr>
-                <td class="faq-number-cell">
-                  <span class="faq-number">3</span>
-                </td>
-                <td class="QA-section" style="border-right: none">
-                  <span class="labelAQ">Q: 材料區怎麼沒有多餘的佈置材料？</span><br />
-                  <span
-                    style="
-                      font-size: 1rem;
-                      font-family: 'Inclusive Sans', sans-serif;
-                    "
-                  >
-                    A: 現場僅提供少量可自取的佈置材料，數量有限、恕不補充，請酌量使用。
-                  </span>
-                </td>
-                <td class="QA-section">
-                  <span class="labelAQ en"
-                    >Q: Why are there no extra materials in the materials area?</span
-                  ><br />
-                  <span class="faq-answer-en">
-                    A: Only a limited amount of booth-decoration materials will be provided onsite. Please take only what you need—quantities are limited and will not be replenished.
-                  </span>
-                </td>
-              </tr>
-    </table>
+            <iframe
+              class="faq-pdf-embed"
+              src="dashboard/faq.pdf"
+              width="100%"
+              title="FAQ PDF"
+            ></iframe>
           </div>
         </td>
-        <!-- OPEN CALL Form Section -->
-        <td class="admin" id="open-call-form" style="display: none">
-          <div class="scroll-inner">
-            <form
-              id="BoothApplication"
-              target="hidden_iframe"
-              action="https://docs.google.com/forms/d/e/1FAIpQLSeQfsc_9GX_CjXIbTd6jknI0nBJ60KETLJNF5D7GEgYxwM_4w/formResponse"
-              method="post"
-            >
-              <div style="font-size: 1rem; text-align: center; font-weight: 600">
-                本地申請<br />TAIPEI ART BOOK FAIR OPEN CALL
-              </div>
-              <br /><br />
-              <span class="description-header">Exhibitor's Name</span>
-              <div class="module-form layout-form-columnized">
-                <!--Exhibitor Name-->
-                <div class="column">
-                  <span class="from-header">攤商品牌名稱</span>
-                  輸入內容將公開顯示於官網目錄及標籤上。
-                </div>
-                <div class="column layout-form-column-grid-1">
-                  <span class="from-description-header-ness">必填問題</span>
-                  <input
-                    class="form-input"
-                    name="entry.1159390039"
-                    placeholder="品牌名稱"
-                    maxlength="150"
-                    required
-                    pattern="^[\p{L}\p{N}\s!&quot;#$%&'()*+,\-./:;<=>?@[\\\]^_`{|}~]+$"
-                    title="請勿輸入特殊符號"
-                  />
-                </div>
-              </div>
-              <span class="description-header">Participating in a record survey</span>
-              <div class="module-form layout-form-columnized">
-                <!--Participated In-->
-                <div class="column">
-                  <span class="from-header">您是否曾經參與過草率季</span>
-                  請問您是否曾在歷屆草率季中以攤主身份參與？
-                </div>
-                <div class="column layout-form-column-grid-2">
-                  <span class="from-description-header-ness">必填問題</span>
-                  <input
-                    type="radio"
-                    class="form-input-radio"
-                    name="entry.1144386047"
-                    id="participatedin_Yes"
-                    value="參與"
-                    required
-                  />
-                  <label for="participatedin_Yes" class="form-label">
-                    <span class="from-label-header">是，我參與過</span>
-                    <span class="from-label-description-header">
-                      如果您之前曾參與過草率季擺攤，請選擇此選項
-                    </span>
-                  </label>
-                  <input
-                    type="radio"
-                    class="form-input-radio"
-                    name="entry.1144386047"
-                    id="participatedin_Firsttime"
-                    value="首次"
-                    required
-                  />
-                  <label for="participatedin_Firsttime" class="form-label">
-                    <span class="from-label-header">否，我第一次</span>
-                    <span class="from-label-description-header">
-                      如果您是第一次參與請選擇此選項
-                    </span>
-                  </label>
-                </div>
 
-                <!--Participated Years-->
-                <div class="column question-ParticipatedYears">
-                  <span class="from-sub-header"
-                    >請告訴我們，您印象中曾參與過哪些年份</span
-                  >
-                  請選擇您印象中曾參與過往屆草率季擺攤的年份。
-                </div>
-                <div
-                  class="column layout-form-column-grid-4 question-ParticipatedYears"
-                >
-                  <span class="from-description-header-ness">必填問題、可多選</span>
-                  <input
-                    type="checkbox"
-                    class="form-input-checkbox"
-                    name="entry.1734398784"
-                    id="ParticipatedYears_2016"
-                    value="2016"
-                  />
-                  <label for="ParticipatedYears_2016" class="form-label">
-                    <span class="from-label-header">2016</span>
-                    <span class="from-label-description-header">海綿</span>
-                  </label>
-                  <input
-                    type="checkbox"
-                    class="form-input-checkbox"
-                    name="entry.1734398784"
-                    id="ParticipatedYears_2017"
-                    value="2017"
-                  />
-                  <label for="ParticipatedYears_2017" class="form-label">
-                    <span class="from-label-header">2017</span>
-                    <span class="from-label-description-header">草藥</span>
-                  </label>
-                  <input
-                    type="checkbox"
-                    class="form-input-checkbox"
-                    name="entry.1734398784"
-                    id="ParticipatedYears_2018"
-                    value="2018"
-                  />
-                  <label for="ParticipatedYears_2018" class="form-label">
-                    <span class="from-label-header">2018</span>
-                    <span class="from-label-description-header">大爆炸</span>
-                  </label>
-                  <input
-                    type="checkbox"
-                    class="form-input-checkbox"
-                    name="entry.1734398784"
-                    id="ParticipatedYears_2019"
-                    value="2019"
-                  />
-                  <label for="ParticipatedYears_2019" class="form-label">
-                    <span class="from-label-header">2019</span>
-                    <span class="from-label-description-header">網起來</span>
-                  </label>
-                  <input
-                    type="checkbox"
-                    class="form-input-checkbox"
-                    name="entry.1734398784"
-                    id="ParticipatedYears_2020"
-                    value="2020"
-                  />
-                  <label for="ParticipatedYears_2020" class="form-label">
-                    <span class="from-label-header">2020</span>
-                    <span class="from-label-description-header">開天窗</span>
-                  </label>
-                  <input
-                    type="checkbox"
-                    class="form-input-checkbox"
-                    name="entry.1734398784"
-                    id="ParticipatedYears_2022"
-                    value="2022"
-                  />
-                  <label for="ParticipatedYears_2022" class="form-label">
-                    <span class="from-label-header">2022</span>
-                    <span class="from-label-description-header">面盆面紗面對面</span>
-                  </label>
-                  <input
-                    type="checkbox"
-                    class="form-input-checkbox"
-                    name="entry.1734398784"
-                    id="ParticipatedYears_2023"
-                    value="2023"
-                  />
-                  <label for="ParticipatedYears_2023" class="form-label">
-                    <span class="from-label-header">2023</span>
-                    <span class="from-label-description-header">一直滑下去</span>
-                  </label>
-                  <input
-                    type="checkbox"
-                    class="form-input-checkbox"
-                    name="entry.1734398784"
-                    id="ParticipatedYears_2024"
-                    value="2024"
-                  />
-                  <label for="ParticipatedYears_2024" class="form-label">
-                    <span class="from-label-header">2024</span>
-                    <span class="from-label-description-header">沒有錯</span>
-                  </label>
-                </div>
-              </div>
+        <!-- Open Call Gated (closed period + invite password) -->
+        <td class="admin" id="open-call-gated" style="display: none; padding: 0;">
+          <div class="scroll-inner" style="min-height:100%; background-color: blue; padding: 2em 1.4em; box-sizing: border-box;">
+            <div style="background: whitesmoke; border-radius: 3rem; padding: 2.4em 2.8em; max-width: 560px; margin: 0 auto; font-family: 'Poppins', sans-serif;">
 
-              <span class="description-header">Preferred Booth Type</span>
-              <div class="module-form layout-form-columnized">
-                <!--Preferred Booth Type-->
-                <div class="column">
-                  <span class="from-header">選擇您欲報名的攤位類型</span>
-                  主辦單位將針對不同的攤種，提供相應設備、空間及位置。攤位位置將由主辦單位統一安排，不提供指定位置，
-                  請務必審慎評估合適的攤種，一旦提交恕不提供修改及調整，如需修改請重新填寫報名表單。
-                  <br />
-                  <br />
-                  錄取時將通知檯面尺寸與細項，錄取後請於兩週內完成攤位費用繳交，逾時將自動取消參與資格。
-                  請注意：錄取後將同步開放通行憑證加購服務（每攤限加購一張），請務必於加購期限內申請，逾期不候。
-                </div>
-                <div class="column layout-form-column-grid-2">
-                  <span class="from-description-header-ness">必填問題</span>
-                  <span class="from-description-header">
-                    書攤類．
-                    針對以書本為主要創作／販售的參展單位，申請時需提出三本以上的書及審查資料。
-                  </span>
-                  <input
-                    type="radio"
-                    class="form-input-radio"
-                    name="entry.133172086"
-                    id="PreferredBoothType_LargeBookStalls"
-                    value="書攤"
-                    required
-                  />
-                  <label for="PreferredBoothType_LargeBookStalls" class="form-label">
-                    <span class="from-label-header">一般書攤</span>
-                    <span class="from-label-sub-header">5,000 元（含稅）</span><br />
-                    <span class="from-label-description-header">
-                      基礎設備：桌面（120*60cm) 1 個、椅子 2 張、通行憑證 2 張、草率簿 1
-                      本（含露出一面）
-                    </span>
-                  </label>
+              <p id="opencall-gated-status-msg" style="margin: 0 0 1.4em; font-size: 0.95rem; line-height: 1.8;"></p>
 
-                  <span class="from-description-header">
-                    創作攤．針對以各類商品為主要創作／販售的參展單位。
-                  </span>
-                  <input
-                    type="radio"
-                    class="form-input-radio"
-                    name="entry.133172086"
-                    id="PreferredBoothType_CreativeProducts"
-                    value="創作商品"
-                    required
-                  />
-                  <label for="PreferredBoothType_CreativeProducts" class="form-label">
-                    <span class="from-label-header">創作攤</span>
-                    <span class="from-label-sub-header">8,000 元（含稅）</span><br />
-                    <span class="from-label-description-header">
-                      基礎設備：桌面（120*60cm) 1 個、椅子 2 張、通行憑證 2 張、草率簿 1
-                      本（含露出一面）
-                    </span>
-                  </label>
-                  <input
-                    type="radio"
-                    class="form-input-radio"
-                    name="entry.133172086"
-                    id="PreferredBoothType_FoodBeverages"
-                    value="食物酒水"
-                    required
-                  />
-                  <label for="PreferredBoothType_FoodBeverages" class="form-label">
-                    <span class="from-label-header">食物酒水攤</span>
-                    <span class="from-label-sub-header">13,000 元（含稅）</span><br />
-                    <span class="from-label-description-header">
-                      基礎設備：桌面（180*60cm) 1 個、椅子 2 張、通行憑證 2 張、草率簿 1
-                      本（含露出一面）
-                    </span>
-                  </label>
-
-                  <span class="from-description-header">
-                    裝置類．針對大型裝置或空間創作為主的參展單位。
-                  </span>
-                  <input
-                    type="radio"
-                    class="form-input-radio"
-                    name="entry.133172086"
-                    id="PreferredBoothType_Curation"
-                    value="裝置類"
-                    required
-                  />
-                  <label for="PreferredBoothType_Curation" class="form-label">
-                    <span class="from-label-header">裝置攤</span>
-                    <span class="from-label-sub-header">10,000 元（含稅） </span><br />
-                    <span class="from-label-description-header">
-                      基礎設備：1.5M*1.5M空地、通行憑證 2 張、草率簿 1 本（含露出一面）
-                    </span>
-                  </label>
-                </div>
-              </div>
-
-              <span class="description-header">Submission Info</span>
-              <div class="module-form layout-form-columnized">
-                <!--Role-->
-                <div class="column">
-                  <span class="from-header">身份類別</span>
-                  輸入內容將公開顯示於官網目錄及標籤上。
-                </div>
-                <div class="column layout-form-column-grid-1">
-                  <span class="from-description-header-ness">必填問題</span>
-                  <select
-                    class="form-input"
-                    name="entry.2022316464"
-                    required
-                    style="color: grey"
-                    onchange="this.style.color = this.value ? 'black' : 'grey';"
-                  >
-                    <option value="" disabled selected hidden>請選擇身份類別</option>
-                    <option value="a0 Creator">a0 Creator 創作者</option>
-                    <option value="a1 Bookstore">a1 Bookstore 書店</option>
-                    <option value="a2 Publisher/Press">
-                      a2 Publisher/Press 出版商
-                    </option>
-                    <option value="a3 Printing/Paper">
-                      a3 Printing/Paper 印刷廠/紙廠
-                    </option>
-                    <option value="a4 Cultural Institution">
-                      a4 Cultural Institution 文化機構
-                    </option>
-                    <option value="a5 Select Shop">a5 Select Shop 選品店</option>
-                    <option value="a6 Group/Structure">a6 Group/Structure 團體</option>
-                  </select>
-                </div>
-
-                <!--Nationality-->
-                <div class="column">
-                  <span class="from-header">主要創作據點</span>
-                  輸入內容將公開顯示於官網目錄及標籤上。
-                </div>
-                <div class="column layout-form-column-grid-1">
-                  <span class="from-description-header-ness">必填問題</span>
-                  <input
-                    class="form-input"
-                    name="entry.637996839"
-                    placeholder="主要創作據點。例：台北"
-                    maxlength="100"
-                    required
-                  />
-                </div>
-
-                <!--Bio-->
-                <div class="column">
-                  <span class="from-header">品牌介紹</span>
-                  輸入內容將公開顯示於官網目錄及標籤上。
-                </div>
-                <div class="column layout-form-column-grid-1">
-                  <span class="from-description-header-ness"
-                    >必填問題、300 個字元內</span
-                  >
-                  <textarea
-                    class="form-input-textarea"
-                    name="entry.1877870250"
-                    placeholder="品牌介紹"
-                    maxlength="1000"
-                    required
-                  ></textarea>
-                </div>
-
-                <!-- 作品類別 -->
-                <div class="column" id="workcat">
-                  <span class="from-header">作品類別</span>
-                  <span style="color: red"></span>輸入內容將公開顯示於官網目錄及標籤上。
-                </div>
-                <div class="column layout-form-column-grid-1" id="workcat2">
-                  <span class="from-description-header-ness" style="display: block"
-                    >必填問題</span
-                  >
-                  <select
-                    id="sub-category"
-                    name="entry.1482635628"
-                    required
-                    disabled
-                    style="color: grey; max-width: 65%"
-                  >
-                    <option value="" disabled selected hidden>請先選擇攤種</option>
-                  </select>
-                </div>
-
-                <!--Product Links-->
-                <div
-                  class="column question-ProductLinks"
-                  id="productLink"
-                  style="display: none"
-                >
-                  <span class="from-header">販售商品描述</span>
-                  請簡述您攤位準備販售之商品品項。
-                </div>
-                <div
-                  class="column layout-form-column-grid-1 question-ProductLinks"
-                  id="productLink-l"
-                  style="display: none"
-                >
-                  <span class="from-description-header-ness">必填問題</span><br />
-                  <textarea
-                    class="form-input-textarea"
-                    name="entry.1111437113"
-                    placeholder="商品品項。例：五金雕塑、鑰匙圈、飲品⋯⋯"
-                    maxlength="1000"
-                    style="width: 100%"
-                  ></textarea>
-                </div>
-                <!-- work link -->
-                <div
-                  class="column question-WorkLinks"
-                  id="uploadArtwork"
-                  style="display: none"
-                >
-                  <span class="from-header">作品上傳</span>
-                  <span id="port-description">
-                    報名「一般書攤」之單位，請提供已發行或預計發行之書籍相關作品。（不包含記事本、日月曆、明信片等輸出物），如提供之內容未達到錄取書攤類之標準，主辦單位將視情況條件式錄取其他攤種。
-                    從事藝術書刊創作者將作為入選優先條件審核，主辦單位將依照您所提交的內容供主辦單位審核。<br /><br />
-                    同時歡迎創作者依每屆主題發想創作及佈置攤位，這也將此納入攤位審核及草率獎參考。
-                  </span>
-                </div>
-                <div
-                  class="column layout-form-column-grid-1 question-ProductLinks"
-                  id="uploadArtwork-l"
-                  style="display: none"
-                >
-                  <span class="from-description-header-ness">
-                    必填問題，請上傳<strong>一份合併好的 PDF 檔案</strong
-                    >，上限為<strong>最多 10 頁 A4、檔案大小不超過 8MB</strong
-                    >。請勿上傳多個 PDF，如有多頁內容，請合併成<u>一份 PDF 上傳</u
-                    >。 </span
-                  ><br />
-                  <div class="upload-container">
-                    <input type="file" id="fileInput" name="file" />
-                    <input
-                      type="hidden"
-                      name="entry.715764736"
-                      id="uploadedFileUrl"
-                      value="some-unique-id-or-timestamp"
-                    />
-                    <input type="hidden" name="category" value="artwork" />
-                  </div>
-                </div>
-
-                <!--Plan Links-->
-                <div
-                  class="column question-PlanLinks"
-                  id="proposalLink"
-                  style="display: none"
-                >
-                  <span class="from-header">企劃書連結</span>
-                  內需包含裝置草圖、計畫說明、創作者介紹、作品介紹、販售清單⋯⋯等內容
-                </div>
-                <div
-                  class="column layout-form-column-grid-1 question-PlanLinks"
-                  id="proposalLink-l"
-                  style="display: none"
-                >
-                  <span class="from-description-header-ness">
-                    必填問題，請上傳<strong>一份合併好的 PDF 檔案</strong
-                    >，上限為<strong>最多 10 頁 A4、檔案大小不超過 8MB</strong
-                    >。請勿上傳多個 PDF，如有多頁內容，請合併成<u>一份 PDF 上傳</u
-                    >。 </span
-                  ><br />
-                  <div class="upload-container">
-                    <input type="file" id="fileInput2" name="file" />
-                    <input
-                      type="hidden"
-                      name="entry.1801583093"
-                      id="uploadedFileUrl2"
-                      value="some-unique-id-or-timestamp"
-                    />
-                    <input type="hidden" name="category" value="proposal" />
-                  </div>
-                </div>
-
-                <!--Social Media-->
-                <div class="column">
-                  <span class="from-header">社群媒體</span>
-                  請附上社群媒體供評選參考。輸入內容將公開顯示於官網目錄及標籤上。
-                </div>
-                <div class="column layout-form-column-grid-2">
-                  <span class="from-description-header-ness-no">非必填問題</span>
-                  <input
-                    type="url"
-                    class="form-input"
-                    name="entry.1361490241"
-                    placeholder="Facebook。 https://facebook.com/"
-                    maxlength="1500"
-                  />
-                  <input
-                    type="url"
-                    class="form-input"
-                    name="entry.138567696"
-                    placeholder="Instagram。 https://instagram.com/"
-                    maxlength="1500"
-                  />
-                  <input
-                    type="url"
-                    class="form-input"
-                    name="entry.699732974"
-                    placeholder="網站。 https://"
-                    maxlength="3000"
-                  />
-                  <input
-                    type="url"
-                    class="form-input"
-                    name="entry.2050899252"
-                    placeholder="其他。 https://"
-                    maxlength="3000"
-                  />
-                  <input
-                    type="url"
-                    class="form-input"
-                    name="entry.830227276"
-                    placeholder="其他。 https://"
-                    maxlength="3000"
-                  />
-                </div>
-
-                <!--Promotion Content-->
-                <div class="column">
-                  <span class="from-header">行銷資料蒐集與使用</span>
-                  若錄取此屆攤商，您是否同意將以上提供之內容資料，供主辦單位用於本屆攤商介紹、網路媒體與貼文宣傳及活動資料使用？
-                </div>
-                <div class="column layout-form-column-grid-2">
-                  <span class="from-description-header-ness">必填問題</span>
-                  <input
-                    type="radio"
-                    class="form-input-radio"
-                    name="entry.7322984"
-                    id="PromotionContent_Agree"
-                    value="同意"
-                    required
-                  />
-                  <label for="PromotionContent_Agree" class="form-label">
-                    <span class="from-label-header">同意</span>
-                    <span class="from-label-description-header"
-                      >同意使用請選擇此選項</span
-                    >
-                  </label>
-                  <input
-                    type="radio"
-                    class="form-input-radio"
-                    name="entry.7322984"
-                    id="PromotionContent_Disagree"
-                    value="不同意"
-                    required
-                  />
-                  <label for="PromotionContent_Disagree" class="form-label">
-                    <span class="from-label-header">不同意</span>
-                    <span class="from-label-description-header"
-                      >不同意使用請選擇此選項</span
-                    >
-                  </label>
-                </div>
-
-                <!--Insufficient Information-->
-                <div class="column question-InsufficientInformation">
-                  <span class="from-sub-header">當攤商行銷資料不足時</span>
-                  您否同意草率季團隊使用、分享您所提供之
-                  Instagram、Facebook、網站⋯⋯等內容用於本屆攤商介紹、網路媒體與貼文宣傳及活動資料使用？
-                </div>
-                <div
-                  class="column layout-form-column-grid-2 question-InsufficientInformation"
-                >
-                  <span class="from-description-header-ness">必填問題</span>
-                  <input
-                    type="radio"
-                    class="form-input-radio"
-                    name="entry.1214650515"
-                    id="InsufficientInformation_Agree"
-                    value="同意"
-                  />
-                  <label for="InsufficientInformation_Agree" class="form-label">
-                    <span class="from-label-header">同意</span>
-                    <span class="from-label-description-header"
-                      >同意使用請選擇此選項</span
-                    >
-                  </label>
-                  <input
-                    type="radio"
-                    class="form-input-radio"
-                    name="entry.1214650515"
-                    id="InsufficientInformation_Disagree"
-                    value="不同意"
-                  />
-                  <label for="InsufficientInformation_Disagree" class="form-label">
-                    <span class="from-label-header">不同意</span>
-                    <span class="from-label-description-header"
-                      >不同意使用請選擇此選項</span
-                    >
-                  </label>
-                </div>
-
-                <!--Workshop Proposal-->
-                <div class="column">
-                  <span class="from-header">主題工作坊提案</span>
-                  依據今年主題盡情發揮想像，如有適合的工作坊提案，我們將會與您聯繫。若現在沒想法，若日後突然靈光一現也可將提案寄至
-                  hooroo@double-grass.com。
-                </div>
-                <div class="column layout-form-column-grid-1">
-                  <span class="from-description-header-ness-no">非必填問題</span>
-                  <textarea
-                    class="form-input-textarea"
-                    name="entry.1347561831"
-                    placeholder="主題工作坊提案"
-                    maxlength="1000"
-                  ></textarea>
-                </div>
-
-                <!-- 十年特場 -->
-                <div class="column">
-                  <span class="from-header">2026 春季草率十年特場！</span>
-                  草率十年特場預計於 2026 年 3–4 月舉行，請勾選是否有參展意願。
-                </div>
-
-                <div class="column layout-form-column-grid-1">
-                  <span class="from-description-header-ness-no">非必填問題</span>
-                  <input
-                    type="checkbox"
-                    class="form-input-checkbox"
-                    name="entry.1381238601"
-                    id="early_signup_2026"
-                    value="要報名"
-                  />
-                  <label for="early_signup_2026" class="form-label-10y">
-                    我要搶先報名 2026 春季草率十年特場！
-                  </label>
-                </div>
-              </div>
-
-              <span class="description-header">Contact Info</span>
-              <div class="module-form layout-form-columnized">
-                <!--Name of Person in Charge-->
-                <div class="column">
-                  <span class="from-header">聯絡代表姓名</span>
-                  如果您以公司、團體或其他集體的身份報名，您必須為您的攤商選擇一名代表人。
-                </div>
-                <div class="column layout-form-column-grid-1">
-                  <span class="from-description-header-ness">必填問題</span>
-                  <input
-                    autocomplete="name"
-                    class="form-input"
-                    name="entry.1522532449"
-                    placeholder="聯絡代表姓名"
-                    maxlength="100"
-                    required
-                  />
-                </div>
-
-                <!--Email-->
-                <div class="column">
-                  <span class="from-header">電子信箱</span>
-                  此電子信箱將作為日後通知、註冊、查詢帳號之使用，<strong>一旦提交將不提供修改及調整</strong>。錄取與備取通知信將以此電子信箱寄出，請留意收信信箱或垃圾信箱，未錄取不另行通知。
-                </div>
-                <div class="column layout-form-column-grid-1">
-                  <span class="from-description-header-ness">必填問題</span>
-                  <input
-                    type="email"
-                    autocomplete="email"
-                    class="form-input"
-                    name="entry.529156755"
-                    id="email-input"
-                    placeholder="電子信箱"
-                    maxlength="500"
-                    required
-                  />
-                  <div
-                    id="email-error"
-                    style="color: plum; display: none; font-size: 13px"
-                  >
-                    請輸入有效的電子信箱，例如：example@gmail.com
-                  </div>
-                </div>
-
-                <!--Password-->
-                <div class="column">
-                  <span class="from-header">登錄密碼</span>
-                  此登錄密碼將作為日後註冊、查詢帳號之使用，<strong>一旦提交將不提供修改及調整，</strong>若重複報名將後輸入密碼為主。
-                </div>
-                <div class="column layout-form-column-grid-1">
-                  <span class="from-description-header-ness">必填問題</span>
-                  <div style="position: relative">
-                    <input
-                      id="password"
-                      type="password"
-                      autocomplete="off"
-                      class="form-input"
-                      name="entry.174970451"
-                      placeholder="Password"
-                      maxlength="500"
-                      required
-                      style="padding-right: 30px"
-                    />
-                    <button
-                      type="button"
-                      id="togglePassword"
-                      style="
-                        position: absolute;
-                        right: 5px;
-                        top: 50%;
-                        transform: translateY(-50%);
-                        font-size: 14px;
-                        "
-                      >
-                      Show
-                    </button>
-                  </div>
-
-                  <div id="password-rules" style="margin-top: 8px; font-size: 14px">
-                    <div id="length-rule">✕ 至少 8 個字元</div>
-                    <div id="uppercase-rule">✕ 至少一個大寫字母</div>
-                    <div id="lowercase-rule">✕ 至少一個小寫字母</div>
-                    <div id="number-rule">✕ 至少一個數字</div>
-    </div>
-                </div>
-
-                <!--Telephone Number-->
-                <div class="column">
-                  <span class="from-header">聯絡電話</span>
-                  此聯絡電話將作為日後聯繫使用。
-                </div>
-                <div class="column layout-form-column-grid-1">
-                  <span class="from-description-header-ness">必填問題</span>
-                  <input
-                    autocomplete="tel"
-                    class="form-input"
-                    name="entry.1057735065"
-                    placeholder="聯絡電話。例：0212345678"
-                    maxlength="50"
-                    required
-                  />
-                </div>
-
-                <!--Further Questions-->
-                <div class="column">
-                  <span class="from-header">想對草率季說的話！</span>
-                  如果您有其他問題與意見或有想對我們說的話，請在此留言。
-                </div>
-                <div class="column layout-form-column-grid-1">
-                  <span class="from-description-header-ness-no">非必填問題</span>
-                  <textarea
-                    class="form-input-textarea"
-                    name="entry.2019239800"
-                    placeholder="留言"
-                    maxlength="1000"
-                  ></textarea>
-                </div>
-              </div>
-
-              <span class="description-header">Notice</span>
-              <div class="module-form layout-form-columnized">
-                <div class="column">
-                  <ol class="from-ol">
-                    <li>
-                      從事藝術書刊創作者將作為入選優先條件審核，主辦單位將依照您所提交的內容供主辦單位審核。同時歡迎創作者依每屆主題發想創作及佈置攤位，這也將此納入攤位審核及草率獎參考。
-                    </li>
-                    <li>
-                      主辦單位將針對不同的攤種，提供相應設備、空間及位置，申請後不開放調整。且攤位位置由主辦單位統一安排，不提供申請指定位置。請務必選擇最合適的攤種，一旦提交將不提供修改及調整，如需修改請重新填寫報名表單。
-                    </li>
-                    <li>
-                      錄取與備取通知信將寄至您所填寫電子信箱，請留意收信信箱或垃圾信箱，未錄取不另行通知。
-                    </li>
-                    <li>
-                      錄取時將通知檯面尺寸與細項，錄取後請於兩週內完成攤位費用繳交，逾時自動取消參與資格。同時錄取後將提供通行憑證加購，請注意，加購通行憑證期間截止後恕無法再加購。
-                    </li>
-                    <li>
-                      收到通知錄取信且付款完成後，草率季將於一週內進行核帳。您可使用您所填寫的電子信箱使用攤商後台查詢繳費狀態與下載其他說明與指南。
-                    </li>
-                  </ol>
-                </div>
-                <div class="column layout-form-column-grid-2">
-                  <span class="from-description-header">
-                    <br />
-                    我已詳細閱讀徵件相關說明，並同意遵守本次徵件之規則，如有未盡事宜，主辦單位保留解釋、修改及補充本活動辦法、細則等說明內容之權利。
-                  </span>
-                  <input
-                    type="checkbox"
-                    class="form-input-checkbox from-input-Agre"
-                    id="InformationRulesAgree"
-                    value=""
-                    required
-                  />
-                  <label for="InformationRulesAgree" class="form-label from-label-Agre">
-                    <span class="from-label-header">點擊並同意</span>
-                  </label>
-                </div>
-              </div>
-              <span class="description-header">Submit</span>
-              <div class="module-form layout-form-columnized">
-                <div class="column">
-                  <span class="from-description-header">
-                    <strong>按下提交按鈕前，請再次檢查您輸入的回答</strong
-                    >，表單提交後將無法再次修改，如需修改請再次提交表單。我們收到您的申請後，您將收到一封自動確認電子郵件。如果您沒有收到電子郵件，請檢查您的垃圾信箱。
-                  </span>
-                </div>
-                <div class="column">
-                  <div
-                    class="g-recaptcha"
-                    data-sitekey="6Ldd3R0sAAAAALXBsRETxdknut46QXHphNYpJl2I"
-                    data-action="DASHBOARD"
-                    data-callback="onRecaptchaSuccess"
-                    data-expired-callback="onRecaptchaExpired"
-                    data-error-callback="onRecaptchaError"
-                  ></div>
-                  <div
-                    id="form-error"
-                    style="display: none; color: plum; margin-top: 1em"
-                  ></div>
-                  <button
-                    type="submit"
-                    class="button-from-submit"
-                    id="submitButton"
-                    value="submit"
-                    disabled
-                  >
-                    提交
+              <!-- Password gate (only shown when closed + password exists) -->
+              <div id="opencall-invite-gate" style="display: none;">
+                <p style="margin: 0 0 0.8em; font-size: 0.88rem; line-height: 1.7;">
+                  <span id="opencall-gate-zh">如您已收到邀請，請輸入邀請密碼以繼續填寫表單。</span>
+                  <span id="opencall-gate-en" style="display: none;">If you have received an invitation, please enter the invite code below to access the form.</span>
+                </p>
+                <div style="display: flex; gap: 0.6em; align-items: center; flex-wrap: wrap;">
+                  <input type="password" id="opencall-invite-password-input"
+                    placeholder="邀請密碼 Invite Code"
+                    style="flex: 1; min-width: 160px; padding: 0.4em 0.8em; border: 1px solid #000; font-size: 0.9rem; font-family: inherit; background: white;"
+                    onkeydown="if(event.key==='Enter') verifyOpenCallInvite();">
+                  <button type="button" id="opencall-invite-verify-btn"
+                    onclick="verifyOpenCallInvite()"
+                    style="padding: 0.4em 1.2em; background: #000; color: #fff; border: none; cursor: pointer; font-size: 0.88rem; font-family: inherit;">
+                    確認 Verify
                   </button>
                 </div>
+                <div id="opencall-invite-status" style="margin-top: 0.6em; font-size: 0.83rem;"></div>
               </div>
-            </form>
+
+            </div>
           </div>
         </td>
+        <!-- /Open Call Gated -->
+
+        <td class="admin" id="open-call-form" style="display: none">
+          <div class="scroll-inner opencall-dashboard-host">
+            <iframe
+              id="opencall-frame-local"
+              class="opencall-dashboard-iframe"
+              title="Open Call — 本地申請"
+              src="localapplication.html?embed=1"
+            ></iframe>
+            <iframe
+              id="opencall-frame-oversea"
+              class="opencall-dashboard-iframe opencall-dashboard-iframe--hidden"
+              title="Open Call — Overseas Application"
+              src="overseaapplication.html?embed=1"
+            ></iframe>
+          </div>
+        </td>
+
+        <!-- 寄售申請 Consignment Form -->
+        <td class="admin" id="consignment-form" style="display:none; padding:0;">
+          <iframe
+            id="consignment-iframe"
+            title="寄售申請 Consignment"
+            src="consignment.html"
+            style="width:100%; height:100vh; border:none; display:block;"
+          ></iframe>
+        </td>
+
+
       </tr>
     </table>
-    <script src="js/dashboardupload/upload_dashboard.js"></script>
-    <script src="js/dashboard-body.js"></script>
-    <script src="js/oxox.js"></script>
-    <script src="js/upload.js"></script>
-    <script src="js/identity2.js"></script>
-    <script src="js/main.js"></script>
-    <script src="js/yes.js"></script>
-    <script src="js/password.js"></script>
+    <!-- ── Clickwrap Consent Modal ── -->
+    <div id="consent-modal" role="dialog" aria-modal="true" style="
+      display: none;
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background: rgba(0,0,0,0.65);
+      z-index: 9999;
+      overflow-y: auto;
+      -webkit-overflow-scrolling: touch;
+    ">
+      <div style="
+        background: #fff;
+        max-width: 700px;
+        margin: 4vh auto 4vh;
+        border: 1px solid #000;
+        position: relative;
+        font-family: inherit;
+      ">
+        <!-- Modal header -->
+        <div style="background:#000; color:#fff; padding:8px 12px; display:flex; justify-content:space-between; align-items:center;">
+          <span style="font-size:0.85rem; font-weight:bold;">參展同意書 Exhibitor Declaration</span>
+          <button id="consent-modal-close-btn" type="button" style="background:none; border:none; color:#fff; font-size:1.3rem; cursor:pointer; line-height:1; padding:0 2px;">✕</button>
+        </div>
+        <!-- PDF viewer -->
+        <div style="padding:0.8em 0.8em 0;">
+          <iframe
+            id="consent-modal-pdf"
+            width="100%"
+            height="480"
+            style="border:1px solid #ddd; display:block;"
+          ></iframe>
+        </div>
+        <!-- Identity + agree section -->
+        <div style="padding:0.8em 1em 1.2em; border-top:1px solid #eee; margin-top:0.8em;">
+          <p style="font-size:0.78rem; color:#777; margin:0 0 0.7em;">
+            以下資料來自您的登入帳號，不可修改。<br>The following information is from your account and cannot be modified.
+            <span style="margin-left:1em; color:#aaa;">條款版本 Version: <span id="consent-modal-version" style="font-family:monospace;"></span></span>
+          </p>
+          <div style="display:flex; gap:1em; flex-wrap:wrap; margin-bottom:0.9em;">
+            <div style="flex:1; min-width:140px;">
+              <label style="font-size:0.75rem; color:#888; display:block; margin-bottom:3px;">姓名 Name</label>
+              <input id="consent-modal-name" type="text" readonly tabindex="-1"
+                style="width:100%; border:1px solid #ccc; padding:5px 7px; background:#f5f5f5; font-size:0.85rem; box-sizing:border-box; cursor:default;">
+            </div>
+            <div style="flex:2; min-width:180px;">
+              <label style="font-size:0.75rem; color:#888; display:block; margin-bottom:3px;">Email</label>
+              <input id="consent-modal-email" type="text" readonly tabindex="-1"
+                style="width:100%; border:1px solid #ccc; padding:5px 7px; background:#f5f5f5; font-size:0.85rem; box-sizing:border-box; cursor:default;">
+            </div>
+          </div>
+          <label id="consent-modal-agree-label" style="display:flex; align-items:flex-start; gap:0.5em; cursor:pointer; font-size:0.85rem; line-height:1.5; margin-bottom:0.9em; user-select:none;">
+            <input type="checkbox" id="consent-modal-checkbox" style="margin-top:0.2em; flex-shrink:0; cursor:pointer;">
+            <span>我已閱讀上述同意書全文，並同意遵守其中所有條款。<br>I have read the full Exhibitor Declaration above and agree to all its terms.</span>
+          </label>
+          <div style="display:flex; align-items:center; gap:1em; flex-wrap:wrap;">
+            <button id="consent-modal-confirm-btn" type="button" disabled style="
+              padding:0.4em 1.8em;
+              background:#ccc;
+              color:#fff;
+              border:none;
+              border-radius:3px;
+              font-size:0.9rem;
+              cursor:not-allowed;
+              transition:background 0.15s, cursor 0.15s;
+            ">確認同意 Confirm</button>
+            <span id="consent-modal-status" style="font-size:0.8rem; color:#c00;"></span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- ── /Clickwrap Consent Modal ── -->
+
+    <script src="js/dashboardupload/upload_dashboard.js?v=20260512c"></script>
+    <script src="js/dashboard-body.js?v=20260513a"></script>
   </body>
 </html>

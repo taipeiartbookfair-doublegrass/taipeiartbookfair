@@ -21,7 +21,7 @@ function initBoothTypeDisplay() {
   }
 
   // 根據選擇的攤位類型顯示或隱藏元素
-  // 支援中文（本地表單）與英文（海外表單 oversea_20251218_invite.html）攤位類型
+  // 支援中文（本地表單 localapplication.html）與英文（海外表單 overseaapplication.html）攤位類型
   function updateFormDisplay() {
     const selectedBoothType = document.querySelector(
       'input[name="entry.133172086"]:checked'

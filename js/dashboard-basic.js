@@ -1,4 +1,3 @@
-
 // 先檢查 cookie
 const account = getCookie("account");
 const region = getCookie("region");
@@ -8,9 +7,10 @@ if (!account || !region) {
 }
 
 const apiUrl =
-  "https://script.google.com/macros/s/AKfycbxOxo-ZzjkkDlkIyCNlmFgYfPhpLOHQr3278Mv36PJrM_jdb_RsaG42hwM23Cp7b7onBw/exec";
+  "https://script.google.com/macros/s/AKfycbyRV_uiklsvHWPeBblxTz47OlTnQ-IeKIxifYZ1D-8ZzHdljVMEbXwsKGO84Agon7mU8g/exec";
 const publishApiUrl =
-  "https://script.google.com/macros/s/AKfycbxJkcTqW6xJfhCSVFdI-Mk9SFSGTdQnCB2-_-8sluqgTHul2wjNS6jV9wJZMPtIdSy3Pw/exec";
+  "https://script.google.com/macros/s/AKfycbwL1g0fpahfuau7g8vuF1Oya0aAS2QvIj0S0EL6rXuajWzYVfgviUm64EmR95xwRMPEQg/exec";
+const contactApiUrl = apiUrl + "?type=contact";
 
 document.addEventListener("DOMContentLoaded", async function () {
   if (window.startFakeLoading) window.startFakeLoading();
@@ -18,7 +18,6 @@ document.addEventListener("DOMContentLoaded", async function () {
   const loadingMask = document.getElementById("loading-mask");
   const loadingGrid = loadingMask.querySelector(".loading-grid");
   const loadingPercent = document.getElementById("loading-percent");
-  const imgSrc = ""; // 不用先 load
   const imgActiveSrc = "image/Moss_of_Bangladesh_2.jpg";
   const imgSize = 70; // px，和 CSS 一致
 
@@ -141,16 +140,11 @@ document.addEventListener("DOMContentLoaded", async function () {
     if (data.success) {
       apiData = data.data;
     } else {
-      alert(data.message || "資料取得失敗，請重新登入。");
-      setCookie("account", "", -1);
-      setCookie("region", "", -1);
-      setCookie("login", "", -1);
-      window.location.href = "login.html";
-      return;
+      // 尚未投稿（沒有 application_id）也能進入頁面，等投稿系統開放後再補資料
+      console.log("No application info yet:", data.message || data.error || "");
     }
   } catch (error) {
-    alert("Network error, please try again later.");
-    return;
+    console.error("get_dashboard_info network error:", error);
   }
   if (window.setLoading) window.setLoading(0.9);
 
@@ -179,18 +173,72 @@ document.addEventListener("DOMContentLoaded", async function () {
         userData.data["account"] || "";
       document.getElementById("phone").textContent =
         userData.data["phone"] || "";
-      document.getElementById("nationality2").textContent =
-        userData.data["region"] || "";
+      const nationality2El = document.getElementById("nationality2");
+      if (nationality2El)
+        nationality2El.textContent = userData.data["region"] || "";
+    } else {
+      // 後端明確回 success: false（例如帳號不存在）才視為 session 失效
+      alert(
+        "登入狀態失效，請重新登入。\nSession expired, please log in again.",
+      );
+      setCookie("account", "", -1);
+      setCookie("region", "", -1);
+      setCookie("login", "", -1);
+      window.location.href = "login.html";
+      return;
     }
-  } catch (error) {}
+  } catch (error) {
+    // 網路錯誤不直接登出，保留現有寬鬆行為
+    console.error("get_user_info network error:", error);
+  }
+
+  if (apiData["報名編號"]) {
+    // 已投稿：顯示攤商面板，並鎖住 OPEN CALL 按鈕
+    if (window.showDashboardSection) window.showDashboardSection();
+    if (window.setSidebarActive) window.setSidebarActive("dashboard");
+
+    const openCallBtn = document.getElementById("sidebar-open-call");
+    if (openCallBtn) {
+      const p = openCallBtn.querySelector("p");
+      if (p) {
+        p.innerHTML = "申請參展<br />OPEN CALL";
+        p.style.color = "darkgray";
+        p.style.cursor = "default";
+      }
+      openCallBtn.onclick = function (e) {
+        e.preventDefault();
+        alert(
+          "您已完成徵件投稿。如需修改資料，請至側邊欄的「攤商管理」進行修改。\nYour application has been submitted. If you need to modify your information, please proceed to the Exhibitor Panel in the sidebar.",
+        );
+        return false;
+      };
+    }
+  } else {
+    // 未投稿：攤商管理按鈕禁用，面板不顯示
+    const sidebarDashboard = document.getElementById("sidebar-dashboard");
+    if (sidebarDashboard) {
+      sidebarDashboard.style.pointerEvents = "none";
+      const p = sidebarDashboard.querySelector("p");
+      if (p) {
+        p.style.color = "darkgray";
+        p.style.cursor = "default";
+      }
+    }
+  }
 
   // 對應 id 填入資料
   document.getElementById("brand-name").textContent = apiData["品牌"] || "";
+  const brandNameOriginalEl = document.getElementById("brand-name-original");
+  if (brandNameOriginalEl)
+    brandNameOriginalEl.textContent = apiData["品牌(原文)"] || "";
   document.getElementById("bio").textContent = apiData["品牌簡介"] || "";
+  const bioEnEl = document.getElementById("bio-en");
+  if (bioEnEl) bioEnEl.textContent = apiData["品牌簡介EN"] || "";
   document.getElementById("role").textContent = apiData["身份類別"] || "";
   document.getElementById("live-event-schedule-reminder").textContent =
     apiData["活動場次資訊"] || "";
-  document.getElementById("nationality").textContent = region || "";
+  const nationalityEl = document.getElementById("nationality");
+  if (nationalityEl) nationalityEl.textContent = region || "";
   setSocialText("baselocation", apiData["主要創作據點"]);
   setSocialText("attendedYears", apiData["參與年份"]);
   setSocialText("website", apiData["website"]);
@@ -199,7 +247,6 @@ document.addEventListener("DOMContentLoaded", async function () {
   setSocialText("yearlyanswer", apiData["當屆問答"]);
   setSocialText("electricity-answer", apiData["電力需求"]);
   setSocialText("Booth-number", apiData["攤商編號"]);
-
 
   const applicationNumberEl = document.getElementById("application-number");
   if (applicationNumberEl) {
@@ -211,7 +258,7 @@ document.addEventListener("DOMContentLoaded", async function () {
   }
   const declarationStatusEl = document.getElementById("declaration-status");
   if (declarationStatusEl) {
-    declarationStatusEl.textContent = apiData["同意書狀態"] || "（人工審核塞車中）";
+    declarationStatusEl.textContent = "";
   }
   // 取得報名編號與 boothType
   function getBoothTypeFromNumber(applicationNumber) {
@@ -226,7 +273,7 @@ document.addEventListener("DOMContentLoaded", async function () {
       II: "Installation Booth",
       IC: "Curation Booth",
     };
-    
+
     for (const [code, type] of Object.entries(map)) {
       if (applicationNumber.includes(code)) {
         return type;
@@ -234,7 +281,9 @@ document.addEventListener("DOMContentLoaded", async function () {
     }
     return "";
   }
-  const applicationNumber = applicationNumberEl ? applicationNumberEl.textContent.trim() : "";
+  const applicationNumber = applicationNumberEl
+    ? applicationNumberEl.textContent.trim()
+    : "";
   const boothType = getBoothTypeFromNumber(applicationNumber);
   const boothTypeEl = document.getElementById("booth-type");
   if (boothType && boothTypeEl) {
@@ -294,7 +343,7 @@ document.addEventListener("DOMContentLoaded", async function () {
   }
   function setApplicationResultStyle(el, resultText) {
     const applicationResultWrapper = document.getElementById(
-      "application-result-wrapper"
+      "application-result-wrapper",
     );
     el.style.backgroundColor = "";
     el.style.color = "";
@@ -343,7 +392,7 @@ document.addEventListener("DOMContentLoaded", async function () {
       "Accepted",
       "條件式錄取",
       "Conditionally Accepted",
-      "NGO"
+      "NGO",
     ];
     return qualifiedStatuses.includes(resultText);
   }
@@ -353,8 +402,9 @@ document.addEventListener("DOMContentLoaded", async function () {
   const hasQualifiedStatus = hasExhibitionQualification(resultText);
   const paymentChecked = !!apiData["已匯款"];
   const declarationChecked = !!apiData["同意書"];
-  const shouldShowBarcode = hasQualifiedStatus && paymentChecked && declarationChecked;
-  
+  const shouldShowBarcode =
+    hasQualifiedStatus && paymentChecked && declarationChecked;
+
   if (barcodeRow) {
     if (shouldShowBarcode) {
       // 顯示條碼行
@@ -371,6 +421,7 @@ document.addEventListener("DOMContentLoaded", async function () {
     }
   }
 
+  //改這裡！！阿寧！在這裡 meow
   // boothType 設備、價錢、付款、電力、付款連結產生
   function updateBoothInfo(boothType) {
     let price = "";
@@ -543,29 +594,26 @@ document.addEventListener("DOMContentLoaded", async function () {
     function toProductUrl(applicationNumber) {
       // 格式：25-{applicationNumber}-booth-fee2026
       return (
-        "https://nmhw.taipeiartbookfair.com/products/" +
+        "https://shop.taipeiartbookfair.com/products/" +
         applicationNumber.toLowerCase() +
         "-booth-fee2026"
       );
     }
 
-    // 控制電力需求顯示
+    // 控制電力需求顯示（需申報電力的攤別：裝置、策展、食物）
+    const needsElectricity =
+      boothType === "食物酒水攤" ||
+      boothType === "裝置攤" ||
+      boothType === "策展攤" ||
+      boothType === "Installation Booth" ||
+      boothType === "Curation Booth" ||
+      boothType === "Food & Beverage";
     const electricityRow = document.getElementById("electricity-row");
-    if (electricityRow) {
-      if (boothType === "食物酒水攤" || boothType === "裝置攤" || boothType === "策展攤") {
-        electricityRow.style.display = "";
-      } else {
-        electricityRow.style.display = "none";
-      }
-    }
+    if (electricityRow)
+      electricityRow.style.display = needsElectricity ? "" : "none";
     const editElectricityRow = document.getElementById("edit-electricity-row");
-    if (editElectricityRow) {
-      if (boothType === "食物酒水攤" || boothType === "裝置攤" || boothType === "策展攤") {
-        editElectricityRow.style.display = "";
-      } else {
-        editElectricityRow.style.display = "none";
-      }
-    }
+    if (editElectricityRow)
+      editElectricityRow.style.display = needsElectricity ? "" : "none";
   }
   updateBoothInfo(boothType);
 
@@ -580,102 +628,68 @@ document.addEventListener("DOMContentLoaded", async function () {
   // 付款方案標題/說明動態切換
   function setBillingInfoLanguage(boothType) {
     const isEnglishBooth = isEnglishBoothType(boothType);
-    document.querySelector("span[for-billing1-title]").innerHTML =
-      isEnglishBooth
+    const titleEl = document.querySelector("span[for-billing1-title]");
+    if (titleEl) {
+      titleEl.innerHTML = isEnglishBooth
         ? "<strong>Basic Fee</strong>"
         : "<strong>基礎攤費</strong>";
-    const billing1Desc = document.querySelector("div[for-billing1-desc]") || document.querySelector("span[for-billing1-desc]");
-    if (billing1Desc) {
-      billing1Desc.innerHTML = isEnglishBooth
-        ? `<strong>Invoice: </strong> For overseas exhibitors who require an invoice, please fill out <a href=https://docs.google.com/forms/d/e/1FAIpQLScuHHfn3zhWd4RVrOCPLY72xf9XiNAf1Sb8De4WJaOCAHovDQ/viewform?usp=header" target="_blank">this form</a>. Once submitted, we will send the invoice to your email as soon as possible.<br><br>
-<strong>Refund: </strong> Cancel by <u>January 15</u> for a refund (10% handling fee). Requests after this date <u>will not be accepted</u>.<br><br>
-<strong>Additional Purchase Instructions:</strong><br>
-&nbsp;&nbsp;a. Number of Tables: Each booth may select 1–2 tables, with 2 access passes included per table (excluding Installation or Curation booths).<br>
-&nbsp;&nbsp;b. Access Passes:<br>
-&nbsp;&nbsp;&nbsp;&nbsp;• Provided in the form of temporary tattoo stickers; 1 pass is valid for all three days (each tattoo sticker may only be used by one person per day).<br>
-&nbsp;&nbsp;&nbsp;&nbsp;• Each booth may purchase up to 1 additional access pass (allowing 1 extra person per day).<br>
-&nbsp;&nbsp;&nbsp;&nbsp;• If the number of people attending on a single day exceeds the available access passes, please purchase additional admission tickets according to the actual number of days and attendees. (Pre-sale friend & family tickets will be available Jan 26 – Feb 8; for additional tickets, please follow our IG posts.)<br><br>
-&nbsp;&nbsp;c. <strong>This is the only period for additional purchase applications. Once payment is completed, no changes will be accepted.</strong><br>
-&nbsp;&nbsp;d. Not sure what to add on? Enter your booth type, tables, and attendees—<a href=https://docs.google.com/spreadsheets/d/1A33pr06kXFJKgvln3-ie_YdIw-BeYaRm9ckBdDQZtyc/edit?usp=sharing" target="_blank">we’ll calculate it for you</a>.`
-         : `<strong>發票：</strong>台灣訂單網站將自動開立電子發票，請確認報名時所填Email。海外單位如需開立發票需填寫<a href=https://docs.google.com/forms/d/e/1FAIpQLScuHHfn3zhWd4RVrOCPLY72xf9XiNAf1Sb8De4WJaOCAHovDQ/viewform?usp=header" target="_blank">此表單</a>，提交後，我們將盡快寄送發票至您的電子郵件信箱。<br><br>
-<strong>退款：</strong>若因不可抗因素需放棄參展，請於<u> 1/15（四）前 </u>通知主辦單位，並辦理退款（將酌收10%手續費）。逾期恕不受理退款。<br><br>
-<strong>加購説明：</strong><br>
-&nbsp;&nbsp;a. 桌子數量：每攤位可選擇 1–2 桌，每桌皆附贈 2份 通行憑證。（裝置攤／策展攤除外）<br>
-&nbsp;&nbsp;b. 通行憑證：<br>
-&nbsp;&nbsp;&nbsp;&nbsp;• 為刺青貼紙形式，1份為三天量。（每張刺青貼紙同一天僅限一人使用）<br>
-&nbsp;&nbsp;&nbsp;&nbsp;• 每攤位最多可加購 1份 通行憑證（每天可增加 1人 通行）。<br>
-&nbsp;&nbsp;&nbsp;&nbsp;• 若單日進場人數超過通行憑證可使用數量，請依實際活動天數與人數，另行購買入場票券（親友預售票將於 01/26–02/08 販售，更多入場票券請持續關注我們的 IG 貼文喔）。<br><br>
-&nbsp;&nbsp;c. <strong>本階段為唯一的加購申請時段，完成繳費後恕不接受任何變更。</strong><br>
-&nbsp;&nbsp;d. 不知道怎麼加購？填寫攤位類型、桌數與進場人數，<a href=https://docs.google.com/spreadsheets/d/1A33pr06kXFJKgvln3-ie_YdIw-BeYaRm9ckBdDQZtyc/edit?usp=sharing" target="_blank">我們幫你算</a>。`;
     }
+    // billing1-desc 的內容由 publishTimes API 的 afterMessage/afterMessageEn 填入
   }
   setBillingInfoLanguage(boothType);
 
-  // 動態切換同意書區塊語言
+  // 動態切換同意書區塊語言（說明文字由試算表 afterMessage 控制）
   function setDeclarationLanguage(boothType) {
     var declardownloadLink = document.getElementById(
-      "declaration-download-link"
+      "declaration-download-link",
     );
-    var declarationdesc = document.getElementById("declaration-desc");
-    console.log("boothType:", boothType);
-    console.log("declarationdesc:", declarationdesc);
-    if (boothType && declardownloadLink && declarationdesc) {
+    var declarationAgreeText = document.getElementById(
+      "declaration-agree-text",
+    );
+    if (boothType && declardownloadLink) {
       if (isEnglishBoothType(boothType)) {
-        declardownloadLink.innerHTML = "Download Exhibitor Declaration";
-        declarationdesc.innerHTML =
-          "Please download and sign the exhibitor declaration, then upload the signed file below.";
+        declardownloadLink.innerHTML = "Exhibitor Declaration";
+        if (declarationAgreeText) {
+          declarationAgreeText.innerHTML =
+            "I have read and agree to the Exhibitor Declaration";
+        }
+        const confirmBtn = document.getElementById("confirmBtnDeclaration");
+        if (confirmBtn) confirmBtn.textContent = "Confirm";
       } else {
-        declardownloadLink.innerHTML = "下載參展同意書";
-        declarationdesc.innerHTML = "請下載並簽署參展同意書，完成後請上傳。";
+        declardownloadLink.innerHTML = "參展同意書";
+        if (declarationAgreeText) {
+          declarationAgreeText.innerHTML =
+            "我已閱讀並同意參展同意書<br/>I have read and agree to the Exhibitor Declaration";
+        }
       }
-      console.log("desc after set:", declarationdesc.innerHTML);
     }
   }
   setDeclarationLanguage(boothType);
 
-    // 動態Billing Notice 區塊語言
-    function setBillingNoticeLanguage(boothType) {
-      var billingNoticedesc = document.getElementById("billing-notice");
-      if (boothType && billingNoticedesc) {
-        if (isEnglishBoothType(boothType)) {
-          billingNoticedesc.innerHTML =
-            "-  Please complete all payments in accordance with the instructions above. If payment is incorrect, late, or made via non-designated methods, the Organizer reserves the right to <b>cancel participation without refund.</b><br>- For all matters related to registration, payment, and participation, <b>TPABF reserves the final right of review, adjustment, and interpretation.</b><br>- In the event of cancellation due to force majeure (including natural disasters, pandemics, or policy changes), the Organizer will announce further arrangements separately.";
-        } else {
-          billingNoticedesc.innerHTML =
-            "- 請務必依繳費說明完成付款流程。如未依規定完成付款（如繳納錯誤金額、超過期限、未依指定方式匯款等），主辦單位將不保留參展資格，亦不提供退款。- 所有報名、繳費及參展相關事宜，草率季保留最終審核、調整及解釋之權利。<br>- 若因不可抗力（如天災、疫情、政策變動等）導致活動取消，主辦單位將另行公告後續處理方式。";
-        }
-      }
-    }
-    setBillingNoticeLanguage(boothType);
-
   // 動態勾勾區塊語言還有攤商編號說明搭便車
-  function setYesLanguage(boothType, rawResult) {
+  // deadlineCN / deadlineEN 可由 publishTimes API 傳入覆蓋預設值
+  function setYesLanguage(boothType, deadlineCN, deadlineEN) {
     var yesdesc = document.getElementById("registration-status-desc");
     var billingnote1 = document.getElementById("billing-note1");
 
-    // 判斷期限
-    let deadline = "12 月 31 日";
-    let deadlineEn = "December 31, 2025 at 11:59 PM (UTC+8)";
-    if (rawResult === "2-是-2波") {
-      deadline = "12 月 31 日";
-      deadlineEn = "December 31, 2025 at 11:59 PM (UTC+8)";
-    }
+    const deadline = deadlineCN || "—";
+    const deadlineEn = deadlineEN || "—";
 
     if (boothType && yesdesc) {
       if (isEnglishBoothType(boothType)) {
-        yesdesc.innerHTML = `Please complete your payment and upload the signed agreement by <b><mark>${deadlineEn}</mark></b>. Late submissions will be considered a forfeiture of your participation. Our team will manually verify all payment and agreement uploads by <mark>January 5</mark>. If you have already completed the process, please keep a screenshot of your payment or upload confirmation. If your status hasn't been updated after <mark>January 5</mark>, feel free to contact us again.`;
+        yesdesc.innerHTML = `Please complete your payment and upload the signed agreement by <b><mark>${deadlineEn}</mark></b>. Late submissions will be considered a forfeiture of your participation. Our team will manually verify all payment and agreement uploads after the deadline. If you have already completed the process, please keep a screenshot of your payment or upload confirmation. If your status hasn't been updated, feel free to contact us.`;
         if (billingnote1) {
           billingnote1.innerHTML = `Payment Deadline: ${deadlineEn}`;
         }
       } else {
-        yesdesc.innerHTML = `請於<b><mark>${deadline}</mark></b>前完成繳費與同意書上傳，逾期將視同放棄參展資格。團隊將於<mark> 1月5日前 </mark>逐一人工確認繳費與同意書的上傳狀態。如您已完成繳交，請先保留相關繳費或上傳截圖；若狀態在 <mark>1月5日</mark> 後仍未更新，請與我們聯繫。`;
+        yesdesc.innerHTML = `請於<b><mark>${deadline}</mark></b>前完成繳費與同意書上傳，逾期將視同放棄參展資格。團隊將於截止後逐一人工確認繳費與同意書的上傳狀態。如您已完成繳交，請先保留相關繳費或上傳截圖；若狀態未更新，請與我們聯繫。`;
         if (billingnote1) {
           billingnote1.innerHTML = `付款期限: ${deadline}`;
         }
       }
     }
   }
-  setYesLanguage(boothType, apiData["錄取"]);
+  setYesLanguage(boothType);
 
   // 動態條件是錄取 區塊語言
   function setConditionalAcceptence(boothType) {
@@ -692,135 +706,18 @@ document.addEventListener("DOMContentLoaded", async function () {
   }
   setConditionalAcceptence(boothType);
 
-  // 動態切換草率簿區塊語言
-  function setCatalogLanguage(boothType) {
-    var catalogdownloadLink = document.getElementById("catalog-download-link");
-    var catalogdesc = document.getElementById("catalog-desc");
-    if (boothType && catalogdownloadLink && catalogdesc) {
-      if (isEnglishBoothType(boothType)) {
-        catalogdownloadLink.innerHTML = "Template Download";
-        catalogdesc.innerHTML =
-          "Each exhibitor is entitled to a one-page feature in this year's <i>TPABF Catalog</i>. Late submissions will be considered as forfeiting the opportunity.<br /><br />📌 Submission requirements: <br />1. <b>Image file</b>: PDF format, final size <b>120 × 195 mm</b>, with <b>5 mm bleed</b>. Please use <b>black and white</b> only.<br />2. <b>Text content</b>: Please edit and complete the information on the left side of the exhibitor info sheet.<br />";
-      } else {
-        catalogdownloadLink.innerHTML = "公版下載";
-        catalogdesc.innerHTML =
-          "每個參展單位可於本屆《草率簿 TPABF Catalog》中獲得一面頁面露出，逾期未繳交者將視同放棄刊登權益。<br /><br />📌 繳交內容如下：<br />1. <b>圖檔</b>：PDF 格式，完稿尺寸 120 × 195 mm，需包含 5 mm 出血，色彩請設為黑白。<br />2. <b>文字資料</b>：請依左方參展資訊進行修改與補充。<br />";
-      }
-    }
-  }
-  setCatalogLanguage(boothType);
-
-  // 動態切換親友票區塊語言
-  function setTicketLanguage(boothType) {
-    var ticketlink = document.getElementById("ticket-link");
-    var familyticketdesc = document.getElementById("familyticket-desc");
-    if (boothType && ticketlink && familyticketdesc) {
-      if (isEnglishBoothType(boothType)) {
-        ticketlink.innerHTML = "Ticket Link";
-        familyticketdesc.innerHTML =
-          "◆ Pre-Sale Discount ◆  1/19-2/15｜ NT$350<br>• Select Pre-Sale Ticket and enter the exhibitor discount code to purchase<br><br>◆ Fast Pass Discount ◆ 2/16-3/8｜ NT$400<br>Enjoy fast-track entry with priority access. No need to queue in the general admission line<br>• Select Fast Pass Ticket and enter the exhibitor discount code to purchase<br>(For detailed usage instructions, please refer to the ticketing page.)<br>⚠️ Limited quantity, available while supplies last<br><br>Your exclusive discount code:<br>";
-      } else {
-        ticketlink.innerHTML = "購票連結";
-        familyticketdesc.innerHTML =
-          "◆ 預售優惠◆ 1/19-2/15｜NT$350<br>• 點選預售票並輸入攤商優惠代碼即可購買<br><br>◆ 快速通關優惠◆ 2/16-3/8｜NT$400<br>享有入場快速通關權益，現場可免排一般入場隊伍<br>• 點選快速通關票並輸入攤商優惠代碼即可購買<br>(詳細使用說明請見售票網頁)<br>⚠️數量有限，售完為止<br><br>您的專屬優惠序號：<br>";
-      }
-    }
-  }
-  setTicketLanguage(boothType);
-
-  // 動態切換現場活動區塊語言
-  function setLiveEventLanguage(boothType) {
-    var liveEventLink = document.getElementById("live-event-signup-link");
-    var liveEventdesc = document.getElementById("live-event-desc");
-    var liveEventScheduledesc = document.getElementById(
-      "live-event-schedule-desc"
-    );
-    if (boothType && liveEventLink && liveEventdesc) {
-      if (isEnglishBoothType(boothType)) {
-        liveEventLink.innerHTML = "Sign Up Form";
-        liveEventdesc.innerHTML =
-          "Want to engage with visitors more directly? Propose on-site programs such as short talks, performances, or workshops!";
-        liveEventScheduledesc.innerHTML =
-          "Your registered on-site program sessions will be listed here. Details have been emailed to you. Please check in at the designated area 15 minutes before your session.";
-      } else {
-        liveEventLink.innerHTML = " 報名表單";
-        liveEventdesc.innerHTML =
-          "想與大家更近距離互動？我們開放以下形式的現場活動徵集：短講、表演、工作坊等。";
-        liveEventScheduledesc.innerHTML =
-          "我們將會在此列出你所報名現場提供的活動服務場次資訊，相關活動內容已寄到你的信箱，不要忘了提早15分鐘到相對應的區域報到喔。";
-      }
-    }
-  }
-  setLiveEventLanguage(boothType);
-
-  // 動態切換攤主手冊區塊語言
-  function setManualLanguage(boothType) {
-    var manualdownloadLink = document.getElementById("manual-link");
-    var manualdesc = document.getElementById("manual-desc");
-    if (boothType && manualdownloadLink && manualdesc) {
-      if (isEnglishBoothType(boothType)) {
-        manualdownloadLink.innerHTML = "Download Manual";
-        manualdesc.innerHTML =
-          "Please read carefully and prepare accordingly. This includes all exhibitor information: event schedule, details, guidelines, booth types, and on-site regulations. <br />";
-      } else {
-        manualdownloadLink.innerHTML = "下載手冊";
-        manualdesc.innerHTML =
-          "請務必詳閱並依說明準備。內含展會流程、細節、注意事項與攤位樣式、現場規範等所有參展須知。<br /";
-      }
-    }
-  }
-  setManualLanguage(boothType);
-
-  // 動態切換媒體上傳區塊語言
-  function setMediaUploadLanguage(boothType) {
-    var mediaziplink = document.getElementById("media-zip-link");
-    var mediamaterialdesc = document.getElementById("material-download-desc");
-    var materialuploaddesc = document.getElementById("material-upload-desc");
-
-    if (!mediaziplink || !mediamaterialdesc || !materialuploaddesc) return;
-
-    if (isEnglishBoothType(boothType)) {
-      mediaziplink.innerHTML = "Download";
-      mediamaterialdesc.innerHTML =
-        "Media Kit<br>You're welcome to use the 2026 TPABF key visual assets — click here to download.";
-      materialuploaddesc.innerHTML = `<strong>Marketing Material Upload</strong><br>
-Please follow the instructions below to create your materials, and upload the completed images/text as a ZIP file. The file size should not exceed 20MB.<br><br>
-📌 The ZIP file should include:<br>
-1. Image for social media post: JPG × 1<br>
-2. Image for Stories: JPG × 1<br>
-3. Threads introduction images: JPG / PNG × 5<br>
-4. Threads introduction text: DOCX / TXT × 1<br><br>
-<strong>Deadline：</strong>1/23（Fri.）（GMT+8 24:00）<br><br>
-⚠️ Late submissions will not be accepted. Please do not send files via email.<br>
-*If materials are not submitted by the deadline, social media exposure may not be arranged. Thank you ;)`;
-    } else {
-      mediaziplink.innerHTML = "下載";
-      mediamaterialdesc.innerHTML =
-        "視覺素材包<br>歡迎使用 2026 草率季主視覺素材，點此下載檔案。";
-      materialuploaddesc.innerHTML = `<strong>行銷素材檔案上傳</strong><br>
-請依照以下製作說明，並將製作完成的圖／文打包為 zip上傳。檔案大小請勿超過 20MB。<br><br>
-📌壓縮檔需包含：<br>
-1. 社群貼文用圖：JPG × 1<br>
-2. 限時動態用圖：JPG × 1<br>
-3. Threads 介紹圖：JPG / PNG × 5<br>
-4. Threads 介紹文：DOCX / TXT × 1<br><br>
-截止日期：1/23（五）（GMT+8 24:00）<br>
-⚠️逾期不接受補交，請勿將檔案傳至email<br>
-*若未於期限內可能無法安排社群曝光，敬請留意;)`;
-    }
-  }
-  setMediaUploadLanguage(boothType);
-
-  // 電力資訊（single source of truth）
-  function updateElectricityList(boothType) {
+  // 電力資訊（deadlineCN / deadlineEN 由 publishTimes API 傳入）
+  function updateElectricityList(boothType, deadlineCN, deadlineEN) {
     const electricityTitle = document.getElementById("electricity-title");
     const electricityList = document.querySelector("#electricity-title + ul");
-    const regulationEl = document.getElementById("electricity-regulation");
-    if (!electricityList || !electricityTitle || !regulationEl) return;
+    if (!electricityList || !electricityTitle) return;
 
     const isForeign = (region || "").trim().toUpperCase() !== "TW";
     const isInstallation =
-      boothType === "裝置攤" || boothType === "Installation Booth" || boothType === "策展攤" || boothType === "Curation Booth";
+      boothType === "裝置攤" ||
+      boothType === "Installation Booth" ||
+      boothType === "策展攤" ||
+      boothType === "Curation Booth";
     const isFood =
       boothType === "食物酒水攤" ||
       boothType === "Food & Beverage" ||
@@ -838,13 +735,16 @@ Please follow the instructions below to create your materials, and upload the co
       <li>Not every booth has sockets; please bring an extension cord & coordinate with neighbors</li>
     `;
 
+    const ddlCN = deadlineCN || "—";
+    const ddlEN = deadlineEN || "—";
+
     // 設定上方「電源配置」
     if (isForeign) {
       if (isInstallation) {
         electricityTitle.textContent = "Electricity:";
         electricityList.innerHTML = `
           <li>Standard 110v power supply</li>
-          <li>Submit electricity request by <strong>Jan 9 (Fri)</strong>:</li>
+          <li>Submit electricity request by <strong>${ddlEN}</strong>:</li>
           <li style="margin-left:1em">List equipment name & wattage</li>
           <li style="margin-left:1em">On-site last-minute requests will NOT be accepted</li>
           <li style="margin-left:1em">Do not use transformers; 220v requires an add-on fee of NT$1000</li>
@@ -859,8 +759,8 @@ Please follow the instructions below to create your materials, and upload the co
         electricityTitle.textContent = "電源配置：";
         electricityList.innerHTML = `
           <li>供應一般電源110v</li>
-          <li><mark>1/9（五）</mark>前需提供電力需求申請：</li>
-          <li style="margin-left:1em">條列使用電器設備＆瓦數</li>
+          <li><mark>${ddlCN}</mark>前需提供電力需求申請：</li>
+          <li style="margin-left:1em">條列使用電器設備&瓦數</li>
           <li style="margin-left:1em">不接受現場臨時申請</li>
           <li style="margin-left:1em">不得使用變壓器，220v 需以 NT$1000 加購</li>
         `;
@@ -870,36 +770,15 @@ Please follow the instructions below to create your materials, and upload the co
       }
     }
 
-    // 設定下方「電力需求」文字（單一來源）
-    let regulationHtml = "";
-    if (isForeign && isInstallation) {
-      regulationHtml = `
-        Edit via the <strong>Edit</strong> button (top-right). Please list equipment name & wattage in detail. Example:<br />
-        Microwave / 1100W / 1 unit<br />
-        Electric kettle / 1500W / 1 unit<br />
-        Electric fan / 65W / 1 unit<br /><br />
-        📌 Unregistered appliances are NOT permitted on site. Repeated violations will be subject to fines as specified in the Exhibitor’s Manual.<br />
-        📌 If 220v is required, an additional fee of NT$1000 will be charged — please state this in the form.<br />
-        📌 For safety, do not use transformers; the Organizer does not provide voltage conversion services.
-      `;
-    } else if (isForeign) {
-      // 其他國外攤位：簡短英文提示
-      regulationHtml = `
-        Please refer to the event guidelines. If you have electricity needs, bring an extension cord and coordinate with neighbors.
-      `;
-    } else {
-      // 國內（中文）
-      regulationHtml = `
-        於右上角 <strong>編輯 Edit</strong> 做修改。請務必詳列設備名稱與瓦數，範例如下：<br />
-        微波爐／1100W／1個<br />
-        熱水壺／1500W／1個<br />
-        電扇／65W／1個<br /><br />
-        📌 未事先申報之電器不得於現場使用，如於現場發現並屢勸不聽，將依《攤主手冊》規定處以罰款。<br />
-        📌 如需使用 220v 電壓，將收取費用 NT$1000，並請於表單中註明。<br />
-        📌 為維護安全，請勿使用變壓器，主辦單位不提供電壓轉換服務。
-      `;
+    // 電力編輯區的截止日期提示（electricity-edit-deadline-notice）
+    const deadlineNotice = document.getElementById(
+      "electricity-edit-deadline-notice",
+    );
+    if (deadlineNotice && ddlCN !== "—") {
+      deadlineNotice.textContent = isForeign
+        ? `Editing deadline: ${ddlEN} 23:59`
+        : `截止日期：${ddlCN} 23:59`;
     }
-    regulationEl.innerHTML = regulationHtml;
 
     // 統一控制該 row 的顯示（single place）
     const electricityRow = document.getElementById("electricity-row");
@@ -908,7 +787,8 @@ Please follow the instructions below to create your materials, and upload the co
       (!isForeign && (isFood || isInstallation)) ||
       (isForeign && isInstallation);
     if (electricityRow) electricityRow.style.display = showForRow ? "" : "none";
-    if (editElectricityRow) editElectricityRow.style.display = showForRow ? "" : "none";
+    if (editElectricityRow)
+      editElectricityRow.style.display = showForRow ? "" : "none";
   }
   // initial call
   updateElectricityList(boothType);
@@ -929,7 +809,7 @@ Please follow the instructions below to create your materials, and upload the co
   const overseavisa = document.getElementById("overseasvisa");
   const familyticket = document.getElementById("familyticket");
   const manualBoothappearance = document.getElementById(
-    "manual-boothappearance"
+    "manual-boothappearance",
   );
   const mediaupload = document.getElementById("media-section");
   const catalogSection = document.getElementById("catalog-section");
@@ -951,9 +831,9 @@ Please follow the instructions below to create your materials, and upload the co
     const isEnglishBooth = isEnglishBoothType(boothType);
     function getStatusText(confirmed) {
       if (isEnglishBooth) {
-        return confirmed ? "Confirmed" : "Unfulfilled";
+        return confirmed ? "Complete" : "Incomplete";
       } else {
-        return confirmed ? "成立" : "未完成";
+        return confirmed ? "完成" : "未完成";
       }
     }
 
@@ -972,7 +852,6 @@ Please follow the instructions below to create your materials, and upload the co
     registrationStatus.style.display = "none";
     boothnumber.style.display = "none";
     liveEventTime.style.display = "none";
-    // boothappearance.style.display = "none";
 
     //勾勾區的鐵門
     if (declarationChecked) {
@@ -1029,7 +908,6 @@ Please follow the instructions below to create your materials, and upload the co
         registrationStatus.style.display = "block";
         // 正確顯示 tr，避免 Safari 重算錯誤
         boothnumber.style.display = "table-row";
-        // boothappearance.style.display = "block";
       } else {
         registrationStatusEl.textContent = getStatusText(false);
         billinginfo.style.display = "block";
@@ -1038,11 +916,10 @@ Please follow the instructions below to create your materials, and upload the co
       }
 
       // Visa logic:
-      // - nationality CN => show visaCN
+      // - show visaCN to everyone
       // - other non-TW nationalities => show overseavisa ONLY for English booth types
-      if (nationality === "CN") {
-        if (visaCN) visaCN.style.display = "block";
-      } else if (nationality !== "TW" && isEnglishBooth) {
+      if (visaCN) visaCN.style.display = "block";
+      if (nationality !== "TW" && isEnglishBooth) {
         if (overseavisa) overseavisa.style.display = "block";
       }
     } else if (!rawResult || rawResult === "" || rawResult === "0") {
@@ -1068,20 +945,17 @@ Please follow the instructions below to create your materials, and upload the co
         manualBoothappearance.style.display = "block";
         registrationStatus.style.display = "block";
         boothnumber.style.display = "table-row";
-        if (nationality === "CN") {
-          if (visaCN) visaCN.style.display = "block";
-        } else if (nationality !== "TW" && isEnglishBooth) {
+        if (visaCN) visaCN.style.display = "block";
+        if (nationality !== "TW" && isEnglishBooth) {
           if (overseavisa) overseavisa.style.display = "block";
         }
-        // boothappearance.style.display = "block";
       } else {
         registrationStatusEl.textContent = getStatusText(false);
         billinginfo.style.display = "block";
         registrationStatus.style.display = "block";
         boothnumber.style.display = "table-row";
-        if (nationality === "CN") {
-          if (visaCN) visaCN.style.display = "block";
-        } else if (nationality !== "TW" && isEnglishBooth) {
+        if (visaCN) visaCN.style.display = "block";
+        if (nationality !== "TW" && isEnglishBooth) {
           if (overseavisa) overseavisa.style.display = "block";
         }
       }
@@ -1097,16 +971,14 @@ Please follow the instructions below to create your materials, and upload the co
         if (nationality !== "TW") {
           foreignShipping.style.display = "block";
         }
-        if (nationality === "CN") {
-          if (visaCN) visaCN.style.display = "block";
-        } else if (nationality !== "TW" && isEnglishBooth) {
+        if (visaCN) visaCN.style.display = "block";
+        if (nationality !== "TW" && isEnglishBooth) {
           if (overseavisa) overseavisa.style.display = "block";
         }
         familyticket.style.display = "block";
         manualBoothappearance.style.display = "block";
         registrationStatus.style.display = "block";
         boothnumber.style.display = "table-row";
-        // boothappearance.style.display = "block";
       } else {
         registrationStatusEl.textContent = getStatusText(false);
         billinginfo.style.display = "block";
@@ -1116,7 +988,6 @@ Please follow the instructions below to create your materials, and upload the co
     }
   }
   updateRegistrationStatusAndChecks();
-
 
   // 動態更新桌子數量
   function extraTable() {
@@ -1133,17 +1004,17 @@ Please follow the instructions below to create your materials, and upload the co
     // 將 tableCount 轉換為數字
     let count = null;
     const tableCountStr = String(tableCount).trim();
-    
+
     // 檢查中文數字
     if (tableCountStr.includes("一") || tableCountStr === "1") {
       count = 1;
     } else if (tableCountStr.includes("二") || tableCountStr === "2") {
       count = 2;
     } else {
-     // 嘗試解析為數字
+      // 嘗試解析為數字
       count = parseInt(tableCountStr, 10);
     }
-    
+
     // 如果無法解析為有效數字，保持原本的顯示
     if (!count || isNaN(count) || count < 1) {
       return;
@@ -1158,8 +1029,7 @@ Please follow the instructions below to create your materials, and upload the co
     const size = sizeMatch ? sizeMatch[1] : "";
 
     // 判斷是否為英文攤位
-    const isEnglishBooth =
-      isEnglishBoothType(boothType);
+    const isEnglishBooth = isEnglishBoothType(boothType);
 
     // 構建新的內容
     let newContent = "";
@@ -1187,12 +1057,12 @@ Please follow the instructions below to create your materials, and upload the co
   function updateBadgeCount() {
     const equipmentBadge = document.getElementById("equipment-badge");
     const extrapasstxt = document.getElementById("extrapasstxt");
-    
+
     if (!equipmentBadge) return; // 防呆
 
     // 基礎通行憑證數量（不含加購）
     let baseBadgeCount = 2;
-    
+
     // 判斷是否為英文攤位
     const isEnglishBooth = isEnglishBoothType(boothType);
 
@@ -1226,15 +1096,15 @@ Please follow the instructions below to create your materials, and upload the co
     // 檢查加購情況並顯示加購的通行憑證
     const tableCount = apiData["桌"];
     const passCount = apiData["證"];
-    
+
     let additionalBadges = 0;
-    
+
     // 解析桌子數量（apiData["桌"] 返回的是總桌子數量）
     // 基礎已有1張桌子，只有當總數為2時才加通行憑證
     if (tableCount && tableCount !== "" && tableCount !== "None") {
       const tableCountStr = String(tableCount).trim();
       let tableNum = 0;
-      
+
       if (tableCountStr.includes("一") || tableCountStr === "1") {
         tableNum = 1;
       } else if (tableCountStr.includes("二") || tableCountStr === "2") {
@@ -1242,19 +1112,19 @@ Please follow the instructions below to create your materials, and upload the co
       } else {
         tableNum = parseInt(tableCountStr, 10) || 0;
       }
-      
+
       // 只有當總桌子數量為2時（基礎1張+加購1張），才加2張通行憑證
       if (tableNum === 2) {
         additionalBadges += 2;
       }
     }
-    
+
     // 檢查是否加購通行憑證
     if (passCount && passCount !== "" && passCount !== "None") {
       // 加購1張通行憑證 +1
       additionalBadges += 1;
     }
-    
+
     // 如果有加購，顯示加購的通行憑證
     if (extrapasstxt) {
       if (additionalBadges > 0) {
@@ -1334,6 +1204,83 @@ Please follow the instructions below to create your materials, and upload the co
   }
   setDiscountCodes(apiData["親友票"]);
 
+  // 從 ISO 日期字串格式化截止日期顯示文字
+  function fmtDeadlineCN(iso) {
+    const d = new Date(iso);
+    const days = ["日", "一", "二", "三", "四", "五", "六"];
+    return `${d.getMonth() + 1}/${d.getDate()}（${days[d.getDay()]}）`;
+  }
+  function fmtDeadlineEN(iso) {
+    const d = new Date(iso);
+    const months = [
+      "Jan",
+      "Feb",
+      "Mar",
+      "Apr",
+      "May",
+      "Jun",
+      "Jul",
+      "Aug",
+      "Sep",
+      "Oct",
+      "Nov",
+      "Dec",
+    ];
+    const days = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
+    return `${months[d.getMonth()]} ${d.getDate()} (${days[d.getDay()]})`;
+  }
+  function fmtDeadlineLongEN(iso) {
+    const d = new Date(iso);
+    const months = [
+      "January",
+      "February",
+      "March",
+      "April",
+      "May",
+      "June",
+      "July",
+      "August",
+      "September",
+      "October",
+      "November",
+      "December",
+    ];
+    let h = d.getHours(),
+      m = d.getMinutes().toString().padStart(2, "0");
+    const ampm = h >= 12 ? "PM" : "AM";
+    h = h % 12 || 12;
+    return `${months[d.getMonth()]} ${d.getDate()}, ${d.getFullYear()} at ${h}:${m} ${ampm} (UTC+8)`;
+  }
+
+  // 將試算表純文字轉為 HTML：換行、Markdown 粗體斜體、URL 自動連結
+  function processAfterMessage(raw) {
+    // 1. 換行符號 → <br>
+    // 2. **粗體** → <strong>，*斜體* / _斜體_ → <em>（先處理 ** 避免和 * 衝突）
+    let html = raw
+      .replace(/\n/g, "<br>")
+      .replace(/\*\*(.*?)\*\*/g, "<strong>$1</strong>")
+      .replace(/\*(.*?)\*/g, "<em>$1</em>")
+      .replace(/_(.*?)_/g, "<em>$1</em>");
+
+    // 3. 純文字 URL → <a>（只走訪文字節點，不動已有的 <a> 標籤或 href 屬性）
+    const temp = document.createElement("div");
+    temp.innerHTML = html;
+    const walker = document.createTreeWalker(temp, NodeFilter.SHOW_TEXT);
+    const textNodes = [];
+    let node;
+    while ((node = walker.nextNode())) textNodes.push(node);
+    textNodes.forEach((textNode) => {
+      if (!/(https?:\/\/)/.test(textNode.nodeValue)) return;
+      const span = document.createElement("span");
+      span.innerHTML = textNode.nodeValue.replace(
+        /(https?:\/\/[^\s<>"]+)/g,
+        '<a href="$1" target="_blank" rel="noopener noreferrer">$1</a>',
+      );
+      textNode.parentNode.replaceChild(span, textNode);
+    });
+    return temp.innerHTML;
+  }
+
   let publishTimes = {};
   try {
     const publishRes = await fetch(publishApiUrl);
@@ -1343,13 +1290,14 @@ Please follow the instructions below to create your materials, and upload the co
     console.warn("Failed to load publish times:", e);
   }
 
-  // 假設 publishTimes 物件 key = section id, value = {descId, publishTime, deadline, preMessage}
+  // publishTimes 物件 key = sectionId，value = {descId, publishTime, deadline, preMessage, afterMessage, afterMessageEn}
+  // section 可以是 null（只更新 desc 和 ddl 元素，不做遮罩邏輯）
   Object.entries(publishTimes).forEach(([sectionId, info]) => {
-    let section = document.getElementById(sectionId);
-    let desc = document.getElementById(info.descId);
-    if (!section || !desc) return;
+    const section = document.getElementById(sectionId);
+    const desc = document.getElementById(info.descId);
+    if (!desc) return;
 
-    // 預設用 deadline
+    // 備取截止日期判斷
     let deadline = info.deadline;
     if (
       (sectionId === "billing-section" || sectionId === "agreement-section") &&
@@ -1360,12 +1308,12 @@ Please follow the instructions below to create your materials, and upload the co
     }
     const deadlineTime = deadline ? new Date(deadline) : null;
 
-    // 填入 ddl-區塊id
-    const ddlDiv = document.getElementById("ddl-" + sectionId);
-    if (ddlDiv && deadline) {
-      // 判斷語言
+    // 填入所有 ddl 元素（支援 id="ddl-{sectionId}" 和 data-ddl="{sectionId}"）
+    const ddlEls = document.querySelectorAll(
+      `#ddl-${sectionId}, [data-ddl="${sectionId}"]`,
+    );
+    if (ddlEls.length && deadline) {
       const isEnglishBooth = isEnglishBoothType(boothType);
-      // 格式化日期
       const deadlineStr = deadlineTime
         ? `${deadlineTime.getFullYear()}-${(deadlineTime.getMonth() + 1)
             .toString()
@@ -1380,69 +1328,236 @@ Please follow the instructions below to create your materials, and upload the co
             .toString()
             .padStart(2, "0")}`
         : deadline;
-      ddlDiv.textContent = isEnglishBooth
+      const ddlText = isEnglishBooth
         ? `Deadline: ${deadlineStr}`
         : `截止日期：${deadlineStr}`;
+      ddlEls.forEach((el) => {
+        el.textContent = ddlText;
+        if (el.style.display === "none") el.style.display = "";
+      });
     }
 
-    // 預設用 deadline
-    // let deadline = info.deadline;
-    // 如果是備取，且有 backupDeadline 就用它
-    // if (
-    //   (sectionId === "billing-section" || sectionId === "agreement-section") &&
-    //   apiData["錄取"] === "2-是-2波" &&
-    //   info.backupDeadline
-    // ) {
-    //   deadline = info.backupDeadline;
-    // }
+    // 以 API 截止日期重新渲染含日期的 UI 元件
+    if (deadline) {
+      if (sectionId === "billing-section") {
+        setYesLanguage(
+          boothType,
+          fmtDeadlineCN(deadline),
+          fmtDeadlineLongEN(deadline),
+        );
+      }
+      if (sectionId === "electricity-row") {
+        updateElectricityList(
+          boothType,
+          fmtDeadlineCN(deadline),
+          fmtDeadlineEN(deadline),
+        );
+      }
+    }
 
-    // 解析時間
     const now = new Date();
     const publishTime = info.publishTime ? new Date(info.publishTime) : null;
-    // 先確保 section 有 position: relative
-    section.style.position = "relative";
-    section.style.overflow = "hidden";
+
+    if (section) {
+      section.style.position = "relative";
+      section.style.overflow = "hidden";
+    }
 
     // 未公布前
     if (publishTime && now < publishTime) {
       desc.innerHTML = "";
-      let banner = document.createElement("div");
+      const banner = document.createElement("div");
       banner.className = "pre-banner";
       banner.style.color = "darkgrey";
       banner.style.fontSize = "1em";
       banner.style.marginTop = "0.5em";
       banner.textContent = info.preMessage || "Not available yet.";
       desc.appendChild(banner);
-
-      section.classList.add("disabled");
-      // 移除舊遮罩
-      let oldOverlay = section.querySelector(".overlay-closed");
-      if (oldOverlay) oldOverlay.remove();
+      if (section) {
+        section.classList.add("disabled");
+        const oldOverlay = section.querySelector(".overlay-closed");
+        if (oldOverlay) oldOverlay.remove();
+      }
     }
     // 截止後
     else if (deadlineTime && now > deadlineTime) {
-      section.style.pointerEvents = "none";
-      // 加遮罩
-      let overlay = document.createElement("div");
-      overlay.className = "overlay-closed";
-      overlay.textContent = "Close";
-      section.appendChild(overlay);
-      setTimeout(() => overlay.classList.add("active"), 10);
-
-      section.classList.add("disabled");
-      section.style.opacity = 1;
+      if (section) {
+        section.style.pointerEvents = "none";
+        const overlay = document.createElement("div");
+        overlay.className = "overlay-closed";
+        overlay.textContent = "Close";
+        section.appendChild(overlay);
+        setTimeout(() => overlay.classList.add("active"), 10);
+        section.classList.add("disabled");
+        section.style.opacity = 1;
+      }
+      // electricity-regulation 的說明文字不受時間鎖定，截止後仍寫入
+      if (sectionId === "electricity-row") {
+        const isEnglish = isEnglishBoothType(boothType);
+        const msg =
+          isEnglish && info.afterMessageEn
+            ? info.afterMessageEn
+            : info.afterMessage;
+        if (msg && desc) desc.innerHTML = processAfterMessage(msg);
+        // 鐵捲門降到 edit-button-row（編輯按鈕那列）
+        const editButtonRow = document.getElementById("edit-button-row");
+        if (editButtonRow && !editButtonRow.querySelector(".overlay-closed")) {
+          editButtonRow.style.pointerEvents = "none";
+          const overlay = document.createElement("div");
+          overlay.className = "overlay-closed";
+          overlay.textContent = "Close";
+          editButtonRow.appendChild(overlay);
+          setTimeout(() => overlay.classList.add("active"), 10);
+        }
+      }
     }
     // 公布期間
     else {
-      section.classList.remove("disabled");
-      section.style.opacity = "";
-      // 移除舊遮罩
-      section.style.pointerEvents = "";
-      let oldOverlay = section.querySelector(".overlay-closed");
-      if (oldOverlay) oldOverlay.remove();
+      if (section) {
+        section.classList.remove("disabled");
+        section.style.opacity = "";
+        section.style.pointerEvents = "";
+        const oldOverlay = section.querySelector(".overlay-closed");
+        if (oldOverlay) oldOverlay.remove();
+      }
+      // afterMessage：不填表示保留原始 HTML（如上傳按鈕區）
+      const isEnglish = isEnglishBoothType(boothType);
+      const msg =
+        isEnglish && info.afterMessageEn
+          ? info.afterMessageEn
+          : info.afterMessage;
+      if (msg && desc) {
+        desc.innerHTML = processAfterMessage(msg);
+      }
     }
   });
 
+  // ── Open Call schedule gate ─────────────────────────────────────────────────
+  const ocSchedule = publishTimes["opencall-schedule"];
+  const hasSubmitted = !!apiData["報名編號"];
+
+  if (ocSchedule && !hasSubmitted) {
+    const now = new Date();
+    const openTime = ocSchedule.openTime ? new Date(ocSchedule.openTime) : null;
+    const closeTime = ocSchedule.closeTime
+      ? new Date(ocSchedule.closeTime)
+      : null;
+    const hasPassword = !!ocSchedule.hasPassword;
+
+    const openCallBtn = document.getElementById("sidebar-open-call");
+
+    if (openTime && now < openTime) {
+      // ── Before open: grey out ──────────────────────────────────────────────
+      if (openCallBtn) {
+        const p = openCallBtn.querySelector("p");
+        if (p) {
+          p.style.color = "darkgray";
+          p.style.cursor = "default";
+        }
+        openCallBtn.onclick = function (e) {
+          e.preventDefault();
+          const openStr = openTime.toLocaleDateString("zh-TW", {
+            month: "long",
+            day: "numeric",
+            hour: "2-digit",
+            minute: "2-digit",
+          });
+          alert(
+            `Open Call 尚未開放，預計於 ${openStr} 起開放。\nOpen Call is not yet available. It will open on ${openTime.toLocaleString()}.`,
+          );
+          return false;
+        };
+      }
+    } else if (closeTime && now > closeTime) {
+      // ── After close ────────────────────────────────────────────────────────
+      if (hasPassword) {
+        // Password gate: show gated section on click
+        if (openCallBtn) {
+          openCallBtn.onclick = function (e) {
+            e.preventDefault();
+            if (window.showOpenCallGated) window.showOpenCallGated();
+            if (window.setSidebarActive) window.setSidebarActive("open-call");
+            return false;
+          };
+        }
+
+        // Populate the gated section message
+        const msgEl = document.getElementById("opencall-gated-status-msg");
+        if (msgEl) {
+          msgEl.innerHTML = "Open Call 申請已截止。<br>Open Call has closed.";
+        }
+        const gateEl = document.getElementById("opencall-invite-gate");
+        if (gateEl) gateEl.style.display = "block";
+      } else {
+        // No password: just grey out the button
+        if (openCallBtn) {
+          const p = openCallBtn.querySelector("p");
+          if (p) {
+            p.style.color = "darkgray";
+            p.style.cursor = "default";
+          }
+          openCallBtn.onclick = function (e) {
+            e.preventDefault();
+            alert("Open Call 申請已截止。\nOpen Call has closed.");
+            return false;
+          };
+        }
+      }
+    }
+    // else: within open period — leave as normal
+  }
+
+  // ── Invite password verification (called from HTML button) ─────────────────
+  window.verifyOpenCallInvite = async function () {
+    const input = document.getElementById("opencall-invite-password-input");
+    const statusEl = document.getElementById("opencall-invite-status");
+    const verifyBtn = document.getElementById("opencall-invite-verify-btn");
+    if (!input || !statusEl) return;
+
+    const password = input.value.trim();
+    if (!password) {
+      statusEl.style.color = "#c00";
+      statusEl.textContent = "請輸入邀請密碼。Please enter the invite code.";
+      return;
+    }
+
+    verifyBtn.disabled = true;
+    statusEl.style.color = "#555";
+    statusEl.textContent = "驗證中… Verifying…";
+
+    try {
+      const res = await fetch(publishApiUrl, {
+        redirect: "follow",
+        method: "POST",
+        headers: { "Content-Type": "application/x-www-form-urlencoded" },
+        body: new URLSearchParams({
+          action: "verify_opencall_password",
+          account: typeof getCookie === "function" ? getCookie("account") : "",
+          password,
+        }).toString(),
+      });
+      const data = await res.json();
+
+      if (data.success) {
+        statusEl.style.color = "green";
+        statusEl.textContent = "✓ 驗證成功！Verified! Loading form…";
+        setTimeout(() => {
+          if (window.showOpenCallForm) window.showOpenCallForm();
+          if (window.setSidebarActive) window.setSidebarActive("open-call");
+        }, 600);
+      } else {
+        statusEl.style.color = "#c00";
+        statusEl.textContent = "密碼不正確。Incorrect invite code.";
+        verifyBtn.disabled = false;
+      }
+    } catch (err) {
+      statusEl.style.color = "#c00";
+      statusEl.textContent =
+        "網路錯誤，請稍後再試。Network error, please try again.";
+      verifyBtn.disabled = false;
+    }
+  };
+  // ── /Open Call schedule gate ─────────────────────────────────────────────────
 
   if (window.setLoading) window.setLoading(1);
   if (window.hideLoading) window.hideLoading();

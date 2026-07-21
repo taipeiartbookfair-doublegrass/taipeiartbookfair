@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="zh-TW">
   <head>
     <meta charset="UTF-8" />
@@ -16,30 +16,30 @@
     <link rel="stylesheet" href="css/font.css" />
     <link rel="stylesheet" href="css/exhibitors.css" />
 
-     <!-- Store Modal -->
+    <!-- Store Modal -->
     <div id="storeModal" class="store-modal">
       <div class="store-modal-content">
         <span class="store-modal-close">&times;</span>
         <div class="store-modal-body">
-          <img src="image/web-book.gif" alt="NMHW" class="store-modal-image">
+          <img src="image/web-book.gif" alt="NMHW" class="store-modal-image" />
         </div>
       </div>
     </div>
 
     <!-- Google tag (gtag.js) -->
-     <script
-     async
-     src="https://www.googletagmanager.com/gtag/js?id=G-EPSXJPDH6L"
-   ></script>
-   <script>
-     window.dataLayer = window.dataLayer || [];
-     function gtag() {
-       dataLayer.push(arguments);
-     }
-     gtag("js", new Date());
+    <script
+      async
+      src="https://www.googletagmanager.com/gtag/js?id=G-EPSXJPDH6L"
+    ></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+      gtag("js", new Date());
 
-     gtag("config", "G-EPSXJPDH6L");
-   </script>
+      gtag("config", "G-EPSXJPDH6L");
+    </script>
   </head>
   <body>
     <!-- 照片轉起來！Hot! -->
@@ -50,515 +50,585 @@
     <!-- 主要內容容器 -->
     <div class="main-container">
       <!-- 右上角控制區域 -->
-    <div class="top-controls">
-      <div class="top-controls-content">
-        <!-- <button id="language-toggle" class="language-btn">English</button> -->
-        <a href="login.html" class="exhibitor-login-btn">攤主登入｜EXHIBITOR LOGIN</a>
-      </div>
-    </div>
+      <!-- <div class="top-controls">
+        <div class="top-controls-content">
+          <a href="login.html" class="exhibitor-login-btn"
+            >攤主登入｜EXHIBITOR LOGIN</a
+          >
+        </div>
+      </div> -->
 
-    <!-- 主標題區域 - 可滾動 -->
-    <!-- <div class="main-title-section">
+      <!-- 主標題區域 - 可滾動 -->
+      <!-- <div class="main-title-section">
       <div class="container">
         <div class="main-title-area">
         </div>
       </div>
     </div> -->
-    
-    <!-- 導航項目區域 - Sticky -->
-    <nav class="nav-items-area sticky-nav">
-      <div class="container">
-        <ul class="nav-menu">
-          <li><a href="https://www.taipeiartbookfair.com">HOME</a></li>
-          <li>
-            <a
-              href="https://nmhw.taipeiartbookfair.com/"
-              target="_blank"
-              id="nav-shop"
-              >STORE</a
-            >
-          </li>
-          <!-- <li><a href="#exhibitors" id="nav-exhibitors">ZINE WALL</a></li>
+
+      <!-- 導航項目區域 - Sticky -->
+      <nav class="nav-items-area sticky-nav">
+        <div class="container">
+          <ul class="nav-menu">
+            <li><a href="https://www.taipeiartbookfair.com">HOME</a></li>
+            <li>
+              <a
+                href="https://shop.taipeiartbookfair.com/"
+                target="_blank"
+                id="nav-shop"
+                >STORE</a
+              >
+            </li>
+            <!-- <li><a href="#exhibitors" id="nav-exhibitors">ZINE WALL</a></li>
           <li><a href="#exhibitors" id="nav-exhibitors">ARCHIVE</a></li> -->
-          <li><a href="about.html" id="nav-about">ABOUT</a></li>
-          <!-- <li><a href="#about" id="nav-about">FAQ</a></li> -->
-        </ul>
-      </div>
-    </nav>
-
-
-    <!-- start of monopoly-style layout -->
-    <div class="monopoly-board">
-      <!-- 左方書籍邊框 -->
-      <div class="book-border book-border-left">
-        <h3 class="zine-wall-title">
-          STORE HIGHLIGHT:
-        </h3>
-        
-        <!-- 商店功能說明文字 -->
-        <div class="store-explanation">
-          ↓ 將滑鼠懸停在書籍上可查看詳細資訊，點擊後將進入商店購買頁面。
-            Hover over the books to view detailed information, and click the bookto enter the store page.
+            <li><a href="about.html" id="nav-about">ABOUT</a></li>
+            <!-- <li><a href="#about" id="nav-about">FAQ</a></li> -->
+          </ul>
         </div>
-        
-        <div class="book-item"></div>
-        <div class="book-item"></div>
-        <div class="book-item"></div>
-      </div>
+      </nav>
 
-      <!-- 中央主要內容區域 -->
-      <div class="main-content">
-        <!-- 上層內容區域 - 海報和PROGRAMS水平排列 -->
-        <div class="top-content-wrapper">
-          <!-- 海報整體區域 -->
-          <div class="poster-area">
-          <!-- 按鈕區域 - 左右並排 -->
-          <div class="poster-buttons-container">
-            <div class="ticket-button-container">
-              <a href="ticketvisit.html" class="ticket-button" id="ticket-button">
-                購票參觀｜TICKETS & VISIT
-              </a>
-            </div>
-            <div class="flip-button-container">
-              <a href="ticketvisit.html" style="text-decoration: none;">
-              <button class="flip-button">
-                <span class="flip-text" >👆</span>
-              </button>
-              </a>
-            </div>
+      <!-- start of monopoly-style layout -->
+      <div class="monopoly-board">
+        <!-- 左方書籍邊框 -->
+        <div class="book-border book-border-left">
+          <h3 class="zine-wall-title">STORE HIGHLIGHT:</h3>
+
+          <!-- 商店功能說明文字 -->
+          <div class="store-explanation">
+            ↓ 將滑鼠懸停在書籍上可查看詳細資訊，點擊後將進入商店購買頁面。 Hover
+            over the books to view detailed information, and click the bookto
+            enter the store page.
           </div>
-          
-          <!-- 按鈕功能說明文字 -->
-          <div class="button-explanation">
-            <div class="explanation-text" style="color:rgb(60,60,60)" id="button-explanation-text">     
-              左側的按鈕可供您購買票券，並同時了解展覽的開放時間地點、票價資訊、參展名單、完整節目表、展覽常見問及參觀須知；可以點按翻轉海報，查看背面的快速資訊。 The button on the left allows you to purchase tickets and learn more about visiting information, including opening hours, ticket prices, and visitor guidelines. Click the post to flip the poster to in order to read the back side, revealing additional details. 
-            </div>
-            <!-- <div class="explanation-text" style="color:rgb(60,60,60)">     
+
+          <div class="book-item"></div>
+          <div class="book-item"></div>
+          <div class="book-item"></div>
+        </div>
+
+        <!-- 中央主要內容區域 -->
+        <div class="main-content">
+          <!-- 上層內容區域 - 海報和PROGRAMS水平排列 -->
+          <div class="top-content-wrapper">
+            <!-- 海報整體區域 -->
+            <div class="poster-area">
+              <!-- 按鈕區域 - 左右並排 -->
+              <div class="poster-buttons-container">
+                <div class="ticket-button-container">
+                  <a
+                    href="ticketvisit.html"
+                    class="ticket-button"
+                    id="ticket-button"
+                  >
+                    購票參觀｜TICKETS & VISIT
+                  </a>
+                </div>
+                <div class="flip-button-container">
+                  <a href="ticketvisit.html" style="text-decoration: none">
+                    <button class="flip-button">
+                      <span class="flip-text">👆</span>
+                    </button>
+                  </a>
+                </div>
+              </div>
+
+              <!-- 按鈕功能說明文字 -->
+              <div class="button-explanation">
+                <div
+                  class="explanation-text"
+                  style="color: rgb(60, 60, 60)"
+                  id="button-explanation-text"
+                >
+                  左側的按鈕可供您購買票券，並同時了解展覽的開放時間地點、票價資訊、參展名單、完整節目表、展覽常見問及參觀須知；可以點按翻轉海報，查看背面的快速資訊。
+                  The button on the left allows you to purchase tickets and
+                  learn more about visiting information, including opening
+                  hours, ticket prices, and visitor guidelines. Click the post
+                  to flip the poster to in order to read the back side,
+                  revealing additional details.
+                </div>
+                <!-- <div class="explanation-text" style="color:rgb(60,60,60)">     
               2026草率季十週年 OPEN CALL 徵件開始！請點擊按鈕進入徵件頁面查看詳細資訊，包括徵件條件、徵件時間、徵件方式等以及草率季十週年的相關資訊。
               The 2026 TPABF 10th Anniversary OPEN CALL is now open! Please click the button to enter the OPEN CALL form page to view detailed information, including application criteria, application dates, application methods, and information about the TPABF 10th Anniversary.
             </div> -->
-          </div>
-          
-          <!-- start of poster-section -->
-          <section class="poster-section" id="Poster">
-            <div class="poster-container" data-flipped="false">
-              <div class="poster-card">
-                <div class="poster-front">
-                  <img class="poster" src="image/mainpage/main-01.jpg" />
+              </div>
+
+              <!-- start of poster-section -->
+              <section class="poster-section" id="Poster">
+                <div class="poster-container" data-flipped="false">
+                  <div class="poster-card">
+                    <div class="poster-front">
+                      <img class="poster" src="image/mainpage/main-01.jpg" />
+                    </div>
+                    <div class="poster-back">
+                      <img class="poster" src="image/mainpage/main-02.jpg" />
+                    </div>
+                  </div>
                 </div>
-                <div class="poster-back">
-                  <img class="poster" src="image/mainpage/main-02.jpg" />
+              </section>
+              <!-- 右側 Zine 區域 - 在 poster 控制區下方 -->
+              <div class="right-zine-container">
+                <div class="store-explanation">
+                  ↓ 懸停查看詳情，點擊進入商店 Hover for details, click to enter
+                  store.
                 </div>
+                <div class="right-zine-item"></div>
+                <div class="right-zine-item"></div>
               </div>
             </div>
-          </section>
-          <!-- 右側 Zine 區域 - 在 poster 控制區下方 -->
-          <div class="right-zine-container">
-            <div class="store-explanation">
-              ↓ 懸停查看詳情，點擊進入商店 Hover for details, click to enter store.
-            </div>
-            <div class="right-zine-item"></div>
-            <div class="right-zine-item"></div>
-          </div>
-        </div>
-        <!-- end of poster-area -->
+            <!-- end of poster-area -->
 
-        <!-- 中間 Zine 區域 - 在 poster 和 calender 之間 -->
-        <div class="middle-zine-container">
-          <div class="middle-zine-items-wrapper">
-            <div class="middle-zine-item"></div>
-            <div class="middle-zine-item"></div>
-            <div class="middle-zine-item"></div>
-            <div class="middle-zine-item"></div>
-            <div class="right-zine-item"></div>
-            <div class="middle-zine-item"></div>
-          </div>
-        </div>
-
-        <!-- 活動圖片輪播區域 - 手機版專用 -->
-        <section class="event-gallery-section" id="eventGallery">
-          <hr class="event-gallery-divider">
-          <div class="event-gallery-container">
-            <div class="event-gallery-slider">
-              <div class="image-strip">
-                <img src="image/horizental/hori1.jpg" alt="Event 1" />
-                <img src="image/horizental/hori2.jpg" alt="Event 2" />
-                <img src="image/horizental/hori3.jpg" alt="Event 3" />
-                <img src="image/horizental/hori4.jpg" alt="Event 4" />
-                <img src="image/horizental/hori5.jpg" alt="Event 5" />
-                <img src="image/horizental/hori6.jpg" alt="Event 6" />
-                <img src="image/horizental/hori7.jpg" alt="Event 7" />
-                <img src="image/horizental/hori8.jpg" alt="Event 8" />
-                <img src="image/horizental/hori9.jpg" alt="Event 9" />
-                <img src="image/horizental/hori10.jpg" alt="Event 10" />
-                <!-- 重複圖片以實現無縫循環 -->
-                <img src="image/horizental/hori1.jpg" alt="Event 1" />
-                <img src="image/horizental/hori2.jpg" alt="Event 2" />
-                <img src="image/horizental/hori3.jpg" alt="Event 3" />
-                <img src="image/horizental/hori4.jpg" alt="Event 4" />
-                <img src="image/horizental/hori5.jpg" alt="Event 5" />
-                <img src="image/horizental/hori6.jpg" alt="Event 6" />
+            <!-- 中間 Zine 區域 - 在 poster 和 calender 之間 -->
+            <div class="middle-zine-container">
+              <div class="middle-zine-items-wrapper">
+                <div class="middle-zine-item"></div>
+                <div class="middle-zine-item"></div>
+                <div class="middle-zine-item"></div>
+                <div class="middle-zine-item"></div>
+                <div class="right-zine-item"></div>
+                <div class="middle-zine-item"></div>
               </div>
             </div>
-          </div>
-          <hr class="event-gallery-divider">
-        </section>
 
-        <!-- 條列模式區域 - 縮短寬度 -->
-        <section class="calender-section card-section" id="calender">
-          <!-- <a href="ticketvisit.html#exhibitors">
+            <!-- 活動圖片輪播區域 - 手機版專用 -->
+            <section class="event-gallery-section" id="eventGallery">
+              <hr class="event-gallery-divider" />
+              <div class="event-gallery-container">
+                <div class="event-gallery-slider">
+                  <div class="image-strip">
+                    <img src="image/horizental/hori1.jpg" alt="Event 1" />
+                    <img src="image/horizental/hori2.jpg" alt="Event 2" />
+                    <img src="image/horizental/hori3.jpg" alt="Event 3" />
+                    <img src="image/horizental/hori4.jpg" alt="Event 4" />
+                    <img src="image/horizental/hori5.jpg" alt="Event 5" />
+                    <img src="image/horizental/hori6.jpg" alt="Event 6" />
+                    <img src="image/horizental/hori7.jpg" alt="Event 7" />
+                    <img src="image/horizental/hori8.jpg" alt="Event 8" />
+                    <img src="image/horizental/hori9.jpg" alt="Event 9" />
+                    <img src="image/horizental/hori10.jpg" alt="Event 10" />
+                    <!-- 重複圖片以實現無縫循環 -->
+                    <img src="image/horizental/hori1.jpg" alt="Event 1" />
+                    <img src="image/horizental/hori2.jpg" alt="Event 2" />
+                    <img src="image/horizental/hori3.jpg" alt="Event 3" />
+                    <img src="image/horizental/hori4.jpg" alt="Event 4" />
+                    <img src="image/horizental/hori5.jpg" alt="Event 5" />
+                    <img src="image/horizental/hori6.jpg" alt="Event 6" />
+                  </div>
+                </div>
+              </div>
+              <hr class="event-gallery-divider" />
+            </section>
+
+            <!-- 條列模式區域 - 縮短寬度 -->
+            <section class="calender-section card-section" id="calender">
+              <!-- <a href="ticketvisit.html#exhibitors">
             <h3>
             ￫ FULL PROGRAM ￩
             </h3>
           </a> -->
-            <h3>
-            Upcoming Events
-            </h3>
-          <div class="timeline-subscribe">
-            <p class="agenda-subscribe">
-              <a
-                href="https://calendar.google.com/calendar/u/2?cid=OTA1MjdmNjdmYTQ2MmM4M2UxODRiMGM2MmRlZjEwZWJjOGIwMGNjOGM2N2E1YjgzYWYyYWZiOTBhMWJkYjI5M0Bncm91cC5jYWxlbmRhci5nb29nbGUuY29t"
-                >\Suscribe to TPABF's calendar/</a
-              >
-            </p>
-          </div>
+              <h3>Upcoming Events</h3>
+              <div class="timeline-subscribe">
+                <p class="agenda-subscribe">
+                  <a
+                    href="https://calendar.google.com/calendar/u/2?cid=OTA1MjdmNjdmYTQ2MmM4M2UxODRiMGM2MmRlZjEwZWJjOGIwMGNjOGM2N2E1YjgzYWYyYWZiOTBhMWJkYjI5M0Bncm91cC5jYWxlbmRhci5nb29nbGUuY29t"
+                    >\Suscribe to TPABF's calendar/</a
+                  >
+                </p>
+              </div>
 
-          <!-- Event Type 篩選器 -->
-          <div class="event-filter-header">
-            <div class="event-filter">
-              <label for="eventTypeFilter">Event Type:</label>
-              <select id="eventTypeFilter" class="event-type-select">
-                <option value="all">All Events</option>
-                <option value="talk">Talk</option>
-                <option value="workshop">Workshop</option>
-                <option value="performance">Performance</option>
-                <option value="news">News</option>
-              </select>
-            </div>
-          </div>
-
-          <!-- 卡片模式內容 -->
-          <div class="calender-content">
-            <!-- 隱藏的卡片模式容器，為了兼容 JavaScript -->
-            <div
-              class="calender-mode-container card-mode"
-              id="cardModeContainer"
-            >
-              <div class="calender-scroll-container" id="calenderScroll">
-                <div id="eventsTimeline" class="events-timeline">
-                  <!-- 日曆事件將由 calender.js 動態生成 -->
+              <!-- Event Type 篩選器 -->
+              <div class="event-filter-header">
+                <div class="event-filter">
+                  <label for="eventTypeFilter">Event Type:</label>
+                  <select id="eventTypeFilter" class="event-type-select">
+                    <option value="all">All Events</option>
+                    <option value="talk">Talk</option>
+                    <option value="workshop">Workshop</option>
+                    <option value="performance">Performance</option>
+                    <option value="news">News</option>
+                  </select>
                 </div>
               </div>
-            </div>
-          </div>
 
-          <!-- 隱藏的模式切換按鈕，為了兼容 JavaScript -->
-          <div style="display: none">
-            <button id="cardMode" class="mode-btn active"></button>
-            <button id="timelineMode" class="mode-btn"></button>
-          </div>
-        </section>
-
-        <!-- 第二個活動圖片輪播區域 - 手機版專用 -->
-        <section class="event-gallery-section event-gallery-section-2" id="eventGallery2">
-          <hr class="event-gallery-divider">
-          <div class="event-gallery-container">
-            <div class="event-gallery-slider">
-              <div class="image-strip">
-                <img src="image/horizental/hori11.jpg" alt="Event 11" />
-                <img src="image/horizental/hori12.jpg" alt="Event 12" />
-                <img src="image/horizental/hori13.jpg" alt="Event 13" />
-                <img src="image/horizental/hori14.jpg" alt="Event 14" />
-                <img src="image/horizental/hori15.jpg" alt="Event 15" />
-                <img src="image/horizental/hori16.jpg" alt="Event 16" />
-                <img src="image/horizental/hori17.jpg" alt="Event 17" />
-                <img src="image/horizental/hori18.jpg" alt="Event 18" />
-                <img src="image/horizental/hori19.jpg" alt="Event 19" />
-                <img src="image/horizental/hori20.jpg" alt="Event 20" />
-                <!-- 重複圖片以實現無縫循環 -->
-                <img src="image/horizental/hori11.jpg" alt="Event 11" />
-                <img src="image/horizental/hori12.jpg" alt="Event 12" />
-                <img src="image/horizental/hori13.jpg" alt="Event 13" />
-                <img src="image/horizental/hori14.jpg" alt="Event 14" />
-                <img src="image/horizental/hori15.jpg" alt="Event 15" />
-                <img src="image/horizental/hori16.jpg" alt="Event 16" />
-              </div>
-            </div>
-          </div>
-          <hr class="event-gallery-divider">
-        </section>
-        </div>
-        <!-- end of top-content-wrapper -->
-
-        <!-- Newsletter Sign Up 區域 - 在PROGRAMS下方 -->
-        <section class="newsletter-section" id="newsletter">
-          <h3>NEWSLETTER</h3>
-          
-          <!-- Newsletter 功能說明文字 -->
-          <div class="newsletter-explanation">
-            <div class="explanation-text">     
-              訂閱我們的電子報，獲取最新展覽資訊、近期活動消息和各種新書新刊新產品的各種消息。
-              Subscribe to our newsletter for the latest exhibition updates, event news, and new books, magazines, and products.
-            </div>
-          </div>
-          
-          <div class="newsletter-content">
-            <div id="mc_embed_signup">
-              <form action="https://taipeiartbookfair.us1.list-manage.com/subscribe/post?u=d8c7b3dc8532a4323466edd2d&amp;id=ca8c067b40&amp;f_id=009678e2f0" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate newsletter-form" target="_self" novalidate="">
-                <div id="mc_embed_signup_scroll" style="display:flex;">
-                  <div class="indicates-required" style="display: none;"><span class="asterisk">*</span> indicates required</div>
-                  <div class="form-group">
-                    <label for="mce-EMAIL" style="display: none;">Email Address <span class="asterisk">*</span></label>
-                    <input 
-                      type="email" 
-                      name="EMAIL" 
-                      class="required email" 
-                      id="mce-EMAIL" 
-                      required 
-                      value=""
-                      placeholder="your@email.com"
-                    >
-                  </div>
-                  <div id="mce-responses" class="clear foot" style="display: none;">
-                    <div class="response" id="mce-error-response" style="display: none;"></div>
-                    <div class="response" id="mce-success-response" style="display: none;"></div>
-                  </div>
-                  <div style="position: absolute; left: -5000px;" aria-hidden="true">
-                    <input type="text" name="b_d8c7b3dc8532a4323466edd2d_ca8c067b40" tabindex="-1" value="">
-                  </div>
-                  <div class="optionalParent">
-                    <div class="clear foot">
-                      <input type="submit" name="subscribe" id="mc-embedded-subscribe" class="button newsletter-submit-btn" value="SUBSCRIBE">
+              <!-- 卡片模式內容 -->
+              <div class="calender-content">
+                <!-- 隱藏的卡片模式容器，為了兼容 JavaScript -->
+                <div
+                  class="calender-mode-container card-mode"
+                  id="cardModeContainer"
+                >
+                  <div class="calender-scroll-container" id="calenderScroll">
+                    <div id="eventsTimeline" class="events-timeline">
+                      <!-- 日曆事件將由 calender.js 動態生成 -->
                     </div>
                   </div>
                 </div>
-              </form>
-            </div>
+              </div>
+
+              <!-- 隱藏的模式切換按鈕，為了兼容 JavaScript -->
+              <div style="display: none">
+                <button id="cardMode" class="mode-btn active"></button>
+                <button id="timelineMode" class="mode-btn"></button>
+              </div>
+            </section>
+
+            <!-- 第二個活動圖片輪播區域 - 手機版專用 -->
+            <section
+              class="event-gallery-section event-gallery-section-2"
+              id="eventGallery2"
+            >
+              <hr class="event-gallery-divider" />
+              <div class="event-gallery-container">
+                <div class="event-gallery-slider">
+                  <div class="image-strip">
+                    <img src="image/horizental/hori11.jpg" alt="Event 11" />
+                    <img src="image/horizental/hori12.jpg" alt="Event 12" />
+                    <img src="image/horizental/hori13.jpg" alt="Event 13" />
+                    <img src="image/horizental/hori14.jpg" alt="Event 14" />
+                    <img src="image/horizental/hori15.jpg" alt="Event 15" />
+                    <img src="image/horizental/hori16.jpg" alt="Event 16" />
+                    <img src="image/horizental/hori17.jpg" alt="Event 17" />
+                    <img src="image/horizental/hori18.jpg" alt="Event 18" />
+                    <img src="image/horizental/hori19.jpg" alt="Event 19" />
+                    <img src="image/horizental/hori20.jpg" alt="Event 20" />
+                    <!-- 重複圖片以實現無縫循環 -->
+                    <img src="image/horizental/hori11.jpg" alt="Event 11" />
+                    <img src="image/horizental/hori12.jpg" alt="Event 12" />
+                    <img src="image/horizental/hori13.jpg" alt="Event 13" />
+                    <img src="image/horizental/hori14.jpg" alt="Event 14" />
+                    <img src="image/horizental/hori15.jpg" alt="Event 15" />
+                    <img src="image/horizental/hori16.jpg" alt="Event 16" />
+                  </div>
+                </div>
+              </div>
+              <hr class="event-gallery-divider" />
+            </section>
           </div>
-        </section>
-      </div>
-      <!-- end of main-content -->
-    </div>
-    <!-- end of monopoly-board -->
+          <!-- end of top-content-wrapper -->
 
+          <!-- Newsletter Sign Up 區域 - 在PROGRAMS下方 -->
+          <section class="newsletter-section" id="newsletter">
+            <h3>NEWSLETTER</h3>
 
-    <!-- 滾動橫幅 -->
-    <div class="banner">
-      <div class="banner-track">
-        <div class="banner-content" id="banner-content-1">
-          <span class="dot"></span> 2025 草率季 TPABF
-          徵件結果已公布，請有報名的單位登入攤商系統查詢。 
-          <span class="dot"></span> The selection results for the 2025 TPABF are
-          now available. Please log in to the exhibitor system to check your
-          application status. 
-          <span class="dot" style="background-color: blueviolet"></span>
-          請持續關注我們的社群平台，掌握最新活動消息。Follow us on social media
-          for the latest updates.
-          <span class="dot"></span> 2025 草率季 TPABF
-          徵件結果已公布，請有報名的單位登入攤商系統查詢。 
-          <span class="dot"></span> The selection results for the 2025 TPABF are
-          now available. Please log in to the exhibitor system to check your
-          application status. 
-          <span class="dot" style="background-color: blueviolet"></span>
-          請持續關注我們的社群平台，掌握最新活動消息。Follow us on social media
-          for the latest updates.
+            <!-- Newsletter 功能說明文字 -->
+            <div class="newsletter-explanation">
+              <div class="explanation-text">
+                訂閱我們的電子報，獲取最新展覽資訊、近期活動消息和各種新書新刊新產品的各種消息。
+                Subscribe to our newsletter for the latest exhibition updates,
+                event news, and new books, magazines, and products.
+              </div>
+            </div>
+
+            <div class="newsletter-content">
+              <div id="mc_embed_signup">
+                <form
+                  action="https://taipeiartbookfair.us1.list-manage.com/subscribe/post?u=d8c7b3dc8532a4323466edd2d&amp;id=ca8c067b40&amp;f_id=009678e2f0"
+                  method="post"
+                  id="mc-embedded-subscribe-form"
+                  name="mc-embedded-subscribe-form"
+                  class="validate newsletter-form"
+                  target="_self"
+                  novalidate=""
+                >
+                  <div id="mc_embed_signup_scroll" style="display: flex">
+                    <div class="indicates-required" style="display: none">
+                      <span class="asterisk">*</span> indicates required
+                    </div>
+                    <div class="form-group">
+                      <label for="mce-EMAIL" style="display: none"
+                        >Email Address <span class="asterisk">*</span></label
+                      >
+                      <input
+                        type="email"
+                        name="EMAIL"
+                        class="required email"
+                        id="mce-EMAIL"
+                        required
+                        value=""
+                        placeholder="your@email.com"
+                      />
+                    </div>
+                    <div
+                      id="mce-responses"
+                      class="clear foot"
+                      style="display: none"
+                    >
+                      <div
+                        class="response"
+                        id="mce-error-response"
+                        style="display: none"
+                      ></div>
+                      <div
+                        class="response"
+                        id="mce-success-response"
+                        style="display: none"
+                      ></div>
+                    </div>
+                    <div
+                      style="position: absolute; left: -5000px"
+                      aria-hidden="true"
+                    >
+                      <input
+                        type="text"
+                        name="b_d8c7b3dc8532a4323466edd2d_ca8c067b40"
+                        tabindex="-1"
+                        value=""
+                      />
+                    </div>
+                    <div class="optionalParent">
+                      <div class="clear foot">
+                        <input
+                          type="submit"
+                          name="subscribe"
+                          id="mc-embedded-subscribe"
+                          class="button newsletter-submit-btn"
+                          value="SUBSCRIBE"
+                        />
+                      </div>
+                    </div>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </section>
         </div>
-        <div class="banner-content" id="banner-content-2">
-          <span class="dot"></span> 2025 草率季 TPABF
-          徵件結果已公布，請有報名的單位登入攤商系統查詢。 
-          <span class="dot"></span> The selection results for the 2025 TPABF are
-          now available. Please log in to the exhibitor system to check your
-          application status. 
-          <span class="dot" style="background-color: blueviolet"></span>
-          請持續關注我們的社群平台，掌握最新活動消息。Follow us on social media
-          for the latest updates.
-          <span class="dot"></span> 2025 草率季 TPABF
-          徵件結果已公布，請有報名的單位登入攤商系統查詢。 
-          <span class="dot"></span> The selection results for the 2025 TPABF are
-          now available. Please log in to the exhibitor system to check your
-          application status. 
-          <span class="dot" style="background-color: blueviolet"></span>
-          請持續關注我們的社群平台，掌握最新活動消息。Follow us on social media
-          for the latest updates.
-          <span class="dot"></span> 2025 草率季 TPABF
-          徵件結果已公布，請有報名的單位登入攤商系統查詢。 
-          <span class="dot"></span> The selection results for the 2025 TPABF are
-          now available. Please log in to the exhibitor system to check your
-          application status. 
-          <span class="dot" style="background-color: blueviolet"></span>
-          請持續關注我們的社群平台，掌握最新活動消息。Follow us on social media
-          for the latest updates.
-          <span class="dot"></span> 2025 草率季 TPABF
-          徵件結果已公布，請有報名的單位登入攤商系統查詢。 
-          <span class="dot"></span> The selection results for the 2025 TPABF are
-          now available. Please log in to the exhibitor system to check your
-          application status. 
-          <span class="dot" style="background-color: blueviolet"></span>
-          請持續關注我們的社群平台，掌握最新活動消息。Follow us on social media
-          for the latest updates.
+        <!-- end of main-content -->
+      </div>
+      <!-- end of monopoly-board -->
+
+      <!-- 滾動橫幅 -->
+      <div class="banner">
+        <div class="banner-track">
+          <div class="banner-content" id="banner-content-1">
+            <span class="dot"></span> 2025 草率季 TPABF
+            徵件結果已公布，請有報名的單位登入攤商系統查詢。
+            <span class="dot"></span> The selection results for the 2025 TPABF
+            are now available. Please log in to the exhibitor system to check
+            your application status.
+            <span class="dot" style="background-color: blueviolet"></span>
+            請持續關注我們的社群平台，掌握最新活動消息。Follow us on social
+            media for the latest updates.
+            <span class="dot"></span> 2025 草率季 TPABF
+            徵件結果已公布，請有報名的單位登入攤商系統查詢。
+            <span class="dot"></span> The selection results for the 2025 TPABF
+            are now available. Please log in to the exhibitor system to check
+            your application status.
+            <span class="dot" style="background-color: blueviolet"></span>
+            請持續關注我們的社群平台，掌握最新活動消息。Follow us on social
+            media for the latest updates.
+          </div>
+          <div class="banner-content" id="banner-content-2">
+            <span class="dot"></span> 2025 草率季 TPABF
+            徵件結果已公布，請有報名的單位登入攤商系統查詢。
+            <span class="dot"></span> The selection results for the 2025 TPABF
+            are now available. Please log in to the exhibitor system to check
+            your application status.
+            <span class="dot" style="background-color: blueviolet"></span>
+            請持續關注我們的社群平台，掌握最新活動消息。Follow us on social
+            media for the latest updates.
+            <span class="dot"></span> 2025 草率季 TPABF
+            徵件結果已公布，請有報名的單位登入攤商系統查詢。
+            <span class="dot"></span> The selection results for the 2025 TPABF
+            are now available. Please log in to the exhibitor system to check
+            your application status.
+            <span class="dot" style="background-color: blueviolet"></span>
+            請持續關注我們的社群平台，掌握最新活動消息。Follow us on social
+            media for the latest updates.
+            <span class="dot"></span> 2025 草率季 TPABF
+            徵件結果已公布，請有報名的單位登入攤商系統查詢。
+            <span class="dot"></span> The selection results for the 2025 TPABF
+            are now available. Please log in to the exhibitor system to check
+            your application status.
+            <span class="dot" style="background-color: blueviolet"></span>
+            請持續關注我們的社群平台，掌握最新活動消息。Follow us on social
+            media for the latest updates.
+            <span class="dot"></span> 2025 草率季 TPABF
+            徵件結果已公布，請有報名的單位登入攤商系統查詢。
+            <span class="dot"></span> The selection results for the 2025 TPABF
+            are now available. Please log in to the exhibitor system to check
+            your application status.
+            <span class="dot" style="background-color: blueviolet"></span>
+            請持續關注我們的社群平台，掌握最新活動消息。Follow us on social
+            media for the latest updates.
+          </div>
         </div>
       </div>
-    </div>
 
-    <!-- Credit Drop-up -->
-    <div class="credit-dropup-container" aria-live="polite">
-      <div class="credit-panel" id="creditPanel" role="dialog" aria-modal="false" aria-labelledby="creditTitle">
-        <!-- Credits 內容由 js/credits-content.js 自動載入 -->
+      <!-- Credit Drop-up -->
+      <div class="credit-dropup-container" aria-live="polite">
+        <div
+          class="credit-panel"
+          id="creditPanel"
+          role="dialog"
+          aria-modal="false"
+          aria-labelledby="creditTitle"
+        >
+          <!-- Credits 內容由 js/credits-content.js 自動載入 -->
+        </div>
       </div>
 
-    </div>
-
-    <!-- 頁腳 -->
-    <footer class="footer">
-      <div class="footer-content">
-        <!-- <div class="footer-left">
+      <!-- 頁腳 -->
+      <footer class="footer">
+        <div class="footer-content">
+          <!-- <div class="footer-left">
         </div> -->
-        <div class="footer-right">
-          <a href="https://www.facebook.com/taipeiartbookfair/" class="social-link">FACEBOOK</a>
-          <a href="https://www.instagram.com/taipeiartbookfair/" class="social-link">INSTAGRAM</a>
-          <a href="#" id="footerCredits" class="footer-link">CREDITS</a>
+          <div class="footer-right">
+            <a
+              href="https://www.facebook.com/taipeiartbookfair/"
+              class="social-link"
+              >FACEBOOK</a
+            >
+            <a
+              href="https://www.instagram.com/taipeiartbookfair/"
+              class="social-link"
+              >INSTAGRAM</a
+            >
+            <a href="#" id="footerCredits" class="footer-link">CREDITS</a>
+          </div>
         </div>
-      </div>
-    </footer>
+      </footer>
 
-    
-    <script src="js/poster-flip.js"></script>
-    <script src="js/calender.js"></script>
-    <script src="js/mainpage_image_rotata.js"></script>
-    <script src="js/homepage-zine.js"></script>
-    <script src="js/credits-content.js"></script>
-    <script src="js/index-content-control.js"></script>
-    
-    <script>
-      // Credit drop-up toggle using existing footer CREDITS link
-      (function(){
-        const trigger = document.getElementById('footerCredits');
-        const panel = document.getElementById('creditPanel');
-        if (!trigger || !panel) return;
-        
-        trigger.addEventListener('click', function(e){
-          e.preventDefault();
-          e.stopPropagation(); // 阻止事件冒泡
-          const isOpen = panel.classList.toggle('open');
-          trigger.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
-          trigger.setAttribute('aria-controls', 'creditPanel');
-          
-          // 如果打開了，滾動到頁面最底部
-          if (isOpen) {
-            setTimeout(() => {
-              window.scrollTo({ top: document.documentElement.scrollHeight, behavior: 'smooth' });
-            }, 100);
-          }
-        });
-        
-        // click outside to close - 只在面板打開時才關閉
-        document.addEventListener('click', function(e){
-          if (panel.classList.contains('open')) {
-            // 如果點擊的不是面板內容也不是觸發按鈕，則關閉
-            if (!panel.contains(e.target) && e.target !== trigger) {
-              panel.classList.remove('open');
-              trigger.setAttribute('aria-expanded', 'false');
+      <script src="js/poster-flip.js"></script>
+      <script src="js/calender.js"></script>
+      <script src="js/mainpage_image_rotata.js"></script>
+      <script src="js/homepage-zine.js"></script>
+      <script src="js/credits-content.js"></script>
+      <script src="js/index-content-control.js"></script>
+
+      <script>
+        // Credit drop-up toggle using existing footer CREDITS link
+        (function () {
+          const trigger = document.getElementById("footerCredits");
+          const panel = document.getElementById("creditPanel");
+          if (!trigger || !panel) return;
+
+          trigger.addEventListener("click", function (e) {
+            e.preventDefault();
+            e.stopPropagation(); // 阻止事件冒泡
+            const isOpen = panel.classList.toggle("open");
+            trigger.setAttribute("aria-expanded", isOpen ? "true" : "false");
+            trigger.setAttribute("aria-controls", "creditPanel");
+
+            // 如果打開了，滾動到頁面最底部
+            if (isOpen) {
+              setTimeout(() => {
+                window.scrollTo({
+                  top: document.documentElement.scrollHeight,
+                  behavior: "smooth",
+                });
+              }, 100);
             }
-          }
-        });
-      })();
-    </script>
+          });
 
-    <script>
-      (function() {
-        const hero = document.querySelector('.hero-section');
-        const newspaper = document.querySelector('#newspaper');
-        const zineRow = document.querySelector('#zine-row'); // 如果需要保險間距，可加上
-      
-        function layoutHeroToNewspaper(gap = 16) {
-          if (!hero || !newspaper) return;
-          const heroTop = hero.offsetTop;
-          const newspaperTop = newspaper.offsetTop;
-          const height = Math.max(0, newspaperTop - heroTop - gap);
-          hero.style.height = height + 'px';
-        }
-      
-        let rafId;
-        function onResize() {
-          cancelAnimationFrame(rafId);
-          rafId = requestAnimationFrame(() => layoutHeroToNewspaper(16));
-        }
-      
-        window.addEventListener('load', onResize);
-        window.addEventListener('resize', onResize);
-        // 若有 webfont/圖片載入影響排版，再多觸發一次
-        document.fonts && document.fonts.ready.then(onResize);
-      })();
+          // click outside to close - 只在面板打開時才關閉
+          document.addEventListener("click", function (e) {
+            if (panel.classList.contains("open")) {
+              // 如果點擊的不是面板內容也不是觸發按鈕，則關閉
+              if (!panel.contains(e.target) && e.target !== trigger) {
+                panel.classList.remove("open");
+                trigger.setAttribute("aria-expanded", "false");
+              }
+            }
+          });
+        })();
       </script>
 
+      <script>
+        (function () {
+          const hero = document.querySelector(".hero-section");
+          const newspaper = document.querySelector("#newspaper");
+          const zineRow = document.querySelector("#zine-row"); // 如果需要保險間距，可加上
 
-    <!-- Store Modal JavaScript -->
-    <script>
-      // Wait for DOM to be loaded
-      document.addEventListener('DOMContentLoaded', function() {
-        const modal = document.getElementById('storeModal');
-        const closeBtn = document.querySelector('.store-modal-close');
-        const modalContent = document.querySelector('.store-modal-content');
-        const storeButton = document.querySelector('.store-modal-image');
-        
-        // Show modal immediately when page loads
-        modal.style.display = 'block';
-        
-        // Store URL
-        const storeUrl = 'https://nmhw.taipeiartbookfair.com';
-        
-        // Close modal function
-        function closeModal() {
-          modal.style.display = 'none';
-        }
-        
-        // Close button click
-        closeBtn.addEventListener('click', function(e) {
-          e.stopPropagation(); // Prevent triggering modal click
-          closeModal();
-        });
-        
-        // Close modal when clicking outside
-        modal.addEventListener('click', function(e) {
-          if (e.target === modal) {
+          function layoutHeroToNewspaper(gap = 16) {
+            if (!hero || !newspaper) return;
+            const heroTop = hero.offsetTop;
+            const newspaperTop = newspaper.offsetTop;
+            const height = Math.max(0, newspaperTop - heroTop - gap);
+            hero.style.height = height + "px";
+          }
+
+          let rafId;
+          function onResize() {
+            cancelAnimationFrame(rafId);
+            rafId = requestAnimationFrame(() => layoutHeroToNewspaper(16));
+          }
+
+          window.addEventListener("load", onResize);
+          window.addEventListener("resize", onResize);
+          // 若有 webfont/圖片載入影響排版，再多觸發一次
+          document.fonts && document.fonts.ready.then(onResize);
+        })();
+      </script>
+
+      <!-- Store Modal JavaScript -->
+      <script>
+        // Wait for DOM to be loaded
+        document.addEventListener("DOMContentLoaded", function () {
+          const modal = document.getElementById("storeModal");
+          const closeBtn = document.querySelector(".store-modal-close");
+          const modalContent = document.querySelector(".store-modal-content");
+          const storeButton = document.querySelector(".store-modal-image");
+
+          // Show modal immediately when page loads
+          modal.style.display = "block";
+
+          // Store URL
+          const storeUrl = "https://shop.taipeiartbookfair.com";
+
+          // Close modal function
+          function closeModal() {
+            modal.style.display = "none";
+          }
+
+          // Close button click
+          closeBtn.addEventListener("click", function (e) {
+            e.stopPropagation(); // Prevent triggering modal click
             closeModal();
+          });
+
+          // Close modal when clicking outside
+          modal.addEventListener("click", function (e) {
+            if (e.target === modal) {
+              closeModal();
+            }
+          });
+
+          // Open store when clicking modal content or store button
+          function openStore() {
+            const newWindow = window.open(
+              storeUrl,
+              "_blank",
+              "noopener,noreferrer",
+            );
+            if (!newWindow) {
+              // If popup blocked, show alert instead of redirecting
+              alert("請允許彈出視窗以開啟商店頁面，或手動前往: " + storeUrl);
+            }
           }
-        });
-        
-        // Open store when clicking modal content or store button
-        function openStore() {
-          const newWindow = window.open(storeUrl, '_blank', 'noopener,noreferrer');
-          if (!newWindow) {
-            // If popup blocked, show alert instead of redirecting
-            alert('請允許彈出視窗以開啟商店頁面，或手動前往: ' + storeUrl);
-          }
-        }
-        
-        // Modal content click (area around close button)
-        modalContent.addEventListener('click', function(e) {
-          // Don't trigger if clicking close button
-          if (!e.target.classList.contains('store-modal-close')) {
+
+          // Modal content click (area around close button)
+          modalContent.addEventListener("click", function (e) {
+            // Don't trigger if clicking close button
+            if (!e.target.classList.contains("store-modal-close")) {
+              e.preventDefault();
+              e.stopPropagation();
+              openStore();
+            }
+          });
+
+          // Store button click
+          storeButton.addEventListener("click", function (e) {
             e.preventDefault();
             e.stopPropagation();
             openStore();
-          }
+          });
+
+          // ESC key to close
+          document.addEventListener("keydown", function (e) {
+            if (e.key === "Escape" && modal.style.display === "block") {
+              closeModal();
+            }
+          });
         });
-        
-        // Store button click
-        storeButton.addEventListener('click', function(e) {
-          e.preventDefault();
-          e.stopPropagation();
-          openStore();
-        });
-        
-        // ESC key to close
-        document.addEventListener('keydown', function(e) {
-          if (e.key === 'Escape' && modal.style.display === 'block') {
-            closeModal();
-          }
-        });
-      });
-    </script>
+      </script>
     </div>
   </body>
 </html>

@@ -1,0 +1,253 @@
+body {
+  margin: 0;
+  padding: 0;
+  font-family: "Poppins", sans-serif;
+  overflow: hidden;
+  position: relative;
+  background-color: #f2f2f2;
+}
+
+.login-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 80vh;
+  padding: 0 10px;
+}
+
+h2 {
+  font-size: 1rem;
+  font-weight: normal;
+  text-transform: uppercase;
+  margin-bottom: 10px;
+  padding-left: 10px;
+  padding-right: 10px;
+  color: black;
+  background-color: ghostwhite;
+  border: 1px solid black;
+  text-align: left;
+}
+
+.login-form {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  max-width: 380px;
+  padding: 8px;
+  box-sizing: border-box;
+  border: 1px solid black;
+  background-color: ghostwhite;
+}
+
+.input-box {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 8px;
+  padding: 4px;
+  border: 1px solid #000;
+}
+
+.input-box label {
+  font-size: 12px;
+  color: black;
+  margin-bottom: 2px;
+}
+
+.input-box input,
+.input-box select {
+  padding: 6px;
+  font-size: 12px;
+  border: 1px solid #000;
+}
+
+.input-box input:focus,
+.input-box select:focus {
+  background-color: olive;
+  outline: none;
+}
+
+.sub-actions {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 4px;
+  padding-right: 6px;
+}
+
+.fp {
+  padding-left: 5px;
+  padding-right: 5px;
+  font-size: 0.8rem;
+  text-decoration: underline;
+  color: grey;
+  display: inline-block;
+  margin-bottom: 1rem;
+}
+
+.submit-box {
+  display: flex;
+  justify-content: center;
+  margin-top: 10px;
+}
+
+button {
+  padding: 8px;
+  background-color: black;
+  color: white;
+  border: none;
+  width: 100%;
+  text-align: center;
+  cursor: pointer;
+  letter-spacing: 1px;
+  font-size: 0.9rem;
+}
+
+button:hover {
+  color: palegreen;
+  background-color: olive;
+}
+
+button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.bgimg {
+  filter: saturate(500) hue-rotate(185deg) contrast(200%) brightness(90%)
+    sepia(25%);
+  position: fixed;
+  z-index: -50;
+  width: 100vw;
+  height: 100vh;
+  -webkit-user-drag: none;
+  top: 0;
+  left: 0;
+}
+
+.back {
+  font-size: 0.9rem;
+  font-family: "Inclusive Sans", sans-serif;
+  overflow: hidden;
+  color: black;
+  background-color: white;
+  white-space: nowrap;
+  position: fixed;
+  bottom: 0px;
+  left: 0px;
+  padding: 5px;
+  text-align: center;
+  font-weight: 500;
+  cursor: pointer;
+}
+
+#signup-status {
+  display: none;
+  width: 100%;
+  max-width: 380px;
+  margin-top: 8px;
+  padding: 8px;
+  box-sizing: border-box;
+  border: 1px solid black;
+  background-color: ghostwhite;
+  color: black;
+  font-size: 0.8rem;
+  word-break: break-word;
+  white-space: pre-wrap;
+}
+
+.form-fields-hidden {
+  display: none;
+}
+
+.form-fields-visible {
+  display: flex;
+  flex-direction: column;
+}
+
+.password-rules {
+  font-size: 0.72rem;
+  line-height: 1.35;
+  margin-top: 4px;
+  color: plum;
+}
+
+.verification-hint,
+.small-note {
+  font-size: 11px;
+  color: #666;
+  margin-top: 4px;
+}
+
+.phone-row {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 8px;
+}
+
+.phone-row .input-box {
+  flex: 1;
+  margin-bottom: 0;
+}
+
+.phone-row .input-box:first-child {
+  flex: 0 0 80px;
+}
+
+.name-row {
+  display: flex;
+  gap: 8px;
+}
+
+.name-row .input-box {
+  flex: 1;
+  margin-bottom: 0;
+}
+
+.verification-actions {
+  display: flex;
+  gap: 6px;
+}
+
+.verification-actions input {
+  flex: 1;
+}
+
+.verification-actions button {
+  width: auto;
+  min-width: 100px;
+  font-size: 0.75rem;
+  flex-shrink: 0;
+}
+
+.verification-resend-row {
+  margin-top: 6px;
+}
+
+.verification-resend-row button {
+  width: 100%;
+  font-size: 0.75rem;
+  padding: 6px;
+}
+
+button.btn-secondary {
+  background-color: white;
+  color: black;
+  border: 1px solid black;
+}
+
+button.btn-secondary:hover:not(:disabled) {
+  background-color: olive;
+  color: palegreen;
+}
+
+.input-box input:disabled,
+.input-box select:disabled {
+  background-color: #e8e8e8;
+  color: #555;
+  cursor: not-allowed;
+}
+
+::selection {
+  color: palegreen;
+  background-color: olive;
+}

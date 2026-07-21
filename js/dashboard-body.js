@@ -46,6 +46,7 @@ document.addEventListener("DOMContentLoaded", function () {
     const sidebarIds = [
       "sidebar-dashboard",
       "sidebar-open-call",
+      "sidebar-consignment",
       "sidebar-contact",
       "sidebar-faq",
       "sidebar-account",
@@ -59,18 +60,18 @@ document.addEventListener("DOMContentLoaded", function () {
         const html = p.innerHTML.replace(/<mark>([\s\S]*?)<\/mark>/g, "$1");
         p.innerHTML = html;
       }
-      // 還原帳號管理顏色
+      // 還原帳號管理顏色；已被標為 disabled (darkgray) 的不覆蓋
       if (id === "sidebar-account") {
         p.style.backgroundColor = "blueviolet";
         p.style.color = "ghostwhite";
-      } else {
+      } else if (p.style.color !== "darkgray") {
         p.style.backgroundColor = "";
         p.style.color = "";
       }
     });
 
     // 只給目前選到的加 <mark>
-    if (section === "dashboard" || section === "open-call" || section === "contact" || section === "faq") {
+    if (section === "dashboard" || section === "open-call" || section === "consignment" || section === "contact" || section === "faq") {
       const a = document.getElementById("sidebar-" + section);
       if (a) {
         const p = a.querySelector("p");
@@ -85,6 +86,42 @@ document.addEventListener("DOMContentLoaded", function () {
   const isMobile = window.innerWidth <= 600;
   const displayValue = isMobile ? "block" : "table-cell";
 
+  const OPEN_CALL_IFRAME_LOCAL = "localapplication.html?embed=1";
+  const OPEN_CALL_IFRAME_OVERSEA = "overseaapplication.html?embed=1";
+
+  /** 若 HTML 仍為舊檔名（如 *_20251218_invite.html），強制改為目前申請頁，避免 iframe 404 */
+  function ensureOpenCallIframeSrc() {
+    const localFrame = document.getElementById("opencall-frame-local");
+    const overseaFrame = document.getElementById("opencall-frame-oversea");
+    if (!localFrame || !overseaFrame) return;
+    const base = document.baseURI || window.location.href;
+    const fix = (el, rel) => {
+      const want = new URL(rel, base).href;
+      let cur = "";
+      try {
+        cur = new URL(el.getAttribute("src") || "", base).href;
+      } catch (e) {
+        cur = "";
+      }
+      if (cur !== want) el.setAttribute("src", rel);
+    };
+    fix(localFrame, OPEN_CALL_IFRAME_LOCAL);
+    fix(overseaFrame, OPEN_CALL_IFRAME_OVERSEA);
+  }
+
+  function syncOpenCallIframeByRegion() {
+    ensureOpenCallIframeSrc();
+    const localFrame = document.getElementById("opencall-frame-local");
+    const overseaFrame = document.getElementById("opencall-frame-oversea");
+    if (!localFrame || !overseaFrame) return;
+    const r =
+      typeof getCookie === "function" ? getCookie("region") || "" : "";
+    const isTW = r.trim().toUpperCase() === "TW";
+    localFrame.classList.toggle("opencall-dashboard-iframe--hidden", !isTW);
+    overseaFrame.classList.toggle("opencall-dashboard-iframe--hidden", isTW);
+  }
+  window.syncOpenCallIframeByRegion = syncOpenCallIframeByRegion;
+
   window.openEditPage = function openEditPage() {
     const editPage = document.getElementById("edit-brand-page");
     const mid = document.querySelector(".mid");
@@ -93,7 +130,9 @@ document.addEventListener("DOMContentLoaded", function () {
     const editAccountPage = document.getElementById("edit-account-page");
     const faq = document.getElementById("faq");
     const contact = document.getElementById("contact-method");
-    const allSections = [mid, right, account, editAccountPage, faq, contact];
+    const openCallGated = document.getElementById("open-call-gated");
+    const consignmentForm = document.getElementById("consignment-form");
+    const allSections = [mid, right, account, editAccountPage, faq, contact, openCallGated, consignmentForm];
     
     // 移除所有 active class 和 inline style
     allSections.forEach(el => {
@@ -119,7 +158,9 @@ document.addEventListener("DOMContentLoaded", function () {
     // 自動填入現有資料
     const fields = [
       ["brand-name", "brandName-edit"],
+      ["brand-name-original", "brandName-original-edit"],
       ["bio", "bio-edit"],
+      ["bio-en", "bio-edit-en"],
       ["role", "role-edit"],
       ["category", "category-edit"],
       ["attendedYears", "attendedYears-edit"],
@@ -138,6 +179,30 @@ document.addEventListener("DOMContentLoaded", function () {
         toEl.value = fromEl.textContent.trim();
       }
     });
+
+    // 初始化字數計數器
+    const bioEdit = document.getElementById("bio-edit");
+    const bioCounter = document.getElementById("bio-edit-counter");
+    const BIO_ZH_MAX = 80;
+    const BIO_EN_MAX = 100;
+    if (bioEdit && bioCounter) {
+      bioCounter.textContent = bioEdit.value.length;
+      bioEdit.addEventListener("input", () => {
+        bioCounter.textContent = bioEdit.value.length;
+        bioCounter.style.color =
+          bioEdit.value.length >= BIO_ZH_MAX ? "#c00" : "#888";
+      });
+    }
+    const bioEditEn = document.getElementById("bio-edit-en");
+    const bioCounterEn = document.getElementById("bio-edit-en-counter");
+    if (bioEditEn && bioCounterEn) {
+      bioCounterEn.textContent = bioEditEn.value.length;
+      bioEditEn.addEventListener("input", () => {
+        bioCounterEn.textContent = bioEditEn.value.length;
+        bioCounterEn.style.color =
+          bioEditEn.value.length >= BIO_EN_MAX ? "#c00" : "#888";
+      });
+    }
 
     // 控制編輯頁電力需求顯示
     const boothType = document.getElementById("booth-type")?.textContent.trim();
@@ -160,7 +225,9 @@ document.addEventListener("DOMContentLoaded", function () {
     const faq = document.getElementById("faq");
     const contact = document.getElementById("contact-method");
     const openCallForm = document.getElementById("open-call-form");
-    const allSections = [editBrandPage, mid, right, editPage, account, faq, contact, openCallForm];
+    const openCallGated = document.getElementById("open-call-gated");
+    const consignmentForm = document.getElementById("consignment-form");
+    const allSections = [editBrandPage, mid, right, editPage, account, faq, contact, openCallForm, openCallGated, consignmentForm];
     
     // 移除所有 active class 和 inline style
     allSections.forEach(el => {
@@ -193,7 +260,9 @@ document.addEventListener("DOMContentLoaded", function () {
     const faq = document.getElementById("faq");
     const contact = document.getElementById("contact-method");
     const openCallForm = document.getElementById("open-call-form");
-    const allSections = [editBrandPage, mid, right, editPage, account, faq, contact, openCallForm];
+    const openCallGated = document.getElementById("open-call-gated");
+    const consignmentForm = document.getElementById("consignment-form");
+    const allSections = [editBrandPage, mid, right, editPage, account, faq, contact, openCallForm, openCallGated, consignmentForm];
     
     // 移除所有 active class 和 inline style
     allSections.forEach(el => {
@@ -225,7 +294,10 @@ document.addEventListener("DOMContentLoaded", function () {
     const account = document.getElementById("account");
     const faq = document.getElementById("faq");
     const contact = document.getElementById("contact-method");
-    const allSections = [editBrandPage, mid, right, editPage, account, faq, contact];
+    const openCallForm = document.getElementById("open-call-form");
+    const openCallGated = document.getElementById("open-call-gated");
+    const consignmentForm = document.getElementById("consignment-form");
+    const allSections = [editBrandPage, mid, right, editPage, account, faq, contact, openCallForm, openCallGated, consignmentForm];
     
     // 移除所有 active class 和 inline style
     allSections.forEach(el => {
@@ -304,7 +376,9 @@ document.addEventListener("DOMContentLoaded", function () {
     const faq = document.getElementById("faq");
     const contact = document.getElementById("contact-method");
     const openCallForm = document.getElementById("open-call-form");
-    const allSections = [editBrandPage, mid, right, editPage, account, faq, contact];
+    const openCallGated = document.getElementById("open-call-gated");
+    const consignmentForm = document.getElementById("consignment-form");
+    const allSections = [editBrandPage, mid, right, editPage, account, faq, contact, openCallGated, consignmentForm];
     
     // 移除所有 active class 和 inline style
     allSections.forEach(el => {
@@ -318,6 +392,7 @@ document.addEventListener("DOMContentLoaded", function () {
       }
     });
     
+    syncOpenCallIframeByRegion();
     // 顯示 OPEN CALL 表單
     if (openCallForm) {
       if (isMobile) {
@@ -325,6 +400,80 @@ document.addEventListener("DOMContentLoaded", function () {
       } else {
         openCallForm.style.display = "table-cell";
       }
+    }
+  };
+
+  window.showOpenCallGated = function showOpenCallGated() {
+    const editBrandPage = document.getElementById("edit-brand-page");
+    const mid = document.querySelector(".mid");
+    const right = document.querySelector(".right");
+    const editPage = document.getElementById("edit-account-page");
+    const account = document.querySelector(".account");
+    const faq = document.getElementById("faq");
+    const contact = document.getElementById("contact-method");
+    const openCallForm = document.getElementById("open-call-form");
+    const openCallGated = document.getElementById("open-call-gated");
+    const consignmentForm = document.getElementById("consignment-form");
+    const allSections = [editBrandPage, mid, right, editPage, account, faq, contact, openCallForm, consignmentForm];
+
+    allSections.forEach(el => {
+      if (el) {
+        el.classList.remove("mobile-active");
+        if (isMobile) {
+          el.style.display = "";
+        } else {
+          el.style.display = "none";
+        }
+      }
+    });
+
+    if (openCallGated) {
+      if (isMobile) {
+        openCallGated.classList.add("mobile-active");
+      } else {
+        openCallGated.style.display = "table-cell";
+      }
+    }
+  };
+
+  window.showConsignmentForm = function showConsignmentForm() {
+    const editBrandPage = document.getElementById("edit-brand-page");
+    const mid = document.querySelector(".mid");
+    const right = document.querySelector(".right");
+    const editPage = document.getElementById("edit-account-page");
+    const account = document.querySelector(".account");
+    const faq = document.getElementById("faq");
+    const contact = document.getElementById("contact-method");
+    const openCallForm = document.getElementById("open-call-form");
+    const openCallGated = document.getElementById("open-call-gated");
+    const consignmentForm = document.getElementById("consignment-form");
+    const allSections = [editBrandPage, mid, right, editPage, account, faq, contact, openCallForm, openCallGated];
+
+    allSections.forEach(el => {
+      if (el) {
+        el.classList.remove("mobile-active");
+        if (isMobile) {
+          el.style.display = "";
+        } else {
+          el.style.display = "none";
+        }
+      }
+    });
+
+    if (consignmentForm) {
+      if (isMobile) {
+        consignmentForm.classList.add("mobile-active");
+      } else {
+        consignmentForm.style.display = "table-cell";
+      }
+    }
+
+    // Send user data to the consignment iframe
+    const csIframe = document.getElementById("consignment-iframe");
+    if (csIframe && csIframe.contentWindow) {
+      const name  = (document.getElementById("contact-person") || {}).textContent?.trim() || "";
+      const email = (document.getElementById("email") || {}).textContent?.trim() || "";
+      try { csIframe.contentWindow.postMessage({ type: "cs-user-data", name, email }, "*"); } catch (e) {}
     }
   };
 
@@ -337,7 +486,9 @@ document.addEventListener("DOMContentLoaded", function () {
     const faq = document.getElementById("faq");
     const contact = document.getElementById("contact-method");
     const openCallForm = document.getElementById("open-call-form");
-    const allSections = [editBrandPage, editPage, account, faq, contact, openCallForm];
+    const openCallGated = document.getElementById("open-call-gated");
+    const consignmentForm = document.getElementById("consignment-form");
+    const allSections = [editBrandPage, editPage, account, faq, contact, openCallForm, openCallGated, consignmentForm];
     
     // 移除所有 active class 和 inline style
     allSections.forEach(el => {
@@ -430,7 +581,9 @@ document.addEventListener("DOMContentLoaded", function () {
       document.getElementById("edit-account-page"),
       document.querySelector(".account"),
       document.getElementById("faq"),
-      document.getElementById("contact-method")
+      document.getElementById("contact-method"),
+      document.getElementById("open-call-gated"),
+      document.getElementById("consignment-form"),
     ];
     allSections.forEach(el => {
       if (el) {
@@ -438,8 +591,50 @@ document.addEventListener("DOMContentLoaded", function () {
       }
     });
   }
-  // 然後顯示 dashboard
-  if (window.showDashboardSection) {
-    window.showDashboardSection();
+  syncOpenCallIframeByRegion();
+});
+
+// 接收 open call iframe 的投稿完成訊號
+// 仿照 edit-profile.js：等待 Apps Script 寫入完成後再 reload
+window.addEventListener("message", function (e) {
+  if (!e.data || e.data.type !== "opencall-submitted") return;
+
+  const POLL_DELAY = 2000;   // 第一次等待 2 秒
+  const POLL_INTERVAL = 1500; // 每次輪詢間隔
+  const POLL_MAX = 6;         // 最多輪詢 6 次（共約 11 秒）
+
+  const accountVal = (typeof getCookie === "function") ? getCookie("account") : "";
+
+  function poll(attempt) {
+    if (!accountVal) { window.location.reload(); return; }
+
+    const params = new URLSearchParams({
+      action: "get_dashboard_info",
+      account: accountVal,
+    }).toString();
+
+    fetch(apiUrl, {
+      redirect: "follow",
+      method: "POST",
+      headers: { "Content-Type": "text/plain;charset=utf-8" },
+      body: params,
+    })
+      .then(function(r) { return r.json(); })
+      .then(function(data) {
+        // 確認報名編號已寫入才 reload
+        if (data.success && data.data && data.data["報名編號"]) {
+          window.location.reload();
+        } else if (attempt < POLL_MAX) {
+          setTimeout(function() { poll(attempt + 1); }, POLL_INTERVAL);
+        } else {
+          // 超時仍 reload，讓使用者看到最新狀態
+          window.location.reload();
+        }
+      })
+      .catch(function() {
+        window.location.reload();
+      });
   }
+
+  setTimeout(function() { poll(1); }, POLL_DELAY);
 });

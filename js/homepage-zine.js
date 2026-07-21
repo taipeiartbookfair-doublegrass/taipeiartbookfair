@@ -25,8 +25,8 @@ function generateShopUrl(englishTitle) {
   if (urlSlug === '') return null;
   
   // 組合成完整的商品頁面 URL
-  // 格式：https://nmhw.taipeiartbookfair.com/products/{url-slug}
-  return `https://nmhw.taipeiartbookfair.com/products/${urlSlug}`;
+  // 格式：https://shop.taipeiartbookfair.com/products/{url-slug}
+  return `https://shop.taipeiartbookfair.com/products/${urlSlug}`;
 }
 
 /**
@@ -118,7 +118,7 @@ function populateZineElements(booksArray) {
         if (elementShopUrl) {
           window.open(elementShopUrl, '_blank', 'noopener,noreferrer');
         } else {
-          window.open('https://nmhw.taipeiartbookfair.com', '_blank', 'noopener,noreferrer');
+          window.open('https://shop.taipeiartbookfair.com', '_blank', 'noopener,noreferrer');
         }
       });
 
