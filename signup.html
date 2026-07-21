@@ -1,298 +1,1116 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
     <meta
       http-equiv="Content-Security-Policy"
-      content="default-src 'self'; 
-         script-src 'self' 'unsafe-inline' https://www.google.com https://www.gstatic.com https://code.jquery.com https://www.googletagmanager.com; 
-         style-src 'self' 'unsafe-inline'; 
+      content="default-src 'self';
+         script-src 'self' 'unsafe-inline' https://www.google.com https://www.gstatic.com https://code.jquery.com https://www.googletagmanager.com;
+         style-src 'self' 'unsafe-inline';
+         img-src 'self' data: blob:;
          connect-src https://www.google-analytics.com https://script.google.com https://script.googleusercontent.com;
-         frame-src https://www.google.com;"
+         frame-src https://www.google.com https://script.google.com https://script.googleusercontent.com;"
     />
-    <title>Sign Up - 草率季Taipei Art Book Fair</title>
-    <link rel="shortcut icon" href="image/icon-1.ico" />
 
-    <!-- <link rel="stylesheet" href="css/style.css" /> -->
+    <title>Sign Up - 草率季Taipei Art Book Fair</title>
+
+    <link rel="shortcut icon" href="image/icon-1.ico" />
     <link rel="stylesheet" href="css/font.css" />
-    <link rel="shortcut icon" href="css/font.css" />
+    <link rel="stylesheet" href="css/signup.css" />
 
     <!-- Google tag (gtag.js) -->
     <script
       async
       src="https://www.googletagmanager.com/gtag/js?id=G-EPSXJPDH6L"
     ></script>
+
     <script>
       window.dataLayer = window.dataLayer || [];
+
       function gtag() {
         dataLayer.push(arguments);
       }
-      gtag("js", new Date());
 
+      gtag("js", new Date());
       gtag("config", "G-EPSXJPDH6L");
     </script>
-    <style>
-      body {
-        margin: 0;
-        padding: 0;
-        font-family: "Poppins", sans-serif;
-        /* background: whitesmoke; */
-        overflow: hidden;
-        position: relative;
-        background-color: #f2f2f2;
-      }
-
-      .login-wrapper {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        height: 80vh;
-        padding: 0 10px;
-      }
-
-      h2 {
-        font-size: 1rem;
-        font-weight: normal;
-        text-transform: uppercase;
-        margin-bottom: 10px;
-        padding-left: 10px;
-        padding-right: 10px;
-        color: black;
-        background-color: ghostwhite;
-        border: 1px solid black;
-        text-align: left;
-      }
-
-      .login-form {
-        display: flex;
-        flex-direction: column;
-        width: 100%;
-        max-width: 380px;
-        padding: 8px;
-        box-sizing: border-box;
-        border: 1px solid black;
-        background-color: ghostwhite;
-      }
-
-      .input-box {
-        display: flex;
-        flex-direction: column;
-        margin-bottom: 8px;
-        padding: 4px;
-        border: 1px solid #000;
-      }
-
-      .input-box label {
-        font-size: 12px;
-        color: black;
-        margin-bottom: 2px;
-      }
-
-      .input-box input,
-      .input-box select {
-        padding: 6px;
-        font-size: 12px;
-        border: 1px solid #000;
-      }
-
-      .input-box input:focus,
-      .input-box select:focus {
-        background-color: olive;
-        outline: none;
-      }
-
-      .sub-actions {
-        display: flex;
-        justify-content: flex-end;
-        margin-top: 4px;
-        padding-right: 6px;
-      }
-
-      .fp {
-        text-decoration: underline;
-        font-size: 11px;
-        color: black;
-      }
-
-      .submit-box {
-        display: flex;
-        justify-content: center;
-        margin-top: 10px;
-      }
-
-      button {
-        padding: 8px;
-        background-color: black;
-        color: white;
-        border: none;
-        width: 100%;
-        text-align: center;
-        cursor: pointer;
-        letter-spacing: 1px;
-        font-size: 0.9rem;
-      }
-
-      button:hover {
-        color: palegreen;
-        background-color: olive;
-      }
-
-      .bgimg {
-        filter: saturate(500) hue-rotate(185deg) contrast(200%) brightness(90%)
-          sepia(25%);
-        position: fixed;
-        z-index: -50;
-        width: 100vw;
-        height: 100vh;
-        -webkit-user-drag: none;
-        top: 0;
-        left: 0;
-      }
-      .fp {
-        padding-left: 5px;
-        padding-right: 5px;
-        font-size: 0.8rem;
-        text-decoration: underline;
-        color: grey;
-        display: inline-block;
-        margin-bottom: 1rem;
-      }
-      .back {
-        font-size: 0.9rem;
-        font-family: "Inclusive Sans", sans-serif;
-        overflow: hidden;
-        color: black;
-        background-color: white;
-        white-space: nowrap;
-        position: fixed;
-        bottom: 0px;
-        left: 0px;
-        padding: 5px;
-        text-align: center;
-        font-weight: 500;
-        cursor: pointer;
-      }
-      ::selection {
-        color: palegreen;
-        background-color: olive;
-      }
-    </style>
   </head>
+
   <body>
     <img
       draggable="false"
-      (dragstart)="false;"
       class="bgimg"
       id="sasa"
       src="image/bgimg4.jpg"
+      alt=""
     />
 
     <div class="login-wrapper">
       <h2>註冊 Sign Up</h2>
+
       <div class="login-form">
-        <form action="/signup" method="POST">
+        <form id="signup-form" method="POST">
           <div class="input-box">
             <label for="email">電子郵件 Email</label>
             <input
               type="email"
-              name="email"
+              name="account"
               id="email"
               placeholder="your@email.com"
+              autocomplete="email"
               required
             />
-          </div>
-
-          <div class="input-box">
-            <label for="password">密碼 Password</label>
-            <input
-              type="password"
-              name="password"
-              id="password"
-              placeholder="Enter your password"
-              required
-            />
-          </div>
-
-          <div class="input-box">
-            <label for="phone">電話 Phone</label>
-            <input
-              type="tel"
-              name="phone"
-              id="phone"
-              placeholder="Enter your phone number"
-              required
-            />
-          </div>
-
-          <div class="input-box">
-            <label for="name">姓名 Name</label>
-            <input
-              type="text"
-              name="name"
-              id="name"
-              placeholder="Enter your name"
-              required
-            />
-          </div>
-
-          <div class="input-box">
-            <label for="region">地區/國籍 Region (Nationality)</label>
-            <select name="region" id="region" required>
-              <option value="">請選擇 Please select</option>
-              <option value="Taiwan">台灣 Taiwan</option>
-              <option value="China">中國 China</option>
-              <option value="Hong Kong">香港 Hong Kong</option>
-              <option value="Macau">澳門 Macau</option>
-              <option value="Japan">日本 Japan</option>
-              <option value="South Korea">韓國 South Korea</option>
-              <option value="Singapore">新加坡 Singapore</option>
-              <option value="Malaysia">馬來西亞 Malaysia</option>
-              <option value="Thailand">泰國 Thailand</option>
-              <option value="Philippines">菲律賓 Philippines</option>
-              <option value="Indonesia">印尼 Indonesia</option>
-              <option value="Vietnam">越南 Vietnam</option>
-              <option value="United States">美國 United States</option>
-              <option value="Canada">加拿大 Canada</option>
-              <option value="United Kingdom">英國 United Kingdom</option>
-              <option value="Australia">澳洲 Australia</option>
-              <option value="New Zealand">紐西蘭 New Zealand</option>
-              <option value="Germany">德國 Germany</option>
-              <option value="France">法國 France</option>
-              <option value="Italy">義大利 Italy</option>
-              <option value="Spain">西班牙 Spain</option>
-              <option value="Netherlands">荷蘭 Netherlands</option>
-              <option value="Belgium">比利時 Belgium</option>
-              <option value="Switzerland">瑞士 Switzerland</option>
-              <option value="Austria">奧地利 Austria</option>
-              <option value="Sweden">瑞典 Sweden</option>
-              <option value="Norway">挪威 Norway</option>
-              <option value="Denmark">丹麥 Denmark</option>
-              <option value="Finland">芬蘭 Finland</option>
-              <option value="Poland">波蘭 Poland</option>
-              <option value="Czech Republic">捷克 Czech Republic</option>
-              <option value="Russia">俄羅斯 Russia</option>
-              <option value="Brazil">巴西 Brazil</option>
-              <option value="Argentina">阿根廷 Argentina</option>
-              <option value="Mexico">墨西哥 Mexico</option>
-              <option value="India">印度 India</option>
-              <option value="Other">其他 Other</option>
-            </select>
           </div>
 
           <div class="submit-box">
-            <button type="submit">註冊 Sign Up</button>
+            <button id="send-verification-btn" type="button">
+              發送驗證碼 Send Verification Code
+            </button>
+          </div>
+
+          <div id="form-fields" class="form-fields-hidden">
+            <div class="input-box" id="verification-code-box">
+              <label for="verification-code">驗證碼 Verification Code</label>
+              <div class="verification-actions">
+                <input
+                  type="text"
+                  id="verification-code"
+                  name="verificationCode"
+                  inputmode="numeric"
+                  autocomplete="one-time-code"
+                  placeholder="6-digit code from email"
+                />
+                <button type="button" id="verify-code-btn">
+                  確認驗證碼 Verify
+                </button>
+              </div>
+              <div class="verification-resend-row">
+                <button
+                  type="button"
+                  id="resend-code-btn"
+                  class="btn-secondary"
+                >
+                  重寄驗證碼 Resend
+                </button>
+              </div>
+              <div class="verification-hint small-note">
+                請輸入信內驗證碼並按「確認驗證碼」；通過後才可填寫密碼與聯絡資料。<br />
+                Enter the code from email and press Verify; password and contact
+                fields unlock after success.
+              </div>
+            </div>
+
+            <div class="input-box">
+              <label for="password">密碼 Password</label>
+              <input
+                type="password"
+                name="password"
+                id="password"
+                placeholder="Enter your password"
+                autocomplete="new-password"
+                minlength="8"
+              />
+
+              <div class="password-rules" id="password-rules">
+                密碼需至少 8 碼，並包含大寫、小寫與數字。<br />
+                Password must be at least 8 characters and include uppercase,
+                lowercase, and number.
+              </div>
+            </div>
+
+            <div class="phone-row">
+              <div class="input-box">
+                <label for="country-code">國碼 Code</label>
+                <select name="country_code" id="country-code" required>
+                  <option value="">選擇 Select</option>
+                  <option value="+886">+886</option>
+                  <option value="+1">+1</option>
+                  <option value="+7">+7</option>
+                  <option value="+20">+20</option>
+                  <option value="+27">+27</option>
+                  <option value="+30">+30</option>
+                  <option value="+31">+31</option>
+                  <option value="+32">+32</option>
+                  <option value="+33">+33</option>
+                  <option value="+34">+34</option>
+                  <option value="+36">+36</option>
+                  <option value="+39">+39</option>
+                  <option value="+40">+40</option>
+                  <option value="+41">+41</option>
+                  <option value="+43">+43</option>
+                  <option value="+44">+44</option>
+                  <option value="+45">+45</option>
+                  <option value="+46">+46</option>
+                  <option value="+47">+47</option>
+                  <option value="+48">+48</option>
+                  <option value="+49">+49</option>
+                  <option value="+51">+51</option>
+                  <option value="+52">+52</option>
+                  <option value="+53">+53</option>
+                  <option value="+54">+54</option>
+                  <option value="+55">+55</option>
+                  <option value="+56">+56</option>
+                  <option value="+57">+57</option>
+                  <option value="+58">+58</option>
+                  <option value="+60">+60</option>
+                  <option value="+61">+61</option>
+                  <option value="+62">+62</option>
+                  <option value="+63">+63</option>
+                  <option value="+64">+64</option>
+                  <option value="+65">+65</option>
+                  <option value="+66">+66</option>
+                  <option value="+81">+81</option>
+                  <option value="+82">+82</option>
+                  <option value="+84">+84</option>
+                  <option value="+86">+86</option>
+                  <option value="+90">+90</option>
+                  <option value="+91">+91</option>
+                  <option value="+92">+92</option>
+                  <option value="+93">+93</option>
+                  <option value="+94">+94</option>
+                  <option value="+95">+95</option>
+                  <option value="+98">+98</option>
+                  <option value="+211">+211</option>
+                  <option value="+212">+212</option>
+                  <option value="+213">+213</option>
+                  <option value="+216">+216</option>
+                  <option value="+218">+218</option>
+                  <option value="+220">+220</option>
+                  <option value="+221">+221</option>
+                  <option value="+222">+222</option>
+                  <option value="+223">+223</option>
+                  <option value="+224">+224</option>
+                  <option value="+225">+225</option>
+                  <option value="+226">+226</option>
+                  <option value="+227">+227</option>
+                  <option value="+228">+228</option>
+                  <option value="+229">+229</option>
+                  <option value="+230">+230</option>
+                  <option value="+231">+231</option>
+                  <option value="+232">+232</option>
+                  <option value="+233">+233</option>
+                  <option value="+234">+234</option>
+                  <option value="+235">+235</option>
+                  <option value="+236">+236</option>
+                  <option value="+237">+237</option>
+                  <option value="+238">+238</option>
+                  <option value="+239">+239</option>
+                  <option value="+240">+240</option>
+                  <option value="+241">+241</option>
+                  <option value="+242">+242</option>
+                  <option value="+243">+243</option>
+                  <option value="+244">+244</option>
+                  <option value="+245">+245</option>
+                  <option value="+246">+246</option>
+                  <option value="+248">+248</option>
+                  <option value="+249">+249</option>
+                  <option value="+250">+250</option>
+                  <option value="+251">+251</option>
+                  <option value="+252">+252</option>
+                  <option value="+253">+253</option>
+                  <option value="+254">+254</option>
+                  <option value="+255">+255</option>
+                  <option value="+256">+256</option>
+                  <option value="+257">+257</option>
+                  <option value="+258">+258</option>
+                  <option value="+260">+260</option>
+                  <option value="+261">+261</option>
+                  <option value="+262">+262</option>
+                  <option value="+263">+263</option>
+                  <option value="+264">+264</option>
+                  <option value="+265">+265</option>
+                  <option value="+266">+266</option>
+                  <option value="+267">+267</option>
+                  <option value="+268">+268</option>
+                  <option value="+269">+269</option>
+                  <option value="+290">+290</option>
+                  <option value="+291">+291</option>
+                  <option value="+297">+297</option>
+                  <option value="+298">+298</option>
+                  <option value="+299">+299</option>
+                  <option value="+350">+350</option>
+                  <option value="+351">+351</option>
+                  <option value="+352">+352</option>
+                  <option value="+353">+353</option>
+                  <option value="+354">+354</option>
+                  <option value="+355">+355</option>
+                  <option value="+356">+356</option>
+                  <option value="+357">+357</option>
+                  <option value="+358">+358</option>
+                  <option value="+359">+359</option>
+                  <option value="+370">+370</option>
+                  <option value="+371">+371</option>
+                  <option value="+372">+372</option>
+                  <option value="+373">+373</option>
+                  <option value="+374">+374</option>
+                  <option value="+375">+375</option>
+                  <option value="+376">+376</option>
+                  <option value="+377">+377</option>
+                  <option value="+378">+378</option>
+                  <option value="+379">+379</option>
+                  <option value="+380">+380</option>
+                  <option value="+381">+381</option>
+                  <option value="+382">+382</option>
+                  <option value="+383">+383</option>
+                  <option value="+385">+385</option>
+                  <option value="+386">+386</option>
+                  <option value="+387">+387</option>
+                  <option value="+389">+389</option>
+                  <option value="+420">+420</option>
+                  <option value="+421">+421</option>
+                  <option value="+423">+423</option>
+                  <option value="+501">+501</option>
+                  <option value="+502">+502</option>
+                  <option value="+503">+503</option>
+                  <option value="+504">+504</option>
+                  <option value="+505">+505</option>
+                  <option value="+506">+506</option>
+                  <option value="+507">+507</option>
+                  <option value="+508">+508</option>
+                  <option value="+509">+509</option>
+                  <option value="+590">+590</option>
+                  <option value="+591">+591</option>
+                  <option value="+592">+592</option>
+                  <option value="+593">+593</option>
+                  <option value="+594">+594</option>
+                  <option value="+595">+595</option>
+                  <option value="+596">+596</option>
+                  <option value="+597">+597</option>
+                  <option value="+598">+598</option>
+                  <option value="+599">+599</option>
+                  <option value="+670">+670</option>
+                  <option value="+672">+672</option>
+                  <option value="+673">+673</option>
+                  <option value="+674">+674</option>
+                  <option value="+675">+675</option>
+                  <option value="+676">+676</option>
+                  <option value="+677">+677</option>
+                  <option value="+678">+678</option>
+                  <option value="+679">+679</option>
+                  <option value="+680">+680</option>
+                  <option value="+681">+681</option>
+                  <option value="+682">+682</option>
+                  <option value="+683">+683</option>
+                  <option value="+685">+685</option>
+                  <option value="+686">+686</option>
+                  <option value="+687">+687</option>
+                  <option value="+688">+688</option>
+                  <option value="+689">+689</option>
+                  <option value="+690">+690</option>
+                  <option value="+691">+691</option>
+                  <option value="+692">+692</option>
+                  <option value="+850">+850</option>
+                  <option value="+852">+852</option>
+                  <option value="+853">+853</option>
+                  <option value="+855">+855</option>
+                  <option value="+856">+856</option>
+                  <option value="+870">+870</option>
+                  <option value="+880">+880</option>
+                  <option value="+960">+960</option>
+                  <option value="+961">+961</option>
+                  <option value="+962">+962</option>
+                  <option value="+963">+963</option>
+                  <option value="+964">+964</option>
+                  <option value="+965">+965</option>
+                  <option value="+966">+966</option>
+                  <option value="+967">+967</option>
+                  <option value="+968">+968</option>
+                  <option value="+970">+970</option>
+                  <option value="+971">+971</option>
+                  <option value="+972">+972</option>
+                  <option value="+973">+973</option>
+                  <option value="+974">+974</option>
+                  <option value="+975">+975</option>
+                  <option value="+976">+976</option>
+                  <option value="+977">+977</option>
+                  <option value="+992">+992</option>
+                  <option value="+993">+993</option>
+                  <option value="+994">+994</option>
+                  <option value="+995">+995</option>
+                  <option value="+996">+996</option>
+                  <option value="+998">+998</option>
+                </select>
+              </div>
+              <div class="input-box">
+                <label for="phone">電話 Phone</label>
+                <input
+                  type="tel"
+                  name="phone"
+                  id="phone"
+                  placeholder="Enter your phone number"
+                  autocomplete="tel"
+                />
+              </div>
+            </div>
+
+            <div class="name-row">
+              <div class="input-box">
+                <label for="last-name">姓 Last Name</label>
+                <input
+                  type="text"
+                  name="last_name"
+                  id="last-name"
+                  placeholder="Enter your last name"
+                  autocomplete="family-name"
+                />
+              </div>
+              <div class="input-box">
+                <label for="first-name">名 First Name</label>
+                <input
+                  type="text"
+                  name="first_name"
+                  id="first-name"
+                  placeholder="Enter your first name"
+                  autocomplete="given-name"
+                />
+              </div>
+            </div>
+            <div
+              class="input-box"
+              style="border-top: none; background-color: olive; color: plum"
+            >
+              <div class="small-note" style="color: plum">
+                請使用真名 Please use your real name
+              </div>
+            </div>
+
+            <div class="input-box">
+              <label for="region">地區/國籍 Region (Nationality)</label>
+              <select name="region" id="region">
+                <option value="">請選擇 Please select</option>
+                <optgroup label="亞洲 Asia">
+                  <option value="TW">台灣 Taiwan</option>
+                  <option value="CN">中國 China</option>
+                  <option value="HK">香港 Hong Kong</option>
+                  <option value="MO">澳門 Macau</option>
+                  <option value="JP">日本 Japan</option>
+                  <option value="KR">韓國 South Korea</option>
+                  <option value="SG">新加坡 Singapore</option>
+                  <option value="MY">馬來西亞 Malaysia</option>
+                  <option value="TH">泰國 Thailand</option>
+                  <option value="PH">菲律賓 Philippines</option>
+                  <option value="ID">印尼 Indonesia</option>
+                  <option value="VN">越南 Vietnam</option>
+                  <option value="IN">印度 India</option>
+                  <option value="BD">孟加拉 Bangladesh</option>
+                  <option value="LK">斯里蘭卡 Sri Lanka</option>
+                  <option value="PK">巴基斯坦 Pakistan</option>
+                  <option value="KH">柬埔寨 Cambodia</option>
+                  <option value="LA">寮國 Laos</option>
+                  <option value="MM">緬甸 Myanmar</option>
+                  <option value="BN">汶萊 Brunei</option>
+                  <option value="KZ">哈薩克 Kazakhstan</option>
+                  <option value="UZ">烏茲別克 Uzbekistan</option>
+                </optgroup>
+                <optgroup label="歐洲 Europe">
+                  <option value="UK">英國 United Kingdom</option>
+                  <option value="IE">愛爾蘭 Ireland</option>
+                  <option value="FR">法國 France</option>
+                  <option value="DE">德國 Germany</option>
+                  <option value="IT">義大利 Italy</option>
+                  <option value="ES">西班牙 Spain</option>
+                  <option value="PT">葡萄牙 Portugal</option>
+                  <option value="NL">荷蘭 Netherlands</option>
+                  <option value="BE">比利時 Belgium</option>
+                  <option value="LU">盧森堡 Luxembourg</option>
+                  <option value="CH">瑞士 Switzerland</option>
+                  <option value="AT">奧地利 Austria</option>
+                  <option value="CZ">捷克 Czech Republic</option>
+                  <option value="SK">斯洛伐克 Slovakia</option>
+                  <option value="PL">波蘭 Poland</option>
+                  <option value="HU">匈牙利 Hungary</option>
+                  <option value="RO">羅馬尼亞 Romania</option>
+                  <option value="BG">保加利亞 Bulgaria</option>
+                  <option value="HR">克羅埃西亞 Croatia</option>
+                  <option value="SI">斯洛維尼亞 Slovenia</option>
+                  <option value="SE">瑞典 Sweden</option>
+                  <option value="NO">挪威 Norway</option>
+                  <option value="DK">丹麥 Denmark</option>
+                  <option value="FI">芬蘭 Finland</option>
+                  <option value="GR">希臘 Greece</option>
+                  <option value="RU">俄羅斯 Russia</option>
+                  <option value="UA">烏克蘭 Ukraine</option>
+                  <option value="BY">白俄羅斯 Belarus</option>
+                  <option value="MD">摩爾多瓦 Moldova</option>
+                </optgroup>
+                <optgroup label="北美 North America">
+                  <option value="US">美國 United States</option>
+                  <option value="CA">加拿大 Canada</option>
+                  <option value="MX">墨西哥 Mexico</option>
+                </optgroup>
+                <optgroup label="中美洲 Central America">
+                  <option value="BZ">貝里斯 Belize</option>
+                  <option value="CR">哥斯大黎加 Costa Rica</option>
+                  <option value="SV">薩爾瓦多 El Salvador</option>
+                  <option value="GT">瓜地馬拉 Guatemala</option>
+                  <option value="HN">宏都拉斯 Honduras</option>
+                  <option value="NI">尼加拉瓜 Nicaragua</option>
+                  <option value="PA">巴拿馬 Panama</option>
+                </optgroup>
+                <optgroup label="南美 South America">
+                  <option value="AR">阿根廷 Argentina</option>
+                  <option value="BO">玻利維亞 Bolivia</option>
+                  <option value="BR">巴西 Brazil</option>
+                  <option value="CL">智利 Chile</option>
+                  <option value="CO">哥倫比亞 Colombia</option>
+                  <option value="EC">厄瓜多 Ecuador</option>
+                  <option value="GY">蓋亞那 Guyana</option>
+                  <option value="PY">巴拉圭 Paraguay</option>
+                  <option value="PE">秘魯 Peru</option>
+                  <option value="SR">蘇利南 Suriname</option>
+                  <option value="UY">烏拉圭 Uruguay</option>
+                  <option value="VE">委內瑞拉 Venezuela</option>
+                </optgroup>
+                <optgroup label="大洋洲 Oceania">
+                  <option value="AU">澳洲 Australia</option>
+                  <option value="NZ">紐西蘭 New Zealand</option>
+                  <option value="FJ">斐濟 Fiji</option>
+                  <option value="PG">巴布亞紐幾內亞 Papua New Guinea</option>
+                  <option value="SB">索羅門群島 Solomon Islands</option>
+                  <option value="VU">萬那杜 Vanuatu</option>
+                </optgroup>
+                <optgroup label="非洲 Africa">
+                  <option value="ZA">南非 South Africa</option>
+                  <option value="EG">埃及 Egypt</option>
+                  <option value="NG">奈及利亞 Nigeria</option>
+                  <option value="KE">肯亞 Kenya</option>
+                  <option value="ET">衣索比亞 Ethiopia</option>
+                  <option value="GH">迦納 Ghana</option>
+                  <option value="MA">摩洛哥 Morocco</option>
+                  <option value="TN">突尼西亞 Tunisia</option>
+                  <option value="DZ">阿爾及利亞 Algeria</option>
+                  <option value="UG">烏干達 Uganda</option>
+                </optgroup>
+                <optgroup label="中東 Middle East">
+                  <option value="AE">阿拉伯聯合大公國 UAE</option>
+                  <option value="SA">沙烏地阿拉伯 Saudi Arabia</option>
+                  <option value="IL">以色列 Israel</option>
+                  <option value="TR">土耳其 Turkey</option>
+                  <option value="IR">伊朗 Iran</option>
+                  <option value="IQ">伊拉克 Iraq</option>
+                  <option value="JO">約旦 Jordan</option>
+                  <option value="LB">黎巴嫩 Lebanon</option>
+                  <option value="OM">阿曼 Oman</option>
+                  <option value="QA">卡達 Qatar</option>
+                  <option value="KW">科威特 Kuwait</option>
+                  <option value="BH">巴林 Bahrain</option>
+                </optgroup>
+                <option value="OTHER">其他 Other</option>
+              </select>
+            </div>
+
+            <div class="submit-box">
+              <button type="submit" id="submit-btn">註冊 Sign Up</button>
+            </div>
           </div>
         </form>
-        
+
         <div class="sub-actions">
-          <a href="login.html" class="fp">已有帳號？回到登入 Already have an account? Back to Login</a>
+          <a href="login.html" class="fp">
+            已有帳號？回到登入 Already have an account? Back to Login
+          </a>
         </div>
       </div>
+
+      <div id="signup-status"></div>
     </div>
 
-    <a href="index.html"><div class="back">回主頁 Back</div></a>
+    <a href="index.html">
+      <div class="back">回主頁 Back</div>
+    </a>
+
+    <script>
+      const SIGNUP_API_URL =
+        "https://script.google.com/macros/s/AKfycbyRV_uiklsvHWPeBblxTz47OlTnQ-IeKIxifYZ1D-8ZzHdljVMEbXwsKGO84Agon7mU8g/exec";
+
+      const signupForm = document.getElementById("signup-form");
+      const submitBtn = document.getElementById("submit-btn");
+      const statusBox = document.getElementById("signup-status");
+      const sendVerificationBtn = document.getElementById(
+        "send-verification-btn",
+      );
+      const emailInput = document.getElementById("email");
+      const verificationCodeInput =
+        document.getElementById("verification-code");
+      const verifyCodeBtn = document.getElementById("verify-code-btn");
+      const resendCodeBtn = document.getElementById("resend-code-btn");
+      const formFields = document.getElementById("form-fields");
+
+      const RESEND_COOLDOWN_SEC = 300;
+      const REGISTRATION_FIELD_IDS = [
+        "password",
+        "country-code",
+        "phone",
+        "last-name",
+        "first-name",
+        "region",
+      ];
+
+      let submitted = false;
+      let timeoutTimer = null;
+      let verificationEmail = "";
+      let codeWasSent = false;
+      let serverEmailVerified = false;
+      let verificationSectionComplete = false;
+      let resendCooldownTimerId = null;
+      let resendCooldownEnd = 0;
+
+      function setSendVerificationButtonDefault() {
+        sendVerificationBtn.disabled = false;
+        sendVerificationBtn.textContent = "發送驗證碼 Send Verification Code";
+      }
+
+      function showStatus(message) {
+        if (!statusBox) return;
+        statusBox.style.display = "block";
+        statusBox.textContent = message;
+      }
+
+      function hideStatus() {
+        if (!statusBox) return;
+        statusBox.style.display = "none";
+      }
+
+      function resetButton() {
+        submitBtn.disabled = false;
+        submitBtn.textContent = "註冊 Sign Up";
+      }
+
+      function isValidEmail(email) {
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        return emailRegex.test(email);
+      }
+
+      function validatePassword(password) {
+        const value = String(password || "");
+
+        if (value.length < 8) {
+          return "密碼至少需要 8 碼 Password must be at least 8 characters.";
+        }
+
+        if (!/[A-Z]/.test(value)) {
+          return "密碼至少需要一個大寫英文字母 Password needs one uppercase letter.";
+        }
+
+        if (!/[a-z]/.test(value)) {
+          return "密碼至少需要一個小寫英文字母 Password needs one lowercase letter.";
+        }
+
+        if (!/[0-9]/.test(value)) {
+          return "密碼至少需要一個數字 Password needs one number.";
+        }
+
+        return "";
+      }
+
+      document
+        .getElementById("password")
+        .addEventListener("input", function () {
+          const passwordInput = document.getElementById("password");
+          const passwordRules = document.getElementById("password-rules");
+          const error = validatePassword(passwordInput.value);
+
+          if (!passwordInput.value) {
+            passwordRules.style.color = "plum";
+            passwordRules.innerHTML =
+              "密碼需至少 8 碼，並包含大寫、小寫與數字。<br />Password must be at least 8 characters and include uppercase, lowercase, and number.";
+            return;
+          }
+
+          if (error) {
+            passwordRules.style.color = "plum";
+            passwordRules.textContent = error;
+          } else {
+            passwordRules.style.color = "darkgreen";
+            passwordRules.textContent = "密碼格式正確 Password format valid.";
+          }
+        });
+
+      async function postToSignupApi(params) {
+        const response = await fetch(SIGNUP_API_URL, {
+          redirect: "follow",
+          method: "POST",
+          headers: {
+            "Content-Type": "text/plain;charset=utf-8",
+          },
+          body: params.toString(),
+        });
+
+        const raw = await response.text();
+        try {
+          return raw ? JSON.parse(raw) : {};
+        } catch (error) {
+          console.error("Signup API non-JSON response:", response.status, raw);
+          throw new Error(
+            "Server returned non-JSON response. Please check Apps Script deployment.",
+          );
+        }
+      }
+
+      function setRegistrationFieldsLocked(lock) {
+        REGISTRATION_FIELD_IDS.forEach(function (id) {
+          const el = document.getElementById(id);
+          if (el) el.disabled = !!lock;
+        });
+      }
+
+      function stopResendCooldownTimer() {
+        if (resendCooldownTimerId) {
+          clearInterval(resendCooldownTimerId);
+          resendCooldownTimerId = null;
+        }
+        resendCooldownEnd = 0;
+      }
+
+      function resetResendCooldownUi() {
+        stopResendCooldownTimer();
+        if (resendCodeBtn) {
+          resendCodeBtn.disabled = false;
+          resendCodeBtn.textContent = "重寄驗證碼 Resend";
+        }
+      }
+
+      function lockVerificationAfterSuccess() {
+        verificationSectionComplete = true;
+        stopResendCooldownTimer();
+        if (verificationCodeInput) {
+          verificationCodeInput.disabled = true;
+        }
+        if (verifyCodeBtn) {
+          verifyCodeBtn.disabled = true;
+          verifyCodeBtn.textContent = "已確認 Verified";
+        }
+        if (resendCodeBtn) {
+          resendCodeBtn.disabled = true;
+          resendCodeBtn.textContent =
+            "已驗證，無法重寄 / Verified (resend locked)";
+        }
+      }
+
+      function unlockVerificationControls() {
+        verificationSectionComplete = false;
+        if (verificationCodeInput) {
+          verificationCodeInput.disabled = false;
+        }
+        if (verifyCodeBtn) {
+          verifyCodeBtn.disabled = false;
+          verifyCodeBtn.textContent = "確認驗證碼 Verify";
+        }
+        resetResendCooldownUi();
+      }
+
+      function updateResendCooldownLabel() {
+        if (!resendCodeBtn) return;
+        if (verificationSectionComplete) {
+          resendCodeBtn.disabled = true;
+          resendCodeBtn.textContent =
+            "已驗證，無法重寄 / Verified (resend locked)";
+          stopResendCooldownTimer();
+          return;
+        }
+        const sec = Math.max(
+          0,
+          Math.ceil((resendCooldownEnd - Date.now()) / 1000),
+        );
+        if (sec <= 0) {
+          resendCodeBtn.disabled = false;
+          resendCodeBtn.textContent = "重寄驗證碼 Resend";
+          if (resendCooldownTimerId) {
+            clearInterval(resendCooldownTimerId);
+            resendCooldownTimerId = null;
+          }
+          return;
+        }
+        resendCodeBtn.disabled = true;
+        resendCodeBtn.textContent =
+          sec + " 秒後可重寄 / Resend in " + sec + "s";
+      }
+
+      function startResendCooldown() {
+        stopResendCooldownTimer();
+        resendCooldownEnd = Date.now() + RESEND_COOLDOWN_SEC * 1000;
+        updateResendCooldownLabel();
+        resendCooldownTimerId = setInterval(updateResendCooldownLabel, 500);
+      }
+
+      function resetVerificationState() {
+        codeWasSent = false;
+        serverEmailVerified = false;
+        verificationSectionComplete = false;
+        verificationEmail = "";
+        verificationCodeInput.value = "";
+        unlockVerificationControls();
+        setRegistrationFieldsLocked(false);
+        formFields.classList.remove("form-fields-visible");
+        formFields.classList.add("form-fields-hidden");
+        [
+          "password",
+          "phone",
+          "country-code",
+          "last-name",
+          "first-name",
+          "region",
+        ].forEach(function (id) {
+          const el = document.getElementById(id);
+          if (el) {
+            el.required = false;
+          }
+        });
+        emailInput.readOnly = false;
+        setSendVerificationButtonDefault();
+      }
+
+      emailInput.addEventListener("input", function () {
+        if (emailInput.readOnly) {
+          return;
+        }
+        if (codeWasSent || verificationEmail) {
+          resetVerificationState();
+          hideStatus();
+        }
+      });
+
+      // Step 1: Send code via Apps Script signup_send_email (account must not exist; server validates and sends mail)
+      sendVerificationBtn.addEventListener("click", async function (event) {
+        event.preventDefault();
+
+        if (codeWasSent) {
+          return;
+        }
+
+        const email = emailInput.value.trim().toLowerCase();
+
+        if (!email) {
+          alert("請輸入您的電子郵件 Please enter your email");
+          return;
+        }
+
+        if (!isValidEmail(email)) {
+          alert("請輸入有效的電子郵件格式 Please enter a valid email format");
+          return;
+        }
+
+        hideStatus();
+
+        try {
+          sendVerificationBtn.disabled = true;
+          sendVerificationBtn.textContent = "發送中... Sending...";
+
+          const signupParams = new URLSearchParams({
+            action: "signup_send_email",
+            account: email,
+          });
+          const data = await postToSignupApi(signupParams);
+
+          if (data.success) {
+            verificationEmail = email;
+            codeWasSent = true;
+            serverEmailVerified = false;
+            verificationCodeInput.value = "";
+
+            emailInput.readOnly = true;
+            sendVerificationBtn.disabled = true;
+            sendVerificationBtn.textContent = "已寄出 Code sent";
+
+            formFields.classList.remove("form-fields-hidden");
+            formFields.classList.add("form-fields-visible");
+
+            document.getElementById("password").required = true;
+            document.getElementById("phone").required = true;
+            document.getElementById("country-code").required = true;
+            document.getElementById("last-name").required = true;
+            document.getElementById("first-name").required = true;
+            document.getElementById("region").required = true;
+
+            setRegistrationFieldsLocked(true);
+            startResendCooldown();
+            verificationCodeInput.focus();
+            showStatus(
+              "驗證碼已寄至 " +
+                email +
+                "。請按「確認驗證碼」檢查碼是否正確，再填寫下方資料並按「註冊」。\nCode sent to " +
+                email +
+                ". Press Verify to check the code, then complete the form and Sign Up.",
+            );
+          } else {
+            alert(
+              data.message ||
+                data.error ||
+                "發送驗證碼失敗，請稍後再試 Failed to send verification code, please try again later",
+            );
+          }
+        } catch (error) {
+          console.error("Send verification error:", error);
+          const detail = error && error.message ? String(error.message) : "";
+          let hint =
+            "若為 Failed to fetch：常見為瀏覽器擴充（廣告封鎖）、公司網路阻擋 Google、或連線問題。請試無痕視窗、暫停擴充、換網路或手機熱點。\n";
+          hint +=
+            "If you see Failed to fetch: try incognito, disable extensions (ad blockers), or another network (e.g. mobile hotspot).\n";
+          const msg = detail
+            ? "連線錯誤 / Network error: " + detail + "\n\n" + hint
+            : "網絡錯誤，請稍後再試 Network error, please try again later.\n\n" +
+              hint;
+          alert(msg);
+        } finally {
+          if (!codeWasSent) {
+            setSendVerificationButtonDefault();
+          } else if (
+            sendVerificationBtn.textContent === "發送中... Sending..."
+          ) {
+            sendVerificationBtn.disabled = true;
+            sendVerificationBtn.textContent = "已寄出 Code sent";
+          }
+        }
+      });
+
+      verifyCodeBtn.addEventListener("click", async function (event) {
+        event.preventDefault();
+        if (verificationSectionComplete) {
+          return;
+        }
+        if (!codeWasSent || !verificationEmail) {
+          return;
+        }
+        const code = verificationCodeInput.value.trim();
+        if (!code) {
+          alert("請輸入驗證碼 Please enter verification code");
+          return;
+        }
+        verifyCodeBtn.disabled = true;
+        verifyCodeBtn.textContent = "確認中...";
+        try {
+          const params = new URLSearchParams({
+            action: "signup_verify_code",
+            account: verificationEmail,
+            token: code,
+            verificationCode: code,
+          });
+          const data = await postToSignupApi(params);
+          if (data.success) {
+            serverEmailVerified = true;
+            lockVerificationAfterSuccess();
+            setRegistrationFieldsLocked(false);
+            showStatus(
+              "驗證碼正確，請填寫下方資料後按「註冊」。\nCode verified. Complete the form below, then Sign Up.",
+            );
+          } else {
+            alert(
+              data.message ||
+                data.error ||
+                "驗證碼錯誤或已過期 Invalid or expired code",
+            );
+          }
+        } catch (error) {
+          console.error("Verify code error:", error);
+          alert(
+            error && error.message
+              ? String(error.message)
+              : "連線錯誤，請稍後再試 Network error, please try again later",
+          );
+        } finally {
+          if (!verificationSectionComplete) {
+            verifyCodeBtn.disabled = false;
+            verifyCodeBtn.textContent = "確認驗證碼 Verify";
+          }
+        }
+      });
+
+      resendCodeBtn.addEventListener("click", async function (event) {
+        event.preventDefault();
+        if (verificationSectionComplete) {
+          return;
+        }
+        if (!codeWasSent || !verificationEmail || resendCodeBtn.disabled) {
+          return;
+        }
+        resendCodeBtn.disabled = true;
+        const prevLabel = resendCodeBtn.textContent;
+        resendCodeBtn.textContent = "寄送中... Sending...";
+        try {
+          const signupParams = new URLSearchParams({
+            action: "signup_send_email",
+            account: verificationEmail,
+          });
+          const data = await postToSignupApi(signupParams);
+          if (data.success) {
+            serverEmailVerified = false;
+            verificationCodeInput.value = "";
+            startResendCooldown();
+            showStatus(
+              "已重新寄送驗證碼至 " +
+                verificationEmail +
+                "。\nVerification code resent to " +
+                verificationEmail +
+                ".",
+            );
+            verificationCodeInput.focus();
+          } else {
+            alert(
+              data.message ||
+                data.error ||
+                "重寄失敗，請稍後再試 Resend failed, please try again later",
+            );
+            resendCodeBtn.textContent = prevLabel;
+            updateResendCooldownLabel();
+          }
+        } catch (error) {
+          console.error("Resend error:", error);
+          alert(
+            error && error.message
+              ? String(error.message)
+              : "連線錯誤，請稍後再試 Network error, please try again later",
+          );
+          resendCodeBtn.textContent = prevLabel;
+          updateResendCooldownLabel();
+        }
+      });
+
+      verificationCodeInput.addEventListener("keypress", function (e) {
+        if (e.key === "Enter" && codeWasSent) {
+          e.preventDefault();
+          if (serverEmailVerified) {
+            submitBtn.click();
+          } else {
+            verifyCodeBtn.click();
+          }
+        }
+      });
+
+      // Form submission
+      signupForm.addEventListener("submit", function (e) {
+        if (!codeWasSent || !verificationEmail) {
+          e.preventDefault();
+          alert(
+            "請先按「發送驗證碼」收信後再註冊 Please press Send Verification Code first.",
+          );
+          return;
+        }
+
+        if (!serverEmailVerified) {
+          e.preventDefault();
+          alert(
+            "請先按「確認驗證碼」通過驗證後再註冊 Please press Verify and pass code check before Sign Up.",
+          );
+          return;
+        }
+
+        const account = emailInput.value.trim().toLowerCase();
+        if (account !== verificationEmail) {
+          e.preventDefault();
+          alert(
+            "Email 與寄送驗證碼時不一致，請重新發送驗證碼 Email does not match the address used to send the code.",
+          );
+          return;
+        }
+        const password = document.getElementById("password").value;
+        const countryCode = document.getElementById("country-code").value;
+        const phone = document.getElementById("phone").value.trim();
+        const lastName = document.getElementById("last-name").value.trim();
+        const firstName = document.getElementById("first-name").value.trim();
+        const region = document.getElementById("region").value;
+        const verificationCode = verificationCodeInput.value.trim();
+
+        if (
+          !account ||
+          !password ||
+          !countryCode ||
+          !phone ||
+          !lastName ||
+          !firstName ||
+          !region
+        ) {
+          e.preventDefault();
+          alert("請完整填寫所有欄位 Please fill in all fields");
+          return;
+        }
+
+        const passwordError = validatePassword(password);
+        if (passwordError) {
+          e.preventDefault();
+          alert(passwordError);
+          return;
+        }
+
+        if (!verificationCode) {
+          e.preventDefault();
+          alert("請輸入驗證碼 Please enter verification code");
+          return;
+        }
+
+        const registerParams = new URLSearchParams();
+        registerParams.set("action", "register");
+        registerParams.set("account", account);
+        registerParams.set("password", password);
+        registerParams.set("country_code", countryCode);
+        registerParams.set("phone", phone);
+        registerParams.set("last_name", lastName);
+        registerParams.set("first_name", firstName);
+        registerParams.set("name", lastName + firstName);
+        registerParams.set("region", region);
+        registerParams.set("verificationCode", verificationCode);
+        registerParams.set("token", verificationCode);
+
+        e.preventDefault();
+
+        submitted = true;
+        submitBtn.disabled = true;
+        submitBtn.textContent = "註冊中...";
+        showStatus("資料已送出，請稍候...");
+
+        clearTimeout(timeoutTimer);
+
+        postToSignupApi(registerParams)
+          .then((data) => {
+            clearTimeout(timeoutTimer);
+
+            if (data.success) {
+              showStatus("送出完成。");
+              alert(
+                data.message ||
+                  "註冊成功，請登入 Register successful. Please login.",
+              );
+              setTimeout(() => {
+                window.location.href = "login.html";
+              }, 1500);
+            } else {
+              const msg =
+                data.message || data.error || "註冊失敗 Register failed.";
+              alert(msg);
+              showStatus(msg);
+              resetButton();
+            }
+          })
+          .catch((error) => {
+            clearTimeout(timeoutTimer);
+            console.error("Register error:", error);
+            const detail = error && error.message ? String(error.message) : "";
+            let hint =
+              "若為 Failed to fetch：常見為瀏覽器擴充（廣告封鎖）、公司網路阻擋 Google、或 CORS。請試無痕視窗、暫停擴充、換網路或手機熱點。\n";
+            hint +=
+              "If you see Failed to fetch: try incognito, disable extensions (ad blockers), or another network (e.g. mobile hotspot). Google endpoints may be blocked on some networks.\n";
+            const msg = detail
+              ? "連線錯誤 / Network error: " + detail + "\n\n" + hint
+              : "Network error, please try again later.\n\n" + hint;
+            alert(msg);
+            showStatus(
+              detail
+                ? "連線錯誤 / Network error: " + detail
+                : "Network error, please try again later.",
+            );
+            resetButton();
+          });
+
+        timeoutTimer = setTimeout(function () {
+          if (submitted) {
+            showStatus(
+              "資料已送出。\n請到 Users 工作表確認是否新增。\n如果沒有新增，請確認 Apps Script 部署網址是否正確。",
+            );
+            // Don't auto-reset, keep the form as is
+          }
+        }, 10000);
+      });
+    </script>
   </body>
 </html>
-
