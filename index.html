@@ -52,7 +52,7 @@
       <!-- 右上角控制區域 -->
       <!-- <div class="top-controls">
         <div class="top-controls-content">
-          <a href="login.html" class="exhibitor-login-btn"
+          <a href="login" class="exhibitor-login-btn"
             >攤主登入｜EXHIBITOR LOGIN</a
           >
         </div>
@@ -81,7 +81,7 @@
             </li>
             <!-- <li><a href="#exhibitors" id="nav-exhibitors">ZINE WALL</a></li>
           <li><a href="#exhibitors" id="nav-exhibitors">ARCHIVE</a></li> -->
-            <li><a href="about.html" id="nav-about">ABOUT</a></li>
+            <li><a href="about" id="nav-about">ABOUT</a></li>
             <!-- <li><a href="#about" id="nav-about">FAQ</a></li> -->
           </ul>
         </div>
@@ -461,11 +461,11 @@
           aria-modal="false"
           aria-labelledby="creditTitle"
         >
-          <!-- Credits 內容由 js/credits-content.js 自動載入 -->
+          <!-- Credits 自動載入 -->
         </div>
       </div>
 
-      <!-- 頁腳 -->
+      <!-- fruity -->
       <footer class="footer">
         <div class="footer-content">
           <!-- <div class="footer-left">
@@ -502,7 +502,7 @@
 
           trigger.addEventListener("click", function (e) {
             e.preventDefault();
-            e.stopPropagation(); // 阻止事件冒泡
+            e.stopPropagation(); 
             const isOpen = panel.classList.toggle("open");
             trigger.setAttribute("aria-expanded", isOpen ? "true" : "false");
             trigger.setAttribute("aria-controls", "creditPanel");
